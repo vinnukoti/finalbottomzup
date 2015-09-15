@@ -1,0 +1,13 @@
+PODS:
+  - GoogleMaps (1.10.2)
+  - GooglePlacesAutocomplete (0.3.0)
+
+DEPENDENCIES:
+  - GoogleMaps
+  - GooglePlacesAutocomplete
+
+SPEC CHECKSUMS:
+  GoogleMaps: 5c92e599b07b0a2a9b367c5dd128edc629bddfea
+  GooglePlacesAutocomplete: 7694636fce561c9d8ac807b8e490d299a730a633
+
+COCOAPODS: 0.38.2
