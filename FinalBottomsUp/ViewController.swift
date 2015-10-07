@@ -37,85 +37,38 @@ var gid:String!
 class ViewController: UIViewController,GPPSignInDelegate
 
 {
-
     @IBOutlet weak var FBbutton: UIButton!
-    
-    @IBOutlet weak var email: UITextField!
-    
-    @IBOutlet weak var password: UITextField!
-    
-    @IBOutlet weak var signUpbtn: UIButton!
-    
 
+   
+    
+    @IBOutlet weak var gogo: UIButton!
 
    var placesClient: GMSPlacesClient?
-    
-
-    
     
     override func viewDidLoad()
     
     {
         super.viewDidLoad()
         placesClient = GMSPlacesClient()
-       email.clearsOnBeginEditing = true
-        password.clearsOnBeginEditing = true
-        
-//        navigationController!.setNavigationBarHidden(false, animated:true)
-//        var myBackButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom)as! UIButton
-//        myBackButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
-//        myBackButton.setTitle("YOUR TITLE", forState: UIControlState.Normal)
-//        myBackButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-//        myBackButton.sizeToFit()
-//        var myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
-//        self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
-//        
-//        func popToRoot(sender:UIBarButtonItem){
-//            self.navigationController!.popToRootViewControllerAnimated(true)
-//        }
-//
     }
    
-    @IBAction func googlesignIn(sender: AnyObject)
-    {
-        //navigationController.popViewController(true)
+    @IBAction func googlesignIn(sender: AnyObject) {
+    
+  
+     
         
         println("User Logged In With Google+")
         
         let signIn = GPPSignIn.sharedInstance()
-        navigationController!.setNavigationBarHidden(false, animated:true)
-        var myBackButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom)as! UIButton
-        myBackButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
-        myBackButton.setTitle("YOUR TITLE", forState: UIControlState.Normal)
-        myBackButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-        myBackButton.sizeToFit()
-        var myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
-        self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
-        func popToRoot(sender:UIBarButtonItem)
-        {
-            self.navigationController!.popToRootViewControllerAnimated(true)
-        }
-
         signIn.shouldFetchGooglePlusUser = true
         signIn.shouldFetchGoogleUserEmail = true  // Uncomment to get the user's email
         signIn.shouldFetchGoogleUserID = true
-        
         signIn.clientID = "131909898152-1euo6vg42c2je2dul8r6khqo6nkjllfs.apps.googleusercontent.com"
-        
         // Uncomment one of these two statements for the scope you chose in the previous step
         signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
-        
-        
-
-        
         signIn.delegate = self
         signIn.authenticate()
-        
-       
-        
         getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(gemail)&password=\(gid)")
-        
-        
         
     }
     
@@ -135,32 +88,7 @@ class ViewController: UIViewController,GPPSignInDelegate
             }
         })
     }
-    
 
-    
-    
-
-//    @IBAction func click1(sender: UIButton)
-//    {
-//        placesClient?.currentPlaceWithCallback({ (placeLikelihoodList: GMSPlaceLikelihoodList?, error: NSError?) -> Void in
-//            if let error = error {
-//                println("Pick Place error: \(error.localizedDescription)")
-//                return
-//            }
-//            
-//            self.name.text = "No current place"
-//            self.address.text = ""
-//            
-//            if let placeLicklihoodList = placeLikelihoodList {
-//                let place = placeLicklihoodList.likelihoods.first?.place
-//                if let place = place {
-//                    self.name.text = place.name
-//                    println(place.name)
-//                    self.address.text = "\n".join(place.formattedAddress.componentsSeparatedByString(", "))
-//                }
-//            }
-//        })
-//    }
 
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!)
     {
@@ -217,13 +145,11 @@ class ViewController: UIViewController,GPPSignInDelegate
         }
     }
     
-    
-    
-    
-    
-    
     @IBAction func FBbuttonClicked(sender: UIButton)
+    
     {
+    
+   
         var login = FBSDKLoginManager()
         var error: NSError!
         var result : FBSDKLoginManagerLoginResult!
@@ -240,7 +166,7 @@ class ViewController: UIViewController,GPPSignInDelegate
                 NSLog("Logged in");
             }
         })
-        returnUserData()
+        
         getFBLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(fbemail)&password=\(fbid)")
         
     
@@ -252,15 +178,6 @@ class ViewController: UIViewController,GPPSignInDelegate
         
     }
     
-    @IBAction func signupBtn(sender: UIButton)
-    {
-        if status == true
-        {
-           performSegueWithIdentifier("show", sender: self)
-        }
-
-    }
-    
     func getFBLoginData(urlString:String)
     {
         let url = NSURL(string: urlString)
@@ -270,6 +187,7 @@ class ViewController: UIViewController,GPPSignInDelegate
             {
                 println(NSString(data: data!, encoding: NSUTF8StringEncoding)!)
             }
+            self.returnUserData()
         }
         
       
@@ -305,6 +223,7 @@ class ViewController: UIViewController,GPPSignInDelegate
                 }
             }
         })
+        
         if fbemail != nil && fbid != nil
         {
             
@@ -312,8 +231,28 @@ class ViewController: UIViewController,GPPSignInDelegate
             performSegueWithIdentifier("show", sender: self)
             
         }
+
+   
         
         
     }
+    @IBAction func gogo(sender: AnyObject)
+    {
+        performSegueWithIdentifier("show", sender: self)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

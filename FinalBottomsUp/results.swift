@@ -7,51 +7,139 @@
 //
 
 import UIKit
+import CoreLocation
 
 var variable:String!
 
+var latitude:Double!
+var longitude:Double!
+var liqnamefromtextfield:String!
+var lat:Double!
+var long:Double!
 
-class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate
+var trimmedString:String!
+
+var head1:[Restaurant] = [Restaurant]()
+
+var fstobj1 = Restaurant()
+var alert = false
+var trim = false
 
 
+class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
-   
-    @IBOutlet weak var autocmpleteTextfield: AutoCompleteTextField!
+    @IBOutlet weak var  autocmpleteTextfield: AutoCompleteTextField!
     
     @IBOutlet weak var textfield1: UITextField!
    
     @IBOutlet weak var tableview: UITableView!
     
     private var responseData:NSMutableData?
-   //private var selectedPointAnnotation:MKPointAnnotation?
+
     private var connection:NSURLConnection?
     
     private let googleMapsKey = "AIzaSyAmC9Bxbw-8M-6ppbty3ArFP7u2t97KKMY"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
 
-    //var pastUrls = ["Beer","Budviser","Vinayak"]
     var autocompleteUrls = [String]()
     
-    var arar = [""]
-    var newarar = [""]
+    let locationManager = CLLocationManager()
     
-    var yes: Bool!
-
+    var arar = [String]()
+    var newarar =  [String]()
+    var flag = false
 
     
     override func viewDidLoad()
     {
+        
+      
         textfield1.delegate = self
         tableview!.delegate = self
         tableview!.dataSource = self
         tableview!.scrollEnabled = true
         tableview!.hidden = true
-       // autocmpleteTextfield.delegate = self
         configureTextField()
         handleTextFieldInterfaces()
+        textfield1.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        textfield1.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
+   
+        
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         
     }
     
+    
+   // getting Device latitude and longitude
+//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+//    {
+//      
+//     
+//        var locValue:CLLocationCoordinate2D = manager.location.coordinate
+//         latitude = locValue.latitude
+//         longitude = locValue.longitude
+//       println("vinayakkoti \(locValue.latitude)")
+//       println("vinayakkoti \(locValue.longitude)")
+//
+//    }
+
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+    {
+         var locValue:CLLocationCoordinate2D = manager.location.coordinate
+                latitude = locValue.latitude
+                 longitude = locValue.longitude
+        
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil)
+            {
+                println("Error: " + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0
+            {
+                let pm = placemarks[0] as! CLPlacemark
+                self.displayLocationInfo(pm)
+            }
+            else
+            {
+                println("Error with the data.")
+            }
+        })
+    }
+    
+    func displayLocationInfo(placemark: CLPlacemark)
+    {
+        
+        self.locationManager.stopUpdatingLocation()
+        println(placemark.locality)
+        println(placemark.postalCode)
+        println(placemark.administrativeArea)
+        println(placemark.country)
+        autocmpleteTextfield.text = placemark.country
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
+    {
+        println("Error: " + error.localizedDescription)
+    }
+    
+
+    
+
+    //city textfield
     private func configureTextField()
     {
         autocmpleteTextfield.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
@@ -67,7 +155,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         autocmpleteTextfield.autoCompleteAttributes = attributes
     }
     
-    private func handleTextFieldInterfaces()
+    
+    //city Textfield
+    private  func handleTextFieldInterfaces()
     {
         autocmpleteTextfield.onTextChange = {[weak self] text in
             if !text.isEmpty{
@@ -85,13 +175,16 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             }
         }
         
+    
         autocmpleteTextfield.onSelect = {[weak self] text, indexpath in
+            self!.autocmpleteTextfield.text = text;
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
-                if placemark != nil{
+                if placemark != nil
+                {
                     let coordinate = placemark!.location.coordinate
-                                        println(coordinate.latitude)
-                                        println(coordinate.longitude)
-                                    }
+                    lat = coordinate.latitude
+                    long = coordinate.longitude
+                }
             })
         }
     }
@@ -117,9 +210,11 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 let status = result["status"] as? String
                 if status == "OK"
                 {
-                    if let predictions = result["predictions"] as? NSArray{
+                    if let predictions = result["predictions"] as? NSArray
+                    {
                         var locations = [String]()
-                        for dict in predictions as! [NSDictionary]{
+                        for dict in predictions as! [NSDictionary]
+                        {
                             locations.append(dict["description"] as! String)
                         }
                         self.autocmpleteTextfield.autoCompleteStrings = locations
@@ -139,6 +234,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     
 
+    
+    // textfield1 starts
     func textFieldDidBeginEditing(textField: UITextField)
     {
             
@@ -148,75 +245,112 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     func textFieldDidChange(textField: UITextField)
     {
-        if textField.text != nil && textField.text != ""
+        
+        if self.textfield1.text != nil && self.textfield1.text != ""
         {
-           
-            var s = textField.text
+            
+            var s = self.textfield1.text
             variable = s
             variable.startIndex
             
-           // println(variable)
-            
+            let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            trim = true
            
-            
-            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(variable)")
-            
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-                // println(NSString(data: data, encoding: NSUTF8StringEncoding)!)
-                self.setLabels(data)
-                
-//                autocompleteTableView.hidden = sender.text.isEmpty
-//                filteredWords = dataManager.getFilteredWords(sender.text)
-//                refreshUI()
-            }
-            
-            task.resume()
-            
+            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(trimmedString1)")
+           
+            loadData(url!, completion: didLoadData)
+
         }
+       
+    }
+    
+    
+
+    func loadData(url: NSURL, completion: ([String]) -> Void){
+        let session = NSURLSession.sharedSession()
+
+        var task = session.dataTaskWithURL(url){
+            (data, response, error) -> Void in
+            
+            if error != nil {
+                
+            } else {
+                
+                var error : NSError?
+                
+                if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error) as? NSArray{
+                    for var index = 0; index < json.count; ++index
+                    {
+                        if let bottomsUp = json[index] as? NSDictionary
+                        {
+                            if let liquors = bottomsUp["liquors"] as? String
+                            {
+                                self.arar.append(liquors)
+                                self.newarar = self.removeDuplicates(self.arar)
+                                
+                            }
+                        }
+                    }
+                }
+                
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                dispatch_async(dispatch_get_global_queue(priority, 0))
+                    {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completion(self.newarar)
+                    }
+                }
+                
+            }
+        }
+        
+        task.resume()
+
+    }
+    func didLoadData(arrData: [String])
+    {
+        var substring = self.textfield1.text
+        //substring.lowercaseString
+        searchAutocompleteEntriesWithSubstring(substring)
+        
+        self.tableview.reloadData()
+        self.tableview!.hidden = false
     }
 
-
-// Autocomplete
+// Autocomplete liq
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
     {
-       
-        tableview!.hidden = false
-        var substring = (self.textfield1.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
         
-        substring.lowercaseString
-        searchAutocompleteEntriesWithSubstring(substring)
         return true
     }
     
     func searchAutocompleteEntriesWithSubstring(substring: String)
     {
         autocompleteUrls.removeAll(keepCapacity: false)
-        println(substring)
-        
-        
-        
+   
+        var usubstring = substring.uppercaseString
         
         for curString in newarar
         {
-            println(curString)
-            var myString: NSString! = curString as NSString
-            var substringRange: NSRange! = myString.rangeOfString(substring)
-            if (substringRange.location == 0)
-            {
-                
-                autocompleteUrls.append(curString)
-                
-            }
+            var ucurstring = curString.uppercaseString
+          
+            var myString: NSString! = ucurstring as NSString
+            var substringRange: NSRange! = myString.rangeOfString(usubstring)
             
+           if (substringRange.location == 0)
+           {
+              autocompleteUrls.append(ucurstring)
+            }
         }
         
-        tableview!.reloadData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return autocompleteUrls.count
+        
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -224,17 +358,16 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
         let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
         var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
-        if let tempo1 = cell
-        {
-            let index = indexPath.row as Int
-            cell!.textLabel!.text = autocompleteUrls[index]
-            return cell!
-        }
-            
-        else
-        {
+        
+        if cell == nil{
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: autoCompleteRowIdentifier)
         }
+        
+        let index = indexPath.row as Int
+        cell!.textLabel!.text = autocompleteUrls[index]
+
+
+      
          return cell!
      }
     
@@ -245,65 +378,298 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         tableView.hidden = true
     }
 
+
     
-    @IBAction func go(sender: UIButton)
+    @IBAction func search(sender: AnyObject)
     {
-       
-        performSegueWithIdentifier("restaurant", sender: self)
         
+        liqnamefromtextfield = textfield1.text
+       trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        //println(trimmedString)
+        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=5&records=4&query=\(trimmedString)")
+        
+
+           }
+    
+    func getbardata(urlString:String)
+    {
+        let url = NSURL(string: urlString)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                
+                self.extract_json(data)
+                
+            })
+            
+        }
+        task.resume()
     }
     
-    
-    func setLabels(weatherData: NSData)
+    func extract_json(data:NSData)
     {
         var jsonError:NSError?
         
-      if (NSJSONSerialization.JSONObjectWithData(weatherData, options: nil, error: &jsonError) as? NSDictionary != nil)
+      if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
       {
-  
-     }
-        else
-      {
-        let json = NSJSONSerialization.JSONObjectWithData(weatherData, options: nil, error: &jsonError) as! NSArray
-          for var index = 0; index < json.count; ++index
-             {
-             if let bottomsUp = json[index] as? NSDictionary
-              {
-             if let liquors = bottomsUp["liquors"] as? String
+        head1 = [Restaurant]()
+        
+        
+        for var index = 0; index < json.count; ++index
+        {
+            fstobj1 = Restaurant()
+            
+            if let bottomsUp1 = json[index] as? NSDictionary
+            {
+                if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                 {
-                 arar.append(liquors)
-                 newarar = removeDuplicates(arar)
-                 println(newarar)
+                    if let res_name = resInfo["res_name"] as? String
+                    {
+                        fstobj1.restname = res_name
+                       
+                    }
                     
-              }
-             }
-           }
+                    if var distance = resInfo["distance"] as? String
+                    {
+                        func PartOfString(s: String, start: Int, length: Int) -> String
+                        {
+                            return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                        }
+                        println("SUBSTRING    " + PartOfString(distance, 1, 2))
+                        distance = PartOfString(distance, 1, 2)
+
+                        fstobj1.distance = distance + "KMS"
+                        
+                    }
+                }
+                if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
+                {
+                    for var i = 0; i < resLiqInfo.count; ++i
+                    {
+                        var liqobj1 = liqclass()
+                        if let one = resLiqInfo[i] as? NSDictionary
+                        {
+                            if let liq_name = one ["liq_name"] as? String
+                            {
+                                liqobj1.liqname = liq_name
+                                println(liqobj1.liqname)
+                            }
+                            if let res_liq_brand_price = one["res_liq_brand_price"] as? String
+                            {
+                                liqobj1.pint = res_liq_brand_price
+                                liqobj1.Bottle = res_liq_brand_price
+                                fstobj1.maxp = res_liq_brand_price + "RS"
+                                fstobj1.minp = res_liq_brand_price + "RS"
+                               println("========" + liqobj1.pint)
+                               println(" **********  \(fstobj1) ")
+                            }
+                            if let res_liq_brand_name = one["liq_brand_name"] as? String
+                            {
+                                liqobj1.liqbrand = res_liq_brand_name
+                                println(liqobj1.liqbrand)
+                            }
+                        }
+                        fstobj1.amp.append(liqobj1)
+                        println(liqobj1)
+                    }
+                }
+                
+                println(fstobj1)
+            }
+            head1.append(fstobj1)
+            //println("```````````````` \(head1.append(fstobj1))")
+            
+          
         }
-     
+        println("vinayak counthead1\( head1.count)")
+        performSegueWithIdentifier("newres", sender: self)
+        //self.tableView.reloadData()
+        }
+        
+        else
+          {
+            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
-    
-    
-    
-    
+
     func removeDuplicates(array: [String]) -> [String]
     {
         var encountered = Set<String>()
         var result: [String] = []
-        for value in array {
+        for value in array
+        {
             if encountered.contains(value)
             {
-                // Do not add a duplicate element.
+  
             }
             else
             {
-                // Add value to the set.
                 encountered.insert(value)
-                // ... Append the value.
                 result.append(value)
             }
         }
         return result
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "newres"
+        {
+            if let destination = segue.destinationViewController as? tableviewclass
+            {
+                destination.liqname = textfield1.text
+                var liqname = textfield1.text
+                let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+                destination.liqname = trimmedString
+                destination.head = head1
+               // println("dest head\(destination.head)")
+        }
+            
+        }
+    }
+    
+    
+    @IBAction func nearbar(sender: AnyObject)
+    {
+//        println(latitude)
+//        println(longitude)
+//        getnearbar("http://demos.dignitasdigital.com/bottomzup/nearby.php?lat=28.63875&long=77.07380&km=5&records=4")
+        
+        performSegueWithIdentifier("mapview", sender: self)
+    }
+    
+    
+    func getnearbar(urlString:String)
+    {
+        let url = NSURL(string: urlString)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                
+                self.extract_nearbars(data)
+                
+            })
+            
+        }
+        task.resume()
+    }
+    
+    
+    func extract_nearbars(data:NSData)
+    {
+        var jsonError:NSError?
+        //let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as! NSArray
+        
+        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
+        {
+            head1 = [Restaurant]()
+            
+            
+            for var index = 0; index < json.count; ++index
+            {
+                fstobj1 = Restaurant()
+                
+                if let bottomsUp1 = json[index] as? NSDictionary
+                {
+                    if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
+                    {
+                        if let res_name = resInfo["res_name"] as? String
+                        {
+                            fstobj1.restname = res_name
+                            
+                        }
+                        
+                        if var distance = resInfo["distance"] as? String
+                            
+                        {
+                           
+                      
+                            func PartOfString(s: String, start: Int, length: Int) -> String
+                            {
+                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                            }
+                            distance = PartOfString(distance, 1, 2)
+                            
+                            fstobj1.distance = distance + "KMS"
+                            
+                            fstobj1.distance = distance
+                            
+                            
+                        }
+                    }
+                    if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
+                    {
+                        for var i = 0; i < resLiqInfo.count; ++i
+                        {
+                            var liqobj1 = liqclass()
+                            if let one = resLiqInfo[i] as? NSDictionary
+                            {
+                                if let liq_name = one ["liq_name"] as? String
+                                {
+                                    liqobj1.liqname = liq_name
+                                    
+                                   // println(liqobj1.liqname)
+                                }
+                                if let res_liq_brand_price = one["res_liq_brand_price"] as? String
+                                {
+                                    liqobj1.pint = res_liq_brand_price
+                                    liqobj1.Bottle = res_liq_brand_price
+                                    fstobj1.maxp = res_liq_brand_price + " RS"
+                                    fstobj1.minp = res_liq_brand_price + " RS"
+                                   // println("========" + liqobj1.pint)
+                                   // println(" **********  \(fstobj1) ")
+                                }
+                                if let res_liq_brand_name = one["liq_brand_name"] as? String
+                                {
+                                    liqobj1.liqbrand = res_liq_brand_name
+                                    //println(liqobj1.liqbrand)
+                                }
+                            }
+                            fstobj1.amp.append(liqobj1)
+                           // println(liqobj1)
+                        }
+                    }
+                    
+                    println(fstobj1)
+                }
+                head1.append(fstobj1)
+              //  println("98765 \(head1.append(fstobj1))")
+               // println(fstobj1)
+                
+            }
+           // println(head1.count)
+            performSegueWithIdentifier("newres", sender: self)
+            //self.tableView.reloadData()
+        }
+            
+        else
+        {
+            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
 
-
+    
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+

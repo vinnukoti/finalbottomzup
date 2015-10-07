@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2E99E8310E9F1A57A2C3DDF9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167FABA4877F1BA58EC2E16 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		534618EB1BBBDAAF00B0E188 /* results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534618EA1BBBDAAF00B0E188 /* results.swift */; };
+		5363430F1BC2A820008018F6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5363430E1BC2A820008018F6 /* Accounts.framework */; };
+		536343111BC2A839008018F6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343101BC2A839008018F6 /* AdSupport.framework */; };
+		536343131BC2A886008018F6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343121BC2A886008018F6 /* Social.framework */; };
+		536343151BC2A924008018F6 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343141BC2A924008018F6 /* libsqlite3.0.dylib */; };
 		5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */; };
 		5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CEF81B9DB0EA00D33220 /* ViewController.swift */; };
 		5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5367CEFA1B9DB0EA00D33220 /* Main.storyboard */; };
@@ -32,14 +37,18 @@
 		5367CF351B9DBC3C00D33220 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF341B9DBC3C00D33220 /* Security.framework */; };
 		5367CF371B9DBC4800D33220 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF361B9DBC4800D33220 /* SystemConfiguration.framework */; };
 		5367CF391B9DC0B200D33220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF381B9DC0B200D33220 /* UIKit.framework */; };
-		5367CF3E1B9DD1A100D33220 /* CheckBox2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CF3D1B9DD1A100D33220 /* CheckBox2.swift */; };
-		538CCBE51BA154F50035A95E /* results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538CCBE41BA154F50035A95E /* results.swift */; };
-		538CCBEB1BA16FCA0035A95E /* takeresults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538CCBEA1BA16FCA0035A95E /* takeresults.swift */; };
+		537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3D81BBA56F80082D896 /* tableviewclass.swift */; };
+		537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DA1BBA578A0082D896 /* customheadercell.swift */; };
+		537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */; };
+		537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DE1BBA58240082D896 /* Restaurant.swift */; };
+		537CA3E11BBA58400082D896 /* liqclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3E01BBA58400082D896 /* liqclass.swift */; };
+		538A3F951BA9930C00A673C1 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538A3F941BA9930C00A673C1 /* TableController.swift */; };
 		538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A411BA41914005D1386 /* AutoCompleteTextField.swift */; };
 		538D0A461BA4194B005D1386 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A431BA4194B005D1386 /* Location.swift */; };
 		538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A441BA4194B005D1386 /* MKMapViewExtension.swift */; };
 		538D0A481BA4194B005D1386 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A451BA4194B005D1386 /* Service.swift */; };
 		538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538D0A491BA41C58005D1386 /* MapKit.framework */; };
+		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +62,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		534618EA1BBBDAAF00B0E188 /* results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = results.swift; sourceTree = "<group>"; };
+		5363430E1BC2A820008018F6 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		536343101BC2A839008018F6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		536343121BC2A886008018F6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		536343141BC2A924008018F6 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		5367CEF11B9DB0EA00D33220 /* FinalBottomsUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalBottomsUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5367CEF51B9DB0EA00D33220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,14 +96,18 @@
 		5367CF361B9DBC4800D33220 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5367CF381B9DC0B200D33220 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5367CF3A1B9DC13F00D33220 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "../Bridging-Header.h"; sourceTree = "<group>"; };
-		5367CF3D1B9DD1A100D33220 /* CheckBox2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBox2.swift; path = ../../../bottomsUp/BottomsUp/BottomsUp/CheckBox2.swift; sourceTree = "<group>"; };
-		538CCBE41BA154F50035A95E /* results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = results.swift; sourceTree = "<group>"; };
-		538CCBEA1BA16FCA0035A95E /* takeresults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = takeresults.swift; sourceTree = "<group>"; };
+		537CA3D81BBA56F80082D896 /* tableviewclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableviewclass.swift; sourceTree = "<group>"; };
+		537CA3DA1BBA578A0082D896 /* customheadercell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercell.swift; sourceTree = "<group>"; };
+		537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onemoreclass1.swift; sourceTree = "<group>"; };
+		537CA3DE1BBA58240082D896 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		537CA3E01BBA58400082D896 /* liqclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liqclass.swift; sourceTree = "<group>"; };
+		538A3F941BA9930C00A673C1 /* TableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		538D0A411BA41914005D1386 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		538D0A431BA4194B005D1386 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		538D0A441BA4194B005D1386 /* MKMapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMapViewExtension.swift; sourceTree = "<group>"; };
 		538D0A451BA4194B005D1386 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		538D0A491BA41C58005D1386 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		A3E6ABB127B08185A6ECEC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BBAACA6BEA2DB090A27F178F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D167FABA4877F1BA58EC2E16 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +118,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536343151BC2A924008018F6 /* libsqlite3.0.dylib in Frameworks */,
+				536343131BC2A886008018F6 /* Social.framework in Frameworks */,
+				536343111BC2A839008018F6 /* AdSupport.framework in Frameworks */,
+				5363430F1BC2A820008018F6 /* Accounts.framework in Frameworks */,
 				538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */,
 				5367CF391B9DC0B200D33220 /* UIKit.framework in Frameworks */,
 				5367CF371B9DBC4800D33220 /* SystemConfiguration.framework in Frameworks */,
@@ -175,6 +197,7 @@
 		5367CEF31B9DB0EA00D33220 /* FinalBottomsUp */ = {
 			isa = PBXGroup;
 			children = (
+				538A3F941BA9930C00A673C1 /* TableController.swift */,
 				538D0A431BA4194B005D1386 /* Location.swift */,
 				538D0A441BA4194B005D1386 /* MKMapViewExtension.swift */,
 				538D0A451BA4194B005D1386 /* Service.swift */,
@@ -188,13 +211,17 @@
 				5367CF191B9DB11F00D33220 /* FBSDKShareKit.framework */,
 				5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */,
 				5367CEF81B9DB0EA00D33220 /* ViewController.swift */,
-				5367CF3D1B9DD1A100D33220 /* CheckBox2.swift */,
-				538CCBE41BA154F50035A95E /* results.swift */,
-				538CCBEA1BA16FCA0035A95E /* takeresults.swift */,
+				537CA3D81BBA56F80082D896 /* tableviewclass.swift */,
+				534618EA1BBBDAAF00B0E188 /* results.swift */,
+				537CA3DA1BBA578A0082D896 /* customheadercell.swift */,
+				537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */,
 				5367CEFA1B9DB0EA00D33220 /* Main.storyboard */,
 				5367CEFD1B9DB0EA00D33220 /* Images.xcassets */,
 				5367CEFF1B9DB0EA00D33220 /* LaunchScreen.xib */,
 				5367CEF41B9DB0EA00D33220 /* Supporting Files */,
+				537CA3DE1BBA58240082D896 /* Restaurant.swift */,
+				537CA3E01BBA58400082D896 /* liqclass.swift */,
+				53CB2BFD1BC3F94900F5F62C /* mapview.swift */,
 			);
 			path = FinalBottomsUp;
 			sourceTree = "<group>";
@@ -228,6 +255,10 @@
 		F0658164BB9C2D2F4CBFF537 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				536343141BC2A924008018F6 /* libsqlite3.0.dylib */,
+				536343121BC2A886008018F6 /* Social.framework */,
+				536343101BC2A839008018F6 /* AdSupport.framework */,
+				5363430E1BC2A820008018F6 /* Accounts.framework */,
 				538D0A491BA41C58005D1386 /* MapKit.framework */,
 				D167FABA4877F1BA58EC2E16 /* Pods.framework */,
 			);
@@ -286,6 +317,7 @@
 				TargetAttributes = {
 					5367CEF01B9DB0EA00D33220 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = K37J4WCRKJ;
 					};
 					5367CF051B9DB0EA00D33220 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -386,15 +418,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5367CF3E1B9DD1A100D33220 /* CheckBox2.swift in Sources */,
 				538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */,
+				538A3F951BA9930C00A673C1 /* TableController.swift in Sources */,
+				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,
-				538CCBEB1BA16FCA0035A95E /* takeresults.swift in Sources */,
+				537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */,
+				537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */,
+				537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */,
+				53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */,
 				538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */,
 				538D0A481BA4194B005D1386 /* Service.swift in Sources */,
-				538CCBE51BA154F50035A95E /* results.swift in Sources */,
+				537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */,
 				5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */,
 				538D0A461BA4194B005D1386 /* Location.swift in Sources */,
+				534618EB1BBBDAAF00B0E188 /* results.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +561,7 @@
 			baseConfigurationReference = A3E6ABB127B08185A6ECEC40 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalBottomsUp",
@@ -544,6 +582,7 @@
 			baseConfigurationReference = BBAACA6BEA2DB090A27F178F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalBottomsUp",
