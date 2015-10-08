@@ -45,6 +45,10 @@
 		5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE381BC630EE007999AE /* tableviewclassvodka.swift */; };
 		5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE3A1BC63121007999AE /* Restauarantvodka.swift */; };
 		5389EE3D1BC63139007999AE /* liqvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE3C1BC63139007999AE /* liqvodka.swift */; };
+		5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE3E1BC65117007999AE /* custmheadercell1.swift */; };
+		5389EE411BC65146007999AE /* onemoreclass2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE401BC65146007999AE /* onemoreclass2.swift */; };
+		5389EE451BC67C66007999AE /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5389EE431BC67C66007999AE /* Fabric.framework */; };
+		5389EE461BC67C66007999AE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5389EE441BC67C66007999AE /* Crashlytics.framework */; };
 		538A3F951BA9930C00A673C1 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538A3F941BA9930C00A673C1 /* TableController.swift */; };
 		538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A411BA41914005D1386 /* AutoCompleteTextField.swift */; };
 		538D0A461BA4194B005D1386 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A431BA4194B005D1386 /* Location.swift */; };
@@ -107,6 +111,10 @@
 		5389EE381BC630EE007999AE /* tableviewclassvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableviewclassvodka.swift; sourceTree = "<group>"; };
 		5389EE3A1BC63121007999AE /* Restauarantvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restauarantvodka.swift; sourceTree = "<group>"; };
 		5389EE3C1BC63139007999AE /* liqvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liqvodka.swift; sourceTree = "<group>"; };
+		5389EE3E1BC65117007999AE /* custmheadercell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = custmheadercell1.swift; sourceTree = "<group>"; };
+		5389EE401BC65146007999AE /* onemoreclass2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onemoreclass2.swift; sourceTree = "<group>"; };
+		5389EE431BC67C66007999AE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		5389EE441BC67C66007999AE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		538A3F941BA9930C00A673C1 /* TableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		538D0A411BA41914005D1386 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		538D0A431BA4194B005D1386 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -135,6 +143,7 @@
 				5367CF331B9DBC2E00D33220 /* MediaPlayer.framework in Frameworks */,
 				5367CF311B9DBC2300D33220 /* CoreText.framework in Frameworks */,
 				5367CF2F1B9DBC1900D33220 /* CoreGraphics.framework in Frameworks */,
+				5389EE451BC67C66007999AE /* Fabric.framework in Frameworks */,
 				5367CF2D1B9DBC0E00D33220 /* CoreMotion.framework in Frameworks */,
 				5367CF2B1B9DBC0100D33220 /* CoreLocation.framework in Frameworks */,
 				5367CF291B9DBBF500D33220 /* Foundation.framework in Frameworks */,
@@ -144,6 +153,7 @@
 				5367CF231B9DBBB700D33220 /* GooglePlus.framework in Frameworks */,
 				5367CF1D1B9DB11F00D33220 /* FBSDKShareKit.framework in Frameworks */,
 				5367CF1A1B9DB11F00D33220 /* FacebookSDK.framework in Frameworks */,
+				5389EE461BC67C66007999AE /* Crashlytics.framework in Frameworks */,
 				5367CF1B1B9DB11F00D33220 /* FBSDKCoreKit.framework in Frameworks */,
 				5367CF1C1B9DB11F00D33220 /* FBSDKLoginKit.framework in Frameworks */,
 				2E99E8310E9F1A57A2C3DDF9 /* Pods.framework in Frameworks */,
@@ -231,6 +241,8 @@
 				5389EE381BC630EE007999AE /* tableviewclassvodka.swift */,
 				5389EE3A1BC63121007999AE /* Restauarantvodka.swift */,
 				5389EE3C1BC63139007999AE /* liqvodka.swift */,
+				5389EE3E1BC65117007999AE /* custmheadercell1.swift */,
+				5389EE401BC65146007999AE /* onemoreclass2.swift */,
 			);
 			path = FinalBottomsUp;
 			sourceTree = "<group>";
@@ -265,6 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				536343141BC2A924008018F6 /* libsqlite3.0.dylib */,
+				5389EE431BC67C66007999AE /* Fabric.framework */,
+				5389EE441BC67C66007999AE /* Crashlytics.framework */,
 				536343121BC2A886008018F6 /* Social.framework */,
 				536343101BC2A839008018F6 /* AdSupport.framework */,
 				5363430E1BC2A820008018F6 /* Accounts.framework */,
@@ -287,6 +301,7 @@
 				5367CEEF1B9DB0EA00D33220 /* Resources */,
 				A1A370905CE0F7CE71B9FC20 /* Copy Pods Resources */,
 				8445A5358FADC04BDAE4EDBF /* Embed Pods Frameworks */,
+				5389EE421BC67B65007999AE /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -390,6 +405,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		5389EE421BC67B65007999AE /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 701deba335050d0d9e2859b4ca3b29cefeb496ff 9cb61239c7b1de7936977d7d88d82a71943f9a0f6c6a7344920b5b999426480d";
+		};
 		8445A5358FADC04BDAE4EDBF /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,6 +459,7 @@
 				5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */,
 				538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */,
 				538A3F951BA9930C00A673C1 /* TableController.swift in Sources */,
+				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,
 				537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */,
@@ -439,6 +469,7 @@
 				538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */,
 				538D0A481BA4194B005D1386 /* Service.swift in Sources */,
 				537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */,
+				5389EE411BC65146007999AE /* onemoreclass2.swift in Sources */,
 				5389EE3D1BC63139007999AE /* liqvodka.swift in Sources */,
 				5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */,
 				5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */,
@@ -575,10 +606,12 @@
 			baseConfigurationReference = A3E6ABB127B08185A6ECEC40 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vinayak Koti (LJTYC774L4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vinayak Koti (LJTYC774L4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalBottomsUp",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FinalBottomsUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -587,7 +620,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = Bottomzup;
-				PROVISIONING_PROFILE = "2d496f7e-411b-424f-86b6-34137b386e7c";
+				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Debug;
@@ -597,10 +630,12 @@
 			baseConfigurationReference = BBAACA6BEA2DB090A27F178F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Dignitas Digital Private Limited (K37J4WCRKJ)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalBottomsUp",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FinalBottomsUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -609,7 +644,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = Bottomzup;
-				PROVISIONING_PROFILE = "2d496f7e-411b-424f-86b6-34137b386e7c";
+				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Release;

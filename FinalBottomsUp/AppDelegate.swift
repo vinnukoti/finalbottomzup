@@ -10,6 +10,9 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleMaps
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 
@@ -22,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
              GMSServices.provideAPIKey("AIzaSyAmC9Bxbw-8M-6ppbty3ArFP7u2t97KKMY")
+             Fabric.with([Crashlytics.self()])
         
-             
                 NSThread.sleepForTimeInterval(1)
 
         

@@ -394,12 +394,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
       if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
       {
         head1 = [Restaurant]()
-        header = [Restauarantvodka]()
         for var index = 0; index < json.count; ++index
         {
             fstobj1 = Restaurant()
-            vodkaobj = Restauarantvodka()
-            
+           
             if let bottomsUp1 = json[index] as? NSDictionary
             {
                 if let avg_price = bottomsUp1["avg_price"] as? Int
@@ -407,8 +405,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                    check = avg_price
                     println("check  \(check)")
                 }
-                if check <= 0
-                {
+                
                 if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                 {
                     if let res_name = resInfo["res_name"] as? String
@@ -460,36 +457,15 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     var bottle_avg_price2:String = toString(bottle_avg_price)
                     fstobj1.maxp = bottle_avg_price2
                 }
-
+                 head1.append(fstobj1)
             }
-                else
-                {
-                    liqnamefromtextfield = textfield1.text
-                    trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-                    getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=5&records=4&query=\(trimmedString)")
-                    
-                   for var index = 0; index < json.count; ++index
-                   {
-                    if let avg_price = bottomsUp1["avg_price"] as? Int
-                    {
-                        check = avg_price
-                        
-                    }
-                    
-
-                    
-                    }
-
-                }
-           
-                
-            }
-             head1.append(fstobj1)
         }
-        performSegueWithIdentifier("newres", sender: self)
-        //self.tableView.reloadData()
+         performSegueWithIdentifier("newres", sender: self)
+
         }
+        
         else
+        
           {
             let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
@@ -526,8 +502,14 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 destination.liqname = trimmedString
                 destination.head = head1
+           }
         }
-            
+        if segue.identifier == "vodka"
+        {
+            if let destination1 = segue.destinationViewController as? tableviewclassvodka
+            {
+                destination1.header1 = header
+            }
         }
     }
     

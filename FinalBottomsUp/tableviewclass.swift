@@ -13,7 +13,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableview: UITableView!
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
-    var appsriv:[Restaurant] = [Restaurant]()
+   // var appsriv:[Restaurant] = [Restaurant]()
     var fstobj = Restaurant()
     var latitude:Double!
     var longitude:Double!
@@ -186,7 +186,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 head.append(fstobj1)
 
         }
-            println("vinayak count\( appsriv.count)")
+           // println("vinayak count\( appsriv.count)")
         }
        else
        {
