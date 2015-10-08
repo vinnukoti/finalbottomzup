@@ -42,6 +42,9 @@
 		537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */; };
 		537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DE1BBA58240082D896 /* Restaurant.swift */; };
 		537CA3E11BBA58400082D896 /* liqclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3E01BBA58400082D896 /* liqclass.swift */; };
+		5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE381BC630EE007999AE /* tableviewclassvodka.swift */; };
+		5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE3A1BC63121007999AE /* Restauarantvodka.swift */; };
+		5389EE3D1BC63139007999AE /* liqvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE3C1BC63139007999AE /* liqvodka.swift */; };
 		538A3F951BA9930C00A673C1 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538A3F941BA9930C00A673C1 /* TableController.swift */; };
 		538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A411BA41914005D1386 /* AutoCompleteTextField.swift */; };
 		538D0A461BA4194B005D1386 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A431BA4194B005D1386 /* Location.swift */; };
@@ -67,14 +70,14 @@
 		536343101BC2A839008018F6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		536343121BC2A886008018F6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		536343141BC2A924008018F6 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		5367CEF11B9DB0EA00D33220 /* FinalBottomsUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalBottomsUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5367CEF11B9DB0EA00D33220 /* Bottomzup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bottomzup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5367CEF51B9DB0EA00D33220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5367CEF81B9DB0EA00D33220 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5367CEFB1B9DB0EA00D33220 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5367CEFD1B9DB0EA00D33220 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5367CF001B9DB0EA00D33220 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		5367CF061B9DB0EA00D33220 /* FinalBottomsUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalBottomsUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5367CF061B9DB0EA00D33220 /* BottomzupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BottomzupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5367CF0B1B9DB0EA00D33220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5367CF0C1B9DB0EA00D33220 /* FinalBottomsUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalBottomsUpTests.swift; sourceTree = "<group>"; };
 		5367CF161B9DB11F00D33220 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -101,6 +104,9 @@
 		537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onemoreclass1.swift; sourceTree = "<group>"; };
 		537CA3DE1BBA58240082D896 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		537CA3E01BBA58400082D896 /* liqclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liqclass.swift; sourceTree = "<group>"; };
+		5389EE381BC630EE007999AE /* tableviewclassvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableviewclassvodka.swift; sourceTree = "<group>"; };
+		5389EE3A1BC63121007999AE /* Restauarantvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restauarantvodka.swift; sourceTree = "<group>"; };
+		5389EE3C1BC63139007999AE /* liqvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liqvodka.swift; sourceTree = "<group>"; };
 		538A3F941BA9930C00A673C1 /* TableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		538D0A411BA41914005D1386 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		538D0A431BA4194B005D1386 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -188,8 +194,8 @@
 		5367CEF21B9DB0EA00D33220 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5367CEF11B9DB0EA00D33220 /* FinalBottomsUp.app */,
-				5367CF061B9DB0EA00D33220 /* FinalBottomsUpTests.xctest */,
+				5367CEF11B9DB0EA00D33220 /* Bottomzup.app */,
+				5367CF061B9DB0EA00D33220 /* BottomzupTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,6 +228,9 @@
 				537CA3DE1BBA58240082D896 /* Restaurant.swift */,
 				537CA3E01BBA58400082D896 /* liqclass.swift */,
 				53CB2BFD1BC3F94900F5F62C /* mapview.swift */,
+				5389EE381BC630EE007999AE /* tableviewclassvodka.swift */,
+				5389EE3A1BC63121007999AE /* Restauarantvodka.swift */,
+				5389EE3C1BC63139007999AE /* liqvodka.swift */,
 			);
 			path = FinalBottomsUp;
 			sourceTree = "<group>";
@@ -268,9 +277,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5367CEF01B9DB0EA00D33220 /* FinalBottomsUp */ = {
+		5367CEF01B9DB0EA00D33220 /* Bottomzup */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5367CF101B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "FinalBottomsUp" */;
+			buildConfigurationList = 5367CF101B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "Bottomzup" */;
 			buildPhases = (
 				07F6D8DDD6AF7D111FE2439A /* Check Pods Manifest.lock */,
 				5367CEED1B9DB0EA00D33220 /* Sources */,
@@ -283,14 +292,14 @@
 			);
 			dependencies = (
 			);
-			name = FinalBottomsUp;
+			name = Bottomzup;
 			productName = FinalBottomsUp;
-			productReference = 5367CEF11B9DB0EA00D33220 /* FinalBottomsUp.app */;
+			productReference = 5367CEF11B9DB0EA00D33220 /* Bottomzup.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5367CF051B9DB0EA00D33220 /* FinalBottomsUpTests */ = {
+		5367CF051B9DB0EA00D33220 /* BottomzupTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5367CF131B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "FinalBottomsUpTests" */;
+			buildConfigurationList = 5367CF131B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "BottomzupTests" */;
 			buildPhases = (
 				5367CF021B9DB0EA00D33220 /* Sources */,
 				5367CF031B9DB0EA00D33220 /* Frameworks */,
@@ -301,9 +310,9 @@
 			dependencies = (
 				5367CF081B9DB0EA00D33220 /* PBXTargetDependency */,
 			);
-			name = FinalBottomsUpTests;
+			name = BottomzupTests;
 			productName = FinalBottomsUpTests;
-			productReference = 5367CF061B9DB0EA00D33220 /* FinalBottomsUpTests.xctest */;
+			productReference = 5367CF061B9DB0EA00D33220 /* BottomzupTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -325,7 +334,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5367CEEC1B9DB0EA00D33220 /* Build configuration list for PBXProject "FinalBottomsUp" */;
+			buildConfigurationList = 5367CEEC1B9DB0EA00D33220 /* Build configuration list for PBXProject "Bottomzup" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -338,8 +347,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5367CEF01B9DB0EA00D33220 /* FinalBottomsUp */,
-				5367CF051B9DB0EA00D33220 /* FinalBottomsUpTests */,
+				5367CEF01B9DB0EA00D33220 /* Bottomzup */,
+				5367CF051B9DB0EA00D33220 /* BottomzupTests */,
 			);
 		};
 /* End PBXProject section */
@@ -418,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */,
 				538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */,
 				538A3F951BA9930C00A673C1 /* TableController.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
@@ -429,6 +439,8 @@
 				538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */,
 				538D0A481BA4194B005D1386 /* Service.swift in Sources */,
 				537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */,
+				5389EE3D1BC63139007999AE /* liqvodka.swift in Sources */,
+				5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */,
 				5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */,
 				538D0A461BA4194B005D1386 /* Location.swift in Sources */,
 				534618EB1BBBDAAF00B0E188 /* results.swift in Sources */,
@@ -448,7 +460,7 @@
 /* Begin PBXTargetDependency section */
 		5367CF081B9DB0EA00D33220 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5367CEF01B9DB0EA00D33220 /* FinalBottomsUp */;
+			target = 5367CEF01B9DB0EA00D33220 /* Bottomzup */;
 			targetProxy = 5367CF071B9DB0EA00D33220 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -512,6 +524,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "c815e0f3-e917-4df0-8e81-60221a871c79";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -550,6 +563,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "c815e0f3-e917-4df0-8e81-60221a871c79";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -572,7 +586,8 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Bottomzup;
+				PROVISIONING_PROFILE = "2d496f7e-411b-424f-86b6-34137b386e7c";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Debug;
@@ -582,7 +597,7 @@
 			baseConfigurationReference = BBAACA6BEA2DB090A27F178F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dignitas Digital Private Limited (K37J4WCRKJ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalBottomsUp",
@@ -593,7 +608,8 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Bottomzup;
+				PROVISIONING_PROFILE = "2d496f7e-411b-424f-86b6-34137b386e7c";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Release;
@@ -612,7 +628,7 @@
 				);
 				INFOPLIST_FILE = FinalBottomsUpTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BottomzupTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalBottomsUp.app/FinalBottomsUp";
 			};
 			name = Debug;
@@ -627,7 +643,7 @@
 				);
 				INFOPLIST_FILE = FinalBottomsUpTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BottomzupTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalBottomsUp.app/FinalBottomsUp";
 			};
 			name = Release;
@@ -635,7 +651,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5367CEEC1B9DB0EA00D33220 /* Build configuration list for PBXProject "FinalBottomsUp" */ = {
+		5367CEEC1B9DB0EA00D33220 /* Build configuration list for PBXProject "Bottomzup" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5367CF0E1B9DB0EA00D33220 /* Debug */,
@@ -644,7 +660,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5367CF101B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "FinalBottomsUp" */ = {
+		5367CF101B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "Bottomzup" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5367CF111B9DB0EA00D33220 /* Debug */,
@@ -653,7 +669,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5367CF131B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "FinalBottomsUpTests" */ = {
+		5367CF131B9DB0EA00D33220 /* Build configuration list for PBXNativeTarget "BottomzupTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5367CF141B9DB0EA00D33220 /* Debug */,

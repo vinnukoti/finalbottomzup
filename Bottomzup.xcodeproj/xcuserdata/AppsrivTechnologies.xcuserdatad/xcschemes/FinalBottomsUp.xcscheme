@@ -15,23 +15,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5367CEF01B9DB0EA00D33220"
-               BuildableName = "FinalBottomsUp.app"
-               BlueprintName = "FinalBottomsUp"
-               ReferencedContainer = "container:FinalBottomsUp.xcodeproj">
+               BuildableName = "Bottomzup.app"
+               BlueprintName = "Bottomzup"
+               ReferencedContainer = "container:Bottomzup.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5367CF051B9DB0EA00D33220"
-               BuildableName = "FinalBottomsUpTests.xctest"
-               BlueprintName = "FinalBottomsUpTests"
-               ReferencedContainer = "container:FinalBottomsUp.xcodeproj">
+               BuildableName = "BottomzupTests.xctest"
+               BlueprintName = "BottomzupTests"
+               ReferencedContainer = "container:Bottomzup.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5367CF051B9DB0EA00D33220"
-               BuildableName = "FinalBottomsUpTests.xctest"
-               BlueprintName = "FinalBottomsUpTests"
-               ReferencedContainer = "container:FinalBottomsUp.xcodeproj">
+               BuildableName = "BottomzupTests.xctest"
+               BlueprintName = "BottomzupTests"
+               ReferencedContainer = "container:Bottomzup.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5367CEF01B9DB0EA00D33220"
-            BuildableName = "FinalBottomsUp.app"
-            BlueprintName = "FinalBottomsUp"
-            ReferencedContainer = "container:FinalBottomsUp.xcodeproj">
+            BuildableName = "Bottomzup.app"
+            BlueprintName = "Bottomzup"
+            ReferencedContainer = "container:Bottomzup.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5367CEF01B9DB0EA00D33220"
-            BuildableName = "FinalBottomsUp.app"
-            BlueprintName = "FinalBottomsUp"
-            ReferencedContainer = "container:FinalBottomsUp.xcodeproj">
+            BuildableName = "Bottomzup.app"
+            BlueprintName = "Bottomzup"
+            ReferencedContainer = "container:Bottomzup.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5367CEF01B9DB0EA00D33220"
-            BuildableName = "FinalBottomsUp.app"
-            BlueprintName = "FinalBottomsUp"
-            ReferencedContainer = "container:FinalBottomsUp.xcodeproj">
+            BuildableName = "Bottomzup.app"
+            BlueprintName = "Bottomzup"
+            ReferencedContainer = "container:Bottomzup.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

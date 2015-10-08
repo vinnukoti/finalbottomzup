@@ -7,75 +7,75 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18A7DC56415CA1E17FC36F2C11742F5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF161D50B008069235B48724582FC5E /* Foundation.framework */; };
-		32B47CD4BBAB810A19F7B168367A579E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14098C3A02E4B025DEDC9337054DFACA /* Images.xcassets */; };
+		169DB6743F6CC08157A464B47FCCCD56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF65A38C7BCBC7284BC072E0F273532 /* Foundation.framework */; };
+		18A7DC56415CA1E17FC36F2C11742F5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF65A38C7BCBC7284BC072E0F273532 /* Foundation.framework */; };
+		1BF7F0F5297A43881CEA551116B2836E /* GooglePlacesAutocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D7FB75C4B38346A09700348ED141DE /* GooglePlacesAutocomplete.swift */; };
+		4FFDA1BCE6CC15262E6B96B614D920C6 /* GooglePlacesAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = C90AA0B1E72318356B2808ECEB2F0090 /* GooglePlacesAutocomplete.xib */; };
 		5148EBFE11AF56CB8125E7E7C762F406 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F412F72E764A409D8B6947EF6AF5C44 /* Pods-dummy.m */; };
-		5E8AD90239F3B6B18D189510C6B2C556 /* GooglePlacesAutocomplete.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FD4CC663394E52C635B82A17D0CE408 /* GooglePlacesAutocomplete.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A907491C82A20FB7CD900A268394AE0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE15EFCE6312D1EAD1249A17424DD953 /* UIKit.framework */; };
-		A095BF0AF52DAB5508FB84FF633BA0F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF161D50B008069235B48724582FC5E /* Foundation.framework */; };
-		A40F23CA7D67BB50035461D48C7C6FEE /* GooglePlacesAutocomplete-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C1F45E507E3744535599E60815F0302 /* GooglePlacesAutocomplete-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5AF82EE18431C96359BF5F05790FD920 /* GooglePlacesAutocomplete-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 30F6B1C7C82BB29B51E6D91AE4A9AF22 /* GooglePlacesAutocomplete-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5FEBDEECB1AD500181297F190070A3C /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A69DD9A47B7EA847491F88D834E2C316 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AB14DA7BAB9B5FAE7AE2A7C60479C477 /* GooglePlacesAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0412554E64EC5751F67973AFD1EDC374 /* GooglePlacesAutocomplete.xib */; };
-		B37A966F0A5917406E56BB6305EA75C2 /* GooglePlacesAutocomplete-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CABFF3579680790A0D50028F80CBF82 /* GooglePlacesAutocomplete-dummy.m */; };
-		FC1DC972554CFB2735CD8F0372193890 /* GooglePlacesAutocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF1BCB33BDEE40F5591EBCEBFF012E /* GooglePlacesAutocomplete.swift */; };
+		CEF82D247626EB1FBD163E1983B684A3 /* GooglePlacesAutocomplete-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B64F6D44F400EA975FFF15B1DD454BB1 /* GooglePlacesAutocomplete-dummy.m */; };
+		E29BAB9E0B90C651E4AC5D201D61E9BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8E3C897D7FA71756FA9BC36AB5D3493 /* Images.xcassets */; };
+		EC0A7DB3A42812274B1E595A7EDB2F2B /* GooglePlacesAutocomplete.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBF7AE12A4E9236DA9C299EBC1C6168 /* GooglePlacesAutocomplete.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F9C28C9279D6E1C6755D506EF8704473 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE774DA6F55FEEEA12DB970D00A034 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DB6756A68590E19DB5D244C20D8F0B71 /* PBXContainerItemProxy */ = {
+		50BDBB30B393C23E6652A17822BFD895 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3EEABBE3AB9FA4A1A2E6F7BE9FE974D5;
+			remoteGlobalIDString = 88920CC778510D33F226E67C27D8A8C9;
 			remoteInfo = GooglePlacesAutocomplete;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0412554E64EC5751F67973AFD1EDC374 /* GooglePlacesAutocomplete.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = GooglePlacesAutocomplete.xib; path = GooglePlacesAutocomplete/GooglePlacesAutocomplete.xib; sourceTree = "<group>"; };
 		091E5B7F8C7F044AB0B5E6701BE54234 /* GooglePlacesAutocomplete.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlacesAutocomplete.xcconfig; sourceTree = "<group>"; };
-		14098C3A02E4B025DEDC9337054DFACA /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = GooglePlacesAutocomplete/Images.xcassets; sourceTree = "<group>"; };
-		388D6AD4119821C17AFFFC8EB69EF5EA /* GooglePlacesAutocomplete.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GooglePlacesAutocomplete.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C11EB1E3C83D3A549320D101421B9EE /* GooglePlacesAutocomplete-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "GooglePlacesAutocomplete-Private.xcconfig"; sourceTree = "<group>"; };
+		30F6B1C7C82BB29B51E6D91AE4A9AF22 /* GooglePlacesAutocomplete-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GooglePlacesAutocomplete-umbrella.h"; sourceTree = "<group>"; };
+		56052A4981102D93B5E091B9AB559437 /* GooglePlacesAutocomplete.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GooglePlacesAutocomplete.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FE631C7899913B6342868B5F774F062 /* GooglePlacesAutocomplete.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = GooglePlacesAutocomplete.modulemap; sourceTree = "<group>"; };
 		61C1FE5BCE2DB18CBEEC686AF482CD0A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
 		664F4D53601A4FEC88A07D343D31AB4F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69AE3BD42A991963880B838E55F75FE5 /* GooglePlacesAutocomplete-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GooglePlacesAutocomplete-prefix.pch"; sourceTree = "<group>"; };
+		6DBF7AE12A4E9236DA9C299EBC1C6168 /* GooglePlacesAutocomplete.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GooglePlacesAutocomplete.h; path = GooglePlacesAutocomplete/GooglePlacesAutocomplete.h; sourceTree = "<group>"; };
 		79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
 		7F412F72E764A409D8B6947EF6AF5C44 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
 		87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		8C1F45E507E3744535599E60815F0302 /* GooglePlacesAutocomplete-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GooglePlacesAutocomplete-umbrella.h"; sourceTree = "<group>"; };
-		8CABFF3579680790A0D50028F80CBF82 /* GooglePlacesAutocomplete-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GooglePlacesAutocomplete-dummy.m"; sourceTree = "<group>"; };
 		937EFB6E12E213704E6FA6025B7D837D /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		9ACD64CF0ABB3D2B3A893B2CEF26BC61 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
-		9FD4CC663394E52C635B82A17D0CE408 /* GooglePlacesAutocomplete.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GooglePlacesAutocomplete.h; path = GooglePlacesAutocomplete/GooglePlacesAutocomplete.h; sourceTree = "<group>"; };
+		9EF65A38C7BCBC7284BC072E0F273532 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A36F3E5477EAD4EF2AFA44C2E2001C0F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69DD9A47B7EA847491F88D834E2C316 /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
+		B64F6D44F400EA975FFF15B1DD454BB1 /* GooglePlacesAutocomplete-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GooglePlacesAutocomplete-dummy.m"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BDF161D50B008069235B48724582FC5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		BE15EFCE6312D1EAD1249A17424DD953 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C088F600765B64ED4F3036322DBE276C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		C8D7FB75C4B38346A09700348ED141DE /* GooglePlacesAutocomplete.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GooglePlacesAutocomplete.swift; path = GooglePlacesAutocomplete/GooglePlacesAutocomplete.swift; sourceTree = "<group>"; };
+		C90AA0B1E72318356B2808ECEB2F0090 /* GooglePlacesAutocomplete.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = GooglePlacesAutocomplete.xib; path = GooglePlacesAutocomplete/GooglePlacesAutocomplete.xib; sourceTree = "<group>"; };
 		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
 		D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D4038BEE36B70B28E21A63BC9FA1D7DC /* GooglePlacesAutocomplete-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "GooglePlacesAutocomplete-Private.xcconfig"; sourceTree = "<group>"; };
-		E1EF1BCB33BDEE40F5591EBCEBFF012E /* GooglePlacesAutocomplete.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GooglePlacesAutocomplete.swift; path = GooglePlacesAutocomplete/GooglePlacesAutocomplete.swift; sourceTree = "<group>"; };
+		D8E3C897D7FA71756FA9BC36AB5D3493 /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = GooglePlacesAutocomplete/Images.xcassets; sourceTree = "<group>"; };
 		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
 		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEDE774DA6F55FEEEA12DB970D00A034 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		131A814D410AB9314211879DEBA100FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				169DB6743F6CC08157A464B47FCCCD56 /* Foundation.framework in Frameworks */,
+				F9C28C9279D6E1C6755D506EF8704473 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14891F3C858943F027BAC98A2A6F29C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				18A7DC56415CA1E17FC36F2C11742F5F /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28C0A76B0435B001BBD5035A0F1D78AE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A095BF0AF52DAB5508FB84FF633BA0F1 /* Foundation.framework in Frameworks */,
-				8A907491C82A20FB7CD900A268394AE0 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,10 +104,10 @@
 			children = (
 				5FE631C7899913B6342868B5F774F062 /* GooglePlacesAutocomplete.modulemap */,
 				091E5B7F8C7F044AB0B5E6701BE54234 /* GooglePlacesAutocomplete.xcconfig */,
-				D4038BEE36B70B28E21A63BC9FA1D7DC /* GooglePlacesAutocomplete-Private.xcconfig */,
-				8CABFF3579680790A0D50028F80CBF82 /* GooglePlacesAutocomplete-dummy.m */,
+				0C11EB1E3C83D3A549320D101421B9EE /* GooglePlacesAutocomplete-Private.xcconfig */,
+				B64F6D44F400EA975FFF15B1DD454BB1 /* GooglePlacesAutocomplete-dummy.m */,
 				69AE3BD42A991963880B838E55F75FE5 /* GooglePlacesAutocomplete-prefix.pch */,
-				8C1F45E507E3744535599E60815F0302 /* GooglePlacesAutocomplete-umbrella.h */,
+				30F6B1C7C82BB29B51E6D91AE4A9AF22 /* GooglePlacesAutocomplete-umbrella.h */,
 				664F4D53601A4FEC88A07D343D31AB4F /* Info.plist */,
 			);
 			name = "Support Files";
@@ -125,8 +125,8 @@
 		4A747F365F3BF1DEEB1AAD6FBF20DE03 /* GooglePlacesAutocomplete */ = {
 			isa = PBXGroup;
 			children = (
-				9FD4CC663394E52C635B82A17D0CE408 /* GooglePlacesAutocomplete.h */,
-				E1EF1BCB33BDEE40F5591EBCEBFF012E /* GooglePlacesAutocomplete.swift */,
+				6DBF7AE12A4E9236DA9C299EBC1C6168 /* GooglePlacesAutocomplete.h */,
+				C8D7FB75C4B38346A09700348ED141DE /* GooglePlacesAutocomplete.swift */,
 				6A10DE67308D57EA832D4896F14FE8B8 /* Resources */,
 				431C55725168C8507469931F04B25DE6 /* Support Files */,
 			);
@@ -136,8 +136,8 @@
 		6A10DE67308D57EA832D4896F14FE8B8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0412554E64EC5751F67973AFD1EDC374 /* GooglePlacesAutocomplete.xib */,
-				14098C3A02E4B025DEDC9337054DFACA /* Images.xcassets */,
+				C90AA0B1E72318356B2808ECEB2F0090 /* GooglePlacesAutocomplete.xib */,
+				D8E3C897D7FA71756FA9BC36AB5D3493 /* Images.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -191,7 +191,7 @@
 		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				388D6AD4119821C17AFFFC8EB69EF5EA /* GooglePlacesAutocomplete.framework */,
+				56052A4981102D93B5E091B9AB559437 /* GooglePlacesAutocomplete.framework */,
 				A36F3E5477EAD4EF2AFA44C2E2001C0F /* Pods.framework */,
 			);
 			name = Products;
@@ -200,8 +200,8 @@
 		D0FB9306D21AF23A056944AE037CBFFF /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				BDF161D50B008069235B48724582FC5E /* Foundation.framework */,
-				BE15EFCE6312D1EAD1249A17424DD953 /* UIKit.framework */,
+				9EF65A38C7BCBC7284BC072E0F273532 /* Foundation.framework */,
+				EEDE774DA6F55FEEEA12DB970D00A034 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -217,15 +217,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8B71592FDEE5E1C61314C697E7AFE70B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A40F23CA7D67BB50035461D48C7C6FEE /* GooglePlacesAutocomplete-umbrella.h in Headers */,
-				5E8AD90239F3B6B18D189510C6B2C556 /* GooglePlacesAutocomplete.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BD31AA0BAA1F8D33FEF5784E390305E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,17 +225,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D57C250052BBECA64A2CEF0A5F5662AB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF82EE18431C96359BF5F05790FD920 /* GooglePlacesAutocomplete-umbrella.h in Headers */,
+				EC0A7DB3A42812274B1E595A7EDB2F2B /* GooglePlacesAutocomplete.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3EEABBE3AB9FA4A1A2E6F7BE9FE974D5 /* GooglePlacesAutocomplete */ = {
+		88920CC778510D33F226E67C27D8A8C9 /* GooglePlacesAutocomplete */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E8E21816DFEE5CC2F54BDB2EC6D17A53 /* Build configuration list for PBXNativeTarget "GooglePlacesAutocomplete" */;
+			buildConfigurationList = 24F7806D11EF235C725EF200DE386C38 /* Build configuration list for PBXNativeTarget "GooglePlacesAutocomplete" */;
 			buildPhases = (
-				CD4EB8F815570E29F24281683B10FA47 /* Sources */,
-				28C0A76B0435B001BBD5035A0F1D78AE /* Frameworks */,
-				8B71592FDEE5E1C61314C697E7AFE70B /* Headers */,
-				2D2590094A40846E138005900C6235E2 /* Resources */,
+				AFD811215041CF957ECAE7AC4CF24CDE /* Sources */,
+				131A814D410AB9314211879DEBA100FD /* Frameworks */,
+				D57C250052BBECA64A2CEF0A5F5662AB /* Headers */,
+				9E26E26023A0C42AEEB45E4FCE0ED376 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -252,7 +252,7 @@
 			);
 			name = GooglePlacesAutocomplete;
 			productName = GooglePlacesAutocomplete;
-			productReference = 388D6AD4119821C17AFFFC8EB69EF5EA /* GooglePlacesAutocomplete.framework */;
+			productReference = 56052A4981102D93B5E091B9AB559437 /* GooglePlacesAutocomplete.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		9E68E53990886369256B7E0CEB10370C /* Pods */ = {
@@ -266,7 +266,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				4ED12457CE9B985B34889D04FDA3D498 /* PBXTargetDependency */,
+				9C63713A6F83BB2BE732F282B774056F /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
@@ -281,6 +281,14 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					88920CC778510D33F226E67C27D8A8C9 = {
+						DevelopmentTeam = K37J4WCRKJ;
+					};
+					9E68E53990886369256B7E0CEB10370C = {
+						DevelopmentTeam = K37J4WCRKJ;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -294,31 +302,31 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3EEABBE3AB9FA4A1A2E6F7BE9FE974D5 /* GooglePlacesAutocomplete */,
+				88920CC778510D33F226E67C27D8A8C9 /* GooglePlacesAutocomplete */,
 				9E68E53990886369256B7E0CEB10370C /* Pods */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2D2590094A40846E138005900C6235E2 /* Resources */ = {
+		9E26E26023A0C42AEEB45E4FCE0ED376 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB14DA7BAB9B5FAE7AE2A7C60479C477 /* GooglePlacesAutocomplete.xib in Resources */,
-				32B47CD4BBAB810A19F7B168367A579E /* Images.xcassets in Resources */,
+				4FFDA1BCE6CC15262E6B96B614D920C6 /* GooglePlacesAutocomplete.xib in Resources */,
+				E29BAB9E0B90C651E4AC5D201D61E9BA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CD4EB8F815570E29F24281683B10FA47 /* Sources */ = {
+		AFD811215041CF957ECAE7AC4CF24CDE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B37A966F0A5917406E56BB6305EA75C2 /* GooglePlacesAutocomplete-dummy.m in Sources */,
-				FC1DC972554CFB2735CD8F0372193890 /* GooglePlacesAutocomplete.swift in Sources */,
+				CEF82D247626EB1FBD163E1983B684A3 /* GooglePlacesAutocomplete-dummy.m in Sources */,
+				1BF7F0F5297A43881CEA551116B2836E /* GooglePlacesAutocomplete.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,19 +341,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4ED12457CE9B985B34889D04FDA3D498 /* PBXTargetDependency */ = {
+		9C63713A6F83BB2BE732F282B774056F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GooglePlacesAutocomplete;
-			target = 3EEABBE3AB9FA4A1A2E6F7BE9FE974D5 /* GooglePlacesAutocomplete */;
-			targetProxy = DB6756A68590E19DB5D244C20D8F0B71 /* PBXContainerItemProxy */;
+			target = 88920CC778510D33F226E67C27D8A8C9 /* GooglePlacesAutocomplete */;
+			targetProxy = 50BDBB30B393C23E6652A17822BFD895 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5D5DFA9434F1A156B7C6883310F4E570 /* Release */ = {
+		365208E23ECBA90DE47C9D43A3AEAC3A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4038BEE36B70B28E21A63BC9FA1D7DC /* GooglePlacesAutocomplete-Private.xcconfig */;
+			baseConfigurationReference = 0C11EB1E3C83D3A549320D101421B9EE /* GooglePlacesAutocomplete-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.3.0;
 				DEFINES_MODULE = YES;
@@ -361,6 +370,7 @@
 				MODULEMAP_FILE = "Target Support Files/GooglePlacesAutocomplete/GooglePlacesAutocomplete.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = GooglePlacesAutocomplete;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -368,6 +378,36 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		72B93A1345333AAE73FC4CA8B611AF35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C11EB1E3C83D3A549320D101421B9EE /* GooglePlacesAutocomplete-Private.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.3.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 0.3.0;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GooglePlacesAutocomplete/GooglePlacesAutocomplete-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GooglePlacesAutocomplete/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GooglePlacesAutocomplete/GooglePlacesAutocomplete.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GooglePlacesAutocomplete;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		9EB645C612834738B99727720210C23E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -412,6 +452,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 61C1FE5BCE2DB18CBEEC686AF482CD0A /* Pods.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -429,6 +470,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = Pods;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C088F600765B64ED4F3036322DBE276C /* Pods.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -458,6 +501,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = Pods;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -501,37 +545,18 @@
 			};
 			name = Release;
 		};
-		F58AD46312409C5056474F50A411DF32 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4038BEE36B70B28E21A63BC9FA1D7DC /* GooglePlacesAutocomplete-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 0.3.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 0.3.0;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/GooglePlacesAutocomplete/GooglePlacesAutocomplete-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GooglePlacesAutocomplete/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/GooglePlacesAutocomplete/GooglePlacesAutocomplete.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = GooglePlacesAutocomplete;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		24F7806D11EF235C725EF200DE386C38 /* Build configuration list for PBXNativeTarget "GooglePlacesAutocomplete" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72B93A1345333AAE73FC4CA8B611AF35 /* Debug */,
+				365208E23ECBA90DE47C9D43A3AEAC3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -546,15 +571,6 @@
 			buildConfigurations = (
 				BAD85E7C12CBE1AA82D8321B3FD3FC76 /* Debug */,
 				9F0294E8361DA2F0021311F8FAC1D1B7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E8E21816DFEE5CC2F54BDB2EC6D17A53 /* Build configuration list for PBXNativeTarget "GooglePlacesAutocomplete" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F58AD46312409C5056474F50A411DF32 /* Debug */,
-				5D5DFA9434F1A156B7C6883310F4E570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

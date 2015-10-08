@@ -45,19 +45,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        println("Button clicked")
-        
+
         let cell = tableView.dequeueReusableCellWithIdentifier("childcellnew", forIndexPath: indexPath) as! onemoreclass1
-        
         cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
         cell.micprice.text = head[indexPath.section].amp[indexPath.row].pint
         cell.maxprice.text = head[indexPath.section].amp[indexPath.row].Bottle
-        
         return cell
     }
-    
-    
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 50
@@ -78,8 +72,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.headercelldist.text = head[section].distance
         return headerCell
     }
-
-    
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         view.layer.borderColor = UIColor.brownColor().CGColor
@@ -88,7 +80,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBAction func lookfurther(sender: AnyObject)
     {
-       // println("Trimmed string is" + trimmedString)
          println("latitude is \(lat)")
          println("longitude is\(long)")
         if trim == true
@@ -124,11 +115,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func extract_jsonfurhter(data:NSData)
     {
         var jsonError:NSError?
-        let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as! NSArray
+       if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
+       {
+         head = [Restaurant]()
         
-            head = [Restaurant]()
-            
-            
             for var index = 0; index < json.count; ++index
             {
                 fstobj1 = Restaurant()
@@ -140,8 +130,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         if let res_name = resInfo["res_name"] as? String
                         {
                             fstobj1.restname = res_name
-                            println("swasthik restname name\(fstobj1.restname)")
-                            
                         }
                         
                         if var distance = resInfo["distance"] as? String
@@ -152,7 +140,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             }
                             println("SUBSTRING    " + PartOfString(distance, 1, 2))
                             distance = PartOfString(distance, 1, 2)
-                            fstobj1.distance = distance + "KMS "
+                            fstobj1.distance = distance + "KMS"
                             
                         }
                     }
@@ -163,39 +151,49 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             var liqobj1 = liqclass()
                             if let one = resLiqInfo[i] as? NSDictionary
                             {
-                                if let liq_name = one ["liq_name"] as? String
-                                {
-                                    liqobj1.liqname = liq_name
-                                    
-                                    println(liqobj1.liqname)
-                                }
-                                if let res_liq_brand_price = one["res_liq_brand_price"] as? String
-                                {
-                                    liqobj1.pint = res_liq_brand_price
-                                    liqobj1.Bottle = res_liq_brand_price
-                                    fstobj1.maxp = res_liq_brand_price + " RS"
-                                    fstobj1.minp = res_liq_brand_price + " RS"
-                                    println("========" + liqobj1.pint)
-                                    println(" **********  \(fstobj1) ")
-                                }
-                                if let res_liq_brand_name = one["liq_brand_name"] as? String
-                                {
-                                    liqobj1.liqbrand = res_liq_brand_name
-                                    println(liqobj1.liqbrand)
-                                }
+
+                            if let res_liq_brand_name = one["liq_brand_name"] as? String
+                            {
+                                liqobj1.liqbrand = res_liq_brand_name
                             }
-                            fstobj1.amp.append(liqobj1)
-                            println("swasthik \(liqobj1)")
+                            if let pint_price = one["pint_price"] as? String
+                            {
+                                liqobj1.pint = pint_price
+
+                            }
+                            if let bottle_price = one["bottle_price"] as? String
+                            {
+                                liqobj1.Bottle = bottle_price
+                           
+                            }
+                                
+                   
                         }
+                            fstobj1.amp.append(liqobj1)
                     }
-                    
-                    println("swasthik \(fstobj1)")
                 }
-                head.append(fstobj1)
-                println("Apprive \(fstobj1)")
-                println("swasthik \(fstobj1)")
+                    if let pint_avg_price = bottomsUp1["pint_avg_price"] as? Int
+                    {
+                        var pint_avg_price1:String = toString(pint_avg_price)
+                        fstobj1.minp = pint_avg_price1
+                    }
+                    if let bottle_avg_price = bottomsUp1["bottle_avg_price"] as? Int
+                    {
+                        var bottle_avg_price1:String = toString(bottle_avg_price)
+                        fstobj1.maxp = bottle_avg_price1
+                    }
             }
+                head.append(fstobj1)
+
+        }
             println("vinayak count\( appsriv.count)")
+        }
+       else
+       {
+        let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        }
         
         self.tableview.reloadData()
     }
