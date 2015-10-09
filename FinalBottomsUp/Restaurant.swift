@@ -8,8 +8,11 @@
 
 import UIKit
 
+
+
 class Restaurant
 {
+    var bool = false
     var two = liqclass()
     
     var restname:String!

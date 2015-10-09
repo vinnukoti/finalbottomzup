@@ -31,6 +31,8 @@ var check:Int!
 
 class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
+  
+
     @IBOutlet weak var  autocmpleteTextfield: AutoCompleteTextField!
     
     @IBOutlet weak var textfield1: UITextField!
@@ -69,17 +71,19 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
    
         
         // Ask for Authorisation from the User.
-        self.locationManager.requestAlwaysAuthorization()
-        
-        // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            self.locationManager.startUpdatingLocation()
-        }
+//        self.locationManager.requestAlwaysAuthorization()
+//        
+//        // For use in foreground
+//        self.locationManager.requestWhenInUseAuthorization()
+//        
+//        if CLLocationManager.locationServicesEnabled()
+//        {
+//            self.locationManager.delegate = self
+//            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+//            self.locationManager.startUpdatingLocation()
+//        }
+//       
+//        
         func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
         {
             
@@ -89,55 +93,63 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             longitude = locValue.longitude
             println("vinayakkoti \(locValue.latitude)")
             println("vinayakkoti \(locValue.longitude)")
-            
+
         }
         
     }
-    
-    
+
+
    // getting Device latitude and longitude
 
 
-//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
-//    {
-//         var locValue:CLLocationCoordinate2D = manager.location.coordinate
-//                latitude = locValue.latitude
-//                 longitude = locValue.longitude
-//        
-//        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-//            
-//            if (error != nil)
-//            {
-//                println("Error: " + error.localizedDescription)
-//                return
-//            }
-//            
-//            if placemarks.count > 0
-//            {
-//                let pm = placemarks[0] as! CLPlacemark
-//                self.displayLocationInfo(pm)
-//            }
-//            else
-//            {
-//                println("Error with the data.")
-//            }
-//        })
-//    }
-//    
-//    func displayLocationInfo(placemark: CLPlacemark)
-//    {
-//        
-//        self.locationManager.stopUpdatingLocation()
-//        println(placemark.locality)
-//        println(placemark.postalCode)
-//        println(placemark.administrativeArea)
-//        println(placemark.country)
-//        autocmpleteTextfield.text = placemark.country
-//    }
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+    {
+         var locValue:CLLocationCoordinate2D = manager.location.coordinate
+                latitude = locValue.latitude
+                 longitude = locValue.longitude
+
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+
+            if (error != nil)
+            {
+                println("Error: " + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0
+            {
+                let pm = placemarks[0] as! CLPlacemark
+                self.displayLocationInfo(pm)
+            }
+            else
+            {
+                println("Error with the data.")
+            }
+        })
+    }
+    
+    func displayLocationInfo(placemark: CLPlacemark)
+    {
+        
+        self.locationManager.stopUpdatingLocation()
+        println(placemark.locality)
+        println(placemark.postalCode)
+        println(placemark.administrativeArea)
+        println(placemark.country)
+        if let locationName = placemark.addressDictionary["Name"] as? NSString
+        {
+            println(locationName)
+          //cityname.text = locationName as String
+            autocmpleteTextfield.text = locationName as String
+        }
+        
+       
+    }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
     {
         println("Error: " + error.localizedDescription)
+        //bool = true
     }
     
     //city textfield

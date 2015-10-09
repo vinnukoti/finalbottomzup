@@ -23,10 +23,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "3rdpage")
         println(latitude)
         println(longitude)
         println(head)
-        
 
     }
     
@@ -38,17 +38,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        
-        return head[section].amp.count
-        
+        if head[section].bool == true
+        {
+             return head[section].amp.count
+        }
+        else
+        {
+            return 0
+        }
     }
-    
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
-        
-
         let cell = tableView.dequeueReusableCellWithIdentifier("childcellnew", forIndexPath: indexPath) as! onemoreclass1
         cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
         cell.micprice.text = head[indexPath.section].amp[indexPath.row].pint
@@ -66,16 +66,38 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         return 30
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
+        headerCell.tag = section
         headerCell.backgroundColor = UIColor.cyanColor()
-        
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = head[section].minp
         headerCell.headercellmax.text = head[section].maxp
         headerCell.headercelldist.text = head[section].distance
+        
+        var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
+        headerCell.addGestureRecognizer(headerTapped)
+        headerCell.userInteractionEnabled = true
         return headerCell
     }
+    
+    
+    func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        println("Section: \(gestureRecognizer.view!.tag)")
+        if head[gestureRecognizer.view!.tag].bool == false
+        {
+        head[gestureRecognizer.view!.tag].bool = true
+        }
+        else
+        {
+            head[gestureRecognizer.view!.tag].bool = false
+        }
+        self.tableview.reloadData()
+    }
+
+
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         view.layer.borderColor = UIColor.brownColor().CGColor
@@ -106,10 +128,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
             
             dispatch_async(dispatch_get_main_queue(), {
-                
-                
-                self.extract_jsonfurhter(data)
-                
+ 
+                self.extract_jsonfurhter(data)  
             })
             
         }

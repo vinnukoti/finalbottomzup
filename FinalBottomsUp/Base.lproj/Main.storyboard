@@ -280,15 +280,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3rdpage" translatesAutoresizingMaskIntoConstraints="NO" id="Esj-ny-7fR">
-                                <rect key="frame" x="0.0" y="64" width="600" height="62"/>
-                            </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zH5-d8-c0K">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem title="Item" id="Hat-a6-Y9m"/>
-                                </items>
-                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mZa-Vh-jz1">
                                 <rect key="frame" x="0.0" y="119" width="600" height="373"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -316,8 +307,11 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Occ-38-WPK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Occ-38-WPK">
                                                     <rect key="frame" x="244" y="11" width="50" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="3IE-c8-cK8"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -328,8 +322,11 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GtX-ks-rD9">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GtX-ks-rD9">
                                                     <rect key="frame" x="302" y="11" width="50" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="CdA-z4-3e5"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <state key="normal" title="Go Here">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -344,11 +341,13 @@
                                                 <constraint firstItem="1dW-g9-pRa" firstAttribute="leading" secondItem="nMo-3H-2qk" secondAttribute="trailing" constant="8" symbolic="YES" id="Kdf-q9-VBL"/>
                                                 <constraint firstItem="nMo-3H-2qk" firstAttribute="leading" secondItem="chN-bP-62g" secondAttribute="leadingMargin" constant="-7" id="LKw-rj-AnX"/>
                                                 <constraint firstItem="BB3-CA-6i8" firstAttribute="centerY" secondItem="chN-bP-62g" secondAttribute="centerY" id="OHj-ut-dDf"/>
+                                                <constraint firstItem="Occ-38-WPK" firstAttribute="bottom" secondItem="GtX-ks-rD9" secondAttribute="bottom" id="Pku-0E-aVS"/>
+                                                <constraint firstItem="Occ-38-WPK" firstAttribute="top" secondItem="GtX-ks-rD9" secondAttribute="top" id="SgW-mf-oxV"/>
                                                 <constraint firstItem="BB3-CA-6i8" firstAttribute="baseline" secondItem="nMo-3H-2qk" secondAttribute="baseline" id="YGb-XO-e71"/>
-                                                <constraint firstAttribute="trailing" secondItem="GtX-ks-rD9" secondAttribute="trailing" constant="5" id="Z50-Pm-WOM"/>
                                                 <constraint firstItem="BB3-CA-6i8" firstAttribute="firstBaseline" secondItem="Occ-38-WPK" secondAttribute="firstBaseline" id="eCa-uZ-6zh"/>
                                                 <constraint firstItem="BB3-CA-6i8" firstAttribute="leading" secondItem="chN-bP-62g" secondAttribute="leading" constant="186" id="eO6-dt-bya"/>
                                                 <constraint firstItem="BB3-CA-6i8" firstAttribute="firstBaseline" secondItem="1dW-g9-pRa" secondAttribute="firstBaseline" id="nbE-FZ-9h2"/>
+                                                <constraint firstItem="GtX-ks-rD9" firstAttribute="leading" secondItem="Occ-38-WPK" secondAttribute="trailing" constant="8" symbolic="YES" id="seh-zF-foh"/>
                                                 <constraint firstItem="BB3-CA-6i8" firstAttribute="baseline" secondItem="1dW-g9-pRa" secondAttribute="baseline" id="tJp-5m-R0t"/>
                                                 <constraint firstItem="Occ-38-WPK" firstAttribute="leading" secondItem="BB3-CA-6i8" secondAttribute="trailing" constant="8" symbolic="YES" id="vMF-DR-VNI"/>
                                             </constraints>
@@ -450,6 +449,15 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3rdpage" translatesAutoresizingMaskIntoConstraints="NO" id="Esj-ny-7fR">
+                                <rect key="frame" x="0.0" y="64" width="600" height="62"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSj-ZJ-ac9">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="xLJ-yh-19a"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -461,6 +469,11 @@
                             <constraint firstItem="Eg4-7w-jby" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" constant="100" id="xXr-Rp-ovt"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="Hat-a6-Y9m"/>
+                    </toolbarItems>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableview" destination="mZa-Vh-jz1" id="7LN-Z7-Olm"/>
                     </connections>
