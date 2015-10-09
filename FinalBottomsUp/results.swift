@@ -51,6 +51,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var arar = [String]()
     var newarar =  [String]()
     var flag = false
+    var manager:CLLocationManager!
+    
 
     
     override func viewDidLoad()
@@ -74,63 +76,64 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
         if CLLocationManager.locationServicesEnabled()
         {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager.startUpdatingLocation()
+        }
+        func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+        {
+            
+            
+            var locValue:CLLocationCoordinate2D = manager.location.coordinate
+            latitude = locValue.latitude
+            longitude = locValue.longitude
+            println("vinayakkoti \(locValue.latitude)")
+            println("vinayakkoti \(locValue.longitude)")
+            
         }
         
     }
     
     
    // getting Device latitude and longitude
+
+
 //    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
 //    {
-//      
-//     
-//        var locValue:CLLocationCoordinate2D = manager.location.coordinate
-//         latitude = locValue.latitude
-//         longitude = locValue.longitude
-//       println("vinayakkoti \(locValue.latitude)")
-//       println("vinayakkoti \(locValue.longitude)")
-//
+//         var locValue:CLLocationCoordinate2D = manager.location.coordinate
+//                latitude = locValue.latitude
+//                 longitude = locValue.longitude
+//        
+//        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+//            
+//            if (error != nil)
+//            {
+//                println("Error: " + error.localizedDescription)
+//                return
+//            }
+//            
+//            if placemarks.count > 0
+//            {
+//                let pm = placemarks[0] as! CLPlacemark
+//                self.displayLocationInfo(pm)
+//            }
+//            else
+//            {
+//                println("Error with the data.")
+//            }
+//        })
 //    }
-
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
-    {
-         var locValue:CLLocationCoordinate2D = manager.location.coordinate
-                latitude = locValue.latitude
-                 longitude = locValue.longitude
-        
-        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-            
-            if (error != nil)
-            {
-                println("Error: " + error.localizedDescription)
-                return
-            }
-            
-            if placemarks.count > 0
-            {
-                let pm = placemarks[0] as! CLPlacemark
-                self.displayLocationInfo(pm)
-            }
-            else
-            {
-                println("Error with the data.")
-            }
-        })
-    }
-    
-    func displayLocationInfo(placemark: CLPlacemark)
-    {
-        
-        self.locationManager.stopUpdatingLocation()
-        println(placemark.locality)
-        println(placemark.postalCode)
-        println(placemark.administrativeArea)
-        println(placemark.country)
-        autocmpleteTextfield.text = placemark.country
-    }
+//    
+//    func displayLocationInfo(placemark: CLPlacemark)
+//    {
+//        
+//        self.locationManager.stopUpdatingLocation()
+//        println(placemark.locality)
+//        println(placemark.postalCode)
+//        println(placemark.administrativeArea)
+//        println(placemark.country)
+//        autocmpleteTextfield.text = placemark.country
+//    }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
     {
