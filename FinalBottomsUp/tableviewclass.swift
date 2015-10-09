@@ -26,6 +26,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         println(latitude)
         println(longitude)
         println(head)
+        
 
     }
     
@@ -45,11 +46,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        
+        
 
         let cell = tableView.dequeueReusableCellWithIdentifier("childcellnew", forIndexPath: indexPath) as! onemoreclass1
         cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
         cell.micprice.text = head[indexPath.section].amp[indexPath.row].pint
         cell.maxprice.text = head[indexPath.section].amp[indexPath.row].Bottle
+        
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
