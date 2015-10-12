@@ -21,9 +21,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     override func viewDidLoad()
     {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         super.viewDidLayoutSubviews()
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
+        let image = UIImage(named: "3rdpage")
+        navigationItem.titleView = UIImageView(image: image)
     }
     
     func numberOfSectionsInTableView(tableview: UITableView) -> Int
@@ -65,8 +68,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.cyanColor()
-
-        
+        headerCell.tag = section        
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = header1[section].avgprice
         headerCell.vodkadistance.text = header1[section].distancevodka
@@ -103,15 +105,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
-        if trim == true
-        {
+//        if trim == true
+//        {
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=8&records=4&query=\(liqvodkaname)")
-            trim = false
-        }
-        else
-        {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/nearby.php?lat=28.63875&long=77.07380&km=8&records=8")
-        }
+            //trim = false
+        //}
+//        else
+//        {
+//            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/nearby.php?lat=28.63875&long=77.07380&km=8&records=8")
+//        }
     }
     
         func getbardatafurtherforvodka(urlString:String)
@@ -175,14 +177,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             if let one = resLiqInfo[i] as? NSDictionary
                             {
                                 
+                                if let res_liq_brand_price = one["res_liq_brand_price"] as? String
+                                {
+                                    liqobj2.liqbrandprice = res_liq_brand_price
+                                }
+                                
                                 if let res_liq_brand_name = one["liq_brand_name"] as? String
                                 {
                                     liqobj2.liqnamebrandname = res_liq_brand_name
                                 }
+                                
 
                                 
                             }
-                            vodkaobj.further.append(liqobj2)
+                            vodkaobj.vodkaarray.append(liqobj2)
                         }
                     }
        

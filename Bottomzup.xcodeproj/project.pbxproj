@@ -42,6 +42,8 @@
 		537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */; };
 		537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DE1BBA58240082D896 /* Restaurant.swift */; };
 		537CA3E11BBA58400082D896 /* liqclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3E01BBA58400082D896 /* liqclass.swift */; };
+		538743401BCBB5F600143A1A /* maplable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5387433F1BCBB5F600143A1A /* maplable.swift */; };
+		538743421BCBB8E300143A1A /* mapdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538743411BCBB8E300143A1A /* mapdata.swift */; };
 		5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE381BC630EE007999AE /* tableviewclassvodka.swift */; };
 		5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE3A1BC63121007999AE /* Restauarantvodka.swift */; };
 		5389EE3D1BC63139007999AE /* liqvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EE3C1BC63139007999AE /* liqvodka.swift */; };
@@ -108,6 +110,8 @@
 		537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onemoreclass1.swift; sourceTree = "<group>"; };
 		537CA3DE1BBA58240082D896 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		537CA3E01BBA58400082D896 /* liqclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liqclass.swift; sourceTree = "<group>"; };
+		5387433F1BCBB5F600143A1A /* maplable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = maplable.swift; sourceTree = "<group>"; };
+		538743411BCBB8E300143A1A /* mapdata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapdata.swift; sourceTree = "<group>"; };
 		5389EE381BC630EE007999AE /* tableviewclassvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableviewclassvodka.swift; sourceTree = "<group>"; };
 		5389EE3A1BC63121007999AE /* Restauarantvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restauarantvodka.swift; sourceTree = "<group>"; };
 		5389EE3C1BC63139007999AE /* liqvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = liqvodka.swift; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 				537CA3DE1BBA58240082D896 /* Restaurant.swift */,
 				537CA3E01BBA58400082D896 /* liqclass.swift */,
 				53CB2BFD1BC3F94900F5F62C /* mapview.swift */,
+				538743411BCBB8E300143A1A /* mapdata.swift */,
+				5387433F1BCBB5F600143A1A /* maplable.swift */,
 				5389EE381BC630EE007999AE /* tableviewclassvodka.swift */,
 				5389EE3A1BC63121007999AE /* Restauarantvodka.swift */,
 				5389EE3C1BC63139007999AE /* liqvodka.swift */,
@@ -459,6 +465,8 @@
 				5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */,
 				538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */,
 				538A3F951BA9930C00A673C1 /* TableController.swift in Sources */,
+				538743421BCBB8E300143A1A /* mapdata.swift in Sources */,
+				538743401BCBB5F600143A1A /* maplable.swift in Sources */,
 				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,

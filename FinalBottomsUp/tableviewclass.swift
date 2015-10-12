@@ -16,14 +16,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var latitude:Double!
     var longitude:Double!
     
+    //@IBOutlet weak var navBar: UINavigationBar!
+    
     override func viewDidLoad()
     {
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
-        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "3rdpage")
-
-
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
+       // self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+        //navBar.backgroundImageForBarMetrics(UIBarMetrics.Default)
+        
+        var backButton = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goBack")
+        
+        navigationItem.rightBarButtonItem = backButton
+         navigationItem.leftBarButtonItem = nil
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int

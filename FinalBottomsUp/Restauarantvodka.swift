@@ -23,7 +23,7 @@ class Restauarantvodka
     init()
     {
         liqobjvodka = liqvodka()
-        
+        bool1 = false
         restnamevodka = String()
         avgprice = String()
         distancevodka = String()

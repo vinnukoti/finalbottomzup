@@ -59,6 +59,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     override func viewDidLoad()
     {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         textfield1.delegate = self
         tableview!.delegate = self
         tableview!.dataSource = self
@@ -68,8 +69,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         handleTextFieldInterfaces()
         textfield1.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         textfield1.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
-   
-   
+         self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+       
         func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
         {
             
@@ -578,6 +579,12 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     {
         
         performSegueWithIdentifier("mapview", sender: self)
+        
+       
+        
+        
+        
+        
     }
     
     
