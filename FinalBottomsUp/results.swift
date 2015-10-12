@@ -69,21 +69,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         textfield1.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         textfield1.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
    
-        
-        // Ask for Authorisation from the User.
-//        self.locationManager.requestAlwaysAuthorization()
-//        
-//        // For use in foreground
-//        self.locationManager.requestWhenInUseAuthorization()
-//        
-//        if CLLocationManager.locationServicesEnabled()
-//        {
-//            self.locationManager.delegate = self
-//            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//            self.locationManager.startUpdatingLocation()
-//        }
-//       
-//        
+   
         func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
         {
             
@@ -397,22 +383,21 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 
                 self.extract_json(data)
             })
-            
         }
         task.resume()
     }
-    
     func extract_json(data:NSData)
     {
         var jsonError:NSError?
-        
       if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
       {
         head1 = [Restaurant]()
+        header = [Restauarantvodka]()
         for var index = 0; index < json.count; ++index
         {
             fstobj1 = Restaurant()
-           
+            vodkaobj = Restauarantvodka()
+            
             if let bottomsUp1 = json[index] as? NSDictionary
             {
                 if let avg_price = bottomsUp1["avg_price"] as? Int
@@ -420,7 +405,17 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                    check = avg_price
                     println("check  \(check)")
                 }
-                
+                if check <= 0{
+                if let pint_avg_price = bottomsUp1["pint_avg_price"] as? Int
+                {
+                    var pint_avg_price2:String = toString(pint_avg_price)
+                    fstobj1.minp = pint_avg_price2
+                }
+                if let bottle_avg_price = bottomsUp1["bottle_avg_price"] as? Int
+                {
+                    var bottle_avg_price2:String = toString(bottle_avg_price)
+                    fstobj1.maxp = bottle_avg_price2
+                }
                 if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                 {
                     if let res_name = resInfo["res_name"] as? String
@@ -461,31 +456,76 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         fstobj1.amp.append(liqobj1)
                     }
                 }
-                
-                if let pint_avg_price = bottomsUp1["pint_avg_price"] as? Int
-                {
-                    var pint_avg_price2:String = toString(pint_avg_price)
-                    fstobj1.minp = pint_avg_price2
-                }
-                if let bottle_avg_price = bottomsUp1["bottle_avg_price"] as? Int
-                {
-                    var bottle_avg_price2:String = toString(bottle_avg_price)
-                    fstobj1.maxp = bottle_avg_price2
-                }
                  head1.append(fstobj1)
+                }
+                    
+                else
+                {
+                   if let avg_price = bottomsUp1["avg_price"] as? Int
+                   {
+                    var avg_price2:String = toString(avg_price)
+                    vodkaobj.avgprice = avg_price2
+                    
+                    }
+                    if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
+                    {
+                        if let res_name = resInfo["res_name"] as? String
+                        {
+                            vodkaobj.restnamevodka = res_name
+                        }
+                        if var distance = resInfo["distance"] as? String
+                        {
+                            func PartOfString(s: String, start: Int, length: Int) -> String
+                            {
+                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                            }
+                            println("SUBSTRING    " + PartOfString(distance, 1, 2))
+                            distance = PartOfString(distance, 1, 2)
+                            vodkaobj.distancevodka = distance + "KMS"
+                        }
+                    }
+                    
+                    if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
+                    {
+                        for var i = 0; i < resLiqInfo.count; ++i
+                        {
+                            var liqobj2 = liqvodka()
+                            if let one = resLiqInfo[i] as? NSDictionary
+                            {
+                                
+                                if let res_liq_brand_name = one["liq_brand_name"] as? String
+                                {
+                                    liqobj2.liqnamebrandname = res_liq_brand_name
+                                }
+                                if let res_liq_brand_price = one["res_liq_brand_price"] as? String
+                                {
+                                    liqobj2.liqbrandprice = res_liq_brand_price
+                                }
+                         
+                            }
+                            vodkaobj.vodkaarray.append(liqobj2)
+                        }
+                    }
+                    header.append(vodkaobj)
+                }
             }
         }
+        if check <= 0
+        {
+        
          performSegueWithIdentifier("newres", sender: self)
-
         }
-        
         else
-        
+        {
+          performSegueWithIdentifier("vodka", sender: self)
+        }
+        }
+        else
           {
             let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
-        }
+          }
     }
     func removeDuplicates(array: [String]) -> [String]
     {
@@ -523,6 +563,11 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         {
             if let destination1 = segue.destinationViewController as? tableviewclassvodka
             {
+                destination1.liqvodkaname = textfield1.text
+                var liqvodkaname = textfield1.text
+                let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+                destination1.liqvodkaname = trimmedString
+
                 destination1.header1 = header
             }
         }

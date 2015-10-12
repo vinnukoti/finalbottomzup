@@ -13,8 +13,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableview: UITableView!
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
-   // var appsriv:[Restaurant] = [Restaurant]()
-    var fstobj = Restaurant()
     var latitude:Double!
     var longitude:Double!
     
@@ -24,9 +22,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.delegate = self
         self.tableview.dataSource = self
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "3rdpage")
-        println(latitude)
-        println(longitude)
-        println(head)
+
 
     }
     
@@ -110,7 +106,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
          println("longitude is\(long)")
         if trim == true
         {
-        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=8&records=4&query=\(trimmedString)")
+        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=8&records=4&query=\(liqname)")
             trim = false
         }
         else
@@ -210,7 +206,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 head.append(fstobj1)
 
         }
-           // println("vinayak count\( appsriv.count)")
         }
        else
        {

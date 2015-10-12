@@ -10,6 +10,7 @@ import UIKit
 
 class Restauarantvodka
 {
+    var bool1 = false
     var liqobjvodka = liqvodka()
     
     var restnamevodka:String!
