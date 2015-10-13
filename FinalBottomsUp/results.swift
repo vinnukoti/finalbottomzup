@@ -508,6 +508,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         }
                     }
                     header.append(vodkaobj)
+                    println("header \(vodkaobj)")
                 }
             }
         }

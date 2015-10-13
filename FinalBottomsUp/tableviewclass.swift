@@ -211,7 +211,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
             }
                 head.append(fstobj1)
-
         }
         }
        else
@@ -226,9 +225,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     @IBAction func pintsort(sender: AnyObject)
+    
     {
         
+        
     }
+
 }
 
 
