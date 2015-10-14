@@ -107,7 +107,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
 //        if trim == true
 //        {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=8&records=4&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=8&records=4&query=\(liqvodkaname)")
             //trim = false
         //}
 //        else

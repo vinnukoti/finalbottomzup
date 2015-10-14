@@ -11,6 +11,8 @@ import UIKit
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet weak var tableview: UITableView!
+    
+    @IBOutlet weak var pintbutton: UIButton!
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
     var latitude:Double!
@@ -20,17 +22,34 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad()
     {
+        if Reachability.isConnectedToNetwork() == true
+        {
+            println("Internet connection OK")
+        }
+        else
+        {
+            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "No internet Connection", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
+        //self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
        // self.navigationController?.navigationBar.backItem?.hidesBackButton = true
         //navBar.backgroundImageForBarMetrics(UIBarMetrics.Default)
         
         var backButton = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goBack")
+//        
+//        navigationItem.rightBarButtonItem = backButton
+//         navigationItem.leftBarButtonItem = nil
         
-        navigationItem.rightBarButtonItem = backButton
-         navigationItem.leftBarButtonItem = nil
+//        pintbutton.backgroundColor = UIColor.clearColor()
+//        pintbutton.layer.cornerRadius = 115
+//        pintbutton.layer.borderWidth = 1
+//        pintbutton.layer.borderColor = UIColor.blackColor().CGColor
+        
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -109,11 +128,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBAction func lookfurther(sender: AnyObject)
     {
-         println("latitude is \(lat)")
-         println("longitude is\(long)")
+         println("latitude is \(citylat)")
+         println("longitude is\(citylong)")
         if trim == true
         {
-        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=8&records=4&query=\(liqname)")
+        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=8&records=4&query=\(liqname)")
             trim = false
         }
         else
@@ -317,6 +336,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         println("sorted array is  : \(head)")
         
     }
+    
+    
     
     
     

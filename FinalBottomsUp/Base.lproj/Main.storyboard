@@ -318,7 +318,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pmq-DU-1WK">
-                                <rect key="frame" x="293" y="107" width="60" height="30"/>
+                                <rect key="frame" x="277" y="107" width="60" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Distance">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -343,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pl3-aM-fz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-521" y="-1806"/>
+            <point key="canvasLocation" x="-542" y="-1939"/>
         </scene>
         <!--Tableviewclass-->
         <scene sceneID="qUz-jp-MiN">
@@ -557,6 +558,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="pintbutton" destination="6Yx-ha-CrO" id="gNm-jp-Q3Q"/>
                         <outlet property="tableview" destination="mZa-Vh-jz1" id="7LN-Z7-Olm"/>
                     </connections>
                 </viewController>
@@ -696,6 +698,6 @@
         <image name="new" width="675" height="1200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f8e-Lx-sA3"/>
+        <segue reference="0Ih-1Q-qdD"/>
     </inferredMetricsTieBreakers>
 </document>

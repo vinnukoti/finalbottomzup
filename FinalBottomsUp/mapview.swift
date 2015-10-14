@@ -8,8 +8,11 @@
 
 import UIKit
 
+var res_lat1:Double!
+var res_long1:Double!
 
-
+var res_res_lat:Double!
+var res_res_long:Double!
 
 class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 {
@@ -19,6 +22,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     var wineandbarobj = mapdata()
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
+    
+
    
 
     override func viewDidLoad()
@@ -28,7 +33,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         self.tableviewformap.dataSource = self
         println("MAPVIEWWWWWW \(getdevicelatitude)")
         println("MAPVIEWWWWWW \(getdevicelongitude)")
-        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=5")
+        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=5")
         
 
         
@@ -85,6 +90,20 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                                wineandbarobj.mapliqname = res_name
                                 println("******************\(wineandbarobj.mapliqname)")
                             }
+                            if let res_lat = resInfo["res_lat"] as? String
+                            {
+                                let string = NSString(string: res_lat)
+                               res_lat1 = string.doubleValue
+                                
+                                
+                              
+                            }
+                            if let res_long = resInfo["res_long"] as? String
+                            {
+                                let string = NSString(string: res_long)
+                                res_long1 = string.doubleValue
+                            }
+                            
                             if var distance = resInfo["distance"] as? String
                             {
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -184,32 +203,32 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         
         
-        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant> {
+        func sortCards(inout cards: Array<mapdata>) -> Array<mapdata> {
             var sorted = false
             while sorted == false {
                 sorted = true
                 for i in 0...cards.count - 2 {
-                    if cards[i].minp > cards[i+1].minp {
+                    if cards[i].mapliqdistance > cards[i+1].mapliqdistance {
                         sorted = false
                         var first = cards[i]
                         var second = cards[i + 1]
-                        println("first object before \(first.minp)")
-                        println("second object before\(second.minp)")
+                        println("first object before \(first.mapliqdistance)")
+                        println("second object before\(second.mapliqdistance)")
                         cards[i] = second
                         cards[i + 1] = first
                         
-                        println("first object after\(cards[i].minp)")
-                        println("second object after\(cards[i + 1].minp)")
+                        println("first object after\(cards[i].mapliqdistance)")
+                        println("second object after\(cards[i + 1].mapliqdistance)")
                         
                     }
                 }
             }
             return cards
         }
-//        var sortedarray:[Restaurant] = sortCards(&head)
-//        head = sortedarray
-//        self.tableview.reloadData()
-//        println("sorted array is  : \(head)")
+        var sortedarray:[mapdata] = sortCards(&wineandbar)
+        wineandbar = sortedarray
+        self.tableviewformap.reloadData()
+        println("sorted array is  : \(wineandbar)")
         
         
     }

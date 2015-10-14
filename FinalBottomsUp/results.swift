@@ -11,11 +11,9 @@ import CoreLocation
 
 var variable:String!
 
-var latitude:Double!
-var longitude:Double!
 var liqnamefromtextfield:String!
-var lat:Double!
-var long:Double!
+var citylat:Double!
+var citylong:Double!
 
 var trimmedString:String!
 
@@ -65,6 +63,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     override func viewDidLoad()
     {
+        getBearingBetweenTwoPoints1()
        // self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         textfield1.delegate = self
         tableview!.delegate = self
@@ -75,19 +74,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         handleTextFieldInterfaces()
         textfield1.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         textfield1.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
-        
-       
-//        func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
-//        {
-//            
-//            
-//            var locValue:CLLocationCoordinate2D = manager.location.coordinate
-//            latitude = locValue.latitude
-//            longitude = locValue.longitude
-//            println("vinayakkoti \(locValue.latitude)")
-//            println("vinayakkoti \(locValue.longitude)")
-//
-//        }
+
         
         self.locationManager.requestAlwaysAuthorization()
         
@@ -110,61 +97,91 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         devicelongitude = locValue.longitude
         println(devicelatitude)
         println(devicelongitude)
+        
+        var OldLocation: CLLocation = CLLocation(latitude: "12.9667".doubleValue, longitude: "77.5667".doubleValue)
+        var newLocation: CLLocation = CLLocation(latitude: "28.639083333333332".doubleValue, longitude: "77.075333333333330".doubleValue)
+        var totalDistance: Double = 0
+        var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+        //currentSpeed = (newLocation.speed() * 3600) / 1000
+        totalDistance = totalDistance + (meters / 1000)
+        // NSLog("Current Speed: %@", String(format: "%.2f", currentSpeed))
+        println(String(format: "%.2f KM", totalDistance))
+        NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil)
+            {
+                println("Error: " + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0
+            {
+                let pm = placemarks[0] as! CLPlacemark
+                self.displayLocationInfo(pm)
+            }
+            else
+            {
+                println("Error with the data.")
+            }
+        })
+
+    }
+    
+    func degreesToRadians(degrees: Double) -> Double
+    {
+        return degrees * M_PI / 180.0
+    }
+    
+    func radiansToDegrees(radians: Double) -> Double
+    {
+        return radians * 180.0 / M_PI
+    }
+    
+    func getBearingBetweenTwoPoints1(/*point1 : CLLocation, point2 : CLLocation*/) -> Double
+    {
+        
+        let lat1 = degreesToRadians("11.021470".doubleValue)
+        let lon1 = degreesToRadians("76.916576".doubleValue)
+        
+        let lat2 = degreesToRadians("11.024747".doubleValue);
+        let lon2 = degreesToRadians("76.898037".doubleValue);
+        
+        let dLon = lon2 - lon1;
+        
+        let y = sin(dLon) * cos(lat2);
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+        let radiansBearing = atan2(y, x);
+        println(radiansToDegrees(radiansBearing))
+        
+        return radiansToDegrees(radiansBearing)
     }
 
 
    // getting Device latitude and longitude
 
-
-//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
-//    {
-//         var locValue:CLLocationCoordinate2D = manager.location.coordinate
-//                latitude = locValue.latitude
-//                 longitude = locValue.longitude
-//
-//        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-//
-//            if (error != nil)
-//            {
-//                println("Error: " + error.localizedDescription)
-//                return
-//            }
-//            
-//            if placemarks.count > 0
-//            {
-//                let pm = placemarks[0] as! CLPlacemark
-//                self.displayLocationInfo(pm)
-//            }
-//            else
-//            {
-//                println("Error with the data.")
-//            }
-//        })
-//    }
-//    
-//    func displayLocationInfo(placemark: CLPlacemark)
-//    {
-//        
-//        self.locationManager.stopUpdatingLocation()
-//        println(placemark.locality)
-//        println(placemark.postalCode)
-//        println(placemark.administrativeArea)
-//        println(placemark.country)
-//        if let locationName = placemark.addressDictionary["Name"] as? NSString
-//        {
-//            println(locationName)
-//          //cityname.text = locationName as String
-//            autocmpleteTextfield.text = locationName as String
-//        }
-//        
-//       
-//    }
-//    
-//    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
-//    {
-//        println("Error: " + error.localizedDescription)
-//        //bool = true
-//    }
+    func displayLocationInfo(placemark: CLPlacemark)
+    {
+        
+        self.locationManager.stopUpdatingLocation()
+        println(placemark.locality)
+        println(placemark.postalCode)
+        println(placemark.administrativeArea)
+        println(placemark.country)
+        if let locationName = placemark.addressDictionary["Name"] as? NSString
+        {
+            println(locationName)
+            autocmpleteTextfield.text = locationName as String
+        }
+        
+       
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
+    {
+        println("Error: " + error.localizedDescription)
+        //bool = true
+    }
     
     //city textfield
     private func configureTextField()
@@ -209,8 +226,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 if placemark != nil
                 {
                     let coordinate = placemark!.location.coordinate
-                    lat = coordinate.latitude
-                    long = coordinate.longitude
+                    citylat = coordinate.latitude
+                    citylong = coordinate.longitude
                 }
             })
         }
@@ -396,7 +413,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(lat)&long=\(long)&km=5&records=4&query=\(trimmedString)")
+       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
     }
     
     func getbardata(urlString:String)

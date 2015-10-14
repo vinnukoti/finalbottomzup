@@ -58,6 +58,7 @@
 		538D0A481BA4194B005D1386 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A451BA4194B005D1386 /* Service.swift */; };
 		538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538D0A491BA41C58005D1386 /* MapKit.framework */; };
 		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
+		53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		538D0A451BA4194B005D1386 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		538D0A491BA41C58005D1386 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
+		53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internetcheckclass.swift; sourceTree = "<group>"; };
 		A3E6ABB127B08185A6ECEC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BBAACA6BEA2DB090A27F178F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D167FABA4877F1BA58EC2E16 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +251,7 @@
 				5389EE3C1BC63139007999AE /* liqvodka.swift */,
 				5389EE3E1BC65117007999AE /* custmheadercell1.swift */,
 				5389EE401BC65146007999AE /* onemoreclass2.swift */,
+				53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */,
 			);
 			path = FinalBottomsUp;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */,
 				5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */,
 				538D0A461BA4194B005D1386 /* Location.swift in Sources */,
+				53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */,
 				534618EB1BBBDAAF00B0E188 /* results.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
