@@ -128,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1043" y="-2615"/>
+            <point key="canvasLocation" x="-1197" y="-2787"/>
         </scene>
         <!--Results-->
         <scene sceneID="kqN-H8-XZO">
@@ -242,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfW-vS-awx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-397" y="-2615"/>
+            <point key="canvasLocation" x="-521" y="-2779"/>
         </scene>
         <!--Mapview-->
         <scene sceneID="GT7-l3-ORI">
@@ -268,7 +268,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Sp9-uO-gkO">
-                                <rect key="frame" x="0.0" y="96" width="600" height="395"/>
+                                <rect key="frame" x="0.0" y="145" width="600" height="346"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="wineandbar" rowHeight="48" id="4Z1-tn-j60" customClass="maplable" customModule="Bottomzup" customModuleProvider="target">
@@ -317,6 +317,15 @@
                                     <segue destination="TUS-5C-5c6" kind="show" id="f8e-Lx-sA3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pmq-DU-1WK">
+                                <rect key="frame" x="293" y="107" width="60" height="30"/>
+                                <state key="normal" title="Distance">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="distancesort:" destination="6zf-Eh-8mM" eventType="touchUpInside" id="OKp-in-sng"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -334,7 +343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pl3-aM-fz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-397" y="-1854"/>
+            <point key="canvasLocation" x="-521" y="-1806"/>
         </scene>
         <!--Tableviewclass-->
         <scene sceneID="qUz-jp-MiN">
@@ -495,6 +504,9 @@
                                 <state key="normal" title="LOCATION">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="locationsort:" destination="cXB-1m-d5z" eventType="touchUpInside" id="hK1-WN-ke1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gw3-dO-6Bx">
                                 <rect key="frame" x="171" y="98" width="56" height="30"/>
@@ -503,6 +515,9 @@
                                 <state key="normal" title="BOTTLE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="bottolesort:" destination="cXB-1m-d5z" eventType="touchUpInside" id="bqo-Sq-xZy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Yx-ha-CrO">
                                 <rect key="frame" x="123" y="98" width="34" height="30"/>
@@ -547,7 +562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="317" y="-2615"/>
+            <point key="canvasLocation" x="139" y="-2779"/>
         </scene>
         <!--Tableviewclassvodka-->
         <scene sceneID="0pa-3Q-oDE">

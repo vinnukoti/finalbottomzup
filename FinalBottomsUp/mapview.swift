@@ -17,7 +17,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     var wineandbar:[mapdata] = [mapdata]()
     var wineandbarobj = mapdata()
-    
+    var getdevicelatitude:Double!
+    var getdevicelongitude:Double!
    
 
     override func viewDidLoad()
@@ -25,7 +26,9 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
-        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=28.6345345&long=77.0749759&km=5&records=5")
+        println("MAPVIEWWWWWW \(getdevicelatitude)")
+        println("MAPVIEWWWWWW \(getdevicelongitude)")
+        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=5")
         
 
         
@@ -172,6 +175,43 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         }
         
         self.tableviewformap.reloadData()
+    }
+    
+    
+    @IBAction func distancesort(sender: AnyObject)
+    
+    {
+        
+        
+        
+        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant> {
+            var sorted = false
+            while sorted == false {
+                sorted = true
+                for i in 0...cards.count - 2 {
+                    if cards[i].minp > cards[i+1].minp {
+                        sorted = false
+                        var first = cards[i]
+                        var second = cards[i + 1]
+                        println("first object before \(first.minp)")
+                        println("second object before\(second.minp)")
+                        cards[i] = second
+                        cards[i + 1] = first
+                        
+                        println("first object after\(cards[i].minp)")
+                        println("second object after\(cards[i + 1].minp)")
+                        
+                    }
+                }
+            }
+            return cards
+        }
+//        var sortedarray:[Restaurant] = sortCards(&head)
+//        head = sortedarray
+//        self.tableview.reloadData()
+//        println("sorted array is  : \(head)")
+        
+        
     }
 
     

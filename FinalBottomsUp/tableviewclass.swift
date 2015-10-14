@@ -227,9 +227,99 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func pintsort(sender: AnyObject)
     
     {
+        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant> {
+            var sorted = false
+            while sorted == false {
+                sorted = true
+                for i in 0...cards.count - 2 {
+                    if cards[i].minp > cards[i+1].minp {
+                        sorted = false
+                        var first = cards[i]
+                        var second = cards[i + 1]
+                        println("first object before \(first.minp)")
+                        println("second object before\(second.minp)")
+                        cards[i] = second
+                        cards[i + 1] = first
+                        
+                        println("first object after\(cards[i].minp)")
+                        println("second object after\(cards[i + 1].minp)")
+                        
+                    }
+                }
+            }
+            return cards
+        }
+        var sortedarray:[Restaurant] = sortCards(&head)
+        head = sortedarray
+        self.tableview.reloadData()
+        println("sorted array is  : \(head)")
+    }
+    
+    @IBAction func bottolesort(sender: AnyObject)
         
+    {
+        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant> {
+            var sorted = false
+            while sorted == false {
+                sorted = true
+                for i in 0...cards.count - 2 {
+                    if cards[i].maxp > cards[i+1].maxp {
+                        sorted = false
+                        var first = cards[i]
+                        var second = cards[i + 1]
+                        println("first object before \(first.maxp)")
+                        println("second object before\(second.maxp)")
+                        cards[i] = second
+                        cards[i + 1] = first
+                        
+                        println("first object after\(cards[i].maxp)")
+                        println("second object after\(cards[i + 1].maxp)")
+                        
+                    }
+                }
+            }
+            return cards
+        }
+        var sortedarray:[Restaurant] = sortCards(&head)
+        head = sortedarray
+        self.tableview.reloadData()
+        println("sorted array is  : \(head)")
+    }
+    
+    
+    @IBAction func locationsort(sender: AnyObject)
+    {
+        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant> {
+            var sorted = false
+            while sorted == false {
+                sorted = true
+                for i in 0...cards.count - 2 {
+                    if cards[i].distance > cards[i+1].distance {
+                        sorted = false
+                        var first = cards[i]
+                        var second = cards[i + 1]
+                        println("first object before \(first.distance)")
+                        println("second object before\(second.distance)")
+                        cards[i] = second
+                        cards[i + 1] = first
+                        
+                        println("first object after\(cards[i].distance)")
+                        println("second object after\(cards[i + 1].distance)")
+                        
+                    }
+                }
+            }
+            return cards
+        }
+        var sortedarray:[Restaurant] = sortCards(&head)
+        head = sortedarray
+        self.tableview.reloadData()
+        println("sorted array is  : \(head)")
         
     }
+    
+    
+    
 
 }
 
