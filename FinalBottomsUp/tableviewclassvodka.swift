@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 
 
@@ -105,15 +106,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
-//        if trim == true
-//        {
+
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=8&records=4&query=\(liqvodkaname)")
-            //trim = false
-        //}
-//        else
-//        {
-//            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/nearby.php?lat=28.63875&long=77.07380&km=8&records=8")
-//        }
+
     }
     
         func getbardatafurtherforvodka(urlString:String)
@@ -157,16 +152,41 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             vodkaobj.restnamevodka = res_name
                         }
                         
+                        if let res_lat = resInfo["res_lat"] as? String
+                        {
+                            let mySwiftString = res_lat
+                            var string = NSString(string: mySwiftString)
+                            string.doubleValue
+                            restvodkalat = string.doubleValue
+                            println(restvodkalat)
+                            
+                        }
+                        if let res_long = resInfo["res_long"] as? String
+                        {
+                            let mySwiftString = res_long
+                            var string = NSString(string: mySwiftString)
+                            string.doubleValue
+                            restvodkalang = string.doubleValue
+                            println(restvodkalang)
+                        }
                         if var distance = resInfo["distance"] as? String
                         {
+                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
+                            var totalDistance: Double = 0
+                            var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                            totalDistance = totalDistance + (meters / 1000)
+                            println(String(format: "%.2f KM", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                            var totalDistance1 = totalDistance.description
+                            println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
-                            println("SUBSTRING    " + PartOfString(distance, 1, 2))
-                            distance = PartOfString(distance, 1, 2)
-                            vodkaobj.distancevodka = distance + "KMS"
-                            
+                            println("SUBSTRING    " + PartOfString(totalDistance1, 1, 4))
+                            totalDistance1 = PartOfString(totalDistance1, 1, 4)
+                            vodkaobj.distancevodka = totalDistance1 + " KMS"
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray

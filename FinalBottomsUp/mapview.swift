@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 var res_lat1:Double!
 var res_long1:Double!
 
-var res_res_lat:Double!
-var res_res_long:Double!
+var res_furtherlat:Double!
+var res_furtherlong:Double!
+
+
 
 class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 {
@@ -22,8 +25,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     var wineandbarobj = mapdata()
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
-    
-
+    var bool = true
    
 
     override func viewDidLoad()
@@ -34,10 +36,6 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         println("MAPVIEWWWWWW \(getdevicelatitude)")
         println("MAPVIEWWWWWW \(getdevicelongitude)")
         getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=5")
-        
-
-        
-        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -92,6 +90,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             }
                             if let res_lat = resInfo["res_lat"] as? String
                             {
+                                //convert string to double
                                 let string = NSString(string: res_lat)
                                res_lat1 = string.doubleValue
                                 
@@ -106,13 +105,22 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             
                             if var distance = resInfo["distance"] as? String
                             {
+                                var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                                var newLocation: CLLocation = CLLocation(latitude: res_lat1, longitude: res_long1)
+                                var totalDistance: Double = 0
+                                var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                                totalDistance = totalDistance + (meters / 1000)
+                                println(String(format: "%.2f KM", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                                var totalDistance1 = totalDistance.description
+                                println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
                                 {
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                                 }
-                                println("SUBSTRING    " + PartOfString(distance, 1, 4))
-                                distance = PartOfString(distance, 1, 4)
-                                wineandbarobj.mapliqdistance = distance + " KMS"
+                                println("SUBSTRING    " + PartOfString(totalDistance1, 1, 4))
+                                totalDistance1 = PartOfString(totalDistance1, 1, 4)
+                                wineandbarobj.mapliqdistance = totalDistance1 + " KMS"
                             }
                         }
                     }
@@ -170,15 +178,40 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             wineandbarobj.mapliqname = res_name
                             println("******************\(wineandbarobj.mapliqname)")
                         }
+                        if let res_lat = resInfo["res_lat"] as? String
+                        {
+                            //convert string to double
+                            let string = NSString(string: res_lat)
+                            res_furtherlat = string.doubleValue
+                            
+                            
+                            
+                        }
+                        if let res_long = resInfo["res_long"] as? String
+                        {
+                            let string = NSString(string: res_long)
+                            res_furtherlong = string.doubleValue
+                        }
+                        
+
                         if var distance = resInfo["distance"] as? String
                         {
+                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var newLocation: CLLocation = CLLocation(latitude: res_furtherlat, longitude: res_furtherlong)
+                            var totalDistance: Double = 0
+                            var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                            totalDistance = totalDistance + (meters / 1000)
+                            println(String(format: "%.2f KM", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                            var totalDistance1 = totalDistance.description
+                            println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
-                            println("SUBSTRING    " + PartOfString(distance, 1, 4))
-                            distance = PartOfString(distance, 1, 4)
-                            wineandbarobj.mapliqdistance = distance + " KMS"
+                            println("SUBSTRING    " + PartOfString(totalDistance1, 1, 4))
+                            totalDistance1 = PartOfString(totalDistance1, 1, 4)
+                            wineandbarobj.mapliqdistance = totalDistance1 + " KMS"
                         }
                     }
                 }
@@ -200,38 +233,46 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     @IBAction func distancesort(sender: AnyObject)
     
     {
-        
-        
-        
-        func sortCards(inout cards: Array<mapdata>) -> Array<mapdata> {
-            var sorted = false
-            while sorted == false {
-                sorted = true
-                for i in 0...cards.count - 2 {
-                    if cards[i].mapliqdistance > cards[i+1].mapliqdistance {
-                        sorted = false
-                        var first = cards[i]
-                        var second = cards[i + 1]
-                        println("first object before \(first.mapliqdistance)")
-                        println("second object before\(second.mapliqdistance)")
-                        cards[i] = second
-                        cards[i + 1] = first
-                        
-                        println("first object after\(cards[i].mapliqdistance)")
-                        println("second object after\(cards[i + 1].mapliqdistance)")
-                        
-                    }
-                }
-            }
-            return cards
-        }
-        var sortedarray:[mapdata] = sortCards(&wineandbar)
-        wineandbar = sortedarray
-        self.tableviewformap.reloadData()
-        println("sorted array is  : \(wineandbar)")
-        
-        
-    }
-
     
+
+        
+        func swapNumbers(index1 :Int,index2: Int)
+        {
+            let temp = wineandbar[index1]
+            wineandbar[index1] = wineandbar[index2]
+            wineandbar[index2] = temp
+        }
+        
+//        for var indexi = 0; indexi < wineandbar.count ; indexi++
+//        {
+//            for var indexj = 0; indexj < indexi; indexj++
+//            {
+//                if wineandbar[indexj] > wineandbar[indexj + 1]
+//                {
+//                    self.swapNumbers(indexj, indexj+1)
+//                }
+//            }
+//        }
+//        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+}
 }

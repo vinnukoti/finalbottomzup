@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -39,7 +40,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
        // self.navigationController?.navigationBar.backItem?.hidesBackButton = true
         //navBar.backgroundImageForBarMetrics(UIBarMetrics.Default)
         
-        var backButton = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goBack")
+     //   var backButton = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goBack")
 //        
 //        navigationItem.rightBarButtonItem = backButton
 //         navigationItem.leftBarButtonItem = nil
@@ -178,16 +179,47 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             fstobj1.restname = res_name
                         }
                         
+                        if let res_lat = resInfo["res_lat"] as? String
+                        {
+                            //convert String to Double
+                            let mySwiftString = res_lat
+                            var string = NSString(string: mySwiftString)
+                            string.doubleValue
+                            restlat = string.doubleValue
+                            println(restlat)
+                        }
+                        if let res_long = resInfo["res_long"] as? String
+                        {
+                            let mySwiftString = res_long
+                            var string = NSString(string: mySwiftString)
+                            string.doubleValue
+                            restlong = string.doubleValue
+                            println(restlong)
+                            
+                            
+                        }
                         if var distance = resInfo["distance"] as? String
                         {
+                            
+                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
+                            var totalDistance: Double = 0
+                            var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                            totalDistance = totalDistance + (meters / 1000)
+                            println(String(format: "%.2f KM", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                            var totalDistance1 = totalDistance.description
+                            println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
-                            println("SUBSTRING    " + PartOfString(distance, 1, 2))
-                            distance = PartOfString(distance, 1, 2)
-                            fstobj1.distance = distance + "KMS"
+                            println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
+                            totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             
+                            
+                            fstobj1.distance = totalDistance1 + " KMS"
+                            println(fstobj1.distance)
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -212,8 +244,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 liqobj1.Bottle = bottle_price
                            
                             }
-                                
-                   
                         }
                             fstobj1.amp.append(liqobj1)
                     }

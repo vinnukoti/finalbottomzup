@@ -49,7 +49,7 @@ class ViewController: UIViewController,GPPSignInDelegate
     
     {
         super.viewDidLoad()
-        placesClient = GMSPlacesClient()
+                placesClient = GMSPlacesClient()
          self.navigationController?.navigationBar.backItem?.hidesBackButton = true
     }
    

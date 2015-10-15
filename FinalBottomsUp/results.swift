@@ -15,6 +15,12 @@ var liqnamefromtextfield:String!
 var citylat:Double!
 var citylong:Double!
 
+var restlat:Double!
+var restlong:Double!
+
+var restvodkalang:Double!
+var restvodkalat:Double!
+
 var trimmedString:String!
 
 var head1:[Restaurant] = [Restaurant]()
@@ -63,7 +69,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     override func viewDidLoad()
     {
-        getBearingBetweenTwoPoints1()
+        //getBearingBetweenTwoPoints1()
        // self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         textfield1.delegate = self
         tableview!.delegate = self
@@ -97,16 +103,14 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         devicelongitude = locValue.longitude
         println(devicelatitude)
         println(devicelongitude)
-        
-        var OldLocation: CLLocation = CLLocation(latitude: "12.9667".doubleValue, longitude: "77.5667".doubleValue)
-        var newLocation: CLLocation = CLLocation(latitude: "28.639083333333332".doubleValue, longitude: "77.075333333333330".doubleValue)
-        var totalDistance: Double = 0
-        var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
-        //currentSpeed = (newLocation.speed() * 3600) / 1000
-        totalDistance = totalDistance + (meters / 1000)
-        // NSLog("Current Speed: %@", String(format: "%.2f", currentSpeed))
-        println(String(format: "%.2f KM", totalDistance))
-        NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+//        
+//        var OldLocation: CLLocation = CLLocation(latitude: "12.9667".doubleValue, longitude: "77.5667".doubleValue)
+//        var newLocation: CLLocation = CLLocation(latitude: "28.639083333333332".doubleValue, longitude: "77.075333333333330".doubleValue)
+//        var totalDistance: Double = 0
+//        var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+//        totalDistance = totalDistance + (meters / 1000)
+//        println(String(format: "%.2f KM", totalDistance))
+//        NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
             
             if (error != nil)
@@ -128,34 +132,34 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
 
     }
     
-    func degreesToRadians(degrees: Double) -> Double
-    {
-        return degrees * M_PI / 180.0
-    }
-    
-    func radiansToDegrees(radians: Double) -> Double
-    {
-        return radians * 180.0 / M_PI
-    }
-    
-    func getBearingBetweenTwoPoints1(/*point1 : CLLocation, point2 : CLLocation*/) -> Double
-    {
-        
-        let lat1 = degreesToRadians("11.021470".doubleValue)
-        let lon1 = degreesToRadians("76.916576".doubleValue)
-        
-        let lat2 = degreesToRadians("11.024747".doubleValue);
-        let lon2 = degreesToRadians("76.898037".doubleValue);
-        
-        let dLon = lon2 - lon1;
-        
-        let y = sin(dLon) * cos(lat2);
-        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
-        let radiansBearing = atan2(y, x);
-        println(radiansToDegrees(radiansBearing))
-        
-        return radiansToDegrees(radiansBearing)
-    }
+//    func degreesToRadians(degrees: Double) -> Double
+//    {
+//        return degrees * M_PI / 180.0
+//    }
+//    
+//    func radiansToDegrees(radians: Double) -> Double
+//    {
+//        return radians * 180.0 / M_PI
+//    }
+//    
+//    func getBearingBetweenTwoPoints1(/*point1 : CLLocation, point2 : CLLocation*/) -> Double
+//    {
+//        
+//        let lat1 = degreesToRadians("11.021470".doubleValue)
+//        let lon1 = degreesToRadians("76.916576".doubleValue)
+//        
+//        let lat2 = degreesToRadians("11.024747".doubleValue);
+//        let lon2 = degreesToRadians("76.898037".doubleValue);
+//        
+//        let dLon = lon2 - lon1;
+//        
+//        let y = sin(dLon) * cos(lat2);
+//        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+//        let radiansBearing = atan2(y, x);
+//        println(radiansToDegrees(radiansBearing))
+//        
+//        return radiansToDegrees(radiansBearing)
+//    }
 
 
    // getting Device latitude and longitude
@@ -467,15 +471,48 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     {
                         fstobj1.restname = res_name
                     }
+                    
+                    if let res_lat = resInfo["res_lat"] as? String
+                    {
+                        //convert String to Double
+                        let mySwiftString = res_lat
+                        var string = NSString(string: mySwiftString)
+                        string.doubleValue
+                        restlat = string.doubleValue
+                        println(restlat)
+                    }
+                    if let res_long = resInfo["res_long"] as? String
+                    {
+                        let mySwiftString = res_long
+                        var string = NSString(string: mySwiftString)
+                        string.doubleValue
+                        restlong = string.doubleValue
+                        println(restlong)
+
+                        
+                    }
                     if var distance = resInfo["distance"] as? String
                     {
+                        
+                        var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                        var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
+                        var totalDistance: Double = 0
+                        var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                        totalDistance = totalDistance + (meters / 1000)
+                        println(String(format: "%.2f KM", totalDistance))
+                        NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                        var totalDistance1 = totalDistance.description
+                        println(totalDistance1)
                         func PartOfString(s: String, start: Int, length: Int) -> String
                         {
                             return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                         }
-                        println("SUBSTRING    " + PartOfString(distance, 1, 2))
-                        distance = PartOfString(distance, 1, 2)
-                        fstobj1.distance = distance + "KMS"
+                        println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
+                        totalDistance1 = PartOfString(totalDistance1, 1, 3)
+
+
+                        fstobj1.distance = totalDistance1 + " KMS"
+                        println(fstobj1.distance)
                     }
                 }
                 if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -518,15 +555,42 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             vodkaobj.restnamevodka = res_name
                         }
+                        
+                        if let res_lat = resInfo["res_lat"] as? String
+                        {
+                            let mySwiftString = res_lat
+                            var string = NSString(string: mySwiftString)
+                            string.doubleValue
+                            restvodkalat = string.doubleValue
+                            println(restvodkalat)
+
+                        }
+                        if let res_long = resInfo["res_long"] as? String
+                        {
+                            let mySwiftString = res_long
+                            var string = NSString(string: mySwiftString)
+                            string.doubleValue
+                            restvodkalang = string.doubleValue
+                            println(restvodkalang)
+                        }
                         if var distance = resInfo["distance"] as? String
                         {
+                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
+                            var totalDistance: Double = 0
+                            var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                            totalDistance = totalDistance + (meters / 1000)
+                            println(String(format: "%.2f KM", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                            var totalDistance1 = totalDistance.description
+                            println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
-                            println("SUBSTRING    " + PartOfString(distance, 1, 2))
-                            distance = PartOfString(distance, 1, 2)
-                            vodkaobj.distancevodka = distance + "KMS"
+                            println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
+                            totalDistance1 = PartOfString(totalDistance1, 1, 3)
+                            vodkaobj.distancevodka = totalDistance1 + " KMS"
                         }
                     }
                     

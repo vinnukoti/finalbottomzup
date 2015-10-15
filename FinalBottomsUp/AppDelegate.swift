@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        
              GMSServices.provideAPIKey("AIzaSyAmC9Bxbw-8M-6ppbty3ArFP7u2t97KKMY")
              Fabric.with([Crashlytics.self()])
         
@@ -66,6 +67,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func applicationDidBecomeActive(application: UIApplication)
     {
+//        GiFHUD.setGif("bubbles (1).gif")
+//        GiFHUD.show()
+//        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
+//        dispatch_after(delay, dispatch_get_main_queue(), {
+//            GiFHUD.dismiss()
+//        })
+
         
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
