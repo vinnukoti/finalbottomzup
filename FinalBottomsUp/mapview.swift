@@ -21,7 +21,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 {
     @IBOutlet weak var tableviewformap: UITableView!
 
-    var wineandbar:[mapdata] = [mapdata]()
+    var wineandbararray:[mapdata] = [mapdata]()
     var wineandbarobj = mapdata()
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
@@ -33,8 +33,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
-        println("MAPVIEWWWWWW \(getdevicelatitude)")
-        println("MAPVIEWWWWWW \(getdevicelongitude)")
+      //  println("MAPVIEWWWWWW \(getdevicelatitude)")
+       // println("MAPVIEWWWWWW \(getdevicelongitude)")
         getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=5")
     }
     
@@ -46,13 +46,13 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return wineandbar.count
+        return wineandbararray.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("wineandbar", forIndexPath: indexPath) as! maplable
-        cell.name.text = wineandbar[indexPath.row].mapliqname
-        cell.distance.text = wineandbar[indexPath.row].mapliqdistance
+        cell.name.text = wineandbararray[indexPath.row].mapliqname
+        cell.distance.text = wineandbararray[indexPath.row].mapliqdistance
         return cell
     }
     func getnaerbybar(urlString:String)
@@ -86,7 +86,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             if let res_name = resInfo["res_name"] as? String
                             {
                                wineandbarobj.mapliqname = res_name
-                                println("******************\(wineandbarobj.mapliqname)")
+                              //  println("******************\(wineandbarobj.mapliqname)")
                             }
                             if let res_lat = resInfo["res_lat"] as? String
                             {
@@ -110,10 +110,10 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f KM", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                               // println(String(format: "%.2f KM", totalDistance))
+                              //  NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
                                 var totalDistance1 = totalDistance.description
-                                println(totalDistance1)
+                               // println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
                                 {
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
@@ -124,8 +124,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             }
                         }
                     }
-                wineandbar.append(wineandbarobj)
-                println(wineandbar.count)
+                wineandbararray.append(wineandbarobj)
+                println(wineandbararray.count)
             }
         }
         else
@@ -164,7 +164,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         var jsonError:NSError?
         if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
         {
-            wineandbar = [mapdata]()
+            wineandbararray = [mapdata]()
             for var index = 0; index < json.count; ++index
             {
                 wineandbarobj = mapdata()
@@ -176,7 +176,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                         if let res_name = resInfo["res_name"] as? String
                         {
                             wineandbarobj.mapliqname = res_name
-                            println("******************\(wineandbarobj.mapliqname)")
+                           // println("******************\(wineandbarobj.mapliqname)")
                         }
                         if let res_lat = resInfo["res_lat"] as? String
                         {
@@ -201,10 +201,9 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
-                            println(String(format: "%.2f KM", totalDistance))
-                            NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                           // println(String(format: "%.2f KM", totalDistance))
                             var totalDistance1 = totalDistance.description
-                            println(totalDistance1)
+                           // println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
@@ -215,8 +214,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                         }
                     }
                 }
-                wineandbar.append(wineandbarobj)
-                println(wineandbar.count)
+                wineandbararray.append(wineandbarobj)
+                println(wineandbararray.count)
             }
         }
         else
@@ -233,46 +232,74 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     @IBAction func distancesort(sender: AnyObject)
     
     {
-    
-
-        
-        func swapNumbers(index1 :Int,index2: Int)
+        func sortCards(inout elements: Array<mapdata>) -> Array<mapdata>
         {
-            let temp = wineandbar[index1]
-            wineandbar[index1] = wineandbar[index2]
-            wineandbar[index2] = temp
+            var sorted = false
+            while sorted == false
+            {
+                sorted = true
+                for i in 0...elements.count - 2
+                {
+                    println(elements[i].mapliqdistance)
+                    println(elements[i+1].mapliqdistance)
+                    if elements[i].mapliqdistance > elements[i+1].mapliqdistance
+                    {
+                        sorted = false
+                        var first = elements[i]
+                        var second = elements[i + 1]
+                        println("first object before \(first.mapliqdistance)")
+                        println("second object before\(second.mapliqdistance)")
+                        elements[i] = second
+                        elements[i + 1] = first
+                        
+                        println("first object after\(elements[i].mapliqdistance)")
+                        println("second object after\(elements[i + 1].mapliqdistance)")
+                        
+                    }
+                }
+            }
+            return elements
         }
-        
-//        for var indexi = 0; indexi < wineandbar.count ; indexi++
-//        {
-//            for var indexj = 0; indexj < indexi; indexj++
-//            {
-//                if wineandbar[indexj] > wineandbar[indexj + 1]
-//                {
-//                    self.swapNumbers(indexj, indexj+1)
-//                }
-//            }
-//        }
-//        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        var sortedarray:[mapdata] = sortCards(&wineandbararray)
+        wineandbararray = sortedarray
+        self.tableviewformap.reloadData()
+        println("sorted array is  : \(wineandbararray)")
 
+        
+        
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
