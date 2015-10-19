@@ -18,6 +18,7 @@ class customheadercell: UITableViewCell
  
     @IBOutlet weak var headercelldist: UILabel!
  
+    @IBOutlet weak var coloredimage: UIImageView!
     
 
 

@@ -108,7 +108,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
 
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=8&records=4&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=8&records=4&query=\(liqvodkaname)")
 
     }
     
@@ -172,7 +172,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         }
                         if var distance = resInfo["distance"] as? String
                         {
-                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)

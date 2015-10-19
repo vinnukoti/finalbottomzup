@@ -16,6 +16,9 @@ class onemoreclass1: UITableViewCell
     @IBOutlet weak var micprice: UILabel!
 
     @IBOutlet weak var maxprice: UILabel!
+    
+    @IBOutlet weak var coloredimagechild: UIImageView!
+    
 
     override func awakeFromNib()
     {
