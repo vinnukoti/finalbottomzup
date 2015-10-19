@@ -232,10 +232,6 @@ class ViewController: UIViewController,GPPSignInDelegate
             performSegueWithIdentifier("show", sender: self)
             
         }
-
-   
-        
-        
     }
     @IBAction func gogo(sender: AnyObject)
     {

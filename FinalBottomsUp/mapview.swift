@@ -33,8 +33,6 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
-      //  println("MAPVIEWWWWWW \(getdevicelatitude)")
-       // println("MAPVIEWWWWWW \(getdevicelongitude)")
         getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=5")
     }
     

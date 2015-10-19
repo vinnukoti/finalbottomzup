@@ -59,7 +59,6 @@
 		538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538D0A491BA41C58005D1386 /* MapKit.framework */; };
 		53A3FF951BCF873900122759 /* GiFHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3FF941BCF873900122759 /* GiFHUD.swift */; };
 		53A3FF971BCF883E00122759 /* pika.gif in Resources */ = {isa = PBXBuildFile; fileRef = 53A3FF961BCF883E00122759 /* pika.gif */; };
-		53A3FF991BCF8AE200122759 /* bubbles.gif in Resources */ = {isa = PBXBuildFile; fileRef = 53A3FF981BCF8AE200122759 /* bubbles.gif */; };
 		53A3FF9F1BCF8F5000122759 /* bubbles (1).gif in Resources */ = {isa = PBXBuildFile; fileRef = 53A3FF9E1BCF8F5000122759 /* bubbles (1).gif */; };
 		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
 		53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */; };
@@ -132,7 +131,6 @@
 		538D0A491BA41C58005D1386 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		53A3FF941BCF873900122759 /* GiFHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GiFHUD.swift; path = "../../../../../../Downloads/GiFHUD-Swift-master/GiFHUD-Swift/GiFHUD.swift"; sourceTree = "<group>"; };
 		53A3FF961BCF883E00122759 /* pika.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = pika.gif; path = "../../../../../../Downloads/GiFHUD-Swift-master/GiFHUD-Swift/pika.gif"; sourceTree = "<group>"; };
-		53A3FF981BCF8AE200122759 /* bubbles.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = bubbles.gif; path = "../../../../../untitled folder/bubbles.gif"; sourceTree = "<group>"; };
 		53A3FF9E1BCF8F5000122759 /* bubbles (1).gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "bubbles (1).gif"; sourceTree = "<group>"; };
 		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internetcheckclass.swift; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				53A3FF9E1BCF8F5000122759 /* bubbles (1).gif */,
-				53A3FF981BCF8AE200122759 /* bubbles.gif */,
 				53A3FF961BCF883E00122759 /* pika.gif */,
 				53A3FF941BCF873900122759 /* GiFHUD.swift */,
 				538A3F941BA9930C00A673C1 /* TableController.swift */,
@@ -397,7 +394,6 @@
 				5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */,
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,
 				53A3FF9F1BCF8F5000122759 /* bubbles (1).gif in Resources */,
-				53A3FF991BCF8AE200122759 /* bubbles.gif in Resources */,
 				53A3FF971BCF883E00122759 /* pika.gif in Resources */,
 				5367CF221B9DBBB700D33220 /* GooglePlus.bundle in Resources */,
 				5367CEFE1B9DB0EA00D33220 /* Images.xcassets in Resources */,

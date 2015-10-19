@@ -34,6 +34,7 @@ var check:Int!
 
 
 
+
 class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
   
@@ -55,7 +56,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     let locationManager = CLLocationManager()
     
-    
+    var locationname:String!
     var arar = [String]()
     var newarar =  [String]()
     var flag = false
@@ -103,14 +104,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         devicelongitude = locValue.longitude
         println(devicelatitude)
         println(devicelongitude)
-//        
-//        var OldLocation: CLLocation = CLLocation(latitude: "12.9667".doubleValue, longitude: "77.5667".doubleValue)
-//        var newLocation: CLLocation = CLLocation(latitude: "28.639083333333332".doubleValue, longitude: "77.075333333333330".doubleValue)
-//        var totalDistance: Double = 0
-//        var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
-//        totalDistance = totalDistance + (meters / 1000)
-//        println(String(format: "%.2f KM", totalDistance))
-//        NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
             
             if (error != nil)
@@ -131,35 +125,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         })
 
     }
-    
-//    func degreesToRadians(degrees: Double) -> Double
-//    {
-//        return degrees * M_PI / 180.0
-//    }
-//    
-//    func radiansToDegrees(radians: Double) -> Double
-//    {
-//        return radians * 180.0 / M_PI
-//    }
-//    
-//    func getBearingBetweenTwoPoints1(/*point1 : CLLocation, point2 : CLLocation*/) -> Double
-//    {
-//        
-//        let lat1 = degreesToRadians("11.021470".doubleValue)
-//        let lon1 = degreesToRadians("76.916576".doubleValue)
-//        
-//        let lat2 = degreesToRadians("11.024747".doubleValue);
-//        let lon2 = degreesToRadians("76.898037".doubleValue);
-//        
-//        let dLon = lon2 - lon1;
-//        
-//        let y = sin(dLon) * cos(lat2);
-//        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
-//        let radiansBearing = atan2(y, x);
-//        println(radiansToDegrees(radiansBearing))
-//        
-//        return radiansToDegrees(radiansBearing)
-//    }
 
 
    // getting Device latitude and longitude
@@ -175,7 +140,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         if let locationName = placemark.addressDictionary["Name"] as? NSString
         {
             println(locationName)
-            autocmpleteTextfield.text = locationName as String
+          locationname  = locationName as String
         }
         
        
@@ -693,6 +658,12 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     
+    @IBAction func getcurrentlocationname(sender: AnyObject)
+    {
+       autocmpleteTextfield.text = locationname
+        
+    }
+
     @IBAction func nearbar(sender: AnyObject)
     {
         
@@ -709,7 +680,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     
     
-    
+
     
     
     

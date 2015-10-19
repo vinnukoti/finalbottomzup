@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreLocation
+import MapKit
+var latitude:Double!
+var longitude:Double!
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -16,8 +19,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var pintbutton: UIButton!
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
-    var latitude:Double!
-    var longitude:Double!
+ 
     
     //@IBOutlet weak var navBar: UINavigationBar!
     
@@ -370,6 +372,29 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
+    @IBAction func getdirections(sender: AnyObject)
+    {
+        
+        func openMapForPlace()
+        {
+            
+
+            
+            var latitute:CLLocationDegrees = latitude
+            var longitute:CLLocationDegrees = longitude
+            
+            let regionDistance:CLLocationDistance = 10000
+            var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+            let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+            var options = [MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+                MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)]
+            var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+            var mapItem = MKMapItem(placemark: placemark)
+           // mapItem.name = "\(self.venueName)"
+            mapItem.openInMapsWithLaunchOptions(options)
+            
+        }
+    }
     
 
 }

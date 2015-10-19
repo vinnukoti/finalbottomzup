@@ -8,12 +8,13 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 
 
 
 
-class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDelegate
+class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDelegate,MKMapViewDelegate
 {
     @IBOutlet weak var tableview1: UITableView!
     var header1:[Restauarantvodka] = [Restauarantvodka]()
@@ -231,8 +232,27 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
         
         
-
+    @IBAction func getdirections(sender: AnyObject)
+    {
+       
+        
+        UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!)
+        
+        if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
+            UIApplication.sharedApplication().openURL(NSURL(string:
+                "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving")!)
+            
+        }
+        else
+        {
+            NSLog("Can't use comgooglemaps://");
+        }
     }
+    }
+
+    
+
+    
     
     
     
