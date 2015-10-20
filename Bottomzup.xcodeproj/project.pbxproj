@@ -58,8 +58,6 @@
 		538D0A481BA4194B005D1386 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A451BA4194B005D1386 /* Service.swift */; };
 		538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538D0A491BA41C58005D1386 /* MapKit.framework */; };
 		53A3FF951BCF873900122759 /* GiFHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3FF941BCF873900122759 /* GiFHUD.swift */; };
-		53A3FF971BCF883E00122759 /* pika.gif in Resources */ = {isa = PBXBuildFile; fileRef = 53A3FF961BCF883E00122759 /* pika.gif */; };
-		53A3FF9F1BCF8F5000122759 /* bubbles (1).gif in Resources */ = {isa = PBXBuildFile; fileRef = 53A3FF9E1BCF8F5000122759 /* bubbles (1).gif */; };
 		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
 		53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */; };
 /* End PBXBuildFile section */
@@ -130,8 +128,6 @@
 		538D0A451BA4194B005D1386 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		538D0A491BA41C58005D1386 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		53A3FF941BCF873900122759 /* GiFHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GiFHUD.swift; path = "../../../../../../Downloads/GiFHUD-Swift-master/GiFHUD-Swift/GiFHUD.swift"; sourceTree = "<group>"; };
-		53A3FF961BCF883E00122759 /* pika.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = pika.gif; path = "../../../../../../Downloads/GiFHUD-Swift-master/GiFHUD-Swift/pika.gif"; sourceTree = "<group>"; };
-		53A3FF9E1BCF8F5000122759 /* bubbles (1).gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "bubbles (1).gif"; sourceTree = "<group>"; };
 		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internetcheckclass.swift; sourceTree = "<group>"; };
 		A3E6ABB127B08185A6ECEC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -225,8 +221,6 @@
 		5367CEF31B9DB0EA00D33220 /* FinalBottomsUp */ = {
 			isa = PBXGroup;
 			children = (
-				53A3FF9E1BCF8F5000122759 /* bubbles (1).gif */,
-				53A3FF961BCF883E00122759 /* pika.gif */,
 				53A3FF941BCF873900122759 /* GiFHUD.swift */,
 				538A3F941BA9930C00A673C1 /* TableController.swift */,
 				538D0A431BA4194B005D1386 /* Location.swift */,
@@ -393,8 +387,6 @@
 			files = (
 				5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */,
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,
-				53A3FF9F1BCF8F5000122759 /* bubbles (1).gif in Resources */,
-				53A3FF971BCF883E00122759 /* pika.gif in Resources */,
 				5367CF221B9DBBB700D33220 /* GooglePlus.bundle in Resources */,
 				5367CEFE1B9DB0EA00D33220 /* Images.xcassets in Resources */,
 			);

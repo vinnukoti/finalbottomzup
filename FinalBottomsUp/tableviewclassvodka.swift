@@ -172,7 +172,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         }
                         if var distance = resInfo["distance"] as? String
                         {
-                            var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
+                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -197,7 +197,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             var liqobj2 = liqvodka()
                             if let one = resLiqInfo[i] as? NSDictionary
                             {
-                                
                                 if let res_liq_brand_price = one["res_liq_brand_price"] as? String
                                 {
                                     liqobj2.liqbrandprice = res_liq_brand_price
@@ -207,9 +206,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 {
                                     liqobj2.liqnamebrandname = res_liq_brand_name
                                 }
-                                
-
-                                
                             }
                             vodkaobj.vodkaarray.append(liqobj2)
                         }
@@ -229,9 +225,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         self.tableview1.reloadData()
     }
-
-        
-        
     @IBAction func getdirections(sender: AnyObject)
     {
        
@@ -248,7 +241,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             NSLog("Can't use comgooglemaps://");
         }
     }
-    }
+}
 
     
 

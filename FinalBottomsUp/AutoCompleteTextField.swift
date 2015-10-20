@@ -107,10 +107,6 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     {
         let screenSize = UIScreen.mainScreen().bounds.size
         let tableView = UITableView(frame: CGRectMake(self.frame.origin.x, self.frame.origin.y + CGRectGetHeight(self.frame), screenSize.width - (self.frame.origin.x * 2), 30.0))
-        //var tableView: UITableView  =   UITableView()
-        
-        // tableView.frame = CGRectMake(0 , 0, self.autoCompleteTableView!.frame.width, self.autoCompleteTableView!.frame.height * 0.7)
-        
         tableView.frame =   CGRectMake(20, 210, 320, 20);
         tableView.dataSource = self
         tableView.delegate = self

@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        
-             GMSServices.provideAPIKey("AIzaSyAmC9Bxbw-8M-6ppbty3ArFP7u2t97KKMY")
+    
+             GMSServices.provideAPIKey("AIzaSyBvSmi0fvOIfFosTmK4khDP6oLaO43kasY")
              Fabric.with([Crashlytics.self()])
         
                 NSThread.sleepForTimeInterval(1)

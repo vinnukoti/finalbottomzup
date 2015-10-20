@@ -383,6 +383,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
+        //28.63875
+        //77.07380
     }
     
     func getbardata(urlString:String)

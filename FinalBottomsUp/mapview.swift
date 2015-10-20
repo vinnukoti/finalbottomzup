@@ -138,7 +138,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     @IBAction func lookfurtherfoewineandbeer(sender: AnyObject)
     {
-        getfurtherdataforwineandbeer("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=28.6345345&long=77.0749759&km=8&records=5")
+        getfurtherdataforwineandbeer("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=8&records=5")
     }
     
     func getfurtherdataforwineandbeer(urlString:String)
@@ -194,6 +194,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 
                         if var distance = resInfo["distance"] as? String
                         {
+                           // 28.63875
+                           // 77.07380
                             var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
                             var newLocation: CLLocation = CLLocation(latitude: res_furtherlat, longitude: res_furtherlong)
                             var totalDistance: Double = 0
