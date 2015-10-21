@@ -19,16 +19,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableview1: UITableView!
     var header1:[Restauarantvodka] = [Restauarantvodka]()
     var liqvodkaname:String!
+    var bool = false
 
 
     override func viewDidLoad()
     {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
+       // self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         super.viewDidLayoutSubviews()
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
-        let image = UIImage(named: "3rdpage")
-        navigationItem.titleView = UIImageView(image: image)
+        //let image = UIImage(named: "3rdpage")
+       // navigationItem.titleView = UIImageView(image: image)
     }
     
     func numberOfSectionsInTableView(tableview: UITableView) -> Int
@@ -67,9 +68,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         return 30
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+     
+        
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
-        headerCell.backgroundColor = UIColor.cyanColor()
+       
+        if bool == false
+        {
+            headerCell.backgroundColor = UIColor.cyanColor()
+        }
+        else
+        {
+             headerCell.backgroundColor = UIColor.orangeColor()
+        }
         headerCell.tag = section        
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = header1[section].avgprice
@@ -107,7 +119,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
-
+             bool = true
+        
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=8&records=4&query=\(liqvodkaname)")
 
     }
