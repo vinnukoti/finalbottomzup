@@ -51,6 +51,10 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         let cell = tableView.dequeueReusableCellWithIdentifier("wineandbar", forIndexPath: indexPath) as! maplable
         cell.name.text = wineandbararray[indexPath.row].mapliqname
         cell.distance.text = wineandbararray[indexPath.row].mapliqdistance
+        var tblView =  UIView(frame: CGRectZero)
+        tableView.tableFooterView = tblView
+        tableView.tableFooterView!.hidden = true
+        tableView.backgroundColor = UIColor.clearColor()
         return cell
     }
     func getnaerbybar(urlString:String)
