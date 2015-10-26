@@ -9,31 +9,53 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Social
 var latitude:Double!
 var longitude:Double!
 var doubleTap = true
 
+
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
+    @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
     
     @IBOutlet weak var pintbutton: UIButton!
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
+    var getdevicelatitude:Double!
+    var getdevicelongitude:Double!
+    var booleanhidelable = false
+
     
     override func viewDidLoad()
     {
+        
+        popupview.hidden = true
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
      }
     
+    @IBAction func shareonfacebook(sender: AnyObject)
+    {
+        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        shareToFacebook.setInitialText("Hello I Posted Using Swift And Social Framework")
+        shareToFacebook.addImage(UIImage(named: "32.png"))
+        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+    }
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
      
         return head.count
     }
     
+    @IBAction func getdiscount1(sender: AnyObject)
+    {
+        popupview.hidden = false
+
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if head[section].bool == true
@@ -66,7 +88,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
+        var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
         headerCell.backgroundColor = UIColor.cyanColor()
         headerCell.headercellname.text = head[section].restname
@@ -77,30 +99,32 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
         headerCell.userInteractionEnabled = true
-        
+//        if booleanhidelable == true
+//        {
+//            headerCell.headercellmax.hidden = true
+//            headerCell.headercellmin.hidden = true
+//        }
         var tblView =  UIView(frame: CGRectZero)
         tableView.tableFooterView = tblView
         tableView.tableFooterView!.hidden = true
         tableView.backgroundColor = UIColor.clearColor()
         return headerCell
     }
-    
-    
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+        booleanhidelable = true
         println("Section: \(gestureRecognizer.view!.tag)")
         if head[gestureRecognizer.view!.tag].bool == false
         {
-        head[gestureRecognizer.view!.tag].bool = true
-       // self.imageview.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2));
+            head[gestureRecognizer.view!.tag].bool = true
         }
         else
         {
             head[gestureRecognizer.view!.tag].bool = false
         }
         self.tableview.reloadData()
+       // booleanhidelable = false
     }
-
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
@@ -481,12 +505,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func getdirections(sender: AnyObject)
     {
-        
-        func openMapForPlace()
-        {
-            
+    
+            //URL to the map application in ios
+            UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
 
-        }
+        
     }
     
 

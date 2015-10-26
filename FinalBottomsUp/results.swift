@@ -634,6 +634,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 destination.liqname = trimmedString
                 destination.head = head1
+                destination.getdevicelatitude = devicelatitude
+                destination.getdevicelongitude = devicelongitude
            }
         }
         if segue.identifier == "vodka"
@@ -663,13 +665,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     @IBAction func getcurrentlocationname(sender: AnyObject)
     {
        autocmpleteTextfield.text = locationname
-        
     }
 
     @IBAction func nearbar(sender: AnyObject)
     {
-        
- 
         performSegueWithIdentifier("mapview", sender: self)
 
     }

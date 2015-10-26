@@ -50,7 +50,7 @@ class ViewController: UIViewController,GPPSignInDelegate
     {
         super.viewDidLoad()
                 placesClient = GMSPlacesClient()
-         self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+         //self.navigationController?.navigationBar.backItem?.hidesBackButton = true
     }
    
     @IBAction func googlesignIn(sender: AnyObject) {
