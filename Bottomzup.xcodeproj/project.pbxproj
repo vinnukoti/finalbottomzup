@@ -630,6 +630,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FinalBottomsUp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -638,6 +639,7 @@
 				PRODUCT_NAME = Bottomzup;
 				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -654,6 +656,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FinalBottomsUp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -662,6 +665,7 @@
 				PRODUCT_NAME = Bottomzup;
 				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

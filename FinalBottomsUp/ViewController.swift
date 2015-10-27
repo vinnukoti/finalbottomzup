@@ -53,18 +53,14 @@ class ViewController: UIViewController,GPPSignInDelegate
          //self.navigationController?.navigationBar.backItem?.hidesBackButton = true
     }
    
-    @IBAction func googlesignIn(sender: AnyObject) {
-    
-  
-     
-        
+    @IBAction func googlesignIn(sender: AnyObject)
+    {
         println("User Logged In With Google+")
-        
         let signIn = GPPSignIn.sharedInstance()
         signIn.shouldFetchGooglePlusUser = true
         signIn.shouldFetchGoogleUserEmail = true  // Uncomment to get the user's email
         signIn.shouldFetchGoogleUserID = true
-        signIn.clientID = "131909898152-1euo6vg42c2je2dul8r6khqo6nkjllfs.apps.googleusercontent.com"
+        signIn.clientID = "587696970048-18ifi3olkhbl3djkc2qgstlo5bp3vp9g.apps.googleusercontent.com"
         // Uncomment one of these two statements for the scope you chose in the previous step
         signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
         signIn.delegate = self
@@ -98,30 +94,12 @@ class ViewController: UIViewController,GPPSignInDelegate
             let user = GPPSignIn.sharedInstance().googlePlusUser
             let signin = GPPSignIn.sharedInstance()
             // println("user name: " + user.name.JSONString() + "\nemail: ")
-            
-            if (user.emails != nil)
-            {
-                
-               
-                gemail = signin.userEmail
+                 gemail = signin.userEmail
                  println("email ID is : " + gemail)
-            }
-            else
-            {
-                print("no email")
-            }
-            
-            if (user.identifier != nil)
-            {
-                
+      
                 gid = user.identifier
                 println("User ID is: " + user.identifier)
-                
-            }
-            else
-            {
-                println("User ID is nil")
-            }
+            
         }
         if gemail != nil && gid != nil
         {
@@ -149,8 +127,6 @@ class ViewController: UIViewController,GPPSignInDelegate
     @IBAction func FBbuttonClicked(sender: UIButton)
     
     {
-    
-   
         var login = FBSDKLoginManager()
         var error: NSError!
         var result : FBSDKLoginManagerLoginResult!
@@ -169,11 +145,7 @@ class ViewController: UIViewController,GPPSignInDelegate
         })
         
         getFBLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(fbemail)&password=\(fbid)")
-        
-    
     }
-    
-    
     func didDisconnectWithError(error: NSError!)
     {
         
@@ -190,8 +162,6 @@ class ViewController: UIViewController,GPPSignInDelegate
             }
             self.returnUserData()
         }
-        
-      
     }
     
     
@@ -225,13 +195,7 @@ class ViewController: UIViewController,GPPSignInDelegate
             }
         })
         
-        if fbemail != nil && fbid != nil
-        {
-            
-            
-            performSegueWithIdentifier("show", sender: self)
-            
-        }
+         performSegueWithIdentifier("show", sender: self)
     }
     @IBAction func gogo(sender: AnyObject)
     {

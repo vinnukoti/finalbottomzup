@@ -19,29 +19,35 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 {
     @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
+ 
     
+    @IBOutlet weak var restaurantname: UITextView!
     @IBOutlet weak var pintbutton: UIButton!
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
     var booleanhidelable = false
+    var selectedrestaurant = false
+      var resobjr = Restaurant()
+    
+    
 
     
     override func viewDidLoad()
     {
-        
         popupview.hidden = true
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
+  
      }
+
     
     @IBAction func shareonfacebook(sender: AnyObject)
     {
         var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        shareToFacebook.setInitialText("Hello I Posted Using Swift And Social Framework")
-        shareToFacebook.addImage(UIImage(named: "32.png"))
+        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
     }
 
@@ -53,7 +59,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func getdiscount1(sender: AnyObject)
     {
+       
+        //selectedrestaurant = true
         popupview.hidden = false
+        restaurantname.text = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
 
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -83,7 +92,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 30
+        return 50
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -91,6 +100,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
         headerCell.backgroundColor = UIColor.cyanColor()
+    
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = head[section].minp
         headerCell.headercellmax.text = head[section].maxp
@@ -99,11 +109,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
         headerCell.userInteractionEnabled = true
-//        if booleanhidelable == true
-//        {
-//            headerCell.headercellmax.hidden = true
-//            headerCell.headercellmin.hidden = true
-//        }
+        
+        
+        //Remove all empty cell is UITableview
         var tblView =  UIView(frame: CGRectZero)
         tableView.tableFooterView = tblView
         tableView.tableFooterView!.hidden = true
@@ -113,6 +121,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         booleanhidelable = true
+        selectedrestaurant = false 
         println("Section: \(gestureRecognizer.view!.tag)")
         if head[gestureRecognizer.view!.tag].bool == false
         {

@@ -65,6 +65,10 @@
 	<string>Access1</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Access</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>STJEDISE.TTF</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

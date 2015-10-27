@@ -34,10 +34,10 @@ var check:Int!
 
 
 
-
 class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
   
+    @IBOutlet var mainview: UIView!
 
     @IBOutlet weak var  autocmpleteTextfield: AutoCompleteTextField!
     
@@ -66,12 +66,11 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
 
    // var manager:CLLocationManager!
     
+    
 
     
     override func viewDidLoad()
     {
-        //getBearingBetweenTwoPoints1()
-       // self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         textfield1.delegate = self
         tableview!.delegate = self
         tableview!.dataSource = self
@@ -93,10 +92,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-        
+  
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+       func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
         var locValue:CLLocationCoordinate2D = manager.location.coordinate
         println("locations = \(locValue.latitude) \(locValue.longitude)")
@@ -125,7 +124,12 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         })
 
     }
-
+    
+//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+//        tableview.resignFirstResponder()
+//    }
+    
+    
 
    // getting Device latitude and longitude
 
@@ -367,6 +371,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
         let index = indexPath.row as Int
         cell!.textLabel!.text = autocompleteUrls[index]
+        cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
          return cell!
      }
     
