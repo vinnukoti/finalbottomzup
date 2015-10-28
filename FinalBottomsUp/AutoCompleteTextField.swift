@@ -13,7 +13,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
 {
     
     //Manages the instance of tableview
-    private var autoCompleteTableView:UITableView?
+    public var autoCompleteTableView:UITableView?
     /// Holds the collection of attributed strings
     public var attributedAutoCompleteStrings:[NSAttributedString]?
     /// Handles user selection action on autocomplete table view

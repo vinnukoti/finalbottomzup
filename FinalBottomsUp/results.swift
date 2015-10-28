@@ -71,19 +71,19 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     override func viewDidLoad()
     {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismiss")
+//        view.addGestureRecognizer(tap)
         textfield1.delegate = self
         tableview!.delegate = self
         tableview!.dataSource = self
         tableview!.scrollEnabled = true
         tableview!.hidden = true
+        //textfield1.reloadInputViews()
         configureTextField()
         handleTextFieldInterfaces()
         textfield1.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         textfield1.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
-
-        
         self.locationManager.requestAlwaysAuthorization()
-        
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
@@ -94,7 +94,14 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         }
   
     }
-    
+   
+    // Resign Firstresponder of UITableview
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    {  // var obj = AutoCompleteTextField()
+        tableview.hidden = true
+        //obj.autoCompleteTableView!.hidden = true
+        //autocmpleteTextfield.hidden = true
+    }
        func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
         var locValue:CLLocationCoordinate2D = manager.location.coordinate
@@ -124,12 +131,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         })
 
     }
-    
-//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-//        tableview.resignFirstResponder()
-//    }
-    
-    
 
    // getting Device latitude and longitude
 

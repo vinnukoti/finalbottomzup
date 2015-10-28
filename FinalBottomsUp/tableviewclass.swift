@@ -42,6 +42,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.dataSource = self
   
      }
+    
+    // Resign Firstresponder of UITableview
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    {
+        popupview.hidden = true
+        //tableview.hidden = true
+    }
+
 
     
     @IBAction func shareonfacebook(sender: AnyObject)
@@ -304,6 +312,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 while sorted == false
                 {
                     sorted = true
+                    if cards.count > 1
+                    {
                     for i in 0...cards.count - 2
                     {
                         if cards[i].minp > cards[i+1].minp
@@ -318,6 +328,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             println("first object after\(cards[i].minp)")
                             println("second object after\(cards[i + 1].minp)")
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards
@@ -336,6 +351,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 while sorted == false
                 {
                     sorted = true
+                    if cards.count > 1
+                    {
                     for i in 0...cards.count - 2
                     {
                         if cards[i].minp < cards[i+1].minp
@@ -350,6 +367,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             println("first object after\(cards[i].minp)")
                             println("second object after\(cards[i + 1].minp)")
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards
@@ -372,10 +394,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
             {
                 var sorted = false
-                while sorted == false {
+                while sorted == false
+                {
                     sorted = true
-                    for i in 0...cards.count - 2 {
-                        if cards[i].maxp > cards[i+1].maxp {
+                    if cards.count > 1
+                    {
+                    for i in 0...cards.count - 2
+                    {
+                        if cards[i].maxp > cards[i+1].maxp
+                        {
                             sorted = false
                             var first = cards[i]
                             var second = cards[i + 1]
@@ -388,6 +415,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             println("second object after\(cards[i + 1].maxp)")
                             
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards
@@ -404,10 +436,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
             {
                 var sorted = false
-                while sorted == false {
+                while sorted == false
+                {
                     sorted = true
-                    for i in 0...cards.count - 2 {
-                        if cards[i].maxp < cards[i+1].maxp {
+                    if cards.count > 1
+                    {
+                    for i in 0...cards.count - 2
+                    {
+                        if cards[i].maxp < cards[i+1].maxp
+                        {
                             sorted = false
                             var first = cards[i]
                             var second = cards[i + 1]
@@ -420,6 +457,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             println("second object after\(cards[i + 1].maxp)")
                             
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards
@@ -444,6 +486,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             while sorted == false
             {
                 sorted = true
+                if cards.count > 1
+                {
                 for i in 0...cards.count - 2
                 {
                     if cards[i].distance > cards[i+1].distance
@@ -460,6 +504,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         println("second object after\(cards[i + 1].distance)")
                         
                     }
+                }
+                }
+                else
+                {
+                    
                 }
             }
             return cards
@@ -478,6 +527,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 while sorted == false
                 {
                     sorted = true
+                    if cards.count > 1
+                    {
                     for i in 0...cards.count - 2
                     {
                         if cards[i].distance < cards[i+1].distance
@@ -494,6 +545,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             println("second object after\(cards[i + 1].distance)")
                             
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards

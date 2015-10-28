@@ -242,6 +242,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
             while sorted == false
             {
                 sorted = true
+                if elements.count > 1
+                {
                 for i in 0...elements.count - 2
                 {
                     println(elements[i].mapliqdistance)
@@ -260,6 +262,11 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                         println("second object after\(elements[i + 1].mapliqdistance)")
                         
                     }
+                }
+                }
+                else
+                {
+                    
                 }
             }
             return elements

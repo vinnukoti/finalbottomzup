@@ -273,6 +273,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 while sorted == false
                 {
                     sorted = true
+                    if cards.count > 1
+                    {
                     for i in 0...cards.count - 2
                     {
                         if cards[i].avgprice > cards[i+1].avgprice
@@ -287,6 +289,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             println("first object after\(cards[i].avgprice)")
                             println("second object after\(cards[i + 1].avgprice)")
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards
@@ -305,6 +312,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 while sorted == false
                 {
                     sorted = true
+                    if cards.count > 1
+                    {
                     for i in 0...cards.count - 2
                     {
                         if cards[i].avgprice < cards[i+1].avgprice
@@ -319,6 +328,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             println("first object after\(cards[i].avgprice)")
                             println("second object after\(cards[i + 1].avgprice)")
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards
@@ -344,6 +358,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 while sorted == false
                 {
                     sorted = true
+                    if cards.count > 1
+                    {
                     for i in 0...cards.count - 2
                     {
                         if cards[i].distancevodka > cards[i+1].distancevodka
@@ -358,6 +374,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             println("first object after\(cards[i].distancevodka)")
                             println("second object after\(cards[i + 1].distancevodka)")
                         }
+                    }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 return cards
@@ -376,6 +397,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 while sorted == false
                 {
                     sorted = true
+                    if cards.count > 1
+                    {
                     for i in 0...cards.count - 2
                     {
                         if cards[i].distancevodka < cards[i+1].distancevodka
@@ -390,6 +413,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             println("first object after\(cards[i].distancevodka)")
                             println("second object after\(cards[i + 1].distancevodka)")
                         }
+                    }
                     }
                 }
                 return cards
