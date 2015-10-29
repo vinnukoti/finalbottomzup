@@ -21,7 +21,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableview: UITableView!
  
     
-    @IBOutlet weak var restaurantname: UITextView!
+    @IBOutlet weak var resturantnamelable: UILabel!
+    @IBOutlet weak var restaurantnamelable2: UILabel!
+   
     @IBOutlet weak var pintbutton: UIButton!
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
@@ -70,7 +72,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
        
         //selectedrestaurant = true
         popupview.hidden = false
-        restaurantname.text = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
+         resturantnamelable.text = "I just got a 10% discount at"
+        restaurantnamelable2.text = "Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
 
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int

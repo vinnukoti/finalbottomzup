@@ -22,13 +22,13 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     public var onTextChange:(String)->() = {_ in}
     
     /// Font for the text suggestions
-    public var autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 12)
+    public var autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14)
     /// Color of the text suggestions
     public var autoCompleteTextColor = UIColor.blackColor()
     /// Used to set the height of cell for each suggestions
     public var autoCompleteCellHeight:CGFloat = 44.0
     /// The maximum visible suggestion
-    public var maximumAutoCompleteCount = 3
+    public var maximumAutoCompleteCount = 10
     /// Used to set your own preferred separator inset
     public var autoCompleteSeparatorInset = UIEdgeInsetsZero
     /// Shows autocomplete text with formatting
@@ -107,7 +107,11 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     {
         let screenSize = UIScreen.mainScreen().bounds.size
         let tableView = UITableView(frame: CGRectMake(self.frame.origin.x, self.frame.origin.y + CGRectGetHeight(self.frame), screenSize.width - (self.frame.origin.x * 2), 30.0))
-        tableView.frame =   CGRectMake(20, 210, 320, 20);
+        tableView.layer.masksToBounds = true
+        tableView.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+        tableView.layer.borderWidth = 2.0
+        tableView.frame =   CGRectMake(0, 205,375,10);
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = autoCompleteCellHeight
@@ -115,8 +119,18 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
          tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
           view.addSubview(tableView)
        autoCompleteTableView = tableView
-       autoCompleteTableHeight = 100.0
+       autoCompleteTableHeight = 363.0
     }
+    
+//    override public func layoutSubviews()
+//    {
+//        super.layoutSubviews()
+//        
+//        let width = CGRectGetWidth(frame)
+//        
+//        let someFrame = CGRect(x: 0, y: 205, width: 375, height: 100)
+//        autoCompleteTableView!.frame = someFrame
+//    }
     
    
     

@@ -71,18 +71,13 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     override func viewDidLoad()
     {
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismiss")
-//        view.addGestureRecognizer(tap)
         textfield1.delegate = self
         tableview!.delegate = self
         tableview!.dataSource = self
         tableview!.scrollEnabled = true
         tableview!.hidden = true
-        //textfield1.reloadInputViews()
         configureTextField()
         handleTextFieldInterfaces()
-        textfield1.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        textfield1.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
         self.locationManager.requestAlwaysAuthorization()
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
@@ -97,10 +92,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
    
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-    {  // var obj = AutoCompleteTextField()
+    {
         tableview.hidden = true
-        //obj.autoCompleteTableView!.hidden = true
-        //autocmpleteTextfield.hidden = true
     }
        func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
@@ -147,8 +140,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             println(locationName)
           locationname  = locationName as String
         }
-        
-       
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
@@ -161,15 +152,15 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     private func configureTextField()
     {
         autocmpleteTextfield.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        autocmpleteTextfield.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 12.0)
+        autocmpleteTextfield.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
         autocmpleteTextfield.autoCompleteCellHeight = 35.0
         autocmpleteTextfield.maximumAutoCompleteCount = 20
         autocmpleteTextfield.hidesWhenSelected = true
         autocmpleteTextfield.hidesWhenEmpty = true
         autocmpleteTextfield.enableAttributedText = true
         var attributes = [String:AnyObject]()
-        attributes[NSForegroundColorAttributeName] = UIColor.blackColor()
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 12.0)
+        attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
         autocmpleteTextfield.autoCompleteAttributes = attributes
     }
     
@@ -192,8 +183,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 }
             }
         }
-        
-    
         autocmpleteTextfield.onSelect = {[weak self] text, indexpath in
             self!.autocmpleteTextfield.text = text;
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
@@ -349,7 +338,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             
            if (substringRange.location == 0)
            {
-              autocompleteUrls.append(ucurstring)
+              autocompleteUrls.append(ucurstring.lowercaseString)
             }
         }
         
@@ -362,7 +351,14 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
+//        var attributes = [String:AnyObject]()
+//        attributes[NSForegroundColorAttributeName] = UIColor.blackColor()
+//        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 13.0)
+//
+        tableview.layer.masksToBounds = true
+        tableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+        tableview.layer.borderWidth = 2.0
+
         let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
         var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
         if cell == nil
@@ -372,7 +368,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
         let index = indexPath.row as Int
         cell!.textLabel!.text = autocompleteUrls[index]
-        cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
+        cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
          return cell!
      }
     
