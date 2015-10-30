@@ -19,12 +19,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 {
     @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
- 
-    
+    @IBOutlet weak var pintbutton: UIButton!
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
    
-    @IBOutlet weak var pintbutton: UIButton!
+
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
     var getdevicelatitude:Double!
@@ -38,6 +37,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad()
     {
+       //pintbutton.setImage(bottle, forState:.Normal);
+       //pintbutton.setImage(pint, forState:.Highlighted);
         popupview.hidden = true
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
@@ -110,7 +111,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
-        headerCell.backgroundColor = UIColor.cyanColor()
+        //headerCell.backgroundColor = UIColor.cyanColor()
     
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = head[section].minp
@@ -307,6 +308,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     {
         
+        // sender.setImage(pint,forState: UIControlState.Highlighted);
         if doubleTap == true
         {
             func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>

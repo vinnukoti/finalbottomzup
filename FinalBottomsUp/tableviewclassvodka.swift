@@ -66,7 +66,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 30
+        return 50
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -77,7 +77,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        
         if bool == false
         {
-            headerCell.backgroundColor = UIColor.cyanColor()
+            headerCell.backgroundColor = UIColor.whiteColor()
         }
         else
         {
