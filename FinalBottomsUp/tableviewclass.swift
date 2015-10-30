@@ -17,6 +17,7 @@ var doubleTap = true
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
+    @IBOutlet var mainview: UIView!
     @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var pintbutton: UIButton!
@@ -31,14 +32,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var booleanhidelable = false
     var selectedrestaurant = false
       var resobjr = Restaurant()
+    var getcitylatitude:Double!
+    var getcitylongitude:Double!
     
     
 
     
     override func viewDidLoad()
     {
-       //pintbutton.setImage(bottle, forState:.Normal);
-       //pintbutton.setImage(pint, forState:.Highlighted);
+//        let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
+//        mainview.addGestureRecognizer(tap)
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
+        popupview.addGestureRecognizer(tap1)
+        
         popupview.hidden = true
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
@@ -49,8 +56,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
-        popupview.hidden = true
+        
+          popupview.hidden = true
         //tableview.hidden = true
+    }
+    
+    func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
+    {
+    
+        popupview.hidden = false
+           // popupview.hidden = true
+       
+        
+        
     }
 
 
@@ -99,16 +117,22 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 50
+        return 55
     }
+    
+//    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 55
+//    }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 50
+        return 55
+        
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
+
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
         //headerCell.backgroundColor = UIColor.cyanColor()
@@ -130,6 +154,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.backgroundColor = UIColor.clearColor()
         return headerCell
     }
+    
+ 
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         booleanhidelable = true
@@ -155,13 +181,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBAction func lookfurther(sender: AnyObject)
     {
-         println("latitude is \(citylat)")
-         println("longitude is\(citylong)")
+//         println("latitude is \(citylat)")
+//         println("longitude is\(citylong)")
         if trim == true
         {
             //28.63875
             //77.07380
-        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=8&records=4&query=\(liqname)")
+        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=8&records=4&query=\(liqname)")
             trim = false
         }
         else
@@ -229,7 +255,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         if var distance = resInfo["distance"] as? String
                         {
                             
-                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var OldLocation: CLLocation = CLLocation(latitude: getcitylatitude, longitude: getcitylongitude)
                             var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -246,7 +272,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             
                             
-                            fstobj1.distance = totalDistance1 + " KMS"
+                            fstobj1.distance = totalDistance1 + "KM"
                             println(fstobj1.distance)
                         }
                     }

@@ -30,6 +30,9 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
     var bool = true
+    
+    var getcitylatitude:Double!
+    var getcitylongitude:Double!
    
 
     override func viewDidLoad()
@@ -37,7 +40,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
-        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=5")
+        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=5")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -111,7 +114,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             
                             if var distance = resInfo["distance"] as? String
                             {
-                                var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                                var OldLocation: CLLocation = CLLocation(latitude: getcitylatitude, longitude: getcitylongitude)
                                 var newLocation: CLLocation = CLLocation(latitude: res_lat1, longitude: res_long1)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -146,7 +149,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     @IBAction func lookfurtherfoewineandbeer(sender: AnyObject)
     {
-        getfurtherdataforwineandbeer("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=8&records=5")
+        getfurtherdataforwineandbeer("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=8&records=5")
     }
     
     func getfurtherdataforwineandbeer(urlString:String)
@@ -204,7 +207,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                         {
                            // 28.63875
                            // 77.07380
-                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var OldLocation: CLLocation = CLLocation(latitude: getcitylatitude, longitude: getcitylongitude)
                             var newLocation: CLLocation = CLLocation(latitude: res_furtherlat, longitude: res_furtherlong)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)

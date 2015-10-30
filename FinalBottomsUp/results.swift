@@ -12,8 +12,7 @@ import CoreLocation
 var variable:String!
 
 var liqnamefromtextfield:String!
-var citylat:Double!
-var citylong:Double!
+
 
 var restlat:Double!
 var restlong:Double!
@@ -34,9 +33,14 @@ var check:Int!
 
 
 
+
 class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
   
+    var citylat:Double!
+    var citylong:Double!
+    
+    var newarar =  [String]()
     @IBOutlet var mainview: UIView!
 
     @IBOutlet weak var  autocmpleteTextfield: AutoCompleteTextField!
@@ -58,7 +62,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     var locationname:String!
     var arar = [String]()
-    var newarar =  [String]()
+ 
     var flag = false
     var devicelatitude:Double!
     var devicelongitude:Double!
@@ -87,6 +91,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        
+        autocmpleteTextfield.text = nil
   
     }
    
@@ -189,8 +195,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 if placemark != nil
                 {
                     let coordinate = placemark!.location.coordinate
-                    citylat = coordinate.latitude
-                    citylong = coordinate.longitude
+                    self!.citylat = coordinate.latitude
+                    self!.citylong = coordinate.longitude
                 }
             })
         }
@@ -348,7 +354,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     {
         return autocompleteUrls.count
     }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
 //        var attributes = [String:AnyObject]()
@@ -481,7 +486,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         totalDistance1 = PartOfString(totalDistance1, 1, 3)
 
 
-                        fstobj1.distance = totalDistance1 + " KMS"
+                        fstobj1.distance = totalDistance1 + "KM"
                         println(fstobj1.distance)
                     }
                 }
@@ -560,7 +565,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                             }
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                            vodkaobj.distancevodka = totalDistance1 + " KMS"
+                            vodkaobj.distancevodka = totalDistance1 + "KM"
                         }
                     }
                     
@@ -639,6 +644,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination.head = head1
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
+                destination.getcitylatitude = citylat
+                destination.getcitylongitude = citylong
+                
            }
         }
         if segue.identifier == "vodka"
@@ -651,6 +659,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination1.liqvodkaname = trimmedString
 
                 destination1.header1 = header
+                destination1.getcitylatitude = citylat
+                destination1.getcitylongitude = citylong
             }
         }
         if segue.identifier == "mapview"
@@ -659,6 +669,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             {
                 destination2.getdevicelatitude = devicelatitude
                 destination2.getdevicelongitude = devicelongitude
+                destination2.getcitylatitude = citylat
+                destination2.getcitylongitude = citylong
             }
             
         }

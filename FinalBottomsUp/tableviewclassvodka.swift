@@ -21,6 +21,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var header1:[Restauarantvodka] = [Restauarantvodka]()
     var liqvodkaname:String!
     var bool = false
+    
+    var getcitylatitude:Double!
+    var getcitylongitude:Double!
+    
 
 
     override func viewDidLoad()
@@ -192,7 +196,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         }
                         if var distance = resInfo["distance"] as? String
                         {
-                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            var OldLocation: CLLocation = CLLocation(latitude: getcitylatitude, longitude: getcitylongitude)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
