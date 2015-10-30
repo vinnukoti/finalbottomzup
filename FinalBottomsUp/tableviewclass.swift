@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import Social
+import FBSDKShareKit
 var latitude:Double!
 var longitude:Double!
 var doubleTap = true
@@ -75,9 +76,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func shareonfacebook(sender: AnyObject)
     {
-        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
+       var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "BottomzUp.com")
+        content.contentTitle = "Bottomz Up"
+        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
+
+      shareToFacebook.setInitialText("\(content)")
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
+        
+        
+//        let button : FBSDKShareButton = FBSDKShareButton()
+//        button.shareContent = content
+//        button.frame = CGRectMake((UIScreen.mainScreen().bounds.width - 100) * 0.5, 50, 100, 25)
+//        self.view.addSubview(button)
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int

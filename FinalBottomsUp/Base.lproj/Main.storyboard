@@ -584,7 +584,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mZa-Vh-jz1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mZa-Vh-jz1">
                                 <rect key="frame" x="0.0" y="134" width="600" height="363"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -988,7 +988,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2043" y="-4207"/>
+            <point key="canvasLocation" x="-2168" y="-4216"/>
         </scene>
         <!--Tableviewclassvodka-->
         <scene sceneID="0pa-3Q-oDE">
@@ -1258,6 +1258,6 @@
         <image name="wineandbeernearyou" width="943" height="119"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f8e-Lx-sA3"/>
+        <segue reference="0Ih-1Q-qdD"/>
     </inferredMetricsTieBreakers>
 </document>

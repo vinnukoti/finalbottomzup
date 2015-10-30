@@ -80,6 +80,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         tableview!.dataSource = self
         tableview!.scrollEnabled = true
         tableview!.hidden = true
+        autocmpleteTextfield.delegate = self
         configureTextField()
         handleTextFieldInterfaces()
         self.locationManager.requestAlwaysAuthorization()
@@ -130,6 +131,17 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         })
 
     }
+    
+    //liq drop down table resign first responder
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        textfield1.resignFirstResponder()
+        autocmpleteTextfield.resignFirstResponder()
+        return true
+    }
+    
+    //keyboard resign firsdt responder 
 
    // getting Device latitude and longitude
 
