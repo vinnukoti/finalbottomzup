@@ -22,6 +22,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var pintbutton: UIButton!
+    
+    @IBOutlet weak var bottlebutton: UIButton!
+    @IBOutlet weak var locationbutton: UIButton!
+    
+    
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
    
@@ -37,7 +42,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var getcitylongitude:Double!
     
     
-
+    let unCheckedImage = UIImage(named: "pint")
+    let unCheckedImage1 = UIImage(named: "location")
+    let unCheckedImage12 = UIImage(named:"bottle")
     
     override func viewDidLoad()
     {
@@ -53,6 +60,34 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.dataSource = self
   
      }
+    
+
+    
+//    //bool propety
+//    var isChecked:Bool = false
+//        {
+//        didSet
+//        {
+//            if isChecked == true
+//            {
+//               // self.setImage(checkedImage, forState: .Normal)
+//              //  pintbutton.setImage(checkedImage, forState: .Normal)
+//                bottlebutton.setImage(unCheckedImage1, forState: .Normal)
+//            }
+//            else
+//            {
+//               bottlebutton.setImage(unCheckedImage, forState: .Normal)
+//            }
+//        }
+//    }
+    
+//     override func awakeFromNib()
+//     {
+//        //addTarget(bottlebutton, action: "buttonClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+//        self.isChecked = false
+//    }
+
+
     
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
@@ -138,7 +173,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 55
+        return 65
+        
         
     }
     
@@ -431,6 +467,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func bottolesort(sender: AnyObject)
         
     {
+//        if(sender as! NSObject == self)
+//        {
+//            if isChecked == true
+//            {
+//                isChecked = false
+//            }
+//            else
+//            {
+//                isChecked = true
+//            }
+//        }
+
         
         if doubleTap == true
         {

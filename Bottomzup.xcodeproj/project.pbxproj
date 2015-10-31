@@ -37,6 +37,7 @@
 		5367CF351B9DBC3C00D33220 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF341B9DBC3C00D33220 /* Security.framework */; };
 		5367CF371B9DBC4800D33220 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF361B9DBC4800D33220 /* SystemConfiguration.framework */; };
 		5367CF391B9DC0B200D33220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF381B9DC0B200D33220 /* UIKit.framework */; };
+		537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537809D21BE4C81F00C18D6B /* CheckBox.swift */; };
 		537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3D81BBA56F80082D896 /* tableviewclass.swift */; };
 		537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DA1BBA578A0082D896 /* customheadercell.swift */; };
 		537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */; };
@@ -107,6 +108,7 @@
 		5367CF361B9DBC4800D33220 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5367CF381B9DC0B200D33220 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5367CF3A1B9DC13F00D33220 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "../Bridging-Header.h"; sourceTree = "<group>"; };
+		537809D21BE4C81F00C18D6B /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		537CA3D81BBA56F80082D896 /* tableviewclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableviewclass.swift; sourceTree = "<group>"; };
 		537CA3DA1BBA578A0082D896 /* customheadercell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercell.swift; sourceTree = "<group>"; };
 		537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onemoreclass1.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		5367CEF31B9DB0EA00D33220 /* FinalBottomsUp */ = {
 			isa = PBXGroup;
 			children = (
+				537809D21BE4C81F00C18D6B /* CheckBox.swift */,
 				53A3FF941BCF873900122759 /* GiFHUD.swift */,
 				538A3F941BA9930C00A673C1 /* TableController.swift */,
 				538D0A431BA4194B005D1386 /* Location.swift */,
@@ -476,6 +479,7 @@
 				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,
+				537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */,
 				537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */,
 				537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */,
 				537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */,
