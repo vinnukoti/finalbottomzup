@@ -14,6 +14,9 @@ import FBSDKShareKit
 var latitude:Double!
 var longitude:Double!
 var doubleTap = true
+var pintbuttonclicked = false
+var bottlebuttonclicked = false
+var locationbuttonclicked = false
 
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
@@ -40,11 +43,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
       var resobjr = Restaurant()
     var getcitylatitude:Double!
     var getcitylongitude:Double!
-    
-    
-    let unCheckedImage = UIImage(named: "pint")
-    let unCheckedImage1 = UIImage(named: "location")
-    let unCheckedImage12 = UIImage(named:"bottle")
     
     override func viewDidLoad()
     {
@@ -381,6 +379,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         @IBAction func pintsort(sender: AnyObject)
     
     {
+        pintbuttonclicked = true
         
         // sender.setImage(pint,forState: UIControlState.Highlighted);
         if doubleTap == true
@@ -421,6 +420,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             self.tableview.reloadData()
             println("sorted array is  : \(head)")
             doubleTap = false
+            //pintbuttonclicked = false
         }
         else
         {
@@ -467,18 +467,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func bottolesort(sender: AnyObject)
         
     {
-//        if(sender as! NSObject == self)
-//        {
-//            if isChecked == true
-//            {
-//                isChecked = false
-//            }
-//            else
-//            {
-//                isChecked = true
-//            }
-//        }
-
+        bottlebuttonclicked = true
         
         if doubleTap == true
         {
@@ -569,6 +558,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func locationsort(sender: AnyObject)
     {
+        locationbuttonclicked = true
         
         if doubleTap == true
         {func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>

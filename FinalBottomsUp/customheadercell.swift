@@ -23,10 +23,42 @@ class customheadercell: UITableViewCell
  
     @IBOutlet weak var headercelldist: UILabel!
  
+    @IBOutlet weak var pintimage: UIImageView!
+    
+    @IBOutlet weak var bottleimage: UIImageView!
+    
+    @IBOutlet weak var locationimage: UIImageView!
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
-
+        
+        if pintbuttonclicked == true
+        {
+//            pintimage.image = UIImage(named: "enabled")
+//            bottleimage.image = UIImage(named: "enabled")
+//            locationimage.image = UIImage(named: "enabled")
+            
+            headercellmin.backgroundColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        }
+        
+        if  bottlebuttonclicked == true
+        {
+            //            pintimage.image = UIImage(named: "enabled")
+            //            bottleimage.image = UIImage(named: "enabled")
+            //            locationimage.image = UIImage(named: "enabled")
+            
+            headercellmax.backgroundColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        }
+        
+        if locationbuttonclicked == true
+        {
+            //            pintimage.image = UIImage(named: "enabled")
+            //            bottleimage.image = UIImage(named: "enabled")
+            //            locationimage.image = UIImage(named: "enabled")
+            
+            headercelldist.backgroundColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        }
  
         // Initialization code
     }
@@ -36,41 +68,4 @@ class customheadercell: UITableViewCell
         super.setSelected(selected, animated: animated)
     }
     
-    @IBAction func discountbutton(sender: AnyObject)
-    {
-
-    }
-    
-    
-    @IBAction func facebooklogin(sender: AnyObject)
-    
-    {
-//        var presentViewController = customheadercell()
-//        var sharetoFacebook:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//        self.window?.rootViewController?.presentViewController(sharetoFacebook,animated:true,completion:nil)
-        
-//        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//        shareToFacebook.setInitialText("Hello I Posted Using Swift And Social Framework")
-//        shareToFacebook.addImage(UIImage(named: "32.png"))
-//        self.presentViewController(shareToFacebook, animated: true, completion: nil)
-        
-//            var text = "Hello sharing !!"
-//            let objectsToShare = [text]
-//            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//            self.window?.rootViewController?.presentViewController(activityVC, animated: true, completion: nil)
-        
-//        
-//        let facebookURL = NSURL(string: "fb://profile/134417203252602")!
-//        checkNetwork(NSURL(string: "https://www.facebook.com/ctcapitolreport")!)
-//        if UIApplication.sharedApplication().canOpenURL(facebookURL) {
-//            
-//            UIApplication.sharedApplication().openURL(facebookURL)
-//        } else {
-//            UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/ctcapitolreport")!)
-//        }
-//        var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
-//        content.contentURL = NSURL.URLWithString("https://developers.facebook.com")
-
-    }
-
 }

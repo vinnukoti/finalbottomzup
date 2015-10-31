@@ -33,11 +33,16 @@ class CheckBox: UIButton {
     
 
 
-    func buttonClicked(sender:UIButton) {
-        if(sender == self){
-            if isChecked == true{
+    func buttonClicked(sender:UIButton)
+    {
+        if(sender == self)
+        {
+            if isChecked == true
+            {
                 isChecked = false
-            }else{
+            }
+            else
+            {
                 isChecked = true
             }
         }
