@@ -17,10 +17,12 @@ var doubleTap = true
 var pintbuttonclicked = false
 var bottlebuttonclicked = false
 var locationbuttonclicked = false
+var arrowimage = false
 
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
+    
     @IBOutlet var mainview: UIView!
     @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
@@ -58,33 +60,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.dataSource = self
   
      }
-    
-
-    
-//    //bool propety
-//    var isChecked:Bool = false
-//        {
-//        didSet
-//        {
-//            if isChecked == true
-//            {
-//               // self.setImage(checkedImage, forState: .Normal)
-//              //  pintbutton.setImage(checkedImage, forState: .Normal)
-//                bottlebutton.setImage(unCheckedImage1, forState: .Normal)
-//            }
-//            else
-//            {
-//               bottlebutton.setImage(unCheckedImage, forState: .Normal)
-//            }
-//        }
-//    }
-    
-//     override func awakeFromNib()
-//     {
-//        //addTarget(bottlebutton, action: "buttonClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-//        self.isChecked = false
-//    }
-
 
     
     // Resign Firstresponder of UITableview
@@ -100,13 +75,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
         popupview.hidden = false
            // popupview.hidden = true
-       
-        
-        
     }
-
-
-    
     @IBAction func shareonfacebook(sender: AnyObject)
     {
        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -204,19 +173,31 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
  
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+        //arrowimage = true
         booleanhidelable = true
-        selectedrestaurant = false 
+        selectedrestaurant = false
+        var section = gestureRecognizer.view!.tag
         println("Section: \(gestureRecognizer.view!.tag)")
+       
         if head[gestureRecognizer.view!.tag].bool == false
         {
             head[gestureRecognizer.view!.tag].bool = true
+            if head[gestureRecognizer.view!.tag].bool == true
+            {
+               arrowimage = true
+            }
         }
         else
         {
             head[gestureRecognizer.view!.tag].bool = false
+            if head[gestureRecognizer.view!.tag].bool == false
+            {
+                arrowimage = false
+            }
+            
         }
         self.tableview.reloadData()
-       // booleanhidelable = false
+       
     }
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
