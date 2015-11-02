@@ -33,7 +33,6 @@ var check:Int!
 
 
 
-
 class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
   
@@ -59,7 +58,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var autocompleteUrls = [String]()
     
     let locationManager = CLLocationManager()
-    
     var locationname:String!
     var arar = [String]()
  
@@ -75,6 +73,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     override func viewDidLoad()
     {
+        
+
+        println("kajsdljdsljdaldjd  \(locationname)")
         textfield1.delegate = self
         tableview!.delegate = self
         tableview!.dataSource = self
@@ -87,13 +88,12 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
-        if CLLocationManager.locationServicesEnabled() {
+        if CLLocationManager.locationServicesEnabled()
+        {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-        
-        autocmpleteTextfield.text = nil
   
     }
    
@@ -138,6 +138,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     {
         textfield1.resignFirstResponder()
         autocmpleteTextfield.resignFirstResponder()
+        
         return true
     }
     
@@ -202,7 +203,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             }
         }
         autocmpleteTextfield.onSelect = {[weak self] text, indexpath in
-            self!.autocmpleteTextfield.text = text;
+            self!.autocmpleteTextfield.text = text;self!.view.endEditing(true)
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -213,6 +214,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             })
         }
     }
+    
+    
     
     //MARK: NSURLConnectionDelegate
     func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse)
@@ -368,10 +371,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-//        var attributes = [String:AnyObject]()
-//        attributes[NSForegroundColorAttributeName] = UIColor.blackColor()
-//        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 13.0)
-//
         tableview.layer.masksToBounds = true
         tableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         tableview.layer.borderWidth = 2.0
@@ -394,6 +393,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     {
         let selectedCell : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         textfield1.text = selectedCell.textLabel!.text
+        self.view.endEditing(true)
         tableView.hidden = true
     }
 
@@ -691,7 +691,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBAction func getcurrentlocationname(sender: AnyObject)
     {
+     
        autocmpleteTextfield.text = locationname
+        
     }
 
     @IBAction func nearbar(sender: AnyObject)

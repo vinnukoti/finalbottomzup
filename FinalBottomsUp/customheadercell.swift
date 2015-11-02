@@ -21,15 +21,11 @@ class customheadercell: UITableViewCell
 
     @IBOutlet weak var headercellmax: UILabel!
  
+   // @IBOutlet weak var headercelldist: UILabel!
     @IBOutlet weak var headercelldist: UILabel!
- 
-    @IBOutlet weak var pintimage: UIImageView!
+
     
-    @IBOutlet weak var bottleimage: UIImageView!
-    
-    @IBOutlet weak var locationimage: UIImageView!
-    
-    @IBOutlet weak var arrowmark: UIImageView!
+
     
     var obj = tableviewclass()
     
@@ -66,18 +62,18 @@ class customheadercell: UITableViewCell
             headercelldist.backgroundColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         }
         
-        if arrowimage == true
-        {
-            arrowmark.image = UIImage(named: "arrowup")
-     
-            
-        }
-        if arrowimage == false
-        {
-            arrowmark.image = UIImage(named: "arrow")
-      
-        }
-
+//        if arrowimage == true
+//        {
+//            arrowmark.image = UIImage(named: "arrowup")
+//     
+//            
+//        }
+//        if arrowimage == false
+//        {
+//            arrowmark.image = UIImage(named: "arrow")
+//      
+//        }
+//
         // Initialization code
     }
     

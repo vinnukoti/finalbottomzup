@@ -78,21 +78,39 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     @IBAction func shareonfacebook(sender: AnyObject)
     {
-       var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "BottomzUp.com")
-        content.contentTitle = "Bottomz Up"
-        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
-
-      shareToFacebook.setInitialText("\(content)")
+      //  var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+//        content.contentURL = NSURL(string: "BottomzUp.com")
+//        content.contentTitle = "Bottomz Up"
+//        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
+//
+//      shareToFacebook.setInitialText("\(content)")
+//        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+        
+        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
         
         
-//        let button : FBSDKShareButton = FBSDKShareButton()
-//        button.shareContent = content
-//        button.frame = CGRectMake((UIScreen.mainScreen().bounds.width - 100) * 0.5, 50, 100, 25)
-//        self.view.addSubview(button)
+//        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
+//        {
+//            
+//            var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//            facebookSheet.setInitialText("Vea Software! :D")
+//            self.presentViewController(facebookSheet, animated: true, completion: nil)
+//
+//        }
+//        else
+//        {
+//            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+//    }
+        
+        var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string:"https://developers.facebook.com")
     }
+    
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
@@ -353,18 +371,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.reloadData()
     }
     
-    
-    
-    
-    
-        @IBAction func pintsort(sender: AnyObject)
+      @IBAction func pintsort(sender: AnyObject)
     
     {
+        bottlebuttonclicked = false
+        locationbuttonclicked = false
         pintbuttonclicked = true
-        
-        // sender.setImage(pint,forState: UIControlState.Highlighted);
         if doubleTap == true
         {
+            
             func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
             {
                 var sorted = false
@@ -401,7 +416,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             self.tableview.reloadData()
             println("sorted array is  : \(head)")
             doubleTap = false
-            //pintbuttonclicked = false
+            
         }
         else
         {
@@ -448,7 +463,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func bottolesort(sender: AnyObject)
         
     {
+        pintbuttonclicked = false
+        locationbuttonclicked = false
         bottlebuttonclicked = true
+     
+
         
         if doubleTap == true
         {
@@ -539,7 +558,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func locationsort(sender: AnyObject)
     {
+        pintbuttonclicked = false
+        bottlebuttonclicked = false
         locationbuttonclicked = true
+  
+
         
         if doubleTap == true
         {func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
@@ -629,17 +652,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
+    @IBAction func getDirections(sender: AnyObject)
     
-    @IBAction func getdirections(sender: AnyObject)
     {
-    
-            //URL to the map application in ios
-            UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
-
+         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
         
     }
-    
-
 }
 
 

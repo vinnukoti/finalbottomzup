@@ -8,25 +8,32 @@
 
 import UIKit
 
-class CheckBox: UIButton {
+class CheckBox: UIButton
+{
     
     //images
     let checkedImage = UIImage(named: "pint")
     let unCheckedImage = UIImage(named: "bottle")
     
     //bool propety
-    var isChecked:Bool = false{
-        didSet{
-            if isChecked == true{
+    var isChecked:Bool = false
+        {
+        didSet
+        {
+            if isChecked == true
+            {
                 self.setImage(checkedImage, forState: .Normal)
-            }else{
+            }
+            else
+            {
                 self.setImage(unCheckedImage, forState: .Normal)
             }
         }
     }
 
     
-    override func awakeFromNib() {
+    override func awakeFromNib()
+    {
         self.addTarget(self, action: "buttonClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         self.isChecked = false
     }
@@ -35,6 +42,7 @@ class CheckBox: UIButton {
 
     func buttonClicked(sender:UIButton)
     {
+        
         if(sender == self)
         {
             if isChecked == true
@@ -46,6 +54,9 @@ class CheckBox: UIButton {
                 isChecked = true
             }
         }
+        
+     
     }
-
 }
+
+
