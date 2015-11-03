@@ -37,44 +37,22 @@ class customheadercell: UITableViewCell
         
         if pintbuttonclicked == true
         {
-//            pintimage.image = UIImage(named: "enabled")
-//            bottleimage.image = UIImage(named: "enabled")
-//            locationimage.image = UIImage(named: "enabled")
-            
-            headercellmin.backgroundColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+
+            headercellmin.backgroundColor = UIColor.yellowColor()
         }
         
         if  bottlebuttonclicked == true
         {
-            //            pintimage.image = UIImage(named: "enabled")
-            //            bottleimage.image = UIImage(named: "enabled")
-            //            locationimage.image = UIImage(named: "enabled")
-            
-            headercellmax.backgroundColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+
+            headercellmax.backgroundColor = UIColor.yellowColor()
         }
         
         if locationbuttonclicked == true
         {
-            //            pintimage.image = UIImage(named: "enabled")
-            //            bottleimage.image = UIImage(named: "enabled")
-            //            locationimage.image = UIImage(named: "enabled")
-            
-            headercelldist.backgroundColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+
+            headercelldist.backgroundColor = UIColor.yellowColor()
         }
-        
-//        if arrowimage == true
-//        {
-//            arrowmark.image = UIImage(named: "arrowup")
-//     
-//            
-//        }
-//        if arrowimage == false
-//        {
-//            arrowmark.image = UIImage(named: "arrow")
-//      
-//        }
-//
-        // Initialization code
+
     }
     
     override func setSelected(selected: Bool, animated: Bool)

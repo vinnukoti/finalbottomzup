@@ -12,6 +12,10 @@ import MapKit
 var doubleTap1 = true
 
 
+var pricebuttonclicked = false
+var distancevodkabuttonclicked = false
+
+
 
 
 
@@ -25,7 +29,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var getcitylatitude:Double!
     var getcitylongitude:Double!
     
+    var getdevicelatitude:Double!
+    var getdevicelongitude:Double!
+    
+    let checkedImage = UIImage(named: "pint")
+    let unCheckedImage = UIImage(named: "bottle")
+    
+    @IBOutlet weak var popupviewvodka: UIView!
 
+    @IBOutlet weak var distancebutton: UIButton!
+    @IBOutlet weak var pricebutton: UIButton!
 
     override func viewDidLoad()
     {
@@ -65,12 +78,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 50
+        return 55
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 50
+        return 65
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -78,15 +91,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
      
         
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
-       
-        if bool == false
-        {
+      
             headerCell.backgroundColor = UIColor.whiteColor()
-        }
-        else
-        {
-             headerCell.backgroundColor = UIColor.orangeColor()
-        }
+        
+    
         headerCell.tag = section        
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = header1[section].avgprice
@@ -130,7 +138,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
-             bool = true
         
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=8&records=4&query=\(liqvodkaname)")
 
@@ -209,8 +216,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
-                            println("SUBSTRING    " + PartOfString(totalDistance1, 1, 4))
-                            totalDistance1 = PartOfString(totalDistance1, 1, 4)
+                            println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
+                            totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             vodkaobj.distancevodka = totalDistance1 + " KMS"
                         }
                     }
@@ -269,6 +276,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func pricesort(sender: AnyObject)
     {
+        
+        pricebuttonclicked = true
+        distancevodkabuttonclicked = false
+        
+        if pricebuttonclicked == true
+        {
+            pricebutton.setImage(checkedImage, forState: .Normal)
+            distancebutton.setImage(unCheckedImage, forState: .Normal)
+        
+        }
         if doubleTap == true
         {
             func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
@@ -354,6 +371,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func distancesort(sender: AnyObject)
     {
+        
+        pricebuttonclicked = false
+        distancevodkabuttonclicked = true
+        
+        if distancevodkabuttonclicked == true
+        {
+            pricebutton.setImage(unCheckedImage, forState: .Normal)
+            distancebutton.setImage(checkedImage, forState: .Normal)
+            
+        }
+
+        
+        
+        
         if doubleTap == true
         {
             func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
@@ -435,7 +466,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     
     
+    @IBAction func gotoMap(sender: AnyObject)
+    {
+         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
+    }
     
+    @IBAction func getDiscountforvodka(sender: AnyObject)
+    {
+        
+    }
     
 }
 

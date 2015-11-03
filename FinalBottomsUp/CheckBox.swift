@@ -43,17 +43,42 @@ class CheckBox: UIButton
     func buttonClicked(sender:UIButton)
     {
         
-        if(sender == self)
+//        if(sender == self)
+//        {
+//            if isChecked == true
+//            {
+//                isChecked = false
+//            }
+//            else
+//            {
+//                isChecked = true
+//            }
+//        }
+        
+        if pintbuttonclicked == true
         {
-            if isChecked == true
-            {
-                isChecked = false
-            }
-            else
-            {
-                isChecked = true
-            }
+           // isChecked = true
+            self.setImage(checkedImage, forState: .Normal)
+         
         }
+        else
+        {
+            self.setImage(unCheckedImage, forState: .Normal)
+        }
+        
+        if bottlebuttonclicked == true
+        {
+            isChecked = true
+        }
+        
+        if locationbuttonclicked == true
+        {
+            isChecked = true
+        }
+//        else
+//        {
+//            isChecked = false
+//        }
         
      
     }

@@ -57,25 +57,17 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
 
     var autocompleteUrls = [String]()
     
-    let locationManager = CLLocationManager()
+    let locationManager1 = CLLocationManager()
+
     var locationname:String!
     var arar = [String]()
  
     var flag = false
     var devicelatitude:Double!
     var devicelongitude:Double!
-    
 
-   // var manager:CLLocationManager!
-    
-    
-
-    
     override func viewDidLoad()
     {
-        
-
-        println("kajsdljdsljdaldjd  \(locationname)")
         textfield1.delegate = self
         tableview!.delegate = self
         tableview!.dataSource = self
@@ -84,52 +76,64 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         autocmpleteTextfield.delegate = self
         configureTextField()
         handleTextFieldInterfaces()
-        self.locationManager.requestAlwaysAuthorization()
-        // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
         
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-  
+       // locationManager = CLLocationManager()
+        locationManager1.delegate = self;
+        locationManager1.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager1.requestAlwaysAuthorization()
+        locationManager1.startUpdatingLocation()
     }
+    
+//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+//        
+//        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+//            
+//            if (error != nil) {
+//                println("Error: " + error.localizedDescription)
+//                return
+//            }
+//            
+//            if placemarks.count > 0 {
+//                let pm = placemarks[0] as! CLPlacemark
+//                self.displayLocationInfo(pm)
+//            } else {
+//                println("Error with the data.")
+//            }
+//        })
+//    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+    {
+        var userLocation:CLLocation = locations[0] as! CLLocation
+        let long = userLocation.coordinate.longitude;
+        let lat = userLocation.coordinate.latitude;
+        //Do What ever you want with it
+        
+        CLGeocoder().reverseGeocodeLocation(userLocation, completionHandler: {
+            placemarks, error in
+
+        
+        if error == nil && placemarks.count > 0
+        {
+//            self.placeMark = placemarks.last as? CLPlacemark
+//            self.adressLabel.text = "\(self.placeMark!.thoroughfare)\n\(self.placeMark!.postalCode) \(self.placeMark!.locality)\n\(self.placeMark!.country)"
+//            self.manager.stopUpdatingLocation()
+        }
+            })
+    }
+    
+    
+
    
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         tableview.hidden = true
     }
-       func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
-    {
-        var locValue:CLLocationCoordinate2D = manager.location.coordinate
-        println("locations = \(locValue.latitude) \(locValue.longitude)")
-        devicelatitude = locValue.latitude
-        devicelongitude = locValue.longitude
-        println(devicelatitude)
-        println(devicelongitude)
 
-        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-            
-            if (error != nil)
-            {
-                println("Error: " + error.localizedDescription)
-                return
-            }
-            
-            if placemarks.count > 0
-            {
-                let pm = placemarks[0] as! CLPlacemark
-                self.displayLocationInfo(pm)
-            }
-            else
-            {
-                println("Error with the data.")
-            }
-        })
-
+    
+    func reverseGeocodeLocation(location: CLLocation!, completionHandler: CLGeocodeCompletionHandler!){
+        
     }
     
     //liq drop down table resign first responder
@@ -146,26 +150,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
 
    // getting Device latitude and longitude
 
-    func displayLocationInfo(placemark: CLPlacemark)
-    {
-        
-        self.locationManager.stopUpdatingLocation()
-        println(placemark.locality)
-        println(placemark.postalCode)
-        println(placemark.administrativeArea)
-        println(placemark.country)
-        if let locationName = placemark.addressDictionary["Name"] as? NSString
-        {
-            println(locationName)
-          locationname  = locationName as String
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
-    {
-        println("Error: " + error.localizedDescription)
-        //bool = true
-    }
     
     //city textfield
     private func configureTextField()
@@ -402,7 +386,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
+       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
         //28.63875
         //77.07380
     }
@@ -480,8 +464,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     }
                     if var distance = resInfo["distance"] as? String
                     {
-                        
-                        var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                        //28.63875
+                        //77.07380
+                        var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                         var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                         var totalDistance: Double = 0
                         var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -562,7 +547,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         }
                         if var distance = resInfo["distance"] as? String
                         {
-                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                            //28.63875
+                            //77.07380
+                            var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -649,6 +636,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         {
             if let destination = segue.destinationViewController as? tableviewclass
             {
+                //28.63875
+                //77.07380
                 destination.liqname = textfield1.text
                 var liqname = textfield1.text
                 let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
@@ -656,8 +645,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination.head = head1
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
-                destination.getcitylatitude = citylat
-                destination.getcitylongitude = citylong
+                destination.getcitylatitude = 28.63875
+                destination.getcitylongitude = 77.07380
                 
            }
         }
@@ -671,8 +660,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination1.liqvodkaname = trimmedString
 
                 destination1.header1 = header
-                destination1.getcitylatitude = citylat
-                destination1.getcitylongitude = citylong
+                destination1.getcitylatitude = 28.63875
+                destination1.getcitylongitude = 77.07380
             }
         }
         if segue.identifier == "mapview"
@@ -681,8 +670,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             {
                 destination2.getdevicelatitude = devicelatitude
                 destination2.getdevicelongitude = devicelongitude
-                destination2.getcitylatitude = citylat
-                destination2.getcitylongitude = citylong
+                destination2.getcitylatitude = 28.63875
+                destination2.getcitylongitude = 77.07380
+                destination2.getdevicelatitude = devicelatitude
+                destination2.getdevicelongitude = devicelongitude
             }
             
         }
@@ -692,7 +683,26 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     @IBAction func getcurrentlocationname(sender: AnyObject)
     {
      
-       autocmpleteTextfield.text = locationname
+        func displayLocationInfo(placemark: CLPlacemark) {
+            
+           // self.locationManager.stopUpdatingLocation()
+            println(placemark.locality)
+            println(placemark.postalCode)
+            println(placemark.administrativeArea)
+            println(placemark.country)
+            
+            autocmpleteTextfield.text = placemark.locality + placemark.postalCode + placemark.administrativeArea + placemark.country
+            
+        }
+        
+        func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+            println("Error: " + error.localizedDescription)
+        }
+
+        
+        
+      // autocmpleteTextfield.text = placemark.locality + placemark.postalCode + placemark.administrativeArea + placemark.country
+        
         
     }
 

@@ -34,7 +34,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
-   
+    let checkedImage = UIImage(named: "pint")
+    let unCheckedImage = UIImage(named: "bottle")
 
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
@@ -50,7 +51,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
 //        let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
 //        mainview.addGestureRecognizer(tap)
+        //tableview.backgroundColor = UIColor(white: 1, alpha: 0.5)
         
+//        self.pintbutton.setImage(UIImage(named: "pintimage"), forState: UIControlState.Normal)
+//        self.pintbutton.setBackgroundImage(UIImage(named: "bottle"), forState: UIControlState.Normal)
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
         popupview.addGestureRecognizer(tap1)
         
@@ -169,6 +173,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
         //headerCell.backgroundColor = UIColor.cyanColor()
+        headerCell.backgroundColor = UIColor.whiteColor()
     
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = head[section].minp
@@ -235,11 +240,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=8&records=4&query=\(liqname)")
             trim = false
         }
-        else
-        {
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/nearby.php?lat=28.63875&long=77.07380&km=8&records=8")
-        }
-        
     }
     
     func getbardatafurther(urlString:String)
@@ -306,7 +306,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
                             println(String(format: "%.2f KM", totalDistance))
-                            NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f KMS", totalDistance))
                             var totalDistance1 = totalDistance.description
                             println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
@@ -317,7 +317,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             
                             
-                            fstobj1.distance = totalDistance1 + "KM"
+                            fstobj1.distance = totalDistance1 + "KMS"
                             println(fstobj1.distance)
                         }
                     }
@@ -377,6 +377,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         bottlebuttonclicked = false
         locationbuttonclicked = false
         pintbuttonclicked = true
+        
+        if pintbuttonclicked == true
+        {
+            pintbutton.setImage(checkedImage, forState: .Normal)
+            bottlebutton.setImage(unCheckedImage, forState: .Normal)
+            locationbutton.setImage(unCheckedImage, forState: .Normal)
+        }
         if doubleTap == true
         {
             
@@ -466,6 +473,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         pintbuttonclicked = false
         locationbuttonclicked = false
         bottlebuttonclicked = true
+        
+        if bottlebuttonclicked == true
+        {
+            pintbutton.setImage(unCheckedImage, forState: .Normal)
+            bottlebutton.setImage(checkedImage, forState: .Normal)
+            locationbutton.setImage(unCheckedImage, forState: .Normal)
+        }
+
      
 
         
@@ -561,6 +576,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         pintbuttonclicked = false
         bottlebuttonclicked = false
         locationbuttonclicked = true
+        
+        if locationbuttonclicked == true
+        {
+            pintbutton.setImage(unCheckedImage, forState: .Normal)
+            bottlebutton.setImage(unCheckedImage, forState: .Normal)
+            locationbutton.setImage(checkedImage, forState: .Normal)
+        }
+
+        
   
 
         

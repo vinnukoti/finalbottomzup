@@ -22,11 +22,22 @@ class custmheadercell1: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        // Initialization code
+        if pricebuttonclicked == true
+        {
+            vodkaavgprice.backgroundColor = UIColor.yellowColor()
+        }
+        
+        if distancevodkabuttonclicked == true
+        {
+            vodkadistance.backgroundColor = UIColor.yellowColor()
+        }
     }
     
     override func setSelected(selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)
     }
+    
+    
+    
 }
