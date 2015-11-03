@@ -386,7 +386,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
+       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
         //28.63875
         //77.07380
     }
@@ -466,7 +466,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     {
                         //28.63875
                         //77.07380
-                        var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
+                        var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
                         var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                         var totalDistance: Double = 0
                         var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -549,7 +549,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             //28.63875
                             //77.07380
-                            var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
+                            var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -645,8 +645,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination.head = head1
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
-                destination.getcitylatitude = 28.63875
-                destination.getcitylongitude = 77.07380
+                destination.getcitylatitude = citylat
+                destination.getcitylongitude = citylong
                 
            }
         }
@@ -660,8 +660,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination1.liqvodkaname = trimmedString
 
                 destination1.header1 = header
-                destination1.getcitylatitude = 28.63875
-                destination1.getcitylongitude = 77.07380
+                destination1.getcitylatitude = citylat
+                destination1.getcitylongitude = citylong
             }
         }
         if segue.identifier == "mapview"
@@ -670,8 +670,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             {
                 destination2.getdevicelatitude = devicelatitude
                 destination2.getdevicelongitude = devicelongitude
-                destination2.getcitylatitude = 28.63875
-                destination2.getcitylongitude = 77.07380
+                destination2.getcitylatitude = citylat
+                destination2.getcitylongitude = citylong
                 destination2.getdevicelatitude = devicelatitude
                 destination2.getdevicelongitude = devicelongitude
             }

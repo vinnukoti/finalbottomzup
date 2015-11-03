@@ -15,7 +15,7 @@ var res_long1:Double!
 var res_furtherlat:Double!
 var res_furtherlong:Double!
 
-
+var distnacemapsort = false
 
 
 
@@ -23,6 +23,9 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 {
     @IBOutlet weak var tableviewformap: UITableView!
      var doubleTapmapview = true
+    
+    let checkedImage = UIImage(named: "pint")
+    let unCheckedImage = UIImage(named: "bottle")
    
 
     var wineandbararray:[mapdata] = [mapdata]()
@@ -34,10 +37,11 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     var getcitylatitude:Double!
     var getcitylongitude:Double!
    
+    @IBOutlet weak var distancemap: UIButton!
 
     override func viewDidLoad()
     {
-        //self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
+        distancemap.setImage(unCheckedImage, forState: .Normal)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
         getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=5")
@@ -243,6 +247,13 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     @IBAction func distancesort(sender: AnyObject)
     
     {
+        distnacemapsort = true
+        
+        if distnacemapsort == true
+        {
+            distancemap.setImage(checkedImage, forState: .Normal)
+        }
+    
         if doubleTapmapview == true
         {
         func sortCards(inout elements: Array<mapdata>) -> Array<mapdata>
@@ -330,10 +341,16 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
             doubleTapmapview = true
 
         }
-
+    }
+    
+    
+    @IBAction func gotomapvodka(sender: AnyObject)
+    {
         
+         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
         
-}
+    }
+    
 }
 
 

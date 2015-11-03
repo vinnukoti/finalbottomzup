@@ -24,13 +24,6 @@ class customheadercell: UITableViewCell
    // @IBOutlet weak var headercelldist: UILabel!
     @IBOutlet weak var headercelldist: UILabel!
 
-    
-
-    
-    var obj = tableviewclass()
-    
-
-    
     override func awakeFromNib()
     {
         super.awakeFromNib()

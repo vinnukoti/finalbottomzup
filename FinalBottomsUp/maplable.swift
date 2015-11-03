@@ -14,16 +14,24 @@ class maplable: UITableViewCell
     @IBOutlet weak var name: UILabel!
 
     @IBOutlet weak var distance: UILabel!
+  
     
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        // Initialization code
+        
+        if distnacemapsort == true
+        {
+            distance.backgroundColor = UIColor.yellowColor()
+           
+        }
     }
     
     override func setSelected(selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)
     }
+    
+  
     
 }

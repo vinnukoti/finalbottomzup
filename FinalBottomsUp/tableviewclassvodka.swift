@@ -9,9 +9,12 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Social
+import FBSDKShareKit
+
+
+
 var doubleTap1 = true
-
-
 var pricebuttonclicked = false
 var distancevodkabuttonclicked = false
 
@@ -40,16 +43,39 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var distancebutton: UIButton!
     @IBOutlet weak var pricebutton: UIButton!
 
+    @IBOutlet var mainviewvodka: UIView!
     override func viewDidLoad()
     {
-       // self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "3rdpage"), forBarMetrics: UIBarMetrics.Default)
+ 
         super.viewDidLayoutSubviews()
+                let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
+                popupviewvodka.addGestureRecognizer(tap)
+        
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
-        //let image = UIImage(named: "3rdpage")
-       // navigationItem.titleView = UIImageView(image: image)
+        popupviewvodka.hidden = true
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    {
+        
+        popupviewvodka.hidden = true
+        //tableview.hidden = true
+    }
+    
+    func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
+    {
+        
+        popupviewvodka.hidden = false
+        // popupview.hidden = true
+    }
+    
+    @IBAction func sharetofacebookVodka(sender: AnyObject)
+    {
+        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant  through the BottomzUp App")
+        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+    }
     func numberOfSectionsInTableView(tableview: UITableView) -> Int
     {
         
@@ -473,7 +499,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func getDiscountforvodka(sender: AnyObject)
     {
-        
+        popupviewvodka.hidden = false
     }
     
 }

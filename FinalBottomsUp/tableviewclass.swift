@@ -51,7 +51,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
 //        let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
 //        mainview.addGestureRecognizer(tap)
-        //tableview.backgroundColor = UIColor(white: 1, alpha: 0.5)
+  
         
 //        self.pintbutton.setImage(UIImage(named: "pintimage"), forState: UIControlState.Normal)
 //        self.pintbutton.setBackgroundImage(UIImage(named: "bottle"), forState: UIControlState.Normal)
@@ -82,37 +82,37 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     @IBAction func shareonfacebook(sender: AnyObject)
     {
-      //  var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
 //        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
 //        content.contentURL = NSURL(string: "BottomzUp.com")
 //        content.contentTitle = "Bottomz Up"
 //        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
-//
-//      shareToFacebook.setInitialText("\(content)")
-//        self.presentViewController(shareToFacebook, animated: true, completion: nil)
-        
+////
+////      shareToFacebook.setInitialText("\(content)")
+////        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+//        
         var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
+       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
-        
-        
-//        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
-//        {
-//            
-//            var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//            facebookSheet.setInitialText("Vea Software! :D")
-//            self.presentViewController(facebookSheet, animated: true, completion: nil)
 //
-//        }
-//        else
-//        {
-//            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-//    }
-        
-        var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string:"https://developers.facebook.com")
+//        
+////        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
+////        {
+////            
+////            var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+////            facebookSheet.setInitialText("Vea Software! :D")
+////            self.presentViewController(facebookSheet, animated: true, completion: nil)
+////
+////        }
+////        else
+////        {
+////            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+////            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+////            self.presentViewController(alert, animated: true, completion: nil)
+////    }
+//        
+//        var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+//        content.contentURL = NSURL(string:"https://developers.facebook.com")
     }
     
 
@@ -675,13 +675,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    
     @IBAction func getDirections(sender: AnyObject)
-    
     {
-         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
-        
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
     }
+    
+
 }
 
 
