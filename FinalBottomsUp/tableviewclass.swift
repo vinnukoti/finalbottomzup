@@ -92,7 +92,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 ////        self.presentViewController(shareToFacebook, animated: true, completion: nil)
 //        
         var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
+       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
 //
 //        
