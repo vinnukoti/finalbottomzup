@@ -459,6 +459,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         var string = NSString(string: mySwiftString)
                         string.doubleValue
                         restlat = string.doubleValue
+                        fstobj1.Restaurantlatitude = restlat
+                        println(fstobj1.Restaurantlatitude)
                         println(restlat)
                     }
                     if let res_long = resInfo["res_long"] as? String
@@ -467,6 +469,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         var string = NSString(string: mySwiftString)
                         string.doubleValue
                         restlong = string.doubleValue
+                        fstobj1.Restaurantlongitude = restlong
+                        println(fstobj1.Restaurantlongitude)
                         println(restlong)
 
                         

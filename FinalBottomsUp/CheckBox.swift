@@ -55,26 +55,26 @@ class CheckBox: UIButton
 //            }
 //        }
         
-        if pintbuttonclicked == true
-        {
-           // isChecked = true
-            self.setImage(checkedImage, forState: .Normal)
-         
-        }
-        else
-        {
-            self.setImage(unCheckedImage, forState: .Normal)
-        }
-        
-        if bottlebuttonclicked == true
-        {
-            isChecked = true
-        }
-        
-        if locationbuttonclicked == true
-        {
-            isChecked = true
-        }
+//        if pintbuttonclicked == true
+//        {
+//           // isChecked = true
+//            self.setImage(checkedImage, forState: .Normal)
+//         
+//        }
+//        else
+//        {
+//            self.setImage(unCheckedImage, forState: .Normal)
+//        }
+//        
+//        if bottlebuttonclicked == true
+//        {
+//            isChecked = true
+//        }
+//        
+//        if locationbuttonclicked == true
+//        {
+//            isChecked = true
+//        }
 //        else
 //        {
 //            isChecked = false

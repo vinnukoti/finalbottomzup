@@ -19,6 +19,8 @@ class Restaurant
     var minp:String!
     var maxp:String!
     var distance:String!
+    var Restaurantlatitude: Double!
+    var Restaurantlongitude: Double!
     
     var amp:[liqclass] = [liqclass]()
     var further:[liqclass] = [liqclass]()
@@ -33,6 +35,9 @@ class Restaurant
         distance = String()
         
         amp = [liqclass]()
+        
+        Restaurantlatitude = Double()
+        Restaurantlongitude = Double()
     }
 
 

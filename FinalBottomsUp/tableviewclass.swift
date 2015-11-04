@@ -14,15 +14,17 @@ import FBSDKShareKit
 var latitude:Double!
 var longitude:Double!
 var doubleTap = true
-var pintbuttonclicked = false
-var bottlebuttonclicked = false
-var locationbuttonclicked = false
+
 var arrowimage = false
+
 
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     
+    var pintbuttonclicked = false
+    var bottlebuttonclicked = false
+    var locationbuttonclicked = false
     @IBOutlet var mainview: UIView!
     @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
@@ -34,8 +36,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var pintdisplayname: UILabel!
     @IBOutlet weak var bottledisplaylable: UILabel!
     @IBOutlet weak var locationdisplaylable: UILabel!
-    
-    
+
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
     let checkedImage = UIImage(named: "pint")
@@ -51,8 +52,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var getcitylatitude:Double!
     var getcitylongitude:Double!
     
+    var getResturantlatitude:[Double] = [Double]()
+    var getRestuarantlongitude:[Double] = [Double]()
+    var sectiontapped:Int!
+    
+    
     override func viewDidLoad()
     {
+        
+       // println(getResturantlatitude)
 //        let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
 //        mainview.addGestureRecognizer(tap)
   
@@ -62,7 +70,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
         popupview.addGestureRecognizer(tap1)
-        
         popupview.hidden = true
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
@@ -70,8 +77,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         pintdisplayname.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
         bottledisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
         locationdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
-        
-  
      }
 
     
@@ -202,8 +207,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
         headerCell.userInteractionEnabled = true
-        
-        
+        headerCell.mapbutton.tag = section
+        headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
+        headerCell.headercelldist.hidden = true
         //Remove all empty cell is UITableview
         var tblView =  UIView(frame: CGRectZero)
         tableView.tableFooterView = tblView
@@ -219,23 +225,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         booleanhidelable = true
         selectedrestaurant = false
         var section = gestureRecognizer.view!.tag
+        println(section)
+        sectiontapped = section
         println("Section: \(gestureRecognizer.view!.tag)")
        
         if head[gestureRecognizer.view!.tag].bool == false
         {
             head[gestureRecognizer.view!.tag].bool = true
-            if head[gestureRecognizer.view!.tag].bool == true
-            {
-               arrowimage = true
-            }
+//            if head[gestureRecognizer.view!.tag].bool == true
+//            {
+//               arrowimage = true
+//            }
         }
         else
         {
             head[gestureRecognizer.view!.tag].bool = false
-            if head[gestureRecognizer.view!.tag].bool == false
-            {
-                arrowimage = false
-            }
+//            if head[gestureRecognizer.view!.tag].bool == false
+//            {
+//                arrowimage = false
+//            }
             
         }
         self.tableview.reloadData()
@@ -691,9 +699,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    @IBAction func getDirections(sender: AnyObject)
+    @IBAction func getDirections(sender: UIButton)
     {
-        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=27.63875,76.07380&daddr=\(restlat),\(restlong)")!)
+
+       UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=26.63875,76.07380&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
+        
     }
     
 

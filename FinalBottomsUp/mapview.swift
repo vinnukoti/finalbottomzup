@@ -75,7 +75,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         cell.name.font = UIFont(name: "HelveticaNeue", size: 11.0)
         cell.distance.font = UIFont(name: "HelveticaNeue", size: 11.0)
         cell.distance.text = wineandbararray[indexPath.row].mapliqdistance
-        if distnacemapsort == true{
+        if distnacemapsort == true
+        {
         cell.distance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
         var tblView =  UIView(frame: CGRectZero)

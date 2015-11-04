@@ -21,14 +21,14 @@ class maplable: UITableViewCell
     {
         super.awakeFromNib()
         
-        if distnacemapsort == true
-        {
-//            distance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-            
-            colorimage.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-            //distance.backgroundColor
-           
-        }
+//        if distnacemapsort == true
+//        {
+////            distance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//            
+//            colorimage.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//            //distance.backgroundColor
+//           
+//        }
     }
     
     override func setSelected(selected: Bool, animated: Bool)
