@@ -24,12 +24,12 @@ class custmheadercell1: UITableViewCell
         super.awakeFromNib()
         if pricebuttonclicked == true
         {
-            vodkaavgprice.backgroundColor = UIColor.yellowColor()
+            vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
         
         if distancevodkabuttonclicked == true
         {
-            vodkadistance.backgroundColor = UIColor.yellowColor()
+            vodkadistance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
     }
     

@@ -31,6 +31,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var bottlebutton: UIButton!
     @IBOutlet weak var locationbutton: UIButton!
     
+    @IBOutlet weak var pintdisplayname: UILabel!
+    @IBOutlet weak var bottledisplaylable: UILabel!
+    @IBOutlet weak var locationdisplaylable: UILabel!
+    
     
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
@@ -55,6 +59,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
 //        self.pintbutton.setImage(UIImage(named: "pintimage"), forState: UIControlState.Normal)
 //        self.pintbutton.setBackgroundImage(UIImage(named: "bottle"), forState: UIControlState.Normal)
+        
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
         popupview.addGestureRecognizer(tap1)
         
@@ -62,6 +67,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
+        pintdisplayname.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        bottledisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        locationdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        
   
      }
 
@@ -82,18 +91,28 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     @IBAction func shareonfacebook(sender: AnyObject)
     {
-//        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-//        content.contentURL = NSURL(string: "BottomzUp.com")
-//        content.contentTitle = "Bottomz Up"
-//        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
+       var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "www.google.com")
+        content.contentTitle = "Bottomz Up"
+        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
+        
+        //var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+
+        //shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
+        //content.contentURL =  NSURL(string: DOWNLOAD_LINK_APPSTORE)
+        //content.contentTitle = "My Custom Title"
+        //content.contentDescription = "My Custom Description"
+       // content.imageURL = NSURL(string: FB_IMAGE_LINK)
+        // Share Dialog
+       // FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
 ////
-////      shareToFacebook.setInitialText("\(content)")
-////        self.presentViewController(shareToFacebook, animated: true, completion: nil)
-//        
-        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
+        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
+//        
+//        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
+//        self.presentViewController(shareToFacebook, animated: true, completion: nil)
 //
 //        
 ////        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
@@ -146,8 +165,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("childcellnew", forIndexPath: indexPath) as! onemoreclass1
         cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
-        cell.micprice.text = head[indexPath.section].amp[indexPath.row].pint
-        cell.maxprice.text = head[indexPath.section].amp[indexPath.row].Bottle
+        cell.micprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
+        cell.maxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
         
         return cell
     }
@@ -669,15 +688,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             println("sorted array is  : \(head)")
             doubleTap = true
         }
-
-        
-        
     }
     
     
     @IBAction func getDirections(sender: AnyObject)
     {
-        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=27.63875,76.07380&daddr=\(restlat),\(restlong)")!)
     }
     
 

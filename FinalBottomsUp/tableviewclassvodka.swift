@@ -44,9 +44,19 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var pricebutton: UIButton!
 
     @IBOutlet var mainviewvodka: UIView!
+    
+    @IBOutlet weak var pricedisplayname: UILabel!
+    
+    @IBOutlet weak var distnacedisplayname: UILabel!
+    
+    
+    
+    
     override func viewDidLoad()
     {
  
+        
+        
         super.viewDidLayoutSubviews()
                 let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
                 popupviewvodka.addGestureRecognizer(tap)
@@ -54,6 +64,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
         popupviewvodka.hidden = true
+        distnacedisplayname.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        pricedisplayname.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)

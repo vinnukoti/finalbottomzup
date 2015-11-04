@@ -20,12 +20,20 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BAckgroundimage" translatesAutoresizingMaskIntoConstraints="NO" id="bYO-kG-WtN">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BottomzUp" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-Vy-6T3">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BottomzUp" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-Vy-6T3">
                     <rect key="frame" x="153" y="219" width="175" height="41"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="175" id="ETm-3H-2gj"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="227" id="Fjd-0j-8wP"/>
                         <constraint firstAttribute="height" constant="41" id="X6s-Is-kkr"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="d9U-Bf-Xvb"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ETm-3H-2gj"/>
+                            <exclude reference="X6s-Is-kkr"/>
+                        </mask>
+                    </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

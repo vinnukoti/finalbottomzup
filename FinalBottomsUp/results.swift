@@ -52,7 +52,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
 
     private var connection:NSURLConnection?
     
-    private let googleMapsKey = "AIzaSyAmC9Bxbw-8M-6ppbty3ArFP7u2t97KKMY"
+    private let googleMapsKey = "AIzaSyBznULI0vOApc8mQDiUv6Q_iohI8BWcSHY"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
 
     var autocompleteUrls = [String]()
@@ -65,6 +65,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var flag = false
     var devicelatitude:Double!
     var devicelongitude:Double!
+    
+    var currentlocationname:String!
 
     override func viewDidLoad()
     {
@@ -107,18 +109,29 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         var userLocation:CLLocation = locations[0] as! CLLocation
         let long = userLocation.coordinate.longitude;
         let lat = userLocation.coordinate.latitude;
+        
+        devicelatitude = lat
+        devicelongitude = long
         //Do What ever you want with it
         
         CLGeocoder().reverseGeocodeLocation(userLocation, completionHandler: {
             placemarks, error in
 
-        
-        if error == nil && placemarks.count > 0
-        {
-//            self.placeMark = placemarks.last as? CLPlacemark
-//            self.adressLabel.text = "\(self.placeMark!.thoroughfare)\n\(self.placeMark!.postalCode) \(self.placeMark!.locality)\n\(self.placeMark!.country)"
-//            self.manager.stopUpdatingLocation()
-        }
+            let placeArray = placemarks as? [CLPlacemark]
+            
+            // Place details
+            var placeMark: CLPlacemark!
+            placeMark = placeArray?[0]
+            
+            // Street address
+            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
+                println(street)
+                self.currentlocationname = street as String
+                
+                self.autocmpleteTextfield.text = street as String
+                self.locationManager1.stopUpdatingLocation()
+            }
+
             })
     }
     
@@ -146,11 +159,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         return true
     }
     
-    //keyboard resign firsdt responder 
-
-   // getting Device latitude and longitude
-
-    
+    //keyboard resign firsdt responder
     //city textfield
     private func configureTextField()
     {
@@ -248,7 +257,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     // textfield1 starts
     func textFieldDidBeginEditing(textField: UITextField)
     {
-            
+        textField.text = ""
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
      
     }
@@ -386,7 +395,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
+       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
         //28.63875
         //77.07380
     }
@@ -466,7 +475,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     {
                         //28.63875
                         //77.07380
-                        var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
+                        var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
                         var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                         var totalDistance: Double = 0
                         var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -549,7 +558,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             //28.63875
                             //77.07380
-                            var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
+                            var OldLocation: CLLocation = CLLocation(latitude: citylat , longitude: citylong)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -630,6 +639,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         return result
     }
     
+
+    
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "newres"
@@ -682,28 +695,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBAction func getcurrentlocationname(sender: AnyObject)
     {
-     
-        func displayLocationInfo(placemark: CLPlacemark) {
-            
-           // self.locationManager.stopUpdatingLocation()
-            println(placemark.locality)
-            println(placemark.postalCode)
-            println(placemark.administrativeArea)
-            println(placemark.country)
-            
-            autocmpleteTextfield.text = placemark.locality + placemark.postalCode + placemark.administrativeArea + placemark.country
-            
-        }
-        
-        func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-            println("Error: " + error.localizedDescription)
-        }
-
-        
-        
-      // autocmpleteTextfield.text = placemark.locality + placemark.postalCode + placemark.administrativeArea + placemark.country
-        
-        
+       autocmpleteTextfield.text = currentlocationname
     }
 
     @IBAction func nearbar(sender: AnyObject)

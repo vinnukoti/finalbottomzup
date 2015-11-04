@@ -31,19 +31,26 @@ class customheadercell: UITableViewCell
         if pintbuttonclicked == true
         {
 
-            headercellmin.backgroundColor = UIColor.yellowColor()
+            headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+            //#fde8d7
+//                //set the background color to #ffd200
+//                view.backgroundColor = UIColor(
+//                    red: 0xfd/255,
+//                    green: 0xe8/255,
+//                    blue: 0xd7/255,
+//                    alpha: 1.0)
         }
         
         if  bottlebuttonclicked == true
         {
 
-            headercellmax.backgroundColor = UIColor.yellowColor()
+            headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
         
         if locationbuttonclicked == true
         {
 
-            headercelldist.backgroundColor = UIColor.yellowColor()
+            headercelldist.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
 
     }

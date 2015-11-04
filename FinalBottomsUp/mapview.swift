@@ -37,11 +37,22 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     var getcitylatitude:Double!
     var getcitylongitude:Double!
    
+  
     @IBOutlet weak var distancemap: UIButton!
 
+    @IBOutlet weak var distnacedisplaylable: UILabel!
+    
+    @IBOutlet weak var REsturantdisplaylable: UILabel!
     override func viewDidLoad()
     {
-        distancemap.setImage(unCheckedImage, forState: .Normal)
+        distancemap.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        distancemap.setTitle("DISTANCE", forState: UIControlState.Normal)
+        //distancemap.titleLabel?.text = "DISTANCE"
+        distnacedisplaylable.hidden = true
+        distnacedisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        REsturantdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
+        distancemap.setBackgroundImage(unCheckedImage, forState: UIControlState.Normal)
+        //distancemap.setImage(unCheckedImage, forState: .Normal)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
         getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=5")
@@ -61,7 +72,12 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("wineandbar", forIndexPath: indexPath) as! maplable
         cell.name.text = wineandbararray[indexPath.row].mapliqname
+        cell.name.font = UIFont(name: "HelveticaNeue", size: 11.0)
+        cell.distance.font = UIFont(name: "HelveticaNeue", size: 11.0)
         cell.distance.text = wineandbararray[indexPath.row].mapliqdistance
+        if distnacemapsort == true{
+        cell.distance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+        }
         var tblView =  UIView(frame: CGRectZero)
         tableView.tableFooterView = tblView
         tableView.tableFooterView!.hidden = true
@@ -251,7 +267,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         if distnacemapsort == true
         {
-            distancemap.setImage(checkedImage, forState: .Normal)
+            distancemap.setBackgroundImage(checkedImage, forState: .Normal)
         }
     
         if doubleTapmapview == true

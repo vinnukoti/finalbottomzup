@@ -15,6 +15,7 @@ class maplable: UITableViewCell
 
     @IBOutlet weak var distance: UILabel!
   
+    @IBOutlet weak var colorimage: UIImageView!
     
     override func awakeFromNib()
     {
@@ -22,7 +23,10 @@ class maplable: UITableViewCell
         
         if distnacemapsort == true
         {
-            distance.backgroundColor = UIColor.yellowColor()
+//            distance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+            
+            colorimage.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+            //distance.backgroundColor
            
         }
     }
