@@ -66,6 +66,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var devicelatitude:Double!
     var devicelongitude:Double!
     
+    var iscitytextfieldhavedata = false
+    var isliqtextfieldhasdata = false
+    
+    @IBOutlet weak var findapubbutton: UIButton!
     var currentlocationname:String!
 
     override func viewDidLoad()
@@ -84,25 +88,17 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
         locationManager1.startUpdatingLocation()
+       
+      
     }
     
-//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-//        
-//        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-//            
-//            if (error != nil) {
-//                println("Error: " + error.localizedDescription)
-//                return
-//            }
-//            
-//            if placemarks.count > 0 {
-//                let pm = placemarks[0] as! CLPlacemark
-//                self.displayLocationInfo(pm)
-//            } else {
-//                println("Error with the data.")
-//            }
-//        })
-//    }
+    override func viewDidAppear(animated: Bool)
+    {
+       // if iscitytextfieldhavedata && isliqtextfieldhasdata == true
+       // {
+            //findapubbutton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+        //}
+    }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
@@ -138,10 +134,13 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
 
    
-    // Resign Firstresponder of UITableview
+    // Resign Firstresponder of UITableview and Keyboard Hiding
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         tableview.hidden = true
+        view.endEditing(true)
+        //super.touchesBegan(touches, withEvent: event)
+        
     }
 
     
@@ -196,7 +195,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             }
         }
         autocmpleteTextfield.onSelect = {[weak self] text, indexpath in
-            self!.autocmpleteTextfield.text = text;self!.view.endEditing(true)
+            self!.autocmpleteTextfield.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true)
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -386,6 +385,11 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     {
         let selectedCell : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         textfield1.text = selectedCell.textLabel!.text
+        if iscitytextfieldhavedata == true
+        {
+        findapubbutton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+        }
+        isliqtextfieldhasdata = true
         self.view.endEditing(true)
         tableView.hidden = true
     }

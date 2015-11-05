@@ -116,7 +116,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 55
+        return 65
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
@@ -136,11 +136,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.tag = section        
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = header1[section].avgprice
-        headerCell.vodkadistance.text = header1[section].distancevodka
+        //headerCell.vodkadistance.text = header1[section].distancevodka
         
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped1)
         headerCell.userInteractionEnabled = true
+        headerCell.mapbuttonvodkaclass.tag = section
+        headerCell.mapbuttonvodkaclass.setTitle(header1[section].distancevodka, forState: UIControlState.Normal)
+
         
         //Code to remove empty cells in UITableview
         var tblView =  UIView(frame: CGRectZero)
@@ -324,8 +327,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             distancebutton.setImage(unCheckedImage, forState: .Normal)
         
         }
-        if doubleTap == true
-        {
+      
             func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
             {
                 var sorted = false
@@ -362,46 +364,46 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.tableview1.reloadData()
             println("sorted array is  : \(header1)")
             doubleTap = false
-        }
-        else
-        {
-            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
-            {
-                var sorted = false
-                while sorted == false
-                {
-                    sorted = true
-                    if cards.count > 1
-                    {
-                    for i in 0...cards.count - 2
-                    {
-                        if cards[i].avgprice < cards[i+1].avgprice
-                        {
-                            sorted = false
-                            var first = cards[i]
-                            var second = cards[i + 1]
-                            println("first object before \(first.avgprice)")
-                            println("second object before\(second.avgprice)")
-                            cards[i] = second
-                            cards[i + 1] = first
-                            println("first object after\(cards[i].avgprice)")
-                            println("second object after\(cards[i + 1].avgprice)")
-                        }
-                    }
-                    }
-                    else
-                    {
-                        
-                    }
-                }
-                return cards
-            }
-            var sortedarray1:[Restauarantvodka] = sortCards(&header1)
-            header1 = sortedarray1
-            self.tableview1.reloadData()
-            println("sorted array is  : \(header1)")
-            doubleTap = true
-        }
+        
+//        else
+//        {
+//            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
+//            {
+//                var sorted = false
+//                while sorted == false
+//                {
+//                    sorted = true
+//                    if cards.count > 1
+//                    {
+//                    for i in 0...cards.count - 2
+//                    {
+//                        if cards[i].avgprice < cards[i+1].avgprice
+//                        {
+//                            sorted = false
+//                            var first = cards[i]
+//                            var second = cards[i + 1]
+//                            println("first object before \(first.avgprice)")
+//                            println("second object before\(second.avgprice)")
+//                            cards[i] = second
+//                            cards[i + 1] = first
+//                            println("first object after\(cards[i].avgprice)")
+//                            println("second object after\(cards[i + 1].avgprice)")
+//                        }
+//                    }
+//                    }
+//                    else
+//                    {
+//                        
+//                    }
+//                }
+//                return cards
+//            }
+//            var sortedarray1:[Restauarantvodka] = sortCards(&header1)
+//            header1 = sortedarray1
+//            self.tableview1.reloadData()
+//            println("sorted array is  : \(header1)")
+//            doubleTap = true
+//        }
 
         
     }
@@ -423,8 +425,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         
         
-        if doubleTap == true
-        {
+      
             func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
             {
                 var sorted = false
@@ -461,43 +462,43 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.tableview1.reloadData()
             println("sorted array is  : \(header1)")
             doubleTap = false
-        }
-        else
-        {
-            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
-            {
-                var sorted = false
-                while sorted == false
-                {
-                    sorted = true
-                    if cards.count > 1
-                    {
-                    for i in 0...cards.count - 2
-                    {
-                        if cards[i].distancevodka < cards[i+1].distancevodka
-                        {
-                            sorted = false
-                            var first = cards[i]
-                            var second = cards[i + 1]
-                            println("first object before \(first.distancevodka)")
-                            println("second object before\(second.distancevodka)")
-                            cards[i] = second
-                            cards[i + 1] = first
-                            println("first object after\(cards[i].distancevodka)")
-                            println("second object after\(cards[i + 1].distancevodka)")
-                        }
-                    }
-                    }
-                }
-                return cards
-            }
-            var sortedarray1:[Restauarantvodka] = sortCards(&header1)
-            header1 = sortedarray1
-            self.tableview1.reloadData()
-            println("sorted array is  : \(header1)")
-            doubleTap = true
-        }
         
+//        else
+//        {
+//            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
+//            {
+//                var sorted = false
+//                while sorted == false
+//                {
+//                    sorted = true
+//                    if cards.count > 1
+//                    {
+//                    for i in 0...cards.count - 2
+//                    {
+//                        if cards[i].distancevodka < cards[i+1].distancevodka
+//                        {
+//                            sorted = false
+//                            var first = cards[i]
+//                            var second = cards[i + 1]
+//                            println("first object before \(first.distancevodka)")
+//                            println("second object before\(second.distancevodka)")
+//                            cards[i] = second
+//                            cards[i + 1] = first
+//                            println("first object after\(cards[i].distancevodka)")
+//                            println("second object after\(cards[i + 1].distancevodka)")
+//                        }
+//                    }
+//                    }
+//                }
+//                return cards
+//            }
+//            var sortedarray1:[Restauarantvodka] = sortCards(&header1)
+//            header1 = sortedarray1
+//            self.tableview1.reloadData()
+//            println("sorted array is  : \(header1)")
+//            doubleTap = true
+//        }
+//        
 
         
         

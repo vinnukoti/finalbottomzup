@@ -20,8 +20,6 @@ class customheadercell: UITableViewCell
     @IBOutlet weak var headercellmin: UILabel!
 
     @IBOutlet weak var headercellmax: UILabel!
- 
-    @IBOutlet weak var headercelldist: UILabel!
 
     @IBOutlet weak var mapbutton: UIButton!
     
@@ -43,17 +41,17 @@ class customheadercell: UITableViewCell
 //                    alpha: 1.0)
         }
         
-        if  tableobject.bottlebuttonclicked == true
-        {
-
-            headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-        }
+//        if  tableobject.bottlebuttonclicked == true
+//        {
+//
+//            headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//        }
         
-        if tableobject.locationbuttonclicked == true
-        {
-
-            headercelldist.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-        }
+//        if tableobject.locationbuttonclicked == true
+//        {
+//
+//            headercelldist.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//        }
 
     }
     
