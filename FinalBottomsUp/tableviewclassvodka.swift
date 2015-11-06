@@ -14,14 +14,6 @@ import FBSDKShareKit
 
 
 
-var doubleTap1 = true
-var pricebuttonclicked = false
-var distancevodkabuttonclicked = false
-
-
-
-
-
 class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDelegate,MKMapViewDelegate
 {
     @IBOutlet weak var tableview1: UITableView!
@@ -35,8 +27,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
     
-    let checkedImage = UIImage(named: "pint")
-    let unCheckedImage = UIImage(named: "bottle")
+    let bottlecheckedImage = UIImage(named: "bottleenabled")
+    let bottleunCheckedImage = UIImage(named: "bottle")
+    
+    let pintcheckedImage = UIImage(named: "pintenabled")
+    let pintunCheckedImage = UIImage(named: "pint")
     
     @IBOutlet weak var popupviewvodka: UIView!
 
@@ -45,9 +40,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     @IBOutlet var mainviewvodka: UIView!
     
-    @IBOutlet weak var pricedisplayname: UILabel!
-    
-    @IBOutlet weak var distnacedisplayname: UILabel!
+    var pricebuttonclicked = false
+    var distancevodkabuttonclicked = false
+
     
     
     
@@ -64,8 +59,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
         popupviewvodka.hidden = true
-        distnacedisplayname.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
-        pricedisplayname.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        distancebutton.setTitle("DISTANCE", forState: .Normal)
+        pricebutton.setTitle("30ML", forState: .Normal)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
@@ -141,8 +136,19 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped1)
         headerCell.userInteractionEnabled = true
+        
         headerCell.mapbuttonvodkaclass.tag = section
         headerCell.mapbuttonvodkaclass.setTitle(header1[section].distancevodka, forState: UIControlState.Normal)
+        
+        if pricebuttonclicked == true
+        {
+             headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+        }
+        
+        if distancevodkabuttonclicked == true
+        {
+            headerCell.mapbuttonvodkaclass.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+        }
 
         
         //Code to remove empty cells in UITableview
@@ -323,8 +329,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         if pricebuttonclicked == true
         {
-            pricebutton.setImage(checkedImage, forState: .Normal)
-            distancebutton.setImage(unCheckedImage, forState: .Normal)
+            pricebutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+            distancebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
         
         }
       
@@ -415,14 +421,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         pricebuttonclicked = false
         distancevodkabuttonclicked = true
         
+
+
         if distancevodkabuttonclicked == true
         {
-            pricebutton.setImage(unCheckedImage, forState: .Normal)
-            distancebutton.setImage(checkedImage, forState: .Normal)
+            pricebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+            distancebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
             
         }
-
-        
         
         
       
@@ -460,6 +466,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             var sortedarray1:[Restauarantvodka] = sortCards(&header1)
             header1 = sortedarray1
             self.tableview1.reloadData()
+     
             println("sorted array is  : \(header1)")
             doubleTap = false
         

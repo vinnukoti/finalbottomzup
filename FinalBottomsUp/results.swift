@@ -9,27 +9,22 @@
 import UIKit
 import CoreLocation
 
-var variable:String!
-
-var liqnamefromtextfield:String!
-
-
 var restlat:Double!
 var restlong:Double!
 
 var restvodkalang:Double!
 var restvodkalat:Double!
 
-var trimmedString:String!
-
 var head1:[Restaurant] = [Restaurant]()
 var fstobj1 = Restaurant()
 
 var header:[Restauarantvodka] = [Restauarantvodka]()
 var vodkaobj = Restauarantvodka()
-var alert = false
+
+
+
 var trim = false
-var check:Int!
+
 
 
 
@@ -38,6 +33,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
   
     var citylat:Double!
     var citylong:Double!
+    var variable:String!
+    var trimmedString:String!
+    var liqnamefromtextfield:String!
+    var check:Int!
     
     var newarar =  [String]()
     @IBOutlet var mainview: UIView!
@@ -71,6 +70,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBOutlet weak var findapubbutton: UIButton!
     var currentlocationname:String!
+    
+
 
     override func viewDidLoad()
     {
@@ -132,18 +133,14 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     
-
-   
     // Resign Firstresponder of UITableview and Keyboard Hiding
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         tableview.hidden = true
         view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
-        
     }
 
-    
     func reverseGeocodeLocation(location: CLLocation!, completionHandler: CLGeocodeCompletionHandler!){
         
     }
@@ -400,6 +397,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
+        
+        //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
         //28.63875
         //77.07380
     }

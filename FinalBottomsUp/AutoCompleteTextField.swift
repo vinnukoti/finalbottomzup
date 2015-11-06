@@ -112,7 +112,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
         tableView.layer.masksToBounds = true
         tableView.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         tableView.layer.borderWidth = 2.0
-        tableView.frame =   CGRectMake(0, 236,375,10);
+        tableView.frame =   CGRectMake(0, 247,375,10);
         
         tableView.dataSource = self
         tableView.delegate = self

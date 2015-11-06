@@ -29,18 +29,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var pintbutton: UIButton!
-    
     @IBOutlet weak var bottlebutton: UIButton!
     @IBOutlet weak var locationbutton: UIButton!
-    
-    @IBOutlet weak var pintdisplayname: UILabel!
-    @IBOutlet weak var bottledisplaylable: UILabel!
-    @IBOutlet weak var locationdisplaylable: UILabel!
 
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
-    let checkedImage = UIImage(named: "pint")
-    let unCheckedImage = UIImage(named: "bottle")
+    let pintcheckedImage = UIImage(named: "pintenabled")
+    let pintunCheckedImage = UIImage(named: "pint")
+    
+    let bottlecheckedImage = UIImage(named: "bottleenabled")
+    let bottleunCheckedImage = UIImage(named: "bottle")
+    
+    let locationcheckedImage = UIImage(named: "locationenabled")
+    let locationunCheckedImage = UIImage(named: "location")
 
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
@@ -74,9 +75,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
-        pintdisplayname.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
-        bottledisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
-        locationdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        pintbutton.setTitle("PINT", forState: .Normal)
+        bottlebutton.setTitle("BOTTLE", forState: .Normal)
+        locationbutton.setTitle("LOCATION", forState: .Normal)
      }
 
     
@@ -423,9 +424,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if pintbuttonclicked == true
         {
-            pintbutton.setImage(checkedImage, forState: .Normal)
-            bottlebutton.setImage(unCheckedImage, forState: .Normal)
-            locationbutton.setImage(unCheckedImage, forState: .Normal)
+            //pintbutton.setImage(checkedImage, forState: .Normal)
+            pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+            bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
+            locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
         }
        
         
@@ -519,9 +521,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if bottlebuttonclicked == true
         {
-            pintbutton.setImage(unCheckedImage, forState: .Normal)
-            bottlebutton.setImage(checkedImage, forState: .Normal)
-            locationbutton.setImage(unCheckedImage, forState: .Normal)
+            pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+            bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+            locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
         }
 
      
@@ -621,9 +623,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if locationbuttonclicked == true
         {
-            pintbutton.setImage(unCheckedImage, forState: .Normal)
-            bottlebutton.setImage(unCheckedImage, forState: .Normal)
-            locationbutton.setImage(checkedImage, forState: .Normal)
+            pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+            bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
+            locationbutton.setBackgroundImage(locationcheckedImage, forState: .Normal)
         }
 
         

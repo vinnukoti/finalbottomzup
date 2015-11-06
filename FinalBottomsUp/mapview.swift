@@ -24,8 +24,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     @IBOutlet weak var tableviewformap: UITableView!
      var doubleTapmapview = true
     
-    let checkedImage = UIImage(named: "pint")
-    let unCheckedImage = UIImage(named: "bottle")
+    let bottlecheckedImage = UIImage(named: "bottleenabled")
+    let bottleunCheckedImage = UIImage(named: "bottle")
    
 
     var wineandbararray:[mapdata] = [mapdata]()
@@ -39,8 +39,6 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
    
   
     @IBOutlet weak var distancemap: UIButton!
-
-    @IBOutlet weak var distnacedisplaylable: UILabel!
     
     @IBOutlet weak var REsturantdisplaylable: UILabel!
     override func viewDidLoad()
@@ -48,14 +46,14 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         distancemap.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
         distancemap.setTitle("DISTANCE", forState: UIControlState.Normal)
         //distancemap.titleLabel?.text = "DISTANCE"
-        distnacedisplaylable.hidden = true
-        distnacedisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
         REsturantdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
-        distancemap.setBackgroundImage(unCheckedImage, forState: UIControlState.Normal)
+        distancemap.setBackgroundImage(bottleunCheckedImage, forState: UIControlState.Normal)
         //distancemap.setImage(unCheckedImage, forState: .Normal)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
         getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=5")
+        
+        distancemap.setTitle("DISTANCE", forState: .Normal)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -135,7 +133,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             
                             if var distance = resInfo["distance"] as? String
                             {
-                                var OldLocation: CLLocation = CLLocation(latitude: getcitylatitude, longitude: getcitylongitude)
+                                var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
                                 var newLocation: CLLocation = CLLocation(latitude: res_lat1, longitude: res_long1)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -268,7 +266,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         if distnacemapsort == true
         {
-            distancemap.setBackgroundImage(checkedImage, forState: .Normal)
+            distancemap.setBackgroundImage(bottlecheckedImage, forState: .Normal)
         }
     
     
