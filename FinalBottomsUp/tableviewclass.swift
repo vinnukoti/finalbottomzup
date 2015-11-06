@@ -32,6 +32,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var bottlebutton: UIButton!
     @IBOutlet weak var locationbutton: UIButton!
 
+    @IBOutlet weak var selectedliqname: UILabel!
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
     let pintcheckedImage = UIImage(named: "pintenabled")
@@ -56,8 +57,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var getResturantlatitude:[Double] = [Double]()
     var getRestuarantlongitude:[Double] = [Double]()
     var sectiontapped:Int!
+    var getselectedliq:String!
     
-    
+    @IBOutlet weak var togglebuttonbeer: UIButton!
+    let toggleoff = UIImage(named: "toggleoff")
+    let toggleon = UIImage(named: "toggleon")
+
+    var toggle = false
     override func viewDidLoad()
     {
         
@@ -76,10 +82,32 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.delegate = self
         self.tableview.dataSource = self
         pintbutton.setTitle("PINT", forState: .Normal)
+        pintbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         bottlebutton.setTitle("BOTTLE", forState: .Normal)
+        bottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         locationbutton.setTitle("LOCATION", forState: .Normal)
+        locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        selectedliqname.text = "Search results for: " + getselectedliq
+        
+        
+        togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+        
      }
 
+    @IBAction func togglebuttonbeerpressed(sender: UIButton)
+    {
+        if toggle == false
+        {
+            togglebuttonbeer.setImage(toggleon, forState: .Normal)
+            toggle = true
+        }
+        else{
+            togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+            toggle = false
+            
+        }
+
+    }
     
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
@@ -150,10 +178,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func getdiscount1(sender: AnyObject)
     {
        
-        //selectedrestaurant = true
+     
+        
         popupview.hidden = false
          resturantnamelable.text = "I just got a 10% discount at"
-        restaurantnamelable2.text = "Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
+        restaurantnamelable2.text = "\(head[sender.tag].restname) through the BottomzUp App"
 
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -173,6 +202,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
         cell.micprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
         cell.maxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
+        
+        self.tableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
         return cell
     }
@@ -208,8 +239,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
         headerCell.userInteractionEnabled = true
+        
+        
         headerCell.mapbutton.tag = section
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
+        
+        headerCell.availofferbuttonbeer.tag = section
+     
 
         //Remove all empty cell is UITableview
         var tblView =  UIView(frame: CGRectZero)
@@ -719,7 +755,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func getDirections(sender: UIButton)
     {
 
-       UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=26.63875,76.07380&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
+       UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
         
     }
     

@@ -20,6 +20,9 @@ class Restauarantvodka
     var vodkaarray:[liqvodka] = [liqvodka]()
     var further:[liqvodka] = [liqvodka]()
     
+    var Restaurantlatitudevodka: Double!
+    var Restaurantlongitudevodka: Double!
+    
     init()
     {
         liqobjvodka = liqvodka()
@@ -29,6 +32,11 @@ class Restauarantvodka
         distancevodka = String()
         
         vodkaarray = [liqvodka]()
+        
+        Restaurantlatitudevodka = Double()
+        Restaurantlongitudevodka = Double()
+        
+        
     }
     
 

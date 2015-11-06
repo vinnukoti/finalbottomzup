@@ -19,6 +19,7 @@ class custmheadercell1: UITableViewCell
     
     @IBOutlet weak var mapbuttonvodkaclass: UIButton!
 
+    @IBOutlet weak var availofferbutton: UIButton!
     
     override func awakeFromNib()
     {

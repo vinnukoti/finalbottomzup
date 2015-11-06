@@ -71,6 +71,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     @IBOutlet weak var findapubbutton: UIButton!
     var currentlocationname:String!
     
+    var selectedliqor:String!
+    
+
+    
 
 
     override func viewDidLoad()
@@ -89,6 +93,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
         locationManager1.startUpdatingLocation()
+        
+        
        
       
     }
@@ -382,6 +388,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     {
         let selectedCell : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         textfield1.text = selectedCell.textLabel!.text
+        selectedliqor = selectedCell.textLabel!.text
+        
         if iscitytextfieldhavedata == true
         {
         findapubbutton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
@@ -482,7 +490,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     {
                         //28.63875
                         //77.07380
-                        var OldLocation: CLLocation = CLLocation(latitude: citylat, longitude: citylong)
+                        var OldLocation: CLLocation = CLLocation(latitude: devicelatitude, longitude: devicelongitude)
                         var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                         var totalDistance: Double = 0
                         var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -550,6 +558,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
                             restvodkalat = string.doubleValue
+                            vodkaobj.Restaurantlatitudevodka = restvodkalat
                             println(restvodkalat)
 
                         }
@@ -559,6 +568,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
                             restvodkalang = string.doubleValue
+                            vodkaobj.Restaurantlongitudevodka = restvodkalang
                             println(restvodkalang)
                         }
                         if var distance = resInfo["distance"] as? String
@@ -667,6 +677,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination.getdevicelongitude = devicelongitude
                 destination.getcitylatitude = citylat
                 destination.getcitylongitude = citylong
+                destination.getselectedliq = selectedliqor
                 
            }
         }
@@ -682,6 +693,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination1.header1 = header
                 destination1.getcitylatitude = citylat
                 destination1.getcitylongitude = citylong
+                destination1.getdevicelatitude = devicelatitude
+                destination1.getdevicelongitude = devicelongitude
+                destination1.getselectedlq = selectedliqor
             }
         }
         if segue.identifier == "mapview"

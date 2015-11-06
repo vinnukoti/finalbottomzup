@@ -43,8 +43,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var pricebuttonclicked = false
     var distancevodkabuttonclicked = false
 
+    @IBOutlet weak var searchresultsvodka: UILabel!
+    @IBOutlet weak var takerestaurantname: UILabel!
+    @IBOutlet weak var takerestaurantname1: UILabel!
     
+    let toggleoff = UIImage(named: "toggleoff")
+    let toggleon = UIImage(named: "toggleon")
+
     
+    @IBOutlet weak var togglebutton: UIButton!
+    var getselectedlq:String!
+    
+    var toggle = false
     
     
     override func viewDidLoad()
@@ -60,7 +70,19 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.tableview1.dataSource = self
         popupviewvodka.hidden = true
         distancebutton.setTitle("DISTANCE", forState: .Normal)
+        distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         pricebutton.setTitle("30ML", forState: .Normal)
+        pricebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        searchresultsvodka.text = "Search results for: " + getselectedlq
+        
+        //togglebutton.backgroundColor = UIColor.grayColor()
+        //togglebutton.imageView?.image = toggleoff
+        togglebutton.setImage(toggleoff, forState: .Normal)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        //togglebutton.imageView?.image = toggleoff
+        togglebutton.setImage(toggleoff, forState: .Normal)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
@@ -68,6 +90,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         popupviewvodka.hidden = true
         //tableview.hidden = true
+    }
+
+    @IBAction func toggelbuttonpressed(sender: UIButton)
+    {
+        
+        if toggle == false
+        {
+        togglebutton.setImage(toggleon, forState: .Normal)
+            toggle = true
+        }
+        else{
+            togglebutton.setImage(toggleoff, forState: .Normal)
+            toggle = false
+
+        }
+        
+      //  toggle = false
     }
     
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
@@ -139,6 +178,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         headerCell.mapbuttonvodkaclass.tag = section
         headerCell.mapbuttonvodkaclass.setTitle(header1[section].distancevodka, forState: UIControlState.Normal)
+        
+        headerCell.availofferbutton.tag = section
+        
         
         if pricebuttonclicked == true
         {
@@ -250,7 +292,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         }
                         if var distance = resInfo["distance"] as? String
                         {
-                            var OldLocation: CLLocation = CLLocation(latitude: getcitylatitude, longitude: getcitylongitude)
+                            var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -514,12 +556,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func gotoMap(sender: AnyObject)
     {
-         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
+         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
     }
     
     @IBAction func getDiscountforvodka(sender: AnyObject)
     {
         popupviewvodka.hidden = false
+        takerestaurantname.text = "I just got a 10 % discount at "
+        takerestaurantname1.text = "\(header1[sender.tag].restnamevodka) Through Bottomz Up"
+        
     }
     
 }
