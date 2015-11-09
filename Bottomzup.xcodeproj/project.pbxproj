@@ -61,6 +61,7 @@
 		53A3FF951BCF873900122759 /* GiFHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3FF941BCF873900122759 /* GiFHUD.swift */; };
 		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
 		53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */; };
+		53E512401BF0E6A200FFC78E /* NewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5123F1BF0E6A200FFC78E /* NewClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		53A3FF941BCF873900122759 /* GiFHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GiFHUD.swift; path = "../../../../../../Downloads/GiFHUD-Swift-master/GiFHUD-Swift/GiFHUD.swift"; sourceTree = "<group>"; };
 		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internetcheckclass.swift; sourceTree = "<group>"; };
+		53E5123F1BF0E6A200FFC78E /* NewClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewClass.swift; sourceTree = "<group>"; };
 		A3E6ABB127B08185A6ECEC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BBAACA6BEA2DB090A27F178F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D167FABA4877F1BA58EC2E16 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +242,7 @@
 				5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */,
 				5367CEF81B9DB0EA00D33220 /* ViewController.swift */,
 				537CA3D81BBA56F80082D896 /* tableviewclass.swift */,
+				53E5123F1BF0E6A200FFC78E /* NewClass.swift */,
 				534618EA1BBBDAAF00B0E188 /* results.swift */,
 				537CA3DA1BBA578A0082D896 /* customheadercell.swift */,
 				537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */,
@@ -489,6 +492,7 @@
 				538D0A481BA4194B005D1386 /* Service.swift in Sources */,
 				537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */,
 				5389EE411BC65146007999AE /* onemoreclass2.swift in Sources */,
+				53E512401BF0E6A200FFC78E /* NewClass.swift in Sources */,
 				5389EE3D1BC63139007999AE /* liqvodka.swift in Sources */,
 				5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */,
 				5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */,

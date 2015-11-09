@@ -9,8 +9,7 @@
 import UIKit
 import CoreLocation
 
-var restlat:Double!
-var restlong:Double!
+
 
 var restvodkalang:Double!
 var restvodkalat:Double!
@@ -20,12 +19,9 @@ var fstobj1 = Restaurant()
 
 var header:[Restauarantvodka] = [Restauarantvodka]()
 var vodkaobj = Restauarantvodka()
-
-
-
 var trim = false
-
-
+var restlat:Double!
+var restlong:Double!
 
 
 class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
@@ -74,6 +70,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var selectedliqor:String!
     
 
+
     
 
 
@@ -95,16 +92,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         locationManager1.startUpdatingLocation()
         
         
-       
-      
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-       // if iscitytextfieldhavedata && isliqtextfieldhasdata == true
-       // {
-            //findapubbutton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-        //}
+        
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
@@ -176,6 +164,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
         autocmpleteTextfield.autoCompleteAttributes = attributes
+        
     }
     
     
@@ -198,7 +187,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             }
         }
         autocmpleteTextfield.onSelect = {[weak self] text, indexpath in
-            self!.autocmpleteTextfield.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true)
+            self!.autocmpleteTextfield.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -255,20 +244,21 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         println("Error: \(error.localizedDescription)")
     }
     
-    
     // textfield1 starts
     func textFieldDidBeginEditing(textField: UITextField)
     {
-        textField.text = ""
+       // textField.text = ""
+        textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
-     
+
     }
-    
+
     func textFieldDidChange(textField: UITextField)
     {
         
         if self.textfield1.text != nil && self.textfield1.text != ""
         {
+         
             var s = self.textfield1.text
             variable = s
             variable.startIndex
@@ -637,6 +627,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             self.presentViewController(alertController, animated: true, completion: nil)
           }
     }
+    
     func removeDuplicates(array: [String]) -> [String]
     {
         var encountered = Set<String>()
@@ -655,11 +646,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         }
         return result
     }
-    
-
-    
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "newres"
@@ -708,6 +694,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination2.getcitylongitude = citylong
                 destination2.getdevicelatitude = devicelatitude
                 destination2.getdevicelongitude = devicelongitude
+                
+               // newbeerresult
             }
             
         }
@@ -724,8 +712,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         performSegueWithIdentifier("mapview", sender: self)
 
     }
-    
-    
 }
     
     

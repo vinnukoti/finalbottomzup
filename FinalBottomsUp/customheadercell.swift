@@ -24,6 +24,18 @@ class customheadercell: UITableViewCell
     @IBOutlet weak var mapbutton: UIButton!
     
     @IBOutlet weak var availofferbuttonbeer: UIButton!
+    
+    
+    @IBOutlet weak var newheadercellname: UILabel!
+    @IBOutlet weak var newheadercellmin: UILabel!
+    @IBOutlet weak var newheadercellmax: UILabel!
+    @IBOutlet weak var newmapbutton: UIButton!
+    @IBOutlet weak var newavailofferbuttonbeer: UIButton!
+    
+    
+    
+    
+
     var tableobject = tableviewclass()
     override func awakeFromNib()
     {

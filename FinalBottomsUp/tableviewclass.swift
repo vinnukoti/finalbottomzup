@@ -11,12 +11,6 @@ import CoreLocation
 import MapKit
 import Social
 import FBSDKShareKit
-var latitude:Double!
-var longitude:Double!
-var doubleTap = true
-
-var arrowimage = false
-
 
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
@@ -35,6 +29,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var selectedliqname: UILabel!
     @IBOutlet weak var resturantnamelable: UILabel!
     @IBOutlet weak var restaurantnamelable2: UILabel!
+    
+    @IBOutlet weak var newpintbutton: UIButton!
+    @IBOutlet weak var newbottlebutton: UIButton!
+    @IBOutlet weak var newlocationbutton: UIButton!
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     let pintcheckedImage = UIImage(named: "pintenabled")
     let pintunCheckedImage = UIImage(named: "pint")
     
@@ -83,11 +95,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.dataSource = self
         pintbutton.setTitle("PINT", forState: .Normal)
         pintbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        
+//        newpintbutton.setTitle("PINT", forState: .Normal)
+//        newpintbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        
+        
         bottlebutton.setTitle("BOTTLE", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        
+//        newbottlebutton.setTitle("BOTTLE", forState: .Normal)
+//        newbottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        
+        
         locationbutton.setTitle("LOCATION", forState: .Normal)
         locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        selectedliqname.text = "Search results for: " + getselectedliq
+        
+//        newlocationbutton.setTitle("LOCATION", forState: .Normal)
+//        newlocationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        selectedliqname.text =  getselectedliq
         
         
         togglebuttonbeer.setImage(toggleoff, forState: .Normal)
@@ -125,11 +150,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     @IBAction func shareonfacebook(sender: AnyObject)
     {
-       var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "www.google.com")
-        content.contentTitle = "Bottomz Up"
-        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
+//      var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+//        content.contentURL = NSURL(string: "www.google.com")
+//        content.contentTitle = "Bottomz Up"
+//        content.contentDescription = "I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App"
         
         //var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
 
@@ -141,31 +166,41 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         // Share Dialog
        // FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
 ////
-        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
-        self.presentViewController(shareToFacebook, animated: true, completion: nil)
-//        
-//        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
+//        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
 //        self.presentViewController(shareToFacebook, animated: true, completion: nil)
 //
-//        
-////        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
-////        {
-////            
-////            var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-////            facebookSheet.setInitialText("Vea Software! :D")
-////            self.presentViewController(facebookSheet, animated: true, completion: nil)
-////
-////        }
-////        else
-////        {
-////            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-////            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-////            self.presentViewController(alert, animated: true, completion: nil)
-////    }
-//        
+        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
+//        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+
+        
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
+        {
+            
+//            var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//            facebookSheet.setInitialText("Vea Software! :D")
+//            self.presentViewController(facebookSheet, animated: true, completion: nil)
+            
+            var text: String = "I just got a 10% discount at  \(head[sender.tag].restname) through the BottomzUp App"
+            var url: NSURL = NSURL(string: "http://bottomzup.com")!
+            var controller: UIActivityViewController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
+            self.presentViewController(controller, animated: true, completion: nil)
+
+        }
+        else
+        {
+            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+    }
+//
 //        var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
 //        content.contentURL = NSURL(string:"https://developers.facebook.com")
+        
+//        var text: String = "How to add Facebook and Twitter sharing to an iOS app"
+//        var url: NSURL = NSURL(string: "http://roadfiresoftware.com/2014/02/how-to-add-facebook-and-twitter-sharing-to-an-ios-app/")!
+//        var controller: UIActivityViewController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
+//        self.presentViewController(controller, animated: true, completion: nil)
     }
     
 
@@ -177,11 +212,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func getdiscount1(sender: AnyObject)
     {
-       
-     
-        
         popupview.hidden = false
-         resturantnamelable.text = "I just got a 10% discount at"
+        resturantnamelable.text = "I just got a 10% discount at"
         restaurantnamelable2.text = "\(head[sender.tag].restname) through the BottomzUp App"
 
     }
@@ -203,13 +235,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.micprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
         cell.maxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
         
+//        cell.newliqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
+//        cell.newminprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
+//        cell.newmaxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
+        
         self.tableview.separatorStyle = UITableViewCellSeparatorStyle.None
+ 
         
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 65
+        
     }
     
 //    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -234,6 +272,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = "₹ " + head[section].minp
         headerCell.headercellmax.text = "₹ " + head[section].maxp
+        
+//        headerCell.newheadercellname.text = head[section].restname
+//        headerCell.newheadercellmin.text = "₹ " + head[section].minp
+//        headerCell.newheadercellmax.text = "₹ " + head[section].maxp
         //headerCell.headercelldist.text = head[section].distance
         
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
@@ -267,11 +309,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell.mapbutton.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
         return headerCell
-        
-      
     }
-    
- 
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         //arrowimage = true
@@ -285,22 +323,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         if head[gestureRecognizer.view!.tag].bool == false
         {
             head[gestureRecognizer.view!.tag].bool = true
-//            if head[gestureRecognizer.view!.tag].bool == true
-//            {
-//               arrowimage = true
-//            }
+
         }
         else
         {
             head[gestureRecognizer.view!.tag].bool = false
-//            if head[gestureRecognizer.view!.tag].bool == false
-//            {
-//                arrowimage = false
-//            }
-            
         }
         self.tableview.reloadData()
-       
+        
     }
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
@@ -308,6 +338,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         view.layer.borderColor = UIColor.brownColor().CGColor
         view.layer.borderWidth = 1
     }
+    
 
     @IBAction func lookfurther(sender: AnyObject)
     {
@@ -449,6 +480,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         self.tableview.reloadData()
+       
     }
     
       @IBAction func pintsort(sender: AnyObject)
@@ -466,8 +498,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
         }
        
-        
-            
             func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
             {
                 var sorted = false
@@ -502,8 +532,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var sortedarray:[Restaurant] = sortCards(&head)
             head = sortedarray
             self.tableview.reloadData()
+        
             println("sorted array is  : \(head)")
-            doubleTap = false
+     
             
         
 //        else
@@ -561,11 +592,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
         }
-
-     
-
-        
-     
             func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
             {
                 var sorted = false
@@ -602,8 +628,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var sortedarray:[Restaurant] = sortCards(&head)
             head = sortedarray
             self.tableview.reloadData()
+       
             println("sorted array is  : \(head)")
-            doubleTap = false
+  
         
 //        else
 //        {
@@ -664,12 +691,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             locationbutton.setBackgroundImage(locationcheckedImage, forState: .Normal)
         }
 
-        
-  
-
-        
-     
-            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
+        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
         {
             var sorted = false
             while sorted == false
@@ -705,8 +727,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var sortedarray:[Restaurant] = sortCards(&head)
             head = sortedarray
             self.tableview.reloadData()
+        
             println("sorted array is  : \(head)")
-            doubleTap = false
         
 //        else
 //        {

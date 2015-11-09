@@ -73,7 +73,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         pricebutton.setTitle("30ML", forState: .Normal)
         pricebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        searchresultsvodka.text = "Search results for: " + getselectedlq
+        searchresultsvodka.text =  getselectedlq
         
         //togglebutton.backgroundColor = UIColor.grayColor()
         //togglebutton.imageView?.image = toggleoff
@@ -145,7 +145,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         let cell = tableView.dequeueReusableCellWithIdentifier("childcellvodka", forIndexPath: indexPath) as! onemoreclass2
         cell.liqbrandname.text  = header1[indexPath.section].vodkaarray[indexPath.row].liqnamebrandname
-        cell.liqbrandprice.text = header1[indexPath.section].vodkaarray[indexPath.row].liqbrandprice
+        cell.liqbrandprice.text = "₹ " + header1[indexPath.section].vodkaarray[indexPath.row].liqbrandprice
+        self.tableview1.separatorStyle = UITableViewCellSeparatorStyle.None
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -169,7 +170,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
         headerCell.tag = section        
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
-        headerCell.vodkaavgprice.text = header1[section].avgprice
+        headerCell.vodkaavgprice.text = "₹ " + header1[section].avgprice
         //headerCell.vodkadistance.text = header1[section].distancevodka
         
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
@@ -345,23 +346,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         self.tableview1.reloadData()
     }
-    @IBAction func getdirections(sender: AnyObject)
-    {
-       
-        
-        UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!)
-        
-        if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
-            UIApplication.sharedApplication().openURL(NSURL(string:
-                "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving")!)
-            
-        }
-        else
-        {
-            NSLog("Can't use comgooglemaps://");
-        }
-    }
-    
+//    @IBAction func getdirections(sender: AnyObject)
+//    {
+//       
+//        
+//        UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!)
+//        
+//        if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
+//            UIApplication.sharedApplication().openURL(NSURL(string:
+//                "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving")!)
+//            
+//        }
+//        else
+//        {
+//            NSLog("Can't use comgooglemaps://");
+//        }
+//    }
+//    
     
     @IBAction func pricesort(sender: AnyObject)
     {
@@ -411,7 +412,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             header1 = sortedarray
             self.tableview1.reloadData()
             println("sorted array is  : \(header1)")
-            doubleTap = false
+        
         
 //        else
 //        {
@@ -510,7 +511,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.tableview1.reloadData()
      
             println("sorted array is  : \(header1)")
-            doubleTap = false
+     
         
 //        else
 //        {

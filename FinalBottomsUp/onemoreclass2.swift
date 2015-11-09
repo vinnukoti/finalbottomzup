@@ -17,12 +17,6 @@ class onemoreclass2: UITableViewCell
     
     @IBOutlet weak var liqbrandprice: UILabel!
     
-    
-    @IBOutlet weak var liqbranddistance: UILabel!
-    
-    
-    
-    
     override func awakeFromNib()
     {
         super.awakeFromNib()

@@ -121,9 +121,6 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                                 //convert string to double
                                 let string = NSString(string: res_lat)
                                res_lat1 = string.doubleValue
-                                
-                                
-                              
                             }
                             if let res_long = resInfo["res_long"] as? String
                             {
@@ -211,9 +208,6 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                             //convert string to double
                             let string = NSString(string: res_lat)
                             res_furtherlat = string.doubleValue
-                            
-                            
-                            
                         }
                         if let res_long = resInfo["res_long"] as? String
                         {
@@ -268,7 +262,6 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         {
             distancemap.setBackgroundImage(bottlecheckedImage, forState: .Normal)
         }
-    
     
         func sortCards(inout elements: Array<mapdata>) -> Array<mapdata>
         {
