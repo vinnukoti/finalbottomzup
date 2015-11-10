@@ -26,6 +26,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
+    var getvodkalatitude:Double!
+    var getvodkalongitude:Double!
     
     let bottlecheckedImage = UIImage(named: "bottleenabled")
     let bottleunCheckedImage = UIImage(named: "bottle")
@@ -56,6 +58,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var toggle = false
     
+    var getvodkaobj = Restauarantvodka()
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad()
     {
@@ -82,6 +91,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         //togglebutton.backgroundColor = UIColor.grayColor()
         //togglebutton.imageView?.image = toggleoff
         togglebutton.setImage(toggleoff, forState: .Normal)
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -155,7 +166,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         //self.tableview1.separatorStyle = UITableViewCellSeparatorStyle.None
         cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
         cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
-        
+//
         if indexPath.section == (header1.count - 1) && indexPath.row == (header1[header1.count - 1].vodkaarray.count - 1)
         {
             cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
@@ -274,21 +285,21 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             for var index = 0; index < json.count; ++index
             {
-                vodkaobj = Restauarantvodka()
+                getvodkaobj = Restauarantvodka()
                 
                 if let bottomsUp1 = json[index] as? NSDictionary
                 {
                     if let avg_price = bottomsUp1["avg_price"] as? Int
                     {
                         var avg_PRICE:String = toString(avg_price)
-                        vodkaobj.avgprice = avg_PRICE
+                        getvodkaobj.avgprice = avg_PRICE
                     }
                     
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                            vodkaobj.restnamevodka = res_name
+                            getvodkaobj.restnamevodka = res_name
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -296,8 +307,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             let mySwiftString = res_lat
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
-                            restvodkalat = string.doubleValue
-                            println(restvodkalat)
+                            getvodkalatitude = string.doubleValue
+                           // println(restvodkalat)
                             
                         }
                         if let res_long = resInfo["res_long"] as? String
@@ -305,13 +316,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             let mySwiftString = res_long
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
-                            restvodkalang = string.doubleValue
-                            println(restvodkalang)
+                            getvodkalongitude = string.doubleValue
+                            println(getvodkalongitude)
                         }
                         if var distance = resInfo["distance"] as? String
                         {
                             var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
-                            var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
+                            var newLocation: CLLocation = CLLocation(latitude: getvodkalatitude, longitude: getvodkalongitude)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
@@ -325,7 +336,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             }
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                            vodkaobj.distancevodka = totalDistance1 + " KMS"
+                            getvodkaobj.distancevodka = totalDistance1 + " KMS"
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -345,12 +356,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                     liqobj2.liqnamebrandname = res_liq_brand_name
                                 }
                             }
-                            vodkaobj.vodkaarray.append(liqobj2)
+                            getvodkaobj.vodkaarray.append(liqobj2)
                         }
                     }
        
                 }
-                header1.append(vodkaobj)
+                header1.append(getvodkaobj)
                 
             }
         }

@@ -16,27 +16,18 @@ import MediaPlayer
 import AssetsLibrary
 import CoreLocation
 import CoreMotion
-
 import GoogleMaps
-
-var status:Bool!
-
-var fbemail:String!
-var fbid:String!
-
-var gemail:String!
-var gid:String!
-
-
-
-
-
-
-
 
 class ViewController: UIViewController,GPPSignInDelegate
 
 {
+    
+    var fbemail:String!
+    var fbid:String!
+    
+    var gemail:String!
+    var gid:String!
+
     @IBOutlet weak var FBbutton: UIButton!
 
    
@@ -183,13 +174,13 @@ class ViewController: UIViewController,GPPSignInDelegate
                     if let id = resultdict["id"] as? String
                     {
                         println("id : " + id)
-                        fbid = id
+                        self.fbid = id
                     }
                     
                     if let email = resultdict["email"] as? String
                     {
                         println("Email is : " + email)
-                        fbemail = email
+                        self.fbemail = email
                     }
                 }
             }

@@ -9,15 +9,6 @@
 import UIKit
 import CoreLocation
 
-var res_lat1:Double!
-var res_long1:Double!
-
-var res_furtherlat:Double!
-var res_furtherlong:Double!
-
-var distnacemapsort = false
-
-
 
 class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 {
@@ -36,7 +27,15 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     var getcitylatitude:Double!
     var getcitylongitude:Double!
-   
+    
+    var getrestlastmapview:Double!
+    var getrestlongitmapview:Double!
+    var res_lat1:Double!
+    var res_long1:Double!
+    
+    var res_furtherlat:Double!
+    var res_furtherlong:Double!
+    var distnacemapsort = false
   
     @IBOutlet weak var distancemap: UIButton!
     
@@ -358,7 +357,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     @IBAction func gotomapvodka(sender: AnyObject)
     {
         
-         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlat),\(restlong)")!)
+         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(getrestlastmapview),\(getrestlongitmapview)")!)
         
     }
     

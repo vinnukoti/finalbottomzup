@@ -32,6 +32,7 @@ class customheadercell: UITableViewCell
     @IBOutlet weak var newmapbutton: UIButton!
     @IBOutlet weak var newavailofferbuttonbeer: UIButton!
     
+    @IBOutlet weak var happyhourslabelbeer: UILabel!
     
     
     
@@ -41,30 +42,19 @@ class customheadercell: UITableViewCell
     {
         super.awakeFromNib()
     
-        if tableobject.pintbuttonclicked == true
-        {
+//        if tableobject.pintbuttonclicked == true
+//        {
+//
+//            headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//
+//        }
+        
+        let happyhorsimage = UIImage(named: "Happyhoursround image")
+        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelbeer.frame.width, height: happyhourslabelbeer.frame.height))
+        myImageView.image = happyhorsimage
+        happyhourslabelbeer.addSubview(myImageView)
+        
 
-            headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-            //#fde8d7
-//                //set the background color to #ffd200
-//                view.backgroundColor = UIColor(
-//                    red: 0xfd/255,
-//                    green: 0xe8/255,
-//                    blue: 0xd7/255,
-//                    alpha: 1.0)
-        }
-        
-//        if  tableobject.bottlebuttonclicked == true
-//        {
-//
-//            headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//        }
-        
-//        if tableobject.locationbuttonclicked == true
-//        {
-//
-//            headercelldist.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//        }
 
     }
     

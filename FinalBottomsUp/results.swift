@@ -10,23 +10,13 @@ import UIKit
 import CoreLocation
 
 
-
-var restvodkalang:Double!
-var restvodkalat:Double!
-
-var head1:[Restaurant] = [Restaurant]()
-var fstobj1 = Restaurant()
-
-var header:[Restauarantvodka] = [Restauarantvodka]()
-var vodkaobj = Restauarantvodka()
-var trim = false
-var restlat:Double!
-var restlong:Double!
-
-
 class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
   
+    var head1:[Restaurant] = [Restaurant]()
+    var fstobj1 = Restaurant()
+    
+    
     var citylat:Double!
     var citylong:Double!
     var variable:String!
@@ -47,7 +37,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
 
     private var connection:NSURLConnection?
     
-    private let googleMapsKey = "AIzaSyBznULI0vOApc8mQDiUv6Q_iohI8BWcSHY"
+    private let googleMapsKey = "AIzaSyC8fGPXIWXTKJNvkBvKszetkDYbqh5AtC0"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
 
     var autocompleteUrls = [String]()
@@ -68,6 +58,16 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var currentlocationname:String!
     
     var selectedliqor:String!
+    
+    
+    var restvodkalang:Double!
+    var restvodkalat:Double!
+    
+    var restlat:Double!
+    var restlong:Double!
+    
+    var header:[Restauarantvodka] = [Restauarantvodka]()
+    var vodkaobj = Restauarantvodka()
     
 
 
@@ -268,7 +268,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             variable = s
             variable.startIndex
             let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-            trim = true
+         
             let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(trimmedString1)")
             loadData(url!, completion: didLoadData)
 
@@ -349,7 +349,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             
            if (substringRange.location == 0)
            {
-              autocompleteUrls.append(ucurstring.lowercaseString)
+              autocompleteUrls.append(ucurstring.lowercaseString.capitalizedString)
             }
         }
         
@@ -570,7 +570,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             //28.63875
                             //77.07380
-                            var OldLocation: CLLocation = CLLocation(latitude: citylat , longitude: citylong)
+                            var OldLocation: CLLocation = CLLocation(latitude: devicelatitude , longitude: devicelongitude)
                             var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -668,7 +668,10 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination.getdevicelongitude = devicelongitude
                 destination.getcitylatitude = citylat
                 destination.getcitylongitude = citylong
+                destination.getrestlatitudebeer = restlat
+                destination.getdevicelongitude = restlong
                 destination.getselectedliq = selectedliqor
+                destination.getfstobj1 = fstobj1
                 
            }
         }
@@ -687,6 +690,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination1.getdevicelatitude = devicelatitude
                 destination1.getdevicelongitude = devicelongitude
                 destination1.getselectedlq = selectedliqor
+                destination1.getvodkalatitude = restlat
+                destination1.getvodkalongitude = restlong
             }
         }
         if segue.identifier == "mapview"
@@ -699,6 +704,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination2.getcitylongitude = citylong
                 destination2.getdevicelatitude = devicelatitude
                 destination2.getdevicelongitude = devicelongitude
+                destination2.getrestlastmapview = restlat
+                destination2.getrestlongitmapview = restlong
                 
                // newbeerresult
             }

@@ -15,6 +15,8 @@ import FBSDKShareKit
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
+    var getfstobj1 = Restaurant()
+    
     
     var pintbuttonclicked = false
     var bottlebuttonclicked = false
@@ -47,15 +49,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var head:[Restaurant] = [Restaurant]()
     var getdevicelatitude:Double!
     var getdevicelongitude:Double!
-    var booleanhidelable = false
-    var selectedrestaurant = false
       var resobjr = Restaurant()
     var getcitylatitude:Double!
     var getcitylongitude:Double!
     
     var getResturantlatitude:[Double] = [Double]()
     var getRestuarantlongitude:[Double] = [Double]()
-    var sectiontapped:Int!
+    
+    var getrestlatitudebeer:Double!
+    var getrestlongitudebeer:Double!
+
     var getselectedliq:String!
     
     @IBOutlet weak var togglebuttonbeer: UIButton!
@@ -221,12 +224,22 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
         cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
         
-        if indexPath.section == (head.count - 1) && indexPath.row == (head[head.count - 1].amp.count - 1)
+        if indexPath.section == (head.count - 1)
         {
-            cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
+            if indexPath.row == (head[indexPath.section].amp.count - 1){
+                
+                if head[indexPath.section].bool == true {
+                  cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
+                }
+                
+                
+            }
+            
         }
         
-        self.tableview.separatorStyle = UITableViewCellSeparatorStyle.None
+        //self.tableview.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
  
         
         return cell
@@ -307,12 +320,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
-        //arrowimage = true
-        booleanhidelable = true
-        selectedrestaurant = false
+        //tableview.reloadData()
         var section = gestureRecognizer.view!.tag
         println(section)
-        sectiontapped = section
         println("Section: \(gestureRecognizer.view!.tag)")
        
         if head[gestureRecognizer.view!.tag].bool == false
@@ -339,13 +349,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
 //         println("latitude is \(citylat)")
 //         println("longitude is\(citylong)")
-        if trim == true
-        {
+      
             //28.63875
             //77.07380
         getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=8&records=4&query=\(liqname)")
-            trim = false
-        }
+
+        
     }
     
     func getbardatafurther(urlString:String)
@@ -373,7 +382,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
             for var index = 0; index < json.count; ++index
             {
-                fstobj1 = Restaurant()
+                getfstobj1 = Restaurant()
                 
                 if let bottomsUp1 = json[index] as? NSDictionary
                 {
@@ -381,7 +390,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                            fstobj1.restname = res_name
+                            getfstobj1.restname = res_name
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -390,24 +399,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             let mySwiftString = res_lat
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
-                            restlat = string.doubleValue
-                            println(restlat)
+                            getrestlatitudebeer = string.doubleValue
+                            //println(restlat)
                         }
                         if let res_long = resInfo["res_long"] as? String
                         {
                             let mySwiftString = res_long
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
-                            restlong = string.doubleValue
-                            println(restlong)
+                            getrestlongitudebeer = string.doubleValue
+                            //println(restlong)
                             
                             
                         }
                         if var distance = resInfo["distance"] as? String
                         {
                             
-                            var OldLocation: CLLocation = CLLocation(latitude: getcitylatitude, longitude: getcitylongitude)
-                            var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
+                            var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
+                            var newLocation: CLLocation = CLLocation(latitude: getrestlatitudebeer, longitude: getrestlongitudebeer)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
@@ -423,8 +432,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             
                             
-                            fstobj1.distance = totalDistance1 + "KMS"
-                            println(fstobj1.distance)
+                            getfstobj1.distance = totalDistance1 + "KMS"
+                           // println(fstobj1.distance)
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -450,21 +459,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                            
                             }
                         }
-                            fstobj1.amp.append(liqobj1)
+                            getfstobj1.amp.append(liqobj1)
                     }
                 }
                     if let pint_avg_price = bottomsUp1["pint_avg_price"] as? Int
                     {
                         var pint_avg_price1:String = toString(pint_avg_price)
-                        fstobj1.minp = pint_avg_price1
+                        getfstobj1.minp = pint_avg_price1
                     }
                     if let bottle_avg_price = bottomsUp1["bottle_avg_price"] as? Int
                     {
                         var bottle_avg_price1:String = toString(bottle_avg_price)
-                        fstobj1.maxp = bottle_avg_price1
+                        getfstobj1.maxp = bottle_avg_price1
                     }
             }
-                head.append(fstobj1)
+                head.append(getfstobj1)
         }
         }
        else

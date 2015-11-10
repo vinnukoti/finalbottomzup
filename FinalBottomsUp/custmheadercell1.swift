@@ -21,18 +21,16 @@ class custmheadercell1: UITableViewCell
 
     @IBOutlet weak var availofferbutton: UIButton!
     
+    @IBOutlet weak var happyhourslabelvodka: UILabel!
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
-//        if pricebuttonclicked == true
-//        {
-//            vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//        }
-//        
-//        if distancevodkabuttonclicked == true
-//        {
-//            vodkadistance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//        }
+        let happyhorsimage = UIImage(named: "Happyhoursround image")
+        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelvodka.frame.width, height: happyhourslabelvodka.frame.height))
+        myImageView.image = happyhorsimage
+        happyhourslabelvodka.addSubview(myImageView)
+
     }
     
     override func setSelected(selected: Bool, animated: Bool)
