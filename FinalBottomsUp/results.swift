@@ -52,7 +52,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
 
     var autocompleteUrls = [String]()
     
-    let locationManager1 = CLLocationManager()
+    var locationManager1: CLLocationManager!
 
     var locationname:String!
     var arar = [String]()
@@ -81,11 +81,13 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         tableview!.dataSource = self
         tableview!.scrollEnabled = true
         tableview!.hidden = true
+        autocmpleteTextfield.textFieldWidth = autocmpleteTextfield.frame.width
         autocmpleteTextfield.delegate = self
+        
         configureTextField()
         handleTextFieldInterfaces()
-        
-       // locationManager = CLLocationManager()
+        locationManager1 = CLLocationManager()
+        // locationManager = CLLocationManager()
         locationManager1.delegate = self;
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
@@ -95,9 +97,12 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
     }
     
+    
+    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
         var userLocation:CLLocation = locations[0] as! CLLocation
+        self.locationManager1.stopUpdatingLocation()
         let long = userLocation.coordinate.longitude;
         let lat = userLocation.coordinate.latitude;
         
@@ -120,7 +125,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 self.currentlocationname = street as String
                 
                 self.autocmpleteTextfield.text = street as String
-                self.locationManager1.stopUpdatingLocation()
+               
             }
 
             })

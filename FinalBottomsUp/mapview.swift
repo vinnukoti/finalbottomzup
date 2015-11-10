@@ -43,6 +43,10 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     @IBOutlet weak var REsturantdisplaylable: UILabel!
     override func viewDidLoad()
     {
+        
+//        tableviewformap.layer.masksToBounds = true
+//        tableviewformap.layer.borderColor = UIColor(red: 0x00/255,green: 0x00/255,blue: 0x000/255,alpha: 1.0).CGColor
+//        tableviewformap.layer.borderWidth = 1.0
         distancemap.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
         distancemap.setTitle("DISTANCE", forState: UIControlState.Normal)
         //distancemap.titleLabel?.text = "DISTANCE"
@@ -70,8 +74,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("wineandbar", forIndexPath: indexPath) as! maplable
         cell.name.text = wineandbararray[indexPath.row].mapliqname
-        cell.name.font = UIFont(name: "HelveticaNeue", size: 11.0)
-        cell.distance.font = UIFont(name: "HelveticaNeue", size: 11.0)
+        cell.name.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        cell.distance.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
         cell.distance.text = wineandbararray[indexPath.row].mapliqdistance
         if distnacemapsort == true
         {

@@ -38,7 +38,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     // Hides autocomplete tableview after selecting a suggestion
     public var hidesWhenSelected = true
     /// Hides autocomplete tableview when the textfield is empty
-    
+    var textFieldWidth: CGFloat!
     
      func viewDidLoad()
     {
@@ -108,11 +108,14 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
         
         
         let screenSize = UIScreen.mainScreen().bounds.size
-        let tableView = UITableView(frame: CGRectMake(self.frame.origin.x, self.frame.origin.y + CGRectGetHeight(self.frame), screenSize.width - (self.frame.origin.x * 2), 30.0))
+        
+        let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize.width - 50, height: 30.0))
+        //let tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: 30))
+
         tableView.layer.masksToBounds = true
         tableView.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         tableView.layer.borderWidth = 2.0
-        tableView.frame =   CGRectMake(0, 247,375,10);
+        //tableView.frame =   CGRectMake(0, 247,375,10);
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -121,7 +124,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
          tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
           view.addSubview(tableView)
        autoCompleteTableView = tableView
-       autoCompleteTableHeight = 363.0
+       autoCompleteTableHeight = 250
     }
     
 //    override public func layoutSubviews()

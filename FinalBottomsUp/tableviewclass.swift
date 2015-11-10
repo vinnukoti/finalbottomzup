@@ -34,19 +34,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var newbottlebutton: UIButton!
     @IBOutlet weak var newlocationbutton: UIButton!
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     let pintcheckedImage = UIImage(named: "pintenabled")
     let pintunCheckedImage = UIImage(named: "pint")
     
@@ -87,6 +74,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //        self.pintbutton.setImage(UIImage(named: "pintimage"), forState: UIControlState.Normal)
 //        self.pintbutton.setBackgroundImage(UIImage(named: "bottle"), forState: UIControlState.Normal)
         
+//        tableview.layer.masksToBounds = true
+//        tableview.layer.borderColor = UIColor(red: 0x00/255,green: 0x00/255,blue: 0x000/255,alpha: 1.0).CGColor
+//        tableview.layer.borderWidth = 1.0
+        
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
         popupview.addGestureRecognizer(tap1)
         popupview.hidden = true
@@ -95,24 +86,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.dataSource = self
         pintbutton.setTitle("PINT", forState: .Normal)
         pintbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        
-//        newpintbutton.setTitle("PINT", forState: .Normal)
-//        newpintbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        
-        
         bottlebutton.setTitle("BOTTLE", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        
-//        newbottlebutton.setTitle("BOTTLE", forState: .Normal)
-//        newbottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        
-        
         locationbutton.setTitle("LOCATION", forState: .Normal)
         locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        
-//        newlocationbutton.setTitle("LOCATION", forState: .Normal)
-//        newlocationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        selectedliqname.text =  getselectedliq
+
+        var drink = getselectedliq.capitalizedString
+        selectedliqname.text =  drink
         
         
         togglebuttonbeer.setImage(toggleoff, forState: .Normal)
@@ -234,16 +214,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
         cell.micprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
         cell.maxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
+        cell.micprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        cell.maxprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        cell.liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        //setting Border for UITABLEVIEW
+        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
+        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
         
-//        cell.newliqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
-//        cell.newminprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
-//        cell.newmaxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
+        if indexPath.section == (head.count - 1) && indexPath.row == (head[head.count - 1].amp.count - 1)
+        {
+            cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
+        }
         
         self.tableview.separatorStyle = UITableViewCellSeparatorStyle.None
  
         
         return cell
     }
+    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 65
@@ -263,20 +252,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
+        
 
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
+       // headerCell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.5)
         //headerCell.backgroundColor = UIColor.cyanColor()
         headerCell.backgroundColor = UIColor.whiteColor()
     
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = "₹ " + head[section].minp
         headerCell.headercellmax.text = "₹ " + head[section].maxp
-        
-//        headerCell.newheadercellname.text = head[section].restname
-//        headerCell.newheadercellmin.text = "₹ " + head[section].minp
-//        headerCell.newheadercellmax.text = "₹ " + head[section].maxp
-        //headerCell.headercelldist.text = head[section].distance
         
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
@@ -287,6 +273,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
         
         headerCell.availofferbuttonbeer.tag = section
+        
+        headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+    
+        
+        //Giving Font family style to a UIButton 
+        headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        
      
 
         //Remove all empty cell is UITableview

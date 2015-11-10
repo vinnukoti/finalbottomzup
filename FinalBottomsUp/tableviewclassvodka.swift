@@ -60,11 +60,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
     {
  
-        
+//        tableview1.layer.masksToBounds = true
+//        tableview1.layer.borderColor = UIColor(red: 0x00/255,green: 0x00/255,blue: 0x000/255,alpha: 1.0).CGColor
+//        tableview1.layer.borderWidth = 1.0
         
         super.viewDidLayoutSubviews()
-                let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
-                popupviewvodka.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
+        popupviewvodka.addGestureRecognizer(tap)
         
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
@@ -73,7 +75,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         pricebutton.setTitle("30ML", forState: .Normal)
         pricebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        searchresultsvodka.text =  getselectedlq
+        
+        var vodkadrink = getselectedlq.capitalizedString
+        searchresultsvodka.text =  vodkadrink
         
         //togglebutton.backgroundColor = UIColor.grayColor()
         //togglebutton.imageView?.image = toggleoff
@@ -146,7 +150,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("childcellvodka", forIndexPath: indexPath) as! onemoreclass2
         cell.liqbrandname.text  = header1[indexPath.section].vodkaarray[indexPath.row].liqnamebrandname
         cell.liqbrandprice.text = "₹ " + header1[indexPath.section].vodkaarray[indexPath.row].liqbrandprice
-        self.tableview1.separatorStyle = UITableViewCellSeparatorStyle.None
+        cell.liqbrandname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        cell.liqbrandprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        //self.tableview1.separatorStyle = UITableViewCellSeparatorStyle.None
+        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
+        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
+        
+        if indexPath.section == (header1.count - 1) && indexPath.row == (header1[header1.count - 1].vodkaarray.count - 1)
+        {
+            cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
+        }
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -181,6 +194,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.mapbuttonvodkaclass.setTitle(header1[section].distancevodka, forState: UIControlState.Normal)
         
         headerCell.availofferbutton.tag = section
+        
+        headerCell.vodkarestaurantname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        headerCell.vodkaavgprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         
         
         if pricebuttonclicked == true
