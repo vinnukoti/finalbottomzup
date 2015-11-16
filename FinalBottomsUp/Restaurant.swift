@@ -19,6 +19,9 @@ class Restaurant
     var minp:String!
     var maxp:String!
     var distance:String!
+    var happystart:String!
+    var happyend:String!
+    var ishappy:String!
     var Restaurantlatitude: Double!
     var Restaurantlongitude: Double!
     
@@ -33,6 +36,9 @@ class Restaurant
         minp = String()
         maxp = String()
         distance = String()
+        happystart = String()
+        happyend = String()
+        ishappy = String()
         
         amp = [liqclass]()
         

@@ -18,6 +18,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var getfstobj1 = Restaurant()
     
     
+ 
     var pintbuttonclicked = false
     var bottlebuttonclicked = false
     var locationbuttonclicked = false
@@ -66,6 +67,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     let toggleon = UIImage(named: "toggleon")
 
     var toggle = false
+    
+    
+//    let arrow = "arrow"
+//    let arrowup = "arrowup"
+    
     override func viewDidLoad()
     {
         
@@ -93,6 +99,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         bottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         locationbutton.setTitle("DISTANCE", forState: .Normal)
         locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        //pintbutton.tintColor = UIColor.clearColor()
 
         var drink = getselectedliq.capitalizedString
         selectedliqname.text =  drink
@@ -264,21 +271,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         return cells
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
         cell.layer.borderColor = UIColor.brownColor().CGColor
         cell.layer.borderWidth = 1
+//         cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
+//        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
+       // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.blackColor(), thickness: 0.9)
     }
     
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if (head[indexPath.section].amp.count * 60) > 190 {
+        if ((head[indexPath.section].amp.count * 60) + 10) > 210 {
             
-            return CGFloat(head[indexPath.section].amp.count * 60)
+            return CGFloat((head[indexPath.section].amp.count * 60) + 10)
         }
         else{
             
-            return 190
+            return 210
             
         }
         
@@ -291,8 +302,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 65
+        if head[section].bool == false
+        {
+
+        return 86
         
+        }
+        else{
+            return 60
+        }
         
     }
     
@@ -311,7 +329,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         
-
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
        // headerCell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.5)
@@ -321,6 +338,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = "₹ " + head[section].minp
         headerCell.headercellmax.text = "₹ " + head[section].maxp
+        headerCell.happyhourslabelbeer.text = head[section].happystart + "PM  - " + head[section].happyend + "PM"
+        
         
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
@@ -335,6 +354,40 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        
+        if head[section].bool == false
+        {
+           // headerCell.headercellname.hidden = false
+            headerCell.headercellmin.hidden = false
+            headerCell.headercellmax.hidden = false
+            headerCell.mapbutton.hidden = false
+            headerCell.availofferbuttonbeer.hidden = false
+            headerCell.happyhourslabelbeer.hidden = false
+            headerCell.arrowimage.image = UIImage(named: "arrow")
+            
+        }
+        
+        else
+        {
+           // headerCell.headercellname.hidden = true
+            headerCell.headercellmin.text = ""
+            headerCell.headercellmax.text = ""
+            headerCell.mapbutton.setTitle("", forState: UIControlState.Normal)
+            headerCell.availofferbuttonbeer.hidden = true
+            headerCell.happyhourslabelbeer.hidden = true
+            headerCell.arrowimage.hidden = true
+            headerCell.headercellnamechild.text = head[section].restname
+            headerCell.headercellname.hidden = true
+           //headerCell.setheadercellnamechildimaghe.image = UIImage(named: "pint")
+                    let happyhoursimage = UIImage(named: "Restauranttab")
+                    let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width:headerCell.headercellnamechild.frame.width,height: headerCell.headercellnamechild.frame.height))
+                    headerCell.setheadercellnamechildimaghe.image = happyhoursimage
+                  headerCell.headercellnamechild.addSubview(myImageView)
+          
+            //yourview.backgroundColor = UIColor.colorWithPatternImage(UIImage(named:imageName))
+           // headerCell.layer.borderColor = UIColor.clearColor()
+        
+        }
     
         
         //Giving Font family style to a UIButton 
@@ -375,6 +428,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         //tableview.reloadData()
+        var obj = Restaurant()
+        
+       // tableview.separatorStyle = UITableViewCellSeparatorStyleNone
         var section = gestureRecognizer.view!.tag
         println(section)
         println("Section: \(gestureRecognizer.view!.tag)")
@@ -382,7 +438,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         if head[gestureRecognizer.view!.tag].bool == false
         {
             head[gestureRecognizer.view!.tag].bool = true
-
+            
         }
         else
         {
@@ -393,9 +449,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        view.layer.borderColor = UIColor.brownColor().CGColor
-        view.layer.borderWidth = 1
+{
+//        view.layer.borderColor = UIColor.whiteColor().CGColor
+//        view.layer.borderWidth = 1
+//        view.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
+//        view.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
+//       view.layer.addBorder(UIRectEdge.Top, color: UIColor.blackColor(), thickness: 0.9)
+     //   let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: headercellname.frame.width, height: headercellname.frame.height))
     }
     
 
@@ -446,6 +506,23 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         {
                             getfstobj1.restname = res_name
                         }
+                        
+                        
+                        if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
+                        {
+                            getfstobj1.happystart = happy_hour_start
+                        }
+                        
+                        if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
+                        {
+                            getfstobj1.happyend = happy_hour_end
+                        }
+                        
+                        if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
+                        {
+                            getfstobj1.ishappy = is_happy_hour
+                        }
+
                         
                         if let res_lat = resInfo["res_lat"] as? String
                         {
@@ -566,7 +643,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     {
                     for i in 0...cards.count - 2
                     {
-                        if cards[i].minp > cards[i+1].minp
+                        if cards[i].minp < cards[i+1].minp
                         {
                             sorted = false
                             var first = cards[i]
@@ -649,7 +726,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
             bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
-        }
             func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
             {
                 var sorted = false
@@ -658,23 +734,23 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     sorted = true
                     if cards.count > 1
                     {
-                    for i in 0...cards.count - 2
-                    {
-                        if cards[i].maxp > cards[i+1].maxp
+                        for i in 0...cards.count - 2
                         {
-                            sorted = false
-                            var first = cards[i]
-                            var second = cards[i + 1]
-                            println("first object before \(first.maxp)")
-                            println("second object before\(second.maxp)")
-                            cards[i] = second
-                            cards[i + 1] = first
-                            
-                            println("first object after\(cards[i].maxp)")
-                            println("second object after\(cards[i + 1].maxp)")
-                            
+                            if cards[i].maxp > cards[i+1].maxp
+                            {
+                                sorted = false
+                                var first = cards[i]
+                                var second = cards[i + 1]
+                                println("first object before \(first.maxp)")
+                                println("second object before\(second.maxp)")
+                                cards[i] = second
+                                cards[i + 1] = first
+                                
+                                println("first object after\(cards[i].maxp)")
+                                println("second object after\(cards[i + 1].maxp)")
+                                
+                            }
                         }
-                    }
                     }
                     else
                     {
@@ -686,9 +762,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var sortedarray:[Restaurant] = sortCards(&head)
             head = sortedarray
             self.tableview.reloadData()
-       
+            
             println("sorted array is  : \(head)")
-  
+
+        }
+        
         
 //        else
 //        {
@@ -738,56 +816,56 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func locationsort(sender: AnyObject)
     {
-        pintbuttonclicked = false
-        bottlebuttonclicked = false
-        locationbuttonclicked = true
-        
-        if locationbuttonclicked == true
-        {
-            pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
-            bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
-            locationbutton.setBackgroundImage(locationcheckedImage, forState: .Normal)
-        }
-
-        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
-        {
-            var sorted = false
-            while sorted == false
-            {
-                sorted = true
-                if cards.count > 1
-                {
-                for i in 0...cards.count - 2
-                {
-                    if cards[i].distance > cards[i+1].distance
-                    {
-                        sorted = false
-                        var first = cards[i]
-                        var second = cards[i + 1]
-                        println("first object before \(first.distance)")
-                        println("second object before\(second.distance)")
-                        cards[i] = second
-                        cards[i + 1] = first
-                        
-                        println("first object after\(cards[i].distance)")
-                        println("second object after\(cards[i + 1].distance)")
-                        
-                    }
-                }
-                }
-                else
-                {
-                    
-                }
-            }
-            return cards
-            }
-            var sortedarray:[Restaurant] = sortCards(&head)
-            head = sortedarray
-            self.tableview.reloadData()
-        
-            println("sorted array is  : \(head)")
-        
+//        pintbuttonclicked = false
+//        bottlebuttonclicked = false
+//        locationbuttonclicked = true
+//        
+//        if locationbuttonclicked == true
+//        {
+//            pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+//            bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
+//            locationbutton.setBackgroundImage(locationcheckedImage, forState: .Normal)
+//        }
+//
+////        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
+////        {
+////            var sorted = false
+////            while sorted == false
+////            {
+////                sorted = true
+////                if cards.count > 1
+////                {
+////                for i in 0...cards.count - 2
+////                {
+////                    if cards[i].distance > cards[i+1].distance
+////                    {
+////                        sorted = false
+////                        var first = cards[i]
+////                        var second = cards[i + 1]
+////                        println("first object before \(first.distance)")
+////                        println("second object before\(second.distance)")
+////                        cards[i] = second
+////                        cards[i + 1] = first
+////                        
+////                        println("first object after\(cards[i].distance)")
+////                        println("second object after\(cards[i + 1].distance)")
+////                        
+////                    }
+////                }
+////                }
+////                else
+////                {
+////                    
+////                }
+////            }
+////            return cards
+////            }
+////            var sortedarray:[Restaurant] = sortCards(&head)
+////            head = sortedarray
+//            self.tableview.reloadData()
+//        
+//            println("sorted array is  : \(head)")
+//        
 //        else
 //        {
 //            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>

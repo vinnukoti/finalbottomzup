@@ -92,9 +92,6 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
         locationManager1.startUpdatingLocation()
-        
-        
-        
     }
     
     
@@ -401,7 +398,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
         
-        //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
+       // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
         //28.63875
         //77.07380
     }
@@ -451,6 +448,21 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     var bottle_avg_price2:String = toString(bottle_avg_price)
                     fstobj1.maxp = bottle_avg_price2
                 }
+                    
+                    if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
+                    {
+                        fstobj1.happystart = happy_hour_start
+                    }
+                    
+                    if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
+                    {
+                        fstobj1.happyend = happy_hour_end
+                    }
+                    
+                    if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
+                    {
+                        fstobj1.ishappy = is_happy_hour
+                    }
                 if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                 {
                     if let res_name = resInfo["res_name"] as? String
@@ -539,6 +551,20 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     var avg_price2:String = toString(avg_price)
                     vodkaobj.avgprice = avg_price2
                     
+                    }
+                    if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
+                    {
+                        vodkaobj.vodkahappystart = happy_hour_start
+                    }
+                    
+                    if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
+                    {
+                        vodkaobj.vodkahappyend = happy_hour_end
+                    }
+                    
+                    if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
+                    {
+                        vodkaobj.vodkaishappy = is_happy_hour
                     }
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                     {

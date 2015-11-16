@@ -23,6 +23,14 @@ class custmheadercell1: UITableViewCell
     
     @IBOutlet weak var happyhourslabelvodka: UILabel!
     
+    @IBOutlet weak var arrowimage: UIImageView!
+    
+    @IBOutlet weak var vodkaresturantnameimage: UIImageView!
+    
+    @IBOutlet weak var childvodkarestaurantname: UILabel!
+    
+    
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()

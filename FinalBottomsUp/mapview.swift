@@ -259,54 +259,54 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     @IBAction func distancesort(sender: AnyObject)
     
     {
-        distnacemapsort = true
-        
-        if distnacemapsort == true
-        {
-            distancemap.setBackgroundImage(bottlecheckedImage, forState: .Normal)
-        }
-    
-        func sortCards(inout elements: Array<mapdata>) -> Array<mapdata>
-        {
-            var sorted = false
-            while sorted == false
-            {
-                sorted = true
-                if elements.count > 1
-                {
-                for i in 0...elements.count - 2
-                {
-                    println(elements[i].mapliqdistance)
-                    println(elements[i+1].mapliqdistance)
-                    if elements[i].mapliqdistance > elements[i+1].mapliqdistance
-                    {
-                        sorted = false
-                        var first = elements[i]
-                        var second = elements[i + 1]
-                        println("first object before \(first.mapliqdistance)")
-                        println("second object before\(second.mapliqdistance)")
-                        elements[i] = second
-                        elements[i + 1] = first
-                        
-                        println("first object after\(elements[i].mapliqdistance)")
-                        println("second object after\(elements[i + 1].mapliqdistance)")
-                        
-                    }
-                }
-                }
-                else
-                {
-                    
-                }
-            }
-            return elements
-        }
-        var sortedarray:[mapdata] = sortCards(&wineandbararray)
-        wineandbararray = sortedarray
-        self.tableviewformap.reloadData()
-        println("sorted array is  : \(wineandbararray)")
-        doubleTapmapview = false
-        
+//        distnacemapsort = true
+//        
+//        if distnacemapsort == true
+//        {
+//            distancemap.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+//        }
+//    
+////        func sortCards(inout elements: Array<mapdata>) -> Array<mapdata>
+////        {
+////            var sorted = false
+////            while sorted == false
+////            {
+////                sorted = true
+////                if elements.count > 1
+////                {
+////                for i in 0...elements.count - 2
+////                {
+////                    println(elements[i].mapliqdistance)
+////                    println(elements[i+1].mapliqdistance)
+////                    if elements[i].mapliqdistance > elements[i+1].mapliqdistance
+////                    {
+////                        sorted = false
+////                        var first = elements[i]
+////                        var second = elements[i + 1]
+////                        println("first object before \(first.mapliqdistance)")
+////                        println("second object before\(second.mapliqdistance)")
+////                        elements[i] = second
+////                        elements[i + 1] = first
+////                        
+////                        println("first object after\(elements[i].mapliqdistance)")
+////                        println("second object after\(elements[i + 1].mapliqdistance)")
+////                        
+////                    }
+////                }
+////                }
+////                else
+////                {
+////                    
+////                }
+////            }
+////            return elements
+////        }
+////        var sortedarray:[mapdata] = sortCards(&wineandbararray)
+////        wineandbararray = sortedarray
+//        self.tableviewformap.reloadData()
+//        println("sorted array is  : \(wineandbararray)")
+//        doubleTapmapview = false
+//        
 //        else
 //        {
 //            func sortCards(inout elements: Array<mapdata>) -> Array<mapdata>

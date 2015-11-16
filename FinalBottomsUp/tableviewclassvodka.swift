@@ -163,21 +163,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
-//        let cell = tableView.dequeueReusableCellWithIdentifier("childcellvodka", forIndexPath: indexPath) as! onemoreclass2
-//        cell.liqbrandname.text  = header1[indexPath.section].vodkaarray[indexPath.row].liqnamebrandname
-//        cell.liqbrandprice.text = "₹ " + header1[indexPath.section].vodkaarray[indexPath.row].liqbrandprice
-//        cell.liqbrandname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-//        cell.liqbrandprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-//        //self.tableview1.separatorStyle = UITableViewCellSeparatorStyle.None
-//        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
-//        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
-////
-//        if indexPath.section == (header1.count - 1) && indexPath.row == (header1[header1.count - 1].vodkaarray.count - 1)
-//        {
-//            cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
-//            
-//        }
+
         
         let cells = tableView.dequeueReusableCellWithIdentifier("vodkaChildCell", forIndexPath: indexPath) as! VodkaRowCell
         cells.liquors = [liqvodka]()
@@ -196,20 +182,25 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if (header1[indexPath.section].vodkaarray.count * 60) > 190 {
+        if (header1[indexPath.section].vodkaarray.count * 60) > 210 {
         
         return CGFloat(header1[indexPath.section].vodkaarray.count * 60)
         }
         else{
         
-        return 190
+        return 210
             
         }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 65
+        if header1[section].bool1 == false{
+        return 85
+        }
+        else {
+            return 60
+        }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -224,6 +215,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.tag = section        
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = "₹ " + header1[section].avgprice
+        headerCell.happyhourslabelvodka.text = header1[section].vodkahappystart + "PM  - " + header1[section].vodkahappyend + "PM"
         //headerCell.vodkadistance.text = header1[section].distancevodka
         
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
@@ -264,6 +256,43 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 //        tableView.tableFooterView!.hidden = true
 //        tableView.backgroundColor = UIColor.clearColor()
         
+        if header1[section].bool1 == false
+        {
+            // headerCell.headercellname.hidden = false
+            headerCell.vodkaavgprice.hidden = false
+            headerCell.vodkaavgprice.hidden = false
+            headerCell.mapbuttonvodkaclass.hidden = false
+//            headerCell.availofferbuttonbeer.hidden = false
+//            headerCell.happyhourslabelbeer.hidden = false
+            headerCell.arrowimage.image = UIImage(named: "arrow")
+           //  headerCell.vodkarestaurantname.hidden = true
+            
+           
+            
+        }
+            
+        else
+        {
+            // headerCell.headercellname.hidden = true
+            headerCell.vodkaavgprice.text = ""
+            headerCell.vodkaavgprice.text = ""
+            headerCell.mapbuttonvodkaclass.setTitle("", forState: UIControlState.Normal)
+             headerCell.happyhourslabelvodka.hidden = true
+            headerCell.arrowimage.hidden = true
+            headerCell.happyhourslabelvodka.hidden = true
+            headerCell.availofferbutton.hidden = true
+            // headerCell.layer.borderColor = UIColor.clearColor()
+            headerCell.childvodkarestaurantname.text = header1[section].restnamevodka
+            let happyhoursimage = UIImage(named: "Restauranttab")
+            let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width:headerCell.childvodkarestaurantname.frame.width,height: headerCell.childvodkarestaurantname.frame.height))
+            headerCell.vodkaresturantnameimage.image = happyhoursimage
+            headerCell.childvodkarestaurantname.addSubview(myImageView)
+            headerCell.vodkarestaurantname.hidden = true
+
+            
+        }
+
+        
         
         return headerCell
     }
@@ -284,8 +313,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
-        view.layer.borderColor = UIColor.brownColor().CGColor
-        view.layer.borderWidth = 1
+//        view.layer.borderColor = UIColor.brownColor().CGColor
+//        view.layer.borderWidth = 1
     }
     
 
@@ -330,6 +359,22 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         var avg_PRICE:String = toString(avg_price)
                         getvodkaobj.avgprice = avg_PRICE
                     }
+                    
+                    if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
+                    {
+                        getvodkaobj.vodkahappystart = happy_hour_start
+                    }
+                    
+                    if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
+                    {
+                        getvodkaobj.vodkahappyend = happy_hour_end
+                    }
+                    
+                    if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
+                    {
+                        getvodkaobj.vodkaishappy = is_happy_hour
+                    }
+
                     
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                     {
@@ -451,7 +496,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     {
                     for i in 0...cards.count - 2
                     {
-                        if cards[i].avgprice > cards[i+1].avgprice
+                        if cards[i].avgprice < cards[i+1].avgprice
                         {
                             sorted = false
                             var first = cards[i]
@@ -525,57 +570,57 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBAction func distancesort(sender: AnyObject)
     {
         
-        pricebuttonclicked = false
-        distancevodkabuttonclicked = true
-        
-
-
-        if distancevodkabuttonclicked == true
-        {
-            pricebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
-            distancebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
-            
-        }
-        
-        
-      
-            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
-            {
-                var sorted = false
-                while sorted == false
-                {
-                    sorted = true
-                    if cards.count > 1
-                    {
-                    for i in 0...cards.count - 2
-                    {
-                        if cards[i].distancevodka > cards[i+1].distancevodka
-                        {
-                            sorted = false
-                            var first = cards[i]
-                            var second = cards[i + 1]
-                            println("first object before \(first.distancevodka)")
-                            println("second object before\(second.distancevodka)")
-                            cards[i] = second
-                            cards[i + 1] = first
-                            println("first object after\(cards[i].distancevodka)")
-                            println("second object after\(cards[i + 1].distancevodka)")
-                        }
-                    }
-                    }
-                    else
-                    {
-                        
-                    }
-                }
-                return cards
-            }
-            var sortedarray1:[Restauarantvodka] = sortCards(&header1)
-            header1 = sortedarray1
-            self.tableview1.reloadData()
-     
-            println("sorted array is  : \(header1)")
-     
+//        pricebuttonclicked = false
+//        distancevodkabuttonclicked = true
+//        
+//
+//
+//        if distancevodkabuttonclicked == true
+//        {
+//            pricebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+//            distancebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+//            
+//        }
+//        
+//        
+//      
+////            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
+////            {
+////                var sorted = false
+////                while sorted == false
+////                {
+////                    sorted = true
+////                    if cards.count > 1
+////                    {
+////                    for i in 0...cards.count - 2
+////                    {
+////                        if cards[i].distancevodka > cards[i+1].distancevodka
+////                        {
+////                            sorted = false
+////                            var first = cards[i]
+////                            var second = cards[i + 1]
+////                            println("first object before \(first.distancevodka)")
+////                            println("second object before\(second.distancevodka)")
+////                            cards[i] = second
+////                            cards[i + 1] = first
+////                            println("first object after\(cards[i].distancevodka)")
+////                            println("second object after\(cards[i + 1].distancevodka)")
+////                        }
+////                    }
+////                    }
+////                    else
+////                    {
+////                        
+////                    }
+////                }
+////                return cards
+////            }
+//            //var sortedarray1:[Restauarantvodka] = sortCards(&header1)
+//           // header1 = sortedarray1
+//            self.tableview1.reloadData()
+//     
+//            println("sorted array is  : \(header1)")
+//     
         
 //        else
 //        {

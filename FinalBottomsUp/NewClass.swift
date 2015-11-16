@@ -150,7 +150,7 @@ extension CALayer {
         
         switch edge {
         case UIRectEdge.Top:
-            border.frame = CGRectMake(0, 0, CGRectGetHeight(self.frame), thickness)
+            border.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), thickness)
             break
         case UIRectEdge.Bottom:
             border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, UIScreen.mainScreen().bounds.width, thickness)

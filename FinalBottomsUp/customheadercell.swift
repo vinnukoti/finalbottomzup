@@ -16,6 +16,9 @@ import SystemConfiguration
 class customheadercell: UITableViewCell
 {
     @IBOutlet weak var headercellname: UILabel!
+    @IBOutlet weak var headercellnamechild: UILabel!
+    
+    @IBOutlet weak var setheadercellnamechildimaghe: UIImageView!
 
     @IBOutlet weak var headercellmin: UILabel!
 
@@ -25,13 +28,7 @@ class customheadercell: UITableViewCell
     
     @IBOutlet weak var availofferbuttonbeer: UIButton!
     
-    
-    @IBOutlet weak var newheadercellname: UILabel!
-    @IBOutlet weak var newheadercellmin: UILabel!
-    @IBOutlet weak var newheadercellmax: UILabel!
-    @IBOutlet weak var newmapbutton: UIButton!
-    @IBOutlet weak var newavailofferbuttonbeer: UIButton!
-    
+    @IBOutlet weak var arrowimage: UIImageView!
     @IBOutlet weak var happyhourslabelbeer: UILabel!
     
     
@@ -49,10 +46,10 @@ class customheadercell: UITableViewCell
 //
 //        }
         
-//        let happyhoursimage = UIImage(named: "Happyhoursround image")
-//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelbeer.frame.width, height: happyhourslabelbeer.frame.height))
+//        let happyhoursimage = UIImage(named: "Restauranttab")
+//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: headercellname.frame.width, height: headercellname.frame.height))
 //        myImageView.image = happyhoursimage
-//        happyhourslabelbeer.addSubview(myImageView)
+//        headercellname.addSubview(myImageView)
         
 
 

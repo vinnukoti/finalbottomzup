@@ -16,6 +16,9 @@ class Restauarantvodka
     var restnamevodka:String!
     var avgprice:String!
     var distancevodka:String!
+    var vodkahappystart: String!
+    var vodkahappyend: String!
+    var vodkaishappy: String!
     
     var vodkaarray:[liqvodka] = [liqvodka]()
     var further:[liqvodka] = [liqvodka]()
@@ -30,6 +33,10 @@ class Restauarantvodka
         restnamevodka = String()
         avgprice = String()
         distancevodka = String()
+        
+        vodkahappystart = String()
+        vodkahappyend = String()
+        vodkaishappy = String()
         
         vodkaarray = [liqvodka]()
         
