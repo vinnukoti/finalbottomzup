@@ -100,6 +100,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         togglebutton.setImage(toggleoff, forState: .Normal)
     }
     
+    @IBAction func press2revealPressed(sender: UIButton) {
+        
+        popupviewvodka.hidden = false
+        
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         
@@ -147,7 +153,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
         if header1[section].bool1 == true
         {
-        return header1[section].vodkaarray.count
+        return 1
         }
         else
         {
@@ -158,24 +164,47 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("childcellvodka", forIndexPath: indexPath) as! onemoreclass2
-        cell.liqbrandname.text  = header1[indexPath.section].vodkaarray[indexPath.row].liqnamebrandname
-        cell.liqbrandprice.text = "₹ " + header1[indexPath.section].vodkaarray[indexPath.row].liqbrandprice
-        cell.liqbrandname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        cell.liqbrandprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        //self.tableview1.separatorStyle = UITableViewCellSeparatorStyle.None
-        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
-        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
-//
-        if indexPath.section == (header1.count - 1) && indexPath.row == (header1[header1.count - 1].vodkaarray.count - 1)
-        {
-            cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
-        }
-        return cell
+//        let cell = tableView.dequeueReusableCellWithIdentifier("childcellvodka", forIndexPath: indexPath) as! onemoreclass2
+//        cell.liqbrandname.text  = header1[indexPath.section].vodkaarray[indexPath.row].liqnamebrandname
+//        cell.liqbrandprice.text = "₹ " + header1[indexPath.section].vodkaarray[indexPath.row].liqbrandprice
+//        cell.liqbrandname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+//        cell.liqbrandprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+//        //self.tableview1.separatorStyle = UITableViewCellSeparatorStyle.None
+//        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
+//        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
+////
+//        if indexPath.section == (header1.count - 1) && indexPath.row == (header1[header1.count - 1].vodkaarray.count - 1)
+//        {
+//            cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
+//            
+//        }
+        
+        let cells = tableView.dequeueReusableCellWithIdentifier("vodkaChildCell", forIndexPath: indexPath) as! VodkaRowCell
+        cells.liquors = [liqvodka]()
+        cells.liquors = header1[indexPath.section].vodkaarray
+        cells.press2reveal.tag = indexPath.section
+        cells.directions.setTitle(header1[indexPath.section].distancevodka, forState: UIControlState.Normal)
+        cells.tableView.reloadData()
+        
+        return cells
     }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layer.borderColor = UIColor.brownColor().CGColor
+        cell.layer.borderWidth = 1
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 65
+        if (header1[indexPath.section].vodkaarray.count * 60) > 190 {
+        
+        return CGFloat(header1[indexPath.section].vodkaarray.count * 60)
+        }
+        else{
+        
+        return 190
+            
+        }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
@@ -220,13 +249,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             headerCell.mapbuttonvodkaclass.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
-
         
+//        let happyhoursimage = UIImage(named: "Happyhoursround image")
+//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: headerCell.happyhourslabelvodka.frame.size.width, height: headerCell.happyhourslabelvodka.frame.size.height))
+//        myImageView.image = happyhoursimage
+//        
+//        headerCell.happyhourslabelvodka.addSubview(myImageView)
+        headerCell.happyhourslabelvodka.layer.cornerRadius = 10
+        headerCell.happyhourslabelvodka.layer.borderColor = UIColor.greenColor().CGColor
+        headerCell.happyhourslabelvodka.layer.borderWidth = 1
         //Code to remove empty cells in UITableview
-        var tblView =  UIView(frame: CGRectZero)
-        tableView.tableFooterView = tblView
-        tableView.tableFooterView!.hidden = true
-        tableView.backgroundColor = UIColor.clearColor()
+//        var tblView =  UIView(frame: CGRectZero)
+//        tableView.tableFooterView = tblView
+//        tableView.tableFooterView!.hidden = true
+//        tableView.backgroundColor = UIColor.clearColor()
         
         
         return headerCell

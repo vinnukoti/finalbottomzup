@@ -91,7 +91,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         pintbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         bottlebutton.setTitle("BOTTLE", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        locationbutton.setTitle("LOCATION", forState: .Normal)
+        locationbutton.setTitle("DISTANCE", forState: .Normal)
         locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
 
         var drink = getselectedliq.capitalizedString
@@ -115,6 +115,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }
 
+    }
+    
+    
+    @IBAction func press2revealPressed(sender: UIButton) {
+       
+        popupview.hidden = false
+    
     }
     
     // Resign Firstresponder of UITableview
@@ -204,7 +211,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         if head[section].bool == true
         {
-             return head[section].amp.count
+             return 1
         }
         else
         {
@@ -213,42 +220,68 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("childcellnew", forIndexPath: indexPath) as! onemoreclass1
-        cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
-        cell.micprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
-        cell.maxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
-        cell.micprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        cell.maxprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        cell.liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        //setting Border for UITABLEVIEW
-        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
-        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
-        
-        if indexPath.section == (head.count - 1)
-        {
-            if indexPath.row == (head[indexPath.section].amp.count - 1){
-                
-                if head[indexPath.section].bool == true {
-                  cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
-                }
-                
-                
-            }
-            
-        }
+//        let cell = tableView.dequeueReusableCellWithIdentifier("childcellnew", forIndexPath: indexPath) as! onemoreclass1
+//        cell.liqname.text = head[indexPath.section].amp[indexPath.row].liqbrand
+//        cell.micprice.text =  "₹ " + head[indexPath.section].amp[indexPath.row].pint
+//        cell.maxprice.text = "₹ " + head[indexPath.section].amp[indexPath.row].Bottle
+//        cell.micprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+//        cell.maxprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+//        cell.liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+//        //setting Border for UITABLEVIEW
+//        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
+//        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
+//        
+//        if indexPath.section == (head.count - 1)
+//        {
+//            if indexPath.row == (head[indexPath.section].amp.count - 1){
+//                
+//                if head[indexPath.section].bool == true {
+//                  cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
+//                }
+//                
+//                
+//            }
+//            
+//        }
         
         //self.tableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
+        //////////////////////////////////////////////////////////////////////
+        let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
+        cells.beers = [liqclass]()
+        cells.beers = head[indexPath.section].amp
+        cells.press2reveal.tag = indexPath.section
+        cells.directions.setTitle(head[indexPath.section].distance, forState: UIControlState.Normal)
+        cells.tableView.reloadData()
         
- 
         
-        return cell
+//        if indexPath.section == (head.count - 1)
+//        {
+//            cells.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
+//            cells.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
+//            cells.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
+//        }
+        return cells
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layer.borderColor = UIColor.brownColor().CGColor
+        cell.layer.borderWidth = 1
     }
     
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 65
+        if (head[indexPath.section].amp.count * 60) > 190 {
+            
+            return CGFloat(head[indexPath.section].amp.count * 60)
+        }
+        else{
+            
+            return 190
+            
+        }
+        
         
     }
     
@@ -261,6 +294,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         return 65
         
         
+    }
+    
+    func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
+        
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        imageObj.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -295,13 +340,22 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         //Giving Font family style to a UIButton 
         headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         
-     
+        //headerCell.happyhourslabelbeer.sizeToFit()
+//        let happyhoursimage = UIImage(named: "Happyhoursround image")
+//        //let img = self.imageResize(happyhoursimage!, sizeChange: CGSize(width: headerCell.happyhourslabelbeer.frame.size.width, height: headerCell.happyhourslabelbeer.frame.size.height))
+//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: headerCell.happyhourslabelbeer.frame.width, height: headerCell.happyhourslabelbeer.frame.size.height))
+//        myImageView.image = happyhoursimage
+//        
+//        headerCell.happyhourslabelbeer.addSubview(myImageView)
+        headerCell.happyhourslabelbeer.layer.cornerRadius = 10
+        headerCell.happyhourslabelbeer.layer.borderColor = UIColor.greenColor().CGColor
+        headerCell.happyhourslabelbeer.layer.borderWidth = 1
 
         //Remove all empty cell is UITableview
-        var tblView =  UIView(frame: CGRectZero)
-        tableView.tableFooterView = tblView
-        tableView.tableFooterView!.hidden = true
-        tableView.backgroundColor = UIColor.clearColor()
+//        var tblView =  UIView(frame: CGRectZero)
+//        tableView.tableFooterView = tblView
+//        tableView.tableFooterView!.hidden = true
+//        tableView.backgroundColor = UIColor.clearColor()
         
         if pintbuttonclicked == true
         {

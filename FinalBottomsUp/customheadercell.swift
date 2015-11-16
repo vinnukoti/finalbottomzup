@@ -37,7 +37,7 @@ class customheadercell: UITableViewCell
     
     
 
-    var tableobject = tableviewclass()
+    //var tableobject = tableviewclass()
     override func awakeFromNib()
     {
         super.awakeFromNib()
@@ -49,10 +49,10 @@ class customheadercell: UITableViewCell
 //
 //        }
         
-        let happyhorsimage = UIImage(named: "Happyhoursround image")
-        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelbeer.frame.width, height: happyhourslabelbeer.frame.height))
-        myImageView.image = happyhorsimage
-        happyhourslabelbeer.addSubview(myImageView)
+//        let happyhoursimage = UIImage(named: "Happyhoursround image")
+//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelbeer.frame.width, height: happyhourslabelbeer.frame.height))
+//        myImageView.image = happyhoursimage
+//        happyhourslabelbeer.addSubview(myImageView)
         
 
 

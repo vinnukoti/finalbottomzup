@@ -26,10 +26,10 @@ class custmheadercell1: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        let happyhorsimage = UIImage(named: "Happyhoursround image")
-        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelvodka.frame.width, height: happyhourslabelvodka.frame.height))
-        myImageView.image = happyhorsimage
-        happyhourslabelvodka.addSubview(myImageView)
+//        let happyhorsimage = UIImage(named: "Happyhoursround image")
+//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelvodka.frame.width, height: happyhourslabelvodka.frame.height))
+//        myImageView.image = happyhorsimage
+//        happyhourslabelvodka.addSubview(myImageView)
 
     }
     
