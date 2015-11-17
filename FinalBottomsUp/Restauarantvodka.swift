@@ -21,6 +21,7 @@ class Restauarantvodka
     var vodkaishappy: String!
     
     var vodkaarray:[liqvodka] = [liqvodka]()
+    var vodkasendarray:[liqvodka] = [liqvodka]()
     var further:[liqvodka] = [liqvodka]()
     
     var Restaurantlatitudevodka: Double!
@@ -39,6 +40,7 @@ class Restauarantvodka
         vodkaishappy = String()
         
         vodkaarray = [liqvodka]()
+        vodkasendarray = [liqvodka]()
         
         Restaurantlatitudevodka = Double()
         Restaurantlongitudevodka = Double()

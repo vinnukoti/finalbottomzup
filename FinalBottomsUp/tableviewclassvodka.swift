@@ -18,6 +18,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 {
     @IBOutlet weak var tableview1: UITableView!
     var header1:[Restauarantvodka] = [Restauarantvodka]()
+    var headfurther:[Restauarantvodka] = [Restauarantvodka]()
     var liqvodkaname:String!
     var bool = false
     
@@ -59,6 +60,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var toggle = false
     
     var getvodkaobj = Restauarantvodka()
+     var getvodkaobj1 = Restauarantvodka()
+    
+    var changecolorvodka = false
     
     
     
@@ -68,11 +72,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad()
     {
- 
-//        tableview1.layer.masksToBounds = true
-//        tableview1.layer.borderColor = UIColor(red: 0x00/255,green: 0x00/255,blue: 0x000/255,alpha: 1.0).CGColor
-//        tableview1.layer.borderWidth = 1.0
-        
         super.viewDidLayoutSubviews()
         let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
         popupviewvodka.addGestureRecognizer(tap)
@@ -91,6 +90,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         //togglebutton.backgroundColor = UIColor.grayColor()
         //togglebutton.imageView?.image = toggleoff
         togglebutton.setImage(toggleoff, forState: .Normal)
+        
+       // headfurther = header1
+       //  headfurther = header1
         
         
     }
@@ -126,15 +128,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             toggle = false
 
         }
-        
-      //  toggle = false
     }
     
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
-        
-        popupviewvodka.hidden = false
-        // popupview.hidden = true
+       popupviewvodka.hidden = false
     }
     
     @IBAction func sharetofacebookVodka(sender: AnyObject)
@@ -163,15 +161,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-
-        
         let cells = tableView.dequeueReusableCellWithIdentifier("vodkaChildCell", forIndexPath: indexPath) as! VodkaRowCell
         cells.liquors = [liqvodka]()
         cells.liquors = header1[indexPath.section].vodkaarray
         cells.press2reveal.tag = indexPath.section
         cells.directions.setTitle(header1[indexPath.section].distancevodka, forState: UIControlState.Normal)
         cells.tableView.reloadData()
-        
         return cells
     }
     
@@ -205,18 +200,22 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-     
-        
-        let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
-      
-            headerCell.backgroundColor = UIColor.whiteColor()
         
     
-        headerCell.tag = section        
+//        let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
+//        headerCell1.vodkarestaurantname.text = headfurther[section].restnamevodka
+//        headerCell1.vodkaavgprice.text = "₹ " + headfurther[section].avgprice
+//        headerCell1.happyhourslabelvodka.text = "Happy Hours " + headfurther[section].vodkahappystart + "PM  - " + headfurther[section].vodkahappyend + "PM"
+//        headerCell1.backgroundColor = UIColor.orangeColor()
+        
+        
+        let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
+        headerCell.backgroundColor = UIColor.whiteColor()
+        headerCell.tag = section
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = "₹ " + header1[section].avgprice
-        headerCell.happyhourslabelvodka.text = header1[section].vodkahappystart + "PM  - " + header1[section].vodkahappyend + "PM"
-        //headerCell.vodkadistance.text = header1[section].distancevodka
+        headerCell.happyhourslabelvodka.text = "Happy Hours " + header1[section].vodkahappystart + "PM  - " + header1[section].vodkahappyend + "PM"
+
         
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped1)
@@ -230,8 +229,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.vodkarestaurantname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.vodkaavgprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        
-        
+
         if pricebuttonclicked == true
         {
              headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
@@ -241,21 +239,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             headerCell.mapbuttonvodkaclass.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
-        
-//        let happyhoursimage = UIImage(named: "Happyhoursround image")
-//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: headerCell.happyhourslabelvodka.frame.size.width, height: headerCell.happyhourslabelvodka.frame.size.height))
-//        myImageView.image = happyhoursimage
-//        
-//        headerCell.happyhourslabelvodka.addSubview(myImageView)
+
+        if header1[section].vodkahappyend == "yes"
+        {
         headerCell.happyhourslabelvodka.layer.cornerRadius = 10
         headerCell.happyhourslabelvodka.layer.borderColor = UIColor.greenColor().CGColor
         headerCell.happyhourslabelvodka.layer.borderWidth = 1
-        //Code to remove empty cells in UITableview
-//        var tblView =  UIView(frame: CGRectZero)
-//        tableView.tableFooterView = tblView
-//        tableView.tableFooterView!.hidden = true
-//        tableView.backgroundColor = UIColor.clearColor()
-        
+        }
+        else
+        {
+            headerCell.happyhourslabelvodka.layer.cornerRadius = 10
+            headerCell.happyhourslabelvodka.layer.borderColor = UIColor.redColor().CGColor
+            headerCell.happyhourslabelvodka.layer.borderWidth = 1
+ 
+        }
         if header1[section].bool1 == false
         {
             // headerCell.headercellname.hidden = false
@@ -266,11 +263,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 //            headerCell.happyhourslabelbeer.hidden = false
             headerCell.arrowimage.image = UIImage(named: "arrow")
            //  headerCell.vodkarestaurantname.hidden = true
-            
-           
-            
         }
-            
         else
         {
             // headerCell.headercellname.hidden = true
@@ -288,13 +281,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             headerCell.vodkaresturantnameimage.image = happyhoursimage
             headerCell.childvodkarestaurantname.addSubview(myImageView)
             headerCell.vodkarestaurantname.hidden = true
-
-            
         }
-
+          return headerCell
         
-        
-        return headerCell
     }
     
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
@@ -313,15 +302,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
-//        view.layer.borderColor = UIColor.brownColor().CGColor
-//        view.layer.borderWidth = 1
-    }
-    
 
+    }
     
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
-        
+        changecolorvodka = true
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=8&records=4&query=\(liqvodkaname)")
 
     }
@@ -346,11 +332,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         var jsonError:NSError?
         if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
         {
-            header1 = [Restauarantvodka]()
+           header1 = [Restauarantvodka]()
+           
+            //headfurther = [Restauarantvodka]()
+         
             
             for var index = 0; index < json.count; ++index
             {
                 getvodkaobj = Restauarantvodka()
+               // getvodkaobj1 = Restauarantvodka()
                 
                 if let bottomsUp1 = json[index] as? NSDictionary
                 {
@@ -358,21 +348,39 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     {
                         var avg_PRICE:String = toString(avg_price)
                         getvodkaobj.avgprice = avg_PRICE
+                        //getvodkaobj1.avgprice = avg_PRICE
                     }
                     
-                    if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
+                    if let happy_hour_startvodka = bottomsUp1["happy_hour_start"] as? String
                     {
-                        getvodkaobj.vodkahappystart = happy_hour_start
+                        func PartOfString(s: String, start: Int, length: Int) -> String
+                        {
+                            return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                        }
+                        println("SUBSTRING    " + PartOfString(happy_hour_startvodka, 1, 3))
+                        var happy_hour_startvodka1 = PartOfString(happy_hour_startvodka, 1, 3)
+
+                        getvodkaobj.vodkahappystart = happy_hour_startvodka1
+                        //getvodkaobj1.vodkahappystart = happy_hour_startvodka1
                     }
                     
-                    if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
+                    if let happy_hour_endvodka = bottomsUp1["happy_hour_end"] as? String
                     {
-                        getvodkaobj.vodkahappyend = happy_hour_end
+                        
+                        func PartOfString(s: String, start: Int, length: Int) -> String
+                        {
+                            return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                        }
+                        println("SUBSTRING    " + PartOfString(happy_hour_endvodka, 1, 3))
+                        var happy_hour_endvodka1 = PartOfString(happy_hour_endvodka, 1, 3)
+                        getvodkaobj.vodkahappyend = happy_hour_endvodka1
+                         //getvodkaobj1.vodkahappyend = happy_hour_endvodka1
                     }
                     
                     if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                     {
-                        getvodkaobj.vodkaishappy = is_happy_hour
+                      getvodkaobj.vodkaishappy = is_happy_hour
+                        //getvodkaobj1.vodkaishappy = is_happy_hour
                     }
 
                     
@@ -380,7 +388,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                            getvodkaobj.restnamevodka = res_name
+                           getvodkaobj.restnamevodka = res_name
+                            //getvodkaobj1.restnamevodka = res_name
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -418,6 +427,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             getvodkaobj.distancevodka = totalDistance1 + " KMS"
+                           // getvodkaobj1.distancevodka = totalDistance1 + " KMS"
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -437,13 +447,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                     liqobj2.liqnamebrandname = res_liq_brand_name
                                 }
                             }
-                            getvodkaobj.vodkaarray.append(liqobj2)
+                           getvodkaobj.vodkaarray.append(liqobj2)
+                            //getvodkaobj1.vodkasendarray.append(liqobj2)
                         }
                     }
        
                 }
-                header1.append(getvodkaobj)
-                
+      
+                 header1.append(getvodkaobj)
+               // headfurther.append(getvodkaobj)
             }
         }
         else
@@ -455,23 +467,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         self.tableview1.reloadData()
     }
-//    @IBAction func getdirections(sender: AnyObject)
-//    {
-//       
-//        
-//        UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!)
-//        
-//        if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
-//            UIApplication.sharedApplication().openURL(NSURL(string:
-//                "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving")!)
-//            
-//        }
-//        else
-//        {
-//            NSLog("Can't use comgooglemaps://");
-//        }
-//    }
-//    
     
     @IBAction func pricesort(sender: AnyObject)
     {
@@ -658,9 +653,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 //            doubleTap = true
 //        }
 //        
-
-        
-        
+  
     }
     
     

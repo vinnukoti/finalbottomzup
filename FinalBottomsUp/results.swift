@@ -67,7 +67,9 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var restlong:Double!
     
     var header:[Restauarantvodka] = [Restauarantvodka]()
+   // var headervodka:[Restauarantvodka] = [Restauarantvodka]()
     var vodkaobj = Restauarantvodka()
+  
     
 
 
@@ -429,6 +431,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         {
             fstobj1 = Restaurant()
             vodkaobj = Restauarantvodka()
+            //vodkasendobj = Restauarantvodka()
             
             if let bottomsUp1 = json[index] as? NSDictionary
             {
@@ -451,12 +454,26 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                     
                     if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                     {
-                        fstobj1.happystart = happy_hour_start
+                        func PartOfString(s: String, start: Int, length: Int) -> String
+                        {
+                            return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                        }
+                        println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 3))
+                        var happy_hour_start1 = PartOfString(happy_hour_start, 1, 3)
+
+           
+                        fstobj1.happystart = happy_hour_start1
                     }
                     
                     if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                     {
-                        fstobj1.happyend = happy_hour_end
+                        func PartOfString(s: String, start: Int, length: Int) -> String
+                        {
+                            return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                        }
+                        println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 3))
+                        var happy_hour_end1 = PartOfString(happy_hour_end, 1, 3)
+                        fstobj1.happyend = happy_hour_end1
                     }
                     
                     if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
@@ -550,27 +567,47 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                    {
                     var avg_price2:String = toString(avg_price)
                     vodkaobj.avgprice = avg_price2
+                    //vodkasendobj.avgprice = avg_price2
                     
                     }
                     if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                     {
-                        vodkaobj.vodkahappystart = happy_hour_start
+                        
+                        func PartOfString(s: String, start: Int, length: Int) -> String
+                        {
+                            return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                        }
+                        println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 3))
+                        var happy_hour_start2 = PartOfString(happy_hour_start, 1, 3)
+
+                        vodkaobj.vodkahappystart = happy_hour_start2
+                        //vodkasendobj.vodkahappystart = happy_hour_start2
                     }
                     
                     if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                     {
-                        vodkaobj.vodkahappyend = happy_hour_end
+                        
+                        func PartOfString(s: String, start: Int, length: Int) -> String
+                        {
+                            return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                        }
+                        println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 3))
+                        var happy_hour_end2 = PartOfString(happy_hour_end, 1, 3)
+                        vodkaobj.vodkahappyend = happy_hour_end2
+                        //vodkasendobj.vodkahappyend = happy_hour_end2
                     }
                     
                     if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                     {
                         vodkaobj.vodkaishappy = is_happy_hour
+                       // vodkasendobj.vodkaishappy = is_happy_hour
                     }
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
                             vodkaobj.restnamevodka = res_name
+                            //vodkasendobj.restnamevodka = res_name
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -580,6 +617,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                             string.doubleValue
                             restvodkalat = string.doubleValue
                             vodkaobj.Restaurantlatitudevodka = restvodkalat
+                           // vodkasendobj.Restaurantlatitudevodka = restvodkalat
                             println(restvodkalat)
 
                         }
@@ -590,6 +628,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                             string.doubleValue
                             restvodkalang = string.doubleValue
                             vodkaobj.Restaurantlongitudevodka = restvodkalang
+                            //vodkasendobj.Restaurantlongitudevodka = restvodkalang
                             println(restvodkalang)
                         }
                         if var distance = resInfo["distance"] as? String
@@ -612,6 +651,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             vodkaobj.distancevodka = totalDistance1 + "KM"
+                            //vodkasendobj.distancevodka = totalDistance1 + "KM"
                         }
                     }
                     
@@ -634,9 +674,11 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                          
                             }
                             vodkaobj.vodkaarray.append(liqobj2)
+                            //vodkasendobj.vodkasendarray.append(liqobj2)
                         }
                     }
                     header.append(vodkaobj)
+                   // headervodka.append(vodkasendobj)
                     println("header \(vodkaobj)")
                 }
             }
@@ -711,6 +753,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination1.liqvodkaname = trimmedString
 
                 destination1.header1 = header
+               // destination1.headfurther = headervodka
                 destination1.getcitylatitude = citylat
                 destination1.getcitylongitude = citylong
                 destination1.getdevicelatitude = devicelatitude
