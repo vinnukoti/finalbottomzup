@@ -21,6 +21,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var address2: UILabel!
     
+    @IBOutlet weak var distancelabelnew: UILabel!
     
     var beers: [liqclass] = [liqclass]()
     
@@ -45,12 +46,14 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         var liqname = cell.viewWithTag(100) as! UILabel
         var minprice = cell.viewWithTag(200) as! UILabel
         var maxprice = cell.viewWithTag(300) as! UILabel
+        //var newdistance = cell.viewWithTag(400) as! UILabel
         
         if beers.count > 0 {
         
         liqname.text = beers[indexPath.row].liqbrand
         minprice.text =  "₹ " + beers[indexPath.row].pint
         maxprice.text = "₹ " + beers[indexPath.row].Bottle
+            //newdistance.text = beers[indexPath.row].distancel
         minprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         maxprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)

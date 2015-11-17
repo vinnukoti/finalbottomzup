@@ -19,6 +19,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
    // var getfstobj2 = Restaurant()
     
     
+
     
     
     var pintbuttonclicked = false
@@ -197,6 +198,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         restaurantnamelable2.text = "\(head[sender.tag].restname) through the BottomzUp App"
         
     }
+    @IBAction func gotomap(sender: AnyObject)
+    {
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if head[section].bool == true
@@ -215,7 +220,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.beers = [liqclass]()
         cells.beers = head[indexPath.section].amp
         cells.press2reveal.tag = indexPath.section
-        cells.directions.setTitle(head[indexPath.section].distance, forState: UIControlState.Normal)
+      //  cells.directions.setTitle(head[indexPath.section].distance, forState: UIControlState.Normal)
+        cells.distancelabelnew.text = head[indexPath.section].distance
         cells.tableView.reloadData()
         
         return cells

@@ -165,7 +165,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         cells.liquors = [liqvodka]()
         cells.liquors = header1[indexPath.section].vodkaarray
         cells.press2reveal.tag = indexPath.section
-        cells.directions.setTitle(header1[indexPath.section].distancevodka, forState: UIControlState.Normal)
+        //cells.directions.setTitle(header1[indexPath.section].distancevodka, forState: UIControlState.Normal)
+        cells.distancenewvodkalabel.text = header1[indexPath.section].distancevodka
         cells.tableView.reloadData()
         return cells
     }
@@ -202,7 +203,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
         
     
-//        let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
+        let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
 //        headerCell1.vodkarestaurantname.text = headfurther[section].restnamevodka
 //        headerCell1.vodkaavgprice.text = "₹ " + headfurther[section].avgprice
 //        headerCell1.happyhourslabelvodka.text = "Happy Hours " + headfurther[section].vodkahappystart + "PM  - " + headfurther[section].vodkahappyend + "PM"
@@ -334,13 +335,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
            header1 = [Restauarantvodka]()
            
-            //headfurther = [Restauarantvodka]()
+            headfurther = [Restauarantvodka]()
          
             
             for var index = 0; index < json.count; ++index
             {
                 getvodkaobj = Restauarantvodka()
-               // getvodkaobj1 = Restauarantvodka()
+                getvodkaobj1 = Restauarantvodka()
                 
                 if let bottomsUp1 = json[index] as? NSDictionary
                 {
@@ -348,7 +349,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     {
                         var avg_PRICE:String = toString(avg_price)
                         getvodkaobj.avgprice = avg_PRICE
-                        //getvodkaobj1.avgprice = avg_PRICE
+                        getvodkaobj1.avgprice = avg_PRICE
                     }
                     
                     if let happy_hour_startvodka = bottomsUp1["happy_hour_start"] as? String
@@ -361,7 +362,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         var happy_hour_startvodka1 = PartOfString(happy_hour_startvodka, 1, 3)
 
                         getvodkaobj.vodkahappystart = happy_hour_startvodka1
-                        //getvodkaobj1.vodkahappystart = happy_hour_startvodka1
+                        getvodkaobj1.vodkahappystart = happy_hour_startvodka1
                     }
                     
                     if let happy_hour_endvodka = bottomsUp1["happy_hour_end"] as? String
@@ -374,13 +375,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         println("SUBSTRING    " + PartOfString(happy_hour_endvodka, 1, 3))
                         var happy_hour_endvodka1 = PartOfString(happy_hour_endvodka, 1, 3)
                         getvodkaobj.vodkahappyend = happy_hour_endvodka1
-                         //getvodkaobj1.vodkahappyend = happy_hour_endvodka1
+                         getvodkaobj1.vodkahappyend = happy_hour_endvodka1
                     }
                     
                     if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                     {
                       getvodkaobj.vodkaishappy = is_happy_hour
-                        //getvodkaobj1.vodkaishappy = is_happy_hour
+                        getvodkaobj1.vodkaishappy = is_happy_hour
                     }
 
                     
@@ -426,8 +427,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             }
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                            getvodkaobj.distancevodka = totalDistance1 + " KMS"
-                           // getvodkaobj1.distancevodka = totalDistance1 + " KMS"
+                            getvodkaobj.distancevodka = totalDistance1 + " KM"
+                            getvodkaobj1.distancevodka = totalDistance1 + " KM"
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -448,14 +449,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 }
                             }
                            getvodkaobj.vodkaarray.append(liqobj2)
-                            //getvodkaobj1.vodkasendarray.append(liqobj2)
+                            getvodkaobj1.vodkasendarray.append(liqobj2)
                         }
                     }
        
                 }
       
                  header1.append(getvodkaobj)
-               // headfurther.append(getvodkaobj)
+                headfurther.append(getvodkaobj)
+               // println(headfurther)
             }
         }
         else
@@ -660,6 +662,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBAction func gotoMap(sender: AnyObject)
     {
          UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
+    }
+    @IBAction func gotomap(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
     }
     
     @IBAction func getDiscountforvodka(sender: AnyObject)

@@ -1092,6 +1092,9 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="gotomap:" destination="cXB-1m-d5z" eventType="touchUpInside" id="ckS-Uz-MEE"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address Line 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="MPR-oI-O89">
                                                     <rect key="frame" x="536" y="46" width="56" height="21"/>
@@ -1119,6 +1122,12 @@
                                                         <constraint firstAttribute="height" constant="6" id="tTA-9b-BB9"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1w-rL-r5a">
+                                                    <rect key="frame" x="569" y="11" width="30" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="9"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="ItC-7g-0nd" secondAttribute="trailing" constant="5" id="0GA-pL-IMC"/>
@@ -1132,19 +1141,22 @@
                                                 <constraint firstItem="jDT-FI-4o1" firstAttribute="leading" secondItem="fDN-Zs-VKW" secondAttribute="leading" constant="5" id="Kcx-hz-M6y"/>
                                                 <constraint firstAttribute="trailing" secondItem="iTW-bT-J2g" secondAttribute="trailing" constant="5" id="RK0-L5-oPu"/>
                                                 <constraint firstItem="MPR-oI-O89" firstAttribute="top" secondItem="iTW-bT-J2g" secondAttribute="bottom" constant="10" id="VBm-Mk-VVA"/>
+                                                <constraint firstItem="MPR-oI-O89" firstAttribute="top" secondItem="q1w-rL-r5a" secondAttribute="bottom" constant="20" id="XLm-HS-Air"/>
                                                 <constraint firstItem="Xac-0Z-iWN" firstAttribute="top" secondItem="MPR-oI-O89" secondAttribute="bottom" constant="5" id="ZVo-d9-BXL"/>
                                                 <constraint firstItem="Xac-0Z-iWN" firstAttribute="leading" secondItem="iVb-dO-VeR" secondAttribute="trailing" constant="15" id="ZdU-zg-rpy"/>
                                                 <constraint firstItem="ItC-7g-0nd" firstAttribute="top" secondItem="Xac-0Z-iWN" secondAttribute="bottom" constant="10" id="eKQ-5W-dY6"/>
                                                 <constraint firstItem="iTW-bT-J2g" firstAttribute="leading" secondItem="iVb-dO-VeR" secondAttribute="trailing" constant="15" id="fID-8K-Lsv"/>
                                                 <constraint firstAttribute="trailing" secondItem="Xac-0Z-iWN" secondAttribute="trailing" constant="5" id="nh2-um-nmd"/>
+                                                <constraint firstAttribute="trailing" secondItem="q1w-rL-r5a" secondAttribute="trailing" constant="1" id="pN9-7t-oPG"/>
                                                 <constraint firstItem="ItC-7g-0nd" firstAttribute="leading" secondItem="iVb-dO-VeR" secondAttribute="trailing" constant="5" id="rMh-gr-6cj"/>
-                                                <constraint firstItem="iTW-bT-J2g" firstAttribute="top" secondItem="fDN-Zs-VKW" secondAttribute="top" constant="5" id="tnP-uL-KIs"/>
+                                                <constraint firstItem="iTW-bT-J2g" firstAttribute="top" secondItem="fDN-Zs-VKW" secondAttribute="top" constant="10" id="tnP-uL-KIs"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="address1" destination="MPR-oI-O89" id="JhI-hN-Fir"/>
                                             <outlet property="address2" destination="Xac-0Z-iWN" id="Nra-NZ-btY"/>
                                             <outlet property="directions" destination="iTW-bT-J2g" id="C5U-bq-am3"/>
+                                            <outlet property="distancelabelnew" destination="q1w-rL-r5a" id="yI8-7z-usG"/>
                                             <outlet property="press2reveal" destination="ItC-7g-0nd" id="ffS-z3-0X7"/>
                                             <outlet property="tableView" destination="iVb-dO-VeR" id="6YJ-97-INA"/>
                                         </connections>
@@ -1319,7 +1331,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2764" y="-5354"/>
+            <point key="canvasLocation" x="-2979" y="-5530"/>
         </scene>
         <!--Tableviewclassvodka-->
         <scene sceneID="0pa-3Q-oDE">
@@ -1483,7 +1495,7 @@
                                                         <constraint firstAttribute="width" priority="1" constant="138" id="V2s-PU-YV9"/>
                                                         <constraint firstAttribute="height" constant="20" id="ere-iw-wPi"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1595,6 +1607,9 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="gotomap:" destination="62d-Bt-Yva" eventType="touchUpInside" id="It8-kI-cYz"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address Line 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="xCB-eb-jt2">
                                                     <rect key="frame" x="533" y="46" width="59" height="21"/>
@@ -1674,6 +1689,12 @@
                                                         <action selector="press2revealPressed:" destination="62d-Bt-Yva" eventType="touchUpInside" id="Nrh-yo-vXe"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27A-DX-oIs">
+                                                    <rect key="frame" x="569" y="10" width="30" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="9"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="ZwY-Bg-t43" secondAttribute="trailing" constant="5" id="09P-Z1-SkS"/>
@@ -1686,13 +1707,15 @@
                                                 <constraint firstItem="AJb-bZ-qEw" firstAttribute="leading" secondItem="KXT-PY-rd5" secondAttribute="leading" id="JKS-cG-9mP"/>
                                                 <constraint firstItem="TVW-1f-HEX" firstAttribute="leading" secondItem="AJb-bZ-qEw" secondAttribute="trailing" constant="15" id="Mjc-JJ-XTr"/>
                                                 <constraint firstAttribute="trailing" secondItem="TVW-1f-HEX" secondAttribute="trailing" constant="5" id="O4z-LO-Orj"/>
+                                                <constraint firstItem="xCB-eb-jt2" firstAttribute="top" secondItem="27A-DX-oIs" secondAttribute="bottom" constant="21" id="Odt-WU-RcO"/>
                                                 <constraint firstItem="MIm-N1-4UM" firstAttribute="leading" secondItem="AJb-bZ-qEw" secondAttribute="trailing" constant="5" id="PBJ-Ul-czF"/>
                                                 <constraint firstItem="ZwY-Bg-t43" firstAttribute="leading" secondItem="AJb-bZ-qEw" secondAttribute="trailing" constant="15" id="PqN-EK-3Dj"/>
                                                 <constraint firstAttribute="bottom" secondItem="ojd-L2-DKs" secondAttribute="bottom" constant="2" id="RY8-gh-0B3"/>
                                                 <constraint firstItem="AJb-bZ-qEw" firstAttribute="top" secondItem="KXT-PY-rd5" secondAttribute="top" id="W13-l0-LgP"/>
                                                 <constraint firstItem="ZwY-Bg-t43" firstAttribute="top" secondItem="xCB-eb-jt2" secondAttribute="bottom" constant="5" id="WdA-fo-N5t"/>
-                                                <constraint firstItem="TVW-1f-HEX" firstAttribute="top" secondItem="KXT-PY-rd5" secondAttribute="top" constant="5" id="b0T-XY-p5f"/>
+                                                <constraint firstItem="TVW-1f-HEX" firstAttribute="top" secondItem="KXT-PY-rd5" secondAttribute="top" constant="10" id="b0T-XY-p5f"/>
                                                 <constraint firstAttribute="trailing" secondItem="MIm-N1-4UM" secondAttribute="trailing" constant="5" id="jBU-uR-IvM"/>
+                                                <constraint firstAttribute="trailing" secondItem="27A-DX-oIs" secondAttribute="trailing" id="qJT-dr-zMl"/>
                                                 <constraint firstItem="ojd-L2-DKs" firstAttribute="leading" secondItem="KXT-PY-rd5" secondAttribute="leading" constant="5" id="uQs-rd-tPt"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1700,6 +1723,7 @@
                                             <outlet property="address1" destination="xCB-eb-jt2" id="zxO-PR-lSm"/>
                                             <outlet property="address2" destination="ZwY-Bg-t43" id="Rqv-0R-IYk"/>
                                             <outlet property="directions" destination="TVW-1f-HEX" id="mTK-4o-zNp"/>
+                                            <outlet property="distancenewvodkalabel" destination="27A-DX-oIs" id="u2e-DH-YaM"/>
                                             <outlet property="press2reveal" destination="MIm-N1-4UM" id="3ux-ub-qVu"/>
                                             <outlet property="tableView" destination="AJb-bZ-qEw" id="PGt-SY-Jtu"/>
                                         </connections>
@@ -1851,7 +1875,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2c-5a-dyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3534" y="-5524"/>
+            <point key="canvasLocation" x="-3608" y="-5530"/>
         </scene>
     </scenes>
     <resources>
