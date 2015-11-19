@@ -25,6 +25,8 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     
     var beers: [liqclass] = [liqclass]()
     
+    var restaurantName: String!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         tableView.delegate = self

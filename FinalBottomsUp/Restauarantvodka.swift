@@ -14,7 +14,7 @@ class Restauarantvodka
     var liqobjvodka = liqvodka()
     
     var restnamevodka:String!
-    var avgprice:String!
+    var avgprice:Int!
     var distancevodka:String!
     var vodkahappystart: String!
     var vodkahappyend: String!
@@ -32,7 +32,7 @@ class Restauarantvodka
         liqobjvodka = liqvodka()
         bool1 = false
         restnamevodka = String()
-        avgprice = String()
+        avgprice = Int()
         distancevodka = String()
         
         vodkahappystart = String()

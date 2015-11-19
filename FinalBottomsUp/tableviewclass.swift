@@ -13,7 +13,7 @@ import Social
 import FBSDKShareKit
 
 
-class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate
+class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate
 {
     var getfstobj1 = Restaurant()
    // var getfstobj2 = Restaurant()
@@ -21,7 +21,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
 
     
-    
+    var global = false
     var pintbuttonclicked = false
     var bottlebuttonclicked = false
     var locationbuttonclicked = false
@@ -34,7 +34,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var selectedliqname: UILabel!
     @IBOutlet weak var resturantnamelable: UILabel!
-    @IBOutlet weak var restaurantnamelable2: UILabel!
+ //   @IBOutlet weak var restaurantnamelable2: UILabel!
     
     let pintcheckedImage = UIImage(named: "pintenabled")
     let pintunCheckedImage = UIImage(named: "pint")
@@ -71,13 +71,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var toggle = false
     
+    var inputArr = [Restaurant]()
+    
+
+    
+    
     
     override func viewDidLoad()
     {
+        inputArr = head
+    
+        pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
         
-        let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
-        popupview.addGestureRecognizer(tap1)
+        popupview.layer.cornerRadius = 20.0
+
+        let tap1 = UITapGestureRecognizer(target: popupview, action: Selector("handleFrontTap:"))
+        //popupview.addGestureRecognizer(tap1)
         popupview.hidden = true
+        tap1.delegate = self
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
@@ -91,6 +102,43 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var drink = getselectedliq.capitalizedString
         selectedliqname.text =  drink
         togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+        
+        func swapNumbers(index1 :Int,index2: Int)
+        {
+            let temp = inputArr[index1]
+            println(temp)
+            inputArr[index1] = inputArr[index2]
+            println(inputArr[index1])
+            inputArr[index2] = temp
+            println(inputArr[index2])
+        }
+        
+        for var ind: Int = 0; ind < inputArr.count - 1; ++ind
+        {
+            for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
+            {
+                println(jIndex)
+                if inputArr[jIndex].minp < inputArr[ind].minp
+                {
+                    // println(inputArr[jIndex].maxp)
+                    // println(inputArr[jIndex + 1].maxp)
+                    //swapNumbers(jIndex, ind)
+                    //println(swapNumbers(jIndex, jIndex+1))
+                    //println(inputArr[jIndex + 1].maxp)
+                    let temp = inputArr[jIndex]
+                    //println(temp)
+                    inputArr[jIndex] = inputArr[ind]
+                    //println(inputArr[index1])
+                    inputArr[ind] = temp
+                }
+            }
+        }
+        
+        //  println(inputArr.first)
+        // println(inputArr.last)
+        head = inputArr
+        self.tableview.reloadData()
+
         
     }
     
@@ -110,8 +158,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    @IBAction func press2revealPressed(sender: UIButton) {
-        
+    @IBAction func press2revealPressed(sender: UIButton)
+    {
+        self.resturantnamelable.text = head[sender.tag].restname
         popupview.hidden = false
         
     }
@@ -119,15 +168,39 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
+       if let touch = touches.first as? UITouch {
+            let location = touch.locationInView(self.mainview)
+            if location.x < popupview.frame.origin.x || location.x > (popupview.frame.origin.x + popupview.frame.size.width){
+                popupview.hidden = true
+            }
+            if location.y < popupview.frame.origin.y || location.y > (popupview.frame.origin.y + popupview.frame.size.height){
+            popupview.hidden = true
+           }
         
-        popupview.hidden = true
+        }
+        
+        //popupview.hidden = true
         
     }
     
+//    override func touchesEnded(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+////        if let touch = touches.first as? UITouch {
+////            let location = touch.locationInView(self.view)
+////            if location.x < popupview.frame.origin.x || location.x > (popupview.frame.origin.x + popupview.frame.size.width){
+////                if location.y < popupview.frame.origin.y || location.y > (popupview.frame.origin.y + popupview.frame.size.height){
+////                    popupview.hidden = true
+////                }
+////            }
+////            
+////        }
+//    }
+    
+    
+    
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
-        
-        popupview.hidden = false
+       // gestureRecognizer.cancelsTouchesInView = true
+        //popupview.hidden = false
     }
     @IBAction func shareonfacebook(sender: AnyObject)
     {
@@ -150,30 +223,30 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         //        shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant \(resobjr.restname) through the BottomzUp App")
         //        self.presentViewController(shareToFacebook, animated: true, completion: nil)
         //
-        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        //       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
-        //        self.presentViewController(shareToFacebook, animated: true, completion: nil)
-        
-        
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
-        {
-            
-            //            var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            //            facebookSheet.setInitialText("Vea Software! :D")
-            //            self.presentViewController(facebookSheet, animated: true, completion: nil)
-            
-            var text: String = "I just got a 10% discount at  \(head[sender.tag].restname) through the BottomzUp App"
-            var url: NSURL = NSURL(string: "http://bottomzup.com")!
-            var controller: UIActivityViewController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
-            self.presentViewController(controller, animated: true, completion: nil)
-            
-        }
-        else
-        {
-            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
+//        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//        //       shareToFacebook.setInitialText("I just got a 10% discount at Aangan Restaurant through the BottomzUp App")
+//        //        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+//        
+//        
+//        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
+//        {
+//            
+//            //            var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//            //            facebookSheet.setInitialText("Vea Software! :D")
+//            //            self.presentViewController(facebookSheet, animated: true, completion: nil)
+//            
+//            var text: String = "I just got a 10% discount at  \(head[sender.tag].restname) through the BottomzUp App"
+//            var url: NSURL = NSURL(string: "http://bottomzup.com")!
+//            var controller: UIActivityViewController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
+//            self.presentViewController(controller, animated: true, completion: nil)
+//            
+//        }
+//        else
+//        {
+//            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        }
         //
         //        var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
         //        content.contentURL = NSURL(string:"https://developers.facebook.com")
@@ -181,7 +254,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         //        var text: String = "How to add Facebook and Twitter sharing to an iOS app"
         //        var url: NSURL = NSURL(string: "http://roadfiresoftware.com/2014/02/how-to-add-facebook-and-twitter-sharing-to-an-ios-app/")!
         //        var controller: UIActivityViewController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
+        
+        
         //        self.presentViewController(controller, animated: true, completion: nil)
+        
+        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        shareToFacebook.setInitialText("I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App")
+        self.presentViewController(shareToFacebook, animated: true, completion: nil)
     }
     
     
@@ -193,9 +272,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func getdiscount1(sender: AnyObject)
     {
-        popupview.hidden = false
-        resturantnamelable.text = "I just got a 10% discount at"
-        restaurantnamelable2.text = "\(head[sender.tag].restname) through the BottomzUp App"
+//        popupview.hidden = false
+//        resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
+        //restaurantnamelable2.text = ""
         
     }
     @IBAction func gotomap(sender: AnyObject)
@@ -220,6 +299,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.beers = [liqclass]()
         cells.beers = head[indexPath.section].amp
         cells.press2reveal.tag = indexPath.section
+        cells.restaurantName = head[indexPath.section].restname
       //  cells.directions.setTitle(head[indexPath.section].distance, forState: UIControlState.Normal)
         cells.distancelabelnew.text = head[indexPath.section].distance
         cells.tableView.reloadData()
@@ -281,14 +361,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
-        
+
         
         headerCell.tag = section
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.headercellname.text = head[section].restname
-        headerCell.headercellmin.text = "₹ " + head[section].minp
-        headerCell.headercellmax.text = "₹ " + head[section].maxp
+        headerCell.headercellmin.text = "₹ " + "\(head[section].minp)"
+        headerCell.headercellmax.text = "₹ " + "\(head[section].maxp)"
         headerCell.happyhourslabelbeer.text = "Happy Hours " + head[section].happystart + "PM  - " + head[section].happyend + "PM"
+       // headerCell.headercellnamechild.text = "Happy Hours " + head[section].happystart + "PM  - " + head[section].happyend + "PM"
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
         headerCell.userInteractionEnabled = true
@@ -298,6 +379,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+        
+        if global == true{
+            headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
+        }
         
         
         if head[section].bool == false
@@ -318,6 +404,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell.happyhourslabelbeer.hidden = true
             headerCell.arrowimage.hidden = true
             headerCell.headercellnamechild.text = head[section].restname
+            headerCell.happyhourslablebeernew.text = "Happy Hours " + head[section].happystart + "PM  - " + head[section].happyend + "PM"
             headerCell.headercellname.hidden = true
             let happyhoursimage = UIImage(named: "Restauranttab")
             let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width:headerCell.headercellnamechild.frame.width,height: headerCell.headercellnamechild.frame.height))
@@ -343,6 +430,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
+
+        
         if bottlebuttonclicked == true
         {
             headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
@@ -535,13 +624,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     if let pint_avg_price = bottomsUp1["pint_avg_price"] as? Int
                     {
-                        var pint_avg_price1:String = toString(pint_avg_price)
-                        getfstobj1.minp = pint_avg_price1
+                       // var pint_avg_price1:String = toString(pint_avg_price)
+                        getfstobj1.minp = pint_avg_price
                     }
                     if let bottle_avg_price = bottomsUp1["bottle_avg_price"] as? Int
                     {
-                        var bottle_avg_price1:String = toString(bottle_avg_price)
-                        getfstobj1.maxp = bottle_avg_price1
+                        //var bottle_avg_price1:String = toString(bottle_avg_price)
+                        getfstobj1.maxp = bottle_avg_price
                     }
                 }
                 head.append(getfstobj1)
@@ -573,42 +662,109 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
         }
         
-        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
+        
+        
+        
+//        func swapNumbers(index1 :Int,index2: Int)
+//        {
+//            let temp = inputArr[index1]
+//            println(temp)
+//            inputArr[index1] = inputArr[index2]
+//            println(inputArr[index1])
+//            inputArr[index2] = temp
+//            println(inputArr[index2])
+//        }
+//        
+//        for var ind: Int = inputArr.count - 1; ind > 0; --ind
+//        {
+//            for var jIndex: Int = 0; jIndex < ind; ++jIndex
+//            {
+//                println(jIndex)
+//                if inputArr[jIndex].minp > inputArr[jIndex + 1].minp
+//                {
+//                    println(jIndex)
+//                    println(jIndex+1)
+//                    swapNumbers(jIndex, jIndex+1)
+//                    println(jIndex)
+//                    println(jIndex+1)
+//                }
+//            }
+//        }
+//        println(inputArr)
+
+
+        
+//        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
+//        {
+//            var sorted = false
+//            while sorted == false
+//            {
+//                sorted = true
+//                if cards.count > 1
+//                {
+//                    for i in 0...cards.count - 2
+//                    {
+//                        if cards[i].minp < cards[i+1].minp
+//                        {
+//                            sorted = false
+//                            var first = cards[i]
+//                            var second = cards[i + 1]
+//                            println("first object before \(first.minp)")
+//                            println("second object before\(second.minp)")
+//                            cards[i] = second
+//                            cards[i + 1] = first
+//                            println("first object after\(cards[i].minp)")
+//                            println("second object after\(cards[i + 1].minp)")
+//                        }
+//                    }
+//                }
+//                else
+//                {
+//                    
+//                }
+//            }
+//            return cards
+//        }
+//        var sortedarray:[Restaurant] = sortCards(&head)
+        
+        
+        func swapNumbers(index1 :Int,index2: Int)
         {
-            var sorted = false
-            while sorted == false
+            let temp = inputArr[index1]
+            println(temp)
+            inputArr[index1] = inputArr[index2]
+            println(inputArr[index1])
+            inputArr[index2] = temp
+            println(inputArr[index2])
+        }
+        
+        for var ind: Int = 0; ind < inputArr.count - 1; ++ind
+        {
+            for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
             {
-                sorted = true
-                if cards.count > 1
+                println(jIndex)
+                if inputArr[jIndex].minp < inputArr[ind].minp
                 {
-                    for i in 0...cards.count - 2
-                    {
-                        if cards[i].minp < cards[i+1].minp
-                        {
-                            sorted = false
-                            var first = cards[i]
-                            var second = cards[i + 1]
-                            println("first object before \(first.minp)")
-                            println("second object before\(second.minp)")
-                            cards[i] = second
-                            cards[i + 1] = first
-                            println("first object after\(cards[i].minp)")
-                            println("second object after\(cards[i + 1].minp)")
-                        }
-                    }
-                }
-                else
-                {
-                    
+                    // println(inputArr[jIndex].maxp)
+                    // println(inputArr[jIndex + 1].maxp)
+                    //swapNumbers(jIndex, ind)
+                    //println(swapNumbers(jIndex, jIndex+1))
+                    //println(inputArr[jIndex + 1].maxp)
+                    let temp = inputArr[jIndex]
+                    //println(temp)
+                    inputArr[jIndex] = inputArr[ind]
+                    //println(inputArr[index1])
+                    inputArr[ind] = temp
                 }
             }
-            return cards
         }
-        var sortedarray:[Restaurant] = sortCards(&head)
-        head = sortedarray
+        
+        //  println(inputArr.first)
+        // println(inputArr.last)
+        head = inputArr
         self.tableview.reloadData()
         
-        println("sorted array is  : \(head)")
+        //println("sorted array is  : \(head)")
         
         
         
@@ -657,50 +813,86 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func bottolesort(sender: AnyObject)
         
     {
+        global = true
         pintbuttonclicked = false
         locationbuttonclicked = false
         bottlebuttonclicked = true
         
         if bottlebuttonclicked == true
         {
+            
             pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
             bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
-            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
+//            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
+//            {
+//                var sorted = false
+//                while sorted == false
+//                {
+//                    sorted = true
+//                    if cards.count > 1
+//                    {
+//                        for i in 0...cards.count - 2
+//                        {
+//                            if cards[i].maxp < cards[i+1].maxp
+//                            {
+//                                sorted = false
+//                                var first = cards[i]
+//                                var second = cards[i + 1]
+//                                println("first object before \(first.maxp)")
+//                                println("second object before\(second.maxp)")
+//                                cards[i] = second
+//                                cards[i + 1] = first
+//                                
+//                                println("first object after\(cards[i].maxp)")
+//                                println("second object after\(cards[i + 1].maxp)")
+//                                
+//                            }
+//                        }
+//                    }
+//                    else
+//                    {
+//                        
+//                    }
+//                }
+//                return cards
+//            }
+//            var sortedarray:[Restaurant] = sortCards(&head)
+            
+            func swapNumbers(index1 :Int,index2: Int)
             {
-                var sorted = false
-                while sorted == false
+                let temp = inputArr[index1]
+                println(temp)
+                inputArr[index1] = inputArr[index2]
+                println(inputArr[index1])
+                inputArr[index2] = temp
+                println(inputArr[index2])
+            }
+            
+            for var ind: Int = 0; ind < inputArr.count - 1; ++ind
+            {
+                for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
                 {
-                    sorted = true
-                    if cards.count > 1
+                    println(jIndex)
+                    if inputArr[jIndex].maxp < inputArr[ind].maxp
                     {
-                        for i in 0...cards.count - 2
-                        {
-                            if cards[i].maxp > cards[i+1].maxp
-                            {
-                                sorted = false
-                                var first = cards[i]
-                                var second = cards[i + 1]
-                                println("first object before \(first.maxp)")
-                                println("second object before\(second.maxp)")
-                                cards[i] = second
-                                cards[i + 1] = first
-                                
-                                println("first object after\(cards[i].maxp)")
-                                println("second object after\(cards[i + 1].maxp)")
-                                
-                            }
-                        }
-                    }
-                    else
-                    {
-                        
+                       // println(inputArr[jIndex].maxp)
+                       // println(inputArr[jIndex + 1].maxp)
+                        //swapNumbers(jIndex, ind)
+                        //println(swapNumbers(jIndex, jIndex+1))
+                        //println(inputArr[jIndex + 1].maxp)
+                        let temp = inputArr[jIndex]
+                        //println(temp)
+                        inputArr[jIndex] = inputArr[ind]
+                        //println(inputArr[index1])
+                        inputArr[ind] = temp
                     }
                 }
-                return cards
             }
-            var sortedarray:[Restaurant] = sortCards(&head)
-            head = sortedarray
+        
+          //  println(inputArr.first)
+           // println(inputArr.last)
+            head = inputArr
             self.tableview.reloadData()
             
             println("sorted array is  : \(head)")

@@ -348,7 +348,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             
            if (substringRange.location == 0)
            {
-              autocompleteUrls.append(ucurstring.lowercaseString.capitalizedString)
+              autocompleteUrls.append(ucurstring)
             }
         }
         
@@ -443,13 +443,13 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 if check <= 0{
                 if let pint_avg_price = bottomsUp1["pint_avg_price"] as? Int
                 {
-                    var pint_avg_price2:String = toString(pint_avg_price)
-                    fstobj1.minp = pint_avg_price2
+                    //var pint_avg_price2:String = toString(pint_avg_price)
+                    fstobj1.minp = pint_avg_price
                 }
                 if let bottle_avg_price = bottomsUp1["bottle_avg_price"] as? Int
                 {
-                    var bottle_avg_price2:String = toString(bottle_avg_price)
-                    fstobj1.maxp = bottle_avg_price2
+                    //var bottle_avg_price2:String = toString(bottle_avg_price)
+                    fstobj1.maxp = bottle_avg_price
                 }
                     
                     if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
@@ -565,8 +565,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 {
                    if let avg_price = bottomsUp1["avg_price"] as? Int
                    {
-                    var avg_price2:String = toString(avg_price)
-                    vodkaobj.avgprice = avg_price2
+                    //var avg_price2:String = toString(avg_price)
+                    vodkaobj.avgprice = avg_price
                     //vodkasendobj.avgprice = avg_price2
                     
                     }

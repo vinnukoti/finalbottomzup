@@ -18,6 +18,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 {
     @IBOutlet weak var tableview1: UITableView!
     var header1:[Restauarantvodka] = [Restauarantvodka]()
+    var vodkasort = [Restauarantvodka]()
     var headfurther:[Restauarantvodka] = [Restauarantvodka]()
     var liqvodkaname:String!
     var bool = false
@@ -48,7 +49,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     @IBOutlet weak var searchresultsvodka: UILabel!
     @IBOutlet weak var takerestaurantname: UILabel!
-    @IBOutlet weak var takerestaurantname1: UILabel!
+  //  @IBOutlet weak var takerestaurantname1: UILabel!
     
     let toggleoff = UIImage(named: "toggleoff")
     let toggleon = UIImage(named: "toggleon")
@@ -69,11 +70,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     
     
+    @IBOutlet var superviewvodka: UIView!
     
     override func viewDidLoad()
     {
+        vodkasort = header1
+        popupviewvodka.layer.cornerRadius = 20.0
         super.viewDidLayoutSubviews()
         let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
+        superviewvodka.addGestureRecognizer(tap)
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
         popupviewvodka.addGestureRecognizer(tap)
         
         self.tableview1.delegate = self
@@ -86,25 +93,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         var vodkadrink = getselectedlq.capitalizedString
         searchresultsvodka.text =  vodkadrink
-        
-        //togglebutton.backgroundColor = UIColor.grayColor()
-        //togglebutton.imageView?.image = toggleoff
+
         togglebutton.setImage(toggleoff, forState: .Normal)
-        
-       // headfurther = header1
-       //  headfurther = header1
-        
+
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        //togglebutton.imageView?.image = toggleoff
         togglebutton.setImage(toggleoff, forState: .Normal)
     }
     
     @IBAction func press2revealPressed(sender: UIButton) {
         
         popupviewvodka.hidden = false
+        takerestaurantname.text = "I just got a 10 % discount at \(header1[sender.tag].restnamevodka) Through Bottomz Up"
         
     }
     
@@ -112,7 +114,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
         
         popupviewvodka.hidden = true
-        //tableview.hidden = true
     }
 
     @IBAction func toggelbuttonpressed(sender: UIButton)
@@ -132,7 +133,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
-       popupviewvodka.hidden = false
+       popupviewvodka.hidden = true
+    }
+    func handleFrontTap1(gestureRecognizer: UITapGestureRecognizer)
+    {
+        popupviewvodka.hidden = false
     }
     
     @IBAction func sharetofacebookVodka(sender: AnyObject)
@@ -203,7 +208,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
         
     
-        let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
+       // let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
 //        headerCell1.vodkarestaurantname.text = headfurther[section].restnamevodka
 //        headerCell1.vodkaavgprice.text = "₹ " + headfurther[section].avgprice
 //        headerCell1.happyhourslabelvodka.text = "Happy Hours " + headfurther[section].vodkahappystart + "PM  - " + headfurther[section].vodkahappyend + "PM"
@@ -214,7 +219,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.tag = section
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
-        headerCell.vodkaavgprice.text = "₹ " + header1[section].avgprice
+        headerCell.vodkaavgprice.text = "₹ " + "\(header1[section].avgprice)"
         headerCell.happyhourslabelvodka.text = "Happy Hours " + header1[section].vodkahappystart + "PM  - " + header1[section].vodkahappyend + "PM"
 
         
@@ -309,6 +314,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
         changecolorvodka = true
+       // vodkasort = header1
+       // self.tableview1.reloadData()
+        header1 = vodkasort
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=8&records=4&query=\(liqvodkaname)")
 
     }
@@ -347,9 +355,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 {
                     if let avg_price = bottomsUp1["avg_price"] as? Int
                     {
-                        var avg_PRICE:String = toString(avg_price)
-                        getvodkaobj.avgprice = avg_PRICE
-                        getvodkaobj1.avgprice = avg_PRICE
+                       // var avg_PRICE:String = toString(avg_price)
+                        getvodkaobj.avgprice = avg_price
+                        getvodkaobj1.avgprice = avg_price
                     }
                     
                     if let happy_hour_startvodka = bottomsUp1["happy_hour_start"] as? String
@@ -483,39 +491,81 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         }
       
-            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
+//            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
+//            {
+//                var sorted = false
+//                while sorted == false
+//                {
+//                    sorted = true
+//                    if cards.count > 1
+//                    {
+//                    for i in 0...cards.count - 2
+//                    {
+//                        if cards[i].avgprice > cards[i+1].avgprice
+//                        {
+//                            sorted = false
+//                            var first = cards[i]
+//                            var second = cards[i + 1]
+//                            println("first object before \(first.avgprice)")
+//                            println("second object before\(second.avgprice)")
+//                            cards[i] = second
+//                            cards[i + 1] = first
+//                            println("first object after\(cards[i].avgprice)")
+//                            println("second object after\(cards[i + 1].avgprice)")
+//                        }
+//                    }
+//                    }
+//                    else
+//                    {
+//                        
+//                    }
+//                }
+//                return cards
+//            }
+//            var sortedarray:[Restauarantvodka] = sortCards(&header1)
+        
+        
+        func swapNumbers(index1 :Int,index2: Int)
+        {
+            let temp = vodkasort[index1]
+            println(temp)
+            vodkasort[index1] = vodkasort[index2]
+            println(vodkasort[index1])
+            vodkasort[index2] = temp
+            println(vodkasort[index2])
+        }
+        
+        for var ind: Int = 0; ind < vodkasort.count - 1; ++ind
+        {
+            for var jIndex: Int = ind + 1; jIndex < vodkasort.count; ++jIndex
             {
-                var sorted = false
-                while sorted == false
+                println(jIndex)
+                if vodkasort[jIndex].avgprice < vodkasort[ind].avgprice
                 {
-                    sorted = true
-                    if cards.count > 1
-                    {
-                    for i in 0...cards.count - 2
-                    {
-                        if cards[i].avgprice < cards[i+1].avgprice
-                        {
-                            sorted = false
-                            var first = cards[i]
-                            var second = cards[i + 1]
-                            println("first object before \(first.avgprice)")
-                            println("second object before\(second.avgprice)")
-                            cards[i] = second
-                            cards[i + 1] = first
-                            println("first object after\(cards[i].avgprice)")
-                            println("second object after\(cards[i + 1].avgprice)")
-                        }
-                    }
-                    }
-                    else
-                    {
-                        
-                    }
+                    // println(inputArr[jIndex].maxp)
+                    // println(inputArr[jIndex + 1].maxp)
+                    //swapNumbers(jIndex, ind)
+                    //println(swapNumbers(jIndex, jIndex+1))
+                    //println(inputArr[jIndex + 1].maxp)
+                    let temp = vodkasort[jIndex]
+                    //println(temp)
+                    vodkasort[jIndex] = vodkasort[ind]
+                    //println(inputArr[index1])
+                    vodkasort[ind] = temp
                 }
-                return cards
             }
-            var sortedarray:[Restauarantvodka] = sortCards(&header1)
-            header1 = sortedarray
+        }
+        
+        //  println(inputArr.first)
+        // println(inputArr.last)
+        header1 = vodkasort
+
+        
+        
+        
+        
+        
+           // header1 = sortedarray
             self.tableview1.reloadData()
             println("sorted array is  : \(header1)")
         
@@ -669,10 +719,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func getDiscountforvodka(sender: AnyObject)
     {
-        popupviewvodka.hidden = false
-        takerestaurantname.text = "I just got a 10 % discount at "
-        takerestaurantname1.text = "\(header1[sender.tag].restnamevodka) Through Bottomz Up"
-        
+//        popupviewvodka.hidden = false
+//        takerestaurantname.text = "I just got a 10 % discount at \(header1[sender.tag].restnamevodka) Through Bottomz Up"
     }
     
 }

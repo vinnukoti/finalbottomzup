@@ -16,8 +16,8 @@ class Restaurant
     var two = liqclass()
     
     var restname:String!
-    var minp:String!
-    var maxp:String!
+    var minp:Int!
+    var maxp:Int!
     var distance:String!
     var happystart:String!
     var happyend:String!
@@ -33,8 +33,8 @@ class Restaurant
         two = liqclass()
         
         restname = String()
-        minp = String()
-        maxp = String()
+        minp = Int()
+        maxp = Int()
         distance = String()
         happystart = String()
         happyend = String()

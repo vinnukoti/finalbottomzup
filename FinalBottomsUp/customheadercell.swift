@@ -31,28 +31,22 @@ class customheadercell: UITableViewCell
     @IBOutlet weak var arrowimage: UIImageView!
     @IBOutlet weak var happyhourslabelbeer: UILabel!
     
-    
-    
+    @IBOutlet weak var happyhourslablebeernew: UILabel!
+
 
     //var tableobject = tableviewclass()
     override func awakeFromNib()
     {
         super.awakeFromNib()
-    
-//        if tableobject.pintbuttonclicked == true
-//        {
-//
-//            headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//
+  
+        
+        
+     // headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//        if global == true{
+//            headercellmin.backgroundColor = UIColor.whiteColor()
+//            //global = false
 //        }
-        
-//        let happyhoursimage = UIImage(named: "Restauranttab")
-//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: headercellname.frame.width, height: headercellname.frame.height))
-//        myImageView.image = happyhoursimage
-//        headercellname.addSubview(myImageView)
-        
-
-
+        //global = false
     }
     
     override func setSelected(selected: Bool, animated: Bool)
