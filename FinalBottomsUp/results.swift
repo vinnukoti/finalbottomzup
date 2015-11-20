@@ -337,20 +337,37 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     {
         autocompleteUrls.removeAll(keepCapacity: false)
    
-        var usubstring = substring.uppercaseString
+        var usubstring = substring
         
         for curString in newarar
         {
-            var ucurstring = curString.uppercaseString
+            var ucurstring = curString
           
             var myString: NSString! = ucurstring as NSString
-            var substringRange: NSRange! = myString.rangeOfString(usubstring)
+            var substringRange: NSRange! = myString.rangeOfString(usubstring.capitalizedString)
             
            if (substringRange.location == 0)
            {
               autocompleteUrls.append(ucurstring)
             }
         }
+        
+        
+        
+//        if autoCompleteStrings != nil
+//        {
+//            for i in 0..<autoCompleteStrings!.count
+//            {
+//                let str = autoCompleteStrings![i] as NSString
+//                let range = str.rangeOfString(text!, options: .CaseInsensitiveSearch)
+//                var attString = NSMutableAttributedString(string: autoCompleteStrings![i], attributes: attrs)
+//                attString.addAttributes(autoCompleteAttributes!, range: range)
+//                attributedAutoCompleteStrings?.append(attString)
+//            }
+//        }
+        
+        
+        
         
     }
     
@@ -398,7 +415,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=4&query=\(trimmedString)")
+       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=15&query=\(trimmedString)")
         
        // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
         //28.63875
@@ -458,8 +475,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                         }
-                        println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 3))
-                        var happy_hour_start1 = PartOfString(happy_hour_start, 1, 3)
+                        println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
+                        var happy_hour_start1 = PartOfString(happy_hour_start, 1, 5)
 
            
                         fstobj1.happystart = happy_hour_start1
@@ -471,8 +488,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                         }
-                        println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 3))
-                        var happy_hour_end1 = PartOfString(happy_hour_end, 1, 3)
+                        println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
+                        var happy_hour_end1 = PartOfString(happy_hour_end, 1, 5)
                         fstobj1.happyend = happy_hour_end1
                     }
                     
@@ -577,8 +594,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                         }
-                        println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 3))
-                        var happy_hour_start2 = PartOfString(happy_hour_start, 1, 3)
+                        println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
+                        var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
 
                         vodkaobj.vodkahappystart = happy_hour_start2
                         //vodkasendobj.vodkahappystart = happy_hour_start2
@@ -591,8 +608,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                         {
                             return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                         }
-                        println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 3))
-                        var happy_hour_end2 = PartOfString(happy_hour_end, 1, 3)
+                        println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
+                        var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
                         vodkaobj.vodkahappyend = happy_hour_end2
                         //vodkasendobj.vodkahappyend = happy_hour_end2
                     }

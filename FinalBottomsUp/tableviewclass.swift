@@ -18,7 +18,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var getfstobj1 = Restaurant()
    // var getfstobj2 = Restaurant()
     
-    
 
     
     var global = false
@@ -160,7 +159,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func press2revealPressed(sender: UIButton)
     {
-        self.resturantnamelable.text = head[sender.tag].restname
+        //resturantnamelable.text = "I just got a 10 % discount at \(head[sender.tag].restnamevodka) Through Bottomz Up"
+        resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
+        tableview.userInteractionEnabled = false
         popupview.hidden = false
         
     }
@@ -172,9 +173,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             let location = touch.locationInView(self.mainview)
             if location.x < popupview.frame.origin.x || location.x > (popupview.frame.origin.x + popupview.frame.size.width){
                 popupview.hidden = true
+                tableview.userInteractionEnabled = true
             }
             if location.y < popupview.frame.origin.y || location.y > (popupview.frame.origin.y + popupview.frame.size.height){
             popupview.hidden = true
+            tableview.userInteractionEnabled = true
            }
         
         }
@@ -199,7 +202,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
-       // gestureRecognizer.cancelsTouchesInView = true
+        //gestureRecognizer.cancelsTouchesInView = false
         //popupview.hidden = false
     }
     @IBAction func shareonfacebook(sender: AnyObject)
@@ -302,6 +305,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.restaurantName = head[indexPath.section].restname
       //  cells.directions.setTitle(head[indexPath.section].distance, forState: UIControlState.Normal)
         cells.distancelabelnew.text = head[indexPath.section].distance
+        //cells.distanceroundimage.image = UIImage(named: "Happyhoursround image")
         cells.tableView.reloadData()
         
         return cells
@@ -309,7 +313,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        cell.layer.borderColor = UIColor.brownColor().CGColor
+        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell.layer.borderWidth = 1
         //         cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
         //        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
@@ -319,13 +323,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if ((head[indexPath.section].amp.count * 60) + 10) > 210 {
+        if ((head[indexPath.section].amp.count * 30) + 10) > 187 {
             
-            return CGFloat((head[indexPath.section].amp.count * 60) + 10)
+            return CGFloat((head[indexPath.section].amp.count * 30) + 10)
         }
         else{
             
-            return 210
+            return 187
             
         }
         
@@ -337,7 +341,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         if head[section].bool == false
         {
             
-            return 86
+            return 99   
             
         }
         else{
@@ -368,8 +372,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = "₹ " + "\(head[section].minp)"
         headerCell.headercellmax.text = "₹ " + "\(head[section].maxp)"
-        headerCell.happyhourslabelbeer.text = "Happy Hours " + head[section].happystart + "PM  - " + head[section].happyend + "PM"
-       // headerCell.headercellnamechild.text = "Happy Hours " + head[section].happystart + "PM  - " + head[section].happyend + "PM"
+        headerCell.happyhourslabelbeer.text = "Happy Hours " + head[section].happystart + "PM-" + head[section].happyend + "PM  "
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped)
         headerCell.userInteractionEnabled = true
@@ -383,6 +386,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if global == true{
             headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
+            
         }
         
         
@@ -394,9 +398,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell.availofferbuttonbeer.hidden = false
             headerCell.happyhourslabelbeer.hidden = false
             headerCell.arrowimage.image = UIImage(named: "arrow")
+            headerCell.headercellnamechild.hidden = true
        }
         else
         {
+            //headerCell.roundimagebeer.hidden = true
             headerCell.headercellmin.text = ""
             headerCell.headercellmax.text = ""
             headerCell.mapbutton.setTitle("", forState: UIControlState.Normal)
@@ -404,12 +410,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell.happyhourslabelbeer.hidden = true
             headerCell.arrowimage.hidden = true
             headerCell.headercellnamechild.text = head[section].restname
-            headerCell.happyhourslablebeernew.text = "Happy Hours " + head[section].happystart + "PM  - " + head[section].happyend + "PM"
+            headerCell.happyhourslablebeernew.text = "Happy Hours " + head[section].happystart + "PM-" + head[section].happyend + "PM "
+            headerCell.happyhourslabelbeer.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
             headerCell.headercellname.hidden = true
-            let happyhoursimage = UIImage(named: "Restauranttab")
-            let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width:headerCell.headercellnamechild.frame.width,height: headerCell.headercellnamechild.frame.height))
-            headerCell.setheadercellnamechildimaghe.image = happyhoursimage
-            headerCell.headercellnamechild.addSubview(myImageView)
+            
+            headerCell.setheadercellnamechildimaghe.layer.borderColor = UIColor.lightGrayColor().CGColor
+            headerCell.setheadercellnamechildimaghe.layer.borderWidth = 1
         }
         //Giving Font family style to a UIButton
         headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
@@ -418,9 +424,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell.happyhourslabelbeer.layer.cornerRadius = 10
             headerCell.happyhourslabelbeer.layer.borderColor = UIColor.greenColor().CGColor
             headerCell.happyhourslabelbeer.layer.borderWidth = 1
+
+
         }
         else
         {
+            
             headerCell.happyhourslabelbeer.layer.cornerRadius = 10
             headerCell.happyhourslabelbeer.layer.borderColor = UIColor.redColor().CGColor
             headerCell.happyhourslabelbeer.layer.borderWidth = 1
@@ -465,12 +474,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
-        //        view.layer.borderColor = UIColor.whiteColor().CGColor
-        //        view.layer.borderWidth = 1
-        //        view.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
-        //        view.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
-        //       view.layer.addBorder(UIRectEdge.Top, color: UIColor.blackColor(), thickness: 0.9)
-        //   let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: headercellname.frame.width, height: headercellname.frame.height))
+
     }
     
     
@@ -482,7 +486,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         //28.63875
         //77.07380
         changecolor = true
-        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=8&records=4&query=\(liqname)")
+        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=8&records=15&query=\(liqname)")
         
         
     }
@@ -530,8 +534,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
-                            println("SUBSTRING    " + PartOfString(happy_hour_startbeer, 1, 3))
-                            var happy_hour_startbeer1 = PartOfString(happy_hour_startbeer, 1, 3)
+                            println("SUBSTRING    " + PartOfString(happy_hour_startbeer, 1, 5))
+                            var happy_hour_startbeer1 = PartOfString(happy_hour_startbeer, 1, 5)
                             getfstobj1.happystart = happy_hour_startbeer1
                         }
                         
@@ -541,8 +545,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
-                            println("SUBSTRING    " + PartOfString(happy_hour_endbeer, 1, 3))
-                            var happy_hour_endbeer1 = PartOfString(happy_hour_endbeer, 1, 3)
+                            println("SUBSTRING    " + PartOfString(happy_hour_endbeer, 1, 5))
+                            var happy_hour_endbeer1 = PartOfString(happy_hour_endbeer, 1, 5)
                             
                             getfstobj1.happyend = happy_hour_endbeer1
                         }
@@ -650,6 +654,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func pintsort(sender: AnyObject)
         
     {
+        inputArr = head
         bottlebuttonclicked = false
         locationbuttonclicked = false
         pintbuttonclicked = true
@@ -661,39 +666,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
         }
-        
-        
-        
-        
-//        func swapNumbers(index1 :Int,index2: Int)
-//        {
-//            let temp = inputArr[index1]
-//            println(temp)
-//            inputArr[index1] = inputArr[index2]
-//            println(inputArr[index1])
-//            inputArr[index2] = temp
-//            println(inputArr[index2])
-//        }
-//        
-//        for var ind: Int = inputArr.count - 1; ind > 0; --ind
-//        {
-//            for var jIndex: Int = 0; jIndex < ind; ++jIndex
-//            {
-//                println(jIndex)
-//                if inputArr[jIndex].minp > inputArr[jIndex + 1].minp
-//                {
-//                    println(jIndex)
-//                    println(jIndex+1)
-//                    swapNumbers(jIndex, jIndex+1)
-//                    println(jIndex)
-//                    println(jIndex+1)
-//                }
-//            }
-//        }
-//        println(inputArr)
-
-
-        
+       
 //        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
 //        {
 //            var sorted = false
@@ -814,6 +787,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     {
         global = true
+        inputArr = head
         pintbuttonclicked = false
         locationbuttonclicked = false
         bottlebuttonclicked = true

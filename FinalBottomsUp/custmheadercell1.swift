@@ -29,7 +29,9 @@ class custmheadercell1: UITableViewCell
     
     @IBOutlet weak var childvodkarestaurantname: UILabel!
     
+    @IBOutlet weak var displayhappyhoursvodka: UILabel!
     
+    @IBOutlet weak var roundimagevodka: UILabel!
     
     override func awakeFromNib()
     {

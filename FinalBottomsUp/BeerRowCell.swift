@@ -31,8 +31,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         super.awakeFromNib()
         tableView.delegate = self
         tableView.dataSource = self
-        //beers = [liqclass]()
-        // Initialization code
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -59,23 +58,6 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         minprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         maxprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        //setting Border for UITABLEVIEW
-//        cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
-//        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
-//        
-//        if indexPath.section == (beers.count - 1)
-//        {
-//            if indexPath.row == (beers.count - 1){
-//                
-//
-//                    cell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.blackColor(), thickness: 0.9)
-//
-//                
-//                
-//            }
-//            
-//        }
-      
         
       }
         
@@ -84,7 +66,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60   
+        return 30
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

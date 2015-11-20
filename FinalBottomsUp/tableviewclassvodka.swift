@@ -65,20 +65,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var changecolorvodka = false
     
-    
-    
-    
-    
-    
-    @IBOutlet var superviewvodka: UIView!
+
     
     override func viewDidLoad()
     {
+        
+        pricebutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
         vodkasort = header1
         popupviewvodka.layer.cornerRadius = 20.0
         super.viewDidLayoutSubviews()
         let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
-        superviewvodka.addGestureRecognizer(tap)
+        mainviewvodka.addGestureRecognizer(tap)
         
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
         popupviewvodka.addGestureRecognizer(tap)
@@ -95,6 +92,44 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         searchresultsvodka.text =  vodkadrink
 
         togglebutton.setImage(toggleoff, forState: .Normal)
+        
+        
+        func swapNumbers(index1 :Int,index2: Int)
+        {
+            let temp = vodkasort[index1]
+            println(temp)
+            vodkasort[index1] = vodkasort[index2]
+            println(vodkasort[index1])
+            vodkasort[index2] = temp
+            println(vodkasort[index2])
+        }
+        
+        for var ind: Int = 0; ind < vodkasort.count - 1; ++ind
+        {
+            for var jIndex: Int = ind + 1; jIndex < vodkasort.count; ++jIndex
+            {
+                println(jIndex)
+                if vodkasort[jIndex].avgprice < vodkasort[ind].avgprice
+                {
+                    // println(inputArr[jIndex].maxp)
+                    // println(inputArr[jIndex + 1].maxp)
+                    //swapNumbers(jIndex, ind)
+                    //println(swapNumbers(jIndex, jIndex+1))
+                    //println(inputArr[jIndex + 1].maxp)
+                    let temp = vodkasort[jIndex]
+                    //println(temp)
+                    vodkasort[jIndex] = vodkasort[ind]
+                    //println(inputArr[index1])
+                    vodkasort[ind] = temp
+                }
+            }
+        }
+        
+        //  println(inputArr.first)
+        // println(inputArr.last)
+        header1 = vodkasort
+         self.tableview1.reloadData()
+
 
         
     }
@@ -106,15 +141,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBAction func press2revealPressed(sender: UIButton) {
         
         popupviewvodka.hidden = false
+        tableview1.userInteractionEnabled = false
         takerestaurantname.text = "I just got a 10 % discount at \(header1[sender.tag].restnamevodka) Through Bottomz Up"
         
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
-        
-        popupviewvodka.hidden = true
-    }
+//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+//    {
+//        
+//        popupviewvodka.hidden = true
+//    }
 
     @IBAction func toggelbuttonpressed(sender: UIButton)
     {
@@ -133,11 +169,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
-       popupviewvodka.hidden = true
+      // popupviewvodka.hidden = true
     }
     func handleFrontTap1(gestureRecognizer: UITapGestureRecognizer)
     {
-        popupviewvodka.hidden = false
+        //popupviewvodka.hidden = false
     }
     
     @IBAction func sharetofacebookVodka(sender: AnyObject)
@@ -177,19 +213,19 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.layer.borderColor = UIColor.brownColor().CGColor
+        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell.layer.borderWidth = 1
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if (header1[indexPath.section].vodkaarray.count * 60) > 210 {
+        if (header1[indexPath.section].vodkaarray.count * 30 + 10) > 187 {
         
-        return CGFloat(header1[indexPath.section].vodkaarray.count * 60)
+        return CGFloat(header1[indexPath.section].vodkaarray.count * 30 + 10)
         }
         else{
         
-        return 210
+        return 187
             
         }
     }
@@ -197,10 +233,26 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
         if header1[section].bool1 == false{
-        return 85
+        return 99   
         }
         else {
             return 60
+        }
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    {
+        if let touch = touches.first as? UITouch {
+            let location = touch.locationInView(self.mainviewvodka)
+            if location.x < popupviewvodka.frame.origin.x || location.x > (popupviewvodka.frame.origin.x + popupviewvodka.frame.size.width){
+                popupviewvodka.hidden = true
+                tableview1.userInteractionEnabled = true
+            }
+            if location.y < popupviewvodka.frame.origin.y || location.y > (popupviewvodka.frame.origin.y + popupviewvodka.frame.size.height){
+                popupviewvodka.hidden = true
+                tableview1.userInteractionEnabled = true
+            }
+            
         }
     }
     
@@ -220,9 +272,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.tag = section
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = "₹ " + "\(header1[section].avgprice)"
-        headerCell.happyhourslabelvodka.text = "Happy Hours " + header1[section].vodkahappystart + "PM  - " + header1[section].vodkahappyend + "PM"
+        headerCell.happyhourslabelvodka.text = "Happy Hours " + header1[section].vodkahappystart + "PM-" + header1[section].vodkahappyend + "PM "
+        headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
 
-        
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.addGestureRecognizer(headerTapped1)
         headerCell.userInteractionEnabled = true
@@ -249,6 +301,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if header1[section].vodkahappyend == "yes"
         {
         headerCell.happyhourslabelvodka.layer.cornerRadius = 10
+            //headerCell.happyhourslabelvodka.layer.frame.width = 50
         headerCell.happyhourslabelvodka.layer.borderColor = UIColor.greenColor().CGColor
         headerCell.happyhourslabelvodka.layer.borderWidth = 1
         }
@@ -282,11 +335,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             headerCell.availofferbutton.hidden = true
             // headerCell.layer.borderColor = UIColor.clearColor()
             headerCell.childvodkarestaurantname.text = header1[section].restnamevodka
-            let happyhoursimage = UIImage(named: "Restauranttab")
-            let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width:headerCell.childvodkarestaurantname.frame.width,height: headerCell.childvodkarestaurantname.frame.height))
-            headerCell.vodkaresturantnameimage.image = happyhoursimage
-            headerCell.childvodkarestaurantname.addSubview(myImageView)
+//            let happyhoursimage = UIImage(named: "Restauranttab")
+//            let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width:headerCell.childvodkarestaurantname.frame.width ,height: headerCell.childvodkarestaurantname.frame.height))
+            //headerCell.vodkaresturantnameimage.image = happyhoursimage
+            //headerCell.childvodkarestaurantname.addSubview(myImageView)
             headerCell.vodkarestaurantname.hidden = true
+            headerCell.displayhappyhoursvodka.text = "Happy Hours " + header1[section].vodkahappystart + "PM -" + header1[section].vodkahappyend + "PM "
+            headerCell.vodkaresturantnameimage.layer.borderColor = UIColor.lightGrayColor().CGColor
+            headerCell.vodkaresturantnameimage.layer.borderWidth = 1
+            
+
         }
           return headerCell
         
@@ -366,8 +424,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         {
                             return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                         }
-                        println("SUBSTRING    " + PartOfString(happy_hour_startvodka, 1, 3))
-                        var happy_hour_startvodka1 = PartOfString(happy_hour_startvodka, 1, 3)
+                        println("SUBSTRING    " + PartOfString(happy_hour_startvodka, 1, 5))
+                        var happy_hour_startvodka1 = PartOfString(happy_hour_startvodka, 1, 5)
 
                         getvodkaobj.vodkahappystart = happy_hour_startvodka1
                         getvodkaobj1.vodkahappystart = happy_hour_startvodka1
@@ -380,8 +438,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         {
                             return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                         }
-                        println("SUBSTRING    " + PartOfString(happy_hour_endvodka, 1, 3))
-                        var happy_hour_endvodka1 = PartOfString(happy_hour_endvodka, 1, 3)
+                        println("SUBSTRING    " + PartOfString(happy_hour_endvodka, 1, 5))
+                        var happy_hour_endvodka1 = PartOfString(happy_hour_endvodka, 1, 5)
                         getvodkaobj.vodkahappyend = happy_hour_endvodka1
                          getvodkaobj1.vodkahappyend = happy_hour_endvodka1
                     }
@@ -480,7 +538,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func pricesort(sender: AnyObject)
     {
-        
+        vodkasort = header1
         pricebuttonclicked = true
         distancevodkabuttonclicked = false
         
@@ -567,7 +625,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
            // header1 = sortedarray
             self.tableview1.reloadData()
-            println("sorted array is  : \(header1)")
+            println("sorted array is  : \(header1.count)")
         
         
 //        else

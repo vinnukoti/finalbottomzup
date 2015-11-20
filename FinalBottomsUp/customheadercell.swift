@@ -33,6 +33,9 @@ class customheadercell: UITableViewCell
     
     @IBOutlet weak var happyhourslablebeernew: UILabel!
 
+    @IBOutlet weak var roundimagebeer: UIImageView!
+    
+    
 
     //var tableobject = tableviewclass()
     override func awakeFromNib()
