@@ -190,7 +190,8 @@ class ViewController: UIViewController,GPPSignInDelegate
     }
     @IBAction func gogo(sender: AnyObject)
     {
-        performSegueWithIdentifier("show", sender: self)
+       // performSegueWithIdentifier("show", sender: self)
+        performSegueWithIdentifier("newsearch", sender: self)
     }
     
     

@@ -13,13 +13,18 @@ import Social
 import FBSDKShareKit
 
 
-class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate
+class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
     var getfstobj1 = Restaurant()
    // var getfstobj2 = Restaurant()
     
-
+    var variable:String!
     
+    var citylat:Double!
+    var citylong:Double!
+    @IBOutlet weak var autocompletetextfieldforbeer: AutoCompleteTextField1!
+    
+    @IBOutlet weak var newtextfieldtableview: UITextField!
     var global = false
     var pintbuttonclicked = false
     var bottlebuttonclicked = false
@@ -43,6 +48,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let locationcheckedImage = UIImage(named: "locationenabled")
     let locationunCheckedImage = UIImage(named: "location")
+    
+    let delasimage = UIImage(named: "Deals")
     
     var liqname:String!
     var head:[Restaurant] = [Restaurant]()
@@ -72,12 +79,50 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var inputArr = [Restaurant]()
     
+       var currentlocationname:String!
+    
 
+    @IBOutlet weak var newuitableview: UITableView!
+   // @IBOutlet weak var newliqdropdowntableview: UITableView!
+    @IBOutlet weak var getdealsbutton: UIButton!
+    
+    var locationManager1: CLLocationManager!
+    
+    private var connection:NSURLConnection?
+    
+     var iscitytextfieldhavedata = false
+    
+    private var responseData:NSMutableData?
+    
+    private let googleMapsKey = "AIzaSyC8fGPXIWXTKJNvkBvKszetkDYbqh5AtC0"
+    private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+    
+    var arar = [String]()
+    
+    var newarar =  [String]()
+    
+    var autocompleteUrls = [String]()
+    
+    var selectedliqor:String!
+    
+    var isliqtextfieldhasdata = false
+    
+    var takegetselectedcitynale:String!
     
     
     
     override func viewDidLoad()
     {
+        configureTextField()
+        handleTextFieldInterfaces()
+     
+
+        autocompletetextfieldforbeer.text = takegetselectedcitynale
+        newuitableview.hidden = true
+        
+        getdealsbutton.layer.cornerRadius = 10
+        getdealsbutton.setBackgroundImage(delasimage, forState: .Normal)
+        
         inputArr = head
     
         pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
@@ -101,6 +146,26 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var drink = getselectedliq.capitalizedString
         selectedliqname.text =  drink
         togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+        autocompletetextfieldforbeer.textFieldWidth = autocompletetextfieldforbeer.frame.width
+        autocompletetextfieldforbeer.delegate = self
+        
+        self.newtextfieldtableview.delegate = self
+        
+        locationManager1 = CLLocationManager()
+        // locationManager = CLLocationManager()
+        locationManager1.delegate = self;
+        locationManager1.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager1.requestAlwaysAuthorization()
+        //locationManager1.startUpdatingLocation()
+        
+        newuitableview.dataSource = self
+        newuitableview.delegate = self
+       // newliqdropdowntableview.scrollEnabled = true
+        
+
+        tableview.tag = 1
+        newuitableview.tag = 0
+        newtextfieldtableview.tag = 2
         
         func swapNumbers(index1 :Int,index2: Int)
         {
@@ -141,6 +206,304 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+    {
+        var userLocation:CLLocation = locations[0] as! CLLocation
+        self.locationManager1.stopUpdatingLocation()
+        let long = userLocation.coordinate.longitude;
+        let lat = userLocation.coordinate.latitude;
+        
+        //Do What ever you want with it
+        
+        CLGeocoder().reverseGeocodeLocation(userLocation, completionHandler: {
+            placemarks, error in
+            
+            let placeArray = placemarks as? [CLPlacemark]
+            
+            // Place details
+            var placeMark: CLPlacemark!
+            placeMark = placeArray?[0]
+            
+            // Street address
+            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
+                println(street)
+                self.currentlocationname = street as String
+                
+                self.autocompletetextfieldforbeer.text = street as String
+                
+            }
+            
+        })
+    }
+    
+ 
+    
+    
+    private func configureTextField()
+    {
+        autocompletetextfieldforbeer.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        autocompletetextfieldforbeer.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        autocompletetextfieldforbeer.autoCompleteCellHeight = 35.0
+        autocompletetextfieldforbeer.maximumAutoCompleteCount = 20
+        autocompletetextfieldforbeer.hidesWhenSelected = true
+        autocompletetextfieldforbeer.hidesWhenEmpty = true
+        autocompletetextfieldforbeer.enableAttributedText = true
+        var attributes = [String:AnyObject]()
+        attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        autocompletetextfieldforbeer.autoCompleteAttributes = attributes
+        
+    }
+    
+    
+    //city Textfield
+    private  func handleTextFieldInterfaces()
+    {
+        autocompletetextfieldforbeer.onTextChange = {[weak self] text in
+            if !text.isEmpty{
+                if self!.connection != nil
+                {
+                    self!.connection!.cancel()
+                    self!.connection = nil
+                }
+                let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)"
+                let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
+                if url != nil{
+                    let urlRequest = NSURLRequest(URL: url!)
+                    self!.connection = NSURLConnection(request: urlRequest, delegate: self)
+                }
+            }
+        }
+        autocompletetextfieldforbeer.onSelect = {[weak self] text, indexpath in
+            self!.autocompletetextfieldforbeer.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);
+            Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
+                if placemark != nil
+                {
+                    let coordinate = placemark!.location.coordinate
+                    self!.citylat = coordinate.latitude
+                    self!.citylong = coordinate.longitude
+                }
+            })
+        }
+    }
+    
+    //MARK: NSURLConnectionDelegate
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse)
+    {
+        responseData = NSMutableData()
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveData data: NSData)
+    {
+        responseData?.appendData(data)
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection)
+    {
+        if responseData != nil
+        {
+            var error:NSError?
+            if let result = NSJSONSerialization.JSONObjectWithData(responseData!, options: nil, error: &error) as? NSDictionary
+            {
+                let status = result["status"] as? String
+                if status == "OK"
+                {
+                    if let predictions = result["predictions"] as? NSArray
+                    {
+                        var locations = [String]()
+                        for dict in predictions as! [NSDictionary]
+                        {
+                            locations.append(dict["description"] as! String)
+                        }
+                        self.autocompletetextfieldforbeer.autoCompleteStrings = locations
+                    }
+                }
+                else{
+                    self.autocompletetextfieldforbeer.autoCompleteStrings = nil
+                }
+            }
+        }
+    }
+    
+    func connection(connection: NSURLConnection, didFailWithError error: NSError)
+    {
+        println("Error: \(error.localizedDescription)")
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField)
+    {
+        // textField.text = ""
+//        if newtextfieldtableview.tag == 2{
+//        newuitableview.hidden = false
+//        }
+        //locationManager1.startUpdatingLocation()
+        
+        textField.selectAll(self)
+        textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        
+    }
+    
+    func textFieldDidChange(textField: UITextField)
+    {
+        
+        if self.newtextfieldtableview.text != nil && self.newtextfieldtableview.text != ""
+        {
+            
+            var s = self.newtextfieldtableview.text
+            variable = s
+            variable.startIndex
+            let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            
+            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(trimmedString1)")
+            loadData(url!, completion: didLoadData)
+            
+        }
+        
+    }
+    
+    func loadData(url: NSURL, completion: ([String]) -> Void){
+        let session = NSURLSession.sharedSession()
+        
+        var task = session.dataTaskWithURL(url){
+            (data, response, error) -> Void in
+            
+            if error != nil {
+                
+            } else {
+                
+                var error : NSError?
+                
+                if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error) as? NSArray{
+                    for var index = 0; index < json.count; ++index
+                    {
+                        if let bottomsUp = json[index] as? NSDictionary
+                        {
+                            if let liquors = bottomsUp["liquors"] as? String
+                            {
+                                self.arar.append(liquors)
+                                self.newarar = self.removeDuplicates(self.arar)
+                                
+                            }
+                        }
+                    }
+                }
+                
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                dispatch_async(dispatch_get_global_queue(priority, 0))
+                    {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            completion(self.newarar)
+                        }
+                }
+                
+            }
+        }
+        
+        task.resume()
+        
+    }
+    
+    func didLoadData(arrData: [String])
+    {
+        var substring = self.newtextfieldtableview.text
+        //substring.lowercaseString
+        searchAutocompleteEntriesWithSubstring(substring)
+        
+        //self.newtextfieldtableview.reloadData()
+        
+        self.newuitableview.reloadData()
+        self.newuitableview!.hidden = false
+        
+    }
+    
+    func removeDuplicates(array: [String]) -> [String]
+    {
+        var encountered = Set<String>()
+        var result: [String] = []
+        for value in array
+        {
+            if encountered.contains(value)
+            {
+                
+            }
+            else
+            {
+                encountered.insert(value)
+                result.append(value)
+            }
+        }
+        return result
+    }
+
+
+    
+    
+    func searchAutocompleteEntriesWithSubstring(substring: String)
+    {
+        autocompleteUrls.removeAll(keepCapacity: false)
+        
+        var usubstring = substring
+        
+        for curString in newarar
+        {
+            var ucurstring = curString
+            
+            var myString: NSString! = ucurstring as NSString
+            var substringRange: NSRange! = myString.rangeOfString(usubstring.capitalizedString)
+            
+            if (substringRange.location == 0)
+            {
+                autocompleteUrls.append(ucurstring)
+            }
+        }
+        
+        
+    }
+    
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+//    {
+//       
+//        return autocompleteUrls.count
+//    }
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+//    {
+//        newtextfieldtableview.layer.masksToBounds = true
+//        newtextfieldtableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+//        newtextfieldtableview.layer.borderWidth = 2.0
+//        
+//        let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
+//        var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
+//        if cell == nil
+//        {
+//            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: autoCompleteRowIdentifier)
+//        }
+//        
+//        let index = indexPath.row as Int
+//        cell!.textLabel!.text = autocompleteUrls[index]
+//        cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+//        cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+//        return cell!
+//    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if tableView.tag == 0{
+        let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        newtextfieldtableview.text = selectedCell1.textLabel?.text
+        selectedliqor = selectedCell1.textLabel!.text
+        
+//        if iscitytextfieldhavedata == true
+//        {
+//            findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+//        }
+        isliqtextfieldhasdata = true
+        self.view.endEditing(true)
+        tableView.hidden = true
+        }
+    }
+    
+    
     @IBAction func togglebuttonbeerpressed(sender: UIButton)
     {
         if toggle == false
@@ -169,6 +532,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
+       // newliqdropdowntableview.hidden = true
+        view.endEditing(true)
        if let touch = touches.first as? UITouch {
             let location = touch.locationInView(self.mainview)
             if location.x < popupview.frame.origin.x || location.x > (popupview.frame.origin.x + popupview.frame.size.width){
@@ -185,18 +550,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         //popupview.hidden = true
         
     }
-    
-//    override func touchesEnded(touches: Set<NSObject>!, withEvent event: UIEvent!) {
-////        if let touch = touches.first as? UITouch {
-////            let location = touch.locationInView(self.view)
-////            if location.x < popupview.frame.origin.x || location.x > (popupview.frame.origin.x + popupview.frame.size.width){
-////                if location.y < popupview.frame.origin.y || location.y > (popupview.frame.origin.y + popupview.frame.size.height){
-////                    popupview.hidden = true
-////                }
-////            }
-////            
-////        }
-//    }
     
     
     
@@ -269,8 +622,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        
+        if tableView.tag == 1{
         return head.count
+        }
+        else {
+            return 1
+        }
     }
     
     @IBAction func getdiscount1(sender: AnyObject)
@@ -286,6 +643,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if tableView.tag == 1{
         if head[section].bool == true
         {
             return 1
@@ -294,10 +652,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             return 0
         }
+        }
+        else
+        {
+            return autocompleteUrls.count
+        }
     }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
+        if tableView.tag == 1
+        {
+
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
         cells.beers = [liqclass]()
         cells.beers = head[indexPath.section].amp
@@ -309,20 +676,46 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.tableView.reloadData()
         
         return cells
+        }
+        
+        else
+        {
+            newtextfieldtableview.layer.masksToBounds = true
+            newtextfieldtableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+            newtextfieldtableview.layer.borderWidth = 2.0
+            
+            let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
+            var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
+            if cell == nil
+            {
+                cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: autoCompleteRowIdentifier)
+            }
+            
+            let index = indexPath.row as Int
+            cell!.textLabel!.text = autocompleteUrls[index]
+            cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+            cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+            return cell!
+        }
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
+        if tableView.tag == 1{
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell.layer.borderWidth = 1
-        //         cell.layer.addBorder(UIRectEdge.Right, color: UIColor.blackColor(), thickness: 0.9)
-        //        cell.layer.addBorder(UIRectEdge.Left, color: UIColor.blackColor(), thickness: 0.9)
-        // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.blackColor(), thickness: 0.9)
+        }
+        else
+        {
+//            cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+//            cell.layer.borderWidth = 1
+        }
     }
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
+        if tableView.tag == 1{
         if ((head[indexPath.section].amp.count * 30) + 10) > 187 {
             
             return CGFloat((head[indexPath.section].amp.count * 30) + 10)
@@ -332,12 +725,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             return 187
             
         }
+        }
+        else
+        {
+            return 35
+        }
         
         
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
+        if tableView.tag == 1{
         if head[section].bool == false
         {
             
@@ -346,6 +745,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         else{
             return 60
+        }
+        }
+        else
+        {
+            return 0
         }
         
     }
@@ -364,9 +768,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
-
         
+        if tableView.tag == 1{
+        var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.tag = section
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.headercellname.text = head[section].restname
@@ -452,6 +856,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
 
         return headerCell
+        }
+        else
+        {
+            //var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! UITableViewCell
+            
+            return nil
+        }
     }
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
@@ -1023,6 +1434,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    @IBAction func backbutton(sender: UIButton)
+    {
+        performSegueWithIdentifier("gobacktoresult1", sender: self)
+    }
     
 }
 

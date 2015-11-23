@@ -22,7 +22,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
     var variable:String!
     var trimmedString:String!
     var liqnamefromtextfield:String!
-    var check:Int!
+    var check:String!
     
     var newarar =  [String]()
     @IBOutlet var mainview: UIView!
@@ -415,7 +415,8 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
         
        liqnamefromtextfield = textfield1.text
        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=15&query=\(trimmedString)")
+       getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=50&records=10&query=\(trimmedString)")
+        //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=5&records=10&query=\(trimmedString)")
         
        // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
         //28.63875
@@ -452,12 +453,13 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             
             if let bottomsUp1 = json[index] as? NSDictionary
             {
-                if let avg_price = bottomsUp1["avg_price"] as? Int
+                if let liquor_type = bottomsUp1["liquor_type"] as? String
                 {
-                   check = avg_price
+                   check = "liquor_type"
                     println("check  \(check)")
                 }
-                if check <= 0{
+                
+                if check == "Beer"{
                 if let pint_avg_price = bottomsUp1["pint_avg_price"] as? Int
                 {
                     //var pint_avg_price2:String = toString(pint_avg_price)
@@ -700,7 +702,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 }
             }
         }
-        if check <= 0
+        if check == "Beer"
         {
         
          performSegueWithIdentifier("newres", sender: self)
