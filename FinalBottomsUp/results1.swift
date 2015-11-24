@@ -89,6 +89,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     override func viewDidLoad()
     {
+        autocompletedTextfieldnew.text = currentlocationname
         textfield2.delegate = self
         textfield2!.delegate = self
         tableviewnew!.dataSource = self
@@ -750,8 +751,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     {
         if segue.identifier == "getbeernew"
         {
-   
-            
             if let destination = segue.destinationViewController as? tableviewclass
             {
                 //28.63875
@@ -767,10 +766,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.getcitylongitude = citylong
                 destination.getrestlatitudebeer = restlat
                 destination.getdevicelongitude = restlong
-                destination.getselectedliq = selectedliqor
+                destination.selectedliqor = selectedliqor
                 destination.getfstobj1 = fstobj1
-                destination.takegetselectedcitynale = getselectedcityname
-                
+                destination.getselectedcityname = getselectedcityname
+                destination.checkliqtype = check
+                destination.vodkaarray = header
+                destination.getrestlatitudevodka = restvodkalat
+                destination.getrestlongitudevodka = restvodkalang
+               // destination.getliqnamefromresult = selectedliqor
             }
         }
         if segue.identifier == "getvodkanew"
@@ -788,9 +791,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination1.getcitylongitude = citylong
                 destination1.getdevicelatitude = devicelatitude
                 destination1.getdevicelongitude = devicelongitude
-                destination1.getselectedlq = selectedliqor
+                destination1.selectedliqor = selectedliqor
                 destination1.getvodkalatitude = restlat
                 destination1.getvodkalongitude = restlong
+                destination1.getselectedcityname = getselectedcityname
+               // destination1.getliqnamefromresult = selectedliqor
+         
             }
         }
         if segue.identifier == "getwinenearyou"

@@ -757,7 +757,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination.getcitylongitude = citylong
                 destination.getrestlatitudebeer = restlat
                 destination.getdevicelongitude = restlong
-                destination.getselectedliq = selectedliqor
+               // destination.getselectedliq = selectedliqor
                 destination.getfstobj1 = fstobj1
                 
            }
@@ -777,7 +777,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 destination1.getcitylongitude = citylong
                 destination1.getdevicelatitude = devicelatitude
                 destination1.getdevicelongitude = devicelongitude
-                destination1.getselectedlq = selectedliqor
+                //destination1.getselectedlq = selectedliqor
                 destination1.getvodkalatitude = restlat
                 destination1.getvodkalongitude = restlong
             }
