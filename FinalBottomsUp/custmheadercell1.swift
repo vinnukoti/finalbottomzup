@@ -31,8 +31,11 @@ class custmheadercell1: UITableViewCell
     
     @IBOutlet weak var displayhappyhoursvodka: UILabel!
     
-    @IBOutlet weak var roundimagevodka: UILabel!
+    @IBOutlet weak var happyhourslabletimingforvodka: UILabel!
+
+    @IBOutlet weak var happyhourstiminglabelvodkanew: UILabel!
     
+    @IBOutlet weak var taprecognizerimage: UIImageView!
     override func awakeFromNib()
     {
         super.awakeFromNib()

@@ -28,15 +28,17 @@ class customheadercell: UITableViewCell
     
     @IBOutlet weak var availofferbuttonbeer: UIButton!
     
-    @IBOutlet weak var arrowimage: UIImageView!
+    @IBOutlet weak var arrowimage: UIButton!
+   // @IBOutlet weak var arrowimage: UIImageView!
     @IBOutlet weak var happyhourslabelbeer: UILabel!
     
     @IBOutlet weak var happyhourslablebeernew: UILabel!
-
-    @IBOutlet weak var roundimagebeer: UIImageView!
     
+    @IBOutlet weak var happyhourstiminglabel: UILabel!
     
+    @IBOutlet weak var happyhourstiminglabelnew: UILabel!
 
+    @IBOutlet weak var tapguesturerecognizer: UIImageView!
     //var tableobject = tableviewclass()
     override func awakeFromNib()
     {

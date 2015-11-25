@@ -22,6 +22,7 @@ class Restaurant
     var happystart:String!
     var happyend:String!
     var ishappy:String!
+    var rest_offers_happy_hour:String!
     var Restaurantlatitude: Double!
     var Restaurantlongitude: Double!
     
@@ -39,6 +40,7 @@ class Restaurant
         happystart = String()
         happyend = String()
         ishappy = String()
+        rest_offers_happy_hour = String()
         
         amp = [liqclass]()
         

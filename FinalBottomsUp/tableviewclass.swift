@@ -28,6 +28,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var restlong:Double!
    // var getfstobj2 = Restaurant()
     
+
     var variable:String!
     var liqnamefromtextfield:String!
     
@@ -46,8 +47,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var pintbutton: UIButton!
     @IBOutlet weak var bottlebutton: UIButton!
     @IBOutlet weak var locationbutton: UIButton!
-    
-    @IBOutlet weak var selectedliqname: UILabel!
     @IBOutlet weak var resturantnamelable: UILabel!
  //   @IBOutlet weak var restaurantnamelable2: UILabel!
     
@@ -145,20 +144,43 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var getcitylongitudefromgoogle:Double!
     
     var getselectedcityname:String!
+    var substringofselectedliq = "650"
+    var boolexists = false
+    var getsubstringofselectedliq:String!
     
-    var getselectedliqname:String!
-    
-  //  var selectedliqor1:String!
+    var countfurther = 0
     
     
-    
+
 
     
     override func viewDidLoad()
     {
+         newuitableview.layer.borderColor = UIColor.grayColor().CGColor
+        newuitableview.layer.borderWidth = 2
+        
+        if selectedliqor.rangeOfString(substringofselectedliq) != nil
+        {
+            boolexists = true
+            println("exists")
+        }
+        else
+        {
+            boolexists = false
+            println("Not exists")
+        }
+        
+        if boolexists
+        {
+           bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+        }
+        else
+        {
+            pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+        }
         
         newtextfieldtableview.text = selectedliqor
-        configureTextField()
+                configureTextField()
         handleTextFieldInterfaces()
      
 
@@ -171,7 +193,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         inputArr = head
     
-        pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+        
         
         popupview.layer.cornerRadius = 20.0
 
@@ -576,25 +598,27 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            var happy_hour_start1 = PartOfString(happy_hour_start, 1, 5)
-                            
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 0, 8))
+                           // var happy_hour_start1 = PartOfString(happy_hour_start, 0, 8)
+                            var happy_hour_start1 = happy_hour_start
                             
                             fstobj1.happystart = happy_hour_start1
                         }
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                            var happy_hour_end1 = PartOfString(happy_hour_end, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 8))
+                           // var happy_hour_end1 = PartOfString(happy_hour_end, 1, 8)
+                            
+                            var happy_hour_end1 = happy_hour_end
                             fstobj1.happyend = happy_hour_end1
                         }
                         
@@ -641,8 +665,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f KM", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                                println(String(format: "%.2f Km.", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -653,7 +677,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 totalDistance1 = PartOfString(totalDistance1, 1, 3)
                                 
                                 
-                                fstobj1.distance = totalDistance1 + "KM"
+                                fstobj1.distance = totalDistance1 + "Km."
                                 //println(fstobj1.distance)
                             }
                         }
@@ -696,12 +720,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
                             
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 8))
+                            //var happy_hour_start2 = PartOfString(happy_hour_start, 1, 8)
+                            var happy_hour_start2 = happy_hour_start
                             
                             vodkaobjnew.vodkahappystart = happy_hour_start2
                             //vodkasendobj.vodkahappystart = happy_hour_start2
@@ -710,12 +735,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
                             
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                            var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 8))
+                           // var happy_hour_end2 = PartOfString(happy_hour_end, 1, 8)
+                            var happy_hour_end2 = happy_hour_end
                             vodkaobjnew.vodkahappyend = happy_hour_end2
                             //vodkasendobj.vodkahappyend = happy_hour_end2
                         }
@@ -763,8 +789,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f KM", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                                println(String(format: "%.2f Km.", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -773,7 +799,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                                 totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                                vodkaobjnew.distancevodka = totalDistance1 + "KM"
+                                vodkaobjnew.distancevodka = totalDistance1 + "Km."
                                 //vodkasendobj.distancevodka = totalDistance1 + "KM"
                             }
                         }
@@ -994,11 +1020,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
         cells.beers = [liqclass]()
         cells.beers = head[indexPath.section].amp
+            cells.arrowup.tag = indexPath.section
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
       //  cells.directions.setTitle(head[indexPath.section].distance, forState: UIControlState.Normal)
         cells.distancelabelnew.text = head[indexPath.section].distance
-        //cells.distanceroundimage.image = UIImage(named: "Happyhoursround image")
+            //cells.b
         cells.tableView.reloadData()
         
         return cells
@@ -1006,9 +1033,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         else
         {
-            newtextfieldtableview.layer.masksToBounds = true
-            newtextfieldtableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
-            newtextfieldtableview.layer.borderWidth = 2.0
+//            newtextfieldtableview.layer.masksToBounds = true
+//            newtextfieldtableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+//            newtextfieldtableview.layer.borderWidth = 2.0
             
             let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
             var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
@@ -1023,6 +1050,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
             return cell!
         }
+    }
+    @IBAction func arrowup(sender: UIButton)
+    {
+       if head[sender.tag].bool == true
+       {
+        
+            head[sender.tag].bool = false
+        }
+        tableview.reloadData()
+        
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
@@ -1066,11 +1103,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         if head[section].bool == false
         {
             
-            return 99   
+            return 99
             
         }
         else{
-            return 60
+            return 60   
         }
         }
         else
@@ -1097,25 +1134,50 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if tableView.tag == 1{
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
-        headerCell.tag = section
+       // headerCell.tag = section
+        
+            
+        
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.headercellname.text = head[section].restname
         headerCell.headercellmin.text = "₹ " + "\(head[section].minp)"
         headerCell.headercellmax.text = "₹ " + "\(head[section].maxp)"
-        headerCell.happyhourslabelbeer.text = "Happy Hours " + head[section].happystart + "PM-" + head[section].happyend + "PM  "
+       headerCell.happyhourslabelbeer.text = "Happy Hours "
+       headerCell.happyhourstiminglabel.text = head[section].happystart + " - " + head[section].happyend
+            
+//            headerCell.happyhourslablebeernew.text = "Happy Hours "
+//            headerCell.happyhourstiminglabelnew.text = head[section].happystart + " - " + head[section].happyend
+
+//            headerCell.setheadercellnamechildimaghe.layer.borderColor = UIColor.lightGrayColor().CGColor
+//            headerCell.setheadercellnamechildimaghe.layer.borderWidth = 1
+            
+            //+ head[section].happystart + "PM-" + head[section].happyend + "PM  "
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
-        headerCell.addGestureRecognizer(headerTapped)
-        headerCell.userInteractionEnabled = true
+        headerCell.tapguesturerecognizer.addGestureRecognizer(headerTapped)
+            headerCell.tapguesturerecognizer.tag = section
+        headerCell.tapguesturerecognizer.userInteractionEnabled = true
+            headerCell.headercellname.tag = headerCell.tag
+//        var tap = UITapGestureRecognizer(target: self, action:"tappedMe :")
+//        headerCell.arrowimage.addGestureRecognizer(tap)
+//        headerCell.arrowimage.userInteractionEnabled = true
         headerCell.mapbutton.tag = section
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
+            headerCell.mapbutton.enabled =  false
         headerCell.availofferbuttonbeer.tag = section
+           // headerCell.availofferbuttonbeer.enabled = false
         headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+            if boolexists{
+                headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+            }
+            else{
         headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+            }
         
         if global == true{
             headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
+
             
         }
         
@@ -1127,8 +1189,56 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell.mapbutton.hidden = false
             headerCell.availofferbuttonbeer.hidden = false
             headerCell.happyhourslabelbeer.hidden = false
-            headerCell.arrowimage.image = UIImage(named: "arrow")
+           // headerCell.arrowimage.image = UIImage(named: "arrow")
             headerCell.headercellnamechild.hidden = true
+            headerCell.happyhourstiminglabel.hidden = true
+//            headerCell.setheadercellnamechildimaghe.layer.borderColor = UIColor.lightGrayColor().CGColor
+//            headerCell.setheadercellnamechildimaghe.layer.borderWidth = 1
+            if head[section].rest_offers_happy_hour == "Yes"
+            {
+                //headerCell.happyhourslabelbeer.hidden = false
+               // headerCell.happyhourslablebeernew.hidden = false
+                headerCell.happyhourstiminglabel.hidden = false
+                headerCell.happyhourstiminglabelnew.hidden = false
+                //headerCell.happyhourslablebeernew.layer.borderColor = UIColor.grayColor().CGColor
+            }
+            else
+            {
+                headerCell.happyhourslabelbeer.hidden = true
+                headerCell.happyhourslablebeernew.hidden = true
+                //headerCell.happyhourstiminglabel.hidden = true
+               // headerCell.happyhourstiminglabelnew.hidden = true
+                //headerCell.happyhourslablebeernew.layer.borderColor = UIColor.grayColor().CGColor
+            }
+            if head[section].ishappy == "yes"
+            {
+                headerCell.happyhourslabelbeer.layer.cornerRadius = 10
+                headerCell.happyhourslabelbeer.layer.borderColor = UIColor.grayColor().CGColor
+                headerCell.happyhourslabelbeer.layer.borderWidth = 1
+                
+                
+            }
+            else
+            {
+                
+                headerCell.happyhourslabelbeer.layer.cornerRadius = 10
+                headerCell.happyhourslabelbeer.layer.borderColor = UIColor.grayColor().CGColor
+                headerCell.happyhourslabelbeer.layer.borderWidth = 1
+            }
+            
+            if head[section].ishappy == "Yes"
+            {
+                headerCell.happyhourstiminglabel.textColor = UIColor.greenColor()
+                headerCell.happyhourstiminglabelnew.textColor = UIColor.greenColor()
+            }
+            else
+            {
+                headerCell.happyhourstiminglabel.textColor = UIColor.blackColor()
+                headerCell.happyhourstiminglabelnew.textColor = UIColor.blackColor()
+            }
+            
+
+
        }
         else
         {
@@ -1140,31 +1250,37 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell.happyhourslabelbeer.hidden = true
             headerCell.arrowimage.hidden = true
             headerCell.headercellnamechild.text = head[section].restname
-            headerCell.happyhourslablebeernew.text = "Happy Hours " + head[section].happystart + "PM-" + head[section].happyend + "PM "
+           headerCell.happyhourslablebeernew.text = "Happy Hours "
+           headerCell.happyhourstiminglabelnew.text = head[section].happystart + " - " + head[section].happyend
+            headerCell.happyhourstiminglabelnew.hidden = true
+            //headerCell.happyhourslabelbeer.hidden = true
+           // headerCell.happyhourstiminglabel.hidden = true
             headerCell.happyhourslabelbeer.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
             headerCell.headercellname.hidden = true
             
             headerCell.setheadercellnamechildimaghe.layer.borderColor = UIColor.lightGrayColor().CGColor
             headerCell.setheadercellnamechildimaghe.layer.borderWidth = 1
+            
+
         }
         //Giving Font family style to a UIButton
         headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        if head[section].happyend == "yes"
-        {
-            headerCell.happyhourslabelbeer.layer.cornerRadius = 10
-            headerCell.happyhourslabelbeer.layer.borderColor = UIColor.greenColor().CGColor
-            headerCell.happyhourslabelbeer.layer.borderWidth = 1
-
-
-        }
-        else
-        {
-            
-            headerCell.happyhourslabelbeer.layer.cornerRadius = 10
-            headerCell.happyhourslabelbeer.layer.borderColor = UIColor.redColor().CGColor
-            headerCell.happyhourslabelbeer.layer.borderWidth = 1
-        }
-        
+       //            if head[section].rest_offers_happy_hour == "Yes"
+//            {
+//               headerCell.happyhourslabelbeer.hidden = false
+//                headerCell.happyhourslablebeernew.hidden = false
+//                headerCell.happyhourstiminglabel.hidden = false
+//                headerCell.happyhourstiminglabelnew.hidden = false
+//                 //headerCell.happyhourslablebeernew.layer.borderColor = UIColor.grayColor().CGColor
+//            }
+//            else
+//            {
+//                headerCell.happyhourslabelbeer.hidden = true
+//                headerCell.happyhourslablebeernew.hidden = true
+//                headerCell.happyhourstiminglabel.hidden = true
+//                headerCell.happyhourstiminglabelnew.hidden = true
+//                //headerCell.happyhourslablebeernew.layer.borderColor = UIColor.grayColor().CGColor
+//            }
         if pintbuttonclicked == true
         {
             headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
@@ -1209,6 +1325,28 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    func tappedMe(gestureRecognizer: UITapGestureRecognizer)
+    {
+        var section = gestureRecognizer.view!.tag
+        println(section)
+        println("Section: \(gestureRecognizer.view!.tag)")
+        
+        if head[gestureRecognizer.view!.tag].bool == false
+        {
+            head[gestureRecognizer.view!.tag].bool = true
+            
+        }
+        else
+        {
+            head[gestureRecognizer.view!.tag].bool = false
+        }
+        self.tableview.reloadData()
+        
+    }
+
+    
+    
+    
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
 
@@ -1217,13 +1355,40 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func lookfurther(sender: AnyObject)
     {
-        //         println("latitude is \(citylat)")
-        //         println("longitude is\(citylong)")
+
         
         //28.63875
         //77.07380
         changecolor = true
-        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=8&records=15&query=\(liqname)")
+        println(countfurther)
+        countfurther = countfurther + 1
+        
+        println(countfurther)
+        
+        if countfurther == 1{
+        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(liqname)")
+            //tableview.reloadData()
+        }
+        
+        if countfurther == 2
+        {
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(liqname)")
+            //tableview.reloadData()
+        }
+        
+//      else
+//        {
+//            countfurther = 0
+//            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(liqname)")
+//            //tableview.reloadData()
+//        }
+        
+//        else
+//        {
+//            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(liqname)")
+//            tableview.reloadData()
+//        }
+//
         
         
     }
@@ -1267,23 +1432,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         if let happy_hour_startbeer = bottomsUp1["happy_hour_start"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_startbeer, 1, 5))
-                            var happy_hour_startbeer1 = PartOfString(happy_hour_startbeer, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_startbeer, 1, 8))
+                            //var happy_hour_startbeer1 = PartOfString(happy_hour_startbeer, 1, 8)
+                            var happy_hour_startbeer1 = happy_hour_startbeer
                             getfstobj1.happystart = happy_hour_startbeer1
                         }
                         
                         if let happy_hour_endbeer = bottomsUp1["happy_hour_end"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_endbeer, 1, 5))
-                            var happy_hour_endbeer1 = PartOfString(happy_hour_endbeer, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_endbeer, 1, 8))
+                            //var happy_hour_endbeer1 = PartOfString(happy_hour_endbeer, 1, 8)
+                            var happy_hour_endbeer1 = happy_hour_endbeer
                             
                             getfstobj1.happyend = happy_hour_endbeer1
                         }
@@ -1321,8 +1488,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
-                            println(String(format: "%.2f KM", totalDistance))
-                            NSLog("totalDistance: %@", String(format: "%.2f KMS", totalDistance))
+                            println(String(format: "%.2f Km.", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                             var totalDistance1 = totalDistance.description
                             println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
@@ -1333,7 +1500,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
                             
                             
-                            getfstobj1.distance = totalDistance1 + "KMS"
+                            getfstobj1.distance = totalDistance1 + "Km."
                             // println(fstobj1.distance)
                         }
                     }
@@ -1403,7 +1570,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
         }
-       
+        
+        for var i = 0; i < head.count ; i++
+        {
+            head[i].bool = false
+            
+        }
+        
+        tableview.reloadData()
 //        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
 //        {
 //            var sorted = false
@@ -1535,6 +1709,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
             bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
             locationbutton.setBackgroundImage(locationunCheckedImage, forState: .Normal)
+            
+            for var i = 0; i < head.count ; i++
+            {
+                head[i].bool = false
+                
+            }
+            
+            tableview.reloadData()
+            
 //            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
 //            {
 //                var sorted = false
@@ -1783,12 +1966,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    @IBAction func getDirections(sender: UIButton)
-    {
-        
-        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
-        
-    }
+//    @IBAction func getDirections(sender: UIButton)
+//    {
+//        
+//        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
+//        
+//    }
     
     @IBAction func backbutton(sender: UIButton)
     {

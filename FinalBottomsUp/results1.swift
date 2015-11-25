@@ -48,7 +48,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     private var connection:NSURLConnection?
     
-    private let googleMapsKey = "AIzaSyC8fGPXIWXTKJNvkBvKszetkDYbqh5AtC0"
+    private let googleMapsKey = "AIzaSyBznULI0vOApc8mQDiUv6Q_iohI8BWcSHY"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
     var autocompleteUrls = [String]()
@@ -411,7 +411,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     {
         liqnamefromtextfield = textfield2.text
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=50&records=10&query=\(trimmedString)")
+        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
         //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=5&records=10&query=\(trimmedString)")
         
         // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
@@ -482,12 +482,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            var happy_hour_start1 = PartOfString(happy_hour_start, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+                            //println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
+                            //var happy_hour_start1 = PartOfString(happy_hour_start, 1, 5)
+                            
+                            var happy_hour_start1 = happy_hour_start
                             
                             
                             fstobj1.happystart = happy_hour_start1
@@ -495,18 +497,25 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                            var happy_hour_end1 = PartOfString(happy_hour_end, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
+                           // var happy_hour_end1 = PartOfString(happy_hour_end, 1, 5)
+                            
+                            var happy_hour_end1 = happy_hour_end
                             fstobj1.happyend = happy_hour_end1
                         }
                         
                         if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                         {
                             fstobj1.ishappy = is_happy_hour
+                        }
+                        
+                        if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
+                        {
+                            fstobj1.rest_offers_happy_hour = rest_offers_happy_hour1
                         }
                         if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                         {
@@ -547,8 +556,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f KM", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                                println(String(format: "%.2f Km.", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -559,7 +568,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 totalDistance1 = PartOfString(totalDistance1, 1, 3)
                                 
                                 
-                                fstobj1.distance = totalDistance1 + "KM"
+                                fstobj1.distance = totalDistance1 + "Km."
                                 println(fstobj1.distance)
                             }
                         }
@@ -591,6 +600,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         
                     else
                     {
+                        
+                        if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
+                        {
+                            vodkaobj.rest_offers_happy_hour = rest_offers_happy_hour1
+                        }
                         if let avg_price = bottomsUp1["alcohol_min_price"] as? Int
                         {
                             //var avg_price2:String = toString(avg_price)
@@ -601,12 +615,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
                             
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
+                           // var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
+                            var happy_hour_start2 = happy_hour_start
                             
                             vodkaobj.vodkahappystart = happy_hour_start2
                             //vodkasendobj.vodkahappystart = happy_hour_start2
@@ -615,12 +630,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
                             
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                            var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
+                           // var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+                            var happy_hour_end2 = happy_hour_end
                             vodkaobj.vodkahappyend = happy_hour_end2
                             //vodkasendobj.vodkahappyend = happy_hour_end2
                         }
@@ -668,8 +684,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f KM", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                                println(String(format: "%.2f Km.", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -678,7 +694,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                                 totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                                vodkaobj.distancevodka = totalDistance1 + "KM"
+                                vodkaobj.distancevodka = totalDistance1 + "Km."
                                 //vodkasendobj.distancevodka = totalDistance1 + "KM"
                             }
                         }

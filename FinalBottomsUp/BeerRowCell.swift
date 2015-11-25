@@ -22,6 +22,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var address2: UILabel!
     
     @IBOutlet weak var distancelabelnew: UILabel!
+    @IBOutlet weak var arrowup: UIButton!
     
     var beers: [liqclass] = [liqclass]()
     

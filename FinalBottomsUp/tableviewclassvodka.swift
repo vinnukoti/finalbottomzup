@@ -108,6 +108,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var getliqnamefromresult:String!
     
+    var count = 0
+    
+
   //  var obj = AutoCompleteTextField()
     
     
@@ -115,7 +118,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad()
     {
+        
        // obj.autoCompleteTableView?.tag == 3
+        newtableviewforvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+        newtableviewforvodka.layer.borderWidth = 2
         newtextfieldvodka.text = selectedliqor
         
         println(getcitylongitude)
@@ -421,13 +427,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         //cells.directions.setTitle(header1[indexPath.section].distancevodka, forState: UIControlState.Normal)
         cells.distancenewvodkalabel.text = header1[indexPath.section].distancevodka
         cells.tableView.reloadData()
+         cells.arrowup.tag = indexPath.section
         return cells
         }
         else
         {
-            newtextfieldvodka.layer.masksToBounds = true
-            newtextfieldvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
-            newtextfieldvodka.layer.borderWidth = 2.0
+//            newtextfieldvodka.layer.masksToBounds = true
+//            newtextfieldvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+//            newtextfieldvodka.layer.borderWidth = 2.0
             
             let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
             var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
@@ -514,20 +521,25 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if tableView.tag == 1{
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.whiteColor()
-        headerCell.tag = section
+        //headerCell.tag = section
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
         headerCell.vodkaavgprice.text = "₹ " + "\(header1[section].avgprice)"
-        headerCell.happyhourslabelvodka.text = "Happy Hours " + header1[section].vodkahappystart + "PM-" + header1[section].vodkahappyend + "PM "
+        headerCell.happyhourslabelvodka.text = "Happy Hours "
+       headerCell.happyhourslabletimingforvodka.text =  header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
         headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
 
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
-        headerCell.addGestureRecognizer(headerTapped1)
-        headerCell.userInteractionEnabled = true
+        headerCell.taprecognizerimage.addGestureRecognizer(headerTapped1)
+            headerCell.taprecognizerimage.tag =  section
+        headerCell.taprecognizerimage.userInteractionEnabled = true
+        
         
         headerCell.mapbuttonvodkaclass.tag = section
         headerCell.mapbuttonvodkaclass.setTitle(header1[section].distancevodka, forState: UIControlState.Normal)
+            headerCell.mapbuttonvodkaclass.enabled =  false
         
         headerCell.availofferbutton.tag = section
+        headerCell.availofferbutton.enabled = false
         
         headerCell.vodkarestaurantname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.vodkaavgprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
@@ -546,17 +558,33 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if header1[section].vodkahappyend == "yes"
         {
         headerCell.happyhourslabelvodka.layer.cornerRadius = 10
-            //headerCell.happyhourslabelvodka.layer.frame.width = 50
-        headerCell.happyhourslabelvodka.layer.borderColor = UIColor.greenColor().CGColor
+         headerCell.happyhourslabelvodka.layer.borderColor = UIColor.grayColor().CGColor
         headerCell.happyhourslabelvodka.layer.borderWidth = 1
         }
         else
         {
             headerCell.happyhourslabelvodka.layer.cornerRadius = 10
-            headerCell.happyhourslabelvodka.layer.borderColor = UIColor.redColor().CGColor
+            headerCell.happyhourslabelvodka.layer.borderColor = UIColor.grayColor().CGColor
             headerCell.happyhourslabelvodka.layer.borderWidth = 1
  
         }
+            
+            if header1[section].rest_offers_happy_hour == "Yes"
+            {
+                headerCell.happyhourslabelvodka.hidden = false
+                headerCell.happyhourslabletimingforvodka.hidden = false
+                headerCell.happyhourstiminglabelvodkanew.hidden = false
+                headerCell.childvodkarestaurantname.hidden = false
+        
+            }
+            else
+            {
+                headerCell.happyhourslabelvodka.hidden = true
+                headerCell.happyhourslabletimingforvodka.hidden = true
+                headerCell.happyhourstiminglabelvodkanew.hidden = true
+                headerCell.childvodkarestaurantname.hidden = true
+            }
+
         if header1[section].bool1 == false
         {
             // headerCell.headercellname.hidden = false
@@ -565,7 +593,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             headerCell.mapbuttonvodkaclass.hidden = false
 //            headerCell.availofferbuttonbeer.hidden = false
 //            headerCell.happyhourslabelbeer.hidden = false
-            headerCell.arrowimage.image = UIImage(named: "arrow")
+           // headerCell.arrowimage.image = UIImage(named: "arrow")
            //  headerCell.vodkarestaurantname.hidden = true
         }
         else
@@ -585,7 +613,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             //headerCell.vodkaresturantnameimage.image = happyhoursimage
             //headerCell.childvodkarestaurantname.addSubview(myImageView)
             headerCell.vodkarestaurantname.hidden = true
-            headerCell.displayhappyhoursvodka.text = "Happy Hours " + header1[section].vodkahappystart + "PM -" + header1[section].vodkahappyend + "PM "
+            headerCell.displayhappyhoursvodka.text = "Happy Hours "
+           headerCell.happyhourstiminglabelvodkanew.text =  header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+            headerCell.happyhourslabletimingforvodka.hidden = true
             headerCell.vodkaresturantnameimage.layer.borderColor = UIColor.lightGrayColor().CGColor
             headerCell.vodkaresturantnameimage.layer.borderWidth = 1
             
@@ -597,6 +627,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             return nil
         }
+        
+        
         
     }
     
@@ -625,7 +657,25 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        // vodkasort = header1
        // self.tableview1.reloadData()
         header1 = vodkasort
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=8&records=4&query=\(liqvodkaname)")
+        count = count + 1
+        if count == 1
+        {
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=4&query=\(liqvodkaname)")
+        }
+        
+        if count == 2
+        {
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=4&query=\(liqvodkaname)")
+        }
+        if count == 3
+        {
+            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "You want to go back for 2 KM Search", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=4&query=\(liqvodkaname)")
+            
+
+        }
 
     }
     
@@ -733,8 +783,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
-                            println(String(format: "%.2f KM", totalDistance))
-                            NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                            println(String(format: "%.2f Km.", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                             var totalDistance1 = totalDistance.description
                             println(totalDistance1)
                             func PartOfString(s: String, start: Int, length: Int) -> String
@@ -743,8 +793,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             }
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                             totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                            getvodkaobj.distancevodka = totalDistance1 + " KM"
-                            getvodkaobj1.distancevodka = totalDistance1 + " KM"
+                            getvodkaobj.distancevodka = totalDistance1 + " Km."
+                            getvodkaobj1.distancevodka = totalDistance1 + " Km."
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -798,6 +848,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             distancebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
         
         }
+        for var i = 0; i < header1.count ; i++
+        {
+            header1[i].bool1 = false
+            
+        }
+        
+        tableview1.reloadData()
+        
       
 //            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
 //            {
@@ -1017,10 +1075,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     
     
-    @IBAction func gotoMap(sender: AnyObject)
-    {
-         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
-    }
+//    @IBAction func gotoMap(sender: AnyObject)
+//    {
+//         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
+//    }
     @IBAction func gotomap(sender: AnyObject) {
         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
     }
@@ -1295,8 +1353,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f KM", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                                println(String(format: "%.2f Km.", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -1307,7 +1365,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 totalDistance1 = PartOfString(totalDistance1, 1, 3)
                                 
                                 
-                                fstobj1.distance = totalDistance1 + "KM"
+                                fstobj1.distance = totalDistance1 + "Km."
                                 //println(fstobj1.distance)
                             }
                         }
@@ -1350,13 +1408,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
                             
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
-                            
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
+                            //var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
+                            var happy_hour_start2 = happy_hour_start
                             vodkaobjnew.vodkahappystart = happy_hour_start2
                             //vodkasendobj.vodkahappystart = happy_hour_start2
                         }
@@ -1364,12 +1422,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
                             
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                            var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
+                           // var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+                            var happy_hour_end2 = happy_hour_end
                             vodkaobjnew.vodkahappyend = happy_hour_end2
                             //vodkasendobj.vodkahappyend = happy_hour_end2
                         }
@@ -1417,8 +1476,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f KM", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f KM", totalDistance))
+                                println(String(format: "%.2f Km.", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -1427,7 +1486,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                                 totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                                vodkaobjnew.distancevodka = totalDistance1 + "KM"
+                                vodkaobjnew.distancevodka = totalDistance1 + "Km."
                                 //vodkasendobj.distancevodka = totalDistance1 + "KM"
                             }
                         }
@@ -1509,6 +1568,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
     }
 
+    @IBAction func arrowup(sender: UIButton)
+    {
+        if header1[sender.tag].bool1 == true
+        {
+            header1[sender.tag].bool1 = false
+        }
+        
+        tableview1.reloadData()
+    }
     
 }
 
