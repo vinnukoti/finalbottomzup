@@ -40,6 +40,8 @@
 		5367CF371B9DBC4800D33220 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF361B9DBC4800D33220 /* SystemConfiguration.framework */; };
 		5367CF391B9DC0B200D33220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF381B9DC0B200D33220 /* UIKit.framework */; };
 		537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537809D21BE4C81F00C18D6B /* CheckBox.swift */; };
+		537A33A01C072AAB001E1D7B /* customheadercellafterexpanstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A339F1C072AAB001E1D7B /* customheadercellafterexpanstion.swift */; };
+		537A33A21C075535001E1D7B /* customheadercellafterexpastionforvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A33A11C075535001E1D7B /* customheadercellafterexpastionforvodka.swift */; };
 		537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3D81BBA56F80082D896 /* tableviewclass.swift */; };
 		537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DA1BBA578A0082D896 /* customheadercell.swift */; };
 		537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */; };
@@ -117,6 +119,8 @@
 		5367CF381B9DC0B200D33220 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5367CF3A1B9DC13F00D33220 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "../Bridging-Header.h"; sourceTree = "<group>"; };
 		537809D21BE4C81F00C18D6B /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		537A339F1C072AAB001E1D7B /* customheadercellafterexpanstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercellafterexpanstion.swift; sourceTree = "<group>"; };
+		537A33A11C075535001E1D7B /* customheadercellafterexpastionforvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercellafterexpastionforvodka.swift; sourceTree = "<group>"; };
 		537CA3D81BBA56F80082D896 /* tableviewclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableviewclass.swift; sourceTree = "<group>"; };
 		537CA3DA1BBA578A0082D896 /* customheadercell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercell.swift; sourceTree = "<group>"; };
 		537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onemoreclass1.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				53E5123F1BF0E6A200FFC78E /* NewClass.swift */,
 				534618EA1BBBDAAF00B0E188 /* results.swift */,
 				537CA3DA1BBA578A0082D896 /* customheadercell.swift */,
+				537A339F1C072AAB001E1D7B /* customheadercellafterexpanstion.swift */,
 				537CA3DC1BBA57DB0082D896 /* onemoreclass1.swift */,
 				5367CEFA1B9DB0EA00D33220 /* Main.storyboard */,
 				5367CEFD1B9DB0EA00D33220 /* Images.xcassets */,
@@ -274,6 +279,7 @@
 				5389EE3A1BC63121007999AE /* Restauarantvodka.swift */,
 				5389EE3C1BC63139007999AE /* liqvodka.swift */,
 				5389EE3E1BC65117007999AE /* custmheadercell1.swift */,
+				537A33A11C075535001E1D7B /* customheadercellafterexpastionforvodka.swift */,
 				5389EE401BC65146007999AE /* onemoreclass2.swift */,
 				53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */,
 			);
@@ -503,11 +509,13 @@
 				537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */,
 				537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */,
 				532E64591BF6078D00B88D09 /* VodkaRowCell.swift in Sources */,
+				537A33A01C072AAB001E1D7B /* customheadercellafterexpanstion.swift in Sources */,
 				537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */,
 				537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */,
 				5382C6B61C0321CB00F6107E /* AutocompleteTextField2.swift in Sources */,
 				53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */,
 				538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */,
+				537A33A21C075535001E1D7B /* customheadercellafterexpastionforvodka.swift in Sources */,
 				53A3FF951BCF873900122759 /* GiFHUD.swift in Sources */,
 				538D0A481BA4194B005D1386 /* Service.swift in Sources */,
 				537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */,

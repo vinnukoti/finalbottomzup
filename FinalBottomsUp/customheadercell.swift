@@ -16,9 +16,6 @@ import SystemConfiguration
 class customheadercell: UITableViewCell
 {
     @IBOutlet weak var headercellname: UILabel!
-    @IBOutlet weak var headercellnamechild: UILabel!
-    
-    @IBOutlet weak var setheadercellnamechildimaghe: UIImageView!
 
     @IBOutlet weak var headercellmin: UILabel!
 
@@ -32,13 +29,14 @@ class customheadercell: UITableViewCell
    // @IBOutlet weak var arrowimage: UIImageView!
     @IBOutlet weak var happyhourslabelbeer: UILabel!
     
-    @IBOutlet weak var happyhourslablebeernew: UILabel!
-    
-    @IBOutlet weak var happyhourstiminglabel: UILabel!
-    
-    @IBOutlet weak var happyhourstiminglabelnew: UILabel!
+
+    @IBOutlet weak var viretodisplayHappyhours: UIView!
+
+    @IBOutlet weak var HappyhourstiminglabelBeforeexpastion: UILabel!
 
     @IBOutlet weak var tapguesturerecognizer: UIImageView!
+
+    
     //var tableobject = tableviewclass()
     override func awakeFromNib()
     {

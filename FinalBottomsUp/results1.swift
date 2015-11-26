@@ -48,7 +48,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     private var connection:NSURLConnection?
     
-    private let googleMapsKey = "AIzaSyBznULI0vOApc8mQDiUv6Q_iohI8BWcSHY"
+    private let googleMapsKey = "AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
     var autocompleteUrls = [String]()
@@ -558,6 +558,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 totalDistance = totalDistance + (meters / 1000)
                                 println(String(format: "%.2f Km.", totalDistance))
                                 NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -565,7 +566,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                                totalDistance1 = PartOfString(totalDistance1, 1, 3)
+                               // totalDistance1 = PartOfString(totalDistance1, 1, 3)
                                 
                                 
                                 fstobj1.distance = totalDistance1 + "Km."
@@ -686,6 +687,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 totalDistance = totalDistance + (meters / 1000)
                                 println(String(format: "%.2f Km.", totalDistance))
                                 NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
                                 func PartOfString(s: String, start: Int, length: Int) -> String
@@ -693,7 +695,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                                totalDistance1 = PartOfString(totalDistance1, 1, 3)
+                               // totalDistance1 = PartOfString(totalDistance1, 1, 3)
                                 vodkaobj.distancevodka = totalDistance1 + "Km."
                                 //vodkasendobj.distancevodka = totalDistance1 + "KM"
                             }

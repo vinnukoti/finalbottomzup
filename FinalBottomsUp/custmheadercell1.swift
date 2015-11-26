@@ -21,28 +21,16 @@ class custmheadercell1: UITableViewCell
 
     @IBOutlet weak var availofferbutton: UIButton!
     
-    @IBOutlet weak var happyhourslabelvodka: UILabel!
-    
-    @IBOutlet weak var arrowimage: UIImageView!
-    
-    @IBOutlet weak var vodkaresturantnameimage: UIImageView!
-    
-    @IBOutlet weak var childvodkarestaurantname: UILabel!
-    
-    @IBOutlet weak var displayhappyhoursvodka: UILabel!
-    
-    @IBOutlet weak var happyhourslabletimingforvodka: UILabel!
-
-    @IBOutlet weak var happyhourstiminglabelvodkanew: UILabel!
-    
     @IBOutlet weak var taprecognizerimage: UIImageView!
+    
+    @IBOutlet weak var viewtodisplayhappyhourbeforeexpantion: UIView!
+    @IBOutlet weak var Happyhourlabelbeforeexpantion: UILabel!
+    
+    @IBOutlet weak var Happyhourtimingdisplaybeforeexpantion: UILabel!
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
-//        let happyhorsimage = UIImage(named: "Happyhoursround image")
-//        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: happyhourslabelvodka.frame.width, height: happyhourslabelvodka.frame.height))
-//        myImageView.image = happyhorsimage
-//        happyhourslabelvodka.addSubview(myImageView)
 
     }
     
