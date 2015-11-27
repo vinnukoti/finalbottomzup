@@ -170,6 +170,12 @@ extension CALayer {
         self.addSublayer(border)
     }
     
+    //let clr:UIColor = UIColor(hexString:"000000")
+    
+//    let s1: TheProtocol = Struct1()
+//    s1.method1()
+//    s1.method2()
+    
 }
 
 

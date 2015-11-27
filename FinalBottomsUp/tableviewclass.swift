@@ -149,7 +149,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
    // var getsubstringofselectedliq:String!
     
     var countfurther = 0
-    var substringdistance = "."
+    
+    var llokfurther = [Restaurant]()
     
     
 
@@ -237,6 +238,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newuitableview.tag = 0
         newtextfieldtableview.tag = 2
         
+        if boolexists{
+        
         func swapNumbers(index1 :Int,index2: Int)
         {
             let temp = inputArr[index1]
@@ -268,10 +271,46 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
-        //  println(inputArr.first)
-        // println(inputArr.last)
         head = inputArr
         self.tableview.reloadData()
+        }
+        else
+        {
+            func swapNumbers(index1 :Int,index2: Int)
+            {
+                let temp = inputArr[index1]
+                println(temp)
+                inputArr[index1] = inputArr[index2]
+                println(inputArr[index1])
+                inputArr[index2] = temp
+                println(inputArr[index2])
+            }
+            
+            for var ind: Int = 0; ind < inputArr.count - 1; ++ind
+            {
+                for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
+                {
+                    println(jIndex)
+                    if inputArr[jIndex].maxp < inputArr[ind].maxp
+                    {
+                        // println(inputArr[jIndex].maxp)
+                        // println(inputArr[jIndex + 1].maxp)
+                        //swapNumbers(jIndex, ind)
+                        //println(swapNumbers(jIndex, jIndex+1))
+                        //println(inputArr[jIndex + 1].maxp)
+                        let temp = inputArr[jIndex]
+                        //println(temp)
+                        inputArr[jIndex] = inputArr[ind]
+                        //println(inputArr[index1])
+                        inputArr[ind] = temp
+                    }
+                }
+            }
+            
+            head = inputArr
+            self.tableview.reloadData()
+
+        }
 
         
     }
@@ -347,6 +386,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         autocompletetextfieldforbeer.onSelect = {[weak self] text, indexpath in
             self!.autocompletetextfieldforbeer.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
+//            if self!.boolexists
+//            {
+//                self!.bottlebutton.setBackgroundImage(self!.bottlecheckedImage, forState: .Normal)
+//            }
+//            else
+//            {
+//                self!.pintbutton.setBackgroundImage(self!.pintcheckedImage, forState: .Normal)
+//            }
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -407,9 +454,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func textFieldDidBeginEditing(textField: UITextField)
     {
 
-        
+        if newtextfieldtableview.tag == 2{
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        }
         
     }
     
@@ -476,11 +524,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func didLoadData(arrData: [String])
     {
         var substring = self.newtextfieldtableview.text
-        //substring.lowercaseString
         searchAutocompleteEntriesWithSubstring(substring)
-        
-        //self.newtextfieldtableview.reloadData()
-        
         self.newuitableview.reloadData()
         self.newuitableview!.hidden = false
         
@@ -537,6 +581,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         newtextfieldtableview.text = selectedCell1.textLabel?.text
          liqnamefromtextfield = newtextfieldtableview.text
+//            if boolexists{
+//                bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+//            }
+//            else
+//            {
+//                pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+//            }
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
            
         getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
@@ -1032,12 +1083,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
         cells.beers = [liqclass]()
         cells.beers = head[indexPath.section].amp
-            cells.arrowup.tag = indexPath.section
+        cells.arrowup.tag = indexPath.section
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
-      //  cells.directions.setTitle(head[indexPath.section].distance, forState: UIControlState.Normal)
         cells.distancelabelnew.text = head[indexPath.section].distance
-            //cells.b
+  
         cells.tableView.reloadData()
         
         return cells
@@ -1045,9 +1095,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         else
         {
-//            newtextfieldtableview.layer.masksToBounds = true
-//            newtextfieldtableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
-//            newtextfieldtableview.layer.borderWidth = 2.0
             
             let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
             var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
@@ -1147,6 +1194,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if tableView.tag == 1
         {
+            
+            //let x = head.filter(<#includeElement: (T) -> Bool##(T) -> Bool#>)
             if head[section].bool == false{
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
    
@@ -1343,6 +1392,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
 
     }
+    
     
     
     @IBAction func lookfurther(sender: AnyObject)
@@ -1564,15 +1614,52 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
-        
         self.tableview.reloadData()
+        func swapNumbers(index1 :Int,index2: Int)
+        {
+            println(head.count)
+            inputArr = head
+            let temp = inputArr[index1]
+            
+            println(temp)
+            inputArr[index1] = inputArr[index2]
+            println(inputArr[index1])
+            inputArr[index2] = temp
+            println(inputArr[index2])
+        }
+        
+        for var ind: Int = 0; ind < inputArr.count - 1; ++ind
+        {
+            for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
+            {
+                println(jIndex)
+                if inputArr[jIndex].minp < inputArr[ind].minp
+                {
+                    // println(inputArr[jIndex].maxp)
+                    // println(inputArr[jIndex + 1].maxp)
+                    //swapNumbers(jIndex, ind)
+                    //println(swapNumbers(jIndex, jIndex+1))
+                    //println(inputArr[jIndex + 1].maxp)
+                    let temp = inputArr[jIndex]
+                    //println(temp)
+                    inputArr[jIndex] = inputArr[ind]
+                    //println(inputArr[index1])
+                    inputArr[ind] = temp
+                }
+            }
+        }
+        
+        head = inputArr
+        tableview.reloadData()
+
+   
         
     }
     
     @IBAction func pintsort(sender: AnyObject)
         
     {
-        inputArr = head
+        //inputArr = head
         bottlebuttonclicked = false
         locationbuttonclicked = false
         pintbuttonclicked = true
@@ -1996,6 +2083,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         performSegueWithIdentifier("gobacktoresult1", sender: self)
     }
     
+    @IBAction func getdeals(sender: UIButton) {
+        performSegueWithIdentifier("getdeals", sender: self)
+    }
 }
 
 

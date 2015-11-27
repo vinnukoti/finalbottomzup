@@ -119,7 +119,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
     {
         
-       // obj.autoCompleteTableView?.tag == 3
+
         newtableviewforvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         newtableviewforvodka.layer.borderWidth = 2
         newtextfieldvodka.text = selectedliqor
@@ -1093,12 +1093,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     func textFieldDidBeginEditing(textField: UITextField)
     {
-       // if newtextfieldvodka.tag == 2{
-//            var obj = AutoCompleteTextField()
-//            obj.autoCompleteTableView?.hidden = true
-        
-        
-        
+
         if textField.tag == 2{
             textField.selectAll(self)
             textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
@@ -1594,6 +1589,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         tableview1.reloadData()
     }
     
+    @IBAction func getdeals(sender: UIButton) {
+        performSegueWithIdentifier("getdeals", sender: self)
+    }
 }
 
     

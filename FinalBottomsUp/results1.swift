@@ -48,7 +48,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     private var connection:NSURLConnection?
     
-    private let googleMapsKey = "AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g"
+    private let googleMapsKey = "AIzaSyBznULI0vOApc8mQDiUv6Q_iohI8BWcSHY"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
     var autocompleteUrls = [String]()
@@ -89,6 +89,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     override func viewDidLoad()
     {
+        textfield2.tag = 1
         autocompletedTextfieldnew.text = currentlocationname
         textfield2.delegate = self
         textfield2!.delegate = self
@@ -265,9 +266,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     // textfield1 starts
     func textFieldDidBeginEditing(textField: UITextField)
     {
-        // textField.text = ""
+        if textField.tag == 1{
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        }
         
     }
     
@@ -778,6 +780,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 destination.liqname = trimmedString
                 destination.head = head1
+                destination.llokfurther = head1
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
                 destination.getcitylatitude = citylat
@@ -848,6 +851,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
     }
 
+    @IBAction func getdeals(sender: UIButton) {
+        performSegueWithIdentifier("getdeals", sender: self)
+    }
 }
 
 
