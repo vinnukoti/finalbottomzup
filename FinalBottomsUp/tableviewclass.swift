@@ -92,7 +92,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var toggle = false
     
-    var inputArr = [Restaurant]()
+    var pintSortingarry = [Restaurant]()
+    var botleSortingarray = [Restaurant]()
+    
+    
     
        var currentlocationname:String!
     
@@ -175,10 +178,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         if boolexists
         {
            bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+           // swapBottle()
         }
         else
         {
             pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+           // swapPint()
         }
         
         newtextfieldtableview.text = selectedliqor
@@ -193,7 +198,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         getdealsbutton.layer.cornerRadius = 10
         getdealsbutton.setBackgroundImage(delasimage, forState: .Normal)
         
-        inputArr = head
+        pintSortingarry = head
     
         
         
@@ -238,79 +243,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newuitableview.tag = 0
         newtextfieldtableview.tag = 2
         
-        if boolexists{
-        
-        func swapNumbers(index1 :Int,index2: Int)
+        if boolexists
         {
-            let temp = inputArr[index1]
-            println(temp)
-            inputArr[index1] = inputArr[index2]
-            println(inputArr[index1])
-            inputArr[index2] = temp
-            println(inputArr[index2])
-        }
-        
-        for var ind: Int = 0; ind < inputArr.count - 1; ++ind
-        {
-            for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
-            {
-                println(jIndex)
-                if inputArr[jIndex].minp < inputArr[ind].minp
-                {
-                    // println(inputArr[jIndex].maxp)
-                    // println(inputArr[jIndex + 1].maxp)
-                    //swapNumbers(jIndex, ind)
-                    //println(swapNumbers(jIndex, jIndex+1))
-                    //println(inputArr[jIndex + 1].maxp)
-                    let temp = inputArr[jIndex]
-                    //println(temp)
-                    inputArr[jIndex] = inputArr[ind]
-                    //println(inputArr[index1])
-                    inputArr[ind] = temp
-                }
-            }
-        }
-        
-        head = inputArr
-        self.tableview.reloadData()
+          botleSortingarray = swapBottle(head)
+//            head = botleSortingarray
+//            tableview.reloadData()
         }
         else
         {
-            func swapNumbers(index1 :Int,index2: Int)
-            {
-                let temp = inputArr[index1]
-                println(temp)
-                inputArr[index1] = inputArr[index2]
-                println(inputArr[index1])
-                inputArr[index2] = temp
-                println(inputArr[index2])
-            }
-            
-            for var ind: Int = 0; ind < inputArr.count - 1; ++ind
-            {
-                for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
-                {
-                    println(jIndex)
-                    if inputArr[jIndex].maxp < inputArr[ind].maxp
-                    {
-                        // println(inputArr[jIndex].maxp)
-                        // println(inputArr[jIndex + 1].maxp)
-                        //swapNumbers(jIndex, ind)
-                        //println(swapNumbers(jIndex, jIndex+1))
-                        //println(inputArr[jIndex + 1].maxp)
-                        let temp = inputArr[jIndex]
-                        //println(temp)
-                        inputArr[jIndex] = inputArr[ind]
-                        //println(inputArr[index1])
-                        inputArr[ind] = temp
-                    }
-                }
-            }
-            
-            head = inputArr
-            self.tableview.reloadData()
-
-        }
+            swapPint()
+         }
 
         
     }
@@ -581,12 +523,34 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         newtextfieldtableview.text = selectedCell1.textLabel?.text
          liqnamefromtextfield = newtextfieldtableview.text
+            if liqnamefromtextfield.rangeOfString(substringofselectedliq) != nil
+            {
+                boolexists = true
+                bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+                pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+              //  swapBottle()
+//                println("exists")
+            }
+            else
+            {
+                boolexists = false
+                pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+                bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
+//                swapPint()
+                println("Not exists")
+            }
+
 //            if boolexists{
-//                bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+////                bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+////                pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+//                swapBottle()
+//               // tableview.reloadData()
 //            }
 //            else
 //            {
 //                pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+//                bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
+//                // swapPint()
 //            }
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
            
@@ -1615,45 +1579,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         self.tableview.reloadData()
-        func swapNumbers(index1 :Int,index2: Int)
-        {
-            println(head.count)
-            inputArr = head
-            let temp = inputArr[index1]
-            
-            println(temp)
-            inputArr[index1] = inputArr[index2]
-            println(inputArr[index1])
-            inputArr[index2] = temp
-            println(inputArr[index2])
-        }
-        
-        for var ind: Int = 0; ind < inputArr.count - 1; ++ind
-        {
-            for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
-            {
-                println(jIndex)
-                if inputArr[jIndex].minp < inputArr[ind].minp
-                {
-                    // println(inputArr[jIndex].maxp)
-                    // println(inputArr[jIndex + 1].maxp)
-                    //swapNumbers(jIndex, ind)
-                    //println(swapNumbers(jIndex, jIndex+1))
-                    //println(inputArr[jIndex + 1].maxp)
-                    let temp = inputArr[jIndex]
-                    //println(temp)
-                    inputArr[jIndex] = inputArr[ind]
-                    //println(inputArr[index1])
-                    inputArr[ind] = temp
-                }
-            }
-        }
-        
-        head = inputArr
-        tableview.reloadData()
-
-   
-        
     }
     
     @IBAction func pintsort(sender: AnyObject)
@@ -1682,119 +1607,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         tableview.reloadData()
-//        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
-//        {
-//            var sorted = false
-//            while sorted == false
-//            {
-//                sorted = true
-//                if cards.count > 1
-//                {
-//                    for i in 0...cards.count - 2
-//                    {
-//                        if cards[i].minp < cards[i+1].minp
-//                        {
-//                            sorted = false
-//                            var first = cards[i]
-//                            var second = cards[i + 1]
-//                            println("first object before \(first.minp)")
-//                            println("second object before\(second.minp)")
-//                            cards[i] = second
-//                            cards[i + 1] = first
-//                            println("first object after\(cards[i].minp)")
-//                            println("second object after\(cards[i + 1].minp)")
-//                        }
-//                    }
-//                }
-//                else
-//                {
-//                    
-//                }
-//            }
-//            return cards
-//        }
-//        var sortedarray:[Restaurant] = sortCards(&head)
-        
-        
-        func swapNumbers(index1 :Int,index2: Int)
-        {
-            let temp = inputArr[index1]
-            println(temp)
-            inputArr[index1] = inputArr[index2]
-            println(inputArr[index1])
-            inputArr[index2] = temp
-            println(inputArr[index2])
-        }
-        
-        for var ind: Int = 0; ind < inputArr.count - 1; ++ind
-        {
-            for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
-            {
-                println(jIndex)
-                if inputArr[jIndex].minp < inputArr[ind].minp
-                {
-                    // println(inputArr[jIndex].maxp)
-                    // println(inputArr[jIndex + 1].maxp)
-                    //swapNumbers(jIndex, ind)
-                    //println(swapNumbers(jIndex, jIndex+1))
-                    //println(inputArr[jIndex + 1].maxp)
-                    let temp = inputArr[jIndex]
-                    //println(temp)
-                    inputArr[jIndex] = inputArr[ind]
-                    //println(inputArr[index1])
-                    inputArr[ind] = temp
-                }
-            }
-        }
-        
-        //  println(inputArr.first)
-        // println(inputArr.last)
-        head = inputArr
+
+        swapPint()
+        head = pintSortingarry
         self.tableview.reloadData()
-        
-        //println("sorted array is  : \(head)")
-        
-        
-        
-        //        else
-        //        {
-        //            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
-        //            {
-        //                var sorted = false
-        //                while sorted == false
-        //                {
-        //                    sorted = true
-        //                    if cards.count > 1
-        //                    {
-        //                    for i in 0...cards.count - 2
-        //                    {
-        //                        if cards[i].minp < cards[i+1].minp
-        //                        {
-        //                            sorted = false
-        //                            var first = cards[i]
-        //                            var second = cards[i + 1]
-        //                            println("first object before \(first.minp)")
-        //                            println("second object before\(second.minp)")
-        //                            cards[i] = second
-        //                            cards[i + 1] = first
-        //                            println("first object after\(cards[i].minp)")
-        //                            println("second object after\(cards[i + 1].minp)")
-        //                        }
-        //                    }
-        //                    }
-        //                    else
-        //                    {
-        //
-        //                    }
-        //                }
-        //                return cards
-        //            }
-        //            var sortedarray:[Restaurant] = sortCards(&head)
-        //            head = sortedarray
-        //            self.tableview.reloadData()
-        //            println("sorted array is  : \(head)")
-        //            doubleTap = true
-        //        }
         
     }
     
@@ -1802,7 +1618,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     {
         global = true
-        inputArr = head
+        pintSortingarry = head
         pintbuttonclicked = false
         locationbuttonclicked = false
         bottlebuttonclicked = true
@@ -1821,223 +1637,23 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
             }
             
+           // tableview.reloadData()
+            
+
+            botleSortingarray = swapBottle(head)
+            head = botleSortingarray
             tableview.reloadData()
-            
-//            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
-//            {
-//                var sorted = false
-//                while sorted == false
-//                {
-//                    sorted = true
-//                    if cards.count > 1
-//                    {
-//                        for i in 0...cards.count - 2
-//                        {
-//                            if cards[i].maxp < cards[i+1].maxp
-//                            {
-//                                sorted = false
-//                                var first = cards[i]
-//                                var second = cards[i + 1]
-//                                println("first object before \(first.maxp)")
-//                                println("second object before\(second.maxp)")
-//                                cards[i] = second
-//                                cards[i + 1] = first
-//                                
-//                                println("first object after\(cards[i].maxp)")
-//                                println("second object after\(cards[i + 1].maxp)")
-//                                
-//                            }
-//                        }
-//                    }
-//                    else
-//                    {
-//                        
-//                    }
-//                }
-//                return cards
-//            }
-//            var sortedarray:[Restaurant] = sortCards(&head)
-            
-            func swapNumbers(index1 :Int,index2: Int)
-            {
-                let temp = inputArr[index1]
-                println(temp)
-                inputArr[index1] = inputArr[index2]
-                println(inputArr[index1])
-                inputArr[index2] = temp
-                println(inputArr[index2])
-            }
-            
-            for var ind: Int = 0; ind < inputArr.count - 1; ++ind
-            {
-                for var jIndex: Int = ind + 1; jIndex < inputArr.count; ++jIndex
-                {
-                    println(jIndex)
-                    if inputArr[jIndex].maxp < inputArr[ind].maxp
-                    {
-                       // println(inputArr[jIndex].maxp)
-                       // println(inputArr[jIndex + 1].maxp)
-                        //swapNumbers(jIndex, ind)
-                        //println(swapNumbers(jIndex, jIndex+1))
-                        //println(inputArr[jIndex + 1].maxp)
-                        let temp = inputArr[jIndex]
-                        //println(temp)
-                        inputArr[jIndex] = inputArr[ind]
-                        //println(inputArr[index1])
-                        inputArr[ind] = temp
-                    }
-                }
-            }
-        
-          //  println(inputArr.first)
-           // println(inputArr.last)
-            head = inputArr
-            self.tableview.reloadData()
-            
-            println("sorted array is  : \(head)")
+//            head = botleSortingarray
+//            self.tableview.reloadData()
             
         }
-        
-        
-        //        else
-        //        {
-        //
-        //            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
-        //            {
-        //                var sorted = false
-        //                while sorted == false
-        //                {
-        //                    sorted = true
-        //                    if cards.count > 1
-        //                    {
-        //                    for i in 0...cards.count - 2
-        //                    {
-        //                        if cards[i].maxp < cards[i+1].maxp
-        //                        {
-        //                            sorted = false
-        //                            var first = cards[i]
-        //                            var second = cards[i + 1]
-        //                            println("first object before \(first.maxp)")
-        //                            println("second object before\(second.maxp)")
-        //                            cards[i] = second
-        //                            cards[i + 1] = first
-        //
-        //                            println("first object after\(cards[i].maxp)")
-        //                            println("second object after\(cards[i + 1].maxp)")
-        //
-        //                        }
-        //                    }
-        //                    }
-        //                    else
-        //                    {
-        //
-        //                    }
-        //                }
-        //                return cards
-        //            }
-        //            var sortedarray:[Restaurant] = sortCards(&head)
-        //            head = sortedarray
-        //            self.tableview.reloadData()
-        //            println("sorted array is  : \(head)")
-        //            doubleTap = true
-        //        }
         
     }
     
     
     @IBAction func locationsort(sender: AnyObject)
     {
-        //        pintbuttonclicked = false
-        //        bottlebuttonclicked = false
-        //        locationbuttonclicked = true
-        //
-        //        if locationbuttonclicked == true
-        //        {
-        //            pintbutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
-        //            bottlebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
-        //            locationbutton.setBackgroundImage(locationcheckedImage, forState: .Normal)
-        //        }
-        //
-        ////        func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
-        ////        {
-        ////            var sorted = false
-        ////            while sorted == false
-        ////            {
-        ////                sorted = true
-        ////                if cards.count > 1
-        ////                {
-        ////                for i in 0...cards.count - 2
-        ////                {
-        ////                    if cards[i].distance > cards[i+1].distance
-        ////                    {
-        ////                        sorted = false
-        ////                        var first = cards[i]
-        ////                        var second = cards[i + 1]
-        ////                        println("first object before \(first.distance)")
-        ////                        println("second object before\(second.distance)")
-        ////                        cards[i] = second
-        ////                        cards[i + 1] = first
-        ////
-        ////                        println("first object after\(cards[i].distance)")
-        ////                        println("second object after\(cards[i + 1].distance)")
-        ////
-        ////                    }
-        ////                }
-        ////                }
-        ////                else
-        ////                {
-        ////
-        ////                }
-        ////            }
-        ////            return cards
-        ////            }
-        ////            var sortedarray:[Restaurant] = sortCards(&head)
-        ////            head = sortedarray
-        //            self.tableview.reloadData()
-        //
-        //            println("sorted array is  : \(head)")
-        //
-        //        else
-        //        {
-        //            func sortCards(inout cards: Array<Restaurant>) -> Array<Restaurant>
-        //            {
-        //                var sorted = false
-        //                while sorted == false
-        //                {
-        //                    sorted = true
-        //                    if cards.count > 1
-        //                    {
-        //                    for i in 0...cards.count - 2
-        //                    {
-        //                        if cards[i].distance < cards[i+1].distance
-        //                        {
-        //                            sorted = false
-        //                            var first = cards[i]
-        //                            var second = cards[i + 1]
-        //                            println("first object before \(first.distance)")
-        //                            println("second object before\(second.distance)")
-        //                            cards[i] = second
-        //                            cards[i + 1] = first
-        //                            
-        //                            println("first object after\(cards[i].distance)")
-        //                            println("second object after\(cards[i + 1].distance)")
-        //                            
-        //                        }
-        //                    }
-        //                    }
-        //                    else
-        //                    {
-        //                        
-        //                    }
-        //                }
-        //                return cards
-        //            }
-        //            var sortedarray:[Restaurant] = sortCards(&head)
-        //            head = sortedarray
-        //            self.tableview.reloadData()
-        //            println("sorted array is  : \(head)")
-        //            doubleTap = true
-        //        }
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -2064,19 +1680,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             destination1.getcitylatitufrombeerscreen = getcitylatitude
             destination1.getcitylongitudefrombeerscreen = getcitylongitude
             destination1.getselectedcityname = getselectedcityname
-            
-            
-            
         }
         }
     }
-    
-//    @IBAction func getDirections(sender: UIButton)
-//    {
-//        
-//        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
-//        
-//    }
     
     @IBAction func backbutton(sender: UIButton)
     {
@@ -2086,12 +1692,68 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func getdeals(sender: UIButton) {
         performSegueWithIdentifier("getdeals", sender: self)
     }
+    
+
+    
+    func swapPint()
+    {
+        for var ind: Int = 0; ind < pintSortingarry.count - 1; ++ind
+        {
+            for var jIndex: Int = ind + 1; jIndex < pintSortingarry.count; ++jIndex
+            {
+                println(jIndex)
+                if pintSortingarry[jIndex].minp < pintSortingarry[ind].minp
+                {
+                    // println(inputArr[jIndex].maxp)
+                    // println(inputArr[jIndex + 1].maxp)
+                    //swapNumbers(jIndex, ind)
+                    //println(swapNumbers(jIndex, jIndex+1))
+                    //println(inputArr[jIndex + 1].maxp)
+                    let temp = pintSortingarry[jIndex]
+                    //println(temp)
+                    pintSortingarry[jIndex] = pintSortingarry[ind]
+                    //println(inputArr[index1])
+                    pintSortingarry[ind] = temp
+                }
+            }
+        }
+        head = pintSortingarry
+        self.tableview.reloadData()
+    }
+    
+    func swapBottle(var array:[Restaurant]) -> [Restaurant]
+    {
+        for var ind: Int = 0; ind < array.count - 1; ++ind
+        {
+            for var jIndex: Int = ind + 1; jIndex < array.count; ++jIndex
+            {
+                println(jIndex)
+                if array[jIndex].maxp < array[ind].maxp
+                {
+                    let temp = array[jIndex]
+                    println(temp.maxp)
+                    array[jIndex] = array[ind]
+                    println(array[jIndex].maxp)
+                    array[ind] = temp
+                    println(array[ind].maxp)
+                }
+            }
+        }
+        
+        
+        return array
+    
+
+    }
+
+    
+    
 }
 
 
 
 
-
+//func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
 
 
 
