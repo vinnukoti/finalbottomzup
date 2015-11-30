@@ -42,11 +42,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var getvodkalongitude:Double!
     var takegetselectedcitynale:String!
     
-    let bottlecheckedImage = UIImage(named: "bottleenabled")
-    let bottleunCheckedImage = UIImage(named: "bottle")
+//    let bottlecheckedImage = UIImage(named: "NormalTabyellow")
+//    let bottleunCheckedImage = UIImage(named: "NormaltabWhite")
     
-    let pintcheckedImage = UIImage(named: "pintenabled")
-    let pintunCheckedImage = UIImage(named: "pint")
+    let pintcheckedImage = UIImage(named: "NormalTabyellow")
+    let pintunCheckedImage = UIImage(named: "NormaltabWhite")
     
     @IBOutlet weak var popupviewvodka: UIView!
 
@@ -118,7 +118,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad()
     {
-        
+        distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
 
         newtableviewforvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         newtableviewforvodka.layer.borderWidth = 2
@@ -142,7 +142,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         getdealsbutton.layer.cornerRadius = 10
         getdealsbutton.setBackgroundImage(delasimage, forState: .Normal)
-       // println(header1.count)
         pricebutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
         vodkasort = header1
         popupviewvodka.layer.cornerRadius = 20.0
@@ -176,41 +175,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         citynametextfieldforvodka.delegate = self
         citynametextfieldforvodka.text = getselectedcityname
         
-        func swapNumbers(index1 :Int,index2: Int)
-        {
-            let temp = vodkasort[index1]
-            println(temp)
-            vodkasort[index1] = vodkasort[index2]
-            println(vodkasort[index1])
-            vodkasort[index2] = temp
-            println(vodkasort[index2])
-        }
-        
-        for var ind: Int = 0; ind < vodkasort.count - 1; ++ind
-        {
-            for var jIndex: Int = ind + 1; jIndex < vodkasort.count; ++jIndex
-            {
-                println(jIndex)
-                if vodkasort[jIndex].avgprice < vodkasort[ind].avgprice
-                {
-                    // println(inputArr[jIndex].maxp)
-                    // println(inputArr[jIndex + 1].maxp)
-                    //swapNumbers(jIndex, ind)
-                    //println(swapNumbers(jIndex, jIndex+1))
-                    //println(inputArr[jIndex + 1].maxp)
-                    let temp = vodkasort[jIndex]
-                    //println(temp)
-                    vodkasort[jIndex] = vodkasort[ind]
-                    //println(inputArr[index1])
-                    vodkasort[ind] = temp
-                }
-            }
-        }
-        
-        //  println(inputArr.first)
-        // println(inputArr.last)
-        header1 = vodkasort
-         self.tableview1.reloadData()
+        header1 = pricesort1(header1)
 
 
         
@@ -655,20 +620,35 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         count = count + 1
         if count == 1
         {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=4&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(liqvodkaname)")
         }
         
         if count == 2
         {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=4&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(liqvodkaname)")
         }
         if count == 3
         {
-            count = 0
-            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "You want to go back for 2 KM Search", style: UIAlertActionStyle.Default,handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=4&query=\(liqvodkaname)")
+            
+            let alertController = UIAlertController(title: "Do you want go back to 2 km search", message: "Press the Ok or cancel", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                self.count = 2
+                
+            }
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.count = 0
+                self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true) {
+                
+            }
+            
+           // getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=4&query=\(liqvodkaname)")
             
 
         }
@@ -720,37 +700,25 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     }
                     if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                     {
-                        
-                        //                            func PartOfString(s: String, start: Int, length: Int) -> String
-                        //                            {
-                        //                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                        //                            }
-                        //                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                        // var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
+
                         var happy_hour_start2 = happy_hour_start
                         
                         getvodkaobj.vodkahappystart = happy_hour_start2
-                        //vodkasendobj.vodkahappystart = happy_hour_start2
+
                     }
                     
                     if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                     {
-                        
-                        //                            func PartOfString(s: String, start: Int, length: Int) -> String
-                        //                            {
-                        //                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                        //                            }
-                        //                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                        // var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+
                         var happy_hour_end2 = happy_hour_end
                         getvodkaobj.vodkahappyend = happy_hour_end2
-                        //vodkasendobj.vodkahappyend = happy_hour_end2
+       
                     }
                     
                     if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                     {
                         getvodkaobj.vodkaishappy = is_happy_hour
-                        // vodkasendobj.vodkaishappy = is_happy_hour
+                  
                     }
                     
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
@@ -758,7 +726,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         if let res_name = resInfo["res_name"] as? String
                         {
                            getvodkaobj.restnamevodka = res_name
-                            //getvodkaobj1.restnamevodka = res_name
+                        
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -767,7 +735,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
                             getvodkalatitude = string.doubleValue
-                           // println(restvodkalat)
+                 
                             
                         }
                         if let res_long = resInfo["res_long"] as? String
@@ -826,8 +794,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
       
                  header1.append(getvodkaobj)
                 headfurther.append(getvodkaobj)
-               // println(headfurther)
+      
             }
+            header1 = pricesort1(header1)
         }
         else
         {
@@ -848,7 +817,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if pricebuttonclicked == true
         {
             pricebutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
-            distancebutton.setBackgroundImage(bottleunCheckedImage, forState: .Normal)
+            distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
         
         }
         for var i = 0; i < header1.count ; i++
@@ -858,85 +827,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         
         tableview1.reloadData()
-        
-      
-//            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
-//            {
-//                var sorted = false
-//                while sorted == false
-//                {
-//                    sorted = true
-//                    if cards.count > 1
-//                    {
-//                    for i in 0...cards.count - 2
-//                    {
-//                        if cards[i].avgprice > cards[i+1].avgprice
-//                        {
-//                            sorted = false
-//                            var first = cards[i]
-//                            var second = cards[i + 1]
-//                            println("first object before \(first.avgprice)")
-//                            println("second object before\(second.avgprice)")
-//                            cards[i] = second
-//                            cards[i + 1] = first
-//                            println("first object after\(cards[i].avgprice)")
-//                            println("second object after\(cards[i + 1].avgprice)")
-//                        }
-//                    }
-//                    }
-//                    else
-//                    {
-//                        
-//                    }
-//                }
-//                return cards
-//            }
-//            var sortedarray:[Restauarantvodka] = sortCards(&header1)
-        
-        
-        func swapNumbers(index1 :Int,index2: Int)
-        {
-            let temp = vodkasort[index1]
-            println(temp)
-            vodkasort[index1] = vodkasort[index2]
-            println(vodkasort[index1])
-            vodkasort[index2] = temp
-            println(vodkasort[index2])
-        }
-        
-        for var ind: Int = 0; ind < vodkasort.count - 1; ++ind
-        {
-            for var jIndex: Int = ind + 1; jIndex < vodkasort.count; ++jIndex
-            {
-                println(jIndex)
-                if vodkasort[jIndex].avgprice < vodkasort[ind].avgprice
-                {
-                    // println(inputArr[jIndex].maxp)
-                    // println(inputArr[jIndex + 1].maxp)
-                    //swapNumbers(jIndex, ind)
-                    //println(swapNumbers(jIndex, jIndex+1))
-                    //println(inputArr[jIndex + 1].maxp)
-                    let temp = vodkasort[jIndex]
-                    //println(temp)
-                    vodkasort[jIndex] = vodkasort[ind]
-                    //println(inputArr[index1])
-                    vodkasort[ind] = temp
-                }
-            }
-        }
-        
-        //  println(inputArr.first)
-        // println(inputArr.last)
-        header1 = vodkasort
 
         
         
-        
-        
-        
-           // header1 = sortedarray
-            self.tableview1.reloadData()
-            println("sorted array is  : \(header1.count)")
+
         
         
 //        else
@@ -1411,36 +1305,24 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         }
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
-                            
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            //var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
+
                             var happy_hour_start2 = happy_hour_start
                             vodkaobjnew.vodkahappystart = happy_hour_start2
-                            //vodkasendobj.vodkahappystart = happy_hour_start2
+
                         }
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
-                            
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                           // var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+
                             var happy_hour_end2 = happy_hour_end
                             vodkaobjnew.vodkahappyend = happy_hour_end2
-                            //vodkasendobj.vodkahappyend = happy_hour_end2
+ 
                         }
                         
                         if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                         {
                             vodkaobjnew.vodkaishappy = is_happy_hour
-                            // vodkasendobj.vodkaishappy = is_happy_hour
+               
                         }
                         
                         if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
@@ -1453,7 +1335,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             if let res_name = resInfo["res_name"] as? String
                             {
                                 vodkaobjnew.restnamevodka = res_name
-                                //vodkasendobj.restnamevodka = res_name
+                         
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -1463,8 +1345,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 string.doubleValue
                                 getrestlatitudevodka = string.doubleValue
                                 vodkaobjnew.Restaurantlatitudevodka = getrestlatitudevodka
-                                // vodkasendobj.Restaurantlatitudevodka = restvodkalat
-                                // println(restvodkalat)
                                 
                             }
                             if let res_long = resInfo["res_long"] as? String
@@ -1474,8 +1354,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 string.doubleValue
                                 getrestlongitudevodka = string.doubleValue
                                 vodkaobjnew.Restaurantlongitudevodka = getrestlongitudevodka
-                                //vodkasendobj.Restaurantlongitudevodka = restvodkalang
-                                //// println(restvodkalang)
+           
                             }
                             if var distance = resInfo["distance"] as? String
                             {
@@ -1521,13 +1400,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                     
                                 }
                                 vodkaobjnew.vodkaarray.append(liqobj2)
-                                //vodkasendobj.vodkasendarray.append(liqobj2)
                             }
                         }
                         headerfortableview.append(vodkaobjnew)
                         println(headerfortableview.count)
-                        // headervodka.append(vodkasendobj)
-                        // println("header \(vodkaobj)")
+   
                     }
                 }
             }
@@ -1540,8 +1417,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
                 header1 = headerfortableview
                 tableview1.reloadData()
-                //self.performSegueWithIdentifier("gotobeersegue", sender: self)
             }
+            header1 = pricesort1(header1)
         }
         else
         {
@@ -1566,10 +1443,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination.getdevicelatitude = getdevicelatitude
                 destination.getdevicelongitude = getdevicelongitude
                 destination.selectedliqor = selectedliqor
-              /// destination.getvodkalatitude = restlat
-               // destination.getvodkalongitude = restlong
                 destination.getselectedcityname = getselectedcityname
-                
                 destination.getcitylatitudefromvodka = getcitylatitude
                 destination.getcitylongitudefromvodka = getcitylongitude
                 
@@ -1591,6 +1465,30 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func getdeals(sender: UIButton) {
         performSegueWithIdentifier("getdeals", sender: self)
+    }
+    
+    
+    func pricesort1 (var array:[Restauarantvodka]) -> [Restauarantvodka]
+    {
+        for var ind: Int = 0; ind < array.count - 1; ind++
+        {
+            for var jIndex: Int = ind + 1; jIndex < array.count; ++jIndex
+            {
+                println(jIndex)
+                if array[jIndex].avgprice < array[ind].avgprice
+                {
+                    
+                    let temp = array[jIndex]
+                    println(temp.avgprice)
+                    array[jIndex] = array[ind]
+                    println(array[jIndex].avgprice)
+                    array[ind] = temp
+                    println(array[ind].avgprice)
+                }
+            }
+        }
+        return array
+        
     }
 }
 
