@@ -22,6 +22,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var vodkaobjnew = Restauarantvodka()
     var header1:[Restauarantvodka] = [Restauarantvodka]()
     var getselectedlq:String!
+    
+
 
     
     var restlat:Double!
@@ -36,6 +38,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var citylong:Double!
     @IBOutlet weak var autocompletetextfieldforbeer: AutoCompleteTextField1!
     
+
     @IBOutlet weak var newtextfieldtableview: UITextField!
     var global = false
     var pintbuttonclicked = false
@@ -102,7 +105,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var newuitableview: UITableView!
    // @IBOutlet weak var newliqdropdowntableview: UITableView!
-    @IBOutlet weak var getdealsbutton: UIButton!
+
     
     var locationManager1: CLLocationManager!
     
@@ -156,14 +159,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var llokfurther = [Restaurant]()
     
     var obj = [results1]()
+    var array1 = [Restaurant]()
 
 
     
     
     override func viewDidLoad()
     {
-
+        tableview.tag = 1
+        newuitableview.tag = 0
+        newtextfieldtableview.tag = 2
+        autocompletetextfieldforbeer.tag = 3
         
+        array1 = head
          newuitableview.layer.borderColor = UIColor.grayColor().CGColor
         newuitableview.layer.borderWidth = 2
 
@@ -244,9 +252,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
        // newliqdropdowntableview.scrollEnabled = true
         
 
-        tableview.tag = 1
-        newuitableview.tag = 0
-        newtextfieldtableview.tag = 2
+
 
 
         
@@ -381,7 +387,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func textFieldDidBeginEditing(textField: UITextField)
     {
 
-        if newtextfieldtableview.tag == 2{
+        if textField.tag == 2
+        {
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         }
@@ -632,6 +639,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 //28.63875
                                 //77.07380
                                 var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
+                               // var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -742,6 +750,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 //28.63875
                                 //77.07380
                                 var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude , longitude: getdevicelongitude)
+                                //var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: getrestlatitudevodka, longitude: getrestlongitudevodka)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -835,14 +844,41 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func togglebuttonbeerpressed(sender: UIButton)
     {
+
+        var array = [Restaurant]()
+
+        array = head
+        
+
         if toggle == false
         {
+     
             togglebuttonbeer.setImage(toggleon, forState: .Normal)
             toggle = true
+            for var i = array.count-1;i >= 0;i--
+            {
+                if array[i].ishappy == "Yes"
+                {
+                    
+                }
+                else
+                {
+                    array.removeAtIndex(i)
+                }
+            }
+            head = array
+           tableview.reloadData()
+          //  head = array1
+
         }
-        else{
+        else
+        {
+
             togglebuttonbeer.setImage(toggleoff, forState: .Normal)
             toggle = false
+            head = self.array1
+            tableview.reloadData()
+  
             
         }
         
@@ -1120,12 +1156,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.viretodisplayHappyhours.layer.cornerRadius = 10
         headerCell.mapbutton.tag = section
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
+                
         headerCell.mapbutton.enabled =  false
         headerCell.availofferbuttonbeer.tag = section
-        headerCell.HappyhourstiminglabelBeforeexpastion.text = head[section].happystart + " - " + head[section].happyend
+        headerCell.HappyhourstiminglabelBeforeexpastion.text = " " + head[section].happystart + " - " + head[section].happyend
         headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+        headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+        //headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 1)
             if boolexists == true
             {
                 headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
@@ -1168,24 +1206,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Giving Font family style to a UIButton
-        headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-//              if pintbuttonclicked == true
-//        {
-//           // bottlebuttonclicked = false
-//            headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//            headerCell.headercellmax.backgroundColor = UIColor.whiteColor()
-//            
-//        }
-//
-//
-//        
-//        if bottlebuttonclicked == true
-//        {
-//           // pintbuttonclicked = false
-//            headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//            headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
-//        }
-//
+        headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
 
         return headerCell
         }
@@ -1196,6 +1217,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell1.backgroundColor = UIColor.whiteColor()
             headerCell1.restNameafterexpastion.text = head[section].restname
             headerCell1.HappyhourstimingAfterexpantion.text = head[section].happystart + " - " + head[section].happyend
+            
+            
             headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
             headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderColor = UIColor.lightGrayColor().CGColor
             
@@ -1203,6 +1226,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell1.imageviewtapguesturerecognizer.addGestureRecognizer(headerTapped)
             headerCell1.imageviewtapguesturerecognizer.tag = section
             headerCell1.imageviewtapguesturerecognizer.userInteractionEnabled = true
+            if head[section].ishappy == "Yes"
+            {
+                headerCell1.HappyhourstimingAfterexpantion.textColor = UIColor.greenColor()
+            }
+
             if boolexists
             {
   
@@ -1228,6 +1256,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                headerCell1.HappyhourstimingAfterexpantion.hidden = true
                 headerCell1.happyhoursdisplaylabelafterexpantion.hidden = true
             }
+      
 
 
             return headerCell1
@@ -1435,6 +1464,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             //28.63875
                             //77.07380
                             var OldLocation: CLLocation = CLLocation(latitude: self.getdevicelatitude, longitude: self.getdevicelongitude)
+                           // var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                             var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)

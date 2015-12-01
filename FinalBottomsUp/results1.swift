@@ -48,7 +48,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     private var connection:NSURLConnection?
     
-    private let googleMapsKey = "AIzaSyBznULI0vOApc8mQDiUv6Q_iohI8BWcSHY"
+    private let googleMapsKey = "AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
     var autocompleteUrls = [String]()
@@ -90,6 +90,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     override func viewDidLoad()
     {
         textfield2.tag = 1
+        autocompletedTextfieldnew.tag = 2
         autocompletedTextfieldnew.text = currentlocationname
         textfield2.delegate = self
         textfield2!.delegate = self
@@ -554,6 +555,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 //28.63875
                                 //77.07380
                                 var OldLocation: CLLocation = CLLocation(latitude: devicelatitude, longitude: devicelongitude)
+                              //  var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -682,7 +684,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             {
                                 //28.63875
                                 //77.07380
-                                var OldLocation: CLLocation = CLLocation(latitude: devicelatitude , longitude: devicelongitude)
+                               var OldLocation: CLLocation = CLLocation(latitude: devicelatitude , longitude: devicelongitude)
+                               // var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: restvodkalat, longitude: restvodkalang)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)

@@ -140,8 +140,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         configureTextField()
         handleTextFieldInterfaces()
         
-        getdealsbutton.layer.cornerRadius = 10
-        getdealsbutton.setBackgroundImage(delasimage, forState: .Normal)
+        //getdealsbutton.layer.cornerRadius = 10
+        //getdealsbutton.setBackgroundImage(delasimage, forState: .Normal)
         pricebutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
         vodkasort = header1
         popupviewvodka.layer.cornerRadius = 20.0
@@ -255,8 +255,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 if placemark != nil
                 {
                     let coordinate = placemark!.location.coordinate
-                    //                    self!.citylat = coordinate.latitude
-                    //                    self!.citylong = coordinate.longitude
                     self!.getenteredcitylat = coordinate.latitude
                     self!.getenteredcitylong = coordinate.longitude
                     
@@ -507,8 +505,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         //headerCell.availofferbutton.enabled = false
         
         headerCell.vodkarestaurantname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        headerCell.vodkaavgprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        headerCell.vodkaavgprice.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+        headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
             
         headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderWidth = 1
         headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -539,7 +537,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
                 
             
-        headerCell.Happyhourtimingdisplaybeforeexpantion.text = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+        headerCell.Happyhourtimingdisplaybeforeexpantion.text = "  " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
 
         if pricebuttonclicked == true
         {
@@ -557,7 +555,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             else
             {
               let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodkanew") as! customheadercellafterexpastionforvodka
-                headerCell1.happyhourstiminglabelafterexpation.text = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+                headerCell1.happyhourstiminglabelafterexpation.text = "  " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
                 headerCell1.restnameafterexpastion.text = header1[section].restnamevodka
                 headerCell1.viewtodisplayhappyhoursafterexpation.layer.borderWidth = 1
                 headerCell1.viewtodisplayhappyhoursafterexpation.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -749,6 +747,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         if var distance = resInfo["distance"] as? String
                         {
                             var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
+                           // var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                             var newLocation: CLLocation = CLLocation(latitude: getvodkalatitude, longitude: getvodkalongitude)
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -828,50 +827,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         tableview1.reloadData()
 
-        
-        
-
-        
-        
-//        else
-//        {
-//            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
-//            {
-//                var sorted = false
-//                while sorted == false
-//                {
-//                    sorted = true
-//                    if cards.count > 1
-//                    {
-//                    for i in 0...cards.count - 2
-//                    {
-//                        if cards[i].avgprice < cards[i+1].avgprice
-//                        {
-//                            sorted = false
-//                            var first = cards[i]
-//                            var second = cards[i + 1]
-//                            println("first object before \(first.avgprice)")
-//                            println("second object before\(second.avgprice)")
-//                            cards[i] = second
-//                            cards[i + 1] = first
-//                            println("first object after\(cards[i].avgprice)")
-//                            println("second object after\(cards[i + 1].avgprice)")
-//                        }
-//                    }
-//                    }
-//                    else
-//                    {
-//                        
-//                    }
-//                }
-//                return cards
-//            }
-//            var sortedarray1:[Restauarantvodka] = sortCards(&header1)
-//            header1 = sortedarray1
-//            self.tableview1.reloadData()
-//            println("sorted array is  : \(header1)")
-//            doubleTap = true
-//        }
 
         
     }
@@ -879,95 +834,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func distancesort(sender: AnyObject)
     {
-        
-//        pricebuttonclicked = false
-//        distancevodkabuttonclicked = true
-//        
-//
-//
-//        if distancevodkabuttonclicked == true
-//        {
-//            pricebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
-//            distancebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
-//            
-//        }
-//        
-//        
-//      
-////            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
-////            {
-////                var sorted = false
-////                while sorted == false
-////                {
-////                    sorted = true
-////                    if cards.count > 1
-////                    {
-////                    for i in 0...cards.count - 2
-////                    {
-////                        if cards[i].distancevodka > cards[i+1].distancevodka
-////                        {
-////                            sorted = false
-////                            var first = cards[i]
-////                            var second = cards[i + 1]
-////                            println("first object before \(first.distancevodka)")
-////                            println("second object before\(second.distancevodka)")
-////                            cards[i] = second
-////                            cards[i + 1] = first
-////                            println("first object after\(cards[i].distancevodka)")
-////                            println("second object after\(cards[i + 1].distancevodka)")
-////                        }
-////                    }
-////                    }
-////                    else
-////                    {
-////                        
-////                    }
-////                }
-////                return cards
-////            }
-//            //var sortedarray1:[Restauarantvodka] = sortCards(&header1)
-//           // header1 = sortedarray1
-//            self.tableview1.reloadData()
-//     
-//            println("sorted array is  : \(header1)")
-//     
-        
-//        else
-//        {
-//            func sortCards(inout cards: Array<Restauarantvodka>) -> Array<Restauarantvodka>
-//            {
-//                var sorted = false
-//                while sorted == false
-//                {
-//                    sorted = true
-//                    if cards.count > 1
-//                    {
-//                    for i in 0...cards.count - 2
-//                    {
-//                        if cards[i].distancevodka < cards[i+1].distancevodka
-//                        {
-//                            sorted = false
-//                            var first = cards[i]
-//                            var second = cards[i + 1]
-//                            println("first object before \(first.distancevodka)")
-//                            println("second object before\(second.distancevodka)")
-//                            cards[i] = second
-//                            cards[i + 1] = first
-//                            println("first object after\(cards[i].distancevodka)")
-//                            println("second object after\(cards[i + 1].distancevodka)")
-//                        }
-//                    }
-//                    }
-//                }
-//                return cards
-//            }
-//            var sortedarray1:[Restauarantvodka] = sortCards(&header1)
-//            header1 = sortedarray1
-//            self.tableview1.reloadData()
-//            println("sorted array is  : \(header1)")
-//            doubleTap = true
-//        }
-//        
   
     }
     
@@ -1246,6 +1112,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 //28.63875
                                 //77.07380
                                 var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
+                                //var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
@@ -1361,6 +1228,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 //28.63875
                                 //77.07380
                                 var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude , longitude: getdevicelongitude)
+                                //var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: getrestlatitudevodka, longitude: getrestlongitudevodka)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
