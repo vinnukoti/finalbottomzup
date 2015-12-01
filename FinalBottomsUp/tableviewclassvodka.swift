@@ -487,7 +487,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             if header1[section].bool1 == false{
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.whiteColor()
-        headerCell.vodkarestaurantname.text = header1[section].restnamevodka
+        headerCell.vodkarestaurantname.text = " " + header1[section].restnamevodka
         headerCell.vodkaavgprice.text = "₹ " + "\(header1[section].avgprice)"
         headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
 
@@ -510,7 +510,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderWidth = 1
         headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderColor = UIColor.lightGrayColor().CGColor
-        headerCell.viewtodisplayhappyhourbeforeexpantion.layer.cornerRadius = 20
+        headerCell.viewtodisplayhappyhourbeforeexpantion.layer.cornerRadius = 10
             
         if header1[section].vodkaishappy == "Yes"
         {
@@ -537,7 +537,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
                 
             
-        headerCell.Happyhourtimingdisplaybeforeexpantion.text = "  " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+        headerCell.Happyhourtimingdisplaybeforeexpantion.text = " " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
 
         if pricebuttonclicked == true
         {
@@ -548,6 +548,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             headerCell.mapbuttonvodkaclass.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
+                
 
       
           return headerCell
@@ -555,8 +556,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             else
             {
               let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodkanew") as! customheadercellafterexpastionforvodka
-                headerCell1.happyhourstiminglabelafterexpation.text = "  " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
-                headerCell1.restnameafterexpastion.text = header1[section].restnamevodka
+                headerCell1.happyhourstiminglabelafterexpation.text = " " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+                headerCell1.restnameafterexpastion.text = " " + header1[section].restnamevodka
                 headerCell1.viewtodisplayhappyhoursafterexpation.layer.borderWidth = 1
                 headerCell1.viewtodisplayhappyhoursafterexpation.layer.borderColor = UIColor.lightGrayColor().CGColor
                 headerCell1.bottlelabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
@@ -575,6 +576,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 {
                     headerCell1.happyhourslabelafteexaption.hidden = true
                     headerCell1.happyhourstiminglabelafterexpation.hidden = true
+                }
+                if header1[section].vodkaishappy == "Yes"
+                {
+                     headerCell1.happyhourstiminglabelafterexpation.textColor = UIColor.greenColor()
                 }
 
                 

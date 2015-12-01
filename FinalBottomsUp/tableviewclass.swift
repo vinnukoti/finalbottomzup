@@ -171,7 +171,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newtextfieldtableview.tag = 2
         autocompletetextfieldforbeer.tag = 3
         
-        array1 = head
+        //array1 = head
          newuitableview.layer.borderColor = UIColor.grayColor().CGColor
         newuitableview.layer.borderWidth = 2
 
@@ -525,8 +525,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
         getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
-
- 
+        self.array1 = head 
         selectedliqor = selectedCell1.textLabel!.text
         isliqtextfieldhasdata = true
         self.view.endEditing(true)
@@ -849,10 +848,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
         array = head
         
+        
 
         if toggle == false
         {
-     
+            self.array1 = head
             togglebuttonbeer.setImage(toggleon, forState: .Normal)
             toggle = true
             for var i = array.count-1;i >= 0;i--
@@ -867,7 +867,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
             head = array
-           tableview.reloadData()
+           
           //  head = array1
 
         }
@@ -877,10 +877,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             togglebuttonbeer.setImage(toggleoff, forState: .Normal)
             toggle = false
             head = self.array1
-            tableview.reloadData()
+           // tableview.reloadData()
   
             
         }
+        if boolexists == true{
+            head = self.bottlesorting(head)
+        }
+        else{
+            head = self.pintsoring(head)
+        }
+        tableview.reloadData()
         
     }
     
@@ -1144,7 +1151,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.backgroundColor = UIColor.whiteColor()
-        headerCell.headercellname.text = head[section].restname
+        headerCell.headercellname.text = " " + head[section].restname
         headerCell.headercellmin.text = "₹ " + "\(head[section].minp)"
         headerCell.headercellmax.text = "₹ " + "\(head[section].maxp)"
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
@@ -1215,8 +1222,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             var  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellnewforexpanded") as! customheadercellafterexpanstion
             headerCell1.backgroundColor = UIColor.whiteColor()
-            headerCell1.restNameafterexpastion.text = head[section].restname
-            headerCell1.HappyhourstimingAfterexpantion.text = head[section].happystart + " - " + head[section].happyend
+            headerCell1.restNameafterexpastion.text = " " + head[section].restname
+            headerCell1.HappyhourstimingAfterexpantion.text = " " + head[section].happystart + " - " + head[section].happyend
             
             
             headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
@@ -1334,13 +1341,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             selectedliqor = trimmedString1
         getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(self.selectedliqor)")
-        
+        self.array1 = head
         }
         
         if countfurther == 2
         {
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(self.selectedliqor)")
- 
+            self.array1 = head
         }
         
         if countfurther == 3
@@ -1357,6 +1364,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
                 self.countfurther = 0
                 self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.selectedliqor)")
+                self.array1 = self.head
             }
             alertController.addAction(OKAction)
             

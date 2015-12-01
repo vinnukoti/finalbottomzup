@@ -111,13 +111,13 @@ public class AutoCompleteTextField1:UITextField, UITableViewDataSource, UITableV
         
         let screenSize = UIScreen.mainScreen().bounds.size
         
-        let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize.width - 189, height: 30.0))
-        //let tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: 30))
-        
+        let tableView = UITableView(frame: CGRect(x: 119, y: 60, width: screenSize.width - 134, height: 30.0))
+       // let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: view.frame.width, height: 30))
+        //tableView  =   CGRectMake(0, 65,screenSize.width ,10);
         tableView.layer.masksToBounds = true
         tableView.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         tableView.layer.borderWidth = 2.0
-      //  tableView.frame =   CGRectMake(0, 65,screenSize.width ,10);
+        
         
         tableView.dataSource = self
         tableView.delegate = self

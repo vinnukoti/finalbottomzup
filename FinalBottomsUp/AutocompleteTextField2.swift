@@ -107,7 +107,8 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
         let screenSize2 = UIScreen.mainScreen().bounds.size
         
         //let tableView1 = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize2.width - 50, height: 30.0))
-        let tableView1 = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize2.width - 140, height: 100.0))
+        //let tableView1 = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize2.width - 140, height: 100.0))
+        let tableView1 = UITableView(frame: CGRect(x: 119, y: 60, width: screenSize2.width - 134, height: 30.0))
         
         tableView1.layer.masksToBounds = true
         tableView1.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
