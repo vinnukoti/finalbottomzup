@@ -41,9 +41,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var getvodkalatitude:Double!
     var getvodkalongitude:Double!
     var takegetselectedcitynale:String!
-    
-//    let bottlecheckedImage = UIImage(named: "NormalTabyellow")
-//    let bottleunCheckedImage = UIImage(named: "NormaltabWhite")
+    var array1 = [Restauarantvodka]()
+
     
     let pintcheckedImage = UIImage(named: "NormalTabyellow")
     let pintunCheckedImage = UIImage(named: "NormaltabWhite")
@@ -321,17 +320,42 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     @IBAction func toggelbuttonpressed(sender: UIButton)
     {
+        var array = [Restauarantvodka]()
+        
+        array = header1
+        
+
         
         if toggle == false
         {
+            self.array1 = header1
         togglebutton.setImage(toggleon, forState: .Normal)
             toggle = true
+            for var i = array.count-1;i >= 0;i--
+            {
+                if array[i].vodkaishappy == "Yes"
+                {
+                    
+                }
+                else
+                {
+                    array.removeAtIndex(i)
+                }
+
+            }
+            header1 = array
         }
-        else{
+        else
+        {
             togglebutton.setImage(toggleoff, forState: .Normal)
             toggle = false
+            header1 = self.array1
 
         }
+  
+            header1 = self.pricesort1(header1)
+        tableview1.reloadData()
+
     }
     
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
@@ -395,10 +419,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         else
         {
-//            newtextfieldvodka.layer.masksToBounds = true
-//            newtextfieldvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
-//            newtextfieldvodka.layer.borderWidth = 2.0
-            
             let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
             var cell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier) as? UITableViewCell
             if cell == nil
@@ -488,7 +508,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.vodkarestaurantname.text = " " + header1[section].restnamevodka
-        headerCell.vodkaavgprice.text = "₹ " + "\(header1[section].avgprice)"
+        if header1[section].avgprice == 0
+        {
+            headerCell.vodkaavgprice.text = "--"
+        }
+         else
+        {
+            headerCell.vodkaavgprice.text = "₹ " + "\(header1[section].avgprice)"
+            
+        }
+        
         headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
 
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
@@ -624,11 +653,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if count == 1
         {
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(liqvodkaname)")
+            self.array1 = header1
         }
         
         if count == 2
         {
             getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(liqvodkaname)")
+            self.array1 = header1
         }
         if count == 3
         {
@@ -644,6 +675,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
                 self.count = 0
                 self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
+                self.array1 = self.header1
             }
             alertController.addAction(OKAction)
             
@@ -1343,20 +1375,27 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func pricesort1 (var array:[Restauarantvodka]) -> [Restauarantvodka]
     {
-        for var ind: Int = 0; ind < array.count - 1; ind++
+        for var i: Int = 0; i < array.count - 1; i++
         {
-            for var jIndex: Int = ind + 1; jIndex < array.count; ++jIndex
+            for var j: Int = i + 1; j < array.count; j++
             {
-                println(jIndex)
-                if array[jIndex].avgprice < array[ind].avgprice
+                println(j)
+                if (array[j].avgprice < array[i].avgprice && array[j].avgprice > 0)
                 {
                     
-                    let temp = array[jIndex]
+                    let temp = array[j]
                     println(temp.avgprice)
-                    array[jIndex] = array[ind]
-                    println(array[jIndex].avgprice)
-                    array[ind] = temp
-                    println(array[ind].avgprice)
+                    array[j] = array[i]
+                    println(array[j].avgprice)
+                    array[i] = temp
+                    println(array[i].avgprice)
+                }
+                else if (array[i].avgprice == 0 && array[j].avgprice > 0)
+                {
+                    let temp = array[i]
+                    array[i] = array[j]
+                    array[j] = temp
+
                 }
             }
         }

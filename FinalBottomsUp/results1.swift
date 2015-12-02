@@ -476,6 +476,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         {
                             //var pint_avg_price2:String = toString(pint_avg_price)
                             fstobj1.minp = pint_avg_price
+                            println(pint_avg_price)
                         }
                         if let bottle_avg_price = bottomsUp1["bottle_min_price"] as? Int
                         {

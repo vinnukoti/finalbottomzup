@@ -467,7 +467,7 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                 }
                 if let bottle_avg_price = bottomsUp1["bottle_avg_price"] as? Int
                 {
-                    //var bottle_avg_price2:String = toString(bottle_avg_price)
+                   // var bottle_avg_price2:String = toString(bottle_avg_price)
                     fstobj1.maxp = bottle_avg_price
                 }
                     
