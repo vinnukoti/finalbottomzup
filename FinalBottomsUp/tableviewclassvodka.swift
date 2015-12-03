@@ -42,6 +42,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var getvodkalongitude:Double!
     var takegetselectedcitynale:String!
     var array1 = [Restauarantvodka]()
+    var array2 = [Restauarantvodka]()
 
     
     let pintcheckedImage = UIImage(named: "NormalTabyellow")
@@ -68,6 +69,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     //var getselectedlq:String!
     
     var toggle = false
+    var toggleboolean:Bool!
     
     var getvodkaobj = Restauarantvodka()
      var getvodkaobj1 = Restauarantvodka()
@@ -318,45 +320,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
     }
 
-    @IBAction func toggelbuttonpressed(sender: UIButton)
-    {
-        var array = [Restauarantvodka]()
-        
-        array = header1
-        
-
-        
-        if toggle == false
-        {
-            self.array1 = header1
-        togglebutton.setImage(toggleon, forState: .Normal)
-            toggle = true
-            for var i = array.count-1;i >= 0;i--
-            {
-                if array[i].vodkaishappy == "Yes"
-                {
-                    
-                }
-                else
-                {
-                    array.removeAtIndex(i)
-                }
-
-            }
-            header1 = array
-        }
-        else
-        {
-            togglebutton.setImage(toggleoff, forState: .Normal)
-            toggle = false
-            header1 = self.array1
-
-        }
-  
-            header1 = self.pricesort1(header1)
-        tableview1.reloadData()
-
-    }
     
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
@@ -643,6 +606,64 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     }
     
+    @IBAction func toggelbuttonpressed(sender: UIButton)
+    {
+        var array = [Restauarantvodka]()
+        
+        array = header1
+        
+        
+        
+        if toggle == false
+        {
+            self.array1 = header1
+            togglebutton.setImage(toggleon, forState: .Normal)
+            toggle = true
+            toggleboolean = false
+            for var i = array.count-1;i >= 0;i--
+            {
+                if array[i].vodkaishappy == "Yes"
+                {
+                    
+                }
+                else
+                {
+                    array.removeAtIndex(i)
+                }
+                
+            }
+            header1 = array
+        }
+        else
+        {
+            togglebutton.setImage(toggleoff, forState: .Normal)
+            toggle = false
+            toggleboolean = true
+            
+            if count == 1
+            {
+              header1 = self.array2
+            }
+            else if count == 2
+            {
+                header1 = self.array2
+            }
+            else if count == 3
+            {
+              header1 = self.array2
+            }
+            else
+            {
+                header1 = self.array1
+           }
+            
+        }
+        
+        header1 = self.pricesort1(header1)
+        tableview1.reloadData()
+        
+    }
+    
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
         changecolorvodka = true
@@ -652,13 +673,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         count = count + 1
         if count == 1
         {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             self.array1 = header1
         }
         
         if count == 2
         {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
             self.array1 = header1
         }
         if count == 3
@@ -682,8 +703,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.presentViewController(alertController, animated: true) {
                 
             }
-            
-           // getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=4&query=\(liqvodkaname)")
+
             
 
         }
@@ -829,9 +849,25 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 }
       
                  header1.append(getvodkaobj)
+                array2 = header1
                 headfurther.append(getvodkaobj)
       
             }
+            if toggle == true
+            {
+                var array = [Restauarantvodka]()
+                array = header1
+                for var i = array.count - 1;i>=0;i--
+                {
+                    if array[i].vodkaishappy != "Yes"
+                    {
+                        array.removeAtIndex(i)
+                    }
+
+                }
+                header1 = array
+            }
+
             header1 = pricesort1(header1)
         }
         else
@@ -1343,6 +1379,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                  destination.liqvodkaname = trimmedString
                 destination.head = head1
+                destination.toggleboolean = toggleboolean
                 destination.getcitylatitude = getcitylatitude
                 destination.getcitylongitude = getcitylongitude
                 destination.getdevicelatitude = getdevicelatitude

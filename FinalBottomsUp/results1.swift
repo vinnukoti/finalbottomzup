@@ -34,6 +34,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var check:String!
     
     var newarar =  [String]()
+    var arraysring = [String]()
 
     
     @IBOutlet weak var autocompletedTextfieldnew: AutoCompleteTextField!
@@ -457,6 +458,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         {
             head1 = [Restaurant]()
             header = [Restauarantvodka]()
+            arraysring = [String]()
             for var index = 0; index < json.count; ++index
             {
                 fstobj1 = Restaurant()
@@ -526,6 +528,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             if let res_name = resInfo["res_name"] as? String
                             {
                                 fstobj1.restname = res_name
+                                arraysring.append(res_name)
+                                println(arraysring.first)
+                                
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -784,7 +789,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 destination.liqname = trimmedString
                 destination.head = head1
-                destination.llokfurther = head1
+               // destination.llokfurther = head1
+                //destination.resortname1 = arraysring
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
                 destination.getcitylatitude = citylat

@@ -14,6 +14,7 @@ class Restaurant
 {
     var bool = false
     var two = liqclass()
+    var color = false
     
     var restname:String!
     var minp:Int!

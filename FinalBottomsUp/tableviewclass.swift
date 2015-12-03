@@ -23,13 +23,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var header1:[Restauarantvodka] = [Restauarantvodka]()
     var getselectedlq:String!
     var arraylookfurther = [Restaurant]()
-    
-    var q:String!
-
-    
+    var array2 = [Restaurant]()
     var restlat:Double!
     var restlong:Double!
-   // var getfstobj2 = Restaurant()
+    var resortname = [String]()
     
 
     var variable:String!
@@ -52,7 +49,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var bottlebutton: UIButton!
     @IBOutlet weak var locationbutton: UIButton!
     @IBOutlet weak var resturantnamelable: UILabel!
- //   @IBOutlet weak var restaurantnamelable2: UILabel!
     
     let pintcheckedImage = UIImage(named: "NormalTabyellow")
     let pintunCheckedImage = UIImage(named: "NormaltabWhite")
@@ -95,6 +91,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var changecolor = false
     
     var toggle = false
+    var toggleboolean:Bool!
     
     var pintSortingarry = [Restaurant]()
     var botleSortingarray = [Restaurant]()
@@ -153,26 +150,33 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var getselectedcityname:String!
     var substringofselectedliq = "650"
     var boolexists = false
-   // var getsubstringofselectedliq:String!
     
     var countfurther = 0
     
-    var llokfurther = [Restaurant]()
-    
     var obj = [results1]()
     var array1 = [Restaurant]()
+    var resortname1 = [String]()
 
 
     
     
     override func viewDidLoad()
     {
+        
+//        println(toggleboolean)
+//        if toggleboolean == true
+//        {
+//            togglebuttonbeer.setImage(toggleon, forState: .Normal)
+//        }
+//        else
+//        {
+//            togglebuttonbeer.setImage(toggleon, forState: .Normal)
+//        }
         tableview.tag = 1
         newuitableview.tag = 0
         newtextfieldtableview.tag = 2
         autocompletetextfieldforbeer.tag = 3
-        
-        //array1 = head
+
          newuitableview.layer.borderColor = UIColor.grayColor().CGColor
         newuitableview.layer.borderWidth = 2
 
@@ -224,9 +228,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
        
         locationbutton.setTitle("DISTANCE", forState: .Normal)
         locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
-        
-        //var drink = getselectedliq.capitalizedString
-        //selectedliqname.text =  drink
+
         togglebuttonbeer.setImage(toggleoff, forState: .Normal)
         autocompletetextfieldforbeer.textFieldWidth = autocompletetextfieldforbeer.frame.width
         autocompletetextfieldforbeer.delegate = self
@@ -253,7 +255,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let long = userLocation.coordinate.longitude;
         let lat = userLocation.coordinate.latitude;
         
-        //Do What ever you want with it
         
         CLGeocoder().reverseGeocodeLocation(userLocation, completionHandler: {
             placemarks, error in
@@ -469,29 +470,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         return result
     }
-    
-//    func removeDuplicates1(array: [Restaurant]) -> [Restaurant]
-//    {
-//        var encountered = [Restaurant]()
-//        var result: [Restaurant] = []
-//        for value in array
-//        {
-//            if encountered.contains(value)
-//            {
-//                
-//            }
-//            else
-//            {
-//                encountered.insert(value)
-//                result.append(value)
-//            }
-//        }
-//        return result
-//    }
 
-
-    
-    
     func searchAutocompleteEntriesWithSubstring(substring: String)
     {
         autocompleteUrls.removeAll(keepCapacity: false)
@@ -510,8 +489,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 autocompleteUrls.append(ucurstring)
             }
         }
-        
-        
     }
 
     
@@ -844,57 +821,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
+    
+    
+    
 
     
     
-    @IBAction func togglebuttonbeerpressed(sender: UIButton)
-    {
-
-        var array = [Restaurant]()
-
-        array = head
-        
-        
-
-        if toggle == false
-        {
-            self.array1 = head
-            togglebuttonbeer.setImage(toggleon, forState: .Normal)
-            toggle = true
-            for var i = array.count-1;i >= 0;i--
-            {
-                if array[i].ishappy == "Yes"
-                {
-                    
-                }
-                else
-                {
-                    array.removeAtIndex(i)
-                }
-            }
-            head = array
-
-
-        }
-        else
-        {
-
-            togglebuttonbeer.setImage(toggleoff, forState: .Normal)
-            toggle = false
-            head = self.array1
-           // tableview.reloadData()
-  
-            
-        }
-        if boolexists == true{
-            head = self.bottlesorting(head)
-        }
-        else{
-            head = self.pintsoring(head)
-        }
-        tableview.reloadData()
-        
-    }
     
     
     @IBAction func press2revealPressed(sender: UIButton)
@@ -909,7 +841,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     // Resign Firstresponder of UITableview
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
-       // newliqdropdowntableview.hidden = true
         view.endEditing(true)
        if let touch = touches.first as? UITouch {
             let location = touch.locationInView(self.mainview)
@@ -923,8 +854,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
            }
         
         }
-        
-        //popupview.hidden = true
         
     }
     
@@ -1174,8 +1103,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     headerCell.headercellmax.text =  "₹  " + "\(head[section].maxp)"
                 }
  
-       
-
+    
         
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.tapguesturerecognizer.addGestureRecognizer(headerTapped)
@@ -1233,18 +1161,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     headerCell.happyhourslabelbeer.hidden = true
                     headerCell.viretodisplayHappyhours.hidden = true
                 }
-//                func removezero()
-//                {
-//                    if headerCell.headercellmin.text
-//                }
-//
-//                if countfurther == 1
-//                {
-//                    if head.capacity > head.capacity{
-//                    headerCell.backgroundColor = UIColor.blueColor()
-//                    }
-//                }
-        
+                if head[section].color == true
+                {
+                    headerCell.backgroundColor = UIColor.grayColor()
+                }
+                else
+                {
+                   headerCell.backgroundColor = UIColor.whiteColor()
+                }
+                
         
         //Giving Font family style to a UIButton
         headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
@@ -1352,6 +1277,63 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
 
     }
+    @IBAction func togglebuttonbeerpressed(sender: UIButton)
+    {
+        
+        var array = [Restaurant]()
+        array = head
+        
+        if toggle == false
+        {
+            self.array1 = head
+            togglebuttonbeer.setImage(toggleon, forState: .Normal)
+            toggle = true
+            toggleboolean = true
+            for var i = array.count-1;i >= 0;i--
+            {
+                if array[i].ishappy != "Yes"
+                {
+                    array.removeAtIndex(i)
+                }
+
+            }
+            head = array
+        }
+        else
+        {
+            togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+            toggle = false
+            toggleboolean = false
+            
+            if countfurther == 1
+            {
+                head = self.array2
+            }
+            else if countfurther == 2
+            {
+                head = self.array2
+            }
+            
+            else if countfurther == 3
+            {
+               head = self.array2
+            }
+            else
+            {
+                head = self.array1
+            }
+            
+        }
+        if boolexists == true{
+            head = self.bottlesorting(head)
+        }
+        else{
+            head = self.pintsoring(head)
+        }
+        tableview.reloadData()
+        
+    }
+
     
     @IBAction func lookfurther(sender: AnyObject)
     {
@@ -1430,16 +1412,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
         {
             head = [Restaurant]()
+           // println(head.count)
+            //println(head.first.re)
+           // self.resortname1 = [String]()
+           // println(self.resortname1.first)
+           // println(self.resortname1.last)
             
             for var index = 0; index < json.count; ++index
             {
                 fstobj1 = Restaurant()
                 
+               
+                
                 if let bottomsUp1 = json[index] as? NSDictionary
                 {
+
                     if let pint_avg_price = bottomsUp1["pint_min_price"] as? Int
                     {
                         //var pint_avg_price2:String = toString(pint_avg_price)
+                        
                         fstobj1.minp = pint_avg_price
                        // println(pint_avg_price)
                     }
@@ -1475,7 +1466,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                            fstobj1.restname = res_name
+                          fstobj1.restname = res_name
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -1551,7 +1542,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     
                 }
                 head.append(fstobj1)
+                array2 = head
             }
+                if toggle == true
+                {
+                    var array = [Restaurant]()
+                    array = head
+                    for var i = array.count - 1;i>=0;i--
+                    {
+                        if array[i].ishappy != "Yes"
+                        {
+                             array.removeAtIndex(i)
+                        }
+
+                    }
+                    head = array
+                    tableview.reloadData()
+                }
+
             if boolexists == true
             {
                 head = bottlesorting(head)
@@ -1571,6 +1579,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
 
         }
+            
         else
         {
             let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
@@ -1647,9 +1656,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var liqvodkaname = newtextfieldtableview.text
             let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             destination1.liqvodkaname = trimmedString
-            
+            destination1.toggleboolean = toggleboolean
             destination1.header1 = headerfortableview
             println(headerfortableview.count)
+            destination1.toggle = toggle
             destination1.getcitylatitude = getcitylatitude
             destination1.getcitylongitude = getcitylongitude
             destination1.getdevicelatitude = getdevicelatitude
