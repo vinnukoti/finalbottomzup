@@ -11,6 +11,7 @@ import CoreLocation
 import MapKit
 import Social
 import FBSDKShareKit
+//var toggleforboth = false
 
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
@@ -90,15 +91,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var changecolor = false
     
-    var toggle = false
-    var toggleboolean:Bool!
+    var togglebeer = false
+   // var toggleboolean:Bool!
     
     var pintSortingarry = [Restaurant]()
     var botleSortingarray = [Restaurant]()
     
     
     
-       var currentlocationname:String!
+
+    
+    
+    var currentlocationname:String!
     
 
     @IBOutlet weak var newuitableview: UITableView!
@@ -163,15 +167,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad()
     {
         
-//        println(toggleboolean)
-//        if toggleboolean == true
-//        {
-//            togglebuttonbeer.setImage(toggleon, forState: .Normal)
-//        }
-//        else
-//        {
-//            togglebuttonbeer.setImage(toggleon, forState: .Normal)
-//        }
+       // println(toggleboolean)
+        if togglebeer == true
+        {
+            togglebuttonbeer.setImage(toggleon, forState: .Normal)
+        }
+        else
+        {
+            togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+        }
         tableview.tag = 1
         newuitableview.tag = 0
         newtextfieldtableview.tag = 2
@@ -229,7 +233,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         locationbutton.setTitle("DISTANCE", forState: .Normal)
         locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
 
-        togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+       // togglebuttonbeer.setImage(toggleoff, forState: .Normal)
         autocompletetextfieldforbeer.textFieldWidth = autocompletetextfieldforbeer.frame.width
         autocompletetextfieldforbeer.delegate = self
         
@@ -246,6 +250,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newuitableview.delegate = self
         
     }
+    
+
     
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
@@ -1279,16 +1285,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     @IBAction func togglebuttonbeerpressed(sender: UIButton)
     {
-        
+    
         var array = [Restaurant]()
         array = head
         
-        if toggle == false
+        if togglebeer == false
         {
             self.array1 = head
             togglebuttonbeer.setImage(toggleon, forState: .Normal)
-            toggle = true
-            toggleboolean = true
+            togglebeer = true
+           // if togglebeer == true
+            //{
+
             for var i = array.count-1;i >= 0;i--
             {
                 if array[i].ishappy != "Yes"
@@ -1297,14 +1305,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
 
             }
+          //  }
             head = array
         }
         else
         {
             togglebuttonbeer.setImage(toggleoff, forState: .Normal)
-            toggle = false
-            toggleboolean = false
-            
+            togglebeer = false
+ 
+           // if togglebeer == false
+           // {
             if countfurther == 1
             {
                 head = self.array2
@@ -1322,6 +1332,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 head = self.array1
             }
+          //  }
             
         }
         if boolexists == true{
@@ -1544,7 +1555,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 head.append(fstobj1)
                 array2 = head
             }
-                if toggle == true
+                if togglebeer == true
                 {
                     var array = [Restaurant]()
                     array = head
@@ -1656,10 +1667,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var liqvodkaname = newtextfieldtableview.text
             let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             destination1.liqvodkaname = trimmedString
-            destination1.toggleboolean = toggleboolean
+           // destination1.toggleboolean = toggleboolean
             destination1.header1 = headerfortableview
             println(headerfortableview.count)
-            destination1.toggle = toggle
+            //destination1.toggle = toggle
+            //destination1.toggleboolean = toggleforboth
+            destination1.togglevodka = togglebeer
             destination1.getcitylatitude = getcitylatitude
             destination1.getcitylongitude = getcitylongitude
             destination1.getdevicelatitude = getdevicelatitude

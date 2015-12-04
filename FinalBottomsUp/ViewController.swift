@@ -18,7 +18,7 @@ import CoreLocation
 import CoreMotion
 import GoogleMaps
 
-class ViewController: UIViewController,GPPSignInDelegate
+class ViewController: UIViewController
 
 {
     
@@ -30,19 +30,46 @@ class ViewController: UIViewController,GPPSignInDelegate
 
     @IBOutlet weak var FBbutton: UIButton!
 
+
+    @IBOutlet weak var webviewforgif: UIWebView!
    
     
     @IBOutlet weak var gogo: UIButton!
 
    var placesClient: GMSPlacesClient?
+    let totalCount = 1
+    var count = 1
+    var myTimer = NSTimer()
+
     
     override func viewDidLoad()
     
     {
+        
         super.viewDidLoad()
-                placesClient = GMSPlacesClient()
-         //self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+        
+        let filePath = NSBundle.mainBundle().pathForResource("Bubble-moving", ofType: "gif")
+        let gif = NSData(contentsOfFile: filePath!)
+        webviewforgif.loadData(gif!, MIMEType: "image/gif", textEncodingName: String(), baseURL: NSURL())
+        let timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "update", userInfo: nil, repeats: false)
+        webviewforgif.userInteractionEnabled = false
+
+
+
     }
+
+    func update(){
+        //self.doFlip(self)
+        //println("vinayak")
+       // performSegueWithIdentifier("LoginScreen", sender: self)
+        //        if timer.timeInterval == 5
+        //        {
+        //            performSegueWithIdentifier("LoginScreen", sender: self)
+        //        }
+    }
+
+
+
    
     @IBAction func googlesignIn(sender: AnyObject)
     {
@@ -54,7 +81,7 @@ class ViewController: UIViewController,GPPSignInDelegate
         signIn.clientID = "587696970048-18ifi3olkhbl3djkc2qgstlo5bp3vp9g.apps.googleusercontent.com"
         // Uncomment one of these two statements for the scope you chose in the previous step
         signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
-        signIn.delegate = self
+        //signIn.delegate = self
         signIn.authenticate()
         getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(gemail)&password=\(gid)")
         

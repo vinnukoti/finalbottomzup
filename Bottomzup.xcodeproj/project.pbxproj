@@ -65,7 +65,12 @@
 		538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A441BA4194B005D1386 /* MKMapViewExtension.swift */; };
 		538D0A481BA4194B005D1386 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A451BA4194B005D1386 /* Service.swift */; };
 		538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538D0A491BA41C58005D1386 /* MapKit.framework */; };
+		539ECEC51C1076D800101C38 /* Bubble-moving.gif in Resources */ = {isa = PBXBuildFile; fileRef = 539ECEC41C1076D700101C38 /* Bubble-moving.gif */; };
+		539ECEC71C10780000101C38 /* Bubble-moving-low.gif in Resources */ = {isa = PBXBuildFile; fileRef = 539ECEC61C10780000101C38 /* Bubble-moving-low.gif */; };
+		539ECEC91C10785200101C38 /* GIFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539ECEC81C10785200101C38 /* GIFViewController.swift */; };
 		53A3FF951BCF873900122759 /* GiFHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3FF941BCF873900122759 /* GiFHUD.swift */; };
+		53A659751C1170150002B4BC /* AViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A659741C1170150002B4BC /* AViewController.swift */; };
+		53A659771C11AEDE0002B4BC /* GifImageclassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */; };
 		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
 		53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */; };
 		53E512401BF0E6A200FFC78E /* NewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5123F1BF0E6A200FFC78E /* NewClass.swift */; };
@@ -144,7 +149,12 @@
 		538D0A441BA4194B005D1386 /* MKMapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMapViewExtension.swift; sourceTree = "<group>"; };
 		538D0A451BA4194B005D1386 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		538D0A491BA41C58005D1386 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		539ECEC41C1076D700101C38 /* Bubble-moving.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Bubble-moving.gif"; sourceTree = "<group>"; };
+		539ECEC61C10780000101C38 /* Bubble-moving-low.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Bubble-moving-low.gif"; sourceTree = "<group>"; };
+		539ECEC81C10785200101C38 /* GIFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFViewController.swift; sourceTree = "<group>"; };
 		53A3FF941BCF873900122759 /* GiFHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GiFHUD.swift; path = "../../../../../../Downloads/GiFHUD-Swift-master/GiFHUD-Swift/GiFHUD.swift"; sourceTree = "<group>"; };
+		53A659741C1170150002B4BC /* AViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AViewController.swift; sourceTree = "<group>"; };
+		53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifImageclassViewController.swift; sourceTree = "<group>"; };
 		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internetcheckclass.swift; sourceTree = "<group>"; };
 		53E5123F1BF0E6A200FFC78E /* NewClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewClass.swift; sourceTree = "<group>"; };
@@ -239,6 +249,10 @@
 		5367CEF31B9DB0EA00D33220 /* FinalBottomsUp */ = {
 			isa = PBXGroup;
 			children = (
+				539ECEC41C1076D700101C38 /* Bubble-moving.gif */,
+				539ECEC61C10780000101C38 /* Bubble-moving-low.gif */,
+				53A659741C1170150002B4BC /* AViewController.swift */,
+				539ECEC81C10785200101C38 /* GIFViewController.swift */,
 				537809D21BE4C81F00C18D6B /* CheckBox.swift */,
 				53A3FF941BCF873900122759 /* GiFHUD.swift */,
 				538A3F941BA9930C00A673C1 /* TableController.swift */,
@@ -257,6 +271,7 @@
 				5367CF191B9DB11F00D33220 /* FBSDKShareKit.framework */,
 				5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */,
 				5367CEF81B9DB0EA00D33220 /* ViewController.swift */,
+				53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */,
 				532E64541BF5EF9800B88D09 /* BeerRowCell.swift */,
 				537CA3D81BBA56F80082D896 /* tableviewclass.swift */,
 				5382C6B31C03146C00F6107E /* results1.swift */,
@@ -415,7 +430,9 @@
 				5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */,
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,
 				5367CF221B9DBBB700D33220 /* GooglePlus.bundle in Resources */,
+				539ECEC71C10780000101C38 /* Bubble-moving-low.gif in Resources */,
 				5367CEFE1B9DB0EA00D33220 /* Images.xcassets in Resources */,
+				539ECEC51C1076D800101C38 /* Bubble-moving.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,15 +520,18 @@
 				538743421BCBB8E300143A1A /* mapdata.swift in Sources */,
 				532E64551BF5EF9800B88D09 /* BeerRowCell.swift in Sources */,
 				538743401BCBB5F600143A1A /* maplable.swift in Sources */,
+				539ECEC91C10785200101C38 /* GIFViewController.swift in Sources */,
 				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,
+				53A659771C11AEDE0002B4BC /* GifImageclassViewController.swift in Sources */,
 				537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */,
 				537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */,
 				532E64591BF6078D00B88D09 /* VodkaRowCell.swift in Sources */,
 				537A33A01C072AAB001E1D7B /* customheadercellafterexpanstion.swift in Sources */,
 				537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */,
 				537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */,
+				53A659751C1170150002B4BC /* AViewController.swift in Sources */,
 				5382C6B61C0321CB00F6107E /* AutocompleteTextField2.swift in Sources */,
 				53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */,
 				538D0A421BA41914005D1386 /* AutoCompleteTextField.swift in Sources */,

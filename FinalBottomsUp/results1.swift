@@ -18,7 +18,7 @@ import UIKit
 import CoreLocation
 
 
-class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
+class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate,UIWebViewDelegate
 {
     var getselectedcityname:String!
     
@@ -110,8 +110,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
         locationManager1.startUpdatingLocation()
+        
+
+        
+        
+
+
     }
-    
+
     
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)

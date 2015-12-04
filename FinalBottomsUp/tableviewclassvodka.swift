@@ -14,7 +14,7 @@ import FBSDKShareKit
 
 
 
-class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
+class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate,UIWebViewDelegate
 {
     @IBOutlet weak var tableview1: UITableView!
     var header1:[Restauarantvodka] = [Restauarantvodka]()
@@ -68,7 +68,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var togglebutton: UIButton!
     //var getselectedlq:String!
     
-    var toggle = false
+    var togglevodka = false
     var toggleboolean:Bool!
     
     var getvodkaobj = Restauarantvodka()
@@ -119,6 +119,19 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad()
     {
+        
+        if togglevodka == true
+        {
+            togglebutton.setImage(toggleon, forState: .Normal)
+            
+        }
+        else
+        {
+            togglebutton.setImage(toggleoff, forState: .Normal)
+        }
+        //togglefunctionality()
+        
+        
         distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
 
         newtableviewforvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
@@ -164,7 +177,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        // var vodkadrink = getselectedlq.capitalizedString
        // searchresultsvodka.text =  vodkadrink
 
-        togglebutton.setImage(toggleoff, forState: .Normal)
+       // togglebutton.setImage(toggleoff, forState: .Normal)
         
         locationManager1 = CLLocationManager()
         // locationManager = CLLocationManager()
@@ -177,6 +190,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         citynametextfieldforvodka.text = getselectedcityname
         
         header1 = pricesort1(header1)
+
+        
+
 
 
         
@@ -308,9 +324,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
 
     
-    override func viewWillAppear(animated: Bool) {
-        togglebutton.setImage(toggleoff, forState: .Normal)
-    }
+//    override func viewWillAppear(animated: Bool) {
+//        togglebutton.setImage(toggleoff, forState: .Normal)
+//    }
     
     @IBAction func press2revealPressed(sender: UIButton) {
         
@@ -614,31 +630,30 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         
         
-        if toggle == false
+        if togglevodka == false
         {
             self.array1 = header1
             togglebutton.setImage(toggleon, forState: .Normal)
-            toggle = true
-            toggleboolean = false
+            togglevodka = true
+           // if togglevodka == true{
             for var i = array.count-1;i >= 0;i--
             {
-                if array[i].vodkaishappy == "Yes"
+                if array[i].vodkaishappy != "Yes"
                 {
-                    
+                   array.removeAtIndex(i)
                 }
-                else
-                {
-                    array.removeAtIndex(i)
-                }
+
                 
             }
+           // }
             header1 = array
         }
         else
         {
             togglebutton.setImage(toggleoff, forState: .Normal)
-            toggle = false
-            toggleboolean = true
+            togglevodka = false
+            //if togglevodka == false
+           // {
             
             if count == 1
             {
@@ -656,11 +671,69 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
                 header1 = self.array1
            }
+            }
+            
+        //}
+        
+        header1 = self.pricesort1(header1)
+        tableview1.reloadData()
+        
+    }
+    
+    
+    func togglefunctionality()
+    {
+        var array = [Restauarantvodka]()
+        
+        array = header1
+        if togglevodka == false
+        {
+            self.array1 = header1
+            togglebutton.setImage(toggleon, forState: .Normal)
+            togglevodka = true
+            if togglevodka == true{
+                for var i = array.count-1;i >= 0;i--
+                {
+                    if array[i].vodkaishappy != "Yes"
+                    {
+                        array.removeAtIndex(i)
+                    }
+                    
+                    
+                }
+            }
+            header1 = array
+        }
+        else
+        {
+            togglebutton.setImage(toggleoff, forState: .Normal)
+            togglevodka = false
+            if togglevodka == false
+            {
+                
+                if count == 1
+                {
+                    header1 = self.array2
+                }
+                else if count == 2
+                {
+                    header1 = self.array2
+                }
+                else if count == 3
+                {
+                    header1 = self.array2
+                }
+                else
+                {
+                    header1 = self.array1
+                }
+            }
             
         }
         
         header1 = self.pricesort1(header1)
         tableview1.reloadData()
+
         
     }
     
@@ -853,7 +926,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 headfurther.append(getvodkaobj)
       
             }
-            if toggle == true
+            if togglevodka == true
             {
                 var array = [Restauarantvodka]()
                 array = header1
@@ -1379,7 +1452,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                  destination.liqvodkaname = trimmedString
                 destination.head = head1
-                destination.toggleboolean = toggleboolean
+                destination.togglebeer = togglevodka
                 destination.getcitylatitude = getcitylatitude
                 destination.getcitylongitude = getcitylongitude
                 destination.getdevicelatitude = getdevicelatitude

@@ -11,50 +11,23 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Appsriv Technologies. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BAckgroundimage" translatesAutoresizingMaskIntoConstraints="NO" id="bYO-kG-WtN">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewImage" translatesAutoresizingMaskIntoConstraints="NO" id="uGo-K0-P4K">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BottomzUp" translatesAutoresizingMaskIntoConstraints="NO" id="T6q-Vy-6T3">
-                    <rect key="frame" x="153" y="219" width="175" height="41"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="175" id="ETm-3H-2gj"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="227" id="Fjd-0j-8wP"/>
-                        <constraint firstAttribute="height" constant="41" id="X6s-Is-kkr"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="d9U-Bf-Xvb"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="ETm-3H-2gj"/>
-                            <exclude reference="X6s-Is-kkr"/>
-                        </mask>
-                    </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="bYO-kG-WtN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ANh-wU-Gyo"/>
-                <constraint firstItem="bYO-kG-WtN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CyL-NR-Km8"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="T6q-Vy-6T3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="219" id="cwZ-qb-kiB"/>
-                <constraint firstItem="bYO-kG-WtN" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="oJD-tg-aXh"/>
-                <constraint firstAttribute="bottom" secondItem="bYO-kG-WtN" secondAttribute="bottom" id="uak-3J-eYM"/>
-                <constraint firstItem="T6q-Vy-6T3" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="z3h-js-gAN"/>
+                <constraint firstItem="uGo-K0-P4K" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DhN-RV-mIb"/>
+                <constraint firstItem="uGo-K0-P4K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gE1-Jw-PAD"/>
+                <constraint firstAttribute="bottom" secondItem="uGo-K0-P4K" secondAttribute="bottom" id="rDV-Ni-Tfl"/>
+                <constraint firstAttribute="trailing" secondItem="uGo-K0-P4K" secondAttribute="trailing" id="vFs-X3-DZa"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="548" y="455"/>
+            <point key="canvasLocation" x="537" y="406"/>
         </view>
     </objects>
     <resources>
-        <image name="BAckgroundimage" width="1080" height="1920"/>
-        <image name="BottomzUp" width="266" height="61"/>
+        <image name="NewImage" width="432" height="768"/>
     </resources>
 </document>
