@@ -64,7 +64,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7d-gU-36d">
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g7d-gU-36d">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
@@ -3157,9 +3157,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KlY-oy-LUS"/>
-        <segue reference="6Fg-HI-kaH"/>
-        <segue reference="mEm-gm-qud"/>
-        <segue reference="yq4-9t-36Q"/>
+        <segue reference="bOf-Qa-YPU"/>
+        <segue reference="XDA-r2-Wma"/>
+        <segue reference="OFC-RP-bvW"/>
+        <segue reference="rdN-c8-F5B"/>
     </inferredMetricsTieBreakers>
 </document>

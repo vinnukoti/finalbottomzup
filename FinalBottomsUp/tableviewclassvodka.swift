@@ -130,6 +130,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             togglebutton.setImage(toggleoff, forState: .Normal)
         }
         //togglefunctionality()
+        Happyhours()
         
         
         distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
@@ -448,12 +449,30 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        if tableView.tag == 1{
-        if header1[section].bool1 == false{
-        return 125
+        if tableView.tag == 1
+        {
+        if header1[section].bool1 == false
+        {
+            if header1[section].rest_offers_happy_hour == "Yes" 
+            {
+               return 125
+            }
+            else
+            {
+                return 80
+            }
+        
         }
-        else {
-            return 110
+        else
+        {
+            if header1[section].rest_offers_happy_hour == "Yes"
+            {
+                return 110
+            }
+            else
+            {
+                return 60
+            }
         }
         }
         else
@@ -542,6 +561,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = true
                 }
             
+                if fstobj1.color == true
+                {
+                    headerCell.backgroundColor = UIColor.grayColor()
+                }
+                else
+                {
+                    headerCell.backgroundColor = UIColor.whiteColor()
+                }
             
                 
             
@@ -679,19 +706,21 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         tableview1.reloadData()
         
     }
+
     
     
-    func togglefunctionality()
+    func Happyhours()
     {
         var array = [Restauarantvodka]()
         
         array = header1
-        if togglevodka == false
+        if togglevodka == true
         {
             self.array1 = header1
-            togglebutton.setImage(toggleon, forState: .Normal)
-            togglevodka = true
-            if togglevodka == true{
+           // togglebutton.setImage(toggleon, forState: .Normal)
+            //togglevodka = true
+          //  if togglevodka == true
+           // {
                 for var i = array.count-1;i >= 0;i--
                 {
                     if array[i].vodkaishappy != "Yes"
@@ -701,42 +730,33 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     
                     
                 }
-            }
+            //}
             header1 = array
         }
         else
         {
-            togglebutton.setImage(toggleoff, forState: .Normal)
-            togglevodka = false
-            if togglevodka == false
+            self.array1 = header1
+            if count == 1
             {
-                
-                if count == 1
-                {
-                    header1 = self.array2
-                }
-                else if count == 2
-                {
-                    header1 = self.array2
-                }
-                else if count == 3
-                {
-                    header1 = self.array2
-                }
-                else
-                {
-                    header1 = self.array1
-                }
+                header1 = self.array2
             }
-            
+            else if count == 2
+            {
+                header1 = self.array2
+            }
+            else if count == 3
+            {
+                header1 = self.array2
+            }
+            else
+            {
+                header1 = self.array1
+            }
         }
-        
         header1 = self.pricesort1(header1)
         tableview1.reloadData()
-
-        
+  
     }
-    
     @IBAction func lookfurtherforvodka(sender: AnyObject)
     {
         changecolorvodka = true
@@ -815,6 +835,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 if let bottomsUp1 = json[index] as? NSDictionary
                 {
+
+                    
                     if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
                     {
                         getvodkaobj.rest_offers_happy_hour = rest_offers_happy_hour1
@@ -853,8 +875,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                           getvodkaobj.restnamevodka = res_name
-                        
+                                    getvodkaobj.restnamevodka = res_name
+
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -1192,25 +1214,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            var happy_hour_start1 = PartOfString(happy_hour_start, 1, 5)
-                            
-                            
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
+                            var happy_hour_start1 = happy_hour_start
                             fstobj1.happystart = happy_hour_start1
                         }
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
-                            func PartOfString(s: String, start: Int, length: Int) -> String
-                            {
-                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-                            }
-                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                            var happy_hour_end1 = PartOfString(happy_hour_end, 1, 5)
+//                            func PartOfString(s: String, start: Int, length: Int) -> String
+//                            {
+//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+//                            }
+//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
+                            var happy_hour_end1 = happy_hour_end
                             fstobj1.happyend = happy_hour_end1
                         }
                         
@@ -1227,6 +1247,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         {
                             if let res_name = resInfo["res_name"] as? String
                             {
+       
                                 fstobj1.restname = res_name
                             }
                             

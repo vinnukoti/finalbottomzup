@@ -28,6 +28,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var restlat:Double!
     var restlong:Double!
     var resortname = [String]()
+    var arraycolor = [Restaurant]()
+    
+    
     
 
     var variable:String!
@@ -166,7 +169,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad()
     {
-        
+       // tableview.tableFooterView = UIView()
        // println(toggleboolean)
         if togglebeer == true
         {
@@ -176,6 +179,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             togglebuttonbeer.setImage(toggleoff, forState: .Normal)
         }
+        
+        Happyhours()
         tableview.tag = 1
         newuitableview.tag = 0
         newtextfieldtableview.tag = 2
@@ -952,6 +957,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+
         if tableView.tag == 1{
         if head[section].bool == true
         {
@@ -1054,10 +1060,26 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
         if head[section].bool == false
         {
-            return 125
+            if head[section].ishappy == "Yes" || head[section].rest_offers_happy_hour == "Yes"
+            {
+                return 125
+            }
+            else
+            {
+                return 80
+            }
         }
-        else{
-            return 110  
+        else
+        {
+            if head[section].ishappy == "Yes" || head[section].rest_offers_happy_hour == "Yes"
+            {
+                return 110
+            }
+            else
+            {
+                return 60
+            }
+            
         }
         }
         else
@@ -1362,8 +1384,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             
             let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             selectedliqor = trimmedString1
+            
+            arraycolor = head
         getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(self.selectedliqor)")
-        self.array1 = head
+            arraycolor = colormethod(arraycolor)
+        self.array1 = arraycolor
+            //fstobj1.color = true
         }
         
         if countfurther == 2
@@ -1372,6 +1398,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             selectedliqor = trimmedString1
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(self.selectedliqor)")
             self.array1 = head
+           // fstobj1.color = true
         }
         
         if countfurther == 3
@@ -1381,6 +1408,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                 self.countfurther = 2
+                //self.fstobj1.color = true
                
             }
             alertController.addAction(cancelAction)
@@ -1390,6 +1418,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 let trimmedString1 = self.selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 self.selectedliqor = trimmedString1
                 self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.selectedliqor)")
+          // self.fstobj1.color = true
                 self.array1 = self.head
             }
             alertController.addAction(OKAction)
@@ -1477,7 +1506,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                          fstobj1.restname = res_name
+                            
+//                            for var i = 0;i < head.count; i++
+//                            {
+//                            
+//                                    if head[i].restname == res_name
+//                                    {
+//                                      //  fstobj1.restname = res_name
+//                                    }
+//                                    else
+//                                    {
+                                        fstobj1.restname = res_name
+//                                        fstobj1.color = true
+//                                    }
+//                                
+//                        }
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -1552,7 +1595,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     
                 }
-                head.append(fstobj1)
+
+                    head.append(fstobj1)
+                
                 array2 = head
             }
                 if togglebeer == true
@@ -1598,6 +1643,26 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         self.tableview.reloadData()
+    }
+    
+    func colormethod(array: [Restaurant]) -> [Restaurant]
+    {
+        for var i = 0 ; i < array.count ; i++
+        {
+            println(array[i].restname)
+             println(array1[i].restname)
+            
+            if array[i].restname == array1[i].restname
+            {
+                
+            }
+            else
+            {
+                fstobj1.color = true
+            }
+        }
+        return array
+        
     }
     
     @IBAction func pintsort(sender: AnyObject)
@@ -1791,6 +1856,62 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
 //
 //        return "₹ " + j
 //    }
+    
+    
+    func Happyhours()
+    {
+        var array = [Restaurant]()
+        
+        array = head
+        if togglebeer == true
+        {
+            self.array1 = head
+            // togglebutton.setImage(toggleon, forState: .Normal)
+            //togglevodka = true
+            //  if togglevodka == true
+            // {
+            for var i = array.count-1;i >= 0;i--
+            {
+                if array[i].ishappy != "Yes"
+                {
+                    array.removeAtIndex(i)
+                }
+                
+                
+            }
+            //}
+            head = array
+        }
+        else
+        {
+            self.array1 = head
+            if countfurther == 1
+            {
+                head = self.array2
+            }
+            else if countfurther == 2
+            {
+                head = self.array2
+            }
+            else if countfurther == 3
+            {
+                head = self.array2
+            }
+            else
+            {
+                head = self.array1
+            }
+        }
+        if boolexists == true{
+            head = self.bottlesorting(head)
+        }
+        else{
+            head = self.pintsoring(head)
+        }
+        tableview.reloadData()
+
+        
+    }
 
 }
 

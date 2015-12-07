@@ -90,6 +90,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     override func viewDidLoad()
     {
+        //tableviewnew.tableFooterView = UIView()
         textfield2.tag = 1
         autocompletedTextfieldnew.tag = 2
         autocompletedTextfieldnew.text = currentlocationname

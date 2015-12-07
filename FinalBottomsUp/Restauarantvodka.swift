@@ -20,6 +20,7 @@ class Restauarantvodka
     var vodkahappyend: String!
     var vodkaishappy: String!
     var rest_offers_happy_hour:String!
+    var color = false
     
     var vodkaarray:[liqvodka] = [liqvodka]()
     var vodkasendarray:[liqvodka] = [liqvodka]()
