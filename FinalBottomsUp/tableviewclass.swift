@@ -30,6 +30,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var resortname = [String]()
     var arraycolor = [Restaurant]()
     
+    var newheadarray:[Restaurant] = [Restaurant]()
+    var newheadarray1:[Restaurant] = [Restaurant]()
+
+    
     
     
 
@@ -169,6 +173,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad()
     {
+       // println(head.count)
+        newheadarray = head
        // tableview.tableFooterView = UIView()
        // println(toggleboolean)
         if togglebeer == true
@@ -833,13 +839,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    
-    
 
-    
-    
-    
-    
     @IBAction func press2revealPressed(sender: UIButton)
     {
         //resturantnamelable.text = "I just got a 10 % discount at \(head[sender.tag].restnamevodka) Through Bottomz Up"
@@ -1189,9 +1189,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     headerCell.happyhourslabelbeer.hidden = true
                     headerCell.viretodisplayHappyhours.hidden = true
                 }
+               
+                
                 if head[section].color == true
                 {
-                    headerCell.backgroundColor = UIColor.grayColor()
+                    headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                    headerCell.headercellmax.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                    //ccd9ff
                 }
                 else
                 {
@@ -1316,9 +1320,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             self.array1 = head
             togglebuttonbeer.setImage(toggleon, forState: .Normal)
             togglebeer = true
-           // if togglebeer == true
-            //{
-
             for var i = array.count-1;i >= 0;i--
             {
                 if array[i].ishappy != "Yes"
@@ -1327,16 +1328,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
 
             }
-          //  }
             head = array
         }
         else
         {
             togglebuttonbeer.setImage(toggleoff, forState: .Normal)
             togglebeer = false
- 
-           // if togglebeer == false
-           // {
+
             if countfurther == 1
             {
                 head = self.array2
@@ -1354,8 +1352,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 head = self.array1
             }
-          //  }
-            
         }
         if boolexists == true{
             head = self.bottlesorting(head)
@@ -1385,10 +1381,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             selectedliqor = trimmedString1
             
-            arraycolor = head
+            
+   
         getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(self.selectedliqor)")
-            arraycolor = colormethod(arraycolor)
-        self.array1 = arraycolor
+          // head = makecolor(newheadarray, arrayj: newheadarray1)
+        self.array1 = self.head
             //fstobj1.color = true
         }
         
@@ -1397,7 +1394,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             selectedliqor = trimmedString1
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(self.selectedliqor)")
-            self.array1 = head
+             self.array1 = self.head
            // fstobj1.color = true
         }
         
@@ -1419,7 +1416,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.selectedliqor = trimmedString1
                 self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.selectedliqor)")
           // self.fstobj1.color = true
-                self.array1 = self.head
+                 self.array1 = self.head
             }
             alertController.addAction(OKAction)
             
@@ -1451,27 +1448,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var jsonError:NSError?
         if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
         {
+           // newheadarray = [Restaurant]()
             head = [Restaurant]()
-           // println(head.count)
-            //println(head.first.re)
-           // self.resortname1 = [String]()
-           // println(self.resortname1.first)
-           // println(self.resortname1.last)
-            
             for var index = 0; index < json.count; ++index
             {
                 fstobj1 = Restaurant()
-                
-               
-                
                 if let bottomsUp1 = json[index] as? NSDictionary
                 {
 
                     if let pint_avg_price = bottomsUp1["pint_min_price"] as? Int
                     {
-                        //var pint_avg_price2:String = toString(pint_avg_price)
-                        
-                        fstobj1.minp = pint_avg_price
+                         fstobj1.minp = pint_avg_price
                        // println(pint_avg_price)
                     }
                     if let bottle_avg_price = bottomsUp1["bottle_min_price"] as? Int
@@ -1506,21 +1493,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                            
-//                            for var i = 0;i < head.count; i++
-//                            {
-//                            
-//                                    if head[i].restname == res_name
-//                                    {
-//                                      //  fstobj1.restname = res_name
-//                                    }
-//                                    else
-//                                    {
-                                        fstobj1.restname = res_name
-//                                        fstobj1.color = true
-//                                    }
-//                                
-//                        }
+
+                            fstobj1.restname = res_name
+
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -1593,13 +1568,35 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             fstobj1.amp.append(liqobj1)
                         }
                     }
-                    
+           
+                   
                 }
-
-                    head.append(fstobj1)
-                
+    
+                head.append(fstobj1)
                 array2 = head
+                newheadarray1 = head
+                
             }
+   
+
+           // head = newheadarray
+           // head = colormethod(self.head,arraynew: newheadarray)
+            
+//            for var i = 0; i < head.count; i++
+//            {
+//                for var j = 0;j < newheadarray.count; j++
+//                {
+//                if head[i].restname == newheadarray[i].restname
+//                {
+//                    head[i].color = false
+//                }
+//                else
+//                {
+//                    head[i].color = true
+//                }
+//                }
+//            }
+           
                 if togglebeer == true
                 {
                     var array = [Restaurant]()
@@ -1633,7 +1630,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     println(head[i].minp)
                 }
             }
-
         }
             
         else
@@ -1645,25 +1641,33 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.reloadData()
     }
     
-    func colormethod(array: [Restaurant]) -> [Restaurant]
-    {
-        for var i = 0 ; i < array.count ; i++
-        {
-            println(array[i].restname)
-             println(array1[i].restname)
-            
-            if array[i].restname == array1[i].restname
-            {
-                
-            }
-            else
-            {
-                fstobj1.color = true
-            }
-        }
-        return array
-        
-    }
+//    func colormethod(array: [Restaurant],arraynew:[Restaurant]) -> [Restaurant]
+//    {
+//        println(array.count)
+//         println(arraynew.count)
+//        
+//      for var j = 0 ; j < arraynew.count ; j++
+//        {
+//            println(arraynew[j].restname)
+//        for var i = 0 ; i < array.count ; i++
+//            {
+//                println(array[i].restname)
+//
+//                if arraynew[j].restname == array[i].restname
+//                {
+//                    arraynew[j].color = false
+//                }
+//                else
+//                {
+//                    arraynew[j].color = false
+//                    
+//                }
+//            }
+//        }
+//        println(arraynew.count)
+//        return arraynew
+//    }
+    
     
     @IBAction func pintsort(sender: AnyObject)
         
@@ -1683,11 +1687,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             head[i].bool = false
             
         }
-        
-
         head = pintsoring(head)
         self.tableview.reloadData()
-        
     }
     
     @IBAction func bottolesort(sender: AnyObject)
@@ -1709,17 +1710,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 head[i].bool = false
                 
             }
-            
             head = bottlesorting(head)
             self.tableview.reloadData()
         }
         
-    }
-    
-    
-    @IBAction func locationsort(sender: AnyObject)
-    {
-
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -1834,30 +1828,6 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
     }
     
-//    func removeZero(value:String) -> String
-//    {
-//        var j = value
-//            if j == "0"
-//            {
-//                j = "--"
-//               
-//                println(j)
-//            }
-//            else if j == "0.00"
-//            {
-//                j = "--"
-//                println(j)
-//            }
-//            else
-//            {
-//                j = value
-//               println(j)
-//            }
-//
-//        return "₹ " + j
-//    }
-    
-    
     func Happyhours()
     {
         var array = [Restaurant]()
@@ -1866,25 +1836,19 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         if togglebeer == true
         {
             self.array1 = head
-            // togglebutton.setImage(toggleon, forState: .Normal)
-            //togglevodka = true
-            //  if togglevodka == true
-            // {
             for var i = array.count-1;i >= 0;i--
             {
                 if array[i].ishappy != "Yes"
                 {
                     array.removeAtIndex(i)
                 }
-                
-                
             }
-            //}
             head = array
         }
         else
         {
             self.array1 = head
+            println(array1.count)
             if countfurther == 1
             {
                 head = self.array2
@@ -1899,6 +1863,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             }
             else
             {
+                println(array1.count)
                 head = self.array1
             }
         }
@@ -1912,6 +1877,30 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
 
         
     }
+    
+    
+//    func makecolor(arrayi:[Restaurant],arrayj:[Restaurant]) -> [Restaurant]
+//    {
+//        for var i = 0;i < arrayi.count ; i++
+//        {
+//            for var j = 0; j < arrayi.count; j++
+//            {
+//                if arrayi[i].restname == arrayj[j].restname && arrayj[j].restname == arrayi[i].restname
+//                {
+//                    arrayi[i].color = false
+//                    arrayj[i].color = false
+//                }
+//                else
+//                {
+//                    arrayi[i].color = true
+//                    arrayj[i].color = true
+//                }
+//            }
+//        }
+//        
+//        return arrayi
+//    }
+    
 
 }
 

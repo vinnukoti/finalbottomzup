@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
              GMSServices.provideAPIKey("AIzaSyBvSmi0fvOIfFosTmK4khDP6oLaO43kasY")
              Fabric.with([Crashlytics.self()])
         
-                NSThread.sleepForTimeInterval(1)
+               // NSThread.sleepForTimeInterval(1)
 
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

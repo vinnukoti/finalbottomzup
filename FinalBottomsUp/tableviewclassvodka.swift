@@ -662,26 +662,22 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.array1 = header1
             togglebutton.setImage(toggleon, forState: .Normal)
             togglevodka = true
-           // if togglevodka == true{
+        
             for var i = array.count-1;i >= 0;i--
             {
                 if array[i].vodkaishappy != "Yes"
                 {
                    array.removeAtIndex(i)
                 }
-
-                
             }
-           // }
+
             header1 = array
         }
         else
         {
             togglebutton.setImage(toggleoff, forState: .Normal)
             togglevodka = false
-            //if togglevodka == false
-           // {
-            
+
             if count == 1
             {
               header1 = self.array2
@@ -698,10 +694,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
                 header1 = self.array1
            }
-            }
-            
-        //}
-        
+        }
+
         header1 = self.pricesort1(header1)
         tableview1.reloadData()
         

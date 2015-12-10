@@ -3157,9 +3157,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bOf-Qa-YPU"/>
-        <segue reference="XDA-r2-Wma"/>
+        <segue reference="k2w-mW-TjF"/>
         <segue reference="OFC-RP-bvW"/>
-        <segue reference="rdN-c8-F5B"/>
+        <segue reference="XDA-r2-Wma"/>
+        <segue reference="WxQ-tc-RM5"/>
     </inferredMetricsTieBreakers>
 </document>
