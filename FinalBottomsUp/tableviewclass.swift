@@ -173,10 +173,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad()
     {
-       // println(head.count)
+        
+        
+
         newheadarray = head
-       // tableview.tableFooterView = UIView()
-       // println(toggleboolean)
+
         if togglebeer == true
         {
             togglebuttonbeer.setImage(toggleon, forState: .Normal)
@@ -987,7 +988,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
         cells.distancelabelnew.text = head[indexPath.section].distance
-  
+            //cells.layer.addBorder(UIRectEdge.Bottom, color: UIColor.whiteColor(), thickness: 10)
+         
         cells.tableView.reloadData()
         
         return cells
@@ -1007,6 +1009,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cell!.textLabel!.text = autocompleteUrls[index]
             cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+            //cell?.layer.addBorder(UIRectEdge.Top, color: UIColor.redColor(), thickness: 10)
+
+            
             return cell!
         }
     }
@@ -1024,6 +1029,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         if tableView.tag == 1{
         cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+       // cell.layer.addBorder (UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 2)
+           // cell.layer.borderWidth = CGRect(x: 0, y: 0, width: 50, height: 1)
+//            cell.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
+//            cell.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
+//            cell.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
         cell.layer.borderWidth = 1
         }
         else
@@ -1194,8 +1204,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 if head[section].color == true
                 {
                     headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
-                    headerCell.headercellmax.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
-                    //ccd9ff
+                    if boolexists != true{
+                        headerCell.headercellmax.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                    }
+                    else
+                    {
+                        headerCell.headercellmin.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                    }
+ 
+  
                 }
                 else
                 {
@@ -1205,6 +1222,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Giving Font family style to a UIButton
         headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+                // headerCell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.redColor(), thickness: 10)
 
         return headerCell
         }
@@ -1217,7 +1235,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell1.HappyhourstimingAfterexpantion.text = " " + head[section].happystart + " - " + head[section].happyend
             headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
             headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderColor = UIColor.lightGrayColor().CGColor
-            
+           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.addBorder(UIRectEdge.Bottom, color: UIColor.greenColor(), thickness: 2)
+           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.a
+           // view.roundCorners(.TopLeft | .BottomLeft, radius: 10)
+        
+
+
+
             var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
             headerCell1.imageviewtapguesturerecognizer.addGestureRecognizer(headerTapped)
             headerCell1.imageviewtapguesturerecognizer.tag = section
@@ -1250,7 +1274,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                headerCell1.HappyhourstimingAfterexpantion.hidden = true
                 headerCell1.happyhoursdisplaylabelafterexpantion.hidden = true
             }
-   
+           
+
+            
       
             return headerCell1
             
@@ -1574,28 +1600,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
                 head.append(fstobj1)
                 array2 = head
-                newheadarray1 = head
+                //newheadarray1 = head
+                head = colormethod(head, newheadarray: newheadarray)
                 
             }
-   
 
-           // head = newheadarray
-           // head = colormethod(self.head,arraynew: newheadarray)
-            
-//            for var i = 0; i < head.count; i++
-//            {
-//                for var j = 0;j < newheadarray.count; j++
-//                {
-//                if head[i].restname == newheadarray[i].restname
-//                {
-//                    head[i].color = false
-//                }
-//                else
-//                {
-//                    head[i].color = true
-//                }
-//                }
-//            }
            
                 if togglebeer == true
                 {
@@ -1641,32 +1650,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.reloadData()
     }
     
-//    func colormethod(array: [Restaurant],arraynew:[Restaurant]) -> [Restaurant]
-//    {
-//        println(array.count)
-//         println(arraynew.count)
-//        
-//      for var j = 0 ; j < arraynew.count ; j++
-//        {
-//            println(arraynew[j].restname)
-//        for var i = 0 ; i < array.count ; i++
-//            {
-//                println(array[i].restname)
-//
-//                if arraynew[j].restname == array[i].restname
-//                {
-//                    arraynew[j].color = false
-//                }
-//                else
-//                {
-//                    arraynew[j].color = false
-//                    
-//                }
-//            }
-//        }
-//        println(arraynew.count)
-//        return arraynew
-//    }
+
     
     
     @IBAction func pintsort(sender: AnyObject)
@@ -1881,25 +1865,48 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
 //    func makecolor(arrayi:[Restaurant],arrayj:[Restaurant]) -> [Restaurant]
 //    {
-//        for var i = 0;i < arrayi.count ; i++
+//        for var i = 0;i < arrayj.count ; i++
 //        {
 //            for var j = 0; j < arrayi.count; j++
 //            {
-//                if arrayi[i].restname == arrayj[j].restname && arrayj[j].restname == arrayi[i].restname
+//                if arrayi[j].restname == arrayj[j].restname
 //                {
-//                    arrayi[i].color = false
-//                    arrayj[i].color = false
+//                    arrayj[j].color = false
+//                   // arrayj[i].color = false
 //                }
 //                else
 //                {
-//                    arrayi[i].color = true
-//                    arrayj[i].color = true
+//                    arrayj[j].color = true
+//                    //arrayj[i].color = true
 //                }
 //            }
 //        }
 //        
 //        return arrayi
 //    }
+    
+    
+        func colormethod(head: [Restaurant],newheadarray:[Restaurant]) -> [Restaurant]
+        {
+         
+    
+          for var i = 0 ; i < head.count ; i++
+            {
+               head[i].color = true
+            for var j = 0 ; j < newheadarray.count ; j++
+                {
+                    println(head[i].restname)
+    
+                    if head[i].restname == newheadarray[j].restname
+                    {
+                        head[i].color = false
+                    }
+
+                }
+            }
+
+            return head
+        }
     
 
 }

@@ -17,11 +17,13 @@ class onemoreclass1: UITableViewCell
 
     @IBOutlet weak var maxprice: UILabel!
 
+
     
    
     override func awakeFromNib()
     {
         super.awakeFromNib()
+
         // Initialization code
     }
     

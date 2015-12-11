@@ -24,9 +24,12 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var distancelabelnew: UILabel!
     @IBOutlet weak var arrowup: UIButton!
 
-    @IBOutlet weak var viewtodisplayBorder: UIView!
+
+
+
     var beers: [liqclass] = [liqclass]()
     
+
     var restaurantName: String!
     
     override func awakeFromNib() {
@@ -45,11 +48,13 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("beerRowChild", forIndexPath: indexPath) as! UITableViewCell
+
         
         var liqname = cell.viewWithTag(100) as! UILabel
         var minprice = cell.viewWithTag(200) as! UILabel
         var maxprice = cell.viewWithTag(300) as! UILabel
         //var newdistance = cell.viewWithTag(400) as! UILabel
+  
         
         if beers.count > 0 {
         
@@ -60,9 +65,12 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         minprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         maxprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+           // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 10)
+            
+
         
       }
-        
+
         return cell
         
     }

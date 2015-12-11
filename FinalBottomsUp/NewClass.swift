@@ -142,40 +142,49 @@ import QuartzCore
 //}
 
 
-extension CALayer {
-    
-    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
-        
-        var border = CALayer()
-        
-        switch edge {
-        case UIRectEdge.Top:
-            border.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), thickness)
-            break
-        case UIRectEdge.Bottom:
-            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, UIScreen.mainScreen().bounds.width, thickness)
-            break
-        case UIRectEdge.Left:
-            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
-            break
-        case UIRectEdge.Right:
-            border.frame = CGRectMake(CGRectGetWidth(self.frame) - thickness, 0, thickness, CGRectGetHeight(self.frame))
-            break
-        default:
-            break
-        }
-        
-        border.backgroundColor = color.CGColor;
-        
-        self.addSublayer(border)
+//extension CALayer {
+//    
+//    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
+//        
+//        var border = CALayer()
+//        
+//        switch edge {
+//        case UIRectEdge.Top:
+//            border.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), thickness)
+//            break
+//        case UIRectEdge.Bottom:
+//            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, UIScreen.mainScreen().bounds.width, thickness)
+//            break
+//        case UIRectEdge.Left:
+//            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
+//            break
+//        case UIRectEdge.Right:
+//            border.frame = CGRectMake(CGRectGetWidth(self.frame) - thickness, 0, thickness, CGRectGetHeight(self.frame))
+//            break
+//        default:
+//            break
+//        }
+//        
+//        border.backgroundColor = color.CGColor;
+//        
+//        self.addSublayer(border)
+//    }
+//    
+//    //let clr:UIColor = UIColor(hexString:"000000")
+//    
+////    let s1: TheProtocol = Struct1()
+////    s1.method1()
+////    s1.method2()
+//    
+//}
+
+extension UIView {
+    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.CGPath
+        self.layer.mask = mask
     }
-    
-    //let clr:UIColor = UIColor(hexString:"000000")
-    
-//    let s1: TheProtocol = Struct1()
-//    s1.method1()
-//    s1.method2()
-    
 }
 
 

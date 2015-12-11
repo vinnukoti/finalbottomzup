@@ -31,8 +31,7 @@ class custmheadercell1: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
-
-    }
+            }
     
     override func setSelected(selected: Bool, animated: Bool)
     {

@@ -111,6 +111,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var count = 0
     
+    var newvodkaarray:[Restauarantvodka] = [Restauarantvodka]()
+    
 
   //  var obj = AutoCompleteTextField()
     
@@ -119,7 +121,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad()
     {
-        
+        newvodkaarray = header1
+        print(newvodkaarray.count)
         if togglevodka == true
         {
             togglebutton.setImage(toggleon, forState: .Normal)
@@ -561,14 +564,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = true
                 }
             
-                if fstobj1.color == true
-                {
-                    headerCell.backgroundColor = UIColor.grayColor()
-                }
-                else
-                {
-                    headerCell.backgroundColor = UIColor.whiteColor()
-                }
+//                if fstobj1.color == true
+//                {
+//                    headerCell.backgroundColor = UIColor.grayColor()
+//                }
+//                else
+//                {
+//                    headerCell.backgroundColor = UIColor.whiteColor()
+//                }
             
                 
             
@@ -584,8 +587,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             headerCell.mapbuttonvodkaclass.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
                 
-
-      
+                if header1[section].color == true
+                {
+                    
+                    headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                   // headerCell.viewtodisplayhappyhourbeforeexpantion.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                   
+                }
+                else
+                {
+                    headerCell.backgroundColor = UIColor.whiteColor()
+                }
+                
           return headerCell
             }
             else
@@ -938,12 +951,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 }
       
                  header1.append(getvodkaobj)
+                print(header1.count)
                 array2 = header1
+                print(array2.count)
                 headfurther.append(getvodkaobj)
-      
+                header1 = makecolor(header1, newvodkaarray: newvodkaarray)
             }
             if togglevodka == true
             {
+                
                 var array = [Restauarantvodka]()
                 array = header1
                 for var i = array.count - 1;i>=0;i--
@@ -1208,22 +1224,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
+
                             var happy_hour_start1 = happy_hour_start
                             fstobj1.happystart = happy_hour_start1
                         }
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
+
                             var happy_hour_end1 = happy_hour_end
                             fstobj1.happyend = happy_hour_end1
                         }
@@ -1526,6 +1534,30 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         return array
         
+    }
+    
+    func makecolor(header1:[Restauarantvodka],newvodkaarray:[Restauarantvodka]) -> [Restauarantvodka]
+    {
+        for var i = 0;i < header1.count ; i++
+        {
+            header1[i].color = true
+            println(header1[i].color)
+            print(header1.count)
+            for var j = 0; j < newvodkaarray.count; j++
+            {
+                print(newvodkaarray.count)
+                if header1[i].restnamevodka == newvodkaarray[j].restnamevodka
+                {
+                    println(header1[i].restnamevodka)
+                    println(newvodkaarray[i].restnamevodka)
+                    header1[i].color = false
+                 
+                }
+
+            }
+        }
+        
+        return header1
     }
 }
 
