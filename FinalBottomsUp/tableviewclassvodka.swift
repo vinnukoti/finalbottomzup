@@ -421,8 +421,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if tableView.tag == 1{
-            cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-            cell.layer.borderWidth = 1
+//            cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+//            cell.layer.borderWidth = 1
+            
+//            cell.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
+//            cell.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
+//            cell.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
+            //cell.layer.addBorder(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1)
         }
         else
         {

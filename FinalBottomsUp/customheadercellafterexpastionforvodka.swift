@@ -17,13 +17,24 @@ class customheadercellafterexpastionforvodka: UITableViewCell
     @IBOutlet weak var happyhourslabelafteexaption: UILabel!
     @IBOutlet weak var happyhourstiminglabelafterexpation: UILabel!
     @IBOutlet weak var viewtodisplayhappyhoursafterexpation: UIView!
+    //var width = CGFloat()
+    
+    
+//    init()
+//    {
+//        width = viewtodisplayhappyhoursafterexpation.frame.width
+//    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func awakeFromNib()
     
     {
         super.awakeFromNib()
         // Initialization code
-                
+    //  width = viewtodisplayhappyhoursafterexpation.frame.width
 
     }
 

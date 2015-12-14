@@ -142,6 +142,94 @@ import QuartzCore
 //}
 
 
+extension CALayer {
+    
+    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
+        
+        var border = CALayer()
+        let screenSize = UIScreen.mainScreen().bounds.size
+        
+        
+        switch edge {
+        case UIRectEdge.Top:
+            border.frame = CGRectMake(self.frame.origin.x, 0, CGRectGetWidth(self.frame), thickness)
+            break
+        case UIRectEdge.Bottom:
+            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, CGRectGetWidth(self.frame), thickness)
+           
+            break
+        case UIRectEdge.Left:
+            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
+            break
+        case UIRectEdge.Right:
+            border.frame = CGRectMake(CGRectGetWidth(self.frame) - thickness, 0, thickness, CGRectGetHeight(self.frame))
+            break
+        default:
+            break
+        }
+        
+        border.backgroundColor = color.CGColor;
+        
+        self.addSublayer(border)
+    }
+    
+    
+    func addBorder1(edge: UIRectEdge, color: UIColor, thickness: CGFloat,end :CGFloat) {
+       // println(width)
+        
+        var border = CALayer()
+        let screenSize = UIScreen.mainScreen().bounds.size
+        
+        
+        switch edge {
+        case UIRectEdge.Top:
+            border.frame = CGRectMake(end, 0, CGRectGetWidth(self.frame), thickness)
+            break
+        case UIRectEdge.Bottom:
+            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, CGRectGetWidth(self.frame), thickness)
+            
+            break
+        case UIRectEdge.Left:
+            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
+            break
+        case UIRectEdge.Right:
+            border.frame = CGRectMake(CGRectGetWidth(self.frame) - thickness, 0, thickness, CGRectGetHeight(self.frame))
+            break
+        default:
+            break
+        }
+        
+        border.backgroundColor = color.CGColor;
+        
+        self.addSublayer(border)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
 //extension CALayer {
 //    
 //    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
@@ -153,7 +241,7 @@ import QuartzCore
 //            border.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), thickness)
 //            break
 //        case UIRectEdge.Bottom:
-//            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, UIScreen.mainScreen().bounds.width, thickness)
+//            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, CGRectGetWidth(self.frame), thickness)
 //            break
 //        case UIRectEdge.Left:
 //            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
@@ -169,7 +257,8 @@ import QuartzCore
 //        
 //        self.addSublayer(border)
 //    }
-//    
+//}
+//
 //    //let clr:UIColor = UIColor(hexString:"000000")
 //    
 ////    let s1: TheProtocol = Struct1()
@@ -178,14 +267,49 @@ import QuartzCore
 //    
 //}
 
-extension UIView {
-    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.CGPath
-        self.layer.mask = mask
-    }
-}
+//extension UIView {
+//    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+//        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        let mask = CAShapeLayer()
+//        mask.path = path.CGPath
+//        self.layer.mask = mask
+//    }
+//}
+
+
+//extension UIView
+//{
+//    func addTopBorderWithColor(color: UIColor, width: CGFloat)
+//    {
+//        let border = CALayer()
+//        border.backgroundColor = color.CGColor
+//        border.frame = CGRectMake(0, 0, self.frame.size.width, width)
+//        self.layer.addSublayer(border)
+//    }
+//    
+//    func addRightBorderWithColor(color: UIColor, width: CGFloat)
+//    {
+//        let border = CALayer()
+//        border.backgroundColor = color.CGColor
+//        border.frame = CGRectMake(self.frame.size.width - width, 0, width, self.frame.size.height)
+//        self.layer.addSublayer(border)
+//    }
+//    
+//    func addBottomBorderWithColor(color: UIColor, width: CGFloat)
+//    {
+//        let border = CALayer()
+//        border.backgroundColor = color.CGColor
+//        border.frame = CGRectMake(0, self.frame.size.height - width, self.frame.size.width, width)
+//        self.layer.addSublayer(border)
+//    }
+//    
+//    func addLeftBorderWithColor(color: UIColor, width: CGFloat)
+//    {
+//        let border = CALayer()
+//        border.backgroundColor = color.CGColor
+//        border.frame = CGRectMake(0, 0, width, self.frame.size.height)
+//        self.layer.addSublayer(border)
+//    }
 
 
 

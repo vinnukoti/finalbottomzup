@@ -169,7 +169,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var resortname1 = [String]()
 
 
-    
+   var origin = CGFloat()
+    var origin1 = Float()
+    var end = CGFloat()
     
     override func viewDidLoad()
     {
@@ -978,6 +980,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        var obj = customheadercellafterexpanstion()
+        var widthtake = obj.widthnew
+        
         if tableView.tag == 1
         {
 
@@ -988,7 +993,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
         cells.distancelabelnew.text = head[indexPath.section].distance
-            //cells.layer.addBorder(UIRectEdge.Bottom, color: UIColor.whiteColor(), thickness: 10)
+            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
+            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
+            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
+            //cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end: 374)
+            println(widthtake)
+            cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end:obj.frame.width - obj.frame.height)
+            
+            println(end)
+
          
         cells.tableView.reloadData()
         
@@ -1028,19 +1041,37 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if tableView.tag == 1{
-        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+       // cell.layer.borderColor = UIColor.lightGrayColor().CGColor
        // cell.layer.addBorder (UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 2)
            // cell.layer.borderWidth = CGRect(x: 0, y: 0, width: 50, height: 1)
-//            cell.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
-//            cell.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
-//            cell.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
-        cell.layer.borderWidth = 1
+    
+           
+
+           
+           // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1)
+            
+
+          
+            
+           // cell.layer.addBorder1(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1,end: end)
+            
+            
+            
+            
+
+            
+            
+            
+       
+       // cell.layer.borderWidth = 1
         }
         else
         {
 
         }
     }
+    
+
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -1070,7 +1101,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
         if head[section].bool == false
         {
-            if head[section].ishappy == "Yes" || head[section].rest_offers_happy_hour == "Yes"
+            if head[section].rest_offers_happy_hour == "Yes"
             {
                 return 125
             }
@@ -1081,7 +1112,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         else
         {
-            if head[section].ishappy == "Yes" || head[section].rest_offers_happy_hour == "Yes"
+            if head[section].rest_offers_happy_hour == "Yes"
             {
                 return 110
             }
@@ -1159,6 +1190,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
         headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+                
+      //  headerCell.viretodisplayHappyhours.frame.width = width
         
                 if boolexists == true
             {
@@ -1222,7 +1255,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Giving Font family style to a UIButton
         headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
-                // headerCell.layer.addBorder(UIRectEdge.Bottom, color: UIColor.redColor(), thickness: 10)
+                
+
 
         return headerCell
         }
@@ -1235,12 +1269,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell1.HappyhourstimingAfterexpantion.text = " " + head[section].happystart + " - " + head[section].happyend
             headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
             headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderColor = UIColor.lightGrayColor().CGColor
-           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.addBorder(UIRectEdge.Bottom, color: UIColor.greenColor(), thickness: 2)
-           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.a
-           // view.roundCorners(.TopLeft | .BottomLeft, radius: 10)
-        
-
-
+           
 
             var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
             headerCell1.imageviewtapguesturerecognizer.addGestureRecognizer(headerTapped)
@@ -1274,10 +1303,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                headerCell1.HappyhourstimingAfterexpantion.hidden = true
                 headerCell1.happyhoursdisplaylabelafterexpantion.hidden = true
             }
-           
-
-            
+          //  end = self.view.frame.size.width
+           // println(end)
+//            origin = headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.frame.origin.x
+//            
+//            println(origin)
+//            println(end)
+            //end =  headerCell1.viewtodisplayhappyhoursafterexpanstion.frame.size
+            //println(headerCell1.viewtodisplayhappyhoursafterexpanstion.frame.size)
+          //  headerCell1.viewtodisplayhappyhoursafterexpanstion.frame.width
       
+            
             return headerCell1
             
         }
@@ -1290,6 +1326,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
+    
+//    override func viewWillLayoutSubviews() {
+//        
+//        
+//       end = self.view.frame.size.width
+//        println(end)
+//        
+//    }
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         var section = gestureRecognizer.view!.tag

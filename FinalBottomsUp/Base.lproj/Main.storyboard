@@ -1033,9 +1033,6 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="locationsort:" destination="cXB-1m-d5z" eventType="touchUpInside" id="hK1-WN-ke1"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gw3-dO-6Bx">
                                 <rect key="frame" x="465" y="107" width="65" height="22"/>
@@ -1219,7 +1216,7 @@
                                                 <constraint firstItem="0LZ-Mt-3Dg" firstAttribute="top" secondItem="1X5-ip-rCh" secondAttribute="top" id="chd-cb-raC"/>
                                                 <constraint firstAttribute="bottom" secondItem="euE-gH-I22" secondAttribute="bottom" id="hTU-VZ-Xe4"/>
                                                 <constraint firstItem="isS-TT-qMH" firstAttribute="top" secondItem="1X5-ip-rCh" secondAttribute="top" id="pYq-cg-yHI"/>
-                                                <constraint firstAttribute="bottom" secondItem="BtB-bk-DLG" secondAttribute="bottom" id="qoO-hi-kib"/>
+                                                <constraint firstAttribute="bottom" secondItem="BtB-bk-DLG" secondAttribute="bottom" constant="-1" id="qoO-hi-kib"/>
                                                 <constraint firstItem="euE-gH-I22" firstAttribute="leading" secondItem="1X5-ip-rCh" secondAttribute="leading" id="rvt-ef-6nu"/>
                                                 <constraint firstItem="isS-TT-qMH" firstAttribute="leading" secondItem="euE-gH-I22" secondAttribute="trailing" constant="10" id="s7J-7D-LCT"/>
                                                 <constraint firstItem="0LZ-Mt-3Dg" firstAttribute="leading" secondItem="isS-TT-qMH" secondAttribute="trailing" id="xGh-r9-BRa"/>
@@ -1752,7 +1749,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9007" y="-12255"/>
+            <point key="canvasLocation" x="-9045" y="-12403"/>
         </scene>
         <!--Tableviewclassvodka-->
         <scene sceneID="0pa-3Q-oDE">
