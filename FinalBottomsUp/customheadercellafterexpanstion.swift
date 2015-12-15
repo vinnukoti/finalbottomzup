@@ -23,7 +23,7 @@ class customheadercellafterexpanstion: UITableViewCell
     
     @IBOutlet weak var happyhoursdisplaylabelafterexpantion: UILabel!
 
-  var widthnew = CGFloat()
+  //var widthnew = CGFloat()
     
 //    override init(style: UITableViewCellStyle, reuseIdentifier: String?)
 //    {
@@ -40,7 +40,7 @@ class customheadercellafterexpanstion: UITableViewCell
     {
         super.awakeFromNib()
         // Initialization code
-     widthnew =  viewtodisplayhappyhoursafterexpanstion.frame.width
+    // widthnew =  viewtodisplayhappyhoursafterexpanstion.frame.width
         
 
     }

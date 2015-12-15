@@ -25,6 +25,10 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     
     @IBOutlet weak var distancenewvodkalabel: UILabel!
     @IBOutlet weak var arrowup: UIButton!
+    
+    @IBOutlet weak var borderimage: UIImageView!
+    
+    @IBOutlet weak var borderimage1: UIImageView!
     var liquors: [liqvodka] = [liqvodka]()
     
     override func awakeFromNib() {

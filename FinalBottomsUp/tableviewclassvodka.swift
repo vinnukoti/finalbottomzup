@@ -113,6 +113,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var newvodkaarray:[Restauarantvodka] = [Restauarantvodka]()
     
+    var newtrimmedstring:String!
+    
 
   //  var obj = AutoCompleteTextField()
     
@@ -279,6 +281,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     self!.getenteredcitylat = coordinate.latitude
                     self!.getenteredcitylong = coordinate.longitude
                     
+                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.trimmedString)")
+                    }
+                    else
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.newtrimmedstring)")
+                    }
+
+                    
                 }
             })
         }
@@ -398,6 +410,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         cells.distancenewvodkalabel.text = header1[indexPath.section].distancevodka
         cells.tableView.reloadData()
          cells.arrowup.tag = indexPath.section
+            
+            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
+            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
+            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
+          cells.borderimage.backgroundColor = UIColor.whiteColor()
+            cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
+            
         return cells
         }
         else
@@ -1174,6 +1193,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
             selectedliqor = selectedCell1.textLabel!.text
             isliqtextfieldhasdata = true
+            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
+            {
+                getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=2&records=10&query=\(trimmedString)")
+            }
+            else
+            {
+                
+                getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
+                println(trimmedString)
+            }
+
             self.view.endEditing(true)
             tableView.hidden = true
         }
@@ -1507,7 +1537,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func getdeals(sender: UIButton) {
-        performSegueWithIdentifier("getdeals", sender: self)
+        performSegueWithIdentifier("getdealsfromvodka", sender: self)
     }
     
     
@@ -1539,6 +1569,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         return array
         
+    }
+    @IBAction func backbutton(sender: UIButton)
+    {
+//         func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+//           {
+//   
+//        }
+        
+        performSegueWithIdentifier("Back", sender: self)
+
     }
     
     func makecolor(header1:[Restauarantvodka],newvodkaarray:[Restauarantvodka]) -> [Restauarantvodka]

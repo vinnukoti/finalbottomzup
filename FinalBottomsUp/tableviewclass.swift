@@ -104,6 +104,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var pintSortingarry = [Restaurant]()
     var botleSortingarray = [Restaurant]()
     
+    //var iscitytextfieldhavedata = false
+    //var isliqtextfieldhasdata = false
+    
     
     
 
@@ -172,6 +175,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
    var origin = CGFloat()
     var origin1 = Float()
     var end = CGFloat()
+    
+    var newtrimmedstring:String!
     
     override func viewDidLoad()
     {
@@ -343,6 +348,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     let coordinate = placemark!.location.coordinate
                     self!.getcitylatitudefromgoogle = coordinate.latitude
                     self!.getcitylongitudefromgoogle = coordinate.longitude
+                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.trimmedString)")
+                    }
+                    else
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.newtrimmedstring)")
+                    }
+
                     
                 }
             })
@@ -518,6 +532,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         newtextfieldtableview.text = selectedCell1.textLabel?.text
          liqnamefromtextfield = newtextfieldtableview.text
+            isliqtextfieldhasdata = true
             if liqnamefromtextfield.rangeOfString(substringofselectedliq) != nil
             {
                 boolexists = true
@@ -527,10 +542,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 boolexists = false
             }
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
+          //  newtrimmedstring = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        
         self.array1 = head 
         selectedliqor = selectedCell1.textLabel!.text
         isliqtextfieldhasdata = true
+        if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
+           {
+              getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=2&records=10&query=\(trimmedString)")
+            }
+            else
+           {
+         
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
+               println(trimmedString)
+            }
         self.view.endEditing(true)
         tableView.hidden = true
         }
@@ -803,6 +829,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             if check == "Beer"
             {
                 head = head2
+                newheadarray = head2
                 tableview.reloadData()
                 
             }
@@ -836,7 +863,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             
         else
         {
-            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
@@ -981,7 +1008,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         var obj = customheadercellafterexpanstion()
-        var widthtake = obj.widthnew
+      //  var widthtake = obj.widthnew
         
         if tableView.tag == 1
         {
@@ -996,9 +1023,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
             cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
             cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
+            //cells.layer.addBorder(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1)
             //cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end: 374)
-            println(widthtake)
-            cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end:obj.frame.width - obj.frame.height)
+          //  println(widthtake)
+         //  cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end:cells.frame.origin.x + obj.viewtodisplayhappyhoursafterexpanstion.frame.width)
+            cells.borderimage.backgroundColor = UIColor.whiteColor()
+            cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
+            cells.userInteractionEnabled = false
+            
             
             println(end)
 
@@ -1041,29 +1073,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if tableView.tag == 1{
-       // cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-       // cell.layer.addBorder (UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 2)
-           // cell.layer.borderWidth = CGRect(x: 0, y: 0, width: 50, height: 1)
-    
-           
 
-           
-           // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1)
-            
-
-          
-            
-           // cell.layer.addBorder1(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1,end: end)
-            
-            
-            
-            
-
-            
-            
-            
-       
-       // cell.layer.borderWidth = 1
+   
         }
         else
         {
@@ -1448,13 +1459,36 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if countfurther == 1{
             
+            
             let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             selectedliqor = trimmedString1
             
+
+           if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+           {
+              getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            }
+            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+           {
+               getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(newtrimmedstring)")
+            }
+           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+           {
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
+            }
+           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
+           {
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(trimmedString)")
+            }
             
-   
-        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(self.selectedliqor)")
-          // head = makecolor(newheadarray, arrayj: newheadarray1)
+        
+         
+    
+            
+           
+
+        
+          //head = makecolor(newheadarray, arrayj: newheadarray1)
         self.array1 = self.head
             //fstobj1.color = true
         }
@@ -1463,7 +1497,29 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             selectedliqor = trimmedString1
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(self.selectedliqor)")
+
+          // getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+           //  getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
+            
+            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            }
+            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
+            }
+            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
+            }
+            
+            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(trimmedString)")
+            }
+
+            
              self.array1 = self.head
            // fstobj1.color = true
         }
@@ -1484,8 +1540,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.countfurther = 0
                 let trimmedString1 = self.selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 self.selectedliqor = trimmedString1
-                self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.selectedliqor)")
-          // self.fstobj1.color = true
+
+                
+                
+                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.newtrimmedstring)")
+                }
+                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.newtrimmedstring)")
+                }
+                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
+                }
+                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == true
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.trimmedString)")
+                }
                  self.array1 = self.head
             }
             alertController.addAction(OKAction)
@@ -1779,9 +1852,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         performSegueWithIdentifier("gobacktoresult1", sender: self)
     }
     
-//    @IBAction func getdeals(sender: UIButton) {
-//        performSegueWithIdentifier("getdeals", sender: self)
-//    }
+    @IBAction func getdeals(sender: UIButton) {
+        performSegueWithIdentifier("getdealsfrombeer", sender: self)
+    }
     
 
     

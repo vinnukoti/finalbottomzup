@@ -222,8 +222,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     let coordinate = placemark!.location.coordinate
                     self!.citylat = coordinate.latitude
                     self!.citylong = coordinate.longitude
+                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
+                    {
+                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+                    }
+
                 }
             })
+            
         }
     }
     
@@ -409,12 +415,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         textfield2.text = selectedCell1.textLabel?.text
         selectedliqor = selectedCell1.textLabel!.text
-        
-        if iscitytextfieldhavedata == true
+         isliqtextfieldhasdata = true
+        if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
         {
             findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
         }
-        isliqtextfieldhasdata = true
+       
         self.view.endEditing(true)
         tableView.hidden = true
     }
@@ -795,6 +801,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 var liqname = textfield2.text
                 let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 destination.liqname = trimmedString
+                destination.newtrimmedstring = trimmedString
                 destination.head = head1
                // destination.llokfurther = head1
                 //destination.resortname1 = arraysring
@@ -824,6 +831,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination1.liqvodkaname = trimmedString
                 
                 destination1.header1 = header
+                destination1.newtrimmedstring = trimmedString
                 // destination1.headfurther = headervodka
                 destination1.getcitylatitude = citylat
                 destination1.getcitylongitude = citylong
@@ -869,7 +877,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     }
 
     @IBAction func getdeals(sender: UIButton) {
-        performSegueWithIdentifier("getdeals", sender: self)
+        performSegueWithIdentifier("getdealsfromsearch", sender: self)
     }
 }
 
