@@ -746,15 +746,15 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
             {
                 //28.63875
                 //77.07380
-                destination.liqname = textfield1.text
+              //  destination.liqname = textfield1.text
                 var liqname = textfield1.text
                 let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-                destination.liqname = trimmedString
+               // destination.liqname = trimmedString
                 destination.head = head1
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
-                destination.getcitylatitude = citylat
-                destination.getcitylongitude = citylong
+              //  destination.getcitylatitude = citylat
+               // destination.getcitylongitude = citylong
                 destination.getrestlatitudebeer = restlat
                 destination.getdevicelongitude = restlong
                // destination.getselectedliq = selectedliqor

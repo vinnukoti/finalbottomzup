@@ -1189,7 +1189,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             liqnamefromtextfield = newtextfieldvodka.text
             trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
 
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(trimmedString)")
+           // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(trimmedString)")
 
             selectedliqor = selectedCell1.textLabel!.text
             isliqtextfieldhasdata = true

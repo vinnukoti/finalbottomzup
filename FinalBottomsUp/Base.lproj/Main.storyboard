@@ -3160,7 +3160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eu7-9v-6on" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9183" y="-11615"/>
+            <point key="canvasLocation" x="-8990" y="-10812"/>
         </scene>
     </scenes>
     <resources>
@@ -3202,9 +3202,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bOf-Qa-YPU"/>
-        <segue reference="yq4-9t-36Q"/>
-        <segue reference="KlY-oy-LUS"/>
+        <segue reference="iOu-10-yno"/>
         <segue reference="mEm-gm-qud"/>
+        <segue reference="KlY-oy-LUS"/>
+        <segue reference="yq4-9t-36Q"/>
     </inferredMetricsTieBreakers>
 </document>
