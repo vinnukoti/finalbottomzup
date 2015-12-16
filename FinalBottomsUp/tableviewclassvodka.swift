@@ -115,6 +115,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var newtrimmedstring:String!
     
+    
+    var liqnamefromtableview:String!
+    
 
   //  var obj = AutoCompleteTextField()
     
@@ -797,13 +800,36 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         count = count + 1
         if count == 1
         {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+         
+            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+            {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            }
+            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+            {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=5&records=10&query=\(liqvodkaname)")
+            }
+            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+            {
+                
+            }
+            
+            
+            
             self.array1 = header1
         }
         
         if count == 2
         {
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+            {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+            }
+            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+            {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=7&records=10&query=\(liqvodkaname)")
+            }
+            
             self.array1 = header1
         }
         if count == 3
@@ -819,7 +845,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
                 self.count = 0
-                self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
+                
+                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
+                {
+                       self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
+                }
+                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
+                {
+                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getenteredcitylat)&long=\(self.getenteredcitylong)&km=2&records=10&query=\(self.liqvodkaname)")
+                }
+                
+             
                 self.array1 = self.header1
             }
             alertController.addAction(OKAction)
@@ -1488,6 +1524,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             else
             {
                 header1 = headerfortableview
+                  newvodkaarray = header1
                 tableview1.reloadData()
             }
             header1 = pricesort1(header1)

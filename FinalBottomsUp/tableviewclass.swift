@@ -1827,6 +1827,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var liqvodkaname = newtextfieldtableview.text
             let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             destination1.liqvodkaname = trimmedString
+            destination1.liqnamefromtableview = trimmedString
            // destination1.toggleboolean = toggleboolean
             destination1.header1 = headerfortableview
             println(headerfortableview.count)
