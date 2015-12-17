@@ -811,7 +811,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             }
             else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
             {
-                
+              getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
             }
             
             
@@ -829,6 +829,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
                 getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=7&records=10&query=\(liqvodkaname)")
             }
+            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+            {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
+            }
+
             
             self.array1 = header1
         }
@@ -854,6 +859,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 {
                     self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getenteredcitylat)&long=\(self.getenteredcitylong)&km=2&records=10&query=\(self.liqvodkaname)")
                 }
+                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
+                {
+                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
+                }
+
                 
              
                 self.array1 = self.header1
@@ -863,9 +873,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.presentViewController(alertController, animated: true) {
                 
             }
-
-            
-
         }
 
     }

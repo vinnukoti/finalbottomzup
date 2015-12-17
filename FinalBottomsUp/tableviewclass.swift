@@ -178,12 +178,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var newtrimmedstring:String!
     
+    var countvlaues:Int!
+    
+    var one:Int!
+    var two:Int!
+
+    
     override func viewDidLoad()
     {
         
         
 
         newheadarray = head
+        countvlaues = newheadarray.count
+        println(countvlaues)
 
         if togglebeer == true
         {
@@ -1029,7 +1037,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
          //  cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end:cells.frame.origin.x + obj.viewtodisplayhappyhoursafterexpanstion.frame.width)
             cells.borderimage.backgroundColor = UIColor.whiteColor()
             cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
-            cells.userInteractionEnabled = false
+           // cells.userInteractionEnabled = false
             
             
             println(end)
@@ -1206,13 +1214,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
                 if boolexists == true
             {
-                headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-                headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
+               // headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+               // headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
             }
             else
             {
-                headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-                headerCell.headercellmax.backgroundColor = UIColor.whiteColor()
+               // headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+               // headerCell.headercellmax.backgroundColor = UIColor.whiteColor()
             }
         
 //        if global == true
@@ -1247,20 +1255,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 if head[section].color == true
                 {
-                    headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                   // headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
                     if boolexists != true{
-                        headerCell.headercellmax.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                        //headerCell.headercellmax.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
                     }
                     else
                     {
-                        headerCell.headercellmin.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                        ///headerCell.headercellmin.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
                     }
  
   
                 }
                 else
                 {
-                   headerCell.backgroundColor = UIColor.whiteColor()
+                  // headerCell.backgroundColor = UIColor.whiteColor()
                 }
                 
         
@@ -1481,12 +1489,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(trimmedString)")
             }
             
-        
-         
     
-            
-           
-
         
           //head = makecolor(newheadarray, arrayj: newheadarray1)
         self.array1 = self.head
@@ -1519,7 +1522,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(trimmedString)")
             }
 
-            
              self.array1 = self.head
            // fstobj1.color = true
         }
@@ -1559,6 +1561,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 {
                     self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.trimmedString)")
                 }
+
                  self.array1 = self.head
             }
             alertController.addAction(OKAction)
@@ -1711,18 +1714,56 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             fstobj1.amp.append(liqobj1)
                         }
                     }
-           
-                   
                 }
     
+                
                 head.append(fstobj1)
                 array2 = head
+                println(head.count)
                 //newheadarray1 = head
+
                 head = colormethod(head, newheadarray: newheadarray)
                 
+                if countfurther == 1
+                {
+                    one = head.count
+                    two = countvlaues
+                    
+                }
+                else if countfurther == 2
+                {
+                    two = head.count
+                    
+                }
+                
+                println(head.count)
+                
             }
+            println(one)
+            println(two)
+            if countvlaues > one
+            {
+                
+            }
+            
+            else if one > two
+            {
+                
+            }
+            
+                
+            else
+            {
 
-           
+        
+                let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+             
+
+            }
+     
+            
                 if togglebeer == true
                 {
                     var array = [Restaurant]()
@@ -1764,11 +1805,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+    
         self.tableview.reloadData()
+   
     }
-    
-
-    
     
     @IBAction func pintsort(sender: AnyObject)
         
@@ -1980,52 +2020,34 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
     }
     
-    
-//    func makecolor(arrayi:[Restaurant],arrayj:[Restaurant]) -> [Restaurant]
-//    {
-//        for var i = 0;i < arrayj.count ; i++
-//        {
-//            for var j = 0; j < arrayi.count; j++
-//            {
-//                if arrayi[j].restname == arrayj[j].restname
-//                {
-//                    arrayj[j].color = false
-//                   // arrayj[i].color = false
-//                }
-//                else
-//                {
-//                    arrayj[j].color = true
-//                    //arrayj[i].color = true
-//                }
-//            }
-//        }
-//        
-//        return arrayi
-//    }
-    
-    
         func colormethod(head: [Restaurant],newheadarray:[Restaurant]) -> [Restaurant]
         {
-         
-    
+            println(head.count)
+            println(newheadarray.count)
           for var i = 0 ; i < head.count ; i++
             {
+                println(i)
                head[i].color = true
+                println(head[i].color)
             for var j = 0 ; j < newheadarray.count ; j++
                 {
+                    println(j)
                     println(head[i].restname)
+                    println(newheadarray[j].restname)
+               
     
                     if head[i].restname == newheadarray[j].restname
                     {
+                        
                         head[i].color = false
+                        println(head[i].color)
+      
                     }
-
                 }
+                
             }
-
             return head
         }
-    
 
 }
 
