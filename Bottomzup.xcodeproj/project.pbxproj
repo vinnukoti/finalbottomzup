@@ -74,6 +74,8 @@
 		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
 		53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */; };
 		53E512401BF0E6A200FFC78E /* NewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5123F1BF0E6A200FFC78E /* NewClass.swift */; };
+		53ED675F1C243F74009966F6 /* MYRIADPRO-COND.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 53ED675E1C243F74009966F6 /* MYRIADPRO-COND.OTF */; };
+		53ED67611C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 53ED67601C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +160,8 @@
 		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internetcheckclass.swift; sourceTree = "<group>"; };
 		53E5123F1BF0E6A200FFC78E /* NewClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewClass.swift; sourceTree = "<group>"; };
+		53ED675E1C243F74009966F6 /* MYRIADPRO-COND.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-COND.OTF"; sourceTree = "<group>"; };
+		53ED67601C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
 		A3E6ABB127B08185A6ECEC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BBAACA6BEA2DB090A27F178F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D167FABA4877F1BA58EC2E16 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +274,8 @@
 				5367CF181B9DB11F00D33220 /* FBSDKLoginKit.framework */,
 				5367CF191B9DB11F00D33220 /* FBSDKShareKit.framework */,
 				5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */,
+				53ED675E1C243F74009966F6 /* MYRIADPRO-COND.OTF */,
+				53ED67601C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF */,
 				5367CEF81B9DB0EA00D33220 /* ViewController.swift */,
 				53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */,
 				532E64541BF5EF9800B88D09 /* BeerRowCell.swift */,
@@ -428,6 +434,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */,
+				53ED675F1C243F74009966F6 /* MYRIADPRO-COND.OTF in Resources */,
+				53ED67611C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF in Resources */,
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,
 				5367CF221B9DBBB700D33220 /* GooglePlus.bundle in Resources */,
 				539ECEC71C10780000101C38 /* Bubble-moving-low.gif in Resources */,

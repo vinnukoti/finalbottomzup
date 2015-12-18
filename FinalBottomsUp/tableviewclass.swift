@@ -253,12 +253,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableview.delegate = self
         self.tableview.dataSource = self
         pintbutton.setTitle("PINT", forState: .Normal)
-        pintbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        pintbutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         bottlebutton.setTitle("BOTTLE", forState: .Normal)
-        bottlebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        bottlebutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
        
         locationbutton.setTitle("DISTANCE", forState: .Normal)
-        locationbutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        locationbutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
 
        // togglebuttonbeer.setImage(toggleoff, forState: .Normal)
         autocompletetextfieldforbeer.textFieldWidth = autocompletetextfieldforbeer.frame.width
@@ -690,7 +690,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                                fstobj1.distance = totalDistance1 + "Km."
+                                fstobj1.distance = totalDistance1 + " Km."
                                 //println(fstobj1.distance)
                             }
                         }
@@ -801,7 +801,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                                vodkaobjnew.distancevodka = totalDistance1 + "Km."
+                                vodkaobjnew.distancevodka = totalDistance1 + " Km."
                  
                             }
                         }
@@ -1122,7 +1122,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if head[section].rest_offers_happy_hour == "Yes"
             {
-                return 125
+                return 100
             }
             else
             {
@@ -1171,7 +1171,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             if head[section].bool == false
             {
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
-        headerCell.backgroundColor = UIColor.whiteColor()
+      //  headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.headercellname.text = " " + head[section].restname
                 if head[section].minp == 0
                 {
@@ -1179,7 +1179,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
                 else
                 {
-                     headerCell.headercellmin.text =   "₹  " + "\(head[section].minp)"
+                     headerCell.headercellmin.text =   "  " + "\(head[section].minp)"
                 }
                 
                 if head[section].maxp == 0
@@ -1188,7 +1188,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
                 else
                 {
-                    headerCell.headercellmax.text =  "₹  " + "\(head[section].maxp)"
+                    headerCell.headercellmax.text =  "  " + "\(head[section].maxp)"
                 }
  
     
@@ -1197,24 +1197,27 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.tapguesturerecognizer.addGestureRecognizer(headerTapped)
         headerCell.tapguesturerecognizer.tag = section
         headerCell.tapguesturerecognizer.userInteractionEnabled = true
-        headerCell.viretodisplayHappyhours.layer.borderWidth = 1
-        headerCell.viretodisplayHappyhours.layer.borderColor = UIColor.grayColor().CGColor
-        headerCell.viretodisplayHappyhours.layer.cornerRadius = 10
+                headerCell.citynamedisplay.text = head[section].Place
+       // headerCell.viretodisplayHappyhours.layer.borderWidth = 1
+       // headerCell.viretodisplayHappyhours.layer.borderColor = UIColor.grayColor().CGColor
+       // headerCell.viretodisplayHappyhours.layer.cornerRadius = 10
         headerCell.mapbutton.tag = section
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
                 
         headerCell.mapbutton.enabled =  false
-        headerCell.availofferbuttonbeer.tag = section
+      //  headerCell.availofferbuttonbeer.tag = section
         headerCell.HappyhourstiminglabelBeforeexpastion.text = " " + head[section].happystart + " - " + head[section].happyend
-        headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
-        headerCell.headercellmax.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+      //  headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+       // headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+        headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+                headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+                //headerCell.HappyhourstiminglabelBeforeexpastion.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
                 
       //  headerCell.viretodisplayHappyhours.frame.width = width
         
                 if boolexists == true
             {
-               // headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+              // headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
                // headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
             }
             else
@@ -1232,48 +1235,52 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 if head[section].ishappy == "Yes"
                 {
-                    headerCell.HappyhourstiminglabelBeforeexpastion.textColor = UIColor.greenColor()
+                   // headerCell.HappyhourstiminglabelBeforeexpastion.textColor = UIColor.greenColor()
                 }
                 else
                 {
-                   headerCell.HappyhourstiminglabelBeforeexpastion.textColor = UIColor.blackColor()
+                   //headerCell.HappyhourstiminglabelBeforeexpastion.textColor = UIColor.blackColor()
                 }
                 
                 if head[section].rest_offers_happy_hour == "Yes"
                 {
                     headerCell.HappyhourstiminglabelBeforeexpastion.hidden = false
-                    headerCell.happyhourslabelbeer.hidden = false
-                    headerCell.viretodisplayHappyhours.hidden = false
+                    //headerCell.happyhourslabelbeer.hidden = false
+                  //  headerCell.viretodisplayHappyhours.hidden = false
                 }
                 else
                 {
                    headerCell.HappyhourstiminglabelBeforeexpastion.hidden = true
-                    headerCell.happyhourslabelbeer.hidden = true
-                    headerCell.viretodisplayHappyhours.hidden = true
+                   // headerCell.happyhourslabelbeer.hidden = true
+                    //headerCell.viretodisplayHappyhours.hidden = true
                 }
                
                 
                 if head[section].color == true
                 {
-                   // headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
-                    if boolexists != true{
-                        //headerCell.headercellmax.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
-                    }
-                    else
-                    {
-                        ///headerCell.headercellmin.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
-                    }
- 
+   
+      
+//                         headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+//                    
+//                  
+//
+//                    if boolexists != true{
+//                        headerCell.headercellmax.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+//                    }
+//                    else
+//                    {
+//                        headerCell.headercellmin.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+//                    }
+                   
+          
+
   
                 }
-                else
-                {
-                  // headerCell.backgroundColor = UIColor.whiteColor()
-                }
+
                 
         
         //Giving Font family style to a UIButton
-        headerCell.mapbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+        headerCell.mapbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 
 
 
@@ -1637,6 +1644,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                     {
+                        
+                        if let res_place = resInfo["res_place"] as? String
+                        {
+                            fstobj1.Place = res_place
+                        }
                         if let res_name = resInfo["res_name"] as? String
                         {
 
@@ -1687,7 +1699,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                            fstobj1.distance = totalDistance1 + "Km."
+                            fstobj1.distance = totalDistance1 + " Km."
                             println(fstobj1.distance)
                         }
                     }

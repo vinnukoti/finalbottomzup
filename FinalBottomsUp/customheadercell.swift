@@ -35,7 +35,10 @@ class customheadercell: UITableViewCell
     @IBOutlet weak var HappyhourstiminglabelBeforeexpastion: UILabel!
 
     @IBOutlet weak var tapguesturerecognizer: UIImageView!
+    
+    @IBOutlet weak var citynamedisplay: UILabel!
 
+    @IBOutlet weak var headercellimage: UIImageView!
     
     //var tableobject = tableviewclass()
     override func awakeFromNib()

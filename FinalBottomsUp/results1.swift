@@ -501,12 +501,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-                            //println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                            //var happy_hour_start1 = PartOfString(happy_hour_start, 1, 5)
+
                             
                             var happy_hour_start1 = happy_hour_start
                             
@@ -516,12 +511,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                           // var happy_hour_end1 = PartOfString(happy_hour_end, 1, 5)
+
                             
                             var happy_hour_end1 = happy_hour_end
                             fstobj1.happyend = happy_hour_end1
@@ -538,12 +528,19 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         }
                         if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                         {
+                            
+                            
                             if let res_name = resInfo["res_name"] as? String
                             {
                                 fstobj1.restname = res_name
                                 arraysring.append(res_name)
                                 println(arraysring.first)
                                 
+                            }
+                            
+                            if let res_place = resInfo["res_place"] as? String
+                            {
+                                fstobj1.Place = res_place
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -638,13 +635,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         }
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
-                            
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-//                            println("SUBSTRING    " + PartOfString(happy_hour_start, 1, 5))
-                           // var happy_hour_start2 = PartOfString(happy_hour_start, 1, 5)
+
                             var happy_hour_start2 = happy_hour_start
                             
                             vodkaobj.vodkahappystart = happy_hour_start2
@@ -653,13 +644,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
                         {
-                            
-//                            func PartOfString(s: String, start: Int, length: Int) -> String
-//                            {
-//                                return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
-//                            }
-//                            println("SUBSTRING    " + PartOfString(happy_hour_end, 1, 5))
-                           // var happy_hour_end2 = PartOfString(happy_hour_end, 1, 5)
+
                             var happy_hour_end2 = happy_hour_end
                             vodkaobj.vodkahappyend = happy_hour_end2
                             //vodkasendobj.vodkahappyend = happy_hour_end2
