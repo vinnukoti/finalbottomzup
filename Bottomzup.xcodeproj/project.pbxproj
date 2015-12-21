@@ -65,6 +65,7 @@
 		538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A441BA4194B005D1386 /* MKMapViewExtension.swift */; };
 		538D0A481BA4194B005D1386 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D0A451BA4194B005D1386 /* Service.swift */; };
 		538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538D0A491BA41C58005D1386 /* MapKit.framework */; };
+		538EF8621C282FEA00983573 /* Newclass1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538EF8611C282FEA00983573 /* Newclass1ViewController.swift */; };
 		539ECEC51C1076D800101C38 /* Bubble-moving.gif in Resources */ = {isa = PBXBuildFile; fileRef = 539ECEC41C1076D700101C38 /* Bubble-moving.gif */; };
 		539ECEC71C10780000101C38 /* Bubble-moving-low.gif in Resources */ = {isa = PBXBuildFile; fileRef = 539ECEC61C10780000101C38 /* Bubble-moving-low.gif */; };
 		539ECEC91C10785200101C38 /* GIFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539ECEC81C10785200101C38 /* GIFViewController.swift */; };
@@ -151,6 +152,7 @@
 		538D0A441BA4194B005D1386 /* MKMapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMapViewExtension.swift; sourceTree = "<group>"; };
 		538D0A451BA4194B005D1386 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		538D0A491BA41C58005D1386 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		538EF8611C282FEA00983573 /* Newclass1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Newclass1ViewController.swift; sourceTree = "<group>"; };
 		539ECEC41C1076D700101C38 /* Bubble-moving.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Bubble-moving.gif"; sourceTree = "<group>"; };
 		539ECEC61C10780000101C38 /* Bubble-moving-low.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Bubble-moving-low.gif"; sourceTree = "<group>"; };
 		539ECEC81C10785200101C38 /* GIFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				537CA3D81BBA56F80082D896 /* tableviewclass.swift */,
 				5382C6B31C03146C00F6107E /* results1.swift */,
 				53E5123F1BF0E6A200FFC78E /* NewClass.swift */,
+				538EF8611C282FEA00983573 /* Newclass1ViewController.swift */,
 				534618EA1BBBDAAF00B0E188 /* results.swift */,
 				537CA3DA1BBA578A0082D896 /* customheadercell.swift */,
 				537A339F1C072AAB001E1D7B /* customheadercellafterexpanstion.swift */,
@@ -520,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				538EF8621C282FEA00983573 /* Newclass1ViewController.swift in Sources */,
 				5382C6B41C03146C00F6107E /* results1.swift in Sources */,
 				5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */,
 				538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */,

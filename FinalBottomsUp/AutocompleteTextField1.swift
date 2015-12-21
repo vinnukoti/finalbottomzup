@@ -151,6 +151,18 @@ public class AutoCompleteTextField1:UITextField, UITableViewDataSource, UITableV
         }
     }
     
+//    @IBInspectable var paddingLeft: CGFloat = 0
+//    @IBInspectable var paddingRight: CGFloat = 0
+//    
+//    override public func textRectForBounds(bounds: CGRect) -> CGRect {
+//        return CGRectMake(bounds.origin.x + paddingLeft, bounds.origin.y,
+//            bounds.size.width - paddingLeft - paddingRight, bounds.size.height);
+//    }
+//    
+//    override public func editingRectForBounds(bounds: CGRect) -> CGRect {
+//        return textRectForBounds(bounds)
+//    }
+    
     //MARK: - UITableViewDataSource
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {

@@ -182,13 +182,47 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var one:Int!
     var two:Int!
+    
+    @IBOutlet weak var searchbutton: UIButton!
+    
+    
 
     
     override func viewDidLoad()
     {
+        searchbutton.setTitle("Search", forState: .Normal)
+        searchbutton.titleLabel?.text = "Search"
+       searchbutton.titleLabel?.textColor = UIColor.whiteColor()
+//        var detailsButton = UIButton(frame: CGRect(x: 0, y: 0, width:70, height: 15))
+//        detailsButton.backgroundColor = UIColor.redColor()
+//        detailsButton.setTitle("Search", forState: .Normal)
+//        autocompletetextfieldforbeer.rightViewMode = UITextFieldViewMode.Always
+//        autocompletetextfieldforbeer.rightView = detailsButton
         
+        //newtextfieldtableview.leftViewMode = UITextFieldViewMode.Always
+        newtextfieldtableview.background = UIImage(named: "beerserchtextfield")
+        autocompletetextfieldforbeer.background = UIImage(named: "locationtextfield")
+//
+//        autocompletetextfieldforbeer.leftViewMode = UITextFieldViewMode.Always
+//        autocompletetextfieldforbeer.leftView = UIImageView(image: UIImage(named: "locationtextfield"))
         
-
+       // autocompletetextfieldforbeer.leftViewMode.background = UIImage(named: "locationtextfield")
+        
+       // let myimage = UIImage(named: "locationtextfield")
+        
+       // autocompletetextfieldforbeer.backgroundColor = UIColor(patternImage: myimage!)
+        
+//        var imageView = UIImageView();
+//        
+//        var image = UIImage(named: "locationtextfield.png");
+//        
+//        imageView.image = image;
+//        
+//        autocompletetextfieldforbeer.leftView = imageView
+//        
+//        autocompletetextfieldforbeer.leftViewMode = UITextFieldViewMode.Always
+        
+        locationbutton.hidden = true
         newheadarray = head
         countvlaues = newheadarray.count
         println(countvlaues)
@@ -257,8 +291,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         bottlebutton.setTitle("BOTTLE", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
        
-        locationbutton.setTitle("DISTANCE", forState: .Normal)
-        locationbutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+     //   locationbutton.setTitle("DISTANCE", forState: .Normal)
+       // locationbutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
 
        // togglebuttonbeer.setImage(toggleoff, forState: .Normal)
         autocompletetextfieldforbeer.textFieldWidth = autocompletetextfieldforbeer.frame.width
@@ -276,6 +310,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newuitableview.dataSource = self
         newuitableview.delegate = self
         
+    }
+    
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
 
@@ -1122,7 +1161,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if head[section].rest_offers_happy_hour == "Yes"
             {
-                return 100
+                return 85
             }
             else
             {
@@ -1309,14 +1348,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             if boolexists
             {
   
-                headerCell1.bottlelabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-                headerCell1.pintlabel.backgroundColor = UIColor.whiteColor()
+//                headerCell1.bottlelabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//                headerCell1.pintlabel.backgroundColor = UIColor.whiteColor()
                 
             }
             else
             {
-                headerCell1.pintlabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-                headerCell1.bottlelabel.backgroundColor = UIColor.whiteColor()
+//                headerCell1.pintlabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//                headerCell1.bottlelabel.backgroundColor = UIColor.whiteColor()
             }
 
             if head[section].rest_offers_happy_hour == "Yes"
