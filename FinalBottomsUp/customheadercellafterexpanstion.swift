@@ -13,6 +13,7 @@ class customheadercellafterexpanstion: UITableViewCell
     @IBOutlet weak var bottlelabel: UILabel!
     
     @IBOutlet weak var pintlabel: UILabel!
+    @IBOutlet weak var distancelabel: UILabel!
     
     @IBOutlet weak var restNameafterexpastion: UILabel!
 
@@ -23,6 +24,7 @@ class customheadercellafterexpanstion: UITableViewCell
     
     @IBOutlet weak var happyhoursdisplaylabelafterexpantion: UILabel!
 
+    @IBOutlet weak var Areanamelabel: UILabel!
   //var widthnew = CGFloat()
     
 //    override init(style: UITableViewCellStyle, reuseIdentifier: String?)

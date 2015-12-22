@@ -200,8 +200,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //        autocompletetextfieldforbeer.rightView = detailsButton
         
         //newtextfieldtableview.leftViewMode = UITextFieldViewMode.Always
-        newtextfieldtableview.background = UIImage(named: "beerserchtextfield")
-        autocompletetextfieldforbeer.background = UIImage(named: "locationtextfield")
+//        newtextfieldtableview.background = UIImage(named: "beerserchtextfield")
+//        autocompletetextfieldforbeer.background = UIImage(named: "locationtextfield")
 //
 //        autocompletetextfieldforbeer.leftViewMode = UITextFieldViewMode.Always
 //        autocompletetextfieldforbeer.leftView = UIImageView(image: UIImage(named: "locationtextfield"))
@@ -249,32 +249,36 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         if selectedliqor.rangeOfString(substringofselectedliq) != nil
         {
             boolexists = true
-            if boolexists
-            {
-                bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
-               head = bottlesorting(head)
-                tableview.reloadData()
-            }
-            println("exists")
+      
+           // println("exists")
         }
         else
         {
             boolexists = false
-            if boolexists == false
-            {
-                pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
-                head = pintsoring(head)
-                tableview.reloadData()
-            }
-            println("Not exists")
+ 
+          //  println("Not exists")
         }
         
-        newtextfieldtableview.text = selectedliqor
+        if boolexists == true
+        {
+            bottlebutton.setBackgroundImage(bottlecheckedImage, forState: .Normal)
+            head = bottlesorting(head)
+            tableview.reloadData()
+        }
+        
+        
+        if boolexists == false
+        {
+            pintbutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
+            head = pintsoring(head)
+            tableview.reloadData()
+        }
+        newtextfieldtableview.text = "  " + selectedliqor
         configureTextField()
         handleTextFieldInterfaces()
      
 
-        autocompletetextfieldforbeer.text = getselectedcityname
+        autocompletetextfieldforbeer.text = "  " + getselectedcityname
         newuitableview.hidden = true
         
         popupview.layer.cornerRadius = 20.0
@@ -1054,8 +1058,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var obj = customheadercellafterexpanstion()
+       // var obj = customheadercellafterexpanstion()
       //  var widthtake = obj.widthnew
+        
+        
         
         if tableView.tag == 1
         {
@@ -1067,19 +1073,27 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
         cells.distancelabelnew.text = head[indexPath.section].distance
-            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
-            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
-            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
+            cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            cells.hotelname.text = head[indexPath.section].restname
+            cells.areaname.text = head[indexPath.section].Place
+            cells.happytiming.text = head[indexPath.section].happystart +  " - "  + head[indexPath.section].happyend
+            
+//            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
+//            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
+//            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
             //cells.layer.addBorder(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1)
             //cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end: 374)
           //  println(widthtake)
          //  cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end:cells.frame.origin.x + obj.viewtodisplayhappyhoursafterexpanstion.frame.width)
-            cells.borderimage.backgroundColor = UIColor.whiteColor()
-            cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
+           // cells.borderimage.backgroundColor = UIColor.whiteColor()
+           // cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
            // cells.userInteractionEnabled = false
             
             
             println(end)
+            
+          //  cells.backgroundColor = UIColor(red: 249/255.0, green: 229/255.0, blue: 189/255.0, alpha: 1.0)
+           // UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
 
          
         cells.tableView.reloadData()
@@ -1135,13 +1149,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         if tableView.tag == 1{
-        if ((head[indexPath.section].amp.count * 30) + 10) > 187 {
+        if ((head[indexPath.section].amp.count * 30) + 10) > 205 {
             
             return CGFloat((head[indexPath.section].amp.count * 30) + 10)
         }
         else{
             
-            return 187
+            return 205
             
         }
         }
@@ -1172,7 +1186,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if head[section].rest_offers_happy_hour == "Yes"
             {
-                return 110
+                return 62
             }
             else
             {
@@ -1256,12 +1270,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
                 if boolexists == true
             {
-              // headerCell.headercellmax.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+               headerCell.headercellmax.font = UIFont(name: "Helvetica-Bold", size: 12)
                // headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
             }
             else
             {
-               // headerCell.headercellmin.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+                headerCell.headercellmin.font = UIFont(name: "Helvetica-Bold", size: 12)
                // headerCell.headercellmax.backgroundColor = UIColor.whiteColor()
             }
         
@@ -1328,12 +1342,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         else
         {
+ 
             var  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellnewforexpanded") as! customheadercellafterexpanstion
             headerCell1.backgroundColor = UIColor.whiteColor()
             headerCell1.restNameafterexpastion.text = " " + head[section].restname
-            headerCell1.HappyhourstimingAfterexpantion.text = " " + head[section].happystart + " - " + head[section].happyend
-            headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
-            headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderColor = UIColor.lightGrayColor().CGColor
+            headerCell1.pintlabel.text = "\(head[section].minp)"
+            headerCell1.bottlelabel.text = "\(head[section].maxp)"
+            headerCell1.distancelabel.text = "\(head[section].distance)"
+            headerCell1.Areanamelabel.text = head[section].Place
+          //  headerCell1.HappyhourstimingAfterexpantion.text = " " + head[section].happystart + " - " + head[section].happyend
+           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
+           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderColor = UIColor.lightGrayColor().CGColor
            
 
             var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
@@ -1348,25 +1367,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             if boolexists
             {
   
-//                headerCell1.bottlelabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+                headerCell1.bottlelabel.font = UIFont(name: "Helvetica-Bold", size: 12)
 //                headerCell1.pintlabel.backgroundColor = UIColor.whiteColor()
                 
             }
             else
             {
-//                headerCell1.pintlabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-//                headerCell1.bottlelabel.backgroundColor = UIColor.whiteColor()
+              headerCell1.pintlabel.font = UIFont(name: "Helvetica-Bold", size: 12)
+                //                headerCell1.bottlelabel.backgroundColor = UIColor.whiteColor()
             }
 
             if head[section].rest_offers_happy_hour == "Yes"
             {
-                headerCell1.HappyhourstimingAfterexpantion.hidden = false
-                headerCell1.happyhoursdisplaylabelafterexpantion.hidden = false
+              //  headerCell1.HappyhourstimingAfterexpantion.hidden = false
+               // headerCell1.happyhoursdisplaylabelafterexpantion.hidden = false
             }
             else
             {
-               headerCell1.HappyhourstimingAfterexpantion.hidden = true
-                headerCell1.happyhoursdisplaylabelafterexpantion.hidden = true
+              // headerCell1.HappyhourstimingAfterexpantion.hidden = true
+               // headerCell1.happyhoursdisplaylabelafterexpantion.hidden = true
             }
           //  end = self.view.frame.size.width
            // println(end)
@@ -1377,6 +1396,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             //end =  headerCell1.viewtodisplayhappyhoursafterexpanstion.frame.size
             //println(headerCell1.viewtodisplayhappyhoursafterexpanstion.frame.size)
           //  headerCell1.viewtodisplayhappyhoursafterexpanstion.frame.width
+            
+          
       
             
             return headerCell1

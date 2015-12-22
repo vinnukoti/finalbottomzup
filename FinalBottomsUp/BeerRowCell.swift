@@ -27,6 +27,11 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var borderimage: UIImageView!
 
     @IBOutlet weak var borderimage1: UIImageView!
+    
+    @IBOutlet weak var hotelname: UILabel!
+    @IBOutlet weak var areaname: UILabel!
+    
+    @IBOutlet weak var happytiming: UILabel!
 
 
     var beers: [liqclass] = [liqclass]()
@@ -34,8 +39,10 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
 
     var restaurantName: String!
     
-    override func awakeFromNib() {
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
+        //tableView.backgroundColor = UIColor(red: 249/255.0, green: 229/255.0, blue: 189/255.0, alpha: 1.0)
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -51,7 +58,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("beerRowChild", forIndexPath: indexPath) as! UITableViewCell
 
-        
+        cell.backgroundColor = UIColor(red: 249/255.0, green: 229/255.0, blue: 189/255.0, alpha: 1.0)
         var liqname = cell.viewWithTag(100) as! UILabel
         var minprice = cell.viewWithTag(200) as! UILabel
         var maxprice = cell.viewWithTag(300) as! UILabel
@@ -61,12 +68,12 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         if beers.count > 0 {
         
         liqname.text = beers[indexPath.row].liqbrand
-        minprice.text =  "₹ " + beers[indexPath.row].pint
-        maxprice.text = "₹ " + beers[indexPath.row].Bottle
+        minprice.text =   beers[indexPath.row].pint
+        maxprice.text = beers[indexPath.row].Bottle
             //newdistance.text = beers[indexPath.row].distancel
-        minprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        maxprice.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
            // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 10)
             
 
@@ -78,7 +85,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 30
+        return 15
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
