@@ -864,7 +864,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     }
 
     @IBAction func getdeals(sender: UIButton) {
-        performSegueWithIdentifier("getdealsfromsearch", sender: self)
+        performSegueWithIdentifier("Dealsnearyou", sender: self)
     }
 }
 

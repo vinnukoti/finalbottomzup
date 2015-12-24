@@ -16,6 +16,8 @@ import FBSDKShareKit
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
+    
+    var yourMobileNUmber = 8892640540
     var head2:[Restaurant] = [Restaurant]()
     var headerfortableview:[Restauarantvodka] = [Restauarantvodka]()
     var getfstobj1 = Restaurant()
@@ -51,7 +53,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var bottlebuttonclicked = false
     var locationbuttonclicked = false
     @IBOutlet var mainview: UIView!
-    @IBOutlet weak var popupview: UIView!
+    //@IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var pintbutton: UIButton!
     @IBOutlet weak var bottlebutton: UIButton!
@@ -109,8 +111,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
+   // @IBOutlet weak var pop: UIView!
+
+    @IBOutlet weak var pop: UIImageView!
 
     
+
     
     var currentlocationname:String!
     
@@ -183,15 +189,28 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var one:Int!
     var two:Int!
     
+    var popupx:CGFloat!
+    var popupy:CGFloat!
+    
     @IBOutlet weak var searchbutton: UIButton!
     
+    @IBOutlet weak var popupclose: UIButton!
     
-    @IBOutlet weak var phoneview: UIView!
+    @IBOutlet weak var calllabel1: UILabel!
+
+    @IBOutlet weak var calllabel2: UILabel!
 
     
     override func viewDidLoad()
     {
+      //  self.pop.backgroundColor = UIColor(patternImage: UIImage(named: "Popbackground")!)
         //phoneview.hidden = true
+        calllabel1.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        calllabel2.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        pop.hidden = true
+        popupclose.hidden = true
+        calllabel1.hidden = true
+        calllabel2.hidden = true
         searchbutton.setTitle("Search", forState: .Normal)
         searchbutton.titleLabel?.text = "Search"
        searchbutton.titleLabel?.textColor = UIColor.whiteColor()
@@ -283,12 +302,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         autocompletetextfieldforbeer.text = "  " + getselectedcityname
         newuitableview.hidden = true
         
-        popupview.layer.cornerRadius = 20.0
+       // popupview.layer.cornerRadius = 20.0
 
-        let tap1 = UITapGestureRecognizer(target: popupview, action: Selector("handleFrontTap:"))
+       // let tap1 = UITapGestureRecognizer(target: popupview, action: Selector("handleFrontTap:"))
         //popupview.addGestureRecognizer(tap1)
-        popupview.hidden = true
-        tap1.delegate = self
+      //  popupview.hidden = true
+      //  tap1.delegate = self
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
@@ -928,28 +947,28 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         //resturantnamelable.text = "I just got a 10 % discount at \(head[sender.tag].restnamevodka) Through Bottomz Up"
         resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
         tableview.userInteractionEnabled = false
-        popupview.hidden = false
+       // popupview.hidden = false
         
     }
     
     // Resign Firstresponder of UITableview
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
-        view.endEditing(true)
-       if let touch = touches.first as? UITouch {
-            let location = touch.locationInView(self.mainview)
-            if location.x < popupview.frame.origin.x || location.x > (popupview.frame.origin.x + popupview.frame.size.width){
-                popupview.hidden = true
-                tableview.userInteractionEnabled = true
-            }
-            if location.y < popupview.frame.origin.y || location.y > (popupview.frame.origin.y + popupview.frame.size.height){
-            popupview.hidden = true
-            tableview.userInteractionEnabled = true
-           }
-        
-        }
-        
-    }
+//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+//    {
+//        view.endEditing(true)
+//       if let touch = touches.first as? UITouch {
+//            let location = touch.locationInView(self.mainview)
+//            if location.x < popupview.frame.origin.x || location.x > (popupview.frame.origin.x + popupview.frame.size.width){
+//                popupview.hidden = true
+//                tableview.userInteractionEnabled = true
+//            }
+//            if location.y < popupview.frame.origin.y || location.y > (popupview.frame.origin.y + popupview.frame.size.height){
+//            popupview.hidden = true
+//            tableview.userInteractionEnabled = true
+//           }
+//        
+//        }
+//        
+//    }
     
     
     
@@ -1080,6 +1099,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.areaname.text = head[indexPath.section].Place
             cells.happytiming.text = head[indexPath.section].happystart +  " - "  + head[indexPath.section].happyend
             
+           popupx = cells.popupbutton.frame.origin.x
+            popupy = cells.popupbutton.frame.origin.y
+            
 //            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
 //            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
 //            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
@@ -1123,6 +1145,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             return cell!
         }
     }
+    
+    
+   
+    
     @IBAction func arrowup(sender: UIButton)
     {
        if head[sender.tag].bool == true
@@ -2126,12 +2152,92 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             }
             return head
         }
+    
+
 
     @IBAction func PhoneButton(sender: UIButton)
     {
+     
+//        let screenSize = UIScreen.mainScreen().bounds.size
+//        
+//        let Viewpop = CGRect(origin: popupx, size: 50)
+//        Viewpop.layer.masksToBounds = true
+//        Viewpop.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+//        Viewpop.layer.borderWidth = 2.0
         
+        println(popupx)
+        println(popupy)
+        pop.hidden = false
+        
+        
+        
+        pop.frame = CGRectMake(popupx-200, popupy-100,30,30)
+
+    }
+    @IBAction func popupbuttonclicked(sender: UIButton, forEvent event: UIEvent)
+    {
+        
+//        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+//        calllabel1.userInteractionEnabled=true
+//        calllabel1.addGestureRecognizer(tapGesture)
+        
+        // downcast sender as a UIView
+        
+        let buttonView = sender as UIView;
+        
+        // get any touch on the buttonView
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch {
+            // print the touch location on the button
+            println(touch.locationInView(self.view))
+            var point = touch.locationInView(self.view)
+  
+            pop.hidden = false
+            popupclose.hidden = false
+            calllabel1.hidden = false
+            calllabel2.hidden = false
+            
+            pop.frame = CGRectMake(point.x - 175,point.y + 15,190,90)
+            popupclose.frame = CGRectMake(point.x - 30,point.y + 37,45,45)
+            calllabel1.frame = CGRectMake(point.x - 125,point.y + 17,45,45)
+            calllabel2.frame = CGRectMake(point.x - 125,point.y + 55,45,45)
+
+            
+            
+            
+            
+            
+            
+            
+        }
+
         
     }
+    
+//    func handleTap(sender:UITapGestureRecognizer){
+//        if let  CallURL:NSURL = NSURL(string:"tel://\(yourMobileNUmber)") {
+//            let application:UIApplication = UIApplication.sharedApplication()
+//            if (application.canOpenURL( CallURL)) {
+//                application.openURL( CallURL);
+//            }
+//            else
+//            {
+//                // your number not valid
+//                let tapAlert = UIAlertController(title: "Alert!!!", message: "Your mobile number is invalid", preferredStyle: UIAlertControllerStyle.Alert)
+//                tapAlert.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: nil))
+//                self.presentViewController(tapAlert, animated: true, completion: nil)
+//            }
+//        }
+//    }
+//    
+    
+    @IBAction func popupclosebutton(sender: UIButton)
+    {
+        pop.hidden = true
+        popupclose.hidden = true
+        calllabel1.hidden = true
+          calllabel2.hidden = true
+    }
+    
 }
 
 

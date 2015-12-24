@@ -14,25 +14,18 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var press2reveal: UIButton!
-    
-    @IBOutlet weak var directions: UIButton!
-    
-    @IBOutlet weak var address1: UILabel!
-    
-    @IBOutlet weak var address2: UILabel!
+
     
     @IBOutlet weak var distancelabelnew: UILabel!
     @IBOutlet weak var arrowup: UIButton!
 
-    @IBOutlet weak var borderimage: UIImageView!
-
-    @IBOutlet weak var borderimage1: UIImageView!
     
     @IBOutlet weak var hotelname: UILabel!
     @IBOutlet weak var areaname: UILabel!
     
     @IBOutlet weak var happytiming: UILabel!
 
+    @IBOutlet weak var popupbutton: UIButton!
 
     var beers: [liqclass] = [liqclass]()
     
