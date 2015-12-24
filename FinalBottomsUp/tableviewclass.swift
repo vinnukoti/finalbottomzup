@@ -186,10 +186,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var searchbutton: UIButton!
     
     
+    @IBOutlet weak var phoneview: UIView!
 
     
     override func viewDidLoad()
     {
+        //phoneview.hidden = true
         searchbutton.setTitle("Search", forState: .Normal)
         searchbutton.titleLabel?.text = "Search"
        searchbutton.titleLabel?.textColor = UIColor.whiteColor()
@@ -290,9 +292,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
-        pintbutton.setTitle("PINT", forState: .Normal)
+        pintbutton.setTitle("PINT (₹)", forState: .Normal)
         pintbutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-        bottlebutton.setTitle("BOTTLE", forState: .Normal)
+        bottlebutton.setTitle("BOTTLE (₹)", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
        
      //   locationbutton.setTitle("DISTANCE", forState: .Normal)
@@ -1149,13 +1151,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         if tableView.tag == 1{
-        if ((head[indexPath.section].amp.count * 30) + 10) > 205 {
+        if ((head[indexPath.section].amp.count * 30) + 10) > 202 {
             
             return CGFloat((head[indexPath.section].amp.count * 30) + 10)
         }
         else{
             
-            return 205
+            return 202
             
         }
         }
@@ -1173,25 +1175,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
         if head[section].bool == false
         {
-            if head[section].rest_offers_happy_hour == "Yes"
-            {
+        if head[section].rest_offers_happy_hour == "Yes"
+        {
                 return 85
-            }
-            else
-            {
-                return 80
-            }
+        }
+          else
+           {
+               return 80
+           }
         }
         else
         {
-            if head[section].rest_offers_happy_hour == "Yes"
-            {
+           if head[section].rest_offers_happy_hour == "Yes"
+        {
                 return 62
-            }
+           }
             else
-            {
-                return 60
-            }
+           {
+            return 60
+           }
             
         }
         }
@@ -1264,18 +1266,22 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
        // headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
         headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+                bottlebutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+                pintbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 //headerCell.HappyhourstiminglabelBeforeexpastion.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
                 
       //  headerCell.viretodisplayHappyhours.frame.width = width
         
                 if boolexists == true
             {
-               headerCell.headercellmax.font = UIFont(name: "Helvetica-Bold", size: 12)
+               headerCell.headercellmax.font = UIFont(name: "MyriadPro-Bold", size: 15)
+                bottlebutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
                // headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
             }
             else
             {
-                headerCell.headercellmin.font = UIFont(name: "Helvetica-Bold", size: 12)
+                headerCell.headercellmin.font = UIFont(name: "MyriadPro-Bold", size: 15)
+                pintbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-bold", size: 11)
                // headerCell.headercellmax.backgroundColor = UIColor.whiteColor()
             }
         
@@ -2121,6 +2127,11 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             return head
         }
 
+    @IBAction func PhoneButton(sender: UIButton)
+    {
+        
+        
+    }
 }
 
 

@@ -111,7 +111,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
         locationManager1.startUpdatingLocation()
-        
+       
+       autocompletedTextfieldnew.layer.cornerRadius = 10
+       textfield2.layer.cornerRadius = 10
 
         
         

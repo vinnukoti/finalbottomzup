@@ -48,11 +48,11 @@ class ViewController: UIViewController
         
         super.viewDidLoad()
         
-        let filePath = NSBundle.mainBundle().pathForResource("Bubble-moving", ofType: "gif")
-        let gif = NSData(contentsOfFile: filePath!)
-        webviewforgif.loadData(gif!, MIMEType: "image/gif", textEncodingName: String(), baseURL: NSURL())
-        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: false)
-        webviewforgif.userInteractionEnabled = false
+//        let filePath = NSBundle.mainBundle().pathForResource("Bubble-moving", ofType: "gif")
+//        let gif = NSData(contentsOfFile: filePath!)
+//        webviewforgif.loadData(gif!, MIMEType: "image/gif", textEncodingName: String(), baseURL: NSURL())
+//        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: false)
+//        webviewforgif.userInteractionEnabled = false
 
 
 

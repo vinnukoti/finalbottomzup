@@ -39,6 +39,7 @@
 		5367CF351B9DBC3C00D33220 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF341B9DBC3C00D33220 /* Security.framework */; };
 		5367CF371B9DBC4800D33220 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF361B9DBC4800D33220 /* SystemConfiguration.framework */; };
 		5367CF391B9DC0B200D33220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367CF381B9DC0B200D33220 /* UIKit.framework */; };
+		53704BD81C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 53704BD71C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF */; };
 		537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537809D21BE4C81F00C18D6B /* CheckBox.swift */; };
 		537A33A01C072AAB001E1D7B /* customheadercellafterexpanstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A339F1C072AAB001E1D7B /* customheadercellafterexpanstion.swift */; };
 		537A33A21C075535001E1D7B /* customheadercellafterexpastionforvodka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A33A11C075535001E1D7B /* customheadercellafterexpastionforvodka.swift */; };
@@ -126,6 +127,7 @@
 		5367CF361B9DBC4800D33220 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5367CF381B9DC0B200D33220 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5367CF3A1B9DC13F00D33220 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "../Bridging-Header.h"; sourceTree = "<group>"; };
+		53704BD71C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-BOLD.OTF"; sourceTree = "<group>"; };
 		537809D21BE4C81F00C18D6B /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		537A339F1C072AAB001E1D7B /* customheadercellafterexpanstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercellafterexpanstion.swift; sourceTree = "<group>"; };
 		537A33A11C075535001E1D7B /* customheadercellafterexpastionforvodka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercellafterexpastionforvodka.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */,
 				53ED675E1C243F74009966F6 /* MYRIADPRO-COND.OTF */,
 				53ED67601C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF */,
+				53704BD71C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF */,
 				5367CEF81B9DB0EA00D33220 /* ViewController.swift */,
 				53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */,
 				532E64541BF5EF9800B88D09 /* BeerRowCell.swift */,
@@ -439,6 +442,7 @@
 				5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */,
 				53ED675F1C243F74009966F6 /* MYRIADPRO-COND.OTF in Resources */,
 				53ED67611C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF in Resources */,
+				53704BD81C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF in Resources */,
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,
 				5367CF221B9DBBB700D33220 /* GooglePlus.bundle in Resources */,
 				539ECEC71C10780000101C38 /* Bubble-moving-low.gif in Resources */,

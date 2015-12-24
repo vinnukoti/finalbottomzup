@@ -46,17 +46,24 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 //        tableviewformap.layer.masksToBounds = true
 //        tableviewformap.layer.borderColor = UIColor(red: 0x00/255,green: 0x00/255,blue: 0x000/255,alpha: 1.0).CGColor
 //        tableviewformap.layer.borderWidth = 1.0
-        distancemap.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
-        distancemap.setTitle("DISTANCE", forState: UIControlState.Normal)
+       // distancemap.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+       // distancemap.setTitle("DISTANCE", forState: UIControlState.Normal)
         //distancemap.titleLabel?.text = "DISTANCE"
-        REsturantdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
-        distancemap.setBackgroundImage(bottleunCheckedImage, forState: UIControlState.Normal)
+       // REsturantdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
+      //  distancemap.setBackgroundImage(bottleunCheckedImage, forState: UIControlState.Normal)
         //distancemap.setImage(unCheckedImage, forState: .Normal)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
-        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=5")
+        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10")
         
-        distancemap.setTitle("DISTANCE", forState: .Normal)
+       // distancemap.setTitle("DISTANCE", forState: .Normal)
+    }
+    
+    
+    
+    // Hides Status bar
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -69,21 +76,29 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     {
         return wineandbararray.count
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 69
+    }
+    
+    
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("wineandbar", forIndexPath: indexPath) as! maplable
         cell.name.text = wineandbararray[indexPath.row].mapliqname
-        cell.name.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
-        cell.distance.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
+        cell.name.font = UIFont(name: "MyriadPro-Regular", size: 11.0)
+        cell.distance.font = UIFont(name: "MyriadPro-Regular", size: 11.0)
         cell.distance.text = wineandbararray[indexPath.row].mapliqdistance
-        if distnacemapsort == true
-        {
-        cell.distance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
-        }
-        var tblView =  UIView(frame: CGRectZero)
-        tableView.tableFooterView = tblView
-        tableView.tableFooterView!.hidden = true
-        tableView.backgroundColor = UIColor.clearColor()
+//        if distnacemapsort == true
+//        {
+//        cell.distance.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+//        }
+//        var tblView =  UIView(frame: CGRectZero)
+//        tableView.tableFooterView = tblView
+//        tableView.tableFooterView!.hidden = true
+//        tableView.backgroundColor = UIColor.clearColor()
         return cell
     }
     func getnaerbybar(urlString:String)
