@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2E99E8310E9F1A57A2C3DDF9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167FABA4877F1BA58EC2E16 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		531F58B71C3104E800E9D583 /* Dealsnearyouclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */; };
+		531F58B91C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */; };
+		531F58BB1C31066C00E9D583 /* childcellfordealsnearyou.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58BA1C31066C00E9D583 /* childcellfordealsnearyou.swift */; };
+		531F58BD1C311F7B00E9D583 /* DealsNearyouRowchild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58BC1C311F7B00E9D583 /* DealsNearyouRowchild.swift */; };
 		532E64551BF5EF9800B88D09 /* BeerRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E64541BF5EF9800B88D09 /* BeerRowCell.swift */; };
 		532E64591BF6078D00B88D09 /* VodkaRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E64581BF6078D00B88D09 /* VodkaRowCell.swift */; };
 		534618EB1BBBDAAF00B0E188 /* results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534618EA1BBBDAAF00B0E188 /* results.swift */; };
@@ -92,6 +96,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dealsnearyouclass.swift; sourceTree = "<group>"; };
+		531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionheaderforDelasnearyouTableViewCell.swift; sourceTree = "<group>"; };
+		531F58BA1C31066C00E9D583 /* childcellfordealsnearyou.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = childcellfordealsnearyou.swift; sourceTree = "<group>"; };
+		531F58BC1C311F7B00E9D583 /* DealsNearyouRowchild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealsNearyouRowchild.swift; sourceTree = "<group>"; };
 		532E64541BF5EF9800B88D09 /* BeerRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerRowCell.swift; sourceTree = "<group>"; };
 		532E64581BF6078D00B88D09 /* VodkaRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VodkaRowCell.swift; sourceTree = "<group>"; };
 		534618EA1BBBDAAF00B0E188 /* results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = results.swift; sourceTree = "<group>"; };
@@ -285,7 +293,11 @@
 				53704BD71C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF */,
 				5367CEF81B9DB0EA00D33220 /* ViewController.swift */,
 				53F068281C2C0FA400ADC41C /* DealsNearyou.swift */,
+				531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */,
+				531F58BC1C311F7B00E9D583 /* DealsNearyouRowchild.swift */,
 				53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */,
+				531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */,
+				531F58BA1C31066C00E9D583 /* childcellfordealsnearyou.swift */,
 				532E64541BF5EF9800B88D09 /* BeerRowCell.swift */,
 				537CA3D81BBA56F80082D896 /* tableviewclass.swift */,
 				5382C6B31C03146C00F6107E /* results1.swift */,
@@ -538,17 +550,21 @@
 				5382C6B21C02EFF900F6107E /* AutocompleteTextField1.swift in Sources */,
 				538743421BCBB8E300143A1A /* mapdata.swift in Sources */,
 				532E64551BF5EF9800B88D09 /* BeerRowCell.swift in Sources */,
+				531F58BB1C31066C00E9D583 /* childcellfordealsnearyou.swift in Sources */,
 				538743401BCBB5F600143A1A /* maplable.swift in Sources */,
 				539ECEC91C10785200101C38 /* GIFViewController.swift in Sources */,
+				531F58B91C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift in Sources */,
 				53F068291C2C0FA400ADC41C /* DealsNearyou.swift in Sources */,
 				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,
 				53A659771C11AEDE0002B4BC /* GifImageclassViewController.swift in Sources */,
 				537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */,
+				531F58B71C3104E800E9D583 /* Dealsnearyouclass.swift in Sources */,
 				537CA3D91BBA56F80082D896 /* tableviewclass.swift in Sources */,
 				532E64591BF6078D00B88D09 /* VodkaRowCell.swift in Sources */,
 				537A33A01C072AAB001E1D7B /* customheadercellafterexpanstion.swift in Sources */,
+				531F58BD1C311F7B00E9D583 /* DealsNearyouRowchild.swift in Sources */,
 				537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */,
 				537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */,
 				53A659751C1170150002B4BC /* AViewController.swift in Sources */,

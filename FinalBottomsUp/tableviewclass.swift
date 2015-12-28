@@ -17,7 +17,7 @@ import FBSDKShareKit
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
     
-    var yourMobileNUmber = 8892640540
+   // var yourMobileNUmber = 8892640540
     var head2:[Restaurant] = [Restaurant]()
     var headerfortableview:[Restauarantvodka] = [Restauarantvodka]()
     var getfstobj1 = Restaurant()
@@ -1471,24 +1471,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func tappedMe(gestureRecognizer: UITapGestureRecognizer)
-    {
-        var section = gestureRecognizer.view!.tag
-        println(section)
-        println("Section: \(gestureRecognizer.view!.tag)")
-        
-        if head[gestureRecognizer.view!.tag].bool == false
-        {
-            head[gestureRecognizer.view!.tag].bool = true
-            
-        }
-        else
-        {
-            head[gestureRecognizer.view!.tag].bool = false
-        }
-        self.tableview.reloadData()
-        
-    }
+    
+//    func tappedMe(gestureRecognizer: UITapGestureRecognizer)
+//    {
+//        var section = gestureRecognizer.view!.tag
+//        println(section)
+//        println("Section: \(gestureRecognizer.view!.tag)")
+//        
+//        if head[gestureRecognizer.view!.tag].bool == false
+//        {
+//            head[gestureRecognizer.view!.tag].bool = true
+//            
+//        }
+//        else
+//        {
+//            head[gestureRecognizer.view!.tag].bool = false
+//        }
+//        self.tableview.reloadData()
+//        
+//    }
 
     
     
