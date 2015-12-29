@@ -608,10 +608,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                     }
                                     if let pint_price = one["pint_price"] as? String
                                     {
+                                        var pint_price = pint_price.toInt()
                                         liqobj1.pint = pint_price
                                     }
                                     if let bottle_price = one["bottle_price"] as? String
                                     {
+                                        var bottle_price = bottle_price.toInt()
                                         liqobj1.Bottle = bottle_price
                                     }
                                 }
@@ -659,10 +661,22 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         }
                         if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                         {
+                            
+//                            if let res_place = bottomsUp1["res_place"] as? String
+//                            {
+//                                vodkaobj.address = res_place
+//                                println(vodkaobj.address)
+//                            }
+                           
                             if let res_name = resInfo["res_name"] as? String
                             {
                                 vodkaobj.restnamevodka = res_name
                                 //vodkasendobj.restnamevodka = res_name
+                            }
+                            
+                            if let res_place = resInfo["res_place"] as? String
+                            {
+                                vodkaobj.address = res_place
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String

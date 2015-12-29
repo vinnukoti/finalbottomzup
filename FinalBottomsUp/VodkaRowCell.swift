@@ -14,27 +14,23 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     
     @IBOutlet weak var press2reveal: UIButton!
     
-    
-    @IBOutlet weak var directions: UIButton!
-    
-    
-    @IBOutlet weak var address1: UILabel!
-    
-    
-    @IBOutlet weak var address2: UILabel!
-    
     @IBOutlet weak var distancenewvodkalabel: UILabel!
     @IBOutlet weak var arrowup: UIButton!
     
-    @IBOutlet weak var borderimage: UIImageView!
+    @IBOutlet weak var Hotelname: UILabel!
     
-    @IBOutlet weak var borderimage1: UIImageView!
+    @IBOutlet weak var address: UILabel!
+    
+    @IBOutlet weak var happyhours: UILabel!
+
+    @IBOutlet weak var happyhourstiming: UILabel!
     var liquors: [liqvodka] = [liqvodka]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         tableView.delegate = self
         tableView.dataSource = self
+       
 
     }
     
@@ -46,6 +42,8 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("liquorRowChild", forIndexPath: indexPath) as! UITableViewCell
+        cell.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)
+         self.tableView.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)
         
         var liqname = cell.viewWithTag(100) as! UILabel
         var price = cell.viewWithTag(200) as! UILabel
@@ -54,11 +52,11 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
         if liquors.count > 0 {
             
             liqname.text = liquors[indexPath.row].liqnamebrandname
-            price.text =  "₹ " + liquors[indexPath.row].liqbrandprice
+            price.text = liquors[indexPath.row].liqbrandprice
             
-            price.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+            price.font = UIFont(name: "MyriadPro-Regular", size: 11)
             
-            liqname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+            liqname.font = UIFont(name: "MyriadPro-Regular", size: 11)
 
             
         }
@@ -68,7 +66,7 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 30
+        return 15
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

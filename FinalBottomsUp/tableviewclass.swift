@@ -53,7 +53,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var bottlebuttonclicked = false
     var locationbuttonclicked = false
     @IBOutlet var mainview: UIView!
-    //@IBOutlet weak var popupview: UIView!
+   // @IBOutlet weak var popupview: UIView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var pintbutton: UIButton!
     @IBOutlet weak var bottlebutton: UIButton!
@@ -200,9 +200,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var calllabel2: UILabel!
 
+    @IBOutlet weak var revelofferview: UIView!
     
     override func viewDidLoad()
     {
+       // self.revelofferview.backgroundColor = UIColor(patternImage: UIImage(named: "Revelpopup")!)
+        revelofferview.hidden = true
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
       //  self.pop.backgroundColor = UIColor(patternImage: UIImage(named: "Popbackground")!)
         //phoneview.hidden = true
         calllabel1.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
@@ -304,10 +309,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
        // popupview.layer.cornerRadius = 20.0
 
-       // let tap1 = UITapGestureRecognizer(target: popupview, action: Selector("handleFrontTap:"))
+        //let tap1 = UITapGestureRecognizer(target: popupview, action: Selector("handleFrontTap:"))
         //popupview.addGestureRecognizer(tap1)
       //  popupview.hidden = true
       //  tap1.delegate = self
+        
+//        let tap2 = UITapGestureRecognizer(target: pop, action: Selector("handleFrontTap:"))
+//        pop.hidden = true
+//        tap2.delegate = self
+        
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
@@ -335,6 +345,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newuitableview.dataSource = self
         newuitableview.delegate = self
         
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//        pop.endEditing(true)
+//        pop.resignFirstResponder()
+        pop.hidden = true
+        calllabel1.hidden = true
+        calllabel2.hidden = true
+        popupclose.hidden = true
     }
     
     
@@ -771,10 +791,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                     }
                                     if let pint_price = one["pint_price"] as? String
                                     {
+                                        var pint_price = pint_price.toInt()
                                         liqobj1.pint = pint_price
                                     }
                                     if let bottle_price = one["bottle_price"] as? String
                                     {
+                                        var bottle_price = bottle_price.toInt()
                                         liqobj1.Bottle = bottle_price
                                     }
                                 }
@@ -945,8 +967,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func press2revealPressed(sender: UIButton)
     {
         //resturantnamelable.text = "I just got a 10 % discount at \(head[sender.tag].restnamevodka) Through Bottomz Up"
-        resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
-        tableview.userInteractionEnabled = false
+       // resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
+       // tableview.userInteractionEnabled = false
        // popupview.hidden = false
         
     }
@@ -1214,11 +1236,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
            if head[section].rest_offers_happy_hour == "Yes"
         {
-                return 62
+                return 0
            }
             else
            {
-            return 60
+            return 0
            }
             
         }
@@ -1278,7 +1300,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.tapguesturerecognizer.addGestureRecognizer(headerTapped)
         headerCell.tapguesturerecognizer.tag = section
         headerCell.tapguesturerecognizer.userInteractionEnabled = true
-                headerCell.citynamedisplay.text = head[section].Place
+                headerCell.citynamedisplay.text = " " + head[section].Place
        // headerCell.viretodisplayHappyhours.layer.borderWidth = 1
        // headerCell.viretodisplayHappyhours.layer.borderColor = UIColor.grayColor().CGColor
        // headerCell.viretodisplayHappyhours.layer.cornerRadius = 10
@@ -1381,7 +1403,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell1.pintlabel.text = "\(head[section].minp)"
             headerCell1.bottlelabel.text = "\(head[section].maxp)"
             headerCell1.distancelabel.text = "\(head[section].distance)"
-            headerCell1.Areanamelabel.text = head[section].Place
+            headerCell1.Areanamelabel.text = " " + head[section].Place
           //  headerCell1.HappyhourstimingAfterexpantion.text = " " + head[section].happystart + " - " + head[section].happyend
            // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
            // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -1809,10 +1831,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 }
                                 if let pint_price = one["pint_price"] as? String
                                 {
+                                 
+                                    var pint_price = pint_price.toInt()
                                     liqobj1.pint = pint_price
                                 }
                                 if let bottle_price = one["bottle_price"] as? String
                                 {
+                                    var bottle_price = bottle_price.toInt()
                                     liqobj1.Bottle = bottle_price
                                 }
                             }
@@ -2177,11 +2202,6 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     }
     @IBAction func popupbuttonclicked(sender: UIButton, forEvent event: UIEvent)
     {
-        
-//        var tapGesture = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-//        calllabel1.userInteractionEnabled=true
-//        calllabel1.addGestureRecognizer(tapGesture)
-        
         // downcast sender as a UIView
         
         let buttonView = sender as UIView;
@@ -2214,23 +2234,6 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
     }
     
-//    func handleTap(sender:UITapGestureRecognizer){
-//        if let  CallURL:NSURL = NSURL(string:"tel://\(yourMobileNUmber)") {
-//            let application:UIApplication = UIApplication.sharedApplication()
-//            if (application.canOpenURL( CallURL)) {
-//                application.openURL( CallURL);
-//            }
-//            else
-//            {
-//                // your number not valid
-//                let tapAlert = UIAlertController(title: "Alert!!!", message: "Your mobile number is invalid", preferredStyle: UIAlertControllerStyle.Alert)
-//                tapAlert.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: nil))
-//                self.presentViewController(tapAlert, animated: true, completion: nil)
-//            }
-//        }
-//    }
-//    
-    
     @IBAction func popupclosebutton(sender: UIButton)
     {
         pop.hidden = true
@@ -2239,6 +2242,21 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
           calllabel2.hidden = true
     }
     
+    @IBAction func revelofferclicked(sender: UIButton, forEvent event: UIEvent)
+    {
+        // downcast sender as a UIView
+        
+        let buttonView = sender as UIView;
+        
+        // get any touch on the buttonView
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch {
+            // print the touch location on the button
+            println(touch.locationInView(self.view))
+            var point = touch.locationInView(self.view)
+          revelofferview.hidden = false
+             revelofferview.frame = CGRectMake(point.x - 300,point.y - 180,300,180)
+    }
+    }
 }
 
 

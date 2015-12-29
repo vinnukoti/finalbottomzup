@@ -27,6 +27,7 @@ class custmheadercell1: UITableViewCell
     @IBOutlet weak var Happyhourlabelbeforeexpantion: UILabel!
     
     @IBOutlet weak var Happyhourtimingdisplaybeforeexpantion: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     
     override func awakeFromNib()
     {

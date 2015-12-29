@@ -51,7 +51,8 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("beerRowChild", forIndexPath: indexPath) as! UITableViewCell
 
-        cell.backgroundColor = UIColor(red: 249/255.0, green: 229/255.0, blue: 189/255.0, alpha: 1.0)
+        cell.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)
+        self.tableView.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)
         var liqname = cell.viewWithTag(100) as! UILabel
         var minprice = cell.viewWithTag(200) as! UILabel
         var maxprice = cell.viewWithTag(300) as! UILabel
@@ -61,9 +62,37 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         if beers.count > 0 {
         
         liqname.text = beers[indexPath.row].liqbrand
-        minprice.text =   beers[indexPath.row].pint
-        maxprice.text = beers[indexPath.row].Bottle
-            //newdistance.text = beers[indexPath.row].distancel
+        
+        
+            
+            if beers[indexPath.row].pint == 0
+            {
+                minprice.text = "--"
+            }
+            else
+            {
+               minprice.text =   "\(beers[indexPath.row].pint)"
+            }
+            
+            if beers[indexPath.row].Bottle == 0
+            {
+                maxprice.text = "--"
+            }
+            
+            else
+            {
+                maxprice.text = "\(beers[indexPath.row].Bottle)"
+            }
+            
+//            if beers[section].minp == 0
+//            {
+//                headerCell.headercellmin.text =   "--"
+//            }
+//            else
+//            {
+//                headerCell.headercellmin.text =   "  " + "\(head[section].minp)"
+//            }
+ 
         minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)

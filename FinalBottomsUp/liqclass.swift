@@ -13,16 +13,16 @@ class liqclass
 
     
     var liqname:String!
-    var pint:String!
-    var Bottle:String!
+    var pint:Int!
+    var Bottle:Int!
     var liqbrand: String!
     var distancel: String!
     
     init()
     {
         liqname = String()
-        pint = String()
-        Bottle = String()
+        pint = Int()
+        Bottle = Int()
         liqbrand = String()
         distancel = String()
     }

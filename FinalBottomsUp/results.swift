@@ -567,10 +567,12 @@ class results: UIViewController,UITableViewDelegate, UITableViewDataSource, UITe
                             }
                             if let pint_price = one["pint_price"] as? String
                             {
+                                var pint_price = pint_price.toInt()
                                 liqobj1.pint = pint_price
                             }
                             if let bottle_price = one["bottle_price"] as? String
                             {
+                                var bottle_price = bottle_price.toInt()
                                 liqobj1.Bottle = bottle_price
                             }
                         }

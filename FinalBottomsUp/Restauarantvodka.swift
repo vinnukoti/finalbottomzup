@@ -21,6 +21,7 @@ class Restauarantvodka
     var vodkaishappy: String!
     var rest_offers_happy_hour:String!
     var color = false
+    var address:String!
     
     var vodkaarray:[liqvodka] = [liqvodka]()
     var vodkasendarray:[liqvodka] = [liqvodka]()
@@ -36,6 +37,7 @@ class Restauarantvodka
         restnamevodka = String()
         avgprice = Int()
         distancevodka = String()
+        address = String()
         
         vodkahappystart = String()
         vodkahappyend = String()

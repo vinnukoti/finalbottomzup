@@ -118,6 +118,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var liqnamefromtableview:String!
     
+    @IBOutlet weak var searchbutton: UIButton!
 
   //  var obj = AutoCompleteTextField()
     
@@ -126,7 +127,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad()
     {
-        newvodkaarray = header1
+        searchbutton.setTitle("Search", forState: .Normal)
+        searchbutton.titleLabel?.text = "Search"
+        searchbutton.titleLabel?.textColor = UIColor.whiteColor();        newvodkaarray = header1
         print(newvodkaarray.count)
         if togglevodka == true
         {
@@ -141,11 +144,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         Happyhours()
         
         
-        distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+       // distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
 
         newtableviewforvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         newtableviewforvodka.layer.borderWidth = 2
-        newtextfieldvodka.text = selectedliqor
+        newtextfieldvodka.text = "  " + selectedliqor
         
         println(getcitylongitude)
         
@@ -178,10 +181,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
         popupviewvodka.hidden = true
-        distancebutton.setTitle("DISTANCE", forState: .Normal)
-        distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+      //  distancebutton.setTitle("DISTANCE", forState: .Normal)
+       // distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         pricebutton.setTitle("30ML", forState: .Normal)
-        pricebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+        pricebutton.titleLabel!.font =  UIFont(name: "MyriadPro-Regular", size:11)
         
        // var vodkadrink = getselectedlq.capitalizedString
        // searchresultsvodka.text =  vodkadrink
@@ -196,7 +199,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
         citynametextfieldforvodka.textFieldWidth = citynametextfieldforvodka.frame.width
         citynametextfieldforvodka.delegate = self
-        citynametextfieldforvodka.text = getselectedcityname
+        citynametextfieldforvodka.text = "  " + getselectedcityname
         
         header1 = pricesort1(header1)
 
@@ -243,7 +246,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     private func configureTextField()
     {
         citynametextfieldforvodka.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        citynametextfieldforvodka.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        citynametextfieldforvodka.autoCompleteTextFont = UIFont(name: "MyriadPro-Regular", size:11)
         citynametextfieldforvodka.autoCompleteCellHeight = 35.0
         citynametextfieldforvodka.maximumAutoCompleteCount = 20
         citynametextfieldforvodka.hidesWhenSelected = true
@@ -251,7 +254,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         citynametextfieldforvodka.enableAttributedText = true
         var attributes = [String:AnyObject]()
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        attributes[NSFontAttributeName] = UIFont(name: "MyriadPro-Regular", size:11)
         citynametextfieldforvodka.autoCompleteAttributes = attributes
         
     }
@@ -413,12 +416,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         cells.distancenewvodkalabel.text = header1[indexPath.section].distancevodka
         cells.tableView.reloadData()
          cells.arrowup.tag = indexPath.section
+         cells.Hotelname.text = header1[indexPath.section].restnamevodka
+            cells.address.text = header1[indexPath.section].address
+            cells.happyhourstiming.text = header1[indexPath.section].vodkahappystart + header1[indexPath.section].vodkahappyend
             
-            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
-            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
-            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
-          cells.borderimage.backgroundColor = UIColor.whiteColor()
-            cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
+//            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
+//            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
+//            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
+        //  cells.borderimage.backgroundColor = UIColor.whiteColor()
+           // cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
             
         return cells
         }
@@ -433,7 +439,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             let index = indexPath.row as Int
             cell!.textLabel!.text = autocompleteUrls[index]
-            cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+            cell!.textLabel?.font = UIFont(name: "MyriadPro-Regular", size:11)
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
             return cell!
  
@@ -461,13 +467,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         if tableView.tag == 1{
-        if (header1[indexPath.section].vodkaarray.count * 30 + 10) > 187 {
+        if (header1[indexPath.section].vodkaarray.count * 30 + 10) > 210 {
         
         return CGFloat(header1[indexPath.section].vodkaarray.count * 30 + 10)
         }
         else{
         
-        return 187
+        return 210
             
         }
         }
@@ -485,11 +491,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             if header1[section].rest_offers_happy_hour == "Yes" 
             {
-               return 125
+               return 81
             }
             else
             {
-                return 80
+                return 81
             }
         
         }
@@ -497,11 +503,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             if header1[section].rest_offers_happy_hour == "Yes"
             {
-                return 110
+                return 0
             }
             else
             {
-                return 60
+                return 0
             }
         }
         }
@@ -536,17 +542,19 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.vodkarestaurantname.text = " " + header1[section].restnamevodka
+               // println(header1[section].address)
+        headerCell.addressLabel.text =  " " + header1[section].address
         if header1[section].avgprice == 0
         {
             headerCell.vodkaavgprice.text = "--"
         }
          else
         {
-            headerCell.vodkaavgprice.text = "₹ " + "\(header1[section].avgprice)"
+            headerCell.vodkaavgprice.text = "\(header1[section].avgprice)"
             
         }
         
-        headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+       // headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
 
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.taprecognizerimage.addGestureRecognizer(headerTapped1)
@@ -558,37 +566,38 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.mapbuttonvodkaclass.setTitle(header1[section].distancevodka, forState: UIControlState.Normal)
         headerCell.mapbuttonvodkaclass.enabled =  false
         
-        headerCell.availofferbutton.tag = section
+       // headerCell.availofferbutton.tag = section
         //headerCell.availofferbutton.enabled = false
         
-        headerCell.vodkarestaurantname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        headerCell.vodkaavgprice.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
-        headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+        headerCell.vodkarestaurantname.font = UIFont(name: "MyriadPro-Regular", size: 11)
+        headerCell.vodkaavgprice.font = UIFont(name: "MyriadPro-Regular", size: 11)
+        headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "MyriadPro-Regular", size: 11)
+                
             
-        headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderWidth = 1
-        headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderColor = UIColor.lightGrayColor().CGColor
-        headerCell.viewtodisplayhappyhourbeforeexpantion.layer.cornerRadius = 10
+       // headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderWidth = 1
+       // headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderColor = UIColor.lightGrayColor().CGColor
+       // headerCell.viewtodisplayhappyhourbeforeexpantion.layer.cornerRadius = 10
             
         if header1[section].vodkaishappy == "Yes"
         {
-         headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.greenColor()
+       //  headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.greenColor()
         }
         else
         {
-            headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.blackColor()
+           // headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.blackColor()
         }
                 
                 if header1[section].rest_offers_happy_hour == "Yes"
                 {
                     headerCell.Happyhourlabelbeforeexpantion.hidden = false
                     headerCell.Happyhourlabelbeforeexpantion.hidden = false
-                    headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = false
+                  //  headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = false
                 }
                 else
                 {
                     headerCell.Happyhourlabelbeforeexpantion.hidden = true
                     headerCell.Happyhourlabelbeforeexpantion.hidden = true
-                    headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = true
+                   // headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = true
                 }
             
 //                if fstobj1.color == true
@@ -606,24 +615,24 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
         if pricebuttonclicked == true
         {
-             headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+             //headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
         
         if distancevodkabuttonclicked == true
         {
-            headerCell.mapbuttonvodkaclass.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
+           // headerCell.mapbuttonvodkaclass.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
         }
                 
                 if header1[section].color == true
                 {
                     
-                    headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
+                   // headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
                    // headerCell.viewtodisplayhappyhourbeforeexpantion.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
                    
                 }
                 else
                 {
-                    headerCell.backgroundColor = UIColor.whiteColor()
+                   // headerCell.backgroundColor = UIColor.whiteColor()
                 }
                 
           return headerCell
@@ -654,7 +663,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 }
                 if header1[section].vodkaishappy == "Yes"
                 {
-                     headerCell1.happyhourstiminglabelafterexpation.textColor = UIColor.greenColor()
+                    // headerCell1.happyhourstiminglabelafterexpation.textColor = UIColor.greenColor()
                 }
 
                 
@@ -1061,7 +1070,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if pricebuttonclicked == true
         {
             pricebutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
-            distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
+           // distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
         
         }
         for var i = 0; i < header1.count ; i++
@@ -1394,10 +1403,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                     }
                                     if let pint_price = one["pint_price"] as? String
                                     {
+                                        var pint_price = pint_price.toInt()
                                         liqobj1.pint = pint_price
                                     }
                                     if let bottle_price = one["bottle_price"] as? String
                                     {
+                                        var bottle_price = bottle_price.toInt()
                                         liqobj1.Bottle = bottle_price
                                     }
                                 }
@@ -1647,6 +1658,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         
         return header1
+    }
+    
+    
+    
+    //Hides status bar
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }
 
