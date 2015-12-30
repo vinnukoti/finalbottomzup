@@ -104,7 +104,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     }
     
     private func setupAutocompleteTable(view:UIView)
-    {
+    {7
         
         
         let screenSize = UIScreen.mainScreen().bounds.size

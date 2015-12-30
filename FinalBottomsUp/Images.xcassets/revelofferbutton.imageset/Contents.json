@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "REVEAL OFFER button 2.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "reveal-offer-button.png"
+      "filename" : "REVEAL OFFER button 2-1.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "REVEAL OFFER button 2-2.png"
     }
   ],
   "info" : {
