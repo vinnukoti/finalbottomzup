@@ -123,6 +123,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
   //  var obj = AutoCompleteTextField()
     
     
+    @IBOutlet weak var phoneview: UIView!
+    
+    @IBOutlet weak var locationpopupview: UIView!
+    @IBOutlet weak var addressLabel: UILabel!
+    
     //var selectedliqor:String!
     
     override func viewDidLoad()
@@ -170,17 +175,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         //getdealsbutton.setBackgroundImage(delasimage, forState: .Normal)
         pricebutton.setBackgroundImage(pintcheckedImage, forState: .Normal)
         vodkasort = header1
-        popupviewvodka.layer.cornerRadius = 20.0
+      //  popupviewvodka.layer.cornerRadius = 20.0
         super.viewDidLayoutSubviews()
         let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
         mainviewvodka.addGestureRecognizer(tap)
         
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
         popupviewvodka.addGestureRecognizer(tap)
+        let tap2 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
+        phoneview.addGestureRecognizer(tap2)
+        let tap3 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
+        locationpopupview.addGestureRecognizer(tap3)
         
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
         popupviewvodka.hidden = true
+        phoneview.hidden = true
+        locationpopupview.hidden = true
       //  distancebutton.setTitle("DISTANCE", forState: .Normal)
        // distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         pricebutton.setTitle("30ML", forState: .Normal)
@@ -354,11 +365,36 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         popupviewvodka.hidden = false
         tableview1.userInteractionEnabled = false
-        takerestaurantname.text = "I just got a 10 % discount at \(header1[sender.tag].restnamevodka) Through Bottomz Up"
+      //  takerestaurantname.text = "I just got a 10 % discount at \(header1[sender.tag].restnamevodka) Through Bottomz Up"
         
     }
-
     
+
+    @IBAction func Press2revell(sender: UIButton, forEvent event: UIEvent)
+    {
+        let buttonView = sender as UIView;
+        
+        // get any touch on the buttonView
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch
+        {
+            // print the touch location on the button
+            println(touch.locationInView(self.view))
+            var point = touch.locationInView(self.view)
+            var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
+            popupviewvodka.frame = CGRectMake(p!.x - 300,p!.y - 190,280,190)
+            popupviewvodka.hidden = false
+            // self.view.bringSubviewToFront(locationpopupview)
+            //locationpopupview.frame = CGRectMake(p!.x - 150,p!.y + 17,2,1)
+            
+            
+        }
+
+    }
+    
+    @IBAction func press2Revelclosebutton(sender: UIButton)
+    {
+       popupviewvodka.hidden = true
+    }
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
       // popupviewvodka.hidden = true
@@ -544,6 +580,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.vodkarestaurantname.text = " " + header1[section].restnamevodka
                // println(header1[section].address)
         headerCell.addressLabel.text =  " " + header1[section].address
+                addressLabel.text = header1[section].address
         if header1[section].avgprice == 0
         {
             headerCell.vodkaavgprice.text = "--"
@@ -1092,10 +1129,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     
     
-//    @IBAction func gotoMap(sender: AnyObject)
-//    {
-//         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
-//    }
+
     @IBAction func gotomap(sender: AnyObject) {
         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
     }
@@ -1592,7 +1626,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func getdeals(sender: UIButton) {
-        performSegueWithIdentifier("getdealsfromvodka", sender: self)
+        performSegueWithIdentifier("Dealsnearfromvodka", sender: self)
     }
     
     
@@ -1666,6 +1700,71 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    @IBAction func phonebuttonclicked(sender: UIButton, forEvent event: UIEvent)
+    {
+        let buttonView = sender as UIView;
+        
+        // get any touch on the buttonView
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch
+        {
+            // print the touch location on the button
+            println(touch.locationInView(self.view))
+            var point = touch.locationInView(self.view)
+            var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
+            phoneview.frame = CGRectMake(p!.x - 180 ,p!.y + 17,190,80)
+            phoneview.hidden = false
+
+            
+            
+        }
+    }
+    
+    @IBAction func call1buttonclicked(sender: UIButton)
+    {
+        callNumber("8722289471")
+    }
+    
+    @IBAction func call2buttonclicked(sender: UIButton)
+    {
+        callNumber("8892640540")
+    }
+    func callNumber(phoneNumber:String)
+    {
+        UIApplication.sharedApplication().openURL(NSURL(string:"tel://"+"\(phoneNumber)")!)
+        
+    }
+    
+    @IBAction func closephonepopupbuttonclicked(sender: UIButton)
+    {
+         phoneview.hidden = true
+    }
+    
+    
+    @IBAction func locationpopupclicked(sender: UIButton, forEvent event: UIEvent)
+    {
+        let buttonView = sender as UIView;
+        
+        // get any touch on the buttonView
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch
+        {
+            // print the touch location on the button
+            println(touch.locationInView(self.view))
+            var point = touch.locationInView(self.view)
+            var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
+             locationpopupview.frame = CGRectMake(p!.x - 150,p!.y + 17,170,80)
+            locationpopupview.hidden = false
+
+    }
+}
+    
+    @IBAction func locationclosebuttonclicked(sender: UIButton)
+    {
+        locationpopupview.hidden = true
+    }
+    
+    
+    
 }
 
     
@@ -1685,7 +1784,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     
     
-    
+
     
     
     

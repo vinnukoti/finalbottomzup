@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E99E8310E9F1A57A2C3DDF9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167FABA4877F1BA58EC2E16 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		531EC5C21C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */; };
 		531F58B71C3104E800E9D583 /* Dealsnearyouclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */; };
 		531F58B91C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */; };
 		531F58BB1C31066C00E9D583 /* childcellfordealsnearyou.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58BA1C31066C00E9D583 /* childcellfordealsnearyou.swift */; };
@@ -96,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "black bubble_CLIPCHAMP_1080p.mp4"; sourceTree = "<group>"; };
 		531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dealsnearyouclass.swift; sourceTree = "<group>"; };
 		531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionheaderforDelasnearyouTableViewCell.swift; sourceTree = "<group>"; };
 		531F58BA1C31066C00E9D583 /* childcellfordealsnearyou.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = childcellfordealsnearyou.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 		5367CEF31B9DB0EA00D33220 /* FinalBottomsUp */ = {
 			isa = PBXGroup;
 			children = (
+				531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */,
 				539ECEC41C1076D700101C38 /* Bubble-moving.gif */,
 				539ECEC61C10780000101C38 /* Bubble-moving-low.gif */,
 				53A659741C1170150002B4BC /* AViewController.swift */,
@@ -456,6 +459,7 @@
 			files = (
 				5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */,
 				53ED675F1C243F74009966F6 /* MYRIADPRO-COND.OTF in Resources */,
+				531EC5C21C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 in Resources */,
 				53ED67611C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF in Resources */,
 				53704BD81C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF in Resources */,
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,

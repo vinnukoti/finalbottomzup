@@ -196,9 +196,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var popupclose: UIButton!
     
-    @IBOutlet weak var calllabel1: UILabel!
 
-    @IBOutlet weak var calllabel2: UILabel!
 
     @IBOutlet weak var revelofferview: UIView!
     @IBOutlet weak var revelofferclosebutton: UIButton!
@@ -209,18 +207,28 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var liqdropdowntableview: UITableView!
     
+    @IBOutlet weak var calllabel2: UILabel!
+    @IBOutlet weak var calllabel1: UILabel!
+    @IBOutlet weak var addresslabel: UILabel!
+
     override func viewDidLoad()
     {
-       
+
+        
+
+    
+        
+      
     
         locationpopupview.hidden = true
-        revelofferview.hidden = true
+       revelofferview.hidden = true
         revelofferclosebutton.hidden = true
-      //  phonepopupview.hidden = true
-        phonepopupview.removeFromSuperview()
+        phonepopupview.hidden = true
+      //  phonepopupview.removeFromSuperview()
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+//        self.view.addGestureRecognizer(tap)
+//        view.userInteractionEnabled = true
       //  self.pop.backgroundColor = UIColor(patternImage: UIImage(named: "Popbackground")!)
         //phoneview.hidden = true
       //  calllabel1.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
@@ -360,20 +368,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-//        pop.endEditing(true)
-//        pop.resignFirstResponder()
-      //  pop.hidden = true
-      //  calllabel1.hidden = true
-       // calllabel2.hidden = true
-       // popupclose.hidden = true
-    }
+    
+    func dismissKeyboard()
+    {
+        phonepopupview.hidden = true
+     }
     
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+
+
     
 
     
@@ -1315,6 +1322,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.tapguesturerecognizer.tag = section
         headerCell.tapguesturerecognizer.userInteractionEnabled = true
                 headerCell.citynamedisplay.text = " " + head[section].Place
+                addresslabel.text = head[section].Place
        // headerCell.viretodisplayHappyhours.layer.borderWidth = 1
        // headerCell.viretodisplayHappyhours.layer.borderColor = UIColor.grayColor().CGColor
        // headerCell.viretodisplayHappyhours.layer.cornerRadius = 10
@@ -2038,7 +2046,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func getdeals(sender: UIButton) {
-        performSegueWithIdentifier("getdealsfrombeer", sender: self)
+        performSegueWithIdentifier("dealsnearyoufrombeer", sender: self)
     }
     
 
@@ -2192,31 +2200,19 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             }
             return head
         }
-    
 
-
-    @IBAction func PhoneButton(sender: UIButton)
-    {
-     
-//        let screenSize = UIScreen.mainScreen().bounds.size
-//        
-//        let Viewpop = CGRect(origin: popupx, size: 50)
-//        Viewpop.layer.masksToBounds = true
-//        Viewpop.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
-//        Viewpop.layer.borderWidth = 2.0
-        
-//        println(popupx)
-//        println(popupy)
-//        pop.hidden = false
-        
-        
-        
-        pop.frame = CGRectMake(popupx-200, popupy-100,30,30)
-
-    }
     @IBAction func popupbuttonclicked(sender: UIButton, forEvent event: UIEvent)
     {
+      
+        //tap.delegate = self // Remember to extend your class with UITapGestureDelegate
+        
+        // Receive action
+     
+        
+        
         // downcast sender as a UIView
+        phonepopupview.hidden = false
+       // self.view.addSubview(phonepopupview)
         
         let buttonView = sender as UIView;
         
@@ -2227,27 +2223,30 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-            phonepopupview.frame = CGRectMake(p!.x - 180  ,p!.y + 17 ,1,1)
+            phonepopupview.frame = CGRectMake(p!.x - 180  ,p!.y + 17 ,190,90)
             println(phonepopupview.frame)
-             self.view.addSubview(phonepopupview)
             
-           // phonepopupview.hidden = false
         }
 
         
     }
+
     
     @IBAction func popupclosebutton(sender: UIButton)
     {
-       phonepopupview.removeFromSuperview()
+       //phonepopupview.removeFromSuperview()
+        phonepopupview.hidden = true
     }
     
     @IBAction func revelofferclicked(sender: UIButton, forEvent event: UIEvent)
     {
         // downcast sender as a UIView
+      //  self.view.bringSubviewToFront(revelofferclosebutton)
+        revelofferclosebutton.hidden = false
     
        revelofferview.hidden = false
         let buttonView = sender as UIView;
+        var p : CGPoint!
         
         // get any touch on the buttonView
         if let touch = event.touchesForView(buttonView)?.first as? UITouch
@@ -2255,11 +2254,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             // print the touch location on the button
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
-            var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-            revelofferview.frame = CGRectMake(p!.x - 300 ,p!.y - 190,2,1)
-            
+           p  = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
+          revelofferview.frame = CGRectMake(p!.x - 300 ,p!.y - 190,280,200)
+            println(revelofferview.superview?.tag)
 
     }
+
         
         
         
@@ -2286,9 +2286,9 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-            locationpopupview.frame = CGRectMake(p!.x - 150,p!.y + 17,2,1)
+            locationpopupview.frame = CGRectMake(p!.x - 150,p!.y + 17,170,90)
              locationpopupview.hidden = false
-              self.view.bringSubviewToFront(locationpopupview)
+             // self.view.bringSubviewToFront(locationpopupview)
             //locationpopupview.frame = CGRectMake(p!.x - 150,p!.y + 17,2,1)
             
             
@@ -2302,6 +2302,23 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     {
         locationpopupview.hidden = true
     }
+    
+    @IBAction func callbutton(sender: AnyObject)
+    {
+       callNumber("122344565")
+
+    }
+    @IBAction func callbutton2(sender: UIButton)
+    {
+        callNumber("122344565")
+    }
+    
+    func callNumber(phoneNumber:String)
+    {
+        UIApplication.sharedApplication().openURL(NSURL(string:"tel://"+"\(phoneNumber)")!)
+
+    }
+    
     
 }
 
