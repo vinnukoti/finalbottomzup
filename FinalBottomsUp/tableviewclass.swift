@@ -213,61 +213,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewDidLoad()
     {
-
-        
-
-    
-        
-      
     
         locationpopupview.hidden = true
        revelofferview.hidden = true
         revelofferclosebutton.hidden = true
         phonepopupview.hidden = true
-      //  phonepopupview.removeFromSuperview()
+
         
 //        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
 //        self.view.addGestureRecognizer(tap)
 //        view.userInteractionEnabled = true
-      //  self.pop.backgroundColor = UIColor(patternImage: UIImage(named: "Popbackground")!)
-        //phoneview.hidden = true
-      //  calllabel1.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-        //calllabel2.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-      //  pop.hidden = true
-        //popupclose.hidden = true
-       // calllabel1.hidden = true
-       // calllabel2.hidden = true
+
         searchbutton.setTitle("Search", forState: .Normal)
         searchbutton.titleLabel?.text = "Search"
        searchbutton.titleLabel?.textColor = UIColor.whiteColor()
-//        var detailsButton = UIButton(frame: CGRect(x: 0, y: 0, width:70, height: 15))
-//        detailsButton.backgroundColor = UIColor.redColor()
-//        detailsButton.setTitle("Search", forState: .Normal)
-//        autocompletetextfieldforbeer.rightViewMode = UITextFieldViewMode.Always
-//        autocompletetextfieldforbeer.rightView = detailsButton
-        
-        //newtextfieldtableview.leftViewMode = UITextFieldViewMode.Always
-//        newtextfieldtableview.background = UIImage(named: "beerserchtextfield")
-//        autocompletetextfieldforbeer.background = UIImage(named: "locationtextfield")
-//
-//        autocompletetextfieldforbeer.leftViewMode = UITextFieldViewMode.Always
-//        autocompletetextfieldforbeer.leftView = UIImageView(image: UIImage(named: "locationtextfield"))
-        
-       // autocompletetextfieldforbeer.leftViewMode.background = UIImage(named: "locationtextfield")
-        
-       // let myimage = UIImage(named: "locationtextfield")
-        
-       // autocompletetextfieldforbeer.backgroundColor = UIColor(patternImage: myimage!)
-        
-//        var imageView = UIImageView();
-//        
-//        var image = UIImage(named: "locationtextfield.png");
-//        
-//        imageView.image = image;
-//        
-//        autocompletetextfieldforbeer.leftView = imageView
-//        
-//        autocompletetextfieldforbeer.leftViewMode = UITextFieldViewMode.Always
+
         
         locationbutton.hidden = true
         newheadarray = head
@@ -870,6 +830,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 vodkaobjnew.restnamevodka = res_name
                             }
+                            if let res_place = resInfo["res_place"] as? String
+                            {
+                                vodkaobjnew.address = res_place
+                            }
+                            
                             
                             if let res_lat = resInfo["res_lat"] as? String
                             {
@@ -1122,8 +1087,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-       // var obj = customheadercellafterexpanstion()
-      //  var widthtake = obj.widthnew
+
         
         
         
@@ -1182,9 +1146,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cell!.textLabel!.text = autocompleteUrls[index]
             cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-            //cell?.layer.addBorder(UIRectEdge.Top, color: UIColor.redColor(), thickness: 10)
-
-            
             return cell!
         }
     }
@@ -1213,9 +1174,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
         }
     }
-    
-
-    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -1295,8 +1253,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             if head[section].bool == false
             {
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
-      //  headerCell.backgroundColor = UIColor.whiteColor()
-        headerCell.headercellname.text = " " + head[section].restname
+        headerCell.headercellname.text = head[section].restname
                 if head[section].minp == 0
                 {
                     headerCell.headercellmin.text =   "--"
@@ -1321,38 +1278,42 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.tapguesturerecognizer.addGestureRecognizer(headerTapped)
         headerCell.tapguesturerecognizer.tag = section
         headerCell.tapguesturerecognizer.userInteractionEnabled = true
-                headerCell.citynamedisplay.text = " " + head[section].Place
+                headerCell.citynamedisplay.text = head[section].Place
                 addresslabel.text = head[section].Place
-       // headerCell.viretodisplayHappyhours.layer.borderWidth = 1
-       // headerCell.viretodisplayHappyhours.layer.borderColor = UIColor.grayColor().CGColor
-       // headerCell.viretodisplayHappyhours.layer.cornerRadius = 10
+
         headerCell.mapbutton.tag = section
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
                 
         headerCell.mapbutton.enabled =  false
-      //  headerCell.availofferbuttonbeer.tag = section
-        headerCell.HappyhourstiminglabelBeforeexpastion.text = " " + head[section].happystart + " - " + head[section].happyend
-      //  headerCell.headercellname.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-       // headerCell.headercellmin.font = UIFont(name: "HelveticaNeue-Bold", size: 9)
+
+             
+                let happyhourstiming = head[section].happystart + " - " + head[section].happyend
+                let happyhours = "Happy Hours"
+                let happyhourshappytiming =   happyhours + "  " + happyhourstiming
+                let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
+                let attributedString = NSMutableAttributedString(string:happyhourshappytiming)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor() , range: range)
+                headerCell.Happyhourslabel.attributedText = attributedString
+
         headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 bottlebutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 pintbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
-                //headerCell.HappyhourstiminglabelBeforeexpastion.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
+  
                 
-      //  headerCell.viretodisplayHappyhours.frame.width = width
+      
         
                 if boolexists == true
             {
                headerCell.headercellmax.font = UIFont(name: "MyriadPro-Bold", size: 15)
                 bottlebutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-               // headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
+         
             }
             else
             {
                 headerCell.headercellmin.font = UIFont(name: "MyriadPro-Bold", size: 15)
                 pintbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-bold", size: 11)
-               // headerCell.headercellmax.backgroundColor = UIColor.whiteColor()
+          
             }
         
 //        if global == true
@@ -1373,14 +1334,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 if head[section].rest_offers_happy_hour == "Yes"
                 {
-                    headerCell.HappyhourstiminglabelBeforeexpastion.hidden = false
-                    //headerCell.happyhourslabelbeer.hidden = false
+                  //  headerCell.HappyhourstiminglabelBeforeexpastion.hidden = false
+                    headerCell.Happyhourslabel.hidden = false
                   //  headerCell.viretodisplayHappyhours.hidden = false
                 }
                 else
                 {
-                   headerCell.HappyhourstiminglabelBeforeexpastion.hidden = true
-                   // headerCell.happyhourslabelbeer.hidden = true
+                  // headerCell.HappyhourstiminglabelBeforeexpastion.hidden = true
+                    headerCell.Happyhourslabel.hidden = true
                     //headerCell.viretodisplayHappyhours.hidden = true
                 }
                
@@ -1426,9 +1387,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell1.bottlelabel.text = "\(head[section].maxp)"
             headerCell1.distancelabel.text = "\(head[section].distance)"
             headerCell1.Areanamelabel.text = " " + head[section].Place
-          //  headerCell1.HappyhourstimingAfterexpantion.text = " " + head[section].happystart + " - " + head[section].happyend
-           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderWidth = 1
-           // headerCell1.viewtodisplayhappyhoursafterexpanstion.layer.borderColor = UIColor.lightGrayColor().CGColor
+
            
 
             var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
@@ -1488,14 +1447,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
-    
-//    override func viewWillLayoutSubviews() {
-//        
-//        
-//       end = self.view.frame.size.width
-//        println(end)
-//        
-//    }
+
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         var section = gestureRecognizer.view!.tag
@@ -1761,6 +1713,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     {
 
                         var happy_hour_start1 = happy_hour_start
+                        
                         fstobj1.happystart = happy_hour_start1
                     }
                     
@@ -1906,11 +1859,23 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
             else
             {
-
-        
+                if countfurther == 1
+                {
                 let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+                alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                
+                else if countfurther == 2
+                {
+                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                else
+                {
+                    
+                }
              
 
             }
@@ -2255,7 +2220,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
            p  = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-          revelofferview.frame = CGRectMake(p!.x - 300 ,p!.y - 190,280,200)
+          revelofferview.frame = CGRectMake(p!.x - 250 ,p!.y - 190,250,200)
+           // self.view.bounds.
             println(revelofferview.superview?.tag)
 
     }

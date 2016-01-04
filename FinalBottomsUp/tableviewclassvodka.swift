@@ -43,6 +43,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var takegetselectedcitynale:String!
     var array1 = [Restauarantvodka]()
     var array2 = [Restauarantvodka]()
+    var array3 = [Restauarantvodka]()
 
     
     let pintcheckedImage = UIImage(named: "NormalTabyellow")
@@ -128,13 +129,24 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var locationpopupview: UIView!
     @IBOutlet weak var addressLabel: UILabel!
     
+    var one:Int!
+    var two:Int!
+    var countvlaues:Int!
+    
+    
+    
+    
     //var selectedliqor:String!
     
     override func viewDidLoad()
     {
+         array3 = header1
+         countvlaues = array3.count
+        println(array3.count)
         searchbutton.setTitle("Search", forState: .Normal)
         searchbutton.titleLabel?.text = "Search"
-        searchbutton.titleLabel?.textColor = UIColor.whiteColor();        newvodkaarray = header1
+        searchbutton.titleLabel?.textColor = UIColor.whiteColor();
+        newvodkaarray = header1
         print(newvodkaarray.count)
         if togglevodka == true
         {
@@ -456,12 +468,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             cells.address.text = header1[indexPath.section].address
             cells.happyhourstiming.text = header1[indexPath.section].vodkahappystart + header1[indexPath.section].vodkahappyend
             
-//            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
-//            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
-//            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
-        //  cells.borderimage.backgroundColor = UIColor.whiteColor()
-           // cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
-            
         return cells
         }
         else
@@ -485,18 +491,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if tableView.tag == 1{
-//            cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-//            cell.layer.borderWidth = 1
-            
-//            cell.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
-//            cell.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
-//            cell.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
-            //cell.layer.addBorder(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1)
+
         }
         else
         {
-            //            cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-            //            cell.layer.borderWidth = 1
+
         }
     }
     
@@ -610,41 +609,32 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.vodkaavgprice.font = UIFont(name: "MyriadPro-Regular", size: 11)
         headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "MyriadPro-Regular", size: 11)
                 
-            
-       // headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderWidth = 1
-       // headerCell.viewtodisplayhappyhourbeforeexpantion.layer.borderColor = UIColor.lightGrayColor().CGColor
-       // headerCell.viewtodisplayhappyhourbeforeexpantion.layer.cornerRadius = 10
+             //   headerCell.Happyhourlabelbeforeexpantion.add
+                
+
             
         if header1[section].vodkaishappy == "Yes"
         {
-       //  headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.greenColor()
+         headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.greenColor()
         }
         else
         {
-           // headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.blackColor()
+            headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.blackColor()
         }
                 
                 if header1[section].rest_offers_happy_hour == "Yes"
                 {
                     headerCell.Happyhourlabelbeforeexpantion.hidden = false
-                    headerCell.Happyhourlabelbeforeexpantion.hidden = false
-                  //  headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = false
+                    headerCell.Happyhourtimingdisplaybeforeexpantion.hidden = false
+                
                 }
                 else
                 {
                     headerCell.Happyhourlabelbeforeexpantion.hidden = true
-                    headerCell.Happyhourlabelbeforeexpantion.hidden = true
-                   // headerCell.viewtodisplayhappyhourbeforeexpantion.hidden = true
+                    headerCell.Happyhourtimingdisplaybeforeexpantion.hidden = true
+                  
                 }
             
-//                if fstobj1.color == true
-//                {
-//                    headerCell.backgroundColor = UIColor.grayColor()
-//                }
-//                else
-//                {
-//                    headerCell.backgroundColor = UIColor.whiteColor()
-//                }
             
                 
             
@@ -686,6 +676,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 headerCell1.viewtodisplayhappyhoursafterexpation.addGestureRecognizer(headerTapped1)
                 headerCell1.viewtodisplayhappyhoursafterexpation.tag =  section
                 headerCell1.viewtodisplayhappyhoursafterexpation.userInteractionEnabled = true
+                
 
                 
                 if header1[section].rest_offers_happy_hour == "Yes"
@@ -700,7 +691,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 }
                 if header1[section].vodkaishappy == "Yes"
                 {
-                    // headerCell1.happyhourstiminglabelafterexpation.textColor = UIColor.greenColor()
+                     //headerCell1.happyhourstiminglabelafterexpation.textColor = UIColor.greenColor()
                 }
 
                 
@@ -995,8 +986,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     {
                         if let res_name = resInfo["res_name"] as? String
                         {
-                                    getvodkaobj.restnamevodka = res_name
+                            getvodkaobj.restnamevodka = res_name
 
+                        }
+                        if let res_place = resInfo["res_place"] as? String
+                        {
+                            getvodkaobj.address = res_place
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -1064,11 +1059,52 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 }
       
                  header1.append(getvodkaobj)
-                print(header1.count)
+                println(header1.count)
                 array2 = header1
-                print(array2.count)
+                println(array2.count)
+                
                 headfurther.append(getvodkaobj)
+                println(headfurther.count)
                 header1 = makecolor(header1, newvodkaarray: newvodkaarray)
+                
+                if count == 1
+                {
+                    one = header1.count
+                    two = countvlaues
+                }
+                else if count == 2
+                {
+                    two = header1.count
+                }
+            }
+            
+            if countvlaues > one
+            {
+                
+            }
+            else if one > two
+            {
+                
+            }
+            else
+            {
+                if count == 1
+                {
+                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                    
+                else if count == 2
+                {
+                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                else
+                {
+                    
+                }
             }
             if togglevodka == true
             {
@@ -1373,6 +1409,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        
                                 fstobj1.restname = res_name
                             }
+                            if let res_place = resInfo["res_place"] as? String
+                            {
+                                fstobj1.Place = res_place
+                            }
+                            
                             
                             if let res_lat = resInfo["res_lat"] as? String
                             {

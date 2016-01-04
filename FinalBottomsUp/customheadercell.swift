@@ -23,15 +23,16 @@ class customheadercell: UITableViewCell
 
     @IBOutlet weak var mapbutton: UIButton!
     
-    @IBOutlet weak var availofferbuttonbeer: UIButton!
+
     
     @IBOutlet weak var arrowimage: UIButton!
    // @IBOutlet weak var arrowimage: UIImageView!
-    @IBOutlet weak var happyhourslabelbeer: UILabel!
+
     
 
-    @IBOutlet weak var viretodisplayHappyhours: UIView!
 
+
+    @IBOutlet weak var Happyhourslabel: UILabel!
     @IBOutlet weak var HappyhourstiminglabelBeforeexpastion: UILabel!
 
     @IBOutlet weak var tapguesturerecognizer: UIImageView!

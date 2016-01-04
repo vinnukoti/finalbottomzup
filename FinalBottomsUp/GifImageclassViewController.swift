@@ -26,8 +26,12 @@ class GifImageclassViewController: UIViewController
 //        let timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "update", userInfo: nil, repeats: false)
 //        webviewforgif.userInteractionEnabled = false
         playVideo()
+      //  localFunc()
+        
 
         }
+    
+
     
     
 //    func update(){
@@ -46,33 +50,48 @@ class GifImageclassViewController: UIViewController
  
     }
     
-    func playVideo() {
+    func playVideo()
+    {
+    
         let path = NSBundle.mainBundle().pathForResource("black bubble_CLIPCHAMP_1080p", ofType:"mp4")
         let url = NSURL.fileURLWithPath(path!)
         moviePlayer = MPMoviePlayerController(contentURL: url)
         if let player = moviePlayer {
             player.view.frame = self.view.bounds
-            player.prepareToPlay()
+           // player.prepareToPlay()
             player.scalingMode = .AspectFill
             moviePlayer!.controlStyle = MPMovieControlStyle.None
-           // moviePlayer.
-            
-            
+            println(player.duration)
+             player.play()
             self.view.addSubview(player.view)
-              performSegueWithIdentifier("LoginScreen", sender: self)
+            
+
+            
         }
-       
+        
+        
+
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(animated: Bool) {
+       
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerDidFinish:"), name: MPMoviePlayerPlaybackDidFinishNotification, object: moviePlayer)
+        
     }
-    */
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    
+    func playerDidFinish(sender:AnyObject)
+    {
+        
+        self.performSegueWithIdentifier("LoginScreen", sender: self)
+    }
+    
+    
 
 }

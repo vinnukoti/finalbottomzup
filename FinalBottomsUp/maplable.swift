@@ -15,7 +15,7 @@ class maplable: UITableViewCell
 
     @IBOutlet weak var distance: UILabel!
   
-    @IBOutlet weak var colorimage: UIImageView!
+
     
     override func awakeFromNib()
     {
