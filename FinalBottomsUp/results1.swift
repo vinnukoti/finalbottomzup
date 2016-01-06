@@ -84,6 +84,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     @IBOutlet weak var tableviewnew: UITableView!
     
+    var locationnamenew:String!
+    var citynamenew:String!
+      var comma = ","
+    
+    
     
     
     
@@ -127,8 +132,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     {
         var userLocation:CLLocation = locations[0] as! CLLocation
         self.locationManager1.stopUpdatingLocation()
-        let long = userLocation.coordinate.longitude;
-        let lat = userLocation.coordinate.latitude;
+        let long = 28.63875
+        let lat = 77.07380
         
         devicelatitude = lat
         devicelongitude = long
@@ -144,14 +149,54 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             placeMark = placeArray?[0]
             
             // Street address
-            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
-                println(street)
-                self.currentlocationname = street as String
+//            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
+//                println(street)
+//                self.currentlocationname = street as String
+//                
+//                self.autocompletedTextfieldnew.text = street as String
+//                
+//            }
+            
+            if let p: AnyObject = placemarks?.last {
                 
-                self.autocompletedTextfieldnew.text = street as String
+                //Unwrapping Optional Strings.
+                let roadno = p.subThoroughfare ?? ""
                 
+                //Checking if subThoroughfare exists.
+                if(p.subThoroughfare != nil) {
+                    
+                    //Unwrapping Optional Strings.
+                    let thoroughfare = p.thoroughfare ?? ""
+                    let subLocality = p.subLocality ?? ""
+                    let locality = p.locality ?? ""
+                    let administrativeArea = p.administrativeArea ?? ""
+                    let postalCode = p.postalCode ?? ""
+                    let country = p.country ?? ""
+                    
+                    let address = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
+                    print(address)
+                    
+                    //Assigning the address to the address label on the map.
+                   // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
+                     self.autocompletedTextfieldnew.text = subLocality + "," +  locality
+                }
             }
             
+//            println(placeMark)
+//            if let locationName = placeMark.addressDictionary!["subLocality"] as? NSString
+//            {
+//                self.locationnamenew = locationName as String
+//                print(locationName)
+//            }
+//            
+//            // City
+//            if let city = placeMark.addressDictionary!["locality"] as? NSString
+//            {
+//                self.citynamenew = city as String
+//                print(city)
+//            }
+            
+           
         })
     }
     
@@ -207,7 +252,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     self!.connection!.cancel()
                     self!.connection = nil
                 }
-                let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)"
+               // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input=connaugh&types=(regions)&components=country:IN"
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
                     let urlRequest = NSURLRequest(URL: url!)
@@ -250,6 +296,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     func connectionDidFinishLoading(connection: NSURLConnection)
     {
+       // var newlaocations:String!
         if responseData != nil
         {
             var error:NSError?
@@ -264,8 +311,25 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         for dict in predictions as! [NSDictionary]
                         {
                             locations.append(dict["description"] as! String)
+                           
+                          
                         }
+                        println(locations)
+                        
+                        for var i = 0; i < locations.count;i++
+                        {
+                            var newlaocations = locations[i]
+                            var index1 = advance(newlaocations.endIndex, -14)
+                            
+                            var substring1 = newlaocations.substringToIndex(index1)
+                            locations[i] = substring1
+
+                            
+                        }
+       
+                     
                         self.autocompletedTextfieldnew.autoCompleteStrings = locations
+                        println(self.autocompletedTextfieldnew.autoCompleteStrings = locations)
                     }
                 }
                 else{

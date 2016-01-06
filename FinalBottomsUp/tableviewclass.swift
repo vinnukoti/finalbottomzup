@@ -34,6 +34,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var newheadarray:[Restaurant] = [Restaurant]()
     var newheadarray1:[Restaurant] = [Restaurant]()
+    
+    var namefromlabel:String!
 
     
     
@@ -113,8 +115,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
    // @IBOutlet weak var pop: UIView!
 
-    @IBOutlet weak var pop: UIImageView!
-
     
 
     
@@ -169,6 +169,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var getselectedcityname:String!
     var substringofselectedliq = "650"
+  
     var boolexists = false
     
     var countfurther = 0
@@ -218,6 +219,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
        revelofferview.hidden = true
         revelofferclosebutton.hidden = true
         phonepopupview.hidden = true
+      //  resturantnamelable.hidden = true
 
         
 //        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -953,7 +955,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func press2revealPressed(sender: UIButton)
     {
         //resturantnamelable.text = "I just got a 10 % discount at \(head[sender.tag].restnamevodka) Through Bottomz Up"
-       // resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
+       
        // tableview.userInteractionEnabled = false
        // popupview.hidden = false
         
@@ -1042,7 +1044,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         //        self.presentViewController(controller, animated: true, completion: nil)
         
         var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        shareToFacebook.setInitialText("I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App")
+        shareToFacebook.setInitialText("\(namefromlabel)")
+     
+
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
     }
     
@@ -1100,31 +1104,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.arrowup.tag = indexPath.section
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
+        resturantnamelable.text = "I just got a 10% discount at \(head[cells.press2reveal.tag].restname) through the BottomzUp App"
+            namefromlabel = resturantnamelable.text
         cells.distancelabelnew.text = head[indexPath.section].distance
             cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
             cells.hotelname.text = head[indexPath.section].restname
             cells.areaname.text = head[indexPath.section].Place
             cells.happytiming.text = head[indexPath.section].happystart +  " - "  + head[indexPath.section].happyend
-            
-           popupx = cells.popupbutton.frame.origin.x
-            popupy = cells.popupbutton.frame.origin.y
-            
-//            cells.layer.addBorder (UIRectEdge.Left, color: UIColor.lightGrayColor(), thickness: 1)
-//            cells.layer.addBorder (UIRectEdge.Right, color: UIColor.lightGrayColor(), thickness: 1)
-//            cells.layer.addBorder (UIRectEdge.Bottom, color: UIColor.lightGrayColor(), thickness: 1)
-            //cells.layer.addBorder(UIRectEdge.Top, color: UIColor.lightGrayColor(), thickness: 1)
-            //cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end: 374)
-          //  println(widthtake)
-         //  cells.layer.addBorder1(UIRectEdge.Top, color: UIColor.redColor(), thickness: 1, end:cells.frame.origin.x + obj.viewtodisplayhappyhoursafterexpanstion.frame.width)
-           // cells.borderimage.backgroundColor = UIColor.whiteColor()
-           // cells.borderimage1.backgroundColor = UIColor.lightGrayColor()
-           // cells.userInteractionEnabled = false
-            
-            
-            println(end)
-            
-          //  cells.backgroundColor = UIColor(red: 249/255.0, green: 229/255.0, blue: 189/255.0, alpha: 1.0)
-           // UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+
 
          
         cells.tableView.reloadData()
@@ -1280,9 +1267,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.tapguesturerecognizer.userInteractionEnabled = true
                 headerCell.citynamedisplay.text = head[section].Place
                 addresslabel.text = head[section].Place
+                
+               // resturantnamelable.text = "I just got a 10% discount at \(head[headerCell.tapguesturerecognizer.tag].restname) through the BottomzUp App"
+                
+            
 
-        headerCell.mapbutton.tag = section
+       headerCell.mapbutton.tag = section
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
+                
                 
         headerCell.mapbutton.enabled =  false
 
@@ -2188,7 +2180,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-            phonepopupview.frame = CGRectMake(p!.x - 180  ,p!.y + 17 ,190,90)
+            phonepopupview.frame = CGRectMake(p!.x - 150  ,p!.y + 17 ,190,90)
             println(phonepopupview.frame)
             
         }
@@ -2207,27 +2199,38 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     {
         // downcast sender as a UIView
       //  self.view.bringSubviewToFront(revelofferclosebutton)
+        println(head[sender.tag])
+       //var newhotelname = head[sender.tag].restname
+      //  resturantnamelable.text = newhotelname
+        
         revelofferclosebutton.hidden = false
+          revelofferview.hidden = false
+     
+       // resturantnamelable.hidden = false
+        
+        
     
-       revelofferview.hidden = false
+       
         let buttonView = sender as UIView;
         var p : CGPoint!
         
         // get any touch on the buttonView
         if let touch = event.touchesForView(buttonView)?.first as? UITouch
         {
+             let screenSize = UIScreen.mainScreen().bounds.size
             // print the touch location on the button
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
            p  = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-          revelofferview.frame = CGRectMake(p!.x - 250 ,p!.y - 190,250,200)
-           // self.view.bounds.
-            println(revelofferview.superview?.tag)
+          revelofferview.frame = CGRectMake(p!.x - 250,p!.y - 17,250,200)
+            println(revelofferview.frame )
+
+           
 
     }
 
         
-        
+      //  resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
         
     }
 
