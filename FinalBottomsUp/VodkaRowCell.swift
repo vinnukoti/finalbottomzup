@@ -40,6 +40,7 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        tableView.userInteractionEnabled = false
         
         let cell = tableView.dequeueReusableCellWithIdentifier("liquorRowChild", forIndexPath: indexPath) as! UITableViewCell
         cell.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)

@@ -330,6 +330,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+//    override func viewWillAppear(animated: Bool) {
+//        revelofferview.hidden = true
+//    }
+    
     
     func dismissKeyboard()
     {
@@ -712,6 +716,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             if let res_name = resInfo["res_name"] as? String
                             {
                                 fstobj1.restname = res_name
+                            }
+                            if let res_place = resInfo["res_place"] as? String
+                            {
+                                fstobj1.Place = res_place
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -1131,7 +1139,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             
             let index = indexPath.row as Int
             cell!.textLabel!.text = autocompleteUrls[index]
-            cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+            cell!.textLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14.0)
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
             return cell!
         }
@@ -1279,7 +1287,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.mapbutton.enabled =  false
 
              
-                let happyhourstiming = head[section].happystart + " - " + head[section].happyend
+                var happyhourstiming = head[section].happystart + " - " + head[section].happyend
                 let happyhours = "Happy Hours"
                 let happyhourshappytiming =   happyhours + "  " + happyhourstiming
                 let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
@@ -1317,11 +1325,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 if head[section].ishappy == "Yes"
                 {
-                   // headerCell.HappyhourstiminglabelBeforeexpastion.textColor = UIColor.greenColor()
+                    
+                  //  headerCell.Happyhourslabel.textColor = UIColor.greenColor()
                 }
                 else
                 {
-                   //headerCell.HappyhourstiminglabelBeforeexpastion.textColor = UIColor.blackColor()
+                 //  headerCell.Happyhourslabel.textColor = UIColor.orangeColor()
                 }
                 
                 if head[section].rest_offers_happy_hour == "Yes"
@@ -1455,6 +1464,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             head[gestureRecognizer.view!.tag].bool = false
         }
+     
         self.tableview.reloadData()
         
     }
@@ -2198,19 +2208,10 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     @IBAction func revelofferclicked(sender: UIButton, forEvent event: UIEvent)
     {
         // downcast sender as a UIView
-      //  self.view.bringSubviewToFront(revelofferclosebutton)
-        println(head[sender.tag])
-       //var newhotelname = head[sender.tag].restname
-      //  resturantnamelable.text = newhotelname
         
         revelofferclosebutton.hidden = false
           revelofferview.hidden = false
      
-       // resturantnamelable.hidden = false
-        
-        
-    
-       
         let buttonView = sender as UIView;
         var p : CGPoint!
         
@@ -2222,8 +2223,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
            p  = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-          revelofferview.frame = CGRectMake(p!.x - 250,p!.y - 17,250,200)
-            println(revelofferview.frame )
+          revelofferview.frame = CGRectMake(self.view.frame.width/2 - 125,p!.y - 185,250,195)
+  
 
            
 

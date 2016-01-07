@@ -178,7 +178,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     
                     //Assigning the address to the address label on the map.
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                     self.autocompletedTextfieldnew.text = subLocality + "," +  locality
+                     self.autocompletedTextfieldnew.text = subLocality + ", " +  locality
                 }
             }
             
@@ -253,7 +253,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     self!.connection = nil
                 }
                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input=connaugh&types=(regions)&components=country:IN"
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input=\(text)&types=(regions)&components=country:IN"
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
                     let urlRequest = NSURLRequest(URL: url!)
@@ -319,10 +319,20 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         for var i = 0; i < locations.count;i++
                         {
                             var newlaocations = locations[i]
-                            var index1 = advance(newlaocations.endIndex, -14)
+//                            var index1 = advance(newlaocations.endIndex, -14)
+//                            
+//                            var substring1 = newlaocations.substringToIndex(index1)
+//                            locations[i] = substring1
                             
-                            var substring1 = newlaocations.substringToIndex(index1)
-                            locations[i] = substring1
+                            //var fullName = "First,Last"
+                            var fullNameArr = split(newlaocations) {$0 == ","}
+                            var firstName: String = fullNameArr[0]
+                            var lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
+                            println(firstName)
+                            println(lastName!)
+                            locations[i] = firstName + ", " + lastName!
+                            
+                            
 
                             
                         }

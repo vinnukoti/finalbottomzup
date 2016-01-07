@@ -481,7 +481,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             let index = indexPath.row as Int
             cell!.textLabel!.text = autocompleteUrls[index]
-            cell!.textLabel?.font = UIFont(name: "MyriadPro-Regular", size:11)
+            cell!.textLabel?.font = UIFont(name: "MyriadPro-Regular", size:14)
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
             return cell!
  
@@ -611,34 +611,43 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
              //   headerCell.Happyhourlabelbeforeexpantion.add
                 
+                let happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+                let happyhours = "Happy Hours"
+                let happyhourshappytiming =   happyhours + "  " + happyhourstiming
+                let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
+                let attributedString = NSMutableAttributedString(string:happyhourshappytiming)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor() , range: range)
+                headerCell.Happyhourlabelbeforeexpantion.attributedText = attributedString
+
+                
 
             
         if header1[section].vodkaishappy == "Yes"
         {
-         headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.greenColor()
+            headerCell.Happyhourlabelbeforeexpantion.textColor = UIColor.greenColor()
         }
         else
         {
-            headerCell.Happyhourtimingdisplaybeforeexpantion.textColor = UIColor.blackColor()
+             headerCell.Happyhourlabelbeforeexpantion.textColor = UIColor.orangeColor()
         }
                 
                 if header1[section].rest_offers_happy_hour == "Yes"
                 {
                     headerCell.Happyhourlabelbeforeexpantion.hidden = false
-                    headerCell.Happyhourtimingdisplaybeforeexpantion.hidden = false
+                 //   headerCell.Happyhourtimingdisplaybeforeexpantion.hidden = false
                 
                 }
                 else
                 {
                     headerCell.Happyhourlabelbeforeexpantion.hidden = true
-                    headerCell.Happyhourtimingdisplaybeforeexpantion.hidden = true
+                  //  headerCell.Happyhourtimingdisplaybeforeexpantion.hidden = true
                   
                 }
             
             
                 
             
-        headerCell.Happyhourtimingdisplaybeforeexpantion.text = " " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+    //    headerCell.Happyhourtimingdisplaybeforeexpantion.text = " " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
 
         if pricebuttonclicked == true
         {
@@ -1536,6 +1545,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             {
                                 vodkaobjnew.restnamevodka = res_name
                          
+                            }
+                            if let res_place = resInfo["res_place"] as? String
+                            {
+                                vodkaobjnew.address = res_place
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
