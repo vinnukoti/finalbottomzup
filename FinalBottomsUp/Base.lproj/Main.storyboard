@@ -11,15 +11,11 @@
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
-            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-COND.OTF">
             <string>MyriadPro-Cond</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
-            <string>MyriadPro-Regular</string>
-            <string>MyriadPro-Regular</string>
-            <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
@@ -1783,123 +1779,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0TN-nn-P2p">
-                                <rect key="frame" x="33" y="10" width="300" height="200"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Revelpopup" translatesAutoresizingMaskIntoConstraints="NO" id="tCV-M9-Fxk">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="207" id="hv4-7D-U7s"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGp-3j-bY7">
-                                        <rect key="frame" x="257" y="5" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="TpV-jH-36A"/>
-                                            <constraint firstAttribute="width" constant="35" id="UaT-VC-djp"/>
-                                        </constraints>
-                                        <state key="normal" image="popupclosebutton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closerevelofferbuttonclicked:" destination="cXB-1m-d5z" eventType="touchUpInside" id="k9T-u9-6Gs"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="To avail a 10% discount on your bill,Press the Avail Offer button." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3i4-lf-ljs">
-                                        <rect key="frame" x="8" y="15" width="271" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="gqt-hK-yEc"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                        <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="1. The following post will be generated Through youe Facebook account." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBR-yN-XNa">
-                                        <rect key="frame" x="8" y="48" width="194" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="aGy-9M-zjV"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                        <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Io-BU-k6P">
-                                        <rect key="frame" x="8" y="77" width="271" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="H6f-cL-2Aq"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="11"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2.Show this Facebook post to the restaurant to avail this offer. " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdF-c9-w77">
-                                        <rect key="frame" x="8" y="106" width="271" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="1B2-HL-P4i"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGS-lZ-Wrl">
-                                        <rect key="frame" x="99" y="135" width="103" height="37"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="DdS-XC-Ovs"/>
-                                            <constraint firstAttribute="height" constant="50" id="rbx-SA-Azl"/>
-                                        </constraints>
-                                        <state key="normal" image="revelofferbutton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="shareonfacebook:" destination="cXB-1m-d5z" eventType="touchUpInside" id="RzR-Qh-fz0"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="1" constant="250" id="2OS-fH-sDW"/>
-                                    <constraint firstItem="3i4-lf-ljs" firstAttribute="leading" secondItem="0TN-nn-P2p" secondAttribute="leading" constant="13" id="2cC-sX-b7H"/>
-                                    <constraint firstAttribute="trailing" secondItem="nBR-yN-XNa" secondAttribute="trailing" constant="20" id="2qf-8i-OEL"/>
-                                    <constraint firstItem="NGp-3j-bY7" firstAttribute="top" secondItem="0TN-nn-P2p" secondAttribute="top" id="5G0-Fb-ZdQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="3i4-lf-ljs" secondAttribute="trailing" constant="20" id="6Zm-wH-Vxe"/>
-                                    <constraint firstItem="tCV-M9-Fxk" firstAttribute="top" secondItem="0TN-nn-P2p" secondAttribute="top" id="ANp-oP-qRz"/>
-                                    <constraint firstAttribute="trailing" secondItem="tCV-M9-Fxk" secondAttribute="trailing" constant="-5" id="AdC-Du-RIN"/>
-                                    <constraint firstAttribute="trailing" secondItem="AdF-c9-w77" secondAttribute="trailing" constant="20" id="CG5-5M-OeB"/>
-                                    <constraint firstItem="nBR-yN-XNa" firstAttribute="leading" secondItem="0TN-nn-P2p" secondAttribute="leading" constant="13" id="CtN-Eh-0SL"/>
-                                    <constraint firstItem="tCV-M9-Fxk" firstAttribute="leading" secondItem="0TN-nn-P2p" secondAttribute="leading" constant="-5" id="EEc-BV-89T"/>
-                                    <constraint firstItem="3Io-BU-k6P" firstAttribute="leading" secondItem="0TN-nn-P2p" secondAttribute="leading" constant="13" id="G9I-aM-K4R"/>
-                                    <constraint firstItem="3i4-lf-ljs" firstAttribute="leading" secondItem="0TN-nn-P2p" secondAttribute="leading" id="I2L-s5-S88"/>
-                                    <constraint firstAttribute="trailing" secondItem="NGp-3j-bY7" secondAttribute="trailing" id="NGR-fS-axr"/>
-                                    <constraint firstItem="3i4-lf-ljs" firstAttribute="top" secondItem="0TN-nn-P2p" secondAttribute="top" constant="15" id="OoS-0z-FoB"/>
-                                    <constraint firstAttribute="bottom" secondItem="tCV-M9-Fxk" secondAttribute="bottom" id="PDy-x0-iVc"/>
-                                    <constraint firstAttribute="trailing" secondItem="3Io-BU-k6P" secondAttribute="trailing" constant="20" id="Rwy-LP-10L"/>
-                                    <constraint firstItem="AdF-c9-w77" firstAttribute="leading" secondItem="0TN-nn-P2p" secondAttribute="leading" constant="13" id="UR8-Ac-uvo"/>
-                                    <constraint firstAttribute="width" priority="1" constant="250" id="Y83-yt-oQW"/>
-                                    <constraint firstItem="nBR-yN-XNa" firstAttribute="top" secondItem="3i4-lf-ljs" secondAttribute="bottom" constant="5" id="Y9S-CK-n8f"/>
-                                    <constraint firstAttribute="bottom" secondItem="wGS-lZ-Wrl" secondAttribute="bottom" constant="10" id="YRp-Xz-GFJ"/>
-                                    <constraint firstItem="3Io-BU-k6P" firstAttribute="top" secondItem="nBR-yN-XNa" secondAttribute="bottom" constant="5" id="agn-9F-pAm"/>
-                                    <constraint firstAttribute="width" constant="250" id="go7-6F-ITQ"/>
-                                    <constraint firstItem="AdF-c9-w77" firstAttribute="top" secondItem="3Io-BU-k6P" secondAttribute="bottom" constant="5" id="iEk-Ul-f2x"/>
-                                    <constraint firstItem="wGS-lZ-Wrl" firstAttribute="top" secondItem="AdF-c9-w77" secondAttribute="bottom" constant="10" id="jFL-ng-dRJ"/>
-                                    <constraint firstAttribute="centerX" secondItem="wGS-lZ-Wrl" secondAttribute="centerX" id="uHM-24-ld5"/>
-                                    <constraint firstAttribute="trailing" secondItem="3i4-lf-ljs" secondAttribute="trailing" id="ui6-Bk-6Fr"/>
-                                    <constraint firstAttribute="height" priority="1" constant="200" id="wio-Js-mOp"/>
-                                    <constraint firstItem="nBR-yN-XNa" firstAttribute="top" secondItem="NGp-3j-bY7" secondAttribute="bottom" constant="5" id="xSV-uI-QOK"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="2OS-fH-sDW"/>
-                                        <exclude reference="Y83-yt-oQW"/>
-                                        <exclude reference="wio-Js-mOp"/>
-                                        <exclude reference="ANp-oP-qRz"/>
-                                        <exclude reference="PDy-x0-iVc"/>
-                                        <exclude reference="I2L-s5-S88"/>
-                                        <exclude reference="ui6-Bk-6Fr"/>
-                                        <exclude reference="xSV-uI-QOK"/>
-                                        <exclude reference="YRp-Xz-GFJ"/>
-                                    </mask>
-                                </variation>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ExG-43-OOm">
                                 <rect key="frame" x="28" y="62" width="122" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1934,7 +1813,6 @@
                             <constraint firstAttribute="centerX" secondItem="NTP-q7-dDS" secondAttribute="centerX" id="IAv-Yk-n9k"/>
                             <constraint firstItem="aNY-4Q-qgG" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="35" id="If6-5j-6S4"/>
                             <constraint firstItem="D8l-rU-SU4" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="25" id="Mh3-Ju-Q4a"/>
-                            <constraint firstItem="0TN-nn-P2p" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" constant="35" id="Mhj-hB-6dH"/>
                             <constraint firstItem="VhW-XG-5id" firstAttribute="centerY" secondItem="lxK-NV-XxS" secondAttribute="centerY" priority="1" id="N3F-m1-cZc"/>
                             <constraint firstItem="T0b-9u-jRj" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" constant="10" id="Oa2-8Q-4S6"/>
                             <constraint firstItem="VhW-XG-5id" firstAttribute="top" secondItem="bYl-zy-TpS" secondAttribute="bottom" constant="15" id="PeI-GD-iUj"/>
@@ -1963,7 +1841,6 @@
                             <constraint firstItem="nk8-tg-n1j" firstAttribute="centerY" secondItem="T0b-9u-jRj" secondAttribute="centerY" priority="1" id="eA5-li-yVm"/>
                             <constraint firstItem="v03-3m-lFe" firstAttribute="top" secondItem="NTP-q7-dDS" secondAttribute="bottom" id="h28-gv-Ezw"/>
                             <constraint firstAttribute="trailing" secondItem="VVP-ru-bgw" secondAttribute="trailing" constant="8" id="jok-FX-mgq"/>
-                            <constraint firstAttribute="trailing" secondItem="0TN-nn-P2p" secondAttribute="trailing" constant="35" id="k8p-oV-Nx1"/>
                             <constraint firstItem="NTP-q7-dDS" firstAttribute="top" secondItem="mZa-Vh-jz1" secondAttribute="bottom" id="l5i-j0-gJx"/>
                             <constraint firstItem="9PE-Dp-Ko1" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" id="lEw-TJ-I1S"/>
                             <constraint firstItem="VhW-XG-5id" firstAttribute="height" secondItem="4IA-Kt-4kI" secondAttribute="height" id="mH8-po-PIm"/>
@@ -1983,8 +1860,6 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Mhj-hB-6dH"/>
-                                <exclude reference="k8p-oV-Nx1"/>
                                 <exclude reference="mH8-po-PIm"/>
                                 <exclude reference="10h-P6-lNk"/>
                                 <exclude reference="ayz-QD-D4Q"/>
@@ -2006,9 +1881,6 @@
                         <outlet property="newtextfieldtableview" destination="4IA-Kt-4kI" id="F2J-KF-6mj"/>
                         <outlet property="phonepopupview" destination="an9-T7-0y9" id="2Xa-yz-nEf"/>
                         <outlet property="pintbutton" destination="6Yx-ha-CrO" id="Vei-TH-YiC"/>
-                        <outlet property="resturantnamelable" destination="3Io-BU-k6P" id="gEj-id-I1d"/>
-                        <outlet property="revelofferclosebutton" destination="NGp-3j-bY7" id="hh4-HM-hXS"/>
-                        <outlet property="revelofferview" destination="0TN-nn-P2p" id="ZJv-To-SXw"/>
                         <outlet property="searchbutton" destination="VVP-ru-bgw" id="rSz-ur-XsO"/>
                         <outlet property="tableview" destination="mZa-Vh-jz1" id="7LN-Z7-Olm"/>
                         <outlet property="togglebuttonbeer" destination="T0b-9u-jRj" id="WeR-68-uAu"/>
@@ -3247,7 +3119,7 @@
                                             <constraint firstAttribute="height" constant="45" id="L9Y-ph-IsV"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xj-sR-Xx4">
@@ -3427,9 +3299,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xac-65-HoW"/>
-        <segue reference="XDA-r2-Wma"/>
         <segue reference="OFC-RP-bvW"/>
-        <segue reference="bOf-Qa-YPU"/>
+        <segue reference="XDA-r2-Wma"/>
+        <segue reference="k2w-mW-TjF"/>
+        <segue reference="oIU-td-Sv5"/>
     </inferredMetricsTieBreakers>
 </document>

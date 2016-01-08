@@ -207,18 +207,26 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var locationpopupview: UIView!
     
     @IBOutlet weak var liqdropdowntableview: UITableView!
-    
-    @IBOutlet weak var calllabel2: UILabel!
-    @IBOutlet weak var calllabel1: UILabel!
+
     @IBOutlet weak var addresslabel: UILabel!
 
+
+    
+     var DynamicView=UIView()
+    var newrestnamefromtag:String!
+    
     override func viewDidLoad()
     {
+        
+       
     
+       
         locationpopupview.hidden = true
-       revelofferview.hidden = true
-        revelofferclosebutton.hidden = true
+      // revelofferview.hidden = true
+       // revelofferclosebutton.hidden = true
         phonepopupview.hidden = true
+       // label1.hidden = true
+       // revelimageview.hidden = true
       //  resturantnamelable.hidden = true
 
         
@@ -750,8 +758,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 //28.63875
                                 //77.07380
                                 var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
+                                println(getdevicelatitude)
+                                println(getdevicelongitude)
                                // var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
+                                println(restlat)
+                                println(restlong)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
@@ -1112,8 +1124,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.arrowup.tag = indexPath.section
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
-        resturantnamelable.text = "I just got a 10% discount at \(head[cells.press2reveal.tag].restname) through the BottomzUp App"
-            namefromlabel = resturantnamelable.text
+      //  resturantnamelable.text = "I just got a 10% discount at \(head[cells.press2reveal.tag].restname) through the BottomzUp App"
+            //namefromlabel = resturantnamelable.text
         cells.distancelabelnew.text = head[indexPath.section].distance
             cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
             cells.hotelname.text = head[indexPath.section].restname
@@ -2207,10 +2219,15 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     @IBAction func revelofferclicked(sender: UIButton, forEvent event: UIEvent)
     {
+        
+        //self.view.userInteractionEnabled = false
+        self.tableview.userInteractionEnabled = false
         // downcast sender as a UIView
         
-        revelofferclosebutton.hidden = false
-          revelofferview.hidden = false
+      //  revelofferclosebutton.hidden = false
+        //  revelofferview.hidden = false
+       // revelimageview.hidden = false
+      //  label1.hidden = false
      
         let buttonView = sender as UIView;
         var p : CGPoint!
@@ -2218,22 +2235,142 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         // get any touch on the buttonView
         if let touch = event.touchesForView(buttonView)?.first as? UITouch
         {
-             let screenSize = UIScreen.mainScreen().bounds.size
+            let imageName = "Revelpopup.png"
+            let image = UIImage(named: imageName)
+            let imageView = UIImageView(image: image!)
+           
+          
             // print the touch location on the button
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
            p  = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-          revelofferview.frame = CGRectMake(self.view.frame.width/2 - 125,p!.y - 185,250,195)
-  
+            
+            
+            self.DynamicView=UIView(frame: CGRectMake(self.view.frame.width*0.1 + 10 ,p!.y - 180,self.view.frame.width * 0.8 - 10 ,195))
+           // DynamicView.layer.borderWidth = 1
+            self.DynamicView.layer.borderColor = UIColor.blackColor().CGColor
+            imageView.frame = CGRect(x: 0,y: 0,width: DynamicView.frame.width,height: DynamicView.frame.height)
+//            var label = UILabel(frame: CGRectMake(self.view.frame.width*0.1 + 10 ,p!.y - 180,self.view.frame.width * 0.8 - 10 ,27))
+//            label.textAlignment = NSTextAlignment.Left
+//            label.text = "I'am a test label"
+//            DynamicView.addSubview(label)
+            var dynamicLabel: UILabel = UILabel()
+            dynamicLabel.frame = CGRectMake(15, 10, DynamicView.frame.width - 20, 27)
+            dynamicLabel.textColor = UIColor.blackColor()
+            dynamicLabel.textAlignment = NSTextAlignment.Left
+            dynamicLabel.text = "To avail a 10% discount on your bill,press the Avail Offer button"
+            dynamicLabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            dynamicLabel.numberOfLines = 2
+            
+            var dynamicLabel1: UILabel = UILabel()
+            dynamicLabel1.frame = CGRectMake(15, 40, DynamicView.frame.width - 20, 27)
+            dynamicLabel1.textColor = UIColor.blackColor()
+            dynamicLabel1.textAlignment = NSTextAlignment.Left
+            dynamicLabel1.text = " 1. The following post will be generated through \nyour Facebook account."
+            dynamicLabel1.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            dynamicLabel1.numberOfLines = 2
+            
+            var dynamicLabel2: UILabel = UILabel()
+            dynamicLabel2.frame = CGRectMake(17, 70, DynamicView.frame.width - 20, 27)
+            dynamicLabel2.textColor = UIColor.blackColor()
+            dynamicLabel2.textAlignment = NSTextAlignment.Left
+            dynamicLabel2.text = " i just got a 10% discount at \(head[sender.tag].restname) through\n the BottomzUp App"
+            newrestnamefromtag = head[sender.tag].restname
+            dynamicLabel2.font = UIFont(name:"MyriadPro-Bold", size: 9)
+            dynamicLabel2.numberOfLines = 2
+            
+            var dynamicLabel3: UILabel = UILabel()
+            dynamicLabel3.frame = CGRectMake(15, 100, DynamicView.frame.width - 20, 27)
+            dynamicLabel3.textColor = UIColor.blackColor()
+            dynamicLabel3.textAlignment = NSTextAlignment.Left
+            dynamicLabel3.text = " 2.Show this Faceboof post to the restaurant to\n avail this offer"
+            dynamicLabel3.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            dynamicLabel3.numberOfLines = 2
 
+            
+            
+            let dunamicButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            dunamicButton.frame = CGRectMake(DynamicView.frame.origin.x + 180,10,16,16)
+            dunamicButton.addTarget(self, action: "buttonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+            let imageName1 = "popupclosebutton.png"
+            let image1 = UIImage(named: imageName1)
+            let imageView1 = UIImageView(image: image1!)
+            dunamicButton.setBackgroundImage(image1, forState: .Normal)
+            
+            
+            
+            let imageName2 = "revelofferbutton.png"
+            let image2 = UIImage(named: imageName2)
+            let imageView2 = UIImageView(image: image2!)
            
 
+            var button   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            button.frame = CGRectMake( 50,120,140,60)
+            button.addTarget(self, action: "Action:", forControlEvents: UIControlEvents.TouchUpInside)
+             button.setBackgroundImage(image2, forState: .Normal)
+         
+            
+            
+            
+            
+//            let button   = UIButton(type: UIButtonType.System) as UIButton
+//            button.frame = CGRectMake(100, 100, 100, 50)
+//            button.backgroundColor = UIColor.greenColor()
+//            button.setTitle("Test Button", forState: UIControlState.Normal)
+//            button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+//            
+//            self.view.addSubview(button)
+            
+//            let dunamicButton2 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+//            dunamicButton2.frame = CGRectMake(DynamicView.frame.origin.x,DynamicView.frame.origin.y,150,20)
+//            dunamicButton2.addTarget(self, action: "buttonTouched1:", forControlEvents: UIControlEvents.TouchUpInside)
+            
+            
+            
+            
+            self.view.addSubview(DynamicView)
+            self.DynamicView.addSubview(imageView)
+            self.DynamicView.addSubview(dynamicLabel)
+             self.DynamicView.addSubview(dynamicLabel1)
+              self.DynamicView.addSubview(dynamicLabel2)
+            self.DynamicView.addSubview(dunamicButton)
+            self.DynamicView.addSubview(dynamicLabel3)
+            self.DynamicView.addSubview(button)
+           // self.DynamicView.addSubview(dunamicButton2)
+            //DynamicView.backgroundColor = UIColor(patternImage: UIImage(named: "Revelpopup")!)
+           // revelofferclosebutton.frame = CGRectMake(p!.x ,p!.y ,35,35)
+        //  revelofferview.frame = CGRectMake(self.view.frame.width*0.1 ,p!.y - 185,self.view.frame.width * 0.8 ,195)
+            //label1.frame = CGRectMake(100,100,100,100)
+       // label1 = UILabel(frame: CGRectMake(280.0, 14.0, 300.0, 30.0))
+        //   revelimageview.frame = CGRectMake(self.view.frame.width*0.1 ,p!.y - 185,self.view.frame.width * 0.8 ,195)
+        
     }
+        
+    
 
         
-      //  resturantnamelable.text = "I just got a 10% discount at \(head[sender.tag].restname) through the BottomzUp App"
+    }
+    
+    func buttonTouched(sender:UIButton!)
+    {
+        print("vinayak")
+       // self.view.userInteractionEnabled = true
+         self.tableview.userInteractionEnabled = true
+        DynamicView.hidden = true
         
     }
+    
+    func Action(sender:UIButton)
+    {
+         print("vinayak")
+        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        shareToFacebook.setInitialText("i just got a 10% discount at \(newrestnamefromtag) through\n the BottomzUp App")
+        
+        
+        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+    }
+    
+   
 
     @IBAction func closerevelofferbuttonclicked(sender: UIButton)
     {
@@ -2275,12 +2412,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     @IBAction func callbutton(sender: AnyObject)
     {
-       callNumber("122344565")
+       callNumber("8722289471")
 
     }
     @IBAction func callbutton2(sender: UIButton)
     {
-        callNumber("122344565")
+        callNumber("8892640540")
     }
     
     func callNumber(phoneNumber:String)

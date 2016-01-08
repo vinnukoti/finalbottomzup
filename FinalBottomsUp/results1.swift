@@ -132,11 +132,18 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     {
         var userLocation:CLLocation = locations[0] as! CLLocation
         self.locationManager1.stopUpdatingLocation()
-        let long = 28.63875
-        let lat = 77.07380
+        let long = userLocation.coordinate.longitude
+        let lat = userLocation.coordinate.latitude
+        
+//        let long = 77.07380
+//        let lat = 28.63875
         
         devicelatitude = lat
         devicelongitude = long
+        
+        println(devicelatitude)
+        println(devicelongitude)
+        
         //Do What ever you want with it
         
         CLGeocoder().reverseGeocodeLocation(userLocation, completionHandler: {
@@ -647,8 +654,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 //28.63875
                                 //77.07380
                                 var OldLocation: CLLocation = CLLocation(latitude: devicelatitude, longitude: devicelongitude)
+                                println(devicelatitude)
+                                println(devicelongitude)
                               //  var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
                                 var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
+                                println(restlat)
+                                println(restlong)
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
