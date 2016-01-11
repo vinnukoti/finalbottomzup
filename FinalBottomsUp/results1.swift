@@ -336,7 +336,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             var firstName: String = fullNameArr[0]
                             var lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
                             println(firstName)
-                            println(lastName!)
+                            println(lastName)
                             locations[i] = firstName + ", " + lastName!
                             
                             

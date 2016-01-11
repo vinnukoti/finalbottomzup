@@ -10,16 +10,11 @@
         <mutableArray key="MYRIADPRO-BOLD.OTF">
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
-            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-COND.OTF">
             <string>MyriadPro-Cond</string>
         </mutableArray>
         <mutableArray key="MYRIADPRO-REGULAR.OTF">
-            <string>MyriadPro-Regular</string>
-            <string>MyriadPro-Regular</string>
-            <string>MyriadPro-Regular</string>
-            <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
@@ -1583,7 +1578,7 @@
                                     <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="lookfurther:" destination="cXB-1m-d5z" eventType="touchUpInside" id="n3I-hA-VpB"/>
+                                    <action selector="lookfurthernewbeer:forEvent:" destination="cXB-1m-d5z" eventType="touchUpInside" id="u2p-ZP-vcO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0b-9u-jRj">
@@ -1644,67 +1639,6 @@
                                     <action selector="getdeals:" destination="cXB-1m-d5z" eventType="touchUpInside" id="vhx-IG-h6Y"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNl-o6-7Bw">
-                                <rect key="frame" x="329" y="533" width="96" height="50"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Popbackground" translatesAutoresizingMaskIntoConstraints="NO" id="Zp0-TJ-ZGj">
-                                        <rect key="frame" x="0.0" y="0.0" width="91" height="50"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="New-zt-2p2">
-                                        <rect key="frame" x="8" y="8" width="42" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="Ewc-fg-ced"/>
-                                            <constraint firstAttribute="height" constant="45" id="M8B-gE-zP5"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="10"/>
-                                        <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="502-EC-r5y">
-                                        <rect key="frame" x="65" y="13" width="16" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="LsU-vd-kKZ"/>
-                                            <constraint firstAttribute="height" constant="30" id="mcU-l9-mo9"/>
-                                        </constraints>
-                                        <state key="normal" image="popupclosebutton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="locationpopupclosebutton:" destination="cXB-1m-d5z" eventType="touchUpInside" id="5AR-sk-8Ls"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYf-EJ-xeW">
-                                        <rect key="frame" x="7" y="26" width="46" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="VkU-hb-xfX"/>
-                                            <constraint firstAttribute="height" constant="15" id="WYh-ef-WGI"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="Find on Google maps">
-                                            <color key="titleColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="gotomap:" destination="cXB-1m-d5z" eventType="touchUpInside" id="pfS-t5-LQm"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="New-zt-2p2" firstAttribute="top" secondItem="eNl-o6-7Bw" secondAttribute="top" constant="2" id="7xY-Hg-Peh"/>
-                                    <constraint firstItem="uYf-EJ-xeW" firstAttribute="leading" secondItem="eNl-o6-7Bw" secondAttribute="leading" id="KCv-KF-NMK"/>
-                                    <constraint firstItem="502-EC-r5y" firstAttribute="top" secondItem="eNl-o6-7Bw" secondAttribute="top" constant="30" id="KrQ-nU-bag"/>
-                                    <constraint firstAttribute="height" constant="90" id="VuI-eq-hee"/>
-                                    <constraint firstAttribute="width" constant="170" id="W50-pi-6GO"/>
-                                    <constraint firstItem="New-zt-2p2" firstAttribute="leading" secondItem="eNl-o6-7Bw" secondAttribute="leading" constant="15" id="c9W-Et-0KB"/>
-                                    <constraint firstAttribute="bottom" secondItem="Zp0-TJ-ZGj" secondAttribute="bottom" constant="-4" id="f2q-0V-Ksv"/>
-                                    <constraint firstItem="Zp0-TJ-ZGj" firstAttribute="top" secondItem="eNl-o6-7Bw" secondAttribute="top" constant="-4" id="iuL-1P-T9Z"/>
-                                    <constraint firstAttribute="bottom" secondItem="uYf-EJ-xeW" secondAttribute="bottom" constant="17" id="lx1-vB-uBY"/>
-                                    <constraint firstAttribute="trailing" secondItem="Zp0-TJ-ZGj" secondAttribute="trailing" constant="-4" id="qf7-dV-Jwg"/>
-                                    <constraint firstAttribute="trailing" secondItem="502-EC-r5y" secondAttribute="trailing" constant="5" id="v5Z-H2-CjJ"/>
-                                    <constraint firstItem="Zp0-TJ-ZGj" firstAttribute="leading" secondItem="eNl-o6-7Bw" secondAttribute="leading" constant="-4" id="wYr-eq-pMw"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="an9-T7-0y9">
                                 <rect key="frame" x="103" y="529" width="145" height="61"/>
                                 <subviews>
@@ -1871,12 +1805,10 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addresslabel" destination="New-zt-2p2" id="XH4-Wj-qda"/>
                         <outlet property="autocompletetextfieldforbeer" destination="lxK-NV-XxS" id="uOu-ye-1tB"/>
                         <outlet property="bottlebutton" destination="gw3-dO-6Bx" id="Lqv-9w-IvK"/>
                         <outlet property="liqdropdowntableview" destination="ExG-43-OOm" id="fnt-7M-xpK"/>
                         <outlet property="locationbutton" destination="vow-5r-N1G" id="Qlv-ID-xah"/>
-                        <outlet property="locationpopupview" destination="eNl-o6-7Bw" id="5aW-ap-SGe"/>
                         <outlet property="mainview" destination="Q37-Nk-LRb" id="20H-SI-G1F"/>
                         <outlet property="newtextfieldtableview" destination="4IA-Kt-4kI" id="F2J-KF-6mj"/>
                         <outlet property="phonepopupview" destination="an9-T7-0y9" id="2Xa-yz-nEf"/>
@@ -2946,101 +2878,6 @@
                                     <constraint firstAttribute="height" constant="100" id="Yia-ka-ddY"/>
                                 </constraints>
                             </tableView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J2e-S6-OWy">
-                                <rect key="frame" x="-10" y="-40" width="280" height="200"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Revelpopup" translatesAutoresizingMaskIntoConstraints="NO" id="MPQ-2s-T2G">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="200"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="To avail a 10% discount on your bill,Press the Avail Offer button." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="931-46-vIO">
-                                        <rect key="frame" x="8" y="8" width="42" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="YZ8-9o-TNr"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                        <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cw4-69-PcM">
-                                        <rect key="frame" x="208" y="8" width="16" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="257-nI-Etr"/>
-                                            <constraint firstAttribute="width" constant="35" id="EdL-3p-M0x"/>
-                                        </constraints>
-                                        <state key="normal" image="popupclosebutton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="press2Revelclosebutton:" destination="62d-Bt-Yva" eventType="touchUpInside" id="XQL-Jp-oaB"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="1. The following post will be generated Through youe Facebook account." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5z9-VI-Rf7">
-                                        <rect key="frame" x="8" y="24" width="177" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="YVo-bB-0bK"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                        <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="&quot;I just got a 10% discount at Mela through the          BottomzUp app&quot;" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ka4-7v-pLF">
-                                        <rect key="frame" x="8" y="40" width="182" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="Xvt-e9-sre"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="12"/>
-                                        <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2.Show this Facebook post to the restaurant to avail this offer. " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZd-nG-R55">
-                                        <rect key="frame" x="17" y="72" width="224" height="23"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="21y-80-YoK"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                        <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GM-Mk-wET">
-                                        <rect key="frame" x="117" y="148" width="112" height="46"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="BoH-KL-esc"/>
-                                            <constraint firstAttribute="height" constant="50" id="l7W-5S-Iqh"/>
-                                        </constraints>
-                                        <state key="normal" image="revelofferbutton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sharetofacebookVodka:" destination="62d-Bt-Yva" eventType="touchUpInside" id="ll6-QU-MHa"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="ka4-7v-pLF" firstAttribute="top" secondItem="5z9-VI-Rf7" secondAttribute="bottom" constant="5" id="5uw-os-VoX"/>
-                                    <constraint firstAttribute="trailing" secondItem="ka4-7v-pLF" secondAttribute="trailing" constant="40" id="77Z-j1-bpq"/>
-                                    <constraint firstAttribute="bottom" secondItem="MPQ-2s-T2G" secondAttribute="bottom" id="9nv-2c-6Ok"/>
-                                    <constraint firstAttribute="bottom" secondItem="1GM-Mk-wET" secondAttribute="bottom" constant="10" id="Ai8-rW-jtG"/>
-                                    <constraint firstItem="5z9-VI-Rf7" firstAttribute="top" secondItem="931-46-vIO" secondAttribute="bottom" constant="5" id="BjU-Ys-7Oi"/>
-                                    <constraint firstItem="MPQ-2s-T2G" firstAttribute="top" secondItem="J2e-S6-OWy" secondAttribute="top" id="EXn-g1-5JV"/>
-                                    <constraint firstItem="oZd-nG-R55" firstAttribute="leading" secondItem="J2e-S6-OWy" secondAttribute="leading" constant="15" id="Iks-C2-e33"/>
-                                    <constraint firstItem="oZd-nG-R55" firstAttribute="top" secondItem="ka4-7v-pLF" secondAttribute="bottom" constant="5" id="LXe-2P-Xdq"/>
-                                    <constraint firstAttribute="trailing" secondItem="MPQ-2s-T2G" secondAttribute="trailing" id="NBm-fe-vQt"/>
-                                    <constraint firstAttribute="trailing" secondItem="cw4-69-PcM" secondAttribute="trailing" constant="5" id="NQE-HV-h8Z"/>
-                                    <constraint firstItem="931-46-vIO" firstAttribute="leading" secondItem="J2e-S6-OWy" secondAttribute="leading" constant="15" id="O00-fP-TOh"/>
-                                    <constraint firstItem="cw4-69-PcM" firstAttribute="top" secondItem="J2e-S6-OWy" secondAttribute="top" constant="5" id="PwN-Nb-hof"/>
-                                    <constraint firstAttribute="centerX" secondItem="1GM-Mk-wET" secondAttribute="centerX" id="dnt-Ia-yU1"/>
-                                    <constraint firstAttribute="height" constant="200" id="e3R-OO-RaI"/>
-                                    <constraint firstItem="ka4-7v-pLF" firstAttribute="leading" secondItem="J2e-S6-OWy" secondAttribute="leading" constant="15" id="fbv-82-pL4"/>
-                                    <constraint firstItem="MPQ-2s-T2G" firstAttribute="leading" secondItem="J2e-S6-OWy" secondAttribute="leading" id="gKz-Bp-6di"/>
-                                    <constraint firstItem="5z9-VI-Rf7" firstAttribute="leading" secondItem="J2e-S6-OWy" secondAttribute="leading" constant="15" id="n4g-OZ-NQB"/>
-                                    <constraint firstAttribute="trailing" secondItem="5z9-VI-Rf7" secondAttribute="trailing" constant="40" id="np2-bM-Pv1"/>
-                                    <constraint firstAttribute="trailing" secondItem="oZd-nG-R55" secondAttribute="trailing" constant="40" id="p3x-6B-PNP"/>
-                                    <constraint firstAttribute="width" constant="280" id="rgC-tt-Aqf"/>
-                                    <constraint firstItem="931-46-vIO" firstAttribute="top" secondItem="J2e-S6-OWy" secondAttribute="top" constant="15" id="s7O-qB-c8K"/>
-                                    <constraint firstItem="cw4-69-PcM" firstAttribute="leading" secondItem="931-46-vIO" secondAttribute="trailing" id="th5-Kd-dIJ"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UqQ-xP-lb9">
                                 <rect key="frame" x="137" y="520" width="112" height="72"/>
                                 <subviews>
@@ -3233,12 +3070,11 @@
                     <connections>
                         <outlet property="addressLabel" destination="K5X-4q-MlT" id="qiJ-38-0Nq"/>
                         <outlet property="citynametextfieldforvodka" destination="VzS-JC-BnP" id="hze-zL-5cJ"/>
-                        <outlet property="locationpopupview" destination="DgT-m0-4RW" id="Iyc-Gy-F6Q"/>
+                        <outlet property="locationpopupview" destination="DgT-m0-4RW" id="29Y-uT-IDC"/>
                         <outlet property="mainviewvodka" destination="QNv-Dd-Pdx" id="7xS-i0-N7P"/>
                         <outlet property="newtableviewforvodka" destination="m3A-U8-LUl" id="mi2-9M-Jft"/>
                         <outlet property="newtextfieldvodka" destination="7Ls-wJ-Yr3" id="nAW-aT-eZV"/>
                         <outlet property="phoneview" destination="UqQ-xP-lb9" id="Ltn-r4-r9p"/>
-                        <outlet property="popupviewvodka" destination="J2e-S6-OWy" id="z3F-uW-utO"/>
                         <outlet property="pricebutton" destination="9EG-tr-Cc7" id="A9C-az-KG2"/>
                         <outlet property="searchbutton" destination="i89-1E-jjY" id="Aem-Rd-2as"/>
                         <outlet property="tableview1" destination="w9y-ac-ycT" id="R82-xH-hIN"/>
@@ -3273,7 +3109,6 @@
         <image name="Phone number" width="37" height="30"/>
         <image name="Popbackground" width="150" height="79"/>
         <image name="Pub and distance tab" width="320" height="30"/>
-        <image name="Revelpopup" width="255" height="180"/>
         <image name="SearchButton" width="51" height="19"/>
         <image name="Signinlaunchscreen" width="166" height="42"/>
         <image name="WineAndBeerShop" width="96" height="97"/>
@@ -3291,7 +3126,6 @@
         <image name="line1" width="299" height="10"/>
         <image name="popupclosebutton" width="16" height="16"/>
         <image name="revealOffer70" width="49" height="51"/>
-        <image name="revelofferbutton" width="112" height="46"/>
         <image name="skiploginbutton" width="96" height="98"/>
         <image name="toggleoff" width="48" height="27"/>
         <image name="wineandbeer" width="939" height="112"/>
@@ -3299,9 +3133,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OFC-RP-bvW"/>
+        <segue reference="bOf-Qa-YPU"/>
         <segue reference="XDA-r2-Wma"/>
-        <segue reference="k2w-mW-TjF"/>
-        <segue reference="oIU-td-Sv5"/>
+        <segue reference="OFC-RP-bvW"/>
+        <segue reference="Xac-65-HoW"/>
     </inferredMetricsTieBreakers>
 </document>

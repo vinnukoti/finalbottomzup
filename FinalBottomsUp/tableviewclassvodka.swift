@@ -129,6 +129,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var locationpopupview: UIView!
     @IBOutlet weak var addressLabel: UILabel!
     
+    var DynamicViewvodka=UIView()
+    var newrestnamefromtagvodka:String!
+    
     var one:Int!
     var two:Int!
     var countvlaues:Int!
@@ -193,7 +196,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         mainviewvodka.addGestureRecognizer(tap)
         
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
-        popupviewvodka.addGestureRecognizer(tap)
+       // popupviewvodka.addGestureRecognizer(tap)
         let tap2 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
         phoneview.addGestureRecognizer(tap2)
         let tap3 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
@@ -201,7 +204,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
-        popupviewvodka.hidden = true
+       // popupviewvodka.hidden = true
         phoneview.hidden = true
         locationpopupview.hidden = true
       //  distancebutton.setTitle("DISTANCE", forState: .Normal)
@@ -375,8 +378,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func press2revealPressed(sender: UIButton) {
         
-        popupviewvodka.hidden = false
-        tableview1.userInteractionEnabled = false
+      //  popupviewvodka.hidden = false
+     //   tableview1.userInteractionEnabled = false
       //  takerestaurantname.text = "I just got a 10 % discount at \(header1[sender.tag].restnamevodka) Through Bottomz Up"
         
     }
@@ -384,28 +387,119 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     @IBAction func Press2revell(sender: UIButton, forEvent event: UIEvent)
     {
+        
+        self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
         if let touch = event.touchesForView(buttonView)?.first as? UITouch
         {
             // print the touch location on the button
+            
+            let imageName = "Revelpopup.png"
+            let image = UIImage(named: imageName)
+            let imageView = UIImageView(image: image!)
+
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-            popupviewvodka.frame = CGRectMake(p!.x - 300,p!.y - 190,280,190)
-            popupviewvodka.hidden = false
-            // self.view.bringSubviewToFront(locationpopupview)
-            //locationpopupview.frame = CGRectMake(p!.x - 150,p!.y + 17,2,1)
+         
+            
+            
+            self.DynamicViewvodka=UIView(frame: CGRectMake(self.view.frame.width*0.1 + 10 ,p!.y - 180,self.view.frame.width * 0.8 - 10 ,195))
+            self.DynamicViewvodka.layer.borderColor = UIColor.blackColor().CGColor
+            imageView.frame = CGRect(x: 0,y: 0,width: DynamicViewvodka.frame.width,height: DynamicViewvodka.frame.height)
+            
+            var dynamicLabel: UILabel = UILabel()
+            dynamicLabel.frame = CGRectMake(15, 10, DynamicViewvodka.frame.width - 20, 27)
+            dynamicLabel.textColor = UIColor.blackColor()
+            dynamicLabel.textAlignment = NSTextAlignment.Left
+            dynamicLabel.text = "To avail a 10% discount on your bill,press the Avail Offer button"
+            dynamicLabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            dynamicLabel.numberOfLines = 2
+            
+            var dynamicLabel1: UILabel = UILabel()
+            dynamicLabel1.frame = CGRectMake(15, 40, DynamicViewvodka.frame.width - 20, 27)
+            dynamicLabel1.textColor = UIColor.blackColor()
+            dynamicLabel1.textAlignment = NSTextAlignment.Left
+            dynamicLabel1.text = " 1. The following post will be generated through \nyour Facebook account."
+            dynamicLabel1.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            dynamicLabel1.numberOfLines = 2
+            
+            var dynamicLabel2: UILabel = UILabel()
+            dynamicLabel2.frame = CGRectMake(17, 70, DynamicViewvodka.frame.width - 20, 27)
+            dynamicLabel2.textColor = UIColor.blackColor()
+            dynamicLabel2.textAlignment = NSTextAlignment.Left
+            dynamicLabel2.text = " i just got a 10% discount at \(header1[sender.tag].restnamevodka) through\n the BottomzUp App"
+            newrestnamefromtagvodka = header1[sender.tag].restnamevodka
+            dynamicLabel2.font = UIFont(name:"MyriadPro-Bold", size: 9)
+            dynamicLabel2.numberOfLines = 2
+            
+            var dynamicLabel3: UILabel = UILabel()
+            dynamicLabel3.frame = CGRectMake(15, 100, DynamicViewvodka.frame.width - 20, 27)
+            dynamicLabel3.textColor = UIColor.blackColor()
+            dynamicLabel3.textAlignment = NSTextAlignment.Left
+            dynamicLabel3.text = " 2.Show this Faceboof post to the restaurant to\n avail this offer"
+            dynamicLabel3.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            dynamicLabel3.numberOfLines = 2
+            
+            
+            
+            let dunamicButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            dunamicButton.frame = CGRectMake(DynamicViewvodka.frame.width - 23,10,16,16)
+            dunamicButton.addTarget(self, action: "buttonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+            let imageName1 = "popupclosebutton.png"
+            let image1 = UIImage(named: imageName1)
+            let imageView1 = UIImageView(image: image1!)
+            dunamicButton.setBackgroundImage(image1, forState: .Normal)
+            
+            
+            
+            let imageName2 = "revelofferbutton.png"
+            let image2 = UIImage(named: imageName2)
+            let imageView2 = UIImageView(image: image2!)
+            
+            
+            var button   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            button.frame = CGRectMake(DynamicViewvodka.frame.width/2 - 75,120,150,60)
+            button.addTarget(self, action: "Action:", forControlEvents: UIControlEvents.TouchUpInside)
+            button.setBackgroundImage(image2, forState: .Normal)
+
+            self.view.addSubview(DynamicViewvodka)
+            self.DynamicViewvodka.addSubview(imageView)
+            self.DynamicViewvodka.addSubview(dynamicLabel)
+            self.DynamicViewvodka.addSubview(dynamicLabel1)
+            self.DynamicViewvodka.addSubview(dynamicLabel2)
+            self.DynamicViewvodka.addSubview(dunamicButton)
+            self.DynamicViewvodka.addSubview(dynamicLabel3)
+            self.DynamicViewvodka.addSubview(button)
             
             
         }
 
     }
     
+    func buttonTouched(sender:UIButton!)
+    {
+        print("vinayak")
+        self.tableview1.userInteractionEnabled = true
+        DynamicViewvodka.hidden = true
+        
+    }
+    
+    func Action(sender:UIButton)
+    {
+        print("vinayak")
+        var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        shareToFacebook.setInitialText("i just got a 10% discount at \(newrestnamefromtagvodka) through\n the BottomzUp App")
+        
+        
+        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+    }
+    
     @IBAction func press2Revelclosebutton(sender: UIButton)
     {
-       popupviewvodka.hidden = true
+      // popupviewvodka.hidden = true
     }
     func handleFrontTap(gestureRecognizer: UITapGestureRecognizer)
     {
@@ -552,21 +646,21 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
-        if let touch = touches.first as? UITouch {
-            let location = touch.locationInView(self.mainviewvodka)
-            if location.x < popupviewvodka.frame.origin.x || location.x > (popupviewvodka.frame.origin.x + popupviewvodka.frame.size.width){
-                popupviewvodka.hidden = true
-                tableview1.userInteractionEnabled = true
-            }
-            if location.y < popupviewvodka.frame.origin.y || location.y > (popupviewvodka.frame.origin.y + popupviewvodka.frame.size.height){
-                popupviewvodka.hidden = true
-                tableview1.userInteractionEnabled = true
-            }
-            
-        }
-    }
+//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+//    {
+//        if let touch = touches.first as? UITouch {
+//            let location = touch.locationInView(self.mainviewvodka)
+//            if location.x < popupviewvodka.frame.origin.x || location.x > (popupviewvodka.frame.origin.x + popupviewvodka.frame.size.width){
+//                popupviewvodka.hidden = true
+//                tableview1.userInteractionEnabled = true
+//            }
+//            if location.y < popupviewvodka.frame.origin.y || location.y > (popupviewvodka.frame.origin.y + popupviewvodka.frame.size.height){
+//                popupviewvodka.hidden = true
+//                tableview1.userInteractionEnabled = true
+//            }
+//            
+//        }
+//    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
@@ -1757,6 +1851,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func phonebuttonclicked(sender: UIButton, forEvent event: UIEvent)
     {
+        self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
@@ -1791,12 +1886,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func closephonepopupbuttonclicked(sender: UIButton)
     {
+        self.tableview1.userInteractionEnabled = true
          phoneview.hidden = true
     }
     
     
     @IBAction func locationpopupclicked(sender: UIButton, forEvent event: UIEvent)
     {
+        self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
@@ -1814,6 +1911,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func locationclosebuttonclicked(sender: UIButton)
     {
+        self.tableview1.userInteractionEnabled = true
         locationpopupview.hidden = true
     }
     
