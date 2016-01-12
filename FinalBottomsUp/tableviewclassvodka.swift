@@ -127,10 +127,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var phoneview: UIView!
     
     @IBOutlet weak var locationpopupview: UIView!
-    @IBOutlet weak var addressLabel: UILabel!
+  //  @IBOutlet weak var addressLabel: UILabel!
     
     var DynamicViewvodka=UIView()
+     var addresslabel: UILabel = UILabel()
     var newrestnamefromtagvodka:String!
+     var newaddress:String!
     
     var one:Int!
     var two:Int!
@@ -146,9 +148,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
          array3 = header1
          countvlaues = array3.count
         println(array3.count)
-        searchbutton.setTitle("Search", forState: .Normal)
-        searchbutton.titleLabel?.text = "Search"
-        searchbutton.titleLabel?.textColor = UIColor.whiteColor();
+      ///  searchbutton.setTitle("Search", forState: .Normal)
+     // searchbutton.titleLabel?.text = "Search"
+       // searchbutton.titleLabel?.textColor = UIColor.whiteColor();
         newvodkaarray = header1
         print(newvodkaarray.count)
         if togglevodka == true
@@ -200,13 +202,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         let tap2 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
         phoneview.addGestureRecognizer(tap2)
         let tap3 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
-        locationpopupview.addGestureRecognizer(tap3)
+    //    locationpopupview.addGestureRecognizer(tap3)
         
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
        // popupviewvodka.hidden = true
         phoneview.hidden = true
-        locationpopupview.hidden = true
+      //  locationpopupview.hidden = true
       //  distancebutton.setTitle("DISTANCE", forState: .Normal)
        // distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
         pricebutton.setTitle("30ML", forState: .Normal)
@@ -560,6 +562,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
          cells.arrowup.tag = indexPath.section
          cells.Hotelname.text = header1[indexPath.section].restnamevodka
             cells.address.text = header1[indexPath.section].address
+            newaddress = header1[indexPath.section].address
             cells.happyhourstiming.text = header1[indexPath.section].vodkahappystart + header1[indexPath.section].vodkahappyend
             
         return cells
@@ -672,8 +675,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.vodkarestaurantname.text = " " + header1[section].restnamevodka
                // println(header1[section].address)
-        headerCell.addressLabel.text =  " " + header1[section].address
-                addressLabel.text = header1[section].address
+      //  headerCell.addressLabel.text =  " " + header1[section].address
+              //  addressLabel.text = header1[section].address
         if header1[section].avgprice == 0
         {
             headerCell.vodkaavgprice.text = "--"
@@ -1268,10 +1271,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
     
     
-
-    @IBAction func gotomap(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
-    }
+//
+//    @IBAction func gotomap(sender: AnyObject) {
+//        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
+//    }
     
     @IBAction func getDiscountforvodka(sender: AnyObject)
     {
@@ -1893,28 +1896,76 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func locationpopupclicked(sender: UIButton, forEvent event: UIEvent)
     {
-        self.tableview1.userInteractionEnabled = false
+      self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
         if let touch = event.touchesForView(buttonView)?.first as? UITouch
         {
             // print the touch location on the button
+            let imageName = "Popbackground.png"
+            let image = UIImage(named: imageName)
+            let imageView = UIImageView(image: image!)
+            // print the touch location on the button
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-             locationpopupview.frame = CGRectMake(p!.x - 150,p!.y + 17,170,80)
-            locationpopupview.hidden = false
+            
+            self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 140,p!.y + 20,165,95))
+            imageView.frame = CGRect(x: 0,y: 0,width: DynamicViewvodka.frame.width,height: DynamicViewvodka.frame.height)
+            
+            let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            closelocationpopupbutton.frame = CGRectMake(DynamicViewvodka.frame.width-27 ,DynamicViewvodka.frame.height/2 - 10,16,16)
+            closelocationpopupbutton.addTarget(self, action: "locationpopupclosebuttontouchedbuttonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+            let imageName1 = "popupclosebutton.png"
+            let image1 = UIImage(named: imageName1)
+            let imageView1 = UIImageView(image: image1!)
+            closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
+            
+            //  var addresslabel: UILabel = UILabel()
+            self.addresslabel.frame = CGRectMake(10, 5, DynamicViewvodka.frame.width - 25, 35)
+            self.addresslabel.textColor = UIColor.blackColor()
+            self.addresslabel.textAlignment = NSTextAlignment.Left
+            self.addresslabel.text = newaddress
+            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            self.addresslabel.numberOfLines = 3
+            
+            
+            let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            Findongooglemapsbutton.frame = CGRectMake(0,50,DynamicViewvodka.frame.width - 30,30)
+            Findongooglemapsbutton.addTarget(self, action: "gotomapgoogle:", forControlEvents: UIControlEvents.TouchUpInside)
+            
+            var text = "Find on Google Maps"
+            var titleString : NSMutableAttributedString = NSMutableAttributedString(string: text)
+            titleString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0,19))
+           // titleString.addAttribute(text, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, 18))
+            
+            Findongooglemapsbutton.setAttributedTitle(titleString, forState: .Normal)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            
+            
+            self.view.addSubview(DynamicViewvodka)
+            self.DynamicViewvodka.addSubview(imageView)
+            self.DynamicViewvodka.addSubview(closelocationpopupbutton)
+            self.DynamicViewvodka.addSubview(self.addresslabel)
+            self.DynamicViewvodka.addSubview(Findongooglemapsbutton)
+
+
 
     }
 }
     
-    @IBAction func locationclosebuttonclicked(sender: UIButton)
+    func locationpopupclosebuttontouchedbuttonTouched(sender: UIButton)
     {
         self.tableview1.userInteractionEnabled = true
-        locationpopupview.hidden = true
+        self.DynamicViewvodka.hidden = true
     }
     
+    func gotomapgoogle(sender: UIButton)
+    {
+       UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
+    }
+
     
     
 }

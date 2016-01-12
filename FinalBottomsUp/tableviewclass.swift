@@ -14,6 +14,7 @@ import FBSDKShareKit
 //var toggleforboth = false
 
 
+
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
     
@@ -214,15 +215,32 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var newaddress:String!
     var addresslabel: UILabel = UILabel()
     
+    
+    var vinayak = 0
+    var vinayak1 = 0
+    let imageName2 = UIImage(named: "LookFurther") as UIImage?
+    let imageName5 = UIImage(named: "lookfurther5") as UIImage?
+    let imageName7 = UIImage(named: "lookfurther7") as UIImage?
+
+    
+    @IBOutlet weak var lookfurtherdefault: UIButton!
+    let closelocationpopupbutton5kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    let closelocationpopupbutton7kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    let closelocationpopupbutton2kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    
+    var km5 = false
+    var km7 = false
+    
+
     override func viewDidLoad()
     {
 
-        phonepopupview.hidden = true
+      //  phonepopupview.hidden = true
 
 
-        searchbutton.setTitle("Search", forState: .Normal)
-        searchbutton.titleLabel?.text = "Search"
-       searchbutton.titleLabel?.textColor = UIColor.whiteColor()
+       // searchbutton.setTitle("Search", forState: .Normal)
+      //  searchbutton.titleLabel?.text = "Search"
+      // searchbutton.titleLabel?.textColor = UIColor.whiteColor()
 
         
         locationbutton.hidden = true
@@ -329,11 +347,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //    }
     
     
-    func dismissKeyboard()
-    {
-        phonepopupview.hidden = true
-     }
-    
+//    func dismissKeyboard()
+//    {
+//      //  phonepopupview.hidden = true
+//     }
+//    
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -1554,135 +1572,135 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     
-//    @IBAction func lookfurther(sender: AnyObject)
-//    {
-//
-//        
-//        //28.63875
-//        //77.07380
-//       // changecolor = true
-//        
-////         var lookfurtherview=UIView()
-////         lookfurtherview = UIView(frame: CGRectMake(50,50,50,50))
-////        
-////        
-////        self.view.addSubview(lookfurtherview)
+    @IBAction func lookfurther(sender: AnyObject)
+    {
+
+        
+        //28.63875
+        //77.07380
+       // changecolor = true
+        
+//         var lookfurtherview=UIView()
+//         lookfurtherview = UIView(frame: CGRectMake(50,50,50,50))
 //        
 //        
-//        
-//        
-//        println(countfurther)
-//        countfurther = countfurther + 1
-//        
-//        println(countfurther)
-//        
-//        if countfurther == 1{
-//            
-//            
-//            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-//            selectedliqor = trimmedString1
-//            
-//
-//           if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
-//           {
-//              getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
-//            }
-//            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
-//           {
-//               getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(newtrimmedstring)")
-//            }
-//           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
-//           {
-//            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
-//            }
-//           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
-//           {
-//            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(trimmedString)")
-//            }
-//            
-//    
-//        
-//          //head = makecolor(newheadarray, arrayj: newheadarray1)
-//        self.array1 = self.head
-//            //fstobj1.color = true
-//        }
-//        
-//        if countfurther == 2
-//        {
-//            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-//            selectedliqor = trimmedString1
-//
-//          // getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
-//           //  getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
-//            
-//            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
-//            {
-//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
-//            }
-//            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
-//            {
-//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
-//            }
-//            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
-//            {
-//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
-//            }
-//            
-//            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
-//            {
-//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(trimmedString)")
-//            }
-//
-//             self.array1 = self.head
-//           // fstobj1.color = true
-//        }
-//        
-//        if countfurther == 3
-//        {
-//            
-//            let alertController = UIAlertController(title: "Do you want go back to 2 km search", message: "Press the Ok or cancel", preferredStyle: .Alert)
-//            
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-//                self.countfurther = 2
-//                //self.fstobj1.color = true
-//               
-//            }
-//            alertController.addAction(cancelAction)
-//            
-//            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-//                self.countfurther = 0
-//                let trimmedString1 = self.selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-//                self.selectedliqor = trimmedString1
-//
-//                
-//                
-//                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
-//                {
-//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.newtrimmedstring)")
-//                }
-//                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
-//                {
-//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.newtrimmedstring)")
-//                }
-//                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
-//                {
-//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
-//                }
-//                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == true
-//                {
-//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.trimmedString)")
-//                }
-//
-//                 self.array1 = self.head
-//            }
-//            alertController.addAction(OKAction)
-//            
-//            self.presentViewController(alertController, animated: true) {
-//          
-//            }
-//            
-//        }
-//    }
+//        self.view.addSubview(lookfurtherview)
+        
+        
+        
+        
+        println(countfurther)
+        countfurther = countfurther + 1
+        
+        println(countfurther)
+        
+        if countfurther == 1{
+            
+            
+            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            selectedliqor = trimmedString1
+            
+
+           if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+           {
+              getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            }
+            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+           {
+               getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(newtrimmedstring)")
+            }
+           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+           {
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
+            }
+           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
+           {
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(trimmedString)")
+            }
+            
+    
+        
+          //head = makecolor(newheadarray, arrayj: newheadarray1)
+        self.array1 = self.head
+            //fstobj1.color = true
+        }
+        
+        if countfurther == 2
+        {
+            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            selectedliqor = trimmedString1
+
+          // getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+           //  getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
+            
+            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            }
+            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
+            }
+            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
+            }
+            
+            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(trimmedString)")
+            }
+
+             self.array1 = self.head
+           // fstobj1.color = true
+        }
+        
+        if countfurther == 3
+        {
+            
+            let alertController = UIAlertController(title: "Do you want go back to 2 km search", message: "Press the Ok or cancel", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                self.countfurther = 2
+                //self.fstobj1.color = true
+               
+            }
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.countfurther = 0
+                let trimmedString1 = self.selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+                self.selectedliqor = trimmedString1
+
+                
+                
+                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.newtrimmedstring)")
+                }
+                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.newtrimmedstring)")
+                }
+                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
+                }
+                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == true
+                {
+                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.trimmedString)")
+                }
+
+                 self.array1 = self.head
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true) {
+          
+            }
+            
+        }
+    }
     
     
 
@@ -1846,56 +1864,56 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
                 head = colormethod(head, newheadarray: newheadarray)
                 
-                if countfurther == 1
-                {
-                    one = head.count
-                    two = countvlaues
-                    
-                }
-                else if countfurther == 2
-                {
-                    two = head.count
-                    
-                }
+//                if countfurther == 1
+//                {
+//                    one = head.count
+//                    two = countvlaues
+//                    
+//                }
+//                else if countfurther == 2
+//                {
+//                    two = head.count
+//                    
+//                }
                 
                 println(head.count)
                 
             }
             println(one)
             println(two)
-            if countvlaues > one
-            {
-                
-            }
+//            if countvlaues > one
+//            {
+//                
+//            }
+//            
+//            else if one > two
+//            {
+//                
+//            }
             
-            else if one > two
-            {
                 
-            }
-            
-                
-            else
-            {
-                if countfurther == 1
-                {
-                let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
-                self.presentViewController(alertController, animated: true, completion: nil)
-                }
-                
-                else if countfurther == 2
-                {
-                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                }
-                else
-                {
-                    
-                }
-             
-
-            }
+//            else
+//            {
+//                if countfurther == 1
+//                {
+//                let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+//                alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
+//                self.presentViewController(alertController, animated: true, completion: nil)
+//                }
+//                
+//                else if countfurther == 2
+//                {
+//                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+//                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
+//                    self.presentViewController(alertController, animated: true, completion: nil)
+//                }
+//                else
+//                {
+//                    
+//                }
+//             
+//
+//            }
      
             
                 if togglebeer == true
@@ -2187,39 +2205,41 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     {
       
         //tap.delegate = self // Remember to extend your class with UITapGestureDelegate
-        
         // Receive action
-     
-        self.tableview.userInteractionEnabled = false
-        
         // downcast sender as a UIView
-        phonepopupview.hidden = false
-       // self.view.addSubview(phonepopupview)
         
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
-        if let touch = event.touchesForView(buttonView)?.first as? UITouch {
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch
+        {
             // print the touch location on the button
            
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-            phonepopupview.frame = CGRectMake(p!.x - 150  ,p!.y + 17 ,190,90)
-            println(phonepopupview.frame)
+            
+             self.DynamicView=UIView(frame: CGRectMake(self.view.frame.origin.x + 50 ,p!.y + 30,self.view.frame.width * 0.3,90))
+            DynamicView.layer.borderWidth = 2
+            DynamicView.layer.borderColor = UIColor.blackColor().CGColor
+            
+            
+            
+            
+            
+            
+            self.view.addSubview(DynamicView)
+            
+            
+            
+
             
         }
 
         
     }
 
-    
-    @IBAction func popupclosebutton(sender: UIButton)
-    {
-       //phonepopupview.removeFromSuperview()
-        self.tableview.userInteractionEnabled = true
-        phonepopupview.hidden = true
-    }
+
     
     @IBAction func revelofferclicked(sender: UIButton, forEvent event: UIEvent)
     {
@@ -2383,11 +2403,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             Findongooglemapsbutton.frame = CGRectMake(0,50,locatiopopupview.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "gotomapgoogle:", forControlEvents: UIControlEvents.TouchUpInside)
-//            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
-//            let underlineAttributedString = NSAttributedString(string: "Find on Google Maps", attributes: underlineAttribute)
-            //myLabel.attributedText = underlineAttributedString
-          //  Findongooglemapsbutton.attributedTitleForState(.Normal)
-         //   Findongooglemapsbutton.setTitle("Find on Google Maps", forState: .Normal)
+
             var text = "Find on Google Maps"
             var titleString : NSMutableAttributedString = NSMutableAttributedString(string: "Find on Google Maps")
             titleString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, count(text.utf8)))
@@ -2440,6 +2456,11 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     }
     @IBAction func lookfurthernewbeer(sender: UIButton, forEvent event: UIEvent)
     {
+       // countfurther = 0
+        // self.lookfurtherdefault.hidden = true
+        
+        
+        
         
          let buttonView = sender as UIView;
         if let touch = event.touchesForView(buttonView)?.first as? UITouch
@@ -2450,46 +2471,64 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         println(touch.locationInView(self.view))
         var point = touch.locationInView(self.view)
         var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-        
-        
-       // var lookfurtherview=UIView()
-        self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 35,p!.y - 220,75,200))
-       // self.locatiopopupview.layer.borderWidth = 2
-      //  self.locatiopopupview.layer.borderColor = UIColor.blackColor().CGColor
-        
-        
-//        let lookfurtherbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-//        lookfurtherbutton1.frame = CGRectMake(p!.x - 35,p!.y - 140,75,75)
-//        lookfurtherbutton1.addTarget(self, action: "print:", forControlEvents: UIControlEvents.TouchUpInside)
-//        let imageName1 = "LookFurther.png"
-//        let image1 = UIImage(named: imageName1)!
-//        let imageView1 = UIImageView(image: image1)
-//        lookfurtherbutton1.setBackgroundImage(image1, forState: .Normal)
-        
-        let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        closelocationpopupbutton.frame = CGRectMake(0,100,75,75)
-        closelocationpopupbutton.addTarget(self, action: "locationpopupclosebuttontouchedbuttonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
-        let imageName1 = "LookFurther.png"
-        let image1 = UIImage(named: imageName1)
-        let imageView1 = UIImageView(image: image1!)
-        closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
-        
-        let closelocationpopupbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        closelocationpopupbutton1.frame = CGRectMake(0,20,75,75)
-        closelocationpopupbutton1.addTarget(self, action: "locationpopupclosebuttontouchedbuttonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
-        let imageName2 = "LookFurther.png"
-        let image2 = UIImage(named: imageName2)
-        let imageView2 = UIImageView(image: image2!)
-        closelocationpopupbutton1.setBackgroundImage(image2, forState: .Normal)
 
-//
+        self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 38,p!.y - 220,75,200))
+        
+//        self.lookfurtherdefault.imageForState(.Normal)
+//        let image = lookfurtherdefault.currentImage
+//        println(image)
+        
+     var tag = sender.tag
+        
+        switch (tag){
+        case 2:
+            closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+            closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton7kms.tag=7
+            closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+            
+            
+            
+            closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+            closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton5kms.tag=5
+            closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+            
+        case 5:
+            closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+            closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton7kms.tag=7
+            closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+            
+            
+            
+            closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+            closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton5kms.tag=2
+            closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+            
+        case 7:
+            
+            closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+            closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton7kms.tag=5
+            closelocationpopupbutton7kms.setBackgroundImage(imageName5, forState: .Normal)
+            
+            
+            
+            closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+            closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton5kms.tag=2
+            closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+            
+        default: return
+        }
         
         self.view.addSubview(locatiopopupview)
-        //self.locatiopopupview.addSubview(imageView1)
-        self.locatiopopupview.addSubview(closelocationpopupbutton)
-        self.locatiopopupview.addSubview(closelocationpopupbutton1)
-        
-       // self.locatiopopupview.bringSubviewToFront(lookfurtherbutton1)
+        self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+        self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+       // self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+
       
 
         
@@ -2499,6 +2538,111 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         
     }
+    
+    
+    func lookfurtherfor5KMS(sender: UIButton)
+    {
+        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        selectedliqor = trimmedString1
+
+        var tag = sender.tag
+        
+        switch(tag){
+        case 2:
+            //call 2km api
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imageName2, forState: .Normal)
+            lookfurtherdefault.tag = 2
+            
+        case 5:
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imageName5, forState: .Normal)
+            lookfurtherdefault.tag = 5
+            
+        case 7:
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imageName7, forState: .Normal)
+            lookfurtherdefault.tag = 7
+            
+        default: return
+            
+        }
+        
+        
+
+        
+        
+        
+
+        self.array1 = self.head
+        self.locatiopopupview.hidden = true
+        
+       // closelocationpopupbutton5kms.hidden = true
+    }
+    
+    func lookfurtherfor7KMS(sender: UIButton)
+    {
+
+        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        selectedliqor = trimmedString1
+
+
+        var tag = sender.tag
+        
+        switch(tag){
+        case 2:
+            //call 2km api
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imageName2, forState: .Normal)
+            lookfurtherdefault.tag = 2
+            
+        case 5:
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imageName5, forState: .Normal)
+            lookfurtherdefault.tag = 5
+            
+        case 7:
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imageName7, forState: .Normal)
+            lookfurtherdefault.tag = 7
+            
+        default: return
+            
+        }
+
+        
+  
+       
+
+            
+        
+
+        
+       // closelocationpopupbutton7kms.hidden = true
+        
+        self.array1 = self.head
+        self.locatiopopupview.hidden = true
+    }
+    
+//    func lookfurtherfor2KMS(sender: UIButton)
+//    {
+//        
+//        
+//        
+//        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+//        selectedliqor = trimmedString1
+//        
+//        
+//        
+//        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+//        
+//        
+//        closelocationpopupbutton2kms.hidden = true
+//        
+//        self.array1 = self.head
+//      //  self.locatiopopupview.hidden = true
+//    }
+    
     
     func print(sender: UIButton)
     {
