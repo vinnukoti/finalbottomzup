@@ -207,7 +207,7 @@ class ViewController: UIViewController
             }
         })
         
-         performSegueWithIdentifier("show", sender: self)
+         performSegueWithIdentifier("newsearch", sender: self)
     }
     @IBAction func gogo(sender: AnyObject)
     {

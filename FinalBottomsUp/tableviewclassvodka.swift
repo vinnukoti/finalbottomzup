@@ -49,9 +49,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     let pintcheckedImage = UIImage(named: "NormalTabyellow")
     let pintunCheckedImage = UIImage(named: "NormaltabWhite")
     
-    @IBOutlet weak var popupviewvodka: UIView!
 
-    @IBOutlet weak var distancebutton: UIButton!
     @IBOutlet weak var pricebutton: UIButton!
 
     @IBOutlet var mainviewvodka: UIView!
@@ -59,7 +57,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var pricebuttonclicked = false
     var distancevodkabuttonclicked = false
 
-    @IBOutlet weak var takerestaurantname: UILabel!
+ 
   //  @IBOutlet weak var takerestaurantname1: UILabel!
     
     let toggleoff = UIImage(named: "toggleoff")
@@ -80,7 +78,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     let delasimage = UIImage(named: "Deals")
     
 
-    @IBOutlet weak var getdealsbutton: UIButton!
+   
     @IBOutlet weak var citynametextfieldforvodka: AutoCompleteTextField2!
     var locationManager1: CLLocationManager!
     var currentlocationname:String!
@@ -118,16 +116,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     
     var liqnamefromtableview:String!
-    
-    @IBOutlet weak var searchbutton: UIButton!
 
-  //  var obj = AutoCompleteTextField()
-    
-    
-    @IBOutlet weak var phoneview: UIView!
-    
-    @IBOutlet weak var locationpopupview: UIView!
-  //  @IBOutlet weak var addressLabel: UILabel!
     
     var DynamicViewvodka=UIView()
      var addresslabel: UILabel = UILabel()
@@ -136,17 +125,26 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var one:Int!
     var two:Int!
-    var countvlaues:Int!
+   // var countvlaues:Int!
     
+    var lookfurtheboolean = false
+    let closelocationpopupbutton5kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    let closelocationpopupbutton7kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    let closelocationpopupbutton2kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    let imagewi2kmrhradius = UIImage(named: "LookFurthe2kmrwithradius") as UIImage?
+    let imagewi5kmrhradius = UIImage(named: "Lookfurther5withradius") as UIImage?
+    let imagewi7kmrhradius = UIImage(named: "lookfurther7withradius") as UIImage?
     
+    let imageName5 = UIImage(named: "lookfurther5") as UIImage?
+    let imageName7 = UIImage(named: "lookfurther7") as UIImage?
+    let imageName2 = UIImage(named: "Lookfurther2") as UIImage?
     
-    
-    //var selectedliqor:String!
-    
+    @IBOutlet weak var lookfurtherdefault: UIButton!
     override func viewDidLoad()
     {
+        lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
          array3 = header1
-         countvlaues = array3.count
+        // countvlaues = array3.count
         println(array3.count)
       ///  searchbutton.setTitle("Search", forState: .Normal)
      // searchbutton.titleLabel?.text = "Search"
@@ -200,14 +198,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
        // popupviewvodka.addGestureRecognizer(tap)
         let tap2 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
-        phoneview.addGestureRecognizer(tap2)
+      //  phoneview.addGestureRecognizer(tap2)
         let tap3 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
     //    locationpopupview.addGestureRecognizer(tap3)
         
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
        // popupviewvodka.hidden = true
-        phoneview.hidden = true
+       // phoneview.hidden = true
       //  locationpopupview.hidden = true
       //  distancebutton.setTitle("DISTANCE", forState: .Normal)
        // distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
@@ -562,6 +560,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
          cells.arrowup.tag = indexPath.section
          cells.Hotelname.text = header1[indexPath.section].restnamevodka
             cells.address.text = header1[indexPath.section].address
+          //  cells.addressLabel.text = header1[indexPath.section].address
             newaddress = header1[indexPath.section].address
             cells.happyhourstiming.text = header1[indexPath.section].vodkahappystart + header1[indexPath.section].vodkahappyend
             
@@ -675,7 +674,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.vodkarestaurantname.text = " " + header1[section].restnamevodka
                // println(header1[section].address)
-      //  headerCell.addressLabel.text =  " " + header1[section].address
+        headerCell.addressLabel.text =  " " + header1[section].address
               //  addressLabel.text = header1[section].address
         if header1[section].avgprice == 0
         {
@@ -1173,45 +1172,45 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 println(headfurther.count)
                 header1 = makecolor(header1, newvodkaarray: newvodkaarray)
                 
-                if count == 1
-                {
-                    one = header1.count
-                    two = countvlaues
-                }
-                else if count == 2
-                {
-                    two = header1.count
-                }
+//                if count == 1
+//                {
+//                    one = header1.count
+//                    two = countvlaues
+//                }
+//                else if count == 2
+//                {
+//                    two = header1.count
+//                }
             }
             
-            if countvlaues > one
-            {
-                
-            }
-            else if one > two
-            {
-                
-            }
-            else
-            {
-                if count == 1
-                {
-                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                }
-                    
-                else if count == 2
-                {
-                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                }
-                else
-                {
-                    
-                }
-            }
+//            if countvlaues > one
+//            {
+//                
+//            }
+//            else if one > two
+//            {
+//                
+//            }
+//            else
+//            {
+//                if count == 1
+//                {
+//                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+//                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
+//                    self.presentViewController(alertController, animated: true, completion: nil)
+//                }
+//                    
+//                else if count == 2
+//                {
+//                    let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+//                    alertController.addAction(UIAlertAction(title: "No New Hotels Found", style: UIAlertActionStyle.Default,handler: nil))
+//                    self.presentViewController(alertController, animated: true, completion: nil)
+//                }
+//                else
+//                {
+//                    
+//                }
+//            }
             if togglevodka == true
             {
                 
@@ -1856,6 +1855,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
         self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
+        let imageName = "Popbackground.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
         
         // get any touch on the buttonView
         if let touch = event.touchesForView(buttonView)?.first as? UITouch
@@ -1864,23 +1866,61 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
-            phoneview.frame = CGRectMake(p!.x - 180 ,p!.y + 17,190,80)
-            phoneview.hidden = false
-
+            
+            self.DynamicViewvodka=UIView(frame: CGRectMake(self.view.frame.origin.x + 60 ,p!.y + 15,self.view.frame.width * 0.5,90))
+            imageView.frame = CGRect(x: 0,y: 0,width: DynamicViewvodka.frame.width,height: DynamicViewvodka.frame.height)
+            
+            let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            closelocationpopupbutton.frame = CGRectMake(DynamicViewvodka.frame.width-27 ,DynamicViewvodka.frame.height/2 - 10,16,16)
+            closelocationpopupbutton.addTarget(self, action: "popupbuttonclickedclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+            let imageName1 = "popupclosebutton.png"
+            let image1 = UIImage(named: imageName1)
+            let imageView1 = UIImageView(image: image1!)
+            closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
             
+            let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicViewvodka.frame.width - 30,30)
+            Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
+            Findongooglemapsbutton.setTitle("8722289471", forState: .Normal)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            
+            let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicViewvodka.frame.width - 30,30)
+            Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
+            Findongooglemapsbutton1.setTitle("8892640540", forState: .Normal)
+            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            
+            self.view.addSubview(DynamicViewvodka)
+            self.DynamicViewvodka.addSubview(imageView)
+            self.DynamicViewvodka.addSubview(closelocationpopupbutton)
+            self.DynamicViewvodka.addSubview(Findongooglemapsbutton)
+            self.DynamicViewvodka.addSubview(Findongooglemapsbutton1)
+ 
         }
     }
     
-    @IBAction func call1buttonclicked(sender: UIButton)
+    func popupbuttonclickedclosed(sender: UIButton)
     {
-        callNumber("8722289471")
+        DynamicViewvodka.hidden = true
+        self.tableview1.userInteractionEnabled = true
     }
     
-    @IBAction func call2buttonclicked(sender: UIButton)
+
+    func call1(sender:UIButton)
+    {
+      callNumber("8722289471")
+    }
+    
+    func call2(sender:UIButton)
     {
         callNumber("8892640540")
     }
+    
+    
+    
+    
+
     func callNumber(phoneNumber:String)
     {
         UIApplication.sharedApplication().openURL(NSURL(string:"tel://"+"\(phoneNumber)")!)
@@ -1890,7 +1930,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBAction func closephonepopupbuttonclicked(sender: UIButton)
     {
         self.tableview1.userInteractionEnabled = true
-         phoneview.hidden = true
+        // phoneview.hidden = true
     }
     
     
@@ -1964,6 +2004,182 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func gotomapgoogle(sender: UIButton)
     {
        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
+    }
+
+    @IBAction func lookfurthernew(sender: UIButton, forEvent event: UIEvent)
+    {
+        if lookfurtheboolean == false
+            {
+                lookfurtheboolean = true
+                println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+        
+        
+        
+        let buttonView = sender as UIView;
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch
+        {
+            
+            
+            // print the touch location on the button
+            println(touch.locationInView(self.view))
+            var point = touch.locationInView(self.view)
+            var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
+            
+            self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 38,p!.y - 220,75,200))
+            
+            if lookfurtheboolean == true
+            {
+                DynamicViewvodka.hidden = false
+            }
+            else
+            {
+                DynamicViewvodka.hidden = true
+            }
+            
+            var tag = sender.tag
+            
+            switch (tag){
+            case 2:
+                closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+            case 5:
+                closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=2
+                closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+            case 7:
+                
+                closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=5
+                closelocationpopupbutton7kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=2
+                closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+            default: return
+            }
+            
+            self.view.addSubview(DynamicViewvodka)
+            self.DynamicViewvodka.addSubview(closelocationpopupbutton7kms)
+            self.DynamicViewvodka.addSubview(closelocationpopupbutton5kms)
+        }
+ 
+        
+    }
+    func lookfurtherfor5KMS(sender: UIButton)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        selectedliqor = trimmedString1
+        
+        var tag = sender.tag
+        
+        switch(tag){
+        case 2:
+            //call 2km api
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+            
+        case 5:
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+            
+        case 7:
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 7
+            
+        default: return
+            
+        }
+        
+        self.array1 = self.header1
+        self.DynamicViewvodka.hidden = true
+    }
+    
+    func lookfurtherfor7KMS(sender: UIButton)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+        
+        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        selectedliqor = trimmedString1
+        
+        
+        var tag = sender.tag
+        
+        switch(tag){
+        case 2:
+            //call 2km api
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+            
+        case 5:
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+            
+        case 7:
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 7
+            
+        default: return
+            
+        }
+        
+        
+        self.array1 = self.header1
+        self.DynamicViewvodka.hidden = true
     }
 
     

@@ -214,13 +214,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var locatiopopupview = UIView()
     var newaddress:String!
     var addresslabel: UILabel = UILabel()
-    
-    
-    var vinayak = 0
-    var vinayak1 = 0
-    let imageName2 = UIImage(named: "LookFurther") as UIImage?
+
+    let imagewi2kmrhradius = UIImage(named: "LookFurthe2kmrwithradius") as UIImage?
+    let imagewi5kmrhradius = UIImage(named: "Lookfurther5withradius") as UIImage?
+    let imagewi7kmrhradius = UIImage(named: "lookfurther7withradius") as UIImage?
+
     let imageName5 = UIImage(named: "lookfurther5") as UIImage?
     let imageName7 = UIImage(named: "lookfurther7") as UIImage?
+    let imageName2 = UIImage(named: "Lookfurther2") as UIImage?
 
     
     @IBOutlet weak var lookfurtherdefault: UIButton!
@@ -228,12 +229,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     let closelocationpopupbutton7kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     let closelocationpopupbutton2kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     
-    var km5 = false
-    var km7 = false
+    var lookfurtheboolean = false
+
     
 
     override func viewDidLoad()
     {
+        //lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
 
       //  phonepopupview.hidden = true
 
@@ -1309,12 +1311,23 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
              
                 var happyhourstiming = head[section].happystart + " - " + head[section].happyend
-                let happyhours = "Happy Hours"
-                let happyhourshappytiming =   happyhours + "  " + happyhourstiming
-                let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
-                let attributedString = NSMutableAttributedString(string:happyhourshappytiming)
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor() , range: range)
-                headerCell.Happyhourslabel.attributedText = attributedString
+//                let happyhours = "Happy Hours"
+//                let happyhourshappytiming =   happyhours + "  " + happyhourstiming
+//                let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
+//                let attributedString = NSMutableAttributedString(string:happyhourshappytiming)
+//                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor() , range: range)
+//                headerCell.Happyhourslabel.attributedText = attributedString
+                
+                var screensize = self.view.frame.width
+                
+                if screensize > 320
+                {
+                    headerCell.Happyhourslabel.text = "Happy Hours" + happyhourstiming
+                }
+                else
+                {
+                    headerCell.Happyhourslabel.text = "Happy Hours\n" + happyhourstiming
+                }
 
         headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
@@ -2208,6 +2221,11 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         // Receive action
         // downcast sender as a UIView
         
+        self.tableview.userInteractionEnabled = false
+        let imageName = "Popbackground.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
@@ -2219,16 +2237,38 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
             
-             self.DynamicView=UIView(frame: CGRectMake(self.view.frame.origin.x + 50 ,p!.y + 30,self.view.frame.width * 0.3,90))
-            DynamicView.layer.borderWidth = 2
-            DynamicView.layer.borderColor = UIColor.blackColor().CGColor
+             self.DynamicView=UIView(frame: CGRectMake(self.view.frame.origin.x + 60 ,p!.y + 15,self.view.frame.width * 0.5,90))
+            imageView.frame = CGRect(x: 0,y: 0,width: DynamicView.frame.width,height: DynamicView.frame.height)
+            
+            let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            closelocationpopupbutton.frame = CGRectMake(DynamicView.frame.width-27 ,DynamicView.frame.height/2 - 10,16,16)
+            closelocationpopupbutton.addTarget(self, action: "popupbuttonclickedclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+            let imageName1 = "popupclosebutton.png"
+            let image1 = UIImage(named: imageName1)
+            let imageView1 = UIImageView(image: image1!)
+            closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
             
+            let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicView.frame.width - 30,30)
+            Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
+            Findongooglemapsbutton.setTitle("8722289471", forState: .Normal)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
             
+            let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicView.frame.width - 30,30)
+            Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
+            Findongooglemapsbutton1.setTitle("8892640540", forState: .Normal)
+            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+
             
-            
-            
+
             self.view.addSubview(DynamicView)
+            self.DynamicView.addSubview(imageView)
+            self.DynamicView.addSubview(closelocationpopupbutton)
+            self.DynamicView.addSubview(Findongooglemapsbutton)
+            self.DynamicView.addSubview(Findongooglemapsbutton1)
+            
             
             
             
@@ -2237,6 +2277,24 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         }
 
         
+    }
+    
+    
+    
+    func popupbuttonclickedclosed(sender: UIButton)
+    {
+        self.tableview.userInteractionEnabled = true
+        DynamicView.hidden = true
+    }
+    
+    func call1(sender: UIButton)
+    {
+        callNumber("8722289471")
+    }
+    
+    func call2(sender: UIButton)
+    {
+        callNumber("8892640540")
     }
 
 
@@ -2391,7 +2449,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             let imageView1 = UIImageView(image: image1!)
             closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
-          //  var addresslabel: UILabel = UILabel()
+
             self.addresslabel.frame = CGRectMake(10, 5, locatiopopupview.frame.width - 25, 35)
             self.addresslabel.textColor = UIColor.blackColor()
             self.addresslabel.textAlignment = NSTextAlignment.Left
@@ -2416,12 +2474,9 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             self.locatiopopupview.addSubview(closelocationpopupbutton)
             self.locatiopopupview.addSubview(self.addresslabel)
             self.locatiopopupview.addSubview(Findongooglemapsbutton)
-            
 
         }
 
-        
-     
     }
     
     
@@ -2438,16 +2493,10 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     {
          UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
     }
-    
-    @IBAction func callbutton(sender: AnyObject)
-    {
-       callNumber("8722289471")
 
-    }
-    @IBAction func callbutton2(sender: UIButton)
-    {
-        callNumber("8892640540")
-    }
+    
+
+
     
     func callNumber(phoneNumber:String)
     {
@@ -2456,9 +2505,16 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     }
     @IBAction func lookfurthernewbeer(sender: UIButton, forEvent event: UIEvent)
     {
-       // countfurther = 0
-        // self.lookfurtherdefault.hidden = true
-        
+       if  lookfurtheboolean == false
+       {
+          lookfurtheboolean = true
+        println(lookfurtheboolean)
+        }
+        else
+       {
+          lookfurtheboolean = false
+        println(lookfurtheboolean)
+        }
         
         
         
@@ -2474,9 +2530,14 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
 
         self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 38,p!.y - 220,75,200))
         
-//        self.lookfurtherdefault.imageForState(.Normal)
-//        let image = lookfurtherdefault.currentImage
-//        println(image)
+        if lookfurtheboolean == true
+        {
+            locatiopopupview.hidden = false
+        }
+        else
+        {
+            locatiopopupview.hidden = true
+        }
         
      var tag = sender.tag
         
@@ -2527,21 +2588,23 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.view.addSubview(locatiopopupview)
         self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
         self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
-       // self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
-
-      
-
-        
         }
-       
-        
-        
-        
+ 
     }
     
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
         let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
         selectedliqor = trimmedString1
 
@@ -2551,37 +2614,39 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         case 2:
             //call 2km api
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
-            lookfurtherdefault.setImage(imageName2, forState: .Normal)
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
         case 5:
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
-            lookfurtherdefault.setImage(imageName5, forState: .Normal)
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             
         case 7:
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
-            lookfurtherdefault.setImage(imageName7, forState: .Normal)
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
         default: return
             
         }
         
-        
-
-        
-        
-        
-
         self.array1 = self.head
         self.locatiopopupview.hidden = true
-        
-       // closelocationpopupbutton5kms.hidden = true
     }
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
 
         let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
         selectedliqor = trimmedString1
@@ -2593,17 +2658,17 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         case 2:
             //call 2km api
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
-            lookfurtherdefault.setImage(imageName2, forState: .Normal)
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
         case 5:
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
-            lookfurtherdefault.setImage(imageName5, forState: .Normal)
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             
         case 7:
             getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
-            lookfurtherdefault.setImage(imageName7, forState: .Normal)
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
         default: return
@@ -2611,39 +2676,9 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         }
 
         
-  
-       
-
-            
-        
-
-        
-       // closelocationpopupbutton7kms.hidden = true
-        
         self.array1 = self.head
         self.locatiopopupview.hidden = true
     }
-    
-//    func lookfurtherfor2KMS(sender: UIButton)
-//    {
-//        
-//        
-//        
-//        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-//        selectedliqor = trimmedString1
-//        
-//        
-//        
-//        getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
-//        
-//        
-//        closelocationpopupbutton2kms.hidden = true
-//        
-//        self.array1 = self.head
-//      //  self.locatiopopupview.hidden = true
-//    }
-    
-    
     func print(sender: UIButton)
     {
         println("Mask")

@@ -66,7 +66,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var iscitytextfieldhavedata = false
     var isliqtextfieldhasdata = false
     
-    var currentlocationname:String!
+
     
     var selectedliqor:String!
     
@@ -86,7 +86,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     var locationnamenew:String!
     var citynamenew:String!
-      var comma = ","
+     // var comma = ","
     
     
     
@@ -98,7 +98,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         //tableviewnew.tableFooterView = UIView()
         textfield2.tag = 1
         autocompletedTextfieldnew.tag = 2
-        autocompletedTextfieldnew.text = currentlocationname
+  
         textfield2.delegate = self
         textfield2!.delegate = self
         tableviewnew!.dataSource = self
@@ -188,20 +188,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                      self.autocompletedTextfieldnew.text = subLocality + ", " +  locality
                 }
             }
-            
-//            println(placeMark)
-//            if let locationName = placeMark.addressDictionary!["subLocality"] as? NSString
-//            {
-//                self.locationnamenew = locationName as String
-//                print(locationName)
-//            }
-//            
-//            // City
-//            if let city = placeMark.addressDictionary!["locality"] as? NSString
-//            {
-//                self.citynamenew = city as String
-//                print(city)
-//            }
+
             
            
         })
@@ -334,10 +321,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             //var fullName = "First,Last"
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             var firstName: String = fullNameArr[0]
-                            var lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
+                            var lastName: String = fullNameArr[1]
+                            
                             println(firstName)
                             println(lastName)
-                            locations[i] = firstName + ", " + lastName!
+                            locations[i] = firstName + ", " + lastName
                             
                             
 
@@ -951,10 +939,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     }
     
     
-    @IBAction func getcurrentlocationname(sender: AnyObject)
-    {
-        autocompletedTextfieldnew.text = currentlocationname
-    }
+
    
     @IBAction func findnearwineandbeer(sender: UIButton)
     {
