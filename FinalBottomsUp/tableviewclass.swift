@@ -50,7 +50,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var autocompletetextfieldforbeer: AutoCompleteTextField1!
     
 
-    @IBOutlet weak var newtextfieldtableview: UITextField!
+   // @IBOutlet weak var newtextfieldtableview: UITextField!
     var global = false
     var pintbuttonclicked = false
     var bottlebuttonclicked = false
@@ -201,7 +201,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
 
     
-    @IBOutlet weak var liqdropdowntableview: UITableView!
+   // @IBOutlet weak var liqdropdowntableview: UITableView!
     
     
 
@@ -230,21 +230,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     let closelocationpopupbutton2kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     
     var lookfurtheboolean = false
+    
+    var newtextfieldtableview = UITextField()
+    var liqdropdowntableview: UITableView  =   UITableView()
 
     
 
     override func viewDidLoad()
     {
-        //lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
-
-      //  phonepopupview.hidden = true
-
-
-       // searchbutton.setTitle("Search", forState: .Normal)
-      //  searchbutton.titleLabel?.text = "Search"
-      // searchbutton.titleLabel?.textColor = UIColor.whiteColor()
-
-        
+       liqdropdowntableview.hidden = true
         locationbutton.hidden = true
         newheadarray = head
         countvlaues = newheadarray.count
@@ -302,18 +296,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
      
 
         autocompletetextfieldforbeer.text = "  " + getselectedcityname
-        liqdropdowntableview.hidden = true
         
-       // popupview.layer.cornerRadius = 20.0
 
-        //let tap1 = UITapGestureRecognizer(target: popupview, action: Selector("handleFrontTap:"))
-        //popupview.addGestureRecognizer(tap1)
-      //  popupview.hidden = true
-      //  tap1.delegate = self
-        
-//        let tap2 = UITapGestureRecognizer(target: pop, action: Selector("handleFrontTap:"))
-//        pop.hidden = true
-//        tap2.delegate = self
         
         super.viewDidLayoutSubviews()
         self.tableview.delegate = self
@@ -322,18 +306,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         pintbutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         bottlebutton.setTitle("BOTTLE (₹)", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-       
-     //   locationbutton.setTitle("DISTANCE", forState: .Normal)
-       // locationbutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
 
-       // togglebuttonbeer.setImage(toggleoff, forState: .Normal)
         autocompletetextfieldforbeer.textFieldWidth = autocompletetextfieldforbeer.frame.width
         autocompletetextfieldforbeer.delegate = self
         
         self.newtextfieldtableview.delegate = self
         
         locationManager1 = CLLocationManager()
-        // locationManager = CLLocationManager()
         locationManager1.delegate = self;
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
@@ -344,16 +323,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        revelofferview.hidden = true
-//    }
-    
-    
-//    func dismissKeyboard()
-//    {
-//      //  phonepopupview.hidden = true
-//     }
-//    
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -501,7 +470,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func textFieldDidBeginEditing(textField: UITextField)
     {
 
-        if textField.tag == 2
+        if textField.tag == 0
         {
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
@@ -574,7 +543,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var substring = self.newtextfieldtableview.text
         searchAutocompleteEntriesWithSubstring(substring)
         self.liqdropdowntableview.reloadData()
-        self.liqdropdowntableview!.hidden = false
+        self.liqdropdowntableview.hidden = false
         
     }
     
@@ -2685,6 +2654,48 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     }
     
     
+    @IBAction func showdropdowns(sender: UIButton)
+    {
+        
+        self.DynamicView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        DynamicView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        
+        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        backbutton.frame = CGRectMake(10,20,20,20)
+        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+        let imageName1 = "popupclosebutton.png"
+        let image1 = UIImage(named: imageName1)
+        let imageView1 = UIImageView(image: image1!)
+        backbutton.setBackgroundImage(image1, forState: .Normal)
+        
+        let locationdisplaybutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        locationdisplaybutton.frame = CGRectMake(30,20,self.view.frame.width - 25,25)
+      // locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
+        locationdisplaybutton.setTitle("Bangalore", forState: .Normal)
+        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
+        
+        self.newtextfieldtableview = UITextField (frame:CGRectMake(30,55,self.view.frame.width - 25,25));
+        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
+        self.newtextfieldtableview.delegate = self
+
+      
+        liqdropdowntableview.frame = CGRectMake(0,80,self.view.frame.width,100);
+
+
+        self.view.addSubview(DynamicView)
+        self.DynamicView.addSubview(backbutton)
+        self.DynamicView.addSubview(locationdisplaybutton)
+        self.DynamicView.addSubview(newtextfieldtableview)
+        self.DynamicView.addSubview(liqdropdowntableview)
+   
+    }
+    
+    
+    
+    func viewclosed(sender: UIButton)
+    {
+        DynamicView.hidden = true
+    }
     
     
 }

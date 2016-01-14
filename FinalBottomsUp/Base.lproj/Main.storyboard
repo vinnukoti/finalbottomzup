@@ -274,6 +274,7 @@
                             <constraint firstItem="sZ7-b9-zOL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="YG4-3I-8vw"/>
                             <constraint firstAttribute="trailing" secondItem="Yjh-pA-s3Z" secondAttribute="trailing" constant="150" id="Zi3-ze-hOf"/>
                             <constraint firstItem="sZ7-b9-zOL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="75" id="a7Y-j1-tf5"/>
+                            <constraint firstItem="wI9-Q5-JlA" firstAttribute="top" secondItem="TIH-Ko-DUu" secondAttribute="bottom" constant="20" id="ahT-Uf-mHe"/>
                             <constraint firstItem="sZ7-b9-zOL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="60" id="bmL-uy-fHn"/>
                             <constraint firstAttribute="trailing" secondItem="Yjh-pA-s3Z" secondAttribute="trailing" constant="100" id="cCF-IM-dCq"/>
                             <constraint firstAttribute="trailing" secondItem="Yjh-pA-s3Z" secondAttribute="trailing" constant="231" id="cCm-nW-hmU"/>
@@ -370,6 +371,7 @@
                                 <exclude reference="MXW-b4-irt"/>
                                 <exclude reference="PK3-Og-Ov0"/>
                                 <exclude reference="vPD-UN-MBu"/>
+                                <exclude reference="UGW-rZ-YWc"/>
                                 <exclude reference="ehh-8x-MKp"/>
                                 <exclude reference="Ab2-ov-nYe"/>
                                 <exclude reference="Qtk-UA-U4p"/>
@@ -1643,8 +1645,8 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTP-q7-dDS">
                                 <rect key="frame" x="268" y="528" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="NBC-Nu-8J3"/>
-                                    <constraint firstAttribute="width" constant="75" id="tnj-SC-Vgd"/>
+                                    <constraint firstAttribute="height" constant="80" id="NBC-Nu-8J3"/>
+                                    <constraint firstAttribute="width" constant="80" id="tnj-SC-Vgd"/>
                                 </constraints>
                                 <state key="normal" image="LookFurthe2kmrwithradius">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1652,6 +1654,19 @@
                                 </state>
                                 <connections>
                                     <action selector="lookfurthernewbeer:forEvent:" destination="cXB-1m-d5z" eventType="touchUpInside" id="u2p-ZP-vcO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AR2-Sm-fRK">
+                                <rect key="frame" x="47" y="17" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Il2-iM-9TP"/>
+                                    <constraint firstAttribute="width" constant="46" id="zaD-Sh-cg3"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showdropdowns:" destination="cXB-1m-d5z" eventType="touchUpInside" id="AXL-4b-5rN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1676,6 +1691,7 @@
                             <constraint firstItem="4IA-Kt-4kI" firstAttribute="top" secondItem="bYl-zy-TpS" secondAttribute="bottom" constant="10" id="EXC-NP-WX3"/>
                             <constraint firstItem="6Yx-ha-CrO" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="25" id="FB3-Um-mqW"/>
                             <constraint firstItem="v03-3m-lFe" firstAttribute="top" secondItem="0tG-cX-6Po" secondAttribute="bottom" id="FFR-aP-Pc2"/>
+                            <constraint firstItem="AR2-Sm-fRK" firstAttribute="top" secondItem="Q37-Nk-LRb" secondAttribute="topMargin" constant="17" id="GcA-Fa-YCM"/>
                             <constraint firstItem="aNY-4Q-qgG" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="35" id="If6-5j-6S4"/>
                             <constraint firstItem="D8l-rU-SU4" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="25" id="Mh3-Ju-Q4a"/>
                             <constraint firstItem="VhW-XG-5id" firstAttribute="centerY" secondItem="lxK-NV-XxS" secondAttribute="centerY" priority="1" id="N3F-m1-cZc"/>
@@ -1704,6 +1720,7 @@
                             <constraint firstItem="XdQ-X1-8ai" firstAttribute="centerY" secondItem="6Yx-ha-CrO" secondAttribute="centerY" constant="4" id="d0w-IW-wWn"/>
                             <constraint firstItem="v03-3m-lFe" firstAttribute="top" secondItem="kxU-IR-kN9" secondAttribute="bottom" id="e18-ld-ocz"/>
                             <constraint firstItem="nk8-tg-n1j" firstAttribute="centerY" secondItem="T0b-9u-jRj" secondAttribute="centerY" priority="1" id="eA5-li-yVm"/>
+                            <constraint firstItem="AR2-Sm-fRK" firstAttribute="leading" secondItem="VhW-XG-5id" secondAttribute="trailing" constant="22" id="jYe-as-zb5"/>
                             <constraint firstItem="9PE-Dp-Ko1" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" id="lEw-TJ-I1S"/>
                             <constraint firstItem="VhW-XG-5id" firstAttribute="height" secondItem="4IA-Kt-4kI" secondAttribute="height" id="mH8-po-PIm"/>
                             <constraint firstAttribute="trailing" secondItem="vow-5r-N1G" secondAttribute="trailing" id="maP-cc-oZC"/>
@@ -1736,11 +1753,9 @@
                     <connections>
                         <outlet property="autocompletetextfieldforbeer" destination="lxK-NV-XxS" id="uOu-ye-1tB"/>
                         <outlet property="bottlebutton" destination="gw3-dO-6Bx" id="Lqv-9w-IvK"/>
-                        <outlet property="liqdropdowntableview" destination="ExG-43-OOm" id="fnt-7M-xpK"/>
                         <outlet property="locationbutton" destination="vow-5r-N1G" id="Qlv-ID-xah"/>
                         <outlet property="lookfurtherdefault" destination="NTP-q7-dDS" id="0RQ-14-jvF"/>
                         <outlet property="mainview" destination="Q37-Nk-LRb" id="20H-SI-G1F"/>
-                        <outlet property="newtextfieldtableview" destination="4IA-Kt-4kI" id="F2J-KF-6mj"/>
                         <outlet property="pintbutton" destination="6Yx-ha-CrO" id="Vei-TH-YiC"/>
                         <outlet property="tableview" destination="mZa-Vh-jz1" id="7LN-Z7-Olm"/>
                         <outlet property="togglebuttonbeer" destination="T0b-9u-jRj" id="WeR-68-uAu"/>
@@ -1751,7 +1766,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9323" y="-13092"/>
+            <point key="canvasLocation" x="-9199" y="-13293"/>
         </scene>
         <!--Deals Nearyou-->
         <scene sceneID="sEf-f9-9TH">
@@ -2904,9 +2919,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bOf-Qa-YPU"/>
-        <segue reference="XDA-r2-Wma"/>
+        <segue reference="k2w-mW-TjF"/>
         <segue reference="OFC-RP-bvW"/>
-        <segue reference="Xac-65-HoW"/>
+        <segue reference="XDA-r2-Wma"/>
+        <segue reference="oIU-td-Sv5"/>
     </inferredMetricsTieBreakers>
 </document>

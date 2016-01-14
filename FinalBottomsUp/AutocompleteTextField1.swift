@@ -40,7 +40,8 @@ public class AutoCompleteTextField1:UITextField, UITableViewDataSource, UITableV
     /// Hides autocomplete tableview when the textfield is empty
     var textFieldWidth: CGFloat!
     
-
+    public var superview1: UIView!
+    
     
     func viewDidLoad()
     {
@@ -69,12 +70,23 @@ public class AutoCompleteTextField1:UITextField, UITableViewDataSource, UITableV
     }
     
     
+    convenience init(frame:CGRect,superview: UIView)
+    {
+       
+        self.init(frame: frame)
+         superview1 = superview
+         setupAutocompleteTable(superview1)
+        
+    }
+    
     //MARK: - Init
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         commonInit()
-        setupAutocompleteTable(superview!)
+        print(superview)
+       // setupAutocompleteTable(superview!)
+ // setupAutocompleteTable(superview1)
     }
     
     required public init(coder aDecoder: NSCoder)
@@ -111,7 +123,7 @@ public class AutoCompleteTextField1:UITextField, UITableViewDataSource, UITableV
         
         let screenSize = UIScreen.mainScreen().bounds.size
         
-        let tableView = UITableView(frame: CGRect(x: 159, y: 42, width: screenSize.width - 163, height: 30.0))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 75, width: screenSize.width ,height: 30.0))
        // let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: view.frame.width, height: 30))
         //tableView  =   CGRectMake(0, 65,screenSize.width ,10);
         tableView.layer.masksToBounds = true

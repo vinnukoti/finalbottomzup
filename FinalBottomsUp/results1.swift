@@ -313,12 +313,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         for var i = 0; i < locations.count;i++
                         {
                             var newlaocations = locations[i]
-//                            var index1 = advance(newlaocations.endIndex, -14)
-//                            
-//                            var substring1 = newlaocations.substringToIndex(index1)
-//                            locations[i] = substring1
-                            
-                            //var fullName = "First,Last"
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             var firstName: String = fullNameArr[0]
                             var lastName: String = fullNameArr[1]
