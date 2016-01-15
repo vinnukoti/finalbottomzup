@@ -88,6 +88,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var citynamenew:String!
      // var comma = ","
     
+    @IBOutlet weak var dealsnearyou: UIButton!
     
     
     
@@ -95,6 +96,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     override func viewDidLoad()
     {
+        dealsnearyou.hidden = true
         //tableviewnew.tableFooterView = UIView()
         textfield2.tag = 1
         autocompletedTextfieldnew.tag = 2
@@ -310,7 +312,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         }
                         println(locations)
                         
-                        for var i = 0; i < locations.count;i++
+                        for var i = 0; i < locations.count - 1;i++
                         {
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
@@ -364,7 +366,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             variable.startIndex
             let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             
-            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(trimmedString1)")
+            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/liquors.php?find=\(trimmedString1)")
             loadData(url!, completion: didLoadData)
             
         }
@@ -493,7 +495,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     {
         liqnamefromtextfield = textfield2.text
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+        getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
         //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=5&records=10&query=\(trimmedString)")
         
         // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
@@ -603,7 +605,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 
                             }
                             
-                            if let res_place = resInfo["res_place"] as? String
+                            if let res_place = resInfo["res_address"] as? String
                             {
                                 fstobj1.Place = res_place
                             }
@@ -741,7 +743,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 //vodkasendobj.restnamevodka = res_name
                             }
                             
-                            if let res_place = resInfo["res_place"] as? String
+                            if let res_place = resInfo["res_address"] as? String
                             {
                                 vodkaobj.address = res_place
                             }

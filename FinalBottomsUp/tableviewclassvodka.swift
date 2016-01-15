@@ -56,9 +56,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     var pricebuttonclicked = false
     var distancevodkabuttonclicked = false
-
- 
-  //  @IBOutlet weak var takerestaurantname1: UILabel!
     
     let toggleoff = UIImage(named: "toggleoff")
     let toggleon = UIImage(named: "toggleon")
@@ -79,7 +76,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
 
    
-    @IBOutlet weak var citynametextfieldforvodka: AutoCompleteTextField2!
+ //   @IBOutlet weak var citynametextfieldforvodka: AutoCompleteTextField2!
     var locationManager1: CLLocationManager!
     var currentlocationname:String!
     var iscitytextfieldhavedata = false
@@ -89,9 +86,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var getenteredcitylat:Double!
     var getenteredcitylong:Double!
     private var responseData:NSMutableData?
-    @IBOutlet weak var newtableviewforvodka: UITableView!
+    //@IBOutlet weak var newtableviewforvodka: UITableView!
   
-    @IBOutlet weak var newtextfieldvodka: UITextField!
+  //  @IBOutlet weak var newtextfieldvodka: UITextField!
     var variable:String!
     var arar = [String]()
     var newarar =  [String]()
@@ -140,8 +137,24 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     let imageName2 = UIImage(named: "Lookfurther2") as UIImage?
     
     @IBOutlet weak var lookfurtherdefault: UIButton!
+    
+    
+    var showdropdownview=UIView()
+    var newtextfieldtableviewcity = AutoCompleteTextField2()
+    let locationdisplaybutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+      var newtextfieldtableview = UITextField()
+    var liqdropdowntableview: UITableView  =   UITableView()
+    
+    
+    @IBOutlet weak var citynamedisplaybutton: UIButton!
+    
+    @IBOutlet weak var liqnamedisplaybutton: UIButton!
+    
+    @IBOutlet weak var dealsnearyou: UIButton!
+    
     override func viewDidLoad()
     {
+        dealsnearyou.hidden = true
         lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
          array3 = header1
         // countvlaues = array3.count
@@ -166,21 +179,24 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
        // distancebutton.setBackgroundImage(pintunCheckedImage, forState: .Normal)
 
-        newtableviewforvodka.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
-        newtableviewforvodka.layer.borderWidth = 2
-        newtextfieldvodka.text = "  " + selectedliqor
+        liqdropdowntableview.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+        liqdropdowntableview.layer.borderWidth = 2
+        newtextfieldtableview.text = "  " + selectedliqor
+        liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
+        citynamedisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
+        locationdisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
         
         println(getcitylongitude)
         
-        newtableviewforvodka.delegate = self
-        newtableviewforvodka.dataSource = self
-        newtextfieldvodka.delegate = self
+        liqdropdowntableview.delegate = self
+        liqdropdowntableview.dataSource = self
+        newtextfieldtableview.delegate = self
        
-        newtableviewforvodka.hidden = true
+        liqdropdowntableview.hidden = true
         
-        newtableviewforvodka.tag = 0
+        liqdropdowntableview.tag = 0
         tableview1.tag = 1
-        newtextfieldvodka.tag = 2
+        newtextfieldtableview.tag = 2
         
         autocompleteUrls = [String]()
         configureTextField()
@@ -223,9 +239,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
 
-        citynametextfieldforvodka.textFieldWidth = citynametextfieldforvodka.frame.width
-        citynametextfieldforvodka.delegate = self
-        citynametextfieldforvodka.text = "  " + getselectedcityname
+        newtextfieldtableviewcity.textFieldWidth = newtextfieldtableviewcity.frame.width
+        newtextfieldtableviewcity.delegate = self
+        newtextfieldtableviewcity.text = "  " + getselectedcityname
         
         header1 = pricesort1(header1)
 
@@ -259,7 +275,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 println(street)
                 self.currentlocationname = street as String
                 
-                self.citynametextfieldforvodka.text = street as String
+                self.newtextfieldtableviewcity.text = street as String
                 
             }
             
@@ -271,17 +287,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     private func configureTextField()
     {
-        citynametextfieldforvodka.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        citynametextfieldforvodka.autoCompleteTextFont = UIFont(name: "MyriadPro-Regular", size:11)
-        citynametextfieldforvodka.autoCompleteCellHeight = 35.0
-        citynametextfieldforvodka.maximumAutoCompleteCount = 20
-        citynametextfieldforvodka.hidesWhenSelected = true
-        citynametextfieldforvodka.hidesWhenEmpty = true
-        citynametextfieldforvodka.enableAttributedText = true
+        newtextfieldtableviewcity.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        newtextfieldtableviewcity.autoCompleteTextFont = UIFont(name: "MyriadPro-Regular", size:11)
+        newtextfieldtableviewcity.autoCompleteCellHeight = 35.0
+        newtextfieldtableviewcity.maximumAutoCompleteCount = 20
+        newtextfieldtableviewcity.hidesWhenSelected = true
+        newtextfieldtableviewcity.hidesWhenEmpty = true
+        newtextfieldtableviewcity.enableAttributedText = true
         var attributes = [String:AnyObject]()
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         attributes[NSFontAttributeName] = UIFont(name: "MyriadPro-Regular", size:11)
-        citynametextfieldforvodka.autoCompleteAttributes = attributes
+        newtextfieldtableviewcity.autoCompleteAttributes = attributes
         
     }
     
@@ -289,7 +305,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     //city Textfield
     private  func handleTextFieldInterfaces()
     {
-        citynametextfieldforvodka.onTextChange = {[weak self] text in
+        newtextfieldtableviewcity.onTextChange = {[weak self] text in
             if !text.isEmpty{
                 if self!.connection != nil
                 {
@@ -304,8 +320,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 }
             }
         }
-        citynametextfieldforvodka.onSelect = {[weak self] text, indexpath in
-            self!.citynametextfieldforvodka.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
+        newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
+            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.DynamicViewvodka.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -313,14 +329,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     self!.getenteredcitylat = coordinate.latitude
                     self!.getenteredcitylong = coordinate.longitude
                     
-                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
-                    {
-                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.trimmedString)")
-                    }
-                    else
-                    {
-                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.newtrimmedstring)")
-                    }
+//                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
+//                    {
+//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.trimmedString)")
+//                    }
+//                    else
+//                    {
+//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.newtrimmedstring)")
+//                    }
 
                     
                 }
@@ -356,11 +372,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         {
                             locations.append(dict["description"] as! String)
                         }
-                        self.citynametextfieldforvodka.autoCompleteStrings = locations
+                        self.newtextfieldtableviewcity.autoCompleteStrings = locations
                     }
                 }
                 else{
-                    self.citynametextfieldforvodka.autoCompleteStrings = nil
+                    self.newtextfieldtableviewcity.autoCompleteStrings = nil
                 }
             }
         }
@@ -551,6 +567,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if tableView.tag == 1
         {
         let cells = tableView.dequeueReusableCellWithIdentifier("vodkaChildCell", forIndexPath: indexPath) as! VodkaRowCell
+            cells.press2reveal.hidden = true
         cells.liquors = [liqvodka]()
         cells.liquors = header1[indexPath.section].vodkaarray
         cells.press2reveal.tag = indexPath.section
@@ -945,15 +962,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
          
             if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
             {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             }
             else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
             {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=5&records=10&query=\(liqvodkaname)")
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=5&records=10&query=\(liqvodkaname)")
             }
             else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
             {
-              getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
+              getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
             }
             
             
@@ -965,15 +982,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
             {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
             }
             else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
             {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=7&records=10&query=\(liqvodkaname)")
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=7&records=10&query=\(liqvodkaname)")
             }
             else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
             {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
             }
 
             
@@ -995,15 +1012,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
                 {
-                       self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
+                       self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
                 }
                 else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
                 {
-                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getenteredcitylat)&long=\(self.getenteredcitylong)&km=2&records=10&query=\(self.liqvodkaname)")
+                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.getenteredcitylat)&long=\(self.getenteredcitylong)&km=2&records=10&query=\(self.liqvodkaname)")
                 }
                 else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
                 {
-                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
+                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
                 }
 
                 
@@ -1094,7 +1111,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             getvodkaobj.restnamevodka = res_name
 
                         }
-                        if let res_place = resInfo["res_place"] as? String
+                        if let res_place = resInfo["res_address"] as? String
                         {
                             getvodkaobj.address = res_place
                         }
@@ -1283,7 +1300,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func textFieldDidBeginEditing(textField: UITextField)
     {
 
-        if textField.tag == 2{
+        if textField.tag == 0{
             textField.selectAll(self)
             textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         }
@@ -1295,15 +1312,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     func textFieldDidChange(textField: UITextField)
     {
         
-        if self.newtextfieldvodka.text != nil && self.newtextfieldvodka.text != ""
+        if self.newtextfieldtableview.text != nil && self.newtextfieldtableview.text != ""
         {
             
-            var s = self.newtextfieldvodka.text
+            var s = self.newtextfieldtableview.text
             variable = s
             variable.startIndex
             let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             
-            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(trimmedString1)")
+            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/liquors.php?find=\(trimmedString1)")
             loadData(url!, completion: didLoadData)
             
         }
@@ -1354,14 +1371,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func didLoadData(arrData: [String])
     {
-        var substring = self.newtextfieldvodka.text
+        var substring = self.newtextfieldtableview.text
         //substring.lowercaseString
         searchAutocompleteEntriesWithSubstring(substring)
         
         //self.newtextfieldtableview.reloadData()
         
-        self.newtableviewforvodka.reloadData()
-        self.newtableviewforvodka!.hidden = false
+        self.liqdropdowntableview.reloadData()
+        self.liqdropdowntableview.hidden = false
         
     }
     
@@ -1409,11 +1426,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        showdropdownview.hidden = true
         if tableView.tag == 0
         {
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            newtextfieldvodka.text = selectedCell1.textLabel?.text
-            liqnamefromtextfield = newtextfieldvodka.text
+            newtextfieldtableview.text = selectedCell1.textLabel?.text
+            liqnamefromtextfield = newtextfieldtableview.text
             trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
 
            // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(trimmedString)")
@@ -1422,12 +1440,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             isliqtextfieldhasdata = true
             if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
             {
-                getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=2&records=10&query=\(trimmedString)")
+                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=2&records=10&query=\(trimmedString)")
             }
             else
             {
                 
-                getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
+                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
                 println(trimmedString)
             }
 
@@ -1514,7 +1532,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        
                                 fstobj1.restname = res_name
                             }
-                            if let res_place = resInfo["res_place"] as? String
+                            if let res_place = resInfo["res_address"] as? String
                             {
                                 fstobj1.Place = res_place
                             }
@@ -1642,7 +1660,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 vodkaobjnew.restnamevodka = res_name
                          
                             }
-                            if let res_place = resInfo["res_place"] as? String
+                            if let res_place = resInfo["res_address"] as? String
                             {
                                 vodkaobjnew.address = res_place
                             }
@@ -1744,8 +1762,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             if let destination = segue.destinationViewController as? tableviewclass
             {
-                destination.liqvodkaname = newtextfieldvodka.text
-                var liqvodkaname = newtextfieldvodka.text
+                destination.liqvodkaname = newtextfieldtableview.text
+                var liqvodkaname = newtextfieldtableview.text
                 let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                  destination.liqvodkaname = trimmedString
                 destination.head = head1
@@ -2115,17 +2133,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
         case 5:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             
         case 7:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
@@ -2159,17 +2177,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
         case 5:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             
         case 7:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
@@ -2183,6 +2201,108 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     }
 
     
+    @IBAction func shownewviewvodka(sender: UIButton)
+    {
+        self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        
+        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        backbutton.frame = CGRectMake(0,10,18,18)
+        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+        let imageName1 = "popupclosebutton.png"
+        let image1 = UIImage(named: imageName1)
+        let imageView1 = UIImageView(image: image1!)
+        backbutton.setBackgroundImage(image1, forState: .Normal)
+        
+        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
+        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
+        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        
+        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
+        
+        self.newtextfieldtableview = UITextField (frame:CGRectMake(0,39,self.view.frame.width,35));
+        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        self.newtextfieldtableview.delegate = self
+        
+        liqdropdowntableview.frame = CGRectMake(0,75,self.view.frame.width,100);
+
+        
+         self.view.addSubview(showdropdownview)
+        self.showdropdownview.addSubview(locationdisplaybutton)
+         self.showdropdownview.addSubview(newtextfieldtableview)
+        self.showdropdownview.addSubview(liqdropdowntableview)
+        self.showdropdownview.addSubview(backbutton)
+        self.showdropdownview.slideInFromLeft()
+
+ 
+        
+    }
+    
+    func locationdisplay(sender: UIButton)
+    {
+        self.DynamicViewvodka = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        DynamicViewvodka.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        
+        self.newtextfieldtableviewcity = AutoCompleteTextField2(frame: CGRect(x: 0,y: 0,width: self.view.frame.width,height: 35), superview: DynamicViewvodka)
+        
+        newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        
+        configureTextField()
+        handleTextFieldInterfaces()
+        self.view.addSubview(DynamicViewvodka)
+        self.DynamicViewvodka.addSubview(newtextfieldtableviewcity)
+        
+    }
+    
+    func viewclosed(sender: UIButton)
+    {
+        showdropdownview.hidden = true
+    }
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        println("Animation stopped")
+    }
+    
+    @IBAction func liqnameshowviewbutton(sender: UIButton)
+    {
+        self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        
+        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        backbutton.frame = CGRectMake(0,10,18,18)
+        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+        let imageName1 = "popupclosebutton.png"
+        let image1 = UIImage(named: imageName1)
+        let imageView1 = UIImageView(image: image1!)
+        backbutton.setBackgroundImage(image1, forState: .Normal)
+        
+        
+        
+        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
+        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
+        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        
+        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
+        
+        self.newtextfieldtableview = UITextField (frame:CGRectMake(0,39,self.view.frame.width,35));
+        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        self.newtextfieldtableview.delegate = self
+        
+        
+        liqdropdowntableview.frame = CGRectMake(0,75,self.view.frame.width,100);
+        
+        
+        self.view.addSubview(showdropdownview)
+        self.showdropdownview.addSubview(locationdisplaybutton)
+        self.showdropdownview.addSubview(newtextfieldtableview)
+        self.showdropdownview.addSubview(backbutton)
+        self.showdropdownview.addSubview(liqdropdowntableview)
+        self.showdropdownview.slideInFromLeft()
+    }
     
 }
 

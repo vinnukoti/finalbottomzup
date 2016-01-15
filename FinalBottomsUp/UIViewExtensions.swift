@@ -3,7 +3,7 @@ import UIKit
 extension UIView {
 	// Name this function in a way that makes sense to you... 
 	// slideFromLeft, slideRight, slideLeftToRight, etc. are great alternative names
-	func slideInFromLeft(duration: NSTimeInterval = 1.4, completionDelegate: AnyObject? = nil) {
+	func slideInFromLeft(duration: NSTimeInterval = 1.001, completionDelegate: AnyObject? = nil) {
 		// Create a CATransition animation
 		let slideInFromLeftTransition = CATransition()
         

@@ -41,6 +41,7 @@ class customheadercell: UITableViewCell
 
     @IBOutlet weak var headercellimage: UIImageView!
     
+    @IBOutlet weak var availofferimagetodisplay: UIImageView!
     //var tableobject = tableviewclass()
     override func awakeFromNib()
     {

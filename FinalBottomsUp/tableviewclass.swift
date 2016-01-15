@@ -47,7 +47,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var citylat:Double!
     var citylong:Double!
-    @IBOutlet weak var autocompletetextfieldforbeer: AutoCompleteTextField1!
+  //  @IBOutlet weak var autocompletetextfieldforbeer: AutoCompleteTextField1!
     
 
    // @IBOutlet weak var newtextfieldtableview: UITextField!
@@ -194,26 +194,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var popupx:CGFloat!
     var popupy:CGFloat!
     
-    @IBOutlet weak var searchbutton: UIButton!
-
-    
-    @IBOutlet weak var phonepopupview: UIView!
-    
-
-    
-   // @IBOutlet weak var liqdropdowntableview: UITableView!
-    
-    
-
-
-
-
-    
      var DynamicView=UIView()
     var newrestnamefromtag:String!
     var locatiopopupview = UIView()
     var newaddress:String!
     var addresslabel: UILabel = UILabel()
+    var showdropdownview=UIView()
 
     let imagewi2kmrhradius = UIImage(named: "LookFurthe2kmrwithradius") as UIImage?
     let imagewi5kmrhradius = UIImage(named: "Lookfurther5withradius") as UIImage?
@@ -233,12 +219,29 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var newtextfieldtableview = UITextField()
     var liqdropdowntableview: UITableView  =   UITableView()
+    var newtextfieldtableviewcity = AutoCompleteTextField1()
+    let locationdisplaybutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
 
     
+    @IBOutlet weak var locationnamedisplaybutton: UIButton!
 
+    @IBOutlet weak var liqnamedisplaybutton: UIButton!
+    
+    @IBOutlet weak var dealsnearyou: UIButton!
+   
+    var space = "   "
+    var near = "Near"
+    
     override func viewDidLoad()
     {
-       liqdropdowntableview.hidden = true
+        dealsnearyou.hidden = true
+        
+        locationnamedisplaybutton.setTitle("\(selectedliqor + space + near + space + getselectedcityname )", forState: .Normal)
+        locationnamedisplaybutton.layer.cornerRadius = 10
+        locationdisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
+        liqnamedisplaybutton.hidden = true
+        liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
+        liqdropdowntableview.hidden = true
         locationbutton.hidden = true
         newheadarray = head
         countvlaues = newheadarray.count
@@ -257,7 +260,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         tableview.tag = 1
         liqdropdowntableview.tag = 0
         newtextfieldtableview.tag = 2
-        autocompletetextfieldforbeer.tag = 3
+        newtextfieldtableviewcity.tag = 3
 
          liqdropdowntableview.layer.borderColor = UIColor.grayColor().CGColor
         liqdropdowntableview.layer.borderWidth = 2
@@ -295,7 +298,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         handleTextFieldInterfaces()
      
 
-        autocompletetextfieldforbeer.text = "  " + getselectedcityname
+        newtextfieldtableviewcity.text = "  " + getselectedcityname
         
 
         
@@ -307,8 +310,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         bottlebutton.setTitle("BOTTLE (₹)", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
 
-        autocompletetextfieldforbeer.textFieldWidth = autocompletetextfieldforbeer.frame.width
-        autocompletetextfieldforbeer.delegate = self
+        newtextfieldtableviewcity.textFieldWidth = newtextfieldtableviewcity.frame.width
+        newtextfieldtableviewcity.delegate = self
         
         self.newtextfieldtableview.delegate = self
         
@@ -356,7 +359,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 println(street)
                 self.currentlocationname = street as String
                 
-                self.autocompletetextfieldforbeer.text = street as String
+                self.newtextfieldtableviewcity.text = street as String
                 
             }
             
@@ -368,17 +371,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private func configureTextField()
     {
-        autocompletetextfieldforbeer.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        autocompletetextfieldforbeer.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
-        autocompletetextfieldforbeer.autoCompleteCellHeight = 35.0
-        autocompletetextfieldforbeer.maximumAutoCompleteCount = 20
-        autocompletetextfieldforbeer.hidesWhenSelected = true
-        autocompletetextfieldforbeer.hidesWhenEmpty = true
-        autocompletetextfieldforbeer.enableAttributedText = true
+        newtextfieldtableviewcity.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        newtextfieldtableviewcity.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        newtextfieldtableviewcity.autoCompleteCellHeight = 35.0
+        newtextfieldtableviewcity.maximumAutoCompleteCount = 20
+        newtextfieldtableviewcity.hidesWhenSelected = true
+        newtextfieldtableviewcity.hidesWhenEmpty = true
+        newtextfieldtableviewcity.enableAttributedText = true
         var attributes = [String:AnyObject]()
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
-        autocompletetextfieldforbeer.autoCompleteAttributes = attributes
+        newtextfieldtableviewcity.autoCompleteAttributes = attributes
         
     }
     
@@ -386,7 +389,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     //city Textfield
     private  func handleTextFieldInterfaces()
     {
-        autocompletetextfieldforbeer.onTextChange = {[weak self] text in
+      //  self.showdropdownview.bringSubviewToFront(liqdropdowntableview)
+        newtextfieldtableviewcity.onTextChange = {[weak self] text in
             if !text.isEmpty{
                 if self!.connection != nil
                 {
@@ -401,22 +405,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
-        autocompletetextfieldforbeer.onSelect = {[weak self] text, indexpath in
-            self!.autocompletetextfieldforbeer.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
+        newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
+            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self!.newtextfieldtableview.hidden = false;self?.DynamicView.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
                     let coordinate = placemark!.location.coordinate
                     self!.getcitylatitudefromgoogle = coordinate.latitude
                     self!.getcitylongitudefromgoogle = coordinate.longitude
-                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
-                    {
-                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.trimmedString)")
-                    }
-                    else
-                    {
-                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.newtrimmedstring)")
-                    }
+                    println(self!.getcitylatitudefromgoogle)
+                    println(self!.getcitylongitudefromgoogle)
+//                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
+//                    {
+//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.trimmedString)")
+//                    }
+//                    else
+//                    {
+//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.newtrimmedstring)")
+//                    }
 
                     
                 }
@@ -452,11 +458,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         {
                             locations.append(dict["description"] as! String)
                         }
-                        self.autocompletetextfieldforbeer.autoCompleteStrings = locations
+                        self.newtextfieldtableviewcity.autoCompleteStrings = locations
                     }
                 }
                 else{
-                    self.autocompletetextfieldforbeer.autoCompleteStrings = nil
+                    self.newtextfieldtableviewcity.autoCompleteStrings = nil
                 }
             }
         }
@@ -469,12 +475,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func textFieldDidBeginEditing(textField: UITextField)
     {
+        //showdropdownview.userInteractionEnabled = false
 
         if textField.tag == 0
         {
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         }
+        
+        if textField.tag == 3
+        {
+            newtextfieldtableview.hidden = true
+        }
+
         
     }
     
@@ -489,7 +502,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             variable.startIndex
             let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             
-            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(trimmedString1)")
+            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/liquors.php?find=\(trimmedString1)")
             loadData(url!, completion: didLoadData)
             
         }
@@ -589,8 +602,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+         self.showdropdownview.hidden = true
         if tableView.tag == 0
         {
+           
         let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         newtextfieldtableview.text = selectedCell1.textLabel?.text
          liqnamefromtextfield = newtextfieldtableview.text
@@ -611,12 +626,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         isliqtextfieldhasdata = true
         if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
            {
-              getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=2&records=10&query=\(trimmedString)")
+              getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=2&records=10&query=\(trimmedString)")
             }
             else
            {
          
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
                println(trimmedString)
             }
         self.view.endEditing(true)
@@ -700,7 +715,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 fstobj1.restname = res_name
                             }
-                            if let res_place = resInfo["res_place"] as? String
+                            if let res_place = resInfo["res_address"] as? String
                             {
                                 fstobj1.Place = res_place
                             }
@@ -827,7 +842,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 vodkaobjnew.restnamevodka = res_name
                             }
-                            if let res_place = resInfo["res_place"] as? String
+                            if let res_place = resInfo["res_address"] as? String
                             {
                                 vodkaobjnew.address = res_place
                             }
@@ -1092,8 +1107,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if tableView.tag == 1
         {
+            
+            
 
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
+            cells.press2reveal.hidden = true
         cells.beers = [liqclass]()
         cells.beers = head[indexPath.section].amp
         cells.arrowup.tag = indexPath.section
@@ -1257,7 +1275,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     headerCell.headercellmax.text =  "  " + "\(head[section].maxp)"
                 }
  
-    
+              headerCell.availofferimagetodisplay.hidden = true
         
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.tapguesturerecognizer.addGestureRecognizer(headerTapped)
@@ -1329,31 +1347,32 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 if head[section].ishappy == "Yes"
                 {
                     
-                  //  headerCell.Happyhourslabel.textColor = UIColor.greenColor()
+                   headerCell.Happyhourslabel.textColor = UIColor.greenColor()
                 }
                 else
                 {
-                 //  headerCell.Happyhourslabel.textColor = UIColor.orangeColor()
+                   headerCell.Happyhourslabel.textColor = UIColor.orangeColor()
                 }
                 
                 if head[section].rest_offers_happy_hour == "Yes"
                 {
-                  //  headerCell.HappyhourstiminglabelBeforeexpastion.hidden = false
+    
                     headerCell.Happyhourslabel.hidden = false
-                  //  headerCell.viretodisplayHappyhours.hidden = false
+                  //  headerCell.availofferimagetodisplay.hidden = false
+
                 }
                 else
                 {
-                  // headerCell.HappyhourstiminglabelBeforeexpastion.hidden = true
+             
+                   //  headerCell.availofferimagetodisplay.hidden = true
                     headerCell.Happyhourslabel.hidden = true
-                    //headerCell.viretodisplayHappyhours.hidden = true
+     
                 }
-               
+
                 
                 if head[section].color == true
                 {
-   
-      
+
 //                         headerCell.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
 //                    
 //                  
@@ -1365,10 +1384,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //                    {
 //                        headerCell.headercellmin.backgroundColor = UIColor(red: 0xcc/255,green: 0xd9/255,blue: 0xff/255,alpha: 1.0)
 //                    }
-                   
-          
 
-  
                 }
 
                 
@@ -1752,7 +1768,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                     {
                         
-                        if let res_place = resInfo["res_place"] as? String
+                        if let res_place = resInfo["res_address"] as? String
                         {
                             fstobj1.Place = res_place
                         }
@@ -2582,17 +2598,17 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
         case 5:
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             
         case 7:
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
@@ -2626,17 +2642,17 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
         case 5:
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             
         case 7:
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
@@ -2657,44 +2673,155 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     @IBAction func showdropdowns(sender: UIButton)
     {
         
-        self.DynamicView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
-        DynamicView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
-        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        backbutton.frame = CGRectMake(10,20,20,20)
-        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
-        let imageName1 = "popupclosebutton.png"
-        let image1 = UIImage(named: imageName1)
-        let imageView1 = UIImageView(image: image1!)
-        backbutton.setBackgroundImage(image1, forState: .Normal)
+//        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+//        backbutton.frame = CGRectMake(0,10,18,18)
+//        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+//        let imageName1 = "popupclosebutton.png"
+//        let image1 = UIImage(named: imageName1)
+//        let imageView1 = UIImageView(image: image1!)
+//        backbutton.setBackgroundImage(image1, forState: .Normal)
+//        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+//        tap.delegate = self
+//        showdropdownview.userInteractionEnabled = true
+//        showdropdownview.addGestureRecognizer(tap)
         
-        let locationdisplaybutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        locationdisplaybutton.frame = CGRectMake(30,20,self.view.frame.width - 25,25)
-      // locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
-        locationdisplaybutton.setTitle("Bangalore", forState: .Normal)
-        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
         
-        self.newtextfieldtableview = UITextField (frame:CGRectMake(30,55,self.view.frame.width - 25,25));
+//        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,45)
+//        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
+//        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+//        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        
+//        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
+        
+        self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 0,y: 3,width: self.view.frame.width,height: 45), superview: showdropdownview)
+        
+        newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        newtextfieldtableviewcity.placeholder = " Search for city here..."
+        configureTextField()
+        handleTextFieldInterfaces()
+        
+        self.newtextfieldtableview = UITextField (frame:CGRectMake(0,59,self.view.frame.width,45));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         self.newtextfieldtableview.delegate = self
+        newtextfieldtableviewcity.placeholder = "Search for city here..."
+        self.newtextfieldtableview.placeholder = " Search for liqure here..."
 
       
-        liqdropdowntableview.frame = CGRectMake(0,80,self.view.frame.width,100);
+        liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
+        
+        
+//        let imageName2 = "searchimage.png"
+//        let image2 = UIImage(named: imageName2)
+//        let imageView2 = UIImageView(image: image2!)
+//        imageView2.backgroundColor = UIColor.whiteColor()
+//        
+//        imageView2.frame = CGRectMake(0,39,35,35)
+       
 
 
-        self.view.addSubview(DynamicView)
-        self.DynamicView.addSubview(backbutton)
-        self.DynamicView.addSubview(locationdisplaybutton)
-        self.DynamicView.addSubview(newtextfieldtableview)
-        self.DynamicView.addSubview(liqdropdowntableview)
+        self.view.addSubview(showdropdownview)
+        self.showdropdownview.addSubview(newtextfieldtableviewcity)
+        self.showdropdownview.addSubview(liqdropdowntableview)
+        self.showdropdownview.addSubview(newtextfieldtableview)
+       
+        self.showdropdownview.slideInFromLeft()
+        
    
+    }
+    
+    func handleTap(gestureRecognizer: UIGestureRecognizer)
+    {
+        self.showdropdownview.hidden = true
     }
     
     
     
     func viewclosed(sender: UIButton)
     {
-        DynamicView.hidden = true
+        showdropdownview.hidden = true
+    }
+    func locationdisplay(sender: UIButton)
+    {
+        self.DynamicView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        DynamicView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        
+        self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 35,y: 36,width: self.view.frame.width - 35,height: 35), superview: DynamicView)
+        
+        newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        newtextfieldtableviewcity.placeholder = " Search for city here..."
+        configureTextField()
+        handleTextFieldInterfaces()
+        
+        let imageName2 = "searchimage.png"
+        let image2 = UIImage(named: imageName2)
+        let imageView2 = UIImageView(image: image2!)
+        imageView2.backgroundColor = UIColor.whiteColor()
+        
+        imageView2.frame = CGRectMake(0,36,35,35)
+         self.view.addSubview(DynamicView)
+         self.DynamicView.addSubview(newtextfieldtableviewcity)
+         self.DynamicView.addSubview(imageView2)
+
+    }
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        println("Animation stopped")
+    }
+    
+    
+    @IBAction func showdropdownliq(sender: UIButton)
+    {
+        self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        
+        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        backbutton.frame = CGRectMake(0,10,18,18)
+        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+        let imageName1 = "popupclosebutton.png"
+        let image1 = UIImage(named: imageName1)
+        let imageView1 = UIImageView(image: image1!)
+        backbutton.setBackgroundImage(image1, forState: .Normal)
+        
+        
+        
+        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
+        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
+        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        
+        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
+        
+        self.newtextfieldtableview = UITextField(frame:CGRectMake(35,39,self.view.frame.width - 35,35));
+        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        newtextfieldtableviewcity.placeholder = "Search for city here..."
+        self.newtextfieldtableview.placeholder = " Search for liqure here..."
+        self.newtextfieldtableview.delegate = self
+        
+        let imageName2 = "searchimage.png"
+        let image2 = UIImage(named: imageName2)
+        let imageView2 = UIImageView(image: image2!)
+        imageView2.backgroundColor = UIColor.whiteColor()
+        
+        imageView2.frame = CGRectMake(0,39,35,35)
+
+        
+        
+        liqdropdowntableview.frame = CGRectMake(0,75,self.view.frame.width,100);
+        
+        
+        self.view.addSubview(showdropdownview)
+        self.showdropdownview.addSubview(locationdisplaybutton)
+        self.showdropdownview.addSubview(newtextfieldtableview)
+        self.showdropdownview.addSubview(backbutton)
+        self.showdropdownview.addSubview(liqdropdowntableview)
+        self.showdropdownview.slideInFromLeft()
+        self.showdropdownview.addSubview(imageView2)
     }
     
     

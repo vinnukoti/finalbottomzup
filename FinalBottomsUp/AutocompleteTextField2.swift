@@ -39,6 +39,8 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
     /// Hides autocomplete tableview when the textfield is empty
     var textFieldWidth: CGFloat!
     
+    public var superview1: UIView!
+    
     func viewDidLoad()
     {
         
@@ -67,11 +69,21 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
     
     
     //MARK: - Init
+    
+    convenience init(frame:CGRect,superview: UIView)
+    {
+        
+        self.init(frame: frame)
+        superview1 = superview
+        setupAutocompleteTable(superview1)
+        
+    }
+
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         commonInit()
-        setupAutocompleteTable(superview!)
+        //setupAutocompleteTable(superview!)
     }
     
     required public init(coder aDecoder: NSCoder)
@@ -108,7 +120,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
         
         //let tableView1 = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize2.width - 50, height: 30.0))
         //let tableView1 = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize2.width - 140, height: 100.0))
-        let tableView1 = UITableView(frame: CGRect(x: 170, y: 42, width: screenSize2.width - 180, height: 30.0))
+        let tableView1 = UITableView(frame: CGRect(x: 0, y: 37, width: screenSize2.width, height: 50.0))
         
         tableView1.layer.masksToBounds = true
         tableView1.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
