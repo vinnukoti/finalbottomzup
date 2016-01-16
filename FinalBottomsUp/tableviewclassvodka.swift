@@ -151,9 +151,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var liqnamedisplaybutton: UIButton!
     
     @IBOutlet weak var dealsnearyou: UIButton!
+    var space = " "
+    var near = "Near"
     
     override func viewDidLoad()
     {
+          citynamedisplaybutton.setTitle("\(selectedliqor + space + near + space + getselectedcityname )", forState: .Normal)
+          citynamedisplaybutton.layer.cornerRadius = 10
         dealsnearyou.hidden = true
         lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
          array3 = header1
@@ -183,7 +187,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         liqdropdowntableview.layer.borderWidth = 2
         newtextfieldtableview.text = "  " + selectedliqor
         liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
-        citynamedisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
+       // citynamedisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
         locationdisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
         
         println(getcitylongitude)
@@ -197,6 +201,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         liqdropdowntableview.tag = 0
         tableview1.tag = 1
         newtextfieldtableview.tag = 2
+         newtextfieldtableviewcity.tag = 3
+
         
         autocompleteUrls = [String]()
         configureTextField()
@@ -220,11 +226,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         self.tableview1.delegate = self
         self.tableview1.dataSource = self
-       // popupviewvodka.hidden = true
-       // phoneview.hidden = true
-      //  locationpopupview.hidden = true
-      //  distancebutton.setTitle("DISTANCE", forState: .Normal)
-       // distancebutton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: 11)
+
         pricebutton.setTitle("30ML", forState: .Normal)
         pricebutton.titleLabel!.font =  UIFont(name: "MyriadPro-Regular", size:11)
         
@@ -271,13 +273,38 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             placeMark = placeArray?[0]
             
             // Street address
-            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
-                println(street)
-                self.currentlocationname = street as String
+//            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
+//                println(street)
+//                self.currentlocationname = street as String
+//                
+//                self.newtextfieldtableviewcity.text = street as String
+//                
+//            }
+            if let p: AnyObject = placemarks?.last {
                 
-                self.newtextfieldtableviewcity.text = street as String
+                //Unwrapping Optional Strings.
+                let roadno = p.subThoroughfare ?? ""
                 
+                //Checking if subThoroughfare exists.
+                if(p.subThoroughfare != nil) {
+                    
+                    //Unwrapping Optional Strings.
+                    let thoroughfare = p.thoroughfare ?? ""
+                    let subLocality = p.subLocality ?? ""
+                    let locality = p.locality ?? ""
+                    let administrativeArea = p.administrativeArea ?? ""
+                    let postalCode = p.postalCode ?? ""
+                    let country = p.country ?? ""
+                    
+                    let address = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
+                    print(address)
+                    
+                    //Assigning the address to the address label on the map.
+                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
+                    self.newtextfieldtableviewcity.text = subLocality + ", " +  locality
+                }
             }
+
             
         })
     }
@@ -321,7 +348,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
-            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.DynamicViewvodka.hidden = true;self!.getselectedcityname = text
+            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -329,14 +356,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     self!.getenteredcitylat = coordinate.latitude
                     self!.getenteredcitylong = coordinate.longitude
                     
-//                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
-//                    {
-//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.trimmedString)")
-//                    }
-//                    else
-//                    {
-//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.newtrimmedstring)")
-//                    }
+                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.trimmedString)")
+                    }
+                    else
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.newtrimmedstring)")
+                    }
 
                     
                 }
@@ -371,6 +398,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         for dict in predictions as! [NSDictionary]
                         {
                             locations.append(dict["description"] as! String)
+                        }
+                        for var i = 0; i < locations.count - 1;i++
+                        {
+                            var newlaocations = locations[i]
+                            var fullNameArr = split(newlaocations) {$0 == ","}
+                            var firstName: String = fullNameArr[0]
+                            var lastName: String = fullNameArr[1]
+                            
+                            println(firstName)
+                            println(lastName)
+                            locations[i] = firstName + ", " + lastName
+                            
                         }
                         self.newtextfieldtableviewcity.autoCompleteStrings = locations
                     }
@@ -719,7 +758,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         //headerCell.availofferbutton.enabled = false
         
         headerCell.vodkarestaurantname.font = UIFont(name: "MyriadPro-Regular", size: 11)
-        headerCell.vodkaavgprice.font = UIFont(name: "MyriadPro-Regular", size: 11)
+        headerCell.vodkaavgprice.font = UIFont(name: "MyriadPro-Bold", size: 11)
         headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "MyriadPro-Regular", size: 11)
                 
              //   headerCell.Happyhourlabelbeforeexpantion.add
@@ -2206,38 +2245,59 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
-        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        backbutton.frame = CGRectMake(0,10,18,18)
-        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
-        let imageName1 = "popupclosebutton.png"
-        let image1 = UIImage(named: imageName1)
-        let imageView1 = UIImageView(image: image1!)
-        backbutton.setBackgroundImage(image1, forState: .Normal)
+//        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+//        backbutton.frame = CGRectMake(0,10,18,18)
+//        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+//        let imageName1 = "popupclosebutton.png"
+//        let image1 = UIImage(named: imageName1)
+//        let imageView1 = UIImageView(image: image1!)
+//        backbutton.setBackgroundImage(image1, forState: .Normal)
         
-        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
-        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
-        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
+//        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
+//        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+//        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        
+//        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
         
-        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
-        
-        self.newtextfieldtableview = UITextField (frame:CGRectMake(0,39,self.view.frame.width,35));
-        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        self.newtextfieldtableview.delegate = self
-        
-        liqdropdowntableview.frame = CGRectMake(0,75,self.view.frame.width,100);
+        var tapview = UIView()
+        tapview = UIView(frame: CGRectMake(0,60,self.view.frame.width,self.view.frame.height))
+        var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        tap.delegate = self
+        showdropdownview.userInteractionEnabled = true
 
         
+      
+        self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
+        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
+        self.newtextfieldtableview.delegate = self
+        newtextfieldtableview.text = "   " + selectedliqor
+         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        
+        liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
+     
+        
          self.view.addSubview(showdropdownview)
-        self.showdropdownview.addSubview(locationdisplaybutton)
+        showdropdownview.addSubview(tapview)
+        tapview.addGestureRecognizer(tap)
          self.showdropdownview.addSubview(newtextfieldtableview)
         self.showdropdownview.addSubview(liqdropdowntableview)
-        self.showdropdownview.addSubview(backbutton)
+     
+        self.newtextfieldtableviewcity = AutoCompleteTextField2 (frame: CGRect(x: 10,y: 3,width: self.view.frame.width - 20,height: 45), superview: showdropdownview)
+           self.showdropdownview.addSubview(newtextfieldtableviewcity)
+        newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        newtextfieldtableviewcity.text = "   " + getselectedcityname
+        configureTextField()
+        handleTextFieldInterfaces()
         self.showdropdownview.slideInFromLeft()
 
  
         
+    }
+    func handleTap(gestureRecognizer: UIGestureRecognizer)
+    {
+        self.showdropdownview.hidden = true
     }
     
     func locationdisplay(sender: UIButton)

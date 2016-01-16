@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableViewDelegate
+public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableViewDelegate
 {
     
     //Manages the instance of tableview
@@ -40,9 +40,9 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     /// Hides autocomplete tableview when the textfield is empty
     var textFieldWidth: CGFloat!
     
-     func viewDidLoad()
+    func viewDidLoad()
     {
-
+        
         
     }
     public var hidesWhenEmpty:Bool?
@@ -104,14 +104,14 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     }
     
     private func setupAutocompleteTable(view:UIView)
-    {7
+    {
         
         
         let screenSize = UIScreen.mainScreen().bounds.size
         
-        let tableView = UITableView(frame: CGRect(x: 28, y: self.frame.origin.y + 13, width: screenSize.width - 53, height: 30.0))
+        let tableView = UITableView(frame: CGRect(x: 28, y: self.frame.origin.y + 45, width: screenSize.width - 56, height: 30.0))
         //let tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: 30))
-
+        
         tableView.layer.masksToBounds = true
         tableView.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         tableView.layer.borderWidth = 2.0
@@ -121,23 +121,23 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.rowHeight = autoCompleteCellHeight
         tableView.hidden = hidesWhenEmpty ?? true
-         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-          view.addSubview(tableView)
-       autoCompleteTableView = tableView
-       autoCompleteTableHeight = 250
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
+        autoCompleteTableView = tableView
+        autoCompleteTableHeight = 250
     }
     
-//    override public func layoutSubviews()
-//    {
-//        super.layoutSubviews()
-//        
-//        let width = CGRectGetWidth(frame)
-//        
-//        let someFrame = CGRect(x: 0, y: 205, width: 375, height: 100)
-//        autoCompleteTableView!.frame = someFrame
-//    }
+    //    override public func layoutSubviews()
+    //    {
+    //        super.layoutSubviews()
+    //
+    //        let width = CGRectGetWidth(frame)
+    //
+    //        let someFrame = CGRect(x: 0, y: 205, width: 375, height: 100)
+    //        autoCompleteTableView!.frame = someFrame
+    //    }
     
-   
+    
     
     private func redrawTable()
     {
@@ -176,7 +176,7 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
             cell?.textLabel?.text = autoCompleteStrings![indexPath.row]
             println(cell?.textLabel?.text = autoCompleteStrings![indexPath.row])
         }
-  
+        
         return cell!
         
     }
@@ -184,14 +184,14 @@ public class AutoCompleteTextField:UITextField, UITableViewDataSource, UITableVi
     //MARK: - UITableViewDelegate
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-       
+        
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         onSelect(cell!.textLabel!.text!, indexPath)
         
-       println(cell)
+        println(cell)
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-          
+            
             tableView.hidden = self.hidesWhenSelected
         })
     }

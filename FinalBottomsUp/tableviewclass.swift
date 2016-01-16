@@ -229,16 +229,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var dealsnearyou: UIButton!
    
-    var space = "   "
+    var space = " "
     var near = "Near"
+   
+
     
     override func viewDidLoad()
     {
         dealsnearyou.hidden = true
-        
         locationnamedisplaybutton.setTitle("\(selectedliqor + space + near + space + getselectedcityname )", forState: .Normal)
         locationnamedisplaybutton.layer.cornerRadius = 10
-        locationdisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
+       // newtextfieldtableviewcity.text = getselectedcityname
         liqnamedisplaybutton.hidden = true
         liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
         liqdropdowntableview.hidden = true
@@ -327,15 +328,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    override func prefersStatusBarHidden() -> Bool {
+    override func prefersStatusBarHidden() -> Bool
+    {
         return true
     }
-    
-
-
-    
-
-    
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
@@ -354,20 +350,41 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var placeMark: CLPlacemark!
             placeMark = placeArray?[0]
             
-            // Street address
-            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
-                println(street)
-                self.currentlocationname = street as String
+//            // Street address
+//            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
+//                println(street)
+//                self.currentlocationname = street as String
+//                
+//                self.newtextfieldtableviewcity.text = street as String
+//                
+//            }
+            if let p: AnyObject = placemarks?.last {
                 
-                self.newtextfieldtableviewcity.text = street as String
+                //Unwrapping Optional Strings.
+                let roadno = p.subThoroughfare ?? ""
                 
+                //Checking if subThoroughfare exists.
+                if(p.subThoroughfare != nil) {
+                    
+                    //Unwrapping Optional Strings.
+                    let thoroughfare = p.thoroughfare ?? ""
+                    let subLocality = p.subLocality ?? ""
+                    let locality = p.locality ?? ""
+                    let administrativeArea = p.administrativeArea ?? ""
+                    let postalCode = p.postalCode ?? ""
+                    let country = p.country ?? ""
+                    
+                    let address = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
+                   // print(address)
+                    
+                    //Assigning the address to the address label on the map.
+                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
+                    self.newtextfieldtableviewcity.text = subLocality + ", " +  locality
+                }
             }
             
         })
     }
-    
- 
-    
     
     private func configureTextField()
     {
@@ -389,7 +406,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     //city Textfield
     private  func handleTextFieldInterfaces()
     {
-      //  self.showdropdownview.bringSubviewToFront(liqdropdowntableview)
+      //  self.view.bringSubviewToFront(showdropdownview)
         newtextfieldtableviewcity.onTextChange = {[weak self] text in
             if !text.isEmpty{
                 if self!.connection != nil
@@ -406,7 +423,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
-            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self!.newtextfieldtableview.hidden = false;self?.DynamicView.hidden = true;self!.getselectedcityname = text
+            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -415,14 +432,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     self!.getcitylongitudefromgoogle = coordinate.longitude
                     println(self!.getcitylatitudefromgoogle)
                     println(self!.getcitylongitudefromgoogle)
-//                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
-//                    {
-//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.trimmedString)")
-//                    }
-//                    else
-//                    {
-//                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.newtrimmedstring)")
-//                    }
+                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.trimmedString)")
+                    }
+                    else
+                    {
+                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.newtrimmedstring)")
+                    }
 
                     
                 }
@@ -458,6 +475,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         {
                             locations.append(dict["description"] as! String)
                         }
+                        for var i = 0; i < locations.count - 1;i++
+                        {
+                            var newlaocations = locations[i]
+                            var fullNameArr = split(newlaocations) {$0 == ","}
+                            var firstName: String = fullNameArr[0]
+                            var lastName: String = fullNameArr[1]
+                            
+                            println(firstName)
+                            println(lastName)
+                            locations[i] = firstName + ", " + lastName
+                            
+                            
+                            
+                            
+                        }
                         self.newtextfieldtableviewcity.autoCompleteStrings = locations
                     }
                 }
@@ -476,19 +508,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func textFieldDidBeginEditing(textField: UITextField)
     {
         //showdropdownview.userInteractionEnabled = false
+           // showdropdownview.removeGestureRecognizer(self.tap)
 
         if textField.tag == 0
         {
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         }
-        
-        if textField.tag == 3
-        {
-            newtextfieldtableview.hidden = true
-        }
-
-        
+ 
     }
     
     func textFieldDidChange(textField: UITextField)
@@ -1063,10 +1090,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        if tableView.tag == 1{
+        if tableView.tag == 1
+        {
         return head.count
         }
-        else {
+        else
+        {
             return 1
         }
     }
@@ -1082,7 +1111,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
 
-        if tableView.tag == 1{
+        if tableView.tag == 1
+        {
         if head[section].bool == true
         {
             return 1
@@ -1118,7 +1148,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         cells.press2reveal.tag = indexPath.section
         cells.restaurantName = head[indexPath.section].restname
       //  resturantnamelable.text = "I just got a 10% discount at \(head[cells.press2reveal.tag].restname) through the BottomzUp App"
-            //namefromlabel = resturantnamelable.text
+        //namefromlabel = resturantnamelable.text
         cells.distancelabelnew.text = head[indexPath.section].distance
             cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
             cells.hotelname.text = head[indexPath.section].restname
@@ -1309,14 +1339,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 if screensize > 320
                 {
-                    headerCell.Happyhourslabel.text = "Happy Hours" + happyhourstiming
+                    headerCell.Happyhourslabel.text = "Happy Hours " + happyhourstiming
                 }
                 else
                 {
                     headerCell.Happyhourslabel.text = "Happy Hours\n" + happyhourstiming
                 }
 
-        headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+                headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 bottlebutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 pintbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
@@ -2673,6 +2703,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     @IBAction func showdropdowns(sender: UIButton)
     {
         
+       
+        
         self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
@@ -2695,41 +2727,39 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
 //        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
 //        
 //        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
+        var tapview = UIView()
+         tapview = UIView(frame: CGRectMake(0,60,self.view.frame.width,self.view.frame.height))
+                var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+                tap.delegate = self
+                showdropdownview.userInteractionEnabled = true
         
-        self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 0,y: 3,width: self.view.frame.width,height: 45), superview: showdropdownview)
         
-        newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        newtextfieldtableviewcity.placeholder = " Search for city here..."
-        configureTextField()
-        handleTextFieldInterfaces()
-        
-        self.newtextfieldtableview = UITextField (frame:CGRectMake(0,59,self.view.frame.width,45));
+        self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
         self.newtextfieldtableview.delegate = self
-        newtextfieldtableviewcity.placeholder = "Search for city here..."
-        self.newtextfieldtableview.placeholder = " Search for liqure here..."
-
-      
+        newtextfieldtableview.text = "  " + selectedliqor
+        
+        newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
         
-        
-//        let imageName2 = "searchimage.png"
-//        let image2 = UIImage(named: imageName2)
-//        let imageView2 = UIImageView(image: image2!)
-//        imageView2.backgroundColor = UIColor.whiteColor()
-//        
-//        imageView2.frame = CGRectMake(0,39,35,35)
-       
-
-
         self.view.addSubview(showdropdownview)
-        self.showdropdownview.addSubview(newtextfieldtableviewcity)
-        self.showdropdownview.addSubview(liqdropdowntableview)
+
+        showdropdownview.addSubview(tapview)
+        tapview.addGestureRecognizer(tap)
         self.showdropdownview.addSubview(newtextfieldtableview)
-       
+        self.showdropdownview.addSubview(liqdropdowntableview)
+        self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 3,width: self.view.frame.width - 20,height: 45), superview: showdropdownview)
+        self.showdropdownview.addSubview(newtextfieldtableviewcity)
+        newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        newtextfieldtableviewcity.text = " " + getselectedcityname
+        configureTextField()
+        handleTextFieldInterfaces()
         self.showdropdownview.slideInFromLeft()
+       
+        
+        
+
         
    
     }
@@ -2754,7 +2784,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        newtextfieldtableviewcity.placeholder = " Search for city here..."
+     //   newtextfieldtableviewcity.placeholder = " Search for city here..."
         configureTextField()
         handleTextFieldInterfaces()
         
@@ -2799,8 +2829,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableview = UITextField(frame:CGRectMake(35,39,self.view.frame.width - 35,35));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-        newtextfieldtableviewcity.placeholder = "Search for city here..."
-        self.newtextfieldtableview.placeholder = " Search for liqure here..."
+      //  newtextfieldtableviewcity.placeholder = "Search for city here..."
+       // self.newtextfieldtableview.placeholder = " Search for liqure here..."
         self.newtextfieldtableview.delegate = self
         
         let imageName2 = "searchimage.png"

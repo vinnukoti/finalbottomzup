@@ -37,9 +37,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var arraysring = [String]()
 
     
-    @IBOutlet weak var autocompletedTextfieldnew: AutoCompleteTextField!
+    @IBOutlet weak var autocompletedTextfieldnew: AutoCompleteTextField3!
 
+   // @IBOutlet weak var auocompletetextfieldsublocality: AutoCompleteTextField4!
     
+    @IBOutlet weak var localityTextfield: UITextField!
     @IBOutlet weak var textfield2: UITextField!
     
     @IBOutlet weak var findapubbuttonnew: UIButton!
@@ -90,38 +92,68 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     @IBOutlet weak var dealsnearyou: UIButton!
     
+    var LOcalityTableview: UITableView  =   UITableView()
     
+    var items: [String] = ["Delhi", "Gurgaon", "Noida"]
     
+    var localityfromtextfield:String!
+    var beerTypefromtextfield:String!
+    
+    @IBOutlet weak var beerTypeTextfield: UITextField!
+    
+    var liqTypes: [String] = ["Beer", "Rum", "Whisky","Vodka"]
+    var liqTypetableview: UITableView  =   UITableView()
     
     
     override func viewDidLoad()
     {
+        localityTextfield.placeholder = " Select Place"
         dealsnearyou.hidden = true
         //tableviewnew.tableFooterView = UIView()
         textfield2.tag = 1
         autocompletedTextfieldnew.tag = 2
+        localityTextfield.tag = 3
+        LOcalityTableview.tag = 4
+        tableviewnew.tag = 5
+        liqTypetableview.tag = 6
+        beerTypeTextfield.tag = 7
   
         textfield2.delegate = self
-        textfield2!.delegate = self
+      //  textfield2!.delegate = self
         tableviewnew!.dataSource = self
         tableviewnew.delegate = self
         tableviewnew!.scrollEnabled = true
         tableviewnew!.hidden = true
         autocompletedTextfieldnew.textFieldWidth = autocompletedTextfieldnew.frame.width
         autocompletedTextfieldnew.delegate = self
-        
+        localityTextfield.delegate = self
+        beerTypeTextfield.delegate = self
+      
         configureTextField()
         handleTextFieldInterfaces()
         locationManager1 = CLLocationManager()
-        // locationManager = CLLocationManager()
         locationManager1.delegate = self;
         locationManager1.desiredAccuracy = kCLLocationAccuracyBest
         locationManager1.requestAlwaysAuthorization()
         locationManager1.startUpdatingLocation()
        
-       autocompletedTextfieldnew.layer.cornerRadius = 10
-       textfield2.layer.cornerRadius = 10
-
+      // autocompletedTextfieldnew.layer.cornerRadius = 10
+     //  textfield2.layer.cornerRadius = 10
+        
+        
+        LOcalityTableview.frame         =   CGRectMake(28,self.localityTextfield.frame.origin.y + 47, self.view.frame.width - 56, 100);
+        LOcalityTableview.delegate      =   self
+        LOcalityTableview.dataSource    =   self
+        LOcalityTableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(LOcalityTableview)
+        LOcalityTableview.hidden = true
+        
+        liqTypetableview.frame         =   CGRectMake(28,self.beerTypeTextfield.frame.origin.y + 35, self.view.frame.width - 56, 100);
+        liqTypetableview.delegate      =   self
+        liqTypetableview.dataSource    =   self
+        liqTypetableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(liqTypetableview)
+        liqTypetableview.hidden = true
         
         
 
@@ -183,11 +215,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     let country = p.country ?? ""
                     
                     let address = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                    print(address)
+                  //  print(address)
                     
+                    println(locality)
                     //Assigning the address to the address label on the map.
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                     self.autocompletedTextfieldnew.text = subLocality + ", " +  locality
+                     self.autocompletedTextfieldnew.text = subLocality + ", " + locality
+                  //  self.auocompletetextfieldsublocality.text = "  " +  subLocality
                 }
             }
 
@@ -235,6 +269,22 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
         autocompletedTextfieldnew.autoCompleteAttributes = attributes
         
+        
+//        auocompletetextfieldsublocality.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+//        auocompletetextfieldsublocality.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+//        auocompletetextfieldsublocality.autoCompleteCellHeight = 35.0
+//        auocompletetextfieldsublocality.maximumAutoCompleteCount = 20
+//        auocompletetextfieldsublocality.hidesWhenSelected = true
+//        auocompletetextfieldsublocality.hidesWhenEmpty = true
+//        auocompletetextfieldsublocality.enableAttributedText = true
+//        var attributes1 = [String:AnyObject]()
+//        attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+//        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+//        auocompletetextfieldsublocality.autoCompleteAttributes = attributes
+        
+        
+        
+        
     }
     
     
@@ -249,7 +299,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     self!.connection = nil
                 }
                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input=\(text)&types=(regions)&components=country:IN"
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityfromtextfield)}\(text)&types=(regions)&components=country:IN"
+              //  https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={Bangalore}vijaynagar&types=(regions)&components=country:IN
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
                     let urlRequest = NSURLRequest(URL: url!)
@@ -275,6 +326,41 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             })
             
         }
+        
+//        auocompletetextfieldsublocality.onTextChange = {[weak self] text in
+//            if !text.isEmpty{
+//                if self!.connection != nil
+//                {
+//                    self!.connection!.cancel()
+//                    self!.connection = nil
+//                }
+//                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
+//                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input=\(text)&types=(regions)&components=country:IN"
+//                let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
+//                if url != nil{
+//                    let urlRequest = NSURLRequest(URL: url!)
+//                    self!.connection = NSURLConnection(request: urlRequest, delegate: self)
+//                }
+//            }
+//        }
+//        auocompletetextfieldsublocality.onSelect = {[weak self] text, indexpath in
+//            self!.autocompletedTextfieldnew.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
+//            //print(self!.getselectedcityname)
+//            Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
+//                if placemark != nil
+//                {
+//                    let coordinate = placemark!.location.coordinate
+//                    self!.citylat = coordinate.latitude
+//                    self!.citylong = coordinate.longitude
+////                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
+////                    {
+////                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+////                    }
+//                    
+//                }
+//            })
+//            
+//        }
     }
     
     
@@ -304,10 +390,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     if let predictions = result["predictions"] as? NSArray
                     {
                         var locations = [String]()
+                        var locations1 = [String]()
                         for dict in predictions as! [NSDictionary]
                         {
                             locations.append(dict["description"] as! String)
-                           
+                            locations1.append(dict["description"] as! String)
                           
                         }
                         println(locations)
@@ -322,19 +409,19 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             println(firstName)
                             println(lastName)
                             locations[i] = firstName + ", " + lastName
-                            
-                            
-
-                            
+        
                         }
+
        
                      
                         self.autocompletedTextfieldnew.autoCompleteStrings = locations
+                      //  self.auocompletetextfieldsublocality.autoCompleteStrings = locations1
                         println(self.autocompletedTextfieldnew.autoCompleteStrings = locations)
                     }
                 }
                 else{
                     self.autocompletedTextfieldnew.autoCompleteStrings = nil
+                   // self.auocompletetextfieldsublocality.autoCompleteStrings = nil
                 }
             }
         }
@@ -348,9 +435,23 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     // textfield1 starts
     func textFieldDidBeginEditing(textField: UITextField)
     {
-        if textField.tag == 1{
+        if textField.tag == 1
+        {
+           // let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(trimmedString1)")
+            
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        }
+        
+        else if textField.tag == 3
+        {
+             textField.selectAll(self)
+            LOcalityTableview.hidden = false
+        }
+        else if textField.tag == 7
+        {
+            textField.selectAll(self)
+            liqTypetableview.hidden = false
         }
         
     }
@@ -455,10 +556,43 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return autocompleteUrls.count
+        if tableView.tag == 4
+        {
+            return self.items.count
+        }
+            else if tableView.tag == 6
+        {
+            return self.liqTypes.count
+        }
+        else
+        {
+            return autocompleteUrls.count
+        }
+        
+        
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        
+        if tableView.tag == 4
+        {
+            var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+            
+            cell.textLabel?.text = self.items[indexPath.row]
+            
+            return cell
+  
+        }
+        
+        else if tableView.tag == 6
+        {
+            var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+            
+            cell.textLabel?.text = self.liqTypes[indexPath.row]
+            
+            return cell
+        }
+        
         tableviewnew.layer.masksToBounds = true
         tableviewnew.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         tableviewnew.layer.borderWidth = 2.0
@@ -479,17 +613,45 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-        textfield2.text = selectedCell1.textLabel?.text
-        selectedliqor = selectedCell1.textLabel!.text
-         isliqtextfieldhasdata = true
-        if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
+        
+        if tableView.tag == 4
         {
-            findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            localityTextfield.text = selectedCell1.textLabel?.text
+            localityfromtextfield = localityTextfield.text
+            println(localityfromtextfield)
+            self.view.endEditing(true)
+            tableView.hidden = true
         }
-       
-        self.view.endEditing(true)
-        tableView.hidden = true
+        
+        else if tableView.tag == 5
+        {
+            let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            textfield2.text = selectedCell1.textLabel?.text
+            selectedliqor = selectedCell1.textLabel!.text
+            isliqtextfieldhasdata = true
+            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
+            {
+                findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            }
+            
+            self.view.endEditing(true)
+            tableView.hidden = true
+        }
+        
+        else if tableView.tag == 6
+        {
+            println("You selected cell #\(indexPath.row)!")
+            let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            beerTypeTextfield.text = selectedCell1.textLabel?.text
+            beerTypefromtextfield = beerTypeTextfield.text
+            println(beerTypefromtextfield)
+            self.view.endEditing(true)
+            tableView.hidden = true
+        }
+ 
+        
+    
     }
     @IBAction func searchnew(sender: UIButton)
     {
