@@ -13,7 +13,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
 {
     
     //Manages the instance of tableview
-    public var autoCompleteTableView:UITableView?
+    public  static var autoCompleteTableView:UITableView?
     /// Holds the collection of attributed strings
     public var attributedAutoCompleteStrings:[NSAttributedString]?
     /// Handles user selection action on autocomplete table view
@@ -49,7 +49,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
         {
         didSet{
             assert(hidesWhenEmpty != nil, "hideWhenEmpty cannot be set to nil")
-            autoCompleteTableView?.hidden = hidesWhenEmpty!
+           self.dynamicType.autoCompleteTableView?.hidden = hidesWhenEmpty!
         }
     }
     /// The table view height
@@ -109,7 +109,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
         
         let screenSize = UIScreen.mainScreen().bounds.size
         
-        let tableView = UITableView(frame: CGRect(x: 28, y: self.frame.origin.y + 45, width: screenSize.width - 56, height: 30.0))
+        let tableView = UITableView(frame: CGRect(x: 15, y: self.frame.origin.y + 30, width: screenSize.width - 30, height: 50.0))
         //let tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: 30))
         
         tableView.layer.masksToBounds = true
@@ -123,7 +123,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
         tableView.hidden = hidesWhenEmpty ?? true
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
-        autoCompleteTableView = tableView
+        self.dynamicType.autoCompleteTableView = tableView
         autoCompleteTableHeight = 250
     }
     
@@ -141,11 +141,11 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
     
     private func redrawTable()
     {
-        if autoCompleteTableView != nil
+        if self.dynamicType.autoCompleteTableView != nil
         {
-            var newFrame = autoCompleteTableView!.frame
+            var newFrame = self.dynamicType.autoCompleteTableView!.frame
             newFrame.size.height = autoCompleteTableHeight!
-            autoCompleteTableView!.frame = newFrame
+            self.dynamicType.autoCompleteTableView!.frame = newFrame
         }
     }
     
@@ -246,7 +246,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
                 }
             }
         }
-        autoCompleteTableView?.reloadData()
+        self.dynamicType.autoCompleteTableView?.reloadData()
     }
     
     //MARK: - Internal
@@ -254,7 +254,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
         onTextChange(text!)
         if text!.isEmpty{ autoCompleteStrings = nil }
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.autoCompleteTableView?.hidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
+            self.dynamicType.autoCompleteTableView?.hidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
         })
     }
 }

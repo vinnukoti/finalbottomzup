@@ -153,11 +153,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var dealsnearyou: UIButton!
     var space = " "
     var near = "Near"
+    var beerTypefromtextfield:String!
     
     override func viewDidLoad()
     {
-          citynamedisplaybutton.setTitle("\(selectedliqor + space + near + space + getselectedcityname )", forState: .Normal)
-          citynamedisplaybutton.layer.cornerRadius = 10
+        
+        if beerTypefromtextfield != nil
+        {
+            citynamedisplaybutton.setTitle("\( beerTypefromtextfield + space + near + space + getselectedcityname )", forState: .Normal)
+        }
+        else
+        {
+            citynamedisplaybutton.setTitle("\( liqvodkaname + space + near + space + getselectedcityname )", forState: .Normal)
+        }
+        
+        
+
+        citynamedisplaybutton.layer.cornerRadius = 10
         dealsnearyou.hidden = true
         lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
          array3 = header1
@@ -308,10 +320,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         })
     }
-    
-    
-    
-    
     private func configureTextField()
     {
         newtextfieldtableviewcity.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
@@ -348,7 +356,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
-            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
+            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.citynamedisplaybutton.setTitle("\(self!.newtextfieldtableview.text + self!.space + self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -1804,7 +1812,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination.liqvodkaname = newtextfieldtableview.text
                 var liqvodkaname = newtextfieldtableview.text
                 let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-                 destination.liqvodkaname = trimmedString
+                destination.liqvodkaname = trimmedString
                 destination.head = head1
                 destination.togglebeer = togglevodka
                 destination.getcitylatitude = getcitylatitude
@@ -2271,7 +2279,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
-        newtextfieldtableview.text = "   " + selectedliqor
+        if beerTypefromtextfield != nil
+        {
+           newtextfieldtableview.text = "   " + beerTypefromtextfield
+        }
+        else
+        {
+            newtextfieldtableview.text = " " + liqvodkaname
+        }
+        
          newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         
         liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);

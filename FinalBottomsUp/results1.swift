@@ -54,7 +54,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     private let googleMapsKey = "AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
-    var autocompleteUrls = [String]()
+   // var autocompleteUrls = [String]()
     
     var locationManager1: CLLocationManager!
     
@@ -104,10 +104,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var liqTypes: [String] = ["Beer", "Rum", "Whisky","Vodka"]
     var liqTypetableview: UITableView  =   UITableView()
     
-    
+   // var liqTypes1:[String] = ["BUDWEISER","CARLSBERG","FOSTERS","HEINEKEN","KINGFISHER"]
+    var liqTypes1:[String] = [String]()
+
     override func viewDidLoad()
     {
-        localityTextfield.placeholder = " Select Place"
         dealsnearyou.hidden = true
         //tableviewnew.tableFooterView = UIView()
         textfield2.tag = 1
@@ -141,14 +142,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
      //  textfield2.layer.cornerRadius = 10
         
         
-        LOcalityTableview.frame         =   CGRectMake(28,self.localityTextfield.frame.origin.y + 47, self.view.frame.width - 56, 100);
+        LOcalityTableview.frame         =   CGRectMake(15,self.localityTextfield.frame.origin.y + 30, self.view.frame.width - 30, 165);
         LOcalityTableview.delegate      =   self
         LOcalityTableview.dataSource    =   self
         LOcalityTableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+       // LOcalityTableview
         self.view.addSubview(LOcalityTableview)
         LOcalityTableview.hidden = true
         
-        liqTypetableview.frame         =   CGRectMake(28,self.beerTypeTextfield.frame.origin.y + 35, self.view.frame.width - 56, 100);
+        liqTypetableview.frame         =   CGRectMake(15,self.beerTypeTextfield.frame.origin.y + 40, self.view.frame.width - 30, 165);
         liqTypetableview.delegate      =   self
         liqTypetableview.dataSource    =   self
         liqTypetableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -220,8 +222,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     println(locality)
                     //Assigning the address to the address label on the map.
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                     self.autocompletedTextfieldnew.text = subLocality + ", " + locality
-                  //  self.auocompletetextfieldsublocality.text = "  " +  subLocality
+                    // self.autocompletedTextfieldnew.text = subLocality + ", " + locality
+                    self.autocompletedTextfieldnew.text = "Current Location"
                 }
             }
 
@@ -317,50 +319,16 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     let coordinate = placemark!.location.coordinate
                     self!.citylat = coordinate.latitude
                     self!.citylong = coordinate.longitude
-                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
-                    {
-                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-                    }
+//                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
+//                    {
+//                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+//                    }
 
                 }
             })
             
         }
-        
-//        auocompletetextfieldsublocality.onTextChange = {[weak self] text in
-//            if !text.isEmpty{
-//                if self!.connection != nil
-//                {
-//                    self!.connection!.cancel()
-//                    self!.connection = nil
-//                }
-//                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
-//                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input=\(text)&types=(regions)&components=country:IN"
-//                let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
-//                if url != nil{
-//                    let urlRequest = NSURLRequest(URL: url!)
-//                    self!.connection = NSURLConnection(request: urlRequest, delegate: self)
-//                }
-//            }
-//        }
-//        auocompletetextfieldsublocality.onSelect = {[weak self] text, indexpath in
-//            self!.autocompletedTextfieldnew.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
-//            //print(self!.getselectedcityname)
-//            Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
-//                if placemark != nil
-//                {
-//                    let coordinate = placemark!.location.coordinate
-//                    self!.citylat = coordinate.latitude
-//                    self!.citylong = coordinate.longitude
-////                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
-////                    {
-////                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-////                    }
-//                    
-//                }
-//            })
-//            
-//        }
+
     }
     
     
@@ -435,124 +403,190 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     // textfield1 starts
     func textFieldDidBeginEditing(textField: UITextField)
     {
+        
         if textField.tag == 1
         {
-           // let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(trimmedString1)")
             
-        textField.selectAll(self)
-        textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+           // getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+            println(beerTypefromtextfield)
+            getliqtypes("http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(beerTypefromtextfield)")
+            tableviewnew.hidden = false
+            liqTypetableview.hidden = true
+        }
+            else if textField.tag == 2
+        {
+            LOcalityTableview.hidden = true
         }
         
         else if textField.tag == 3
         {
              textField.selectAll(self)
             LOcalityTableview.hidden = false
+            AutoCompleteTextField3.autoCompleteTableView?.hidden = true
         }
         else if textField.tag == 7
         {
-            textField.selectAll(self)
+         // textField.userInteractionEnabled = true
+          //  textField.selectAll(self)
+            tableviewnew.hidden = true
             liqTypetableview.hidden = false
+            //textField.userInteractionEnabled = false
         }
         
+    }
+//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool
+//    {
+//        if textField.tag == 7
+//        {
+//            return false; //do not show keyboard nor cursor
+//        }
+//        else
+//        {
+//            return true
+//        }
+//        
+//    }
+    
+    func getliqtypes(urlString:String)
+    {
+        let url = NSURL(string: urlString)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+            
+            dispatch_async(dispatch_get_main_queue(),
+                {
+                    
+                    self.extract_jsonbeerTypes(data)
+            })
+        }
+        task.resume()
     }
     
-    func textFieldDidChange(textField: UITextField)
+    func extract_jsonbeerTypes(data:NSData)
     {
-        
-        if self.textfield2.text != nil && self.textfield2.text != ""
+        var jsonError:NSError?
+        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
         {
-            
-            var s = self.textfield2.text
-            variable = s
-            variable.startIndex
-            let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-            
-            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/liquors.php?find=\(trimmedString1)")
-            loadData(url!, completion: didLoadData)
-            
-        }
-        
-    }
-    func loadData(url: NSURL, completion: ([String]) -> Void){
-        let session = NSURLSession.sharedSession()
-        
-        var task = session.dataTaskWithURL(url){
-            (data, response, error) -> Void in
-            
-            if error != nil {
-                
-            } else {
-                
-                var error : NSError?
-                
-                if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error) as? NSArray{
-                    for var index = 0; index < json.count; ++index
-                    {
-                        if let bottomsUp = json[index] as? NSDictionary
-                        {
-                            if let liquors = bottomsUp["liquors"] as? String
-                            {
-                                self.arar.append(liquors)
-                                self.newarar = self.removeDuplicates(self.arar)
-                                
-                            }
-                        }
-                    }
+            liqTypes1 = [String]()
+           if let result = json["result"] as? NSArray
+           {
+            for var i = 0; i < result.count; i++
+            {
+              if let one = result[i] as? NSDictionary
+              {
+               if let brand_name = one["brand_name"] as? String
+               {
+                liqTypes1.append(brand_name)
                 }
-                
-                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-                dispatch_async(dispatch_get_global_queue(priority, 0))
-                    {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            completion(self.newarar)
-                        }
-                }
-                
+               }
+            }
+            
             }
         }
         
-        task.resume()
-        
-    }
-    func didLoadData(arrData: [String])
-    {
-        var substring = self.textfield2.text
-        //substring.lowercaseString
-        searchAutocompleteEntriesWithSubstring(substring)
-        
         self.tableviewnew.reloadData()
-        self.tableviewnew!.hidden = false
     }
+    
+    
+    
+//    func textFieldDidChange(textField: UITextField)
+//    {
+//        
+//        if self.textfield2.text != nil && self.textfield2.text != ""
+//        {
+//            
+//            var s = self.textfield2.text
+//            variable = s
+//            variable.startIndex
+//            let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+//            
+//            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/liquors.php?find=\(trimmedString1)")
+//            loadData(url!, completion: didLoadData)
+//
+//        }
+//        
+//    }
+//    func loadData(url: NSURL, completion: ([String]) -> Void){
+//        let session = NSURLSession.sharedSession()
+//        
+//        var task = session.dataTaskWithURL(url){
+//            (data, response, error) -> Void in
+//            
+//            if error != nil {
+//                
+//            } else {
+//                
+//                var error : NSError?
+//                
+//                if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error) as? NSArray{
+//                    for var index = 0; index < json.count; ++index
+//                    {
+//                        if let bottomsUp = json[index] as? NSDictionary
+//                        {
+//                            if let liquors = bottomsUp["liquors"] as? String
+//                            {
+//                                self.arar.append(liquors)
+//                                self.newarar = self.removeDuplicates(self.arar)
+//                                
+//                            }
+//                        }
+//                    }
+//                }
+//                
+//                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+//                dispatch_async(dispatch_get_global_queue(priority, 0))
+//                    {
+//                        dispatch_async(dispatch_get_main_queue()) {
+//                            completion(self.newarar)
+//                        }
+//                }
+//                
+//            }
+//        }
+//        
+//        task.resume()
+//        
+//    }
+//    func didLoadData(arrData: [String])
+//    {
+//        var substring = self.textfield2.text
+//        //substring.lowercaseString
+//        searchAutocompleteEntriesWithSubstring(substring)
+//        
+//        self.tableviewnew.reloadData()
+//        self.tableviewnew!.hidden = false
+//    }
     
     // Autocomplete liq
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
-    {
-        
-        return true
-    }
+//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
+//    {
+//        
+//        return true
+//    }
     
-    func searchAutocompleteEntriesWithSubstring(substring: String)
-    {
-        autocompleteUrls.removeAll(keepCapacity: false)
-        
-        var usubstring = substring
-        
-        for curString in newarar
-        {
-            var ucurstring = curString
-            
-            var myString: NSString! = ucurstring as NSString
-            var substringRange: NSRange! = myString.rangeOfString(usubstring.capitalizedString)
-            
-            if (substringRange.location == 0)
-            {
-                autocompleteUrls.append(ucurstring)
-            }
-        }
-
-        
-    }
+//    func searchAutocompleteEntriesWithSubstring(substring: String)
+//    {
+//        autocompleteUrls.removeAll(keepCapacity: false)
+//        
+//        var usubstring = substring
+//        
+//        for curString in newarar
+//        {
+//            var ucurstring = curString
+//            
+//            var myString: NSString! = ucurstring as NSString
+//            var substringRange: NSRange! = myString.rangeOfString(usubstring.capitalizedString)
+//            
+//            if (substringRange.location == 0)
+//            {
+//                autocompleteUrls.append(ucurstring)
+//            }
+//        }
+//
+//        
+//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -566,7 +600,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         }
         else
         {
-            return autocompleteUrls.count
+            return liqTypes1.count
         }
         
         
@@ -579,6 +613,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.items[indexPath.row]
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:11)
             
             return cell
   
@@ -588,11 +623,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         {
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
-            cell.textLabel?.text = self.liqTypes[indexPath.row]
+             cell.textLabel?.text = self.liqTypes[indexPath.row]
+             cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:11)
             
             return cell
         }
         
+     
+        else
+        {
         tableviewnew.layer.masksToBounds = true
         tableviewnew.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
         tableviewnew.layer.borderWidth = 2.0
@@ -605,10 +644,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         }
         
         let index = indexPath.row as Int
-        cell!.textLabel!.text = autocompleteUrls[index]
-        cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        cell!.textLabel!.text = liqTypes1[index]
+        cell!.textLabel?.font = UIFont(name: "MyriadPro-Regular", size: 11.0)
         cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         return cell!
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
@@ -630,10 +670,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             textfield2.text = selectedCell1.textLabel?.text
             selectedliqor = selectedCell1.textLabel!.text
             isliqtextfieldhasdata = true
-            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
-            {
-                findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-            }
+//            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
+//            {
+//                findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+//            }
             
             self.view.endEditing(true)
             tableView.hidden = true
@@ -648,6 +688,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(beerTypefromtextfield)
             self.view.endEditing(true)
             tableView.hidden = true
+            
         }
  
         
@@ -657,7 +698,17 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     {
         liqnamefromtextfield = textfield2.text
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-        getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+      //  println(trimmedString)
+        
+        if trimmedString == "All"
+        {
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(beerTypefromtextfield)")
+        }
+        else
+        {
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+        }
+        
         //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=5&records=10&query=\(trimmedString)")
         
         // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
@@ -1035,6 +1086,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.liqname = trimmedString
                 destination.newtrimmedstring = trimmedString
                 destination.head = head1
+                destination.beerTypefromtextfield = beerTypefromtextfield
                // destination.llokfurther = head1
                 //destination.resortname1 = arraysring
                 destination.getdevicelatitude = devicelatitude
@@ -1064,6 +1116,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 
                 destination1.header1 = header
                 destination1.newtrimmedstring = trimmedString
+                destination1.beerTypefromtextfield = beerTypefromtextfield
                 // destination1.headfurther = headervodka
                 destination1.getcitylatitude = citylat
                 destination1.getcitylongitude = citylong

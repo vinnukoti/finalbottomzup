@@ -231,17 +231,31 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
    
     var space = " "
     var near = "Near"
+     var beerTypefromtextfield:String!
+    //var space = " "
    
+    var locationvaluefrombutton: String!
 
     
     override func viewDidLoad()
     {
         dealsnearyou.hidden = true
-        locationnamedisplaybutton.setTitle("\(selectedliqor + space + near + space + getselectedcityname )", forState: .Normal)
+
+        
+          if beerTypefromtextfield != nil
+          {
+            locationnamedisplaybutton.setTitle("\(beerTypefromtextfield + space + near + space + getselectedcityname )", forState: .Normal)
+         }
+          
+      else
+        {
+             locationnamedisplaybutton.setTitle("\(liqvodkaname + space + near + space + getselectedcityname )", forState: .Normal)
+        }
+      
         locationnamedisplaybutton.layer.cornerRadius = 10
        // newtextfieldtableviewcity.text = getselectedcityname
         liqnamedisplaybutton.hidden = true
-        liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
+      //  liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
         liqdropdowntableview.hidden = true
         locationbutton.hidden = true
         newheadarray = head
@@ -423,10 +437,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
-            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationdisplaybutton.setTitle("\(self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
+            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationnamedisplaybutton.setTitle("\(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
+                    println(self!.newtextfieldtableviewcity)
                     let coordinate = placemark!.location.coordinate
                     self!.getcitylatitudefromgoogle = coordinate.latitude
                     self!.getcitylongitudefromgoogle = coordinate.longitude
@@ -475,16 +490,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         {
                             locations.append(dict["description"] as! String)
                         }
-                        for var i = 0; i < locations.count - 1;i++
+                        for var i = 0; i < locations.count;i++
                         {
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             var firstName: String = fullNameArr[0]
-                            var lastName: String = fullNameArr[1]
+                           // var lastName: String = fullNameArr[1]
                             
                             println(firstName)
-                            println(lastName)
-                            locations[i] = firstName + ", " + lastName
+                           // println(lastName)
+                            locations[i] = firstName
                             
                             
                             
@@ -647,17 +662,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
           //  newtrimmedstring = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            locationnamedisplaybutton.setTitle(newtextfieldtableview.text + space + near + space + newtextfieldtableviewcity.text, forState: .Normal)
         
         self.array1 = head 
         selectedliqor = selectedCell1.textLabel!.text
         isliqtextfieldhasdata = true
         if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
            {
+          //  liqnamedisplaybutton.setTitle(newtextfieldtableview.text + space + near + space + newtextfieldtableviewcity.text, forState: .Normal)
+            
               getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=2&records=10&query=\(trimmedString)")
             }
             else
            {
          
+           // liqnamedisplaybutton.setTitle(newtextfieldtableview.text + space + near + space + newtextfieldtableviewcity.text, forState: .Normal)
             getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
                println(trimmedString)
             }
@@ -2737,7 +2756,14 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
-        newtextfieldtableview.text = "  " + selectedliqor
+        if beerTypefromtextfield != nil
+        {
+            newtextfieldtableview.text = "   " + beerTypefromtextfield
+        }
+        else
+        {
+            newtextfieldtableview.text = " " + liqvodkaname
+        }
         
         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
@@ -2804,55 +2830,55 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     }
     
     
-    @IBAction func showdropdownliq(sender: UIButton)
-    {
-        self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
-        showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-        
-        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        backbutton.frame = CGRectMake(0,10,18,18)
-        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
-        let imageName1 = "popupclosebutton.png"
-        let image1 = UIImage(named: imageName1)
-        let imageView1 = UIImageView(image: image1!)
-        backbutton.setBackgroundImage(image1, forState: .Normal)
-        
-        
-        
-        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
-        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
-        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        
-        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
-        
-        self.newtextfieldtableview = UITextField(frame:CGRectMake(35,39,self.view.frame.width - 35,35));
-        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
-      //  newtextfieldtableviewcity.placeholder = "Search for city here..."
-       // self.newtextfieldtableview.placeholder = " Search for liqure here..."
-        self.newtextfieldtableview.delegate = self
-        
-        let imageName2 = "searchimage.png"
-        let image2 = UIImage(named: imageName2)
-        let imageView2 = UIImageView(image: image2!)
-        imageView2.backgroundColor = UIColor.whiteColor()
-        
-        imageView2.frame = CGRectMake(0,39,35,35)
-
-        
-        
-        liqdropdowntableview.frame = CGRectMake(0,75,self.view.frame.width,100);
-        
-        
-        self.view.addSubview(showdropdownview)
-        self.showdropdownview.addSubview(locationdisplaybutton)
-        self.showdropdownview.addSubview(newtextfieldtableview)
-        self.showdropdownview.addSubview(backbutton)
-        self.showdropdownview.addSubview(liqdropdowntableview)
-        self.showdropdownview.slideInFromLeft()
-        self.showdropdownview.addSubview(imageView2)
-    }
+//    @IBAction func showdropdownliq(sender: UIButton)
+//    {
+//        self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+//        showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+//        
+//        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+//        backbutton.frame = CGRectMake(0,10,18,18)
+//        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
+//        let imageName1 = "popupclosebutton.png"
+//        let image1 = UIImage(named: imageName1)
+//        let imageView1 = UIImageView(image: image1!)
+//        backbutton.setBackgroundImage(image1, forState: .Normal)
+//        
+//        
+//        
+//        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
+//        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
+//        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+//        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        
+//        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
+//        
+//        self.newtextfieldtableview = UITextField(frame:CGRectMake(35,39,self.view.frame.width - 35,35));
+//        newtextfieldtableview.backgroundColor = UIColor.whiteColor()
+//        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+//      //  newtextfieldtableviewcity.placeholder = "Search for city here..."
+//       // self.newtextfieldtableview.placeholder = " Search for liqure here..."
+//        self.newtextfieldtableview.delegate = self
+//        
+//        let imageName2 = "searchimage.png"
+//        let image2 = UIImage(named: imageName2)
+//        let imageView2 = UIImageView(image: image2!)
+//        imageView2.backgroundColor = UIColor.whiteColor()
+//        
+//        imageView2.frame = CGRectMake(0,39,35,35)
+//
+//        
+//        
+//        liqdropdowntableview.frame = CGRectMake(0,75,self.view.frame.width,100);
+//        
+//        
+//        self.view.addSubview(showdropdownview)
+//        self.showdropdownview.addSubview(locationdisplaybutton)
+//        self.showdropdownview.addSubview(newtextfieldtableview)
+//        self.showdropdownview.addSubview(backbutton)
+//        self.showdropdownview.addSubview(liqdropdowntableview)
+//        self.showdropdownview.slideInFromLeft()
+//        self.showdropdownview.addSubview(imageView2)
+//    }
     
     
 }
