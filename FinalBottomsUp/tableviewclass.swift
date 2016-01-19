@@ -231,10 +231,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
    
     var space = " "
     var near = "Near"
-     var beerTypefromtextfield:String!
-    //var space = " "
-   
+    
+    var beerTypefromtextfield:String!
+    var localityfromtextfield:String!
+    
     var locationvaluefrombutton: String!
+    var liqvaluefrombutton: String!
+    
+//    
+//    var liqnametodisplayonButton:String!
+//    var locationnametodisplayonBUtton:String!
 
     
     override func viewDidLoad()
@@ -244,18 +250,23 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
           if beerTypefromtextfield != nil
           {
-            locationnamedisplaybutton.setTitle("\(beerTypefromtextfield + space + near + space + getselectedcityname )", forState: .Normal)
+            
+            
+            locationnamedisplaybutton.setTitle("\(beerTypefromtextfield + space + near + space + getselectedcityname)", forState: .Normal)
+            locationvaluefrombutton = getselectedcityname
+            liqvaluefrombutton = beerTypefromtextfield
+            
          }
           
       else
         {
-             locationnamedisplaybutton.setTitle("\(liqvodkaname + space + near + space + getselectedcityname )", forState: .Normal)
+             locationnamedisplaybutton.setTitle("\(liqvodkaname + space + near + space + getselectedcityname)", forState: .Normal)
+            locationvaluefrombutton = getselectedcityname
+            liqvaluefrombutton = beerTypefromtextfield
         }
       
         locationnamedisplaybutton.layer.cornerRadius = 10
-       // newtextfieldtableviewcity.text = getselectedcityname
         liqnamedisplaybutton.hidden = true
-      //  liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
         liqdropdowntableview.hidden = true
         locationbutton.hidden = true
         newheadarray = head
@@ -308,12 +319,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             head = pintsoring(head)
             tableview.reloadData()
         }
-        newtextfieldtableview.text = "  " + selectedliqor
-        configureTextField()
-        handleTextFieldInterfaces()
+       // newtextfieldtableview.text = "  " + selectedliqor
+       // configureTextField()
+       // handleTextFieldInterfaces()
      
 
-        newtextfieldtableviewcity.text = "  " + getselectedcityname
+     //   newtextfieldtableviewcity.text = "  " + getselectedcityname
         
 
         
@@ -325,7 +336,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         bottlebutton.setTitle("BOTTLE (₹)", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
 
-        newtextfieldtableviewcity.textFieldWidth = newtextfieldtableviewcity.frame.width
+      //  newtextfieldtableviewcity.textFieldWidth = newtextfieldtableviewcity.frame.width
         newtextfieldtableviewcity.delegate = self
         
         self.newtextfieldtableview.delegate = self
@@ -437,7 +448,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
-            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.locationnamedisplaybutton.setTitle("\(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
+            self!.newtextfieldtableviewcity.text = text;
+            self!.iscitytextfieldhavedata = true;
+            self!.locationnamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text, forState: .Normal);
+            self!.liqvaluefrombutton = self!.newtextfieldtableview.text
+            self!.locationvaluefrombutton = self!.newtextfieldtableviewcity.text
+            self!.view.endEditing(true);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
@@ -494,12 +510,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         {
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
+                            println(fullNameArr)
                             var firstName: String = fullNameArr[0]
-                           // var lastName: String = fullNameArr[1]
+                            var lastName: String = fullNameArr[1]
                             
                             println(firstName)
-                           // println(lastName)
-                            locations[i] = firstName
+                            println(lastName)
+                            locations[i] = firstName + ", " + lastName
                             
                             
                             
@@ -1347,6 +1364,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
              
                 var happyhourstiming = head[section].happystart + " - " + head[section].happyend
+                
+               // println(happyhourstiming)
 //                let happyhours = "Happy Hours"
 //                let happyhourshappytiming =   happyhours + "  " + happyhourstiming
 //                let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
@@ -1358,11 +1377,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 if screensize > 320
                 {
-                    headerCell.Happyhourslabel.text = "Happy Hours " + happyhourstiming
+                  
+                    var happyhourstiming1 = "Happy Hours " + happyhourstiming
+                    headerCell.Happyhourslabel.text = happyhourstiming1
+                    println(happyhourstiming1)
                 }
                 else
                 {
-                    headerCell.Happyhourslabel.text = "Happy Hours\n" + happyhourstiming
+                    var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+                    
+                    headerCell.Happyhourslabel.text = happyhourstiming1
                 }
 
                 headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
@@ -2562,7 +2586,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         var point = touch.locationInView(self.view)
         var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
 
-        self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 38,p!.y - 220,75,200))
+        self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 38,p!.y - 270,75,230))
         
         if lookfurtheboolean == true
         {
@@ -2576,54 +2600,153 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
      var tag = sender.tag
         
         switch (tag){
+            
+            case 1:
+            
+                closelocationpopupbutton7kms.frame = CGRectMake(0,0,75,75)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+            
+                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+            
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                
+                self.view.addSubview(locatiopopupview)
+                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+
+
+            
         case 2:
-            closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+            closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
             closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton7kms.tag=7
             closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
             
             
             
-            closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+            closelocationpopupbutton5kms.frame = CGRectMake(0,150,75,75)
             closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton5kms.tag=5
             closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
             
+            self.view.addSubview(locatiopopupview)
+            self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+            self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+           // self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+
+            
+
+            
         case 5:
-            closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+            closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
             closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton7kms.tag=7
             closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
             
             
             
-            closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
-            closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton5kms.tag=2
-            closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+            closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+            closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton2kms.tag=2
+            closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+            
+            
+            self.view.addSubview(locatiopopupview)
+            self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+            //self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+            self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+
             
         case 7:
             
-            closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
-            closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton7kms.tag=5
-            closelocationpopupbutton7kms.setBackgroundImage(imageName5, forState: .Normal)
-            
-            
-            
-            closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+            closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
             closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton5kms.tag=2
-            closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+            closelocationpopupbutton5kms.tag=5
+            closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+            
+            
+            
+            closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+            closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+            closelocationpopupbutton2kms.tag=2
+            closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+            
+            self.view.addSubview(locatiopopupview)
+          //  self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+            self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+            self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+
+            
+            
+//            closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+//            closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+//            closelocationpopupbutton2kms.tag=2
+//            closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
             
         default: return
         }
         
-        self.view.addSubview(locatiopopupview)
-        self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
-        self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+        
         }
  
+    }
+    
+    
+    func lookfurtherfor2KMS(sender: UIButton)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        selectedliqor = trimmedString1
+        
+        var tag = sender.tag
+        
+        switch(tag){
+            
+        
+            
+            
+        case 2:
+            //call 2km api
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+            
+        case 5:
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+            
+        case 7:
+            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 7
+            
+        default: return
+            
+        }
+        
+        self.array1 = self.head
+        self.locatiopopupview.hidden = true
+
     }
     
     
@@ -2727,67 +2850,36 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
-//        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-//        backbutton.frame = CGRectMake(0,10,18,18)
-//        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
-//        let imageName1 = "popupclosebutton.png"
-//        let image1 = UIImage(named: imageName1)
-//        let imageView1 = UIImageView(image: image1!)
-//        backbutton.setBackgroundImage(image1, forState: .Normal)
-//        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-//        tap.delegate = self
-//        showdropdownview.userInteractionEnabled = true
-//        showdropdownview.addGestureRecognizer(tap)
-        
-        
-//        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,45)
-//        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
-//        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-//        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-//        
-//        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
         var tapview = UIView()
-         tapview = UIView(frame: CGRectMake(0,60,self.view.frame.width,self.view.frame.height))
-                var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-                tap.delegate = self
-                showdropdownview.userInteractionEnabled = true
+        tapview = UIView(frame: CGRectMake(0,60,self.view.frame.width,self.view.frame.height))
+        var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        tap.delegate = self
+        showdropdownview.userInteractionEnabled = true
         
         
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
-        if beerTypefromtextfield != nil
-        {
-            newtextfieldtableview.text = "   " + beerTypefromtextfield
-        }
-        else
-        {
-            newtextfieldtableview.text = " " + liqvodkaname
-        }
-        
         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        newtextfieldtableview.text = " " + liqvaluefrombutton
         liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
         
+        
         self.view.addSubview(showdropdownview)
-
         showdropdownview.addSubview(tapview)
         tapview.addGestureRecognizer(tap)
         self.showdropdownview.addSubview(newtextfieldtableview)
         self.showdropdownview.addSubview(liqdropdowntableview)
+        
+        
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 3,width: self.view.frame.width - 20,height: 45), superview: showdropdownview)
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-        newtextfieldtableviewcity.text = " " + getselectedcityname
+        newtextfieldtableviewcity.text = locationvaluefrombutton
         configureTextField()
         handleTextFieldInterfaces()
         self.showdropdownview.slideInFromLeft()
-       
-        
-        
-
-        
-   
     }
     
     func handleTap(gestureRecognizer: UIGestureRecognizer)

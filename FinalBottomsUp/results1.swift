@@ -358,25 +358,25 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     if let predictions = result["predictions"] as? NSArray
                     {
                         var locations = [String]()
-                        var locations1 = [String]()
+                       // var locations1 = [String]()
                         for dict in predictions as! [NSDictionary]
                         {
                             locations.append(dict["description"] as! String)
-                            locations1.append(dict["description"] as! String)
+                           // locations1.append(dict["description"] as! String)
                           
                         }
                         println(locations)
                         
-                        for var i = 0; i < locations.count - 1;i++
+                        for var i = 0; i < locations.count ;i++
                         {
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             var firstName: String = fullNameArr[0]
-                            var lastName: String = fullNameArr[1]
+                          //  var lastName: String = fullNameArr[1]
                             
-                            println(firstName)
-                            println(lastName)
-                            locations[i] = firstName + ", " + lastName
+                          //  println(firstName)
+                           // println(lastName)
+                            locations[i] = " " +  firstName
         
                         }
 
@@ -1086,6 +1086,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.liqname = trimmedString
                 destination.newtrimmedstring = trimmedString
                 destination.head = head1
+               // destination.localityfromtextfield = localityfromtextfield
                 destination.beerTypefromtextfield = beerTypefromtextfield
                // destination.llokfurther = head1
                 //destination.resortname1 = arraysring
@@ -1102,7 +1103,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.vodkaarray = header
                 destination.getrestlatitudevodka = restvodkalat
                 destination.getrestlongitudevodka = restvodkalang
-               // destination.getliqnamefromresult = selectedliqor
             }
         }
         if segue.identifier == "getvodkanew"
@@ -1117,7 +1117,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination1.header1 = header
                 destination1.newtrimmedstring = trimmedString
                 destination1.beerTypefromtextfield = beerTypefromtextfield
-                // destination1.headfurther = headervodka
                 destination1.getcitylatitude = citylat
                 destination1.getcitylongitude = citylong
                 destination1.getdevicelatitude = devicelatitude
@@ -1126,8 +1125,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination1.getvodkalatitude = restlat
                 destination1.getvodkalongitude = restlong
                 destination1.getselectedcityname = getselectedcityname
-               // destination1.getliqnamefromresult = selectedliqor
-         
             }
         }
         if segue.identifier == "getwinenearyou"
@@ -1142,8 +1139,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination2.getdevicelongitude = devicelongitude
                 destination2.getrestlastmapview = restlat
                 destination2.getrestlongitmapview = restlong
-                
-                // newbeerresult
             }
             
         }

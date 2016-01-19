@@ -171,7 +171,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
         citynamedisplaybutton.layer.cornerRadius = 10
         dealsnearyou.hidden = true
-        lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+       // lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
          array3 = header1
         // countvlaues = array3.count
         println(array3.count)
@@ -1234,7 +1234,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 headfurther.append(getvodkaobj)
                 println(headfurther.count)
-                header1 = makecolor(header1, newvodkaarray: newvodkaarray)
+               // header1 = makecolor(header1, newvodkaarray: newvodkaarray)
                 
 //                if count == 1
 //                {
@@ -1885,29 +1885,29 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     }
     
-    func makecolor(header1:[Restauarantvodka],newvodkaarray:[Restauarantvodka]) -> [Restauarantvodka]
-    {
-        for var i = 0;i < header1.count ; i++
-        {
-            header1[i].color = true
-            println(header1[i].color)
-            print(header1.count)
-            for var j = 0; j < newvodkaarray.count; j++
-            {
-                print(newvodkaarray.count)
-                if header1[i].restnamevodka == newvodkaarray[j].restnamevodka
-                {
-                    println(header1[i].restnamevodka)
-                    println(newvodkaarray[i].restnamevodka)
-                    header1[i].color = false
-                 
-                }
-
-            }
-        }
-        
-        return header1
-    }
+//    func makecolor(header1:[Restauarantvodka],newvodkaarray:[Restauarantvodka]) -> [Restauarantvodka]
+//    {
+//        for var i = 0;i < header1.count ; i++
+//        {
+//            header1[i].color = true
+//            println(header1[i].color)
+//            print(header1.count)
+//            for var j = 0; j < newvodkaarray.count; j++
+//            {
+//                print(newvodkaarray.count)
+//                if header1[i].restnamevodka == newvodkaarray[j].restnamevodka
+//                {
+//                    println(header1[i].restnamevodka)
+//                    println(newvodkaarray[i].restnamevodka)
+//                    header1[i].color = false
+//                 
+//                }
+//
+//            }
+//        }
+//        
+//        return header1
+//    }
     
     
     
@@ -2096,7 +2096,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
             
-            self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 38,p!.y - 220,75,200))
+            self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 38,p!.y - 270,75,230))
             
             if lookfurtheboolean == true
             {
@@ -2109,57 +2109,147 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             var tag = sender.tag
             
-            switch (tag){
-            case 2:
-                closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+            switch (tag)
+            {
+                
+                
+            case 1:
+                closelocationpopupbutton7kms.frame = CGRectMake(0,0,75,75)
                 closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton7kms.tag=7
                 closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
                 closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton5kms.tag=5
                 closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
                 
-            case 5:
-                closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
+                
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                self.view.addSubview(DynamicViewvodka)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton7kms)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton5kms)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton2kms)
+                
+                
+                
+                
+                
+            case 2:
+                closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
                 closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton7kms.tag=7
                 closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+                closelocationpopupbutton5kms.frame = CGRectMake(0,150,75,75)
                 closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-                closelocationpopupbutton5kms.tag=2
-                closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+                self.view.addSubview(DynamicViewvodka)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton7kms)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton5kms)
+                
+                
+            case 5:
+                closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                self.view.addSubview(DynamicViewvodka)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton7kms)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton2kms)
                 
             case 7:
                 
-                closelocationpopupbutton7kms.frame = CGRectMake(0,20,75,75)
-                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-                closelocationpopupbutton7kms.tag=5
-                closelocationpopupbutton7kms.setBackgroundImage(imageName5, forState: .Normal)
-                
-                
-                
-                closelocationpopupbutton5kms.frame = CGRectMake(0,100,75,75)
+                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
                 closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-                closelocationpopupbutton5kms.tag=2
-                closelocationpopupbutton5kms.setBackgroundImage(imageName2, forState: .Normal)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                self.view.addSubview(DynamicViewvodka)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton5kms)
+                self.DynamicViewvodka.addSubview(closelocationpopupbutton2kms)
                 
             default: return
             }
             
-            self.view.addSubview(DynamicViewvodka)
-            self.DynamicViewvodka.addSubview(closelocationpopupbutton7kms)
-            self.DynamicViewvodka.addSubview(closelocationpopupbutton5kms)
+
         }
  
         
     }
+    
+    
+    func lookfurtherfor2KMS(sender: UIButton)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        selectedliqor = trimmedString1
+        
+        var tag = sender.tag
+        
+        switch(tag){
+        case 2:
+            //call 2km api
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+            
+        case 5:
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+            
+        case 7:
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 7
+            
+        default: return
+            
+        }
+        
+        self.array1 = self.header1
+        self.DynamicViewvodka.hidden = true
+
+    }
+    
+    
+    
+    
     func lookfurtherfor5KMS(sender: UIButton)
     {
         if  lookfurtheboolean == false
@@ -2180,7 +2270,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
@@ -2190,7 +2280,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             lookfurtherdefault.tag = 5
             
         case 7:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
@@ -2224,7 +2314,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             
@@ -2234,7 +2324,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             lookfurtherdefault.tag = 5
             
         case 7:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             
