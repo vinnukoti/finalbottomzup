@@ -1261,7 +1261,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aum-hz-7Ge">
                                                     <rect key="frame" x="162" y="119" width="241" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="Grz-uL-87u"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Grz-uL-87u"/>
                                                         <constraint firstAttribute="width" constant="50" id="cYk-ZZ-bsA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>

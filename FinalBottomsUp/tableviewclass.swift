@@ -1365,37 +1365,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
              
                 var happyhourstiming = head[section].happystart + " - " + head[section].happyend
                 
-               // println(happyhourstiming)
-//                let happyhours = "Happy Hours"
-//                let happyhourshappytiming =   happyhours + "  " + happyhourstiming
-//                let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
-//                let attributedString = NSMutableAttributedString(string:happyhourshappytiming)
-//                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor() , range: range)
-//                headerCell.Happyhourslabel.attributedText = attributedString
-                
                 var screensize = self.view.frame.width
-                
-                if screensize > 320
-                {
-                  
-                    var happyhourstiming1 = "Happy Hours " + happyhourstiming
-                    headerCell.Happyhourslabel.text = happyhourstiming1
-                    println(happyhourstiming1)
-                }
-                else
-                {
-                    var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
-                    
-                    headerCell.Happyhourslabel.text = happyhourstiming1
-                }
-
                 headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 bottlebutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 pintbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
-  
-                
-      
         
                 if boolexists == true
             {
@@ -1409,22 +1383,67 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 pintbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-bold", size: 11)
           
             }
-        
-//        if global == true
-//        {
-//            headerCell.headercellmin.backgroundColor = UIColor.whiteColor()
-//
-//            
-//        }
                 
                 if head[section].ishappy == "Yes"
                 {
                     
-                   headerCell.Happyhourslabel.textColor = UIColor.greenColor()
+                    if screensize > 320
+                    {
+                        
+                        var happyhourstiming1 = "Happy Hours " + happyhourstiming
+                        var myMutableString = NSMutableAttributedString()
+                        
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                        
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenColor(), range: NSRange(location:11,length:19))
+                        
+                        headerCell.Happyhourslabel.attributedText = myMutableString
+                        println(happyhourstiming1)
+                    }
+                    else
+                    {
+                        var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+                        var myMutableString = NSMutableAttributedString()
+                        
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                        
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenColor(), range: NSRange(location:11,length:19))
+                        
+                        headerCell.Happyhourslabel.attributedText = myMutableString
+                        println(happyhourstiming1)
+                    }
+                    
+                  // headerCell.Happyhourslabel.textColor = UIColor.greenColor()
                 }
                 else
                 {
-                   headerCell.Happyhourslabel.textColor = UIColor.orangeColor()
+                    
+                    if screensize > 320
+                    {
+                        
+                        var happyhourstiming1 = "Happy Hours " + happyhourstiming
+                        var myMutableString = NSMutableAttributedString()
+                        
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                        
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:19))
+                        
+                        headerCell.Happyhourslabel.attributedText = myMutableString
+                        println(happyhourstiming1)
+                    }
+                    else
+                    {
+                        var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+                        var myMutableString = NSMutableAttributedString()
+                        
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                        
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:19))
+                        
+                        headerCell.Happyhourslabel.attributedText = myMutableString
+                        println(happyhourstiming1)
+                    }
+                  // headerCell.Happyhourslabel.textColor = UIColor.orangeColor()
                 }
                 
                 if head[section].rest_offers_happy_hour == "Yes"
