@@ -287,6 +287,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         liqdropdowntableview.tag = 0
         newtextfieldtableview.tag = 2
         newtextfieldtableviewcity.tag = 3
+        
 
          liqdropdowntableview.layer.borderColor = UIColor.grayColor().CGColor
         liqdropdowntableview.layer.borderWidth = 2
@@ -465,10 +466,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     println(self!.getcitylongitudefromgoogle)
                     if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
                     {
+                        println(self!.trimmedString)
                         self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.trimmedString)")
                     }
                     else
                     {
+                        println(self!.trimmedString)
                         self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.newtrimmedstring)")
                     }
 
@@ -510,17 +513,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         {
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
-                            println(fullNameArr)
-                            var firstName: String = fullNameArr[0]
-                            var lastName: String = fullNameArr[1]
+                            println(fullNameArr.count)
                             
-                            println(firstName)
-                            println(lastName)
-                            locations[i] = firstName + ", " + lastName
-                            
-                            
-                            
-                            
+                            if fullNameArr.count > 1
+                            {
+                                var firstName: String = fullNameArr[0]
+                                var lastName: String = fullNameArr[1]
+                                locations[i] = firstName + ", " + lastName
+                            }
+                            else
+                            {
+                                var firstName: String = fullNameArr[0]
+                                locations[i] = firstName
+                            }
+
                         }
                         self.newtextfieldtableviewcity.autoCompleteStrings = locations
                     }
@@ -705,6 +711,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func getbardata(urlString:String)
     {
         let url = NSURL(string: urlString)
+            println(urlString)
         
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
@@ -1395,7 +1402,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
                         
-                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenColor(), range: NSRange(location:11,length:19))
+                        var length = myMutableString.length
+                        
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
                         println(happyhourstiming1)
@@ -1404,10 +1413,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     {
                         var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
-                        
+                     
                         myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
-                        
-                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenColor(), range: NSRange(location:11,length:19))
+                           var length = myMutableString.length
+                        println(length)
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
                         println(happyhourstiming1)
@@ -1426,7 +1436,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
                         
-                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:19))
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
                         println(happyhourstiming1)
@@ -1438,7 +1448,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
                         
-                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:19))
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
                         println(happyhourstiming1)
@@ -1797,6 +1807,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func getbardatafurther(urlString:String)
     {
         let url = NSURL(string: urlString)
+    
         
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in

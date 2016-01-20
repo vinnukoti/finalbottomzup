@@ -106,6 +106,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
    // var liqTypes1:[String] = ["BUDWEISER","CARLSBERG","FOSTERS","HEINEKEN","KINGFISHER"]
     var liqTypes1:[String] = [String]()
+    
+    var delhi = "Delhi"
+    
+    var mainlocalityfromtextfield:String!
 
     override func viewDidLoad()
     {
@@ -125,7 +129,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         tableviewnew.delegate = self
         tableviewnew!.scrollEnabled = true
         tableviewnew!.hidden = true
-        autocompletedTextfieldnew.textFieldWidth = autocompletedTextfieldnew.frame.width
+      //  autocompletedTextfieldnew.textFieldWidth = autocompletedTextfieldnew.frame.width
         autocompletedTextfieldnew.delegate = self
         localityTextfield.delegate = self
         beerTypeTextfield.delegate = self
@@ -222,7 +226,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     println(locality)
                     //Assigning the address to the address label on the map.
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                    // self.autocompletedTextfieldnew.text = subLocality + ", " + locality
+                  //   self.autocompletedTextfieldnew.text = subLocality + ", " + locality
                     self.autocompletedTextfieldnew.text = "Current Location"
                 }
             }
@@ -302,7 +306,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 }
                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
                 let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityfromtextfield)}\(text)&types=(regions)&components=country:IN"
+                
+                  // let urlString = "http://maps.google.com/maps/api/geocode/json?address={\(self!.localityfromtextfield)}\(text)&sensor=false"
               //  https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={Bangalore}vijaynagar&types=(regions)&components=country:IN
+                
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
                     let urlRequest = NSURLRequest(URL: url!)
@@ -310,21 +317,28 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 }
             }
         }
-        autocompletedTextfieldnew.onSelect = {[weak self] text, indexpath in
+        autocompletedTextfieldnew.onSelect = {[weak self] text , indexpath in
+          //  text = text + localityfromtextfield
+            println(text)
+          
             self!.autocompletedTextfieldnew.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
-            //print(self!.getselectedcityname)
+            print(self!.getselectedcityname)
+         //   self.text = text + self!.liqnamefromtextfield
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
-                if placemark != nil
-                {
-                    let coordinate = placemark!.location.coordinate
-                    self!.citylat = coordinate.latitude
-                    self!.citylong = coordinate.longitude
-//                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
-//                    {
-//                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-//                    }
-
-                }
+              //  self!.getgoogledata("http://maps.google.com/maps/api/geocode/json?addreself.ss=\(self!.localityfromtextfield + self!.localityTextfield.text)&sensor=false")
+//                if placemark != nil
+//                {
+//                    let coordinate = placemark!.location.coordinate
+//                    self!.citylat = coordinate.latitude
+//                    self!.citylong = coordinate.longitude
+//                    println(self!.citylat)
+//                    println(self!.citylong)
+////                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
+////                    {
+////                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+////                    }
+//
+//                }
             })
             
         }
@@ -376,7 +390,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             
                           //  println(firstName)
                            // println(lastName)
-                            locations[i] = " " +  firstName
+                            locations[i] =  firstName
         
                         }
 
@@ -698,16 +712,28 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     {
         liqnamefromtextfield = textfield2.text
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        println(localityfromtextfield)
+        println(autocompletedTextfieldnew.text)
+        var text = autocompletedTextfieldnew.text
+        var locate = localityfromtextfield + text
+        println(locate)
+        //var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        
+       var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        println(locate1)
+        
+        getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+        
+        
+        
+        
+       //  getgoogledata("http://maps.google.com/maps/api/geocode/json?address=delhi%20connaught%20place&sensor=false")
+        
       //  println(trimmedString)
         
-        if trimmedString == "All"
-        {
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(beerTypefromtextfield)")
-        }
-        else
-        {
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
-        }
+      
+        
+  
         
         //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=5&records=10&query=\(trimmedString)")
         
@@ -729,6 +755,69 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 //        //77.07380
 //    }
     
+    
+    func getgoogledata(urlString:String)
+    {
+        let url = NSURL(string: urlString)
+        println(urlString)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+            
+            dispatch_async(dispatch_get_main_queue(),
+                {
+                    
+                    self.extract_googlejson(data)
+            })
+        }
+        task.resume()
+    }
+    
+    
+    func extract_googlejson(data:NSData)
+    {
+        var jsonError:NSError?
+        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
+        {
+          if let results = json["results"] as? NSArray
+          {
+            for var i = 0; i < results.count; i++
+            {
+                if let one = results[i] as? NSDictionary
+                {
+                    if let geometry = one["geometry"] as? NSDictionary
+                    {
+                       // for var j = 0; j < geometry.count; j++
+                      //  {
+                            if let location = geometry["location"] as? NSDictionary
+                            {
+                          
+                                if let lat = location["lat"] as? Double
+                                {
+                                    citylat = lat
+                                    println(citylat)
+                                }
+                                if let lng = location["lng"] as? Double
+                                {
+                                    citylong = lng
+                                    println(citylong)
+                                }
+                                
+                                ApiCall()
+                                
+                           // }
+                        }
+                    }
+                }
+            }
+            
+         }
+        
+        }
+    }
+    
+    
+    
     func getbardata(urlString:String)
     {
         let url = NSURL(string: urlString)
@@ -747,8 +836,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     func extract_json(data:NSData)
     {
         var jsonError:NSError?
-        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
-        {
+        
+      if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
+        
+               //let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as! NSArray
+        
+      {
             head1 = [Restaurant]()
             header = [Restauarantvodka]()
             arraysring = [String]()
@@ -1155,6 +1248,26 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
     @IBAction func getdeals(sender: UIButton) {
         performSegueWithIdentifier("Dealsnearyou", sender: self)
+    }
+    
+    func ApiCall()
+    {
+        if trimmedString == "All"
+        {
+            println(citylat)
+            println(citylong)
+            println(trimmedString)
+            println(beerTypefromtextfield)
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(beerTypefromtextfield)")
+        }
+        else
+        {
+            println(citylat)
+            println(citylong)
+            println(trimmedString)
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+        }
+        
     }
 }
 

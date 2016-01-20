@@ -831,7 +831,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xiK-bt-4Ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10608" y="-14346"/>
+            <point key="canvasLocation" x="-10298" y="-14346"/>
         </scene>
         <!--Mapview-->
         <scene sceneID="GT7-l3-ORI">
@@ -3116,9 +3116,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xac-65-HoW"/>
-        <segue reference="XDA-r2-Wma"/>
-        <segue reference="OFC-RP-bvW"/>
-        <segue reference="bOf-Qa-YPU"/>
+        <segue reference="yq4-9t-36Q"/>
+        <segue reference="k2w-mW-TjF"/>
+        <segue reference="KlY-oy-LUS"/>
+        <segue reference="hwc-eh-rZc"/>
     </inferredMetricsTieBreakers>
 </document>

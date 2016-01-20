@@ -411,12 +411,22 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         {
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
-                            var firstName: String = fullNameArr[0]
-                            var lastName: String = fullNameArr[1]
                             
-                            println(firstName)
-                            println(lastName)
-                            locations[i] = firstName + ", " + lastName
+                            if fullNameArr.count > 1
+                            {
+                                var firstName: String = fullNameArr[0]
+                                var lastName: String = fullNameArr[1]
+                                locations[i] = firstName + ", " + lastName
+
+                            }
+                            else
+                            {
+                                 var firstName: String = fullNameArr[0]
+                                 locations[i] = firstName
+                                
+                            }
+
+                          
                             
                         }
                         self.newtextfieldtableviewcity.autoCompleteStrings = locations
@@ -771,20 +781,43 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
              //   headerCell.Happyhourlabelbeforeexpantion.add
                 
-                let happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
-                let happyhours = "Happy Hours"
-                let happyhourshappytiming =   happyhours + "  " + happyhourstiming
-                let range = (happyhourshappytiming as NSString).rangeOfString(happyhours)
-                let attributedString = NSMutableAttributedString(string:happyhourshappytiming)
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor() , range: range)
-                headerCell.Happyhourlabelbeforeexpantion.attributedText = attributedString
+                var happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+   
 
                 
-
+         var screensize = self.view.frame.width
             
         if header1[section].vodkaishappy == "Yes"
         {
-            headerCell.Happyhourlabelbeforeexpantion.textColor = UIColor.greenColor()
+            if screensize > 320
+            {
+                
+                var happyhourstiming1 = "Happy Hours " + happyhourstiming
+                var myMutableString = NSMutableAttributedString()
+                
+                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                
+                var length = myMutableString.length
+                
+                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
+                
+                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
+                println(happyhourstiming1)
+            }
+            else
+            {
+                var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+                var myMutableString = NSMutableAttributedString()
+                
+                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                var length = myMutableString.length
+                println(length)
+                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
+                
+                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
+                println(happyhourstiming1)
+            }
+
         }
         else
         {
