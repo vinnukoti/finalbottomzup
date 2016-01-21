@@ -110,6 +110,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var delhi = "Delhi"
     
     var mainlocalityfromtextfield:String!
+    
+    var currentLocationname:String!
+    
+    var currentLocation = "Current Location"
 
     override func viewDidLoad()
     {
@@ -124,12 +128,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         beerTypeTextfield.tag = 7
   
         textfield2.delegate = self
-      //  textfield2!.delegate = self
+
         tableviewnew!.dataSource = self
         tableviewnew.delegate = self
         tableviewnew!.scrollEnabled = true
         tableviewnew!.hidden = true
-      //  autocompletedTextfieldnew.textFieldWidth = autocompletedTextfieldnew.frame.width
+        
         autocompletedTextfieldnew.delegate = self
         localityTextfield.delegate = self
         beerTypeTextfield.delegate = self
@@ -142,8 +146,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         locationManager1.requestAlwaysAuthorization()
         locationManager1.startUpdatingLocation()
        
-      // autocompletedTextfieldnew.layer.cornerRadius = 10
-     //  textfield2.layer.cornerRadius = 10
+
         
         
         LOcalityTableview.frame         =   CGRectMake(15,self.localityTextfield.frame.origin.y + 30, self.view.frame.width - 30, 165);
@@ -226,8 +229,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     println(locality)
                     //Assigning the address to the address label on the map.
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                  //   self.autocompletedTextfieldnew.text = subLocality + ", " + locality
-                    self.autocompletedTextfieldnew.text = "Current Location"
+                     self.currentLocationname = subLocality + ", " + locality
+                    self.autocompletedTextfieldnew.text = self.currentLocation
                 }
             }
 
@@ -716,11 +719,18 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         println(autocompletedTextfieldnew.text)
         var text = autocompletedTextfieldnew.text
         var locate = localityfromtextfield + text
-        println(locate)
-        //var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        println(autocompletedTextfieldnew.text)
+        println(localityfromtextfield)
         
+        
+        println(locate)
        var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         println(locate1)
+        
+        if autocompletedTextfieldnew.text == currentLocation
+        {
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=13.043131&long=77.570327&km=2&records=15&query=\(beerTypeTextfield.text)")
+        }
         
         getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
         
@@ -1196,6 +1206,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.vodkaarray = header
                 destination.getrestlatitudevodka = restvodkalat
                 destination.getrestlongitudevodka = restvodkalang
+                destination.locationnamefromtextfield = autocompletedTextfieldnew.text
+                destination.liqtypefromTextfield = beerTypeTextfield.text
+                destination.localityFromtextfield = localityfromtextfield
             }
         }
         if segue.identifier == "getvodkanew"
@@ -1218,6 +1231,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination1.getvodkalatitude = restlat
                 destination1.getvodkalongitude = restlong
                 destination1.getselectedcityname = getselectedcityname
+                destination1.locationnamefromtextfield = autocompletedTextfieldnew.text
+                destination1.liqtypefromTextfield = beerTypeTextfield.text
+                destination1.localityFromtextfield = localityfromtextfield
             }
         }
         if segue.identifier == "getwinenearyou"
@@ -1252,6 +1268,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     func ApiCall()
     {
+  
+        
+        
         if trimmedString == "All"
         {
             println(citylat)

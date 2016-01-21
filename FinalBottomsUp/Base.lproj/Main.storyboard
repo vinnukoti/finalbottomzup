@@ -2532,7 +2532,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-Y9-FrS">
                                                     <rect key="frame" x="33" y="55" width="414" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="08z-vy-7Fr"/>
+                                                        <constraint firstAttribute="height" constant="30" id="08z-vy-7Fr"/>
                                                         <constraint firstAttribute="width" constant="80" id="bwQ-gn-vHU"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
@@ -3116,9 +3116,9 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yq4-9t-36Q"/>
         <segue reference="k2w-mW-TjF"/>
         <segue reference="KlY-oy-LUS"/>
         <segue reference="hwc-eh-rZc"/>
+        <segue reference="yq4-9t-36Q"/>
     </inferredMetricsTieBreakers>
 </document>

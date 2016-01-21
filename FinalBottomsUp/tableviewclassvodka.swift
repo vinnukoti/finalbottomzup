@@ -155,18 +155,31 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var near = "Near"
     var beerTypefromtextfield:String!
     
+    
+    
+    var locationnamefromtextfield:String!
+    var liqtypefromTextfield:String!
+    
+    var citylat:Double!
+    var citylong:Double!
+    
+    var localityFromtextfield:String!
+    
+    
     override func viewDidLoad()
     {
         
-        if beerTypefromtextfield != nil
-        {
-            citynamedisplaybutton.setTitle("\( beerTypefromtextfield + space + near + space + getselectedcityname )", forState: .Normal)
-        }
-        else
-        {
-            citynamedisplaybutton.setTitle("\( liqvodkaname + space + near + space + getselectedcityname )", forState: .Normal)
-        }
+//        if beerTypefromtextfield != nil
+//        {
+//            citynamedisplaybutton.setTitle("\( beerTypefromtextfield + space + near + space + getselectedcityname )", forState: .Normal)
+//        }
+//        else
+//        {
+//            citynamedisplaybutton.setTitle("\( liqvodkaname + space + near + space + getselectedcityname )", forState: .Normal)
+//        }
+//        
         
+        citynamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
         
 
         citynamedisplaybutton.layer.cornerRadius = 10
@@ -199,7 +212,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         liqdropdowntableview.layer.borderWidth = 2
         newtextfieldtableview.text = "  " + selectedliqor
         liqnamedisplaybutton.setTitle("\(selectedliqor)", forState: .Normal)
-       // citynamedisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
         locationdisplaybutton.setTitle("\(getselectedcityname)", forState: .Normal)
         
         println(getcitylongitude)
@@ -255,7 +267,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
         newtextfieldtableviewcity.textFieldWidth = newtextfieldtableviewcity.frame.width
         newtextfieldtableviewcity.delegate = self
-        newtextfieldtableviewcity.text = "  " + getselectedcityname
+        newtextfieldtableviewcity.text = getselectedcityname
         
         header1 = pricesort1(header1)
 
@@ -347,7 +359,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     self!.connection!.cancel()
                     self!.connection = nil
                 }
-                let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)"
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityFromtextfield)}\(text)&types=(regions)&components=country:IN"
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
                     let urlRequest = NSURLRequest(URL: url!)
@@ -356,28 +368,159 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
-            self!.newtextfieldtableviewcity.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self?.citynamedisplaybutton.setTitle("\(self!.newtextfieldtableview.text + self!.space + self!.newtextfieldtableviewcity.text)", forState: .Normal);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
+            self!.newtextfieldtableviewcity.text = text;
+            self!.iscitytextfieldhavedata = true;
+            self!.citynamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text, forState: .Normal)
+            self!.locationnamefromtextfield = self!.newtextfieldtableviewcity.text
+            self!.liqtypefromTextfield = self!.newtextfieldtableview.text
+            
+            self!.view.endEditing(true);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
                     let coordinate = placemark!.location.coordinate
                     self!.getenteredcitylat = coordinate.latitude
                     self!.getenteredcitylong = coordinate.longitude
+                    println(self!.getenteredcitylat)
+                    println(self!.getenteredcitylong)
                     
-                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
-                    {
-                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.trimmedString)")
-                    }
-                    else
-                    {
-                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getenteredcitylat)&long=\(self!.getenteredcitylong)&km=2&records=10&query=\(self!.newtrimmedstring)")
-                    }
+                    var text = self!.newtextfieldtableviewcity.text
+                    var locate = self!.localityFromtextfield + text
+                    
+                    
+                    println(locate)
+                    var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    println(locate1)
+                    
+                       self!.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+                    
+
 
                     
                 }
             })
         }
     }
+    
+    func getgoogledata(urlString:String)
+    {
+        let url = NSURL(string: urlString)
+        println(urlString)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+            
+            dispatch_async(dispatch_get_main_queue(),
+                {
+                    
+                    self.extract_googlejson(data)
+            })
+        }
+        task.resume()
+    }
+    func getgoogledata1(urlString:String)
+    {
+        let url = NSURL(string: urlString)
+        println(urlString)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+            
+            dispatch_async(dispatch_get_main_queue(),
+                {
+                    
+                    self.extract_googlejson1(data)
+            })
+        }
+        task.resume()
+    }
+    
+    
+    
+    func extract_googlejson(data:NSData)
+    {
+        var jsonError:NSError?
+        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
+        {
+            if let results = json["results"] as? NSArray
+            {
+                for var i = 0; i < results.count; i++
+                {
+                    if let one = results[i] as? NSDictionary
+                    {
+                        if let geometry = one["geometry"] as? NSDictionary
+                        {
+                            // for var j = 0; j < geometry.count; j++
+                            //  {
+                            if let location = geometry["location"] as? NSDictionary
+                            {
+                                
+                                if let lat = location["lat"] as? Double
+                                {
+                                    citylat = lat
+                                    println(citylat)
+                                }
+                                if let lng = location["lng"] as? Double
+                                {
+                                    citylong = lng
+                                    println(citylong)
+                                }
+                                
+                                ApiCall()
+                                
+                                // }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    
+    func extract_googlejson1(data:NSData)
+    {
+        var jsonError:NSError?
+        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
+        {
+            if let results = json["results"] as? NSArray
+            {
+                for var i = 0; i < results.count; i++
+                {
+                    if let one = results[i] as? NSDictionary
+                    {
+                        if let geometry = one["geometry"] as? NSDictionary
+                        {
+                            // for var j = 0; j < geometry.count; j++
+                            //  {
+                            if let location = geometry["location"] as? NSDictionary
+                            {
+                                
+                                if let lat = location["lat"] as? Double
+                                {
+                                    citylat = lat
+                                    println(citylat)
+                                }
+                                if let lng = location["lng"] as? Double
+                                {
+                                    citylong = lng
+                                    println(citylong)
+                                }
+                                
+                                ApiCall1()
+                                
+                                // }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+    }
+
     
     //MARK: NSURLConnectionDelegate
     func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse)
@@ -746,9 +889,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             if header1[section].bool1 == false{
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.whiteColor()
-        headerCell.vodkarestaurantname.text = " " + header1[section].restnamevodka
+        headerCell.vodkarestaurantname.text = header1[section].restnamevodka
                // println(header1[section].address)
-        headerCell.addressLabel.text =  " " + header1[section].address
+        headerCell.addressLabel.text = header1[section].address
               //  addressLabel.text = header1[section].address
         if header1[section].avgprice == 0
         {
@@ -781,7 +924,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
              //   headerCell.Happyhourlabelbeforeexpantion.add
                 
-                var happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+              
    
 
                 
@@ -789,6 +932,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         if header1[section].vodkaishappy == "Yes"
         {
+              var happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
             if screensize > 320
             {
                 
@@ -814,6 +958,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 println(length)
                 myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
                 
+                println(myMutableString)
+                
                 headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
                 println(happyhourstiming1)
             }
@@ -821,7 +967,32 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         else
         {
-             headerCell.Happyhourlabelbeforeexpantion.textColor = UIColor.orangeColor()
+              var happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+            if screensize > 320
+            {
+                
+                var happyhourstiming1 = "Happy Hours " + happyhourstiming
+                var myMutableString = NSMutableAttributedString()
+                
+                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                
+                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
+                
+                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
+                println(happyhourstiming1)
+            }
+            else
+            {
+                var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+                var myMutableString = NSMutableAttributedString()
+                
+                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                
+                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
+                
+                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
+                println(happyhourstiming1)
+            }
         }
                 
                 if header1[section].rest_offers_happy_hour == "Yes"
@@ -870,7 +1041,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
               let  headerCell1 = tableView.dequeueReusableCellWithIdentifier("headercellvodkanew") as! customheadercellafterexpastionforvodka
                 headerCell1.happyhourstiminglabelafterexpation.text = " " + header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
-                headerCell1.restnameafterexpastion.text = " " + header1[section].restnamevodka
+                headerCell1.restnameafterexpastion.text = header1[section].restnamevodka
                 headerCell1.viewtodisplayhappyhoursafterexpation.layer.borderWidth = 1
                 headerCell1.viewtodisplayhappyhoursafterexpation.layer.borderColor = UIColor.lightGrayColor().CGColor
                 headerCell1.bottlelabel.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
@@ -1513,21 +1684,48 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             newtextfieldtableview.text = selectedCell1.textLabel?.text
             liqnamefromtextfield = newtextfieldtableview.text
             trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            citynamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text , forState: .Normal)
+            locationnamefromtextfield = self.newtextfieldtableviewcity.text
+            liqtypefromTextfield = self.newtextfieldtableview.text
+            
+//            var text = self.newtextfieldtableviewcity.text
+//            var locate = self.localityFromtextfield + text
+//            
+//            
+//            println(locate)
+//            var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//            println(locate1)
+//            
+//            self.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+            
 
            // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(trimmedString)")
 
             selectedliqor = selectedCell1.textLabel!.text
             isliqtextfieldhasdata = true
-            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
-            {
-                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=2&records=10&query=\(trimmedString)")
-            }
-            else
-            {
-                
-                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
-                println(trimmedString)
-            }
+//            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
+//            {
+//                println(citylat)
+//                 println(citylong)
+//                
+//                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
+//            }
+//            else
+//            {
+//                
+//                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
+//                println(trimmedString)
+//            }
+            
+            var text = self.newtextfieldtableviewcity.text
+            var locate = self.localityFromtextfield + text
+            
+            
+            println(locate)
+            var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            println(locate1)
+            
+            self.getgoogledata1("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
 
             self.view.endEditing(true)
             tableView.hidden = true
@@ -1549,6 +1747,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         task.resume()
     }
+    
+    
     func extract_json(data:NSData)
     {
         var jsonError:NSError?
@@ -1834,6 +2034,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
+            
         }
     }
     
@@ -1856,6 +2057,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination.getselectedcityname = getselectedcityname
                 destination.getcitylatitudefromvodka = getcitylatitude
                 destination.getcitylongitudefromvodka = getcitylongitude
+                
+                destination.liqtypefromTextfield = liqtypefromTextfield
+                destination.locationnamefromtextfield = locationnamefromtextfield
                 
                 
                 
@@ -2257,25 +2461,31 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(liqvodkaname)")
+            count = 1
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=20&query=\(liqtypefromTextfield)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
+            self.array1 = self.header1
             
         case 5:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+             count = 2
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=20&query=\(liqtypefromTextfield)")
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
+            self.array1 = self.header1
             
         case 7:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+             count = 3
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=20&query=\(liqtypefromTextfield)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
+            self.array1 = self.header1
             
         default: return
             
         }
         
-        self.array1 = self.header1
+        //self.array1 = self.header1
         self.DynamicViewvodka.hidden = true
 
     }
@@ -2303,25 +2513,31 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(liqvodkaname)")
+             count = 1
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=20&query=\(liqtypefromTextfield)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
+            self.array1 = self.header1
             
         case 5:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+             count = 2
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=20&query=\(liqtypefromTextfield)")
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
+            self.array1 = self.header1
             
         case 7:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+             count = 3
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=20&query=\(liqtypefromTextfield)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
+            self.array1 = self.header1
             
         default: return
             
         }
         
-        self.array1 = self.header1
+      //  self.array1 = self.header1
         self.DynamicViewvodka.hidden = true
     }
     
@@ -2347,26 +2563,32 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         switch(tag){
         case 2:
             //call 2km api
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(liqvodkaname)")
+             count = 1
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=20&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
+            self.array1 = self.header1
             
         case 5:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+             count = 2
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=20&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
+            self.array1 = self.header1
             
         case 7:
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+             count = 3
+            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=20&query=\(liqvodkaname)")
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
+            self.array1 = self.header1
             
         default: return
             
         }
         
         
-        self.array1 = self.header1
+       // self.array1 = self.header1
         self.DynamicViewvodka.hidden = true
     }
 
@@ -2376,20 +2598,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
-//        let backbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-//        backbutton.frame = CGRectMake(0,10,18,18)
-//        backbutton.addTarget(self, action: "viewclosed:", forControlEvents: UIControlEvents.TouchUpInside)
-//        let imageName1 = "popupclosebutton.png"
-//        let image1 = UIImage(named: imageName1)
-//        let imageView1 = UIImageView(image: image1!)
-//        backbutton.setBackgroundImage(image1, forState: .Normal)
-        
-//        locationdisplaybutton.frame = CGRectMake(0,3,self.view.frame.width,35)
-//        locationdisplaybutton.addTarget(self, action: "locationdisplay:", forControlEvents: UIControlEvents.TouchUpInside)
-//        locationdisplaybutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-//        locationdisplaybutton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-//        
-//        locationdisplaybutton.backgroundColor = UIColor.whiteColor()
         
         var tapview = UIView()
         tapview = UIView(frame: CGRectMake(0,60,self.view.frame.width,self.view.frame.height))
@@ -2402,14 +2610,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
-        if beerTypefromtextfield != nil
-        {
-           newtextfieldtableview.text = "   " + beerTypefromtextfield
-        }
-        else
-        {
-            newtextfieldtableview.text = " " + liqvodkaname
-        }
+        self.newtextfieldtableview.text = liqtypefromTextfield
+
         
          newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
         
@@ -2426,7 +2628,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
            self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-        newtextfieldtableviewcity.text = "   " + getselectedcityname
+        newtextfieldtableviewcity.text = locationnamefromtextfield
+     
         configureTextField()
         handleTextFieldInterfaces()
         self.showdropdownview.slideInFromLeft()
@@ -2501,37 +2704,90 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.showdropdownview.addSubview(backbutton)
         self.showdropdownview.addSubview(liqdropdowntableview)
         self.showdropdownview.slideInFromLeft()
-    }
+        
     
+    }
+
+    
+    func ApiCall()
+    {
+        if self.iscitytextfieldhavedata == true && self.isliqtextfieldhasdata == true
+        {
+            println(citylat)
+             println(citylong)
+            
+            
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(self.newtextfieldtableview.text)")
+        }
+        else
+        {
+            println(citylat)
+            println(citylong)
+            
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(self.newtextfieldtableview.text)")
+        }
+        
+}
+    
+    func ApiCall1()
+    {
+        if self.iscitytextfieldhavedata == true && self.isliqtextfieldhasdata == true
+        {
+            println(citylat)
+            println(citylong)
+            
+            var passliq = self.newtextfieldtableview.text
+           var  passliqspaceremoved = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            
+            
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passliqspaceremoved)")
+        }
+        else
+        {
+            println(citylat)
+            println(citylong)
+            
+            
+            var passliq = self.newtextfieldtableview.text
+            var  passliqspaceremoved = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passliqspaceremoved)")
+        }
+        
+    }
+
 }
 
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
     
