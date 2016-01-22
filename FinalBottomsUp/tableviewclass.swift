@@ -237,18 +237,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var locationvaluefrombutton: String!
     var liqvaluefrombutton: String!
-    
-//    
-//    var liqnametodisplayonButton:String!
-//    var locationnametodisplayonBUtton:String!
-    
-    
-    
+
     var locationnamefromtextfield:String!
     var liqtypefromTextfield:String!
     
     // localityFromtextfield value is given by Result1 from segue
      var localityFromtextfield:String!
+    
+    
+    var citylatitudefFomresult:Double!
+    var citylongitudeFromresult:Double!
+    var liqtypeFromresult:String!
+    var liqFromresult:String!
+    
 
     
     override func viewDidLoad()
@@ -348,7 +349,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         bottlebutton.setTitle("BOTTLE (₹)", forState: .Normal)
         bottlebutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: 11)
 
-      //  newtextfieldtableviewcity.textFieldWidth = newtextfieldtableviewcity.frame.width
         newtextfieldtableviewcity.delegate = self
         
         self.newtextfieldtableview.delegate = self
@@ -416,7 +416,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     
                     //Assigning the address to the address label on the map.
                     // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                    self.newtextfieldtableviewcity.text = subLocality + ", " +  locality
+                    self.newtextfieldtableviewcity.text = subLocality
                 }
             }
             
@@ -451,7 +451,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     self!.connection!.cancel()
                     self!.connection = nil
                 }
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityFromtextfield)}\(text)&types=(regions)&components=country:IN"
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityFromtextfield.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)&types=(regions)&components=country:IN"
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
                     let urlRequest = NSURLRequest(URL: url!)
@@ -460,25 +460,26 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
+            
             println(self!.newtextfieldtableviewcity.text)
-            self!.locationnamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text , forState: .Normal)
-            self!.iscitytextfieldhavedata = true;
-            self!.locationnamefromtextfield = self!.newtextfieldtableviewcity.text
+            self!.newtextfieldtableviewcity.text = text
             self!.liqtypefromTextfield = self!.newtextfieldtableview.text
-            self!.view.endEditing(true);self?.showdropdownview.hidden = true;
+            self!.locationnamefromtextfield = text
+            self!.onselect()
+            self!.liqFromresult = self!.newtextfieldtableview.text
+            self!.locationnamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text ,forState: .Normal)
+
+            self!.iscitytextfieldhavedata = true;
+    
+            self!.view.endEditing(true);
+            self?.showdropdownview.hidden = true;
             self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
                 {
-                    println(self!.newtextfieldtableviewcity)
                     let coordinate = placemark!.location.coordinate
                     self!.getcitylatitudefromgoogle = coordinate.latitude
                     self!.getcitylongitudefromgoogle = coordinate.longitude
-                    println(self!.getcitylatitudefromgoogle)
-                    println(self!.getcitylongitudefromgoogle)
-                    
-                    
-                    
 //                    if self!.iscitytextfieldhavedata == true && self!.isliqtextfieldhasdata == true
 //                    {
 //                        println(self!.trimmedString)
@@ -490,20 +491,30 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //                        self!.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self!.getcitylatitudefromgoogle)&long=\(self!.getcitylongitudefromgoogle)&km=2&records=10&query=\(self!.newtrimmedstring)")
 //                    }
                     
-                    var text = self!.newtextfieldtableviewcity.text
-                    var locate = self!.localityFromtextfield + text
-                    
-                    
-                    println(locate)
-                    var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                    println(locate1)
-                    
-                    self!.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+          
 
                     
                 }
             })
-        }
+                    }
+
+    }
+    
+    func onselect()
+    {
+        var text1 = self.newtextfieldtableviewcity.text
+        var locate = self.localityFromtextfield + text1
+        
+        println(self.newtextfieldtableviewcity.text)
+        println(self.localityFromtextfield)
+        
+        
+        println(locate)
+        var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        println(locate1)
+        
+        self.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+
     }
     
     func getgoogledata(urlString:String)
@@ -560,11 +571,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 if let lat = location["lat"] as? Double
                                 {
                                     citylat = lat
+                                    citylatitudefFomresult = lat
                                     println(citylat)
                                 }
                                 if let lng = location["lng"] as? Double
                                 {
                                     citylong = lng
+                                    citylongitudeFromresult = lng
                                     println(citylong)
                                 }
                                 
@@ -602,11 +615,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 if let lat = location["lat"] as? Double
                                 {
                                     citylat = lat
+                                    citylatitudefFomresult = lat
                                     println(citylat)
                                 }
                                 if let lng = location["lng"] as? Double
                                 {
                                     citylong = lng
+                                    citylongitudeFromresult = lng
                                     println(citylong)
                                 }
                                 
@@ -659,17 +674,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             println(fullNameArr.count)
                             
-                            if fullNameArr.count > 1
-                            {
-                                var firstName: String = fullNameArr[0]
-                                var lastName: String = fullNameArr[1]
-                                locations[i] = firstName + ", " + lastName
-                            }
-                            else
-                            {
+//                            if fullNameArr.count > 1
+//                            {
+//                                var firstName: String = fullNameArr[0]
+//                                var lastName: String = fullNameArr[1]
+//                                locations[i] = firstName + ", " + lastName
+//                            }
+                     
+                            
                                 var firstName: String = fullNameArr[0]
                                 locations[i] = firstName
-                            }
+                            
 
                         }
                         self.newtextfieldtableviewcity.autoCompleteStrings = locations
@@ -834,35 +849,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         self.array1 = head 
         selectedliqor = selectedCell1.textLabel!.text
         isliqtextfieldhasdata = true
-            
+           self.liqFromresult = self.newtextfieldtableview.text
             locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text , forState: .Normal)
             locationnamefromtextfield = self.newtextfieldtableviewcity.text
             liqtypefromTextfield = self.newtextfieldtableview.text
+            println(self.newtextfieldtableviewcity.text)
+            println(self.newtextfieldtableview.text)
 
-//        if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
-//           {
-//          //  liqnamedisplaybutton.setTitle(newtextfieldtableview.text + space + near + space + newtextfieldtableviewcity.text, forState: .Normal)
-//            
-//              getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=2&records=10&query=\(trimmedString)")
-//            }
-//            else
-//           {
-//         
-//           // liqnamedisplaybutton.setTitle(newtextfieldtableview.text + space + near + space + newtextfieldtableviewcity.text, forState: .Normal)
-//            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
-//               println(trimmedString)
-//            }
+
             
             var text = self.newtextfieldtableviewcity.text
-            
+
             var locate = self.localityFromtextfield + text
-           
             
             println(locate)
             var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-            println(locate1)
-            
             self.getgoogledata1("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+            
+            
         self.view.endEditing(true)
         tableView.hidden = true
         }
@@ -2300,7 +2304,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             destination1.getcitylongitudefrombeerscreen = getcitylongitude
             destination1.getselectedcityname = getselectedcityname
             destination1.liqtypefromTextfield = liqtypefromTextfield
+            println(locationnamefromtextfield)
             destination1.locationnamefromtextfield = locationnamefromtextfield
+            destination1.localityFromtextfield = localityFromtextfield
+            destination1.liqFromresult = newtextfieldtableview.text
+           destination1.citylongitudeFromresult = citylat
+            destination1.citylongitudeFromresult = citylong
         }
         }
     }
@@ -2921,21 +2930,48 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         case 2:
             //call 2km api
             countfurther = 1
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+            println(liqFromresult)
+            println(liqtypeFromresult)
+            
+            if liqFromresult == "All"
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            }
+            else
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            }
+            
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
               self.array1 = self.head
             
         case 5:
             countfurther = 2
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+            if liqFromresult == "All"
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            }
+            else
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            }
+
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
               self.array1 = self.head
             
         case 7:
             countfurther = 3
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+            if liqFromresult == "All"
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            }
+            else
+            {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            }
+
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
               self.array1 = self.head
@@ -2971,21 +3007,45 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         case 2:
             //call 2km api
               countfurther = 1
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+              if liqFromresult == "All"
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+              else
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+              }
+
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
               self.array1 = self.head
             
         case 5:
               countfurther = 2
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+              if liqFromresult == "All"
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+              else
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
               self.array1 = self.head
             
         case 7:
               countfurther = 3
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+              if liqFromresult == "All"
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+              else
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
               self.array1 = self.head
@@ -3021,21 +3081,46 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         case 2:
             //call 2km api
               countfurther = 1
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(newtrimmedstring)")
+              println(liqtypeFromresult)
+              if liqFromresult == "All"
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+              else
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
               self.array1 = self.head
             
         case 5:
               countfurther = 2
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+              if liqFromresult == "All"
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+              else
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
               self.array1 = self.head
             
         case 7:
               countfurther = 3
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+              if liqFromresult == "All"
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+              else
+              {
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+              }
+
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
               self.array1 = self.head
@@ -3043,9 +3128,6 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         default: return
             
         }
-
-        
-     
         self.locatiopopupview.hidden = true
     }
     func print(sender: UIButton)
@@ -3188,48 +3270,33 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func ApiCall()
     {
-        if self.iscitytextfieldhavedata == true && self.isliqtextfieldhasdata == true
-        {
+
             println(citylat)
             println(citylong)
+        
+            var passliq = newtextfieldtableview.text
+       
+            var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        
+             println(passspaceremovedliq)
             
-            
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(self.newtextfieldtableview.text)")
-        }
-        else
-        {
-            println(citylat)
-            println(citylong)
-            
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(self.newtextfieldtableview.text)")
-        }
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+
         
     }
     
     func ApiCall1()
     {
-        if self.iscitytextfieldhavedata == true && self.isliqtextfieldhasdata == true
-        {
+ 
             println(citylat)
             println(citylong)
             
             var passliq = newtextfieldtableview.text
             var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
-            
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
-        }
-        else
-        {
-            println(citylat)
-            println(citylong)
-            
-            var passliq = newtextfieldtableview.text
-            var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-
             
             self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
-        }
+
         
     }
     

@@ -166,6 +166,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var localityFromtextfield:String!
     
     
+    var citylatitudefFomresult:Double!
+    var citylongitudeFromresult:Double!
+    var liqtypeFromresult:String!
+    var liqFromresult:String!
+    
+    
     override func viewDidLoad()
     {
         
@@ -238,14 +244,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         vodkasort = header1
       //  popupviewvodka.layer.cornerRadius = 20.0
         super.viewDidLayoutSubviews()
-        let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
-        mainviewvodka.addGestureRecognizer(tap)
-        
-        let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
-       // popupviewvodka.addGestureRecognizer(tap)
-        let tap2 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
-      //  phoneview.addGestureRecognizer(tap2)
-        let tap3 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
+//        let tap = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap:"))
+//        mainviewvodka.addGestureRecognizer(tap)
+//        
+//        let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
+//       // popupviewvodka.addGestureRecognizer(tap)
+//        let tap2 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
+//      //  phoneview.addGestureRecognizer(tap2)
+//        let tap3 = UITapGestureRecognizer(target: self, action: Selector("handleFrontTap1:"))
     //    locationpopupview.addGestureRecognizer(tap3)
         
         self.tableview1.delegate = self
@@ -368,11 +374,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             }
         }
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
+            println(text)
             self!.newtextfieldtableviewcity.text = text;
-            self!.iscitytextfieldhavedata = true;
-            self!.citynamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text, forState: .Normal)
             self!.locationnamefromtextfield = self!.newtextfieldtableviewcity.text
+            self!.iscitytextfieldhavedata = true;
             self!.liqtypefromTextfield = self!.newtextfieldtableview.text
+            self!.liqFromresult = self!.newtextfieldtableview.text
+            
+            self!.onselect()
+            self!.citynamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text, forState: .Normal)
+            
             
             self!.view.endEditing(true);self?.showdropdownview.hidden = true;self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
@@ -384,15 +395,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                     println(self!.getenteredcitylat)
                     println(self!.getenteredcitylong)
                     
-                    var text = self!.newtextfieldtableviewcity.text
-                    var locate = self!.localityFromtextfield + text
-                    
-                    
-                    println(locate)
-                    var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                    println(locate1)
-                    
-                       self!.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+//                    var text = self!.newtextfieldtableviewcity.text
+//                    var locate = self!.localityFromtextfield + text
+//                    
+//                    
+//                    println(locate)
+//                    var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//                    println(locate1)
+//                    
+//                       self!.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
                     
 
 
@@ -400,6 +411,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 }
             })
         }
+    }
+    
+    func onselect()
+    {
+        var text1 = self.newtextfieldtableviewcity.text
+        var locate = self.localityFromtextfield + text1
+        
+        println(self.newtextfieldtableviewcity.text)
+        println(self.localityFromtextfield)
+        
+        
+        println(locate)
+        var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        println(locate1)
+        
+        self.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+        
     }
     
     func getgoogledata(urlString:String)
@@ -458,11 +486,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 if let lat = location["lat"] as? Double
                                 {
                                     citylat = lat
+                                    citylatitudefFomresult = lat
                                     println(citylat)
                                 }
                                 if let lng = location["lng"] as? Double
                                 {
                                     citylong = lng
+                                    citylongitudeFromresult = lng
                                     println(citylong)
                                 }
                                 
@@ -500,11 +530,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 if let lat = location["lat"] as? Double
                                 {
                                     citylat = lat
+                                    citylatitudefFomresult = lat
                                     println(citylat)
                                 }
                                 if let lng = location["lng"] as? Double
                                 {
                                     citylong = lng
+                                    citylongitudeFromresult = lng
                                     println(citylong)
                                 }
                                 
@@ -839,11 +871,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             if header1[section].rest_offers_happy_hour == "Yes" 
             {
-               return 81
+               return 82
             }
             else
             {
-                return 81
+                return 82
             }
         
         }
@@ -886,7 +918,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if tableView.tag == 1
         {
             
-            if header1[section].bool1 == false{
+        if header1[section].bool1 == false{
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.whiteColor()
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
@@ -902,8 +934,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             headerCell.vodkaavgprice.text = "\(header1[section].avgprice)"
             
         }
-        
-       // headerCell.vodkaavgprice.backgroundColor = UIColor(red: 0xff/255,green: 0xd2/255,blue: 0x00/255,alpha: 1.0)
 
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sectionHeaderTapped:")
         headerCell.taprecognizerimage.addGestureRecognizer(headerTapped1)
@@ -915,24 +945,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.mapbuttonvodkaclass.setTitle(header1[section].distancevodka, forState: UIControlState.Normal)
         headerCell.mapbuttonvodkaclass.enabled =  false
         
-       // headerCell.availofferbutton.tag = section
-        //headerCell.availofferbutton.enabled = false
-        
         headerCell.vodkarestaurantname.font = UIFont(name: "MyriadPro-Regular", size: 11)
         headerCell.vodkaavgprice.font = UIFont(name: "MyriadPro-Bold", size: 11)
         headerCell.mapbuttonvodkaclass.titleLabel?.font = UIFont(name: "MyriadPro-Regular", size: 11)
-                
-             //   headerCell.Happyhourlabelbeforeexpantion.add
-                
-              
-   
+        var happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+        //headerCell.Happyhourlabelbeforeexpantion.text = "Happy Hours " + happyhourstiming
 
-                
          var screensize = self.view.frame.width
             
         if header1[section].vodkaishappy == "Yes"
         {
-              var happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+           
+
             if screensize > 320
             {
                 
@@ -967,7 +991,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         else
         {
-              var happyhourstiming = header1[section].vodkahappystart + " - " + header1[section].vodkahappyend
+         
             if screensize > 320
             {
                 
@@ -993,8 +1017,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
                 println(happyhourstiming1)
             }
-        }
-                
+       }
+//            else
+//        {
+//            headerCell.Happyhourlabelbeforeexpantion.textColor = UIColor.orangeColor()
+//            }
+            
                 if header1[section].rest_offers_happy_hour == "Yes"
                 {
                     headerCell.Happyhourlabelbeforeexpantion.hidden = false
@@ -1683,44 +1711,24 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             newtextfieldtableview.text = selectedCell1.textLabel?.text
             liqnamefromtextfield = newtextfieldtableview.text
-            trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-            citynamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text , forState: .Normal)
             locationnamefromtextfield = self.newtextfieldtableviewcity.text
             liqtypefromTextfield = self.newtextfieldtableview.text
-            
-//            var text = self.newtextfieldtableviewcity.text
-//            var locate = self.localityFromtextfield + text
-//            
-//            
-//            println(locate)
-//            var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-//            println(locate1)
-//            
-//            self.getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
-            
-
-           // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=15&query=\(trimmedString)")
-
             selectedliqor = selectedCell1.textLabel!.text
             isliqtextfieldhasdata = true
-//            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
-//            {
-//                println(citylat)
-//                 println(citylong)
-//                
-//                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
-//            }
-//            else
-//            {
-//                
-//                getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=10&query=\(trimmedString)")
-//                println(trimmedString)
-//            }
+            self.liqFromresult = self.newtextfieldtableview.text
+            
+            
+
+            trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            citynamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text , forState: .Normal)
+       
+            
+
+       
             
             var text = self.newtextfieldtableviewcity.text
+                   println(self.localityFromtextfield)
             var locate = self.localityFromtextfield + text
-            
-            
             println(locate)
             var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             println(locate1)
@@ -2060,6 +2068,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 destination.liqtypefromTextfield = liqtypefromTextfield
                 destination.locationnamefromtextfield = locationnamefromtextfield
+                
+                destination.localityFromtextfield = localityFromtextfield
+                
+                destination.liqFromresult = newtextfieldtableview.text
+                destination.citylongitudeFromresult = citylat
+                destination.citylongitudeFromresult = citylong
                 
                 
                 
@@ -2462,21 +2476,47 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         case 2:
             //call 2km api
             count = 1
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=20&query=\(liqtypefromTextfield)")
+            if liqFromresult == "All"
+            {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult)")
+            }
+            else
+            {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+            }
+
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             self.array1 = self.header1
             
         case 5:
              count = 2
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=20&query=\(liqtypefromTextfield)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                println(citylatitudefFomresult)
+                println(citylongitudeFromresult)
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult)")
+             }
+
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             self.array1 = self.header1
             
         case 7:
              count = 3
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=20&query=\(liqtypefromTextfield)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult)")
+             }
+
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             self.array1 = self.header1
@@ -2514,21 +2554,42 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         case 2:
             //call 2km api
              count = 1
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=20&query=\(liqtypefromTextfield)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+             }
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             self.array1 = self.header1
             
         case 5:
              count = 2
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=20&query=\(liqtypefromTextfield)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult)")
+             }
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             self.array1 = self.header1
             
         case 7:
              count = 3
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=20&query=\(liqtypefromTextfield)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult)")
+             }
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             self.array1 = self.header1
@@ -2564,21 +2625,42 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         case 2:
             //call 2km api
              count = 1
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=2&records=20&query=\(liqvodkaname)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+             }
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
             self.array1 = self.header1
             
         case 5:
              count = 2
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=20&query=\(liqvodkaname)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult)")
+             }
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
             self.array1 = self.header1
             
         case 7:
              count = 3
-            getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=20&query=\(liqvodkaname)")
+             if liqFromresult == "All"
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult)")
+             }
+             else
+             {
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult)")
+             }
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
             self.array1 = self.header1
@@ -2711,28 +2793,25 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func ApiCall()
     {
-        if self.iscitytextfieldhavedata == true && self.isliqtextfieldhasdata == true
-        {
+   
             println(citylat)
              println(citylong)
+        
+        var passliq = self.newtextfieldtableview.text
+        var  passliqspaceremoved = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+
+        
             
-            
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(self.newtextfieldtableview.text)")
-        }
-        else
-        {
-            println(citylat)
-            println(citylong)
-            
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(self.newtextfieldtableview.text)")
-        }
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passliqspaceremoved)")
+       
+
         
 }
     
     func ApiCall1()
     {
-        if self.iscitytextfieldhavedata == true && self.isliqtextfieldhasdata == true
-        {
+    
+        
             println(citylat)
             println(citylong)
             
@@ -2740,19 +2819,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
            var  passliqspaceremoved = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/earchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passliqspaceremoved)")
-        }
-        else
-        {
-            println(citylat)
-            println(citylong)
-            
-            
-            var passliq = self.newtextfieldtableview.text
-            var  passliqspaceremoved = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-            
             self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passliqspaceremoved)")
-        }
+        
+
         
     }
 

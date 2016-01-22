@@ -400,7 +400,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10596" y="-14068"/>
+            <point key="canvasLocation" x="-11107" y="-14058"/>
         </scene>
         <!--Results-->
         <scene sceneID="kqN-H8-XZO">
@@ -663,7 +663,7 @@
                                     <action selector="searchnew:" destination="rsj-6l-Npj" eventType="touchUpInside" id="Sb9-aH-Rmn"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select City" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T05-a2-eXl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Change City" borderStyle="roundedRect" placeholder="Select City" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T05-a2-eXl">
                                 <rect key="frame" x="40" y="253" width="244" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="UOO-o6-Gd1"/>
@@ -677,7 +677,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What you want to drink?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KUO-sz-Zsr">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="All" borderStyle="roundedRect" placeholder="What you want to drink?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KUO-sz-Zsr">
                                 <rect key="frame" x="308" y="179" width="252" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="b8K-ze-qIB"/>
@@ -727,7 +727,7 @@
                                     <constraint firstAttribute="height" constant="45" id="6Ca-gW-2hU"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4zY-zC-Rl3">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Beer" borderStyle="roundedRect" placeholder="Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4zY-zC-Rl3">
                                 <rect key="frame" x="40" y="179" width="244" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="rW6-2k-hz7"/>
@@ -2529,7 +2529,7 @@
                                                     <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-Y9-FrS">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-Y9-FrS">
                                                     <rect key="frame" x="33" y="55" width="414" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="08z-vy-7Fr"/>
@@ -3118,7 +3118,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="k2w-mW-TjF"/>
         <segue reference="KlY-oy-LUS"/>
-        <segue reference="hwc-eh-rZc"/>
         <segue reference="yq4-9t-36Q"/>
+        <segue reference="hwc-eh-rZc"/>
     </inferredMetricsTieBreakers>
 </document>

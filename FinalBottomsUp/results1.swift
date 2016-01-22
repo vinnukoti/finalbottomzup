@@ -101,7 +101,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     @IBOutlet weak var beerTypeTextfield: UITextField!
     
-    var liqTypes: [String] = ["Beer", "Rum", "Whisky","Vodka"]
+    var liqTypes: [String] = ["Beer", "Rum", "whiskey","Vodka"]
     var liqTypetableview: UITableView  =   UITableView()
     
    // var liqTypes1:[String] = ["BUDWEISER","CARLSBERG","FOSTERS","HEINEKEN","KINGFISHER"]
@@ -229,7 +229,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     println(locality)
                     //Assigning the address to the address label on the map.
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
-                     self.currentLocationname = subLocality + ", " + locality
+                     self.currentLocationname = subLocality + "," + locality
                     self.autocompletedTextfieldnew.text = self.currentLocation
                 }
             }
@@ -308,7 +308,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     self!.connection = nil
                 }
                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityfromtextfield)}\(text)&types=(regions)&components=country:IN"
+                
+                var trimmedlocalityfromtextfield = self!.localityfromtextfield.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(trimmedlocalityfromtextfield)}\(text)&types=(regions)&components=country:IN"
                 
                   // let urlString = "http://maps.google.com/maps/api/geocode/json?address={\(self!.localityfromtextfield)}\(text)&sensor=false"
               //  https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={Bangalore}vijaynagar&types=(regions)&components=country:IN
@@ -321,27 +323,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             }
         }
         autocompletedTextfieldnew.onSelect = {[weak self] text , indexpath in
-          //  text = text + localityfromtextfield
+          
             println(text)
+            println(self!.autocompletedTextfieldnew.text)
           
             self!.autocompletedTextfieldnew.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
+            println(self!.autocompletedTextfieldnew.text)
             print(self!.getselectedcityname)
-         //   self.text = text + self!.liqnamefromtextfield
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
-              //  self!.getgoogledata("http://maps.google.com/maps/api/geocode/json?addreself.ss=\(self!.localityfromtextfield + self!.localityTextfield.text)&sensor=false")
-//                if placemark != nil
-//                {
-//                    let coordinate = placemark!.location.coordinate
-//                    self!.citylat = coordinate.latitude
-//                    self!.citylong = coordinate.longitude
-//                    println(self!.citylat)
-//                    println(self!.citylong)
-////                    if self!.isliqtextfieldhasdata == true && self!.iscitytextfieldhavedata == true
-////                    {
-////                        self!.findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-////                    }
-//
-//                }
+
             })
             
         }
@@ -426,9 +416,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             
            // getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
             println(beerTypefromtextfield)
-            getliqtypes("http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(beerTypefromtextfield)")
+            getliqtypes("http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(beerTypeTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
             tableviewnew.hidden = false
             liqTypetableview.hidden = true
+            LOcalityTableview.hidden = true
         }
             else if textField.tag == 2
         {
@@ -447,6 +438,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
           //  textField.selectAll(self)
             tableviewnew.hidden = true
             liqTypetableview.hidden = false
+            LOcalityTableview.hidden = true
+            tableviewnew.hidden = true
+            AutoCompleteTextField3.autoCompleteTableView?.hidden = true
             //textField.userInteractionEnabled = false
         }
         
@@ -685,13 +679,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         {
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             textfield2.text = selectedCell1.textLabel?.text
-            selectedliqor = selectedCell1.textLabel!.text
+            selectedliqor = selectedCell1.textLabel?.text
             isliqtextfieldhasdata = true
-//            if iscitytextfieldhavedata == true && isliqtextfieldhasdata == true
-//            {
-//                findapubbuttonnew.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-//            }
-            
             self.view.endEditing(true)
             tableView.hidden = true
         }
@@ -717,8 +706,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
         println(localityfromtextfield)
         println(autocompletedTextfieldnew.text)
+        
         var text = autocompletedTextfieldnew.text
-        var locate = localityfromtextfield + text
+        var locate = localityTextfield.text + text
         println(autocompletedTextfieldnew.text)
         println(localityfromtextfield)
         
@@ -729,7 +719,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         if autocompletedTextfieldnew.text == currentLocation
         {
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=13.043131&long=77.570327&km=2&records=15&query=\(beerTypeTextfield.text)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=13.043131&long=77.570327&km=2&records=15&query=\(beerTypeTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
         }
         
         getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
@@ -1185,30 +1175,34 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 //77.07380
                 destination.liqname = textfield2.text
                 var liqname = textfield2.text
-                let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-                destination.liqname = trimmedString
-                destination.newtrimmedstring = trimmedString
+//                let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+//                destination.liqname = trimmedString
+//                destination.newtrimmedstring = trimmedString
                 destination.head = head1
-               // destination.localityfromtextfield = localityfromtextfield
+         
                 destination.beerTypefromtextfield = beerTypefromtextfield
-               // destination.llokfurther = head1
-                //destination.resortname1 = arraysring
+                destination.selectedliqor = textfield2.text
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
                 destination.getcitylatitude = citylat
                 destination.getcitylongitude = citylong
                 destination.getrestlatitudebeer = restlat
                 destination.getdevicelongitude = restlong
-                destination.selectedliqor = selectedliqor
+              
                 destination.getfstobj1 = fstobj1
                 destination.getselectedcityname = getselectedcityname
                 destination.checkliqtype = check
                 destination.vodkaarray = header
                 destination.getrestlatitudevodka = restvodkalat
                 destination.getrestlongitudevodka = restvodkalang
+                println(autocompletedTextfieldnew.text)
                 destination.locationnamefromtextfield = autocompletedTextfieldnew.text
                 destination.liqtypefromTextfield = beerTypeTextfield.text
-                destination.localityFromtextfield = localityfromtextfield
+                destination.localityFromtextfield = localityTextfield.text
+                destination.citylatitudefFomresult = citylat
+                destination.citylongitudeFromresult = citylong
+                destination.liqtypeFromresult = beerTypeTextfield.text
+                destination.liqFromresult = textfield2.text
             }
         }
         if segue.identifier == "getvodkanew"
@@ -1223,17 +1217,23 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination1.header1 = header
                 destination1.newtrimmedstring = trimmedString
                 destination1.beerTypefromtextfield = beerTypefromtextfield
-                destination1.getcitylatitude = citylat
-                destination1.getcitylongitude = citylong
+//                destination1.getcitylatitude = citylat
+//                destination1.getcitylongitude = citylong
                 destination1.getdevicelatitude = devicelatitude
                 destination1.getdevicelongitude = devicelongitude
-                destination1.selectedliqor = selectedliqor
+                destination1.selectedliqor = textfield2.text
                 destination1.getvodkalatitude = restlat
                 destination1.getvodkalongitude = restlong
                 destination1.getselectedcityname = getselectedcityname
                 destination1.locationnamefromtextfield = autocompletedTextfieldnew.text
+                println(autocompletedTextfieldnew.text)
                 destination1.liqtypefromTextfield = beerTypeTextfield.text
-                destination1.localityFromtextfield = localityfromtextfield
+                destination1.localityFromtextfield = localityTextfield.text
+                
+                destination1.citylatitudefFomresult = citylat
+                destination1.citylongitudeFromresult = citylong
+                destination1.liqtypeFromresult = beerTypeTextfield.text
+                destination1.liqFromresult = textfield2.text
             }
         }
         if segue.identifier == "getwinenearyou"
@@ -1276,15 +1276,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(citylat)
             println(citylong)
             println(trimmedString)
-            println(beerTypefromtextfield)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(beerTypefromtextfield)")
+            println(beerTypeTextfield.text)
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(beerTypeTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
         }
         else
         {
             println(citylat)
             println(citylong)
             println(trimmedString)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
         }
         
     }
