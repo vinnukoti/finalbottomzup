@@ -3,7 +3,7 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "radius-7-km-light-2.png"
+      "filename" : "radius-7-km-light.png"
     },
     {
       "idiom" : "universal",
@@ -13,7 +13,7 @@
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "radius-7-km-light.png"
+      "filename" : "radius-7-km-light-2.png"
     }
   ],
   "info" : {

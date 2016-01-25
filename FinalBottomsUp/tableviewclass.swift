@@ -249,11 +249,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var citylongitudeFromresult:Double!
     var liqtypeFromresult:String!
     var liqFromresult:String!
+
     
 
     
     override func viewDidLoad()
     {
+        
+        if Reachability.isConnectedToNetwork() == true {
+           // print("Internet connection OK")
+        } else {
+            //print("Internet connection FAILED")
+            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
         dealsnearyou.hidden = true
 
         
@@ -949,9 +958,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 fstobj1.restname = res_name
                             }
-                            if let res_place = resInfo["res_address"] as? String
+                            if let res_locality = resInfo["res_locality"] as? String
                             {
-                                fstobj1.Place = res_place
+                                fstobj1.Place = res_locality
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -1076,9 +1085,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 vodkaobjnew.restnamevodka = res_name
                             }
-                            if let res_place = resInfo["res_address"] as? String
+                            if let res_locality = resInfo["res_locality"] as? String
                             {
-                                vodkaobjnew.address = res_place
+                                vodkaobjnew.address = res_locality
                             }
                             
                             
@@ -1837,143 +1846,141 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     
-    @IBAction func lookfurther(sender: AnyObject)
-    {
-
-        
-        //28.63875
-        //77.07380
-       // changecolor = true
-        
-//         var lookfurtherview=UIView()
-//         lookfurtherview = UIView(frame: CGRectMake(50,50,50,50))
+//    @IBAction func lookfurther(sender: AnyObject)
+//    {
+//
+//        
+//        //28.63875
+//        //77.07380
+//       // changecolor = true
+//        
+////         var lookfurtherview=UIView()
+////         lookfurtherview = UIView(frame: CGRectMake(50,50,50,50))
+////        
+////        
+////        self.view.addSubview(lookfurtherview)
 //        
 //        
-//        self.view.addSubview(lookfurtherview)
-        
-        
-        
-        
-        println(countfurther)
-        countfurther = countfurther + 1
-        
-        println(countfurther)
-        
-        if countfurther == 1{
-            
-            
-            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-            selectedliqor = trimmedString1
-            
-
-           if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
-           {
-              getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
-            }
-            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
-           {
-               getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(newtrimmedstring)")
-            }
-           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
-           {
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
-            }
-           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
-           {
-            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(trimmedString)")
-            }
-            
-    
-        
-          //head = makecolor(newheadarray, arrayj: newheadarray1)
-        self.array1 = self.head
-            //fstobj1.color = true
-        }
-        
-        if countfurther == 2
-        {
-            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-            selectedliqor = trimmedString1
-
-          // getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
-           //  getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
-            
-            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
-            {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
-            }
-            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
-            {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
-            }
-            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
-            {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
-            }
-            
-            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
-            {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(trimmedString)")
-            }
-
-             self.array1 = self.head
-           // fstobj1.color = true
-        }
-        
-        if countfurther == 3
-        {
-            
-            let alertController = UIAlertController(title: "Do you want go back to 2 km search", message: "Press the Ok or cancel", preferredStyle: .Alert)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-                self.countfurther = 2
-                //self.fstobj1.color = true
-               
-            }
-            alertController.addAction(cancelAction)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                self.countfurther = 0
-                let trimmedString1 = self.selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-                self.selectedliqor = trimmedString1
-
-                
-                
-                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
-                {
-                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.newtrimmedstring)")
-                }
-                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
-                {
-                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.newtrimmedstring)")
-                }
-                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
-                {
-                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
-                }
-                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == true
-                {
-                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.trimmedString)")
-                }
-
-                 self.array1 = self.head
-            }
-            alertController.addAction(OKAction)
-            
-            self.presentViewController(alertController, animated: true) {
-          
-            }
-            
-        }
-    }
+//        
+//        
+//        println(countfurther)
+//        countfurther = countfurther + 1
+//        
+//        println(countfurther)
+//        
+//        if countfurther == 1{
+//            
+//            
+//            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+//            selectedliqor = trimmedString1
+//            
+//
+//           if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+//           {
+//              getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=15&query=\(newtrimmedstring)")
+//            }
+//            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+//           {
+//               getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(newtrimmedstring)")
+//            }
+//           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+//           {
+//            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
+//            }
+//           else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
+//           {
+//            getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=5&records=10&query=\(trimmedString)")
+//            }
+//            
+//    
+//        
+//          //head = makecolor(newheadarray, arrayj: newheadarray1)
+//        self.array1 = self.head
+//            //fstobj1.color = true
+//        }
+//        
+//        if countfurther == 2
+//        {
+//            let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+//            selectedliqor = trimmedString1
+//
+//          // getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+//           //  getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
+//            
+//            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+//            {
+//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=15&query=\(newtrimmedstring)")
+//            }
+//            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+//            {
+//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(newtrimmedstring)")
+//            }
+//            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+//            {
+//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
+//            }
+//            
+//            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == true
+//            {
+//                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitudefromgoogle)&long=\(getcitylongitudefromgoogle)&km=7&records=10&query=\(trimmedString)")
+//            }
+//
+//             self.array1 = self.head
+//           // fstobj1.color = true
+//        }
+//        
+//        if countfurther == 3
+//        {
+//            
+//            let alertController = UIAlertController(title: "Do you want go back to 2 km search", message: "Press the Ok or cancel", preferredStyle: .Alert)
+//            
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+//                self.countfurther = 2
+//                //self.fstobj1.color = true
+//               
+//            }
+//            alertController.addAction(cancelAction)
+//            
+//            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+//                self.countfurther = 0
+//                let trimmedString1 = self.selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+//                self.selectedliqor = trimmedString1
+//
+//                
+//                
+//                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
+//                {
+//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.newtrimmedstring)")
+//                }
+//                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
+//                {
+//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.newtrimmedstring)")
+//                }
+//                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
+//                {
+//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
+//                }
+//                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == true
+//                {
+//                    self.getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitudefromgoogle)&long=\(self.getcitylongitudefromgoogle)&km=2&records=10&query=\(self.trimmedString)")
+//                }
+//
+//                 self.array1 = self.head
+//            }
+//            alertController.addAction(OKAction)
+//            
+//            self.presentViewController(alertController, animated: true) {
+//          
+//            }
+//            
+//        }
+//    }
     
     
 
     func getbardatafurther(urlString:String)
     {
         let url = NSURL(string: urlString)
-    
-        
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
             
@@ -2036,9 +2043,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                     {
                         
-                        if let res_place = resInfo["res_address"] as? String
+                        if let res_locality = resInfo["res_locality"] as? String
                         {
-                            fstobj1.Place = res_place
+                            fstobj1.Place = res_locality
                         }
                         if let res_name = resInfo["res_name"] as? String
                         {
@@ -2308,7 +2315,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             destination1.locationnamefromtextfield = locationnamefromtextfield
             destination1.localityFromtextfield = localityFromtextfield
             destination1.liqFromresult = newtextfieldtableview.text
-           destination1.citylongitudeFromresult = citylat
+           destination1.citylatitudefFomresult = citylat
             destination1.citylongitudeFromresult = citylong
         }
         }
@@ -2935,11 +2942,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
             if liqFromresult == "All"
             {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -2950,11 +2959,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             countfurther = 2
             if liqFromresult == "All"
             {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
             }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -2965,11 +2976,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             countfurther = 3
             if liqFromresult == "All"
             {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
             }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3009,11 +3022,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               countfurther = 1
               if liqFromresult == "All"
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3024,11 +3039,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               countfurther = 2
               if liqFromresult == "All"
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3039,11 +3056,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               countfurther = 3
               if liqFromresult == "All"
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3084,11 +3103,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               println(liqtypeFromresult)
               if liqFromresult == "All"
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3099,11 +3120,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               countfurther = 2
               if liqFromresult == "All"
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3114,11 +3137,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               countfurther = 3
               if liqFromresult == "All"
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)

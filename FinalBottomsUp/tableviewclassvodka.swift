@@ -175,6 +175,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
     {
         
+        if Reachability.isConnectedToNetwork() == true {
+            print("Internet connection OK")
+        } else {
+            print("Internet connection FAILED")
+            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+        
 //        if beerTypefromtextfield != nil
 //        {
 //            citynamedisplaybutton.setTitle("\( beerTypefromtextfield + space + near + space + getselectedcityname )", forState: .Normal)
@@ -1390,9 +1398,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             getvodkaobj.restnamevodka = res_name
 
                         }
-                        if let res_place = resInfo["res_address"] as? String
+                        if let res_locality = resInfo["res_locality"] as? String
                         {
-                            getvodkaobj.address = res_place
+                            getvodkaobj.address = res_locality
                         }
                         
                         if let res_lat = resInfo["res_lat"] as? String
@@ -1820,9 +1828,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        
                                 fstobj1.restname = res_name
                             }
-                            if let res_place = resInfo["res_address"] as? String
+                            if let res_locality = resInfo["res_locality"] as? String
                             {
-                                fstobj1.Place = res_place
+                                fstobj1.Place = res_locality
                             }
                             
                             
@@ -1948,9 +1956,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 vodkaobjnew.restnamevodka = res_name
                          
                             }
-                            if let res_place = resInfo["res_address"] as? String
+                            if let res_locality = resInfo["res_locality"] as? String
                             {
-                                vodkaobjnew.address = res_place
+                                vodkaobjnew.address = res_locality
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -2072,7 +2080,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination.localityFromtextfield = localityFromtextfield
                 
                 destination.liqFromresult = newtextfieldtableview.text
-                destination.citylongitudeFromresult = citylat
+                destination.citylatitudefFomresult = citylat
                 destination.citylongitudeFromresult = citylong
                 
                 
@@ -2476,13 +2484,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         case 2:
             //call 2km api
             count = 1
+            println(liqFromresult)
+            println(citylatitudefFomresult)
+            println(citylongitudeFromresult)
             if liqFromresult == "All"
             {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
             }
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -2491,15 +2504,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         case 5:
              count = 2
+             println(liqFromresult)
+             println(citylatitudefFomresult)
+             println(citylongitudeFromresult)
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
                 println(citylatitudefFomresult)
                 println(citylongitudeFromresult)
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
              }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -2510,11 +2528,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              count = 3
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
              }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -2556,11 +2576,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              count = 1
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
              }
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
@@ -2568,13 +2590,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         case 5:
              count = 2
+             println(liqFromresult)
+             println(citylatitudefFomresult)
+             println(citylongitudeFromresult)
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
              }
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
@@ -2584,11 +2611,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              count = 3
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult)")
+                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
              }
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
@@ -2627,11 +2656,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              count = 1
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
              }
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
@@ -2641,11 +2672,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              count = 2
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(liqFromresult)")
+                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
              }
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
@@ -2655,11 +2688,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              count = 3
              if liqFromresult == "All"
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqtypeFromresult)")
+                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
              }
              else
              {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(liqFromresult)")
+                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
              }
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7

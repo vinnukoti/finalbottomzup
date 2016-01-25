@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Off-button.png"
+      "filename" : "OFF-button-(3x)-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Off-button-1.png"
+      "filename" : "OFF-button-(2x).png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Off-button-2.png"
+      "filename" : "OFF-button-(3x).png"
     }
   ],
   "info" : {

@@ -15,6 +15,7 @@
 		531F58BD1C311F7B00E9D583 /* DealsNearyouRowchild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58BC1C311F7B00E9D583 /* DealsNearyouRowchild.swift */; };
 		532E64551BF5EF9800B88D09 /* BeerRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E64541BF5EF9800B88D09 /* BeerRowCell.swift */; };
 		532E64591BF6078D00B88D09 /* VodkaRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E64581BF6078D00B88D09 /* VodkaRowCell.swift */; };
+		534F6E481C55F95200782D87 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F6E471C55F95200782D87 /* Reachability.swift */; };
 		5363430F1BC2A820008018F6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5363430E1BC2A820008018F6 /* Accounts.framework */; };
 		536343111BC2A839008018F6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343101BC2A839008018F6 /* AdSupport.framework */; };
 		536343131BC2A886008018F6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343121BC2A886008018F6 /* Social.framework */; };
@@ -77,7 +78,6 @@
 		53A659751C1170150002B4BC /* AViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A659741C1170150002B4BC /* AViewController.swift */; };
 		53A659771C11AEDE0002B4BC /* GifImageclassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */; };
 		53CB2BFE1BC3F94900F5F62C /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB2BFD1BC3F94900F5F62C /* mapview.swift */; };
-		53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */; };
 		53E512401BF0E6A200FFC78E /* NewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5123F1BF0E6A200FFC78E /* NewClass.swift */; };
 		53ED675F1C243F74009966F6 /* MYRIADPRO-COND.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 53ED675E1C243F74009966F6 /* MYRIADPRO-COND.OTF */; };
 		53ED67611C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 53ED67601C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF */; };
@@ -105,6 +105,7 @@
 		531F58BC1C311F7B00E9D583 /* DealsNearyouRowchild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealsNearyouRowchild.swift; sourceTree = "<group>"; };
 		532E64541BF5EF9800B88D09 /* BeerRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerRowCell.swift; sourceTree = "<group>"; };
 		532E64581BF6078D00B88D09 /* VodkaRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VodkaRowCell.swift; sourceTree = "<group>"; };
+		534F6E471C55F95200782D87 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		5363430E1BC2A820008018F6 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		536343101BC2A839008018F6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		536343121BC2A886008018F6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -172,7 +173,6 @@
 		53A659741C1170150002B4BC /* AViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AViewController.swift; sourceTree = "<group>"; };
 		53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifImageclassViewController.swift; sourceTree = "<group>"; };
 		53CB2BFD1BC3F94900F5F62C /* mapview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
-		53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internetcheckclass.swift; sourceTree = "<group>"; };
 		53E5123F1BF0E6A200FFC78E /* NewClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewClass.swift; sourceTree = "<group>"; };
 		53ED675E1C243F74009966F6 /* MYRIADPRO-COND.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-COND.OTF"; sourceTree = "<group>"; };
 		53ED67601C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
@@ -300,6 +300,7 @@
 				5367CEF81B9DB0EA00D33220 /* ViewController.swift */,
 				53F068281C2C0FA400ADC41C /* DealsNearyou.swift */,
 				531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */,
+				534F6E471C55F95200782D87 /* Reachability.swift */,
 				531F58BC1C311F7B00E9D583 /* DealsNearyouRowchild.swift */,
 				53A659761C11AEDE0002B4BC /* GifImageclassViewController.swift */,
 				531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */,
@@ -329,7 +330,6 @@
 				5389EE3E1BC65117007999AE /* custmheadercell1.swift */,
 				537A33A11C075535001E1D7B /* customheadercellafterexpastionforvodka.swift */,
 				5389EE401BC65146007999AE /* onemoreclass2.swift */,
-				53E02F451BCE63110016A3D2 /* Internetcheckclass.swift */,
 			);
 			path = FinalBottomsUp;
 			sourceTree = "<group>";
@@ -563,6 +563,7 @@
 				531F58B91C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift in Sources */,
 				53F068291C2C0FA400ADC41C /* DealsNearyou.swift in Sources */,
 				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
+				534F6E481C55F95200782D87 /* Reachability.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,
 				53A659771C11AEDE0002B4BC /* GifImageclassViewController.swift in Sources */,
@@ -590,7 +591,6 @@
 				53F9E8FF1C4A4F8600183052 /* AutoCompleteTextField4.swift in Sources */,
 				5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */,
 				538D0A461BA4194B005D1386 /* Location.swift in Sources */,
-				53E02F461BCE63110016A3D2 /* Internetcheckclass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

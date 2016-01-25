@@ -48,6 +48,21 @@ class ViewController: UIViewController
         
         super.viewDidLoad()
         
+        if Reachability.isConnectedToNetwork() {
+            println("Haz Interwebz!")
+        } else {
+            println("Oh noes! No interwebz!!!")
+        }
+        
+        if Reachability.isConnectedToNetwork() == true {
+            print("Internet connection OK")
+        } else {
+            print("Internet connection FAILED")
+            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+
+        
 //        let filePath = NSBundle.mainBundle().pathForResource("Bubble-moving", ofType: "gif")
 //        let gif = NSData(contentsOfFile: filePath!)
 //        webviewforgif.loadData(gif!, MIMEType: "image/gif", textEncodingName: String(), baseURL: NSURL())

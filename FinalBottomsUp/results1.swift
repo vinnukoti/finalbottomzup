@@ -114,9 +114,42 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var currentLocationname:String!
     
     var currentLocation = "Current Location"
+     var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+    let indicatorview = UIView()
+    var PleaseWaitlabel = UILabel()
 
     override func viewDidLoad()
     {
+  
+        // All done!
+        
+        println(autocompletedTextfieldnew.text)
+
+        PleaseWaitlabel = UILabel(frame: CGRectMake(0,20, 150, 100))
+       PleaseWaitlabel.text = "Please Wait..."
+       actInd.center = self.view.center
+       actInd.hidesWhenStopped = true
+       actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+       actInd.color = UIColor.blackColor()
+       view.addSubview(actInd)
+       actInd.startAnimating()
+        actInd.addSubview(PleaseWaitlabel)
+
+
+        
+
+       
+        autocompletedTextfieldnew.userInteractionEnabled = false
+        
+        if Reachability.isConnectedToNetwork() == true {
+            print("Internet connection OK")
+        } else {
+            print("Internet connection FAILED")
+            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+        
+        
         dealsnearyou.hidden = true
         //tableviewnew.tableFooterView = UIView()
         textfield2.tag = 1
@@ -126,6 +159,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         tableviewnew.tag = 5
         liqTypetableview.tag = 6
         beerTypeTextfield.tag = 7
+        
+       // beerTypeTextfield.enabled = false
+        
+        
   
         textfield2.delegate = self
 
@@ -164,10 +201,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         self.view.addSubview(liqTypetableview)
         liqTypetableview.hidden = true
         
+         println(autocompletedTextfieldnew.text)
+        
         
 
 
     }
+
 
     
     
@@ -231,6 +271,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
                      self.currentLocationname = subLocality + "," + locality
                     self.autocompletedTextfieldnew.text = self.currentLocation
+                    self.PleaseWaitlabel.hidden = true
+                    self.actInd.stopAnimating()
+                    self.actInd.hidden = true
+                    
+                    println(self.autocompletedTextfieldnew.text)
                 }
             }
 
@@ -309,8 +354,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 }
                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
                 
-                var trimmedlocalityfromtextfield = self!.localityfromtextfield.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(trimmedlocalityfromtextfield)}\(text)&types=(regions)&components=country:IN"
+                //var trimmedlocalityfromtextfield = self!.localityfromtextfield.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityfromtextfield)}\(text)&types=(regions)&components=country:IN"
                 
                   // let urlString = "http://maps.google.com/maps/api/geocode/json?address={\(self!.localityfromtextfield)}\(text)&sensor=false"
               //  https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={Bangalore}vijaynagar&types=(regions)&components=country:IN
@@ -411,37 +456,49 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     func textFieldDidBeginEditing(textField: UITextField)
     {
         
+        // Textfield2
         if textField.tag == 1
         {
+            textfield2.enabled = false
             
            // getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
             println(beerTypefromtextfield)
-            getliqtypes("http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(beerTypeTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            getliqtypes("http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(beerTypeTextfield.text)")
             tableviewnew.hidden = false
             liqTypetableview.hidden = true
             LOcalityTableview.hidden = true
         }
+            
+            
+            // autocompletedTextfieldnew
             else if textField.tag == 2
         {
             LOcalityTableview.hidden = true
         }
         
+            
+            
+           // localityTextfield
         else if textField.tag == 3
         {
+            localityTextfield.enabled = false
              textField.selectAll(self)
             LOcalityTableview.hidden = false
             AutoCompleteTextField3.autoCompleteTableView?.hidden = true
         }
+            
+            // beerTypeTextfield
         else if textField.tag == 7
         {
-         // textField.userInteractionEnabled = true
-          //  textField.selectAll(self)
+            
+            
+            beerTypeTextfield.enabled = false
             tableviewnew.hidden = true
             liqTypetableview.hidden = false
             LOcalityTableview.hidden = true
             tableviewnew.hidden = true
             AutoCompleteTextField3.autoCompleteTableView?.hidden = true
-            //textField.userInteractionEnabled = false
+        
         }
         
     }
@@ -664,9 +721,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        
+        // Locality tableview
         if tableView.tag == 4
         {
+            autocompletedTextfieldnew.userInteractionEnabled = true
+            localityTextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             localityTextfield.text = selectedCell1.textLabel?.text
             localityfromtextfield = localityTextfield.text
@@ -674,9 +733,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             self.view.endEditing(true)
             tableView.hidden = true
         }
-        
+        // liqatable view
         else if tableView.tag == 5
         {
+            textfield2.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             textfield2.text = selectedCell1.textLabel?.text
             selectedliqor = selectedCell1.textLabel?.text
@@ -684,9 +744,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             self.view.endEditing(true)
             tableView.hidden = true
         }
-        
+            
+        // Liq type table view
         else if tableView.tag == 6
         {
+            textfield2.text = "All"
+            beerTypeTextfield.enabled = true
             println("You selected cell #\(indexPath.row)!")
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             beerTypeTextfield.text = selectedCell1.textLabel?.text
@@ -719,7 +782,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         if autocompletedTextfieldnew.text == currentLocation
         {
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=13.043131&long=77.570327&km=2&records=15&query=\(beerTypeTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=2&records=15&query=\(beerTypeTextfield.text)")
         }
         
         getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
@@ -911,9 +974,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 
                             }
                             
-                            if let res_place = resInfo["res_address"] as? String
+                            if let res_locality = resInfo["res_locality"] as? String
                             {
-                                fstobj1.Place = res_place
+                                fstobj1.Place = res_locality
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -1049,9 +1112,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 //vodkasendobj.restnamevodka = res_name
                             }
                             
-                            if let res_place = resInfo["res_address"] as? String
+                            if let res_locality = resInfo["res_locality"] as? String
                             {
-                                vodkaobj.address = res_place
+                                vodkaobj.address = res_locality
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -1277,14 +1340,19 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(citylong)
             println(trimmedString)
             println(beerTypeTextfield.text)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(beerTypeTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            var name  = beerTypeTextfield.text
+            var name1 =  name.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            println(name1)
+            
+            println(name)
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(name1)")
         }
         else
         {
             println(citylat)
             println(citylong)
             println(trimmedString)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
         }
         
     }
