@@ -16,7 +16,7 @@ class GifImageclassViewController: UIViewController
 
     @IBOutlet weak var webviewforgif: UIWebView!
     var moviePlayer : MPMoviePlayerController?
-
+    var img: UIImageView!
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -25,6 +25,10 @@ class GifImageclassViewController: UIViewController
 //        webviewforgif.loadData(gif!, MIMEType: "image/gif", textEncodingName: String(), baseURL: NSURL())
 //        let timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "update", userInfo: nil, repeats: false)
 //        webviewforgif.userInteractionEnabled = false
+        self.view.backgroundColor = UIColor.whiteColor()
+        img = UIImageView(frame: self.view.frame)
+        img.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(img)
         playVideo()
       //  localFunc()
         
@@ -63,6 +67,7 @@ class GifImageclassViewController: UIViewController
             moviePlayer!.controlStyle = MPMovieControlStyle.None
             println(player.duration)
              player.play()
+            self.view.sendSubviewToBack(img)
             self.view.addSubview(player.view)
             
 

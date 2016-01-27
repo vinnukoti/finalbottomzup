@@ -250,19 +250,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var liqtypeFromresult:String!
     var liqFromresult:String!
 
-    
+    var hstart = "00:00:00 - 00:00:00"
+   
 
     
     override func viewDidLoad()
     {
         
-        if Reachability.isConnectedToNetwork() == true {
-           // print("Internet connection OK")
-        } else {
-            //print("Internet connection FAILED")
-            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
-        }
+//        if Reachability.isConnectedToNetwork() == true {
+//           // print("Internet connection OK")
+//        } else {
+//            //print("Internet connection FAILED")
+//            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+//            alert.show()
+//        }
         dealsnearyou.hidden = true
 
         
@@ -435,7 +436,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     private func configureTextField()
     {
         newtextfieldtableviewcity.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        newtextfieldtableviewcity.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        newtextfieldtableviewcity.autoCompleteTextFont = UIFont(name: "MYRIADPRO-REGULAR", size: 14.0)
         newtextfieldtableviewcity.autoCompleteCellHeight = 35.0
         newtextfieldtableviewcity.maximumAutoCompleteCount = 20
         newtextfieldtableviewcity.hidesWhenSelected = true
@@ -443,7 +444,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newtextfieldtableviewcity.enableAttributedText = true
         var attributes = [String:AnyObject]()
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        attributes[NSFontAttributeName] = UIFont(name: "MYRIADPRO-REGULAR", size: 14.0)
         newtextfieldtableviewcity.autoCompleteAttributes = attributes
         
     }
@@ -460,6 +461,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     self!.connection!.cancel()
                     self!.connection = nil
                 }
+                
                 let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityFromtextfield.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)&types=(regions)&components=country:IN"
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
@@ -735,7 +737,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             variable.startIndex
             let trimmedString1 = variable.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
             
-            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/radmin/liquors.php?find=\(trimmedString1)")
+            let url = NSURL(string: "http://demos.dignitasdigital.com/bottomzup/liquors.php?find=\(trimmedString1)")
             loadData(url!, completion: didLoadData)
             
         }
@@ -1545,6 +1547,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
              
                 var happyhourstiming = head[section].happystart + " - " + head[section].happyend
+                if happyhourstiming == hstart
+                {
+                    headerCell.Happyhourslabel.hidden = true
+                }
+                else
+                {
+                    headerCell.Happyhourslabel.hidden = false
+                }
                 
                 var screensize = self.view.frame.width
                 headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
@@ -1568,8 +1578,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 if head[section].ishappy == "Yes"
                 {
                     
-                    if screensize > 320
-                    {
+                 
                         
                         var happyhourstiming1 = "Happy Hours " + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
@@ -1582,28 +1591,27 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
                         println(happyhourstiming1)
-                    }
-                    else
-                    {
-                        var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
-                        var myMutableString = NSMutableAttributedString()
-                     
-                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
-                           var length = myMutableString.length
-                        println(length)
-                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
-                        
-                        headerCell.Happyhourslabel.attributedText = myMutableString
-                        println(happyhourstiming1)
-                    }
+                    
+//                    else
+//                    {
+//                        var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+//                        var myMutableString = NSMutableAttributedString()
+//                     
+//                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+//                           var length = myMutableString.length
+//                        println(length)
+//                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
+//                        
+//                        headerCell.Happyhourslabel.attributedText = myMutableString
+//                        println(happyhourstiming1)
+//                    }
                     
                   // headerCell.Happyhourslabel.textColor = UIColor.greenColor()
                 }
                 else
                 {
                     
-                    if screensize > 320
-                    {
+          
                         
                         var happyhourstiming1 = "Happy Hours " + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
@@ -1614,19 +1622,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
                         println(happyhourstiming1)
-                    }
-                    else
-                    {
-                        var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
-                        var myMutableString = NSMutableAttributedString()
-                        
-                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
-                        
-                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
-                        
-                        headerCell.Happyhourslabel.attributedText = myMutableString
-                        println(happyhourstiming1)
-                    }
+                    
+//                    else
+//                    {
+//                        var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+//                        var myMutableString = NSMutableAttributedString()
+//                        
+//                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+//                        
+//                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
+//                        
+//                        headerCell.Happyhourslabel.attributedText = myMutableString
+//                        println(happyhourstiming1)
+//                    }
                   // headerCell.Happyhourslabel.textColor = UIColor.orangeColor()
                 }
                 
@@ -1634,6 +1642,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 {
     
                     headerCell.Happyhourslabel.hidden = false
+                    if happyhourstiming == hstart
+                    {
+                        headerCell.Happyhourslabel.hidden = true
+                    }
+                    else
+                    {
+                        headerCell.Happyhourslabel.hidden = false
+                    }
                   //  headerCell.availofferimagetodisplay.hidden = false
 
                 }
@@ -2722,7 +2738,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             self.addresslabel.textColor = UIColor.blackColor()
             self.addresslabel.textAlignment = NSTextAlignment.Left
             self.addresslabel.text = newaddress
-            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 14)
             self.addresslabel.numberOfLines = 3
             
             
@@ -2734,7 +2750,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             var titleString : NSMutableAttributedString = NSMutableAttributedString(string: "Find on Google Maps")
             titleString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, count(text.utf8)))
             Findongooglemapsbutton.setAttributedTitle(titleString, forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
             
             
             self.view.addSubview(locatiopopupview)
@@ -2811,28 +2827,28 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         switch (tag){
             
-            case 1:
-            
-                closelocationpopupbutton7kms.frame = CGRectMake(0,0,75,75)
-                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-                closelocationpopupbutton7kms.tag=7
-                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
-            
-                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
-                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-                closelocationpopupbutton5kms.tag=5
-                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
-            
-                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
-                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-                closelocationpopupbutton2kms.tag=2
-                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
-                
-                
-                self.view.addSubview(locatiopopupview)
-                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
-                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
-                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+//            case 1:
+//            
+//                closelocationpopupbutton7kms.frame = CGRectMake(0,0,75,75)
+//                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+//                closelocationpopupbutton7kms.tag=7
+//                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+//            
+//                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
+//                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+//                closelocationpopupbutton5kms.tag=5
+//                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+//            
+//                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+//                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+//                closelocationpopupbutton2kms.tag=2
+//                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+//                
+//                
+//                self.view.addSubview(locatiopopupview)
+//                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+//                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+//                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
 
 
             
@@ -2943,12 +2959,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -2960,12 +2976,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             if liqFromresult == "All"
             {
                  var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
             }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -2977,12 +2993,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
             }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3023,12 +3039,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3040,12 +3056,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3057,12 +3073,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3104,12 +3120,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3121,12 +3137,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3138,12 +3154,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3180,7 +3196,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
-        newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
         newtextfieldtableview.text = liqtypefromTextfield
         liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
         
@@ -3195,7 +3211,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 3,width: self.view.frame.width - 20,height: 45), superview: showdropdownview)
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
         newtextfieldtableviewcity.text = locationnamefromtextfield
         configureTextField()
         handleTextFieldInterfaces()
@@ -3305,7 +3321,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
              println(passspaceremovedliq)
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
 
         
     }
@@ -3320,9 +3336,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
 
         
+    }
+    @IBAction func findwineandbeernewryou(sender: UIButton)
+    {
+        performSegueWithIdentifier("getwinenearyoufrombeer", sender: self)
     }
     
     

@@ -115,8 +115,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     var currentLocation = "Current Location"
      var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
-    let indicatorview = UIView()
+   // var indicatorview = UIView()
     var PleaseWaitlabel = UILabel()
+
 
     override func viewDidLoad()
     {
@@ -124,6 +125,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // All done!
         
         println(autocompletedTextfieldnew.text)
+
 
         PleaseWaitlabel = UILabel(frame: CGRectMake(0,20, 150, 100))
        PleaseWaitlabel.text = "Please Wait..."
@@ -136,19 +138,16 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         actInd.addSubview(PleaseWaitlabel)
 
 
-        
 
-       
-        autocompletedTextfieldnew.userInteractionEnabled = false
-        
-        if Reachability.isConnectedToNetwork() == true {
+        if CheckforInternetViewController.isConnectedToNetwork() == true {
             print("Internet connection OK")
         } else {
             print("Internet connection FAILED")
             let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
             alert.show()
+            actInd.hidden = true
         }
-        
+    
         
         dealsnearyou.hidden = true
         //tableviewnew.tableFooterView = UIView()
@@ -274,6 +273,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     self.PleaseWaitlabel.hidden = true
                     self.actInd.stopAnimating()
                     self.actInd.hidden = true
+                    println(locality)
+                    self.localityTextfield.text = locality
+                    
                     
                     println(self.autocompletedTextfieldnew.text)
                 }
@@ -312,7 +314,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     private func configureTextField()
     {
         autocompletedTextfieldnew.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        autocompletedTextfieldnew.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        autocompletedTextfieldnew.autoCompleteTextFont = UIFont(name: "MyriadPro-Regular", size: 14.0)
         autocompletedTextfieldnew.autoCompleteCellHeight = 35.0
         autocompletedTextfieldnew.maximumAutoCompleteCount = 20
         autocompletedTextfieldnew.hidesWhenSelected = true
@@ -320,7 +322,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         autocompletedTextfieldnew.enableAttributedText = true
         var attributes = [String:AnyObject]()
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        attributes[NSFontAttributeName] = UIFont(name: "MyriadPro-Regular", size: 14.0)
         autocompletedTextfieldnew.autoCompleteAttributes = attributes
         
         
@@ -355,16 +357,36 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                // let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)&types=regions&components=country:IN"
                 
                 //var trimmedlocalityfromtextfield = self!.localityfromtextfield.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityfromtextfield)}\(text)&types=(regions)&components=country:IN"
-                
-                  // let urlString = "http://maps.google.com/maps/api/geocode/json?address={\(self!.localityfromtextfield)}\(text)&sensor=false"
-              //  https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={Bangalore}vijaynagar&types=(regions)&components=country:IN
-                
-                let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
-                if url != nil{
-                    let urlRequest = NSURLRequest(URL: url!)
-                    self!.connection = NSURLConnection(request: urlRequest, delegate: self)
+     
+               if CheckforInternetViewController.isConnectedToNetwork() == true
+               {
+                    print("Internet connection OK")
+                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityTextfield.text)}\(text)&types=(regions)&components=country:IN"
+                    let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
+                    if url != nil{
+                        let urlRequest = NSURLRequest(URL: url!)
+                        self!.connection = NSURLConnection(request: urlRequest, delegate: self)
+                        print("Internet connection OK")
+     
+                }}
+                else
+                {
+                    print("Internet connection FAILED")
+                    
+                    let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+                    alert.show()
+                    AutoCompleteTextField3.autoCompleteTableView?.hidden = true
+                   
+                    
+           
                 }
+ 
+          
+                
+                        
+                    
+
+                
             }
         }
         autocompletedTextfieldnew.onSelect = {[weak self] text , indexpath in
@@ -433,14 +455,16 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         }
 
        
-                     
+                        
+                        
                         self.autocompletedTextfieldnew.autoCompleteStrings = locations
-                      //  self.auocompletetextfieldsublocality.autoCompleteStrings = locations1
-                        println(self.autocompletedTextfieldnew.autoCompleteStrings = locations)
+                  
+     
                     }
                 }
                 else{
                     self.autocompletedTextfieldnew.autoCompleteStrings = nil
+                    
                    // self.auocompletetextfieldsublocality.autoCompleteStrings = nil
                 }
             }
@@ -459,12 +483,29 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // Textfield2
         if textField.tag == 1
         {
+            //textfield2.enabled = false
             textfield2.enabled = false
             
            // getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
             println(beerTypefromtextfield)
-            getliqtypes("http://demos.dignitasdigital.com/bottomzup/radmin/get_brandmaster_for_category.php?category=\(beerTypeTextfield.text)")
-            tableviewnew.hidden = false
+            if CheckforInternetViewController.isConnectedToNetwork() == true
+            {
+                print("Internet connection OK")
+                getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(beerTypeTextfield.text)")
+               
+                tableviewnew.hidden = false
+            }
+            else
+            {
+                print("Internet connection FAILED")
+                
+                let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+                tableviewnew.hidden = true
+                textfield2.enabled = true
+            }
+            
+            
             liqTypetableview.hidden = true
             LOcalityTableview.hidden = true
         }
@@ -473,6 +514,24 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             // autocompletedTextfieldnew
             else if textField.tag == 2
         {
+         
+            if CheckforInternetViewController.isConnectedToNetwork() == true
+            {
+                print("Internet connection OK")
+   
+            }
+            else
+            {
+                print("Internet connection FAILED")
+                
+                let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+                AutoCompleteTextField3.autoCompleteTableView?.hidden = true
+            
+                
+                
+            }
+            
             LOcalityTableview.hidden = true
         }
         
@@ -681,7 +740,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.items[indexPath.row]
-            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:11)
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
             
             return cell
   
@@ -692,7 +751,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
              cell.textLabel?.text = self.liqTypes[indexPath.row]
-             cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:11)
+             cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
             
             return cell
         }
@@ -713,7 +772,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         let index = indexPath.row as Int
         cell!.textLabel!.text = liqTypes1[index]
-        cell!.textLabel?.font = UIFont(name: "MyriadPro-Regular", size: 11.0)
+        cell!.textLabel?.font = UIFont(name: "MyriadPro-Regular", size: 14.0)
         cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         return cell!
         }
@@ -724,7 +783,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // Locality tableview
         if tableView.tag == 4
         {
-            autocompletedTextfieldnew.userInteractionEnabled = true
+           // autocompletedTextfieldnew.userInteractionEnabled = true
             localityTextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             localityTextfield.text = selectedCell1.textLabel?.text
@@ -782,7 +841,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         if autocompletedTextfieldnew.text == currentLocation
         {
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=2&records=15&query=\(beerTypeTextfield.text)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=2&records=15&query=\(beerTypeTextfield.text)")
         }
         
         getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
@@ -1345,15 +1404,40 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(name1)
             
             println(name)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(name1)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(name1)")
         }
         else
         {
             println(citylat)
             println(citylong)
             println(trimmedString)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
         }
+        
+    }
+    func connserv()
+    {
+        var request = NSMutableURLRequest(URL: NSURL(string: "https://144.1.1.45:8000")!)
+        //request.timeoutInterval = 10 // for implementing timeout
+        request.HTTPMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        var response: NSURLResponse?
+        var error: NSError?
+        println("Firing synchronous url connection......")
+        let urlData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+        
+        if urlData == nil
+        {
+            println("Error happend timeout======\(error)!")
+        }
+        else
+        {
+            println("\(urlData!.length) bytes of data was returned")
+            println(response!);
+            println(NSString(data: urlData!, encoding: NSUTF8StringEncoding)!)
+        }
+        
         
     }
 }

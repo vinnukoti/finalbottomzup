@@ -1,8 +1,8 @@
 //
-//  Reachability.swift
+//  CheckforInternetViewController.swift
 //  Bottomzup
 //
-//  Created by Appsriv Technologies on 25/01/16.
+//  Created by Appsriv Technologies on 27/01/16.
 //  Copyright (c) 2016 Appsriv Technologies. All rights reserved.
 //
 
@@ -10,7 +10,9 @@ import UIKit
 import Foundation
 import SystemConfiguration
 
-public class Reachability {
+class CheckforInternetViewController: UIViewController
+{
+
     
     class func isConnectedToNetwork() -> Bool {
         
@@ -30,7 +32,9 @@ public class Reachability {
         let isReachable = (flags & UInt32(kSCNetworkFlagsReachable)) != 0
         let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
-        return (isReachable && !needsConnection) ? true : false
+        return isReachable && !needsConnection
     }
+
     
+
 }

@@ -48,13 +48,13 @@ class ViewController: UIViewController
         
         super.viewDidLoad()
         
-        if Reachability.isConnectedToNetwork() {
-            println("Haz Interwebz!")
-        } else {
-            println("Oh noes! No interwebz!!!")
-        }
-        
-        if Reachability.isConnectedToNetwork() == true {
+//        if Reachability.isConnectedToNetwork() {
+//            println("Haz Interwebz!")
+//        } else {
+//            println("Oh noes! No interwebz!!!")
+//        }
+//        
+        if CheckforInternetViewController.isConnectedToNetwork() == true {
             print("Internet connection OK")
         } else {
             print("Internet connection FAILED")

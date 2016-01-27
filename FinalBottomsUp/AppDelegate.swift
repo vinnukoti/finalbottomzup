@@ -20,10 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 {
 
     var window: UIWindow?
+    var reachability:Reachability?
    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "CheckforReachability:", name: kReachabilityChangedNotification, object: nil)
+        self.reachability = Reachability.reachabilityForInternetConnection()
+        self.reachability!.startNotifier()
     
              GMSServices.provideAPIKey("AIzaSyBvSmi0fvOIfFosTmK4khDP6oLaO43kasY")
              Fabric.with([Crashlytics.self()])
@@ -102,7 +106,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func CheckforReachability(notification:NSNotification)
+    {
+        var remotehostStatus = self.reachability!.currentReachabilityStatus()
+        
+        if remotehostStatus.value == NotReachable.value
+        {
+                        let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+                        alert.show()
+        }
+        else
+        {
+            
+        }
+    }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
