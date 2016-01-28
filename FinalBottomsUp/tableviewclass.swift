@@ -251,11 +251,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var liqFromresult:String!
 
     var hstart = "00:00:00 - 00:00:00"
+    
+    var countphoneclicked = 0
    
 
     
     override func viewDidLoad()
     {
+        
+        GAI.sharedInstance().trackUncaughtExceptions = true
+        GAI.sharedInstance().dispatchInterval = 20
+        GAI.sharedInstance().logger.logLevel = GAILogLevel.Verbose
+        GAI.sharedInstance().trackerWithTrackingId("UA-73017985-1")
+                var tracker2:GAITracker = GAI.sharedInstance().defaultTracker as GAITracker
+                tracker2.set(kGAIScreenName, value:"Beer Screen")
         
 //        if Reachability.isConnectedToNetwork() == true {
 //           // print("Internet connection OK")
@@ -1375,7 +1384,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             //addresslabel.text = head[indexPath.section].Place
             newaddress = head[indexPath.section].Place
             cells.happytiming.text = head[indexPath.section].happystart +  " - "  + head[indexPath.section].happyend
-
+            cells.popupbutton.tag = indexPath.section
+           // println("\(cells.popupbutton.tag)" + "MAxwell")
 
          
         cells.tableView.reloadData()
@@ -1544,9 +1554,22 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 
         headerCell.mapbutton.enabled =  false
+                
 
+                
+                
              
                 var happyhourstiming = head[section].happystart + " - " + head[section].happyend
+               // println(happyhourstiming)
+                
+                
+           
+              //  happyhourstiming = dropLast(happyhourstiming)
+              //  println(happyhourstiming)
+                
+                
+                
+                
                 if happyhourstiming == hstart
                 {
                     headerCell.Happyhourslabel.hidden = true
@@ -1642,14 +1665,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 {
     
                     headerCell.Happyhourslabel.hidden = false
-                    if happyhourstiming == hstart
-                    {
-                        headerCell.Happyhourslabel.hidden = true
-                    }
-                    else
-                    {
-                        headerCell.Happyhourslabel.hidden = false
-                    }
+//                    if happyhourstiming == hstart
+//                    {
+//                        headerCell.Happyhourslabel.hidden = true
+//                    }
+//                    else
+//                    {
+//                        headerCell.Happyhourslabel.hidden = false
+//                    }
                   //  headerCell.availofferimagetodisplay.hidden = false
 
                 }
@@ -2505,6 +2528,23 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         // Receive action
         // downcast sender as a UIView
         
+       
+        
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Phone Number",action: "Phone Number",label: "Phone NUmber", value: nil).build()
+        tracker.send(eventTracker as! [NSObject : AnyObject])
+        
+        
+        
+        var tracker1 = GAI.sharedInstance().defaultTracker
+        
+//        tracker1.send(GAIDictionaryBuilder.createEventWithCategory("Game 1", action: "Start Pressed", label: "Start Timer One", value: nil).build() as [NSObject : AnyObject])
+//        println(tracker1)
+        
+//        var tracker2:GAITracker = GAI.sharedInstance().defaultTracker as GAITracker
+//        tracker2.set(kGAIScreenName, value:"Tabelviewscreen Screen")
+        
         self.tableview.userInteractionEnabled = false
         let imageName = "Popbackground.png"
         let image = UIImage(named: imageName)
@@ -2703,6 +2743,10 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     @IBAction func locationpopup(sender: UIButton, forEvent event: UIEvent)
     {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Location Name",action: "Location Name",label: "Location Name", value: nil).build()
+        tracker.send(eventTracker as! [NSObject : AnyObject])
+     
         
         // downcast sender as a UIView
         

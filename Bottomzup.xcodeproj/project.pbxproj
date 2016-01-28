@@ -21,6 +21,10 @@
 		536343111BC2A839008018F6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343101BC2A839008018F6 /* AdSupport.framework */; };
 		536343131BC2A886008018F6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343121BC2A886008018F6 /* Social.framework */; };
 		536343151BC2A924008018F6 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343141BC2A924008018F6 /* libsqlite3.0.dylib */; };
+		5367A9991C59F4EA00FA441E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367A9981C59F4EA00FA441E /* CoreData.framework */; };
+		5367A99B1C59F50300FA441E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367A99A1C59F50300FA441E /* libz.dylib */; };
+		5367A9A71C59FF6000FA441E /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5367A9A61C59FF6000FA441E /* libGoogleAnalyticsServices.a */; };
+		5367A9A91C5A191300FA441E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5367A9A81C5A191300FA441E /* GoogleService-Info.plist */; };
 		5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */; };
 		5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CEF81B9DB0EA00D33220 /* ViewController.swift */; };
 		5367CEFC1B9DB0EA00D33220 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5367CEFA1B9DB0EA00D33220 /* Main.storyboard */; };
@@ -113,6 +117,20 @@
 		536343101BC2A839008018F6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		536343121BC2A886008018F6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		536343141BC2A924008018F6 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		5367A9981C59F4EA00FA441E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5367A99A1C59F50300FA441E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		5367A99C1C59FBAF00FA441E /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		5367A99D1C59FBAF00FA441E /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		5367A99E1C59FBAF00FA441E /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		5367A99F1C59FBAF00FA441E /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		5367A9A01C59FBAF00FA441E /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		5367A9A11C59FBAF00FA441E /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		5367A9A21C59FBAF00FA441E /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		5367A9A31C59FBAF00FA441E /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		5367A9A41C59FBAF00FA441E /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		5367A9A51C59FBAF00FA441E /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		5367A9A61C59FF6000FA441E /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		5367A9A81C5A191300FA441E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5367CEF11B9DB0EA00D33220 /* Bottomzup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bottomzup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5367CEF51B9DB0EA00D33220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5367CEF61B9DB0EA00D33220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -193,7 +211,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5367A99B1C59F50300FA441E /* libz.dylib in Frameworks */,
+				5367A9991C59F4EA00FA441E /* CoreData.framework in Frameworks */,
 				536343131BC2A886008018F6 /* Social.framework in Frameworks */,
+				5367A9A71C59FF6000FA441E /* libGoogleAnalyticsServices.a in Frameworks */,
 				536343151BC2A924008018F6 /* libsqlite3.0.dylib in Frameworks */,
 				536343111BC2A839008018F6 /* AdSupport.framework in Frameworks */,
 				5363430F1BC2A820008018F6 /* Accounts.framework in Frameworks */,
@@ -274,6 +295,7 @@
 		5367CEF31B9DB0EA00D33220 /* FinalBottomsUp */ = {
 			isa = PBXGroup;
 			children = (
+				5367A9A81C5A191300FA441E /* GoogleService-Info.plist */,
 				531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */,
 				539ECEC41C1076D700101C38 /* Bubble-moving.gif */,
 				539ECEC61C10780000101C38 /* Bubble-moving-low.gif */,
@@ -342,6 +364,17 @@
 		5367CEF41B9DB0EA00D33220 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5367A9A61C59FF6000FA441E /* libGoogleAnalyticsServices.a */,
+				5367A99C1C59FBAF00FA441E /* GAI.h */,
+				5367A99D1C59FBAF00FA441E /* GAIDictionaryBuilder.h */,
+				5367A99E1C59FBAF00FA441E /* GAIEcommerceFields.h */,
+				5367A99F1C59FBAF00FA441E /* GAIEcommerceProduct.h */,
+				5367A9A01C59FBAF00FA441E /* GAIEcommerceProductAction.h */,
+				5367A9A11C59FBAF00FA441E /* GAIEcommercePromotion.h */,
+				5367A9A21C59FBAF00FA441E /* GAIFields.h */,
+				5367A9A31C59FBAF00FA441E /* GAILogger.h */,
+				5367A9A41C59FBAF00FA441E /* GAITrackedViewController.h */,
+				5367A9A51C59FBAF00FA441E /* GAITracker.h */,
 				5367CF3A1B9DC13F00D33220 /* Bridging-Header.h */,
 				5367CEF51B9DB0EA00D33220 /* Info.plist */,
 			);
@@ -368,6 +401,8 @@
 		F0658164BB9C2D2F4CBFF537 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5367A99A1C59F50300FA441E /* libz.dylib */,
+				5367A9981C59F4EA00FA441E /* CoreData.framework */,
 				536343141BC2A924008018F6 /* libsqlite3.0.dylib */,
 				5389EE431BC67C66007999AE /* Fabric.framework */,
 				5389EE441BC67C66007999AE /* Crashlytics.framework */,
@@ -473,6 +508,7 @@
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,
 				5367CF221B9DBBB700D33220 /* GooglePlus.bundle in Resources */,
 				539ECEC71C10780000101C38 /* Bubble-moving-low.gif in Resources */,
+				5367A9A91C5A191300FA441E /* GoogleService-Info.plist in Resources */,
 				5367CEFE1B9DB0EA00D33220 /* Images.xcassets in Resources */,
 				539ECEC51C1076D800101C38 /* Bubble-moving.gif in Resources */,
 			);
@@ -735,9 +771,13 @@
 					"$(PROJECT_DIR)/FinalBottomsUp",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = FinalBottomsUp/Info.plist;
+				INFOPLIST_FILE = FinalBottomsup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FinalBottomsUp",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -746,6 +786,7 @@
 				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/GoogleAnalytics (recursive)";
 			};
 			name = Debug;
 		};
@@ -761,9 +802,13 @@
 					"$(PROJECT_DIR)/FinalBottomsUp",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = FinalBottomsUp/Info.plist;
+				INFOPLIST_FILE = FinalBottomsup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FinalBottomsUp",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -772,6 +817,7 @@
 				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/GoogleAnalytics (recursive)";
 			};
 			name = Release;
 		};
@@ -790,7 +836,7 @@
 				INFOPLIST_FILE = FinalBottomsUpTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = BottomzupTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalBottomsUp.app/FinalBottomsUp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bottomzup.app/Bottomzup";
 			};
 			name = Debug;
 		};
@@ -805,7 +851,7 @@
 				INFOPLIST_FILE = FinalBottomsUpTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = BottomzupTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalBottomsUp.app/FinalBottomsUp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bottomzup.app/Bottomzup";
 			};
 			name = Release;
 		};

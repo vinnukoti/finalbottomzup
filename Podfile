@@ -6,3 +6,4 @@ pod 'GoogleMaps'
 use_frameworks!
 
 pod 'GooglePlacesAutocomplete'
+pod 'GoogleAnalytics'

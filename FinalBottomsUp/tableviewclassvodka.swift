@@ -175,6 +175,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
     {
         
+        var tracker2:GAITracker = GAI.sharedInstance().defaultTracker as GAITracker
+        tracker2.set(kGAIScreenName, value:"Vodka Screen")
+        
 //        if Reachability.isConnectedToNetwork() == true {
 //            print("Internet connection OK")
 //        } else {
@@ -590,24 +593,24 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         {
                             locations.append(dict["description"] as! String)
                         }
-                        for var i = 0; i < locations.count - 1;i++
+                        for var i = 0; i < locations.count ;i++
                         {
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             
-                            if fullNameArr.count > 1
-                            {
-                                var firstName: String = fullNameArr[0]
-                                var lastName: String = fullNameArr[1]
-                                locations[i] = firstName + ", " + lastName
-
-                            }
-                            else
-                            {
-                                 var firstName: String = fullNameArr[0]
-                                 locations[i] = firstName
-                                
-                            }
+//                            if fullNameArr.count > 1
+//                            {
+                               var firstName: String = fullNameArr[0]
+//                               // var lastName: String = fullNameArr[1]
+                               locations[i] = firstName
+//
+//                            }
+//                            else
+//                            {
+//                                 var firstName: String = fullNameArr[0]
+//                                 locations[i] = firstName
+//                                
+//                            }
 
                           
                             
@@ -965,8 +968,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
            
 
-            if screensize > 320
-            {
                 
                 var happyhourstiming1 = "Happy Hours " + happyhourstiming
                 var myMutableString = NSMutableAttributedString()
@@ -979,29 +980,28 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
                 println(happyhourstiming1)
-            }
-            else
-            {
-                var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
-                var myMutableString = NSMutableAttributedString()
-                
-                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
-                var length = myMutableString.length
-                println(length)
-                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
-                
-                println(myMutableString)
-                
-                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
-                println(happyhourstiming1)
-            }
+            
+//            else
+//            {
+//                var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+//                var myMutableString = NSMutableAttributedString()
+//                
+//                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+//                var length = myMutableString.length
+//                println(length)
+//                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
+//                
+//                println(myMutableString)
+//                
+//                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
+//                println(happyhourstiming1)
+//            }
 
         }
         else
         {
          
-            if screensize > 320
-            {
+       
                 
                 var happyhourstiming1 = "Happy Hours " + happyhourstiming
                 var myMutableString = NSMutableAttributedString()
@@ -1012,19 +1012,19 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
                 println(happyhourstiming1)
-            }
-            else
-            {
-                var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
-                var myMutableString = NSMutableAttributedString()
-                
-                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
-                
-                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
-                
-                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
-                println(happyhourstiming1)
-            }
+            
+//            else
+//            {
+//                var happyhourstiming1 = "Happy Hours\n" + happyhourstiming
+//                var myMutableString = NSMutableAttributedString()
+//                
+//                myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+//                
+//                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
+//                
+//                headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
+//                println(happyhourstiming1)
+//            }
        }
 //            else
 //        {
@@ -1237,91 +1237,91 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         tableview1.reloadData()
   
     }
-    @IBAction func lookfurtherforvodka(sender: AnyObject)
-    {
-        changecolorvodka = true
-       // vodkasort = header1
-       // self.tableview1.reloadData()
-        header1 = vodkasort
-        count = count + 1
-        if count == 1
-        {
-         
-            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
-            {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
-            }
-            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
-            {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=5&records=10&query=\(liqvodkaname)")
-            }
-            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
-            {
-              getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
-            }
-            
-            
-            
-            self.array1 = header1
-        }
-        
-        if count == 2
-        {
-            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
-            {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
-            }
-            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
-            {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=7&records=10&query=\(liqvodkaname)")
-            }
-            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
-            {
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
-            }
-
-            
-            self.array1 = header1
-        }
-        if count == 3
-        {
-            
-            let alertController = UIAlertController(title: "Do you want go back to 2 km search", message: "Press the Ok or cancel", preferredStyle: .Alert)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-                self.count = 2
-                
-            }
-            alertController.addAction(cancelAction)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                self.count = 0
-                
-                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
-                {
-                       self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
-                }
-                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
-                {
-                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getenteredcitylat)&long=\(self.getenteredcitylong)&km=2&records=10&query=\(self.liqvodkaname)")
-                }
-                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
-                {
-                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
-                }
-
-                
-             
-                self.array1 = self.header1
-            }
-            alertController.addAction(OKAction)
-            
-            self.presentViewController(alertController, animated: true) {
-                
-            }
-        }
-
-    }
+//    @IBAction func lookfurtherforvodka(sender: AnyObject)
+//    {
+//        changecolorvodka = true
+//       // vodkasort = header1
+//       // self.tableview1.reloadData()
+//        header1 = vodkasort
+//        count = count + 1
+//        if count == 1
+//        {
+//         
+//            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+//            {
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(liqvodkaname)")
+//            }
+//            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+//            {
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=5&records=10&query=\(liqvodkaname)")
+//            }
+//            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+//            {
+//              getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10&query=\(trimmedString)")
+//            }
+//            
+//            
+//            
+//            self.array1 = header1
+//        }
+//        
+//        if count == 2
+//        {
+//            if isliqtextfieldhasdata == false && iscitytextfieldhavedata == false
+//            {
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(liqvodkaname)")
+//            }
+//            else if isliqtextfieldhasdata == false && iscitytextfieldhavedata == true
+//            {
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getenteredcitylat)&long=\(getenteredcitylong)&km=7&records=10&query=\(liqvodkaname)")
+//            }
+//            else if isliqtextfieldhasdata == true && iscitytextfieldhavedata == false
+//            {
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=7&records=10&query=\(trimmedString)")
+//            }
+//
+//            
+//            self.array1 = header1
+//        }
+//        if count == 3
+//        {
+//            
+//            let alertController = UIAlertController(title: "Do you want go back to 2 km search", message: "Press the Ok or cancel", preferredStyle: .Alert)
+//            
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+//                self.count = 2
+//                
+//            }
+//            alertController.addAction(cancelAction)
+//            
+//            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+//                self.count = 0
+//                
+//                if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == false
+//                {
+//                       self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=15&query=\(self.liqvodkaname)")
+//                }
+//                else if self.isliqtextfieldhasdata == false && self.iscitytextfieldhavedata == true
+//                {
+//                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getenteredcitylat)&long=\(self.getenteredcitylong)&km=2&records=10&query=\(self.liqvodkaname)")
+//                }
+//                else if self.isliqtextfieldhasdata == true && self.iscitytextfieldhavedata == false
+//                {
+//                    self.getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.getcitylatitude)&long=\(self.getcitylongitude)&km=2&records=10&query=\(self.trimmedString)")
+//                }
+//
+//                
+//             
+//                self.array1 = self.header1
+//            }
+//            alertController.addAction(OKAction)
+//            
+//            self.presentViewController(alertController, animated: true) {
+//                
+//            }
+//        }
+//
+//    }
     
         func getbardatafurtherforvodka(urlString:String)
         {
@@ -1735,7 +1735,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        
             
             var text = self.newtextfieldtableviewcity.text
-                   println(self.localityFromtextfield)
+            println(self.localityFromtextfield)
             var locate = self.localityFromtextfield + text
             println(locate)
             var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
@@ -2177,6 +2177,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func phonebuttonclicked(sender: UIButton, forEvent event: UIEvent)
     {
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Phone NUmber",action: "Phone Number",label: "Phone Number", value: nil).build()
+        tracker.send(eventTracker as! [NSObject : AnyObject])
         self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         let imageName = "Popbackground.png"
@@ -2260,6 +2264,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func locationpopupclicked(sender: UIButton, forEvent event: UIEvent)
     {
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Location Name",action: "Location Name",label: "Location Name", value: nil).build()
+        tracker.send(eventTracker as! [NSObject : AnyObject])
       self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         
@@ -2730,7 +2738,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.newtextfieldtableview.text = liqtypefromTextfield
 
         
-         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
         
         liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
      
@@ -2744,7 +2752,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.newtextfieldtableviewcity = AutoCompleteTextField2 (frame: CGRect(x: 10,y: 3,width: self.view.frame.width - 20,height: 45), superview: showdropdownview)
            self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
         newtextfieldtableviewcity.text = locationnamefromtextfield
      
         configureTextField()

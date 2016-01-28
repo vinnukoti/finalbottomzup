@@ -14,6 +14,7 @@ import Fabric
 import Crashlytics
 
 
+
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -25,6 +26,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+
+        var gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
+        
+
+        GAI.sharedInstance().trackUncaughtExceptions = true
+        GAI.sharedInstance().dispatchInterval = 20
+        GAI.sharedInstance().logger.logLevel = GAILogLevel.Verbose
+        GAI.sharedInstance().trackerWithTrackingId("UA-73017985-1")
+        
+
+        
+//        var tracker2:GAITracker = GAI.sharedInstance().defaultTracker as GAITracker
+//        tracker2.set(kGAIScreenName, value:"Home Screen")
+        
+
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "CheckforReachability:", name: kReachabilityChangedNotification, object: nil)
         self.reachability = Reachability.reachabilityForInternetConnection()
         self.reachability!.startNotifier()
@@ -121,6 +140,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             
         }
     }
+    
+    
 
 
 }

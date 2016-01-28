@@ -117,6 +117,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
      var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
    // var indicatorview = UIView()
     var PleaseWaitlabel = UILabel()
+    var space = " "
+    var searchedin = "Searched in"
+    var forliqtype = "For liquor"
 
 
     override func viewDidLoad()
@@ -291,6 +294,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         tableviewnew.hidden = true
+        textfield2.enabled = true
+        localityTextfield.enabled = true
+        LOcalityTableview.hidden = true
+        beerTypeTextfield.enabled = true
+        liqTypetableview.hidden = true
+        
         view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
     }
@@ -515,6 +524,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             else if textField.tag == 2
         {
          
+            localityTextfield.enabled = true
             if CheckforInternetViewController.isConnectedToNetwork() == true
             {
                 print("Internet connection OK")
@@ -824,7 +834,28 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     }
     @IBAction func searchnew(sender: UIButton)
     {
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        if textfield2.text == "All"
+        {
+          let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(searchedin  + space + localityTextfield.text + space + autocompletedTextfieldnew.text)",action: "\(forliqtype + space + beerTypeTextfield.text)",label: "\(localityTextfield.text + autocompletedTextfieldnew.text)", value: nil).build()
+              tracker.send(eventTracker as! [NSObject : AnyObject])
+        }
+        else
+        {
+           let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(searchedin + space + localityTextfield.text + space + autocompletedTextfieldnew.text)",action: "\(forliqtype + space + textfield2.text)",label: "\(localityTextfield.text + space + autocompletedTextfieldnew.text)", value: nil).build()
+              tracker.send(eventTracker as! [NSObject : AnyObject])
+        }
+        
+        
+        
+        
+      
         liqnamefromtextfield = textfield2.text
+    
+        
+        
+        
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
         println(localityfromtextfield)
         println(autocompletedTextfieldnew.text)

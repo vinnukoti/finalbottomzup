@@ -66,6 +66,7 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -392,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10523" y="-14684"/>
+            <point key="canvasLocation" x="-10331" y="-14750"/>
         </scene>
         <!--Results-->
         <scene sceneID="kqN-H8-XZO">
@@ -823,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xiK-bt-4Ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9767" y="-14392"/>
+            <point key="canvasLocation" x="-9353" y="-14700"/>
         </scene>
         <!--Mapview-->
         <scene sceneID="GT7-l3-ORI">
@@ -1250,7 +1251,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bjf-8n-taL">
                                                     <rect key="frame" x="389" y="0.0" width="14" height="135"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aum-hz-7Ge">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="aum-hz-7Ge">
                                                     <rect key="frame" x="162" y="119" width="241" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Grz-uL-87u"/>
@@ -1842,7 +1843,7 @@
                             <constraint firstItem="4IA-Kt-4kI" firstAttribute="top" secondItem="bYl-zy-TpS" secondAttribute="bottom" constant="10" id="EXC-NP-WX3"/>
                             <constraint firstItem="6Yx-ha-CrO" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="25" id="FB3-Um-mqW"/>
                             <constraint firstItem="v03-3m-lFe" firstAttribute="top" secondItem="0tG-cX-6Po" secondAttribute="bottom" id="FFR-aP-Pc2"/>
-                            <constraint firstAttribute="trailing" secondItem="0PV-g3-WqK" secondAttribute="trailing" constant="60" id="FtG-C4-7yq"/>
+                            <constraint firstAttribute="trailing" secondItem="0PV-g3-WqK" secondAttribute="trailing" constant="50" id="FtG-C4-7yq"/>
                             <constraint firstItem="aNY-4Q-qgG" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="35" id="If6-5j-6S4"/>
                             <constraint firstItem="EWL-gM-2zM" firstAttribute="top" secondItem="Q37-Nk-LRb" secondAttribute="top" constant="16" id="IiJ-aM-ZIR"/>
                             <constraint firstAttribute="trailing" secondItem="EWL-gM-2zM" secondAttribute="trailing" constant="20" id="JCd-nP-gxG"/>
@@ -1938,7 +1939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9714" y="-13704"/>
+            <point key="canvasLocation" x="-9720" y="-13635"/>
         </scene>
         <!--Deals Nearyou-->
         <scene sceneID="sEf-f9-9TH">
@@ -2550,7 +2551,7 @@
                                                     <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-Y9-FrS">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Happy Hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-Y9-FrS">
                                                     <rect key="frame" x="33" y="55" width="414" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="08z-vy-7Fr"/>
@@ -3019,9 +3020,19 @@
                                     <action selector="lookfurthernew:forEvent:" destination="62d-Bt-Yva" eventType="touchUpInside" id="DaZ-Ik-nVw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sort by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LZ-gc-Qmd">
+                                <rect key="frame" x="485" y="68" width="69" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Sjb-cL-JWV"/>
+                                    <constraint firstAttribute="width" constant="100" id="ZTH-rz-ySE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0LZ-gc-Qmd" secondAttribute="trailing" constant="46" id="2Pr-M2-ds5"/>
                             <constraint firstItem="gbc-1X-3yM" firstAttribute="bottom" secondItem="5zN-Ei-AU3" secondAttribute="bottom" id="2hm-zB-6yQ"/>
                             <constraint firstItem="mr2-SL-8ta" firstAttribute="leading" secondItem="QNv-Dd-Pdx" secondAttribute="leading" constant="10" id="3Jm-Fg-p6g"/>
                             <constraint firstAttribute="centerX" secondItem="5zN-Ei-AU3" secondAttribute="centerX" id="3gb-G6-dv0"/>
@@ -3045,6 +3056,7 @@
                             <constraint firstAttribute="trailing" secondItem="z4V-Il-E6B" secondAttribute="trailing" id="S86-bU-Mtz"/>
                             <constraint firstItem="w9y-ac-ycT" firstAttribute="leading" secondItem="QNv-Dd-Pdx" secondAttribute="leading" id="SPI-xZ-3U6"/>
                             <constraint firstAttribute="trailing" secondItem="zve-bZ-pTu" secondAttribute="trailing" constant="20" id="Xei-Q7-8Mj"/>
+                            <constraint firstItem="z4V-Il-E6B" firstAttribute="top" secondItem="0LZ-gc-Qmd" secondAttribute="bottom" constant="8" id="Y3j-Vb-MGN"/>
                             <constraint firstItem="y29-ym-03Y" firstAttribute="top" secondItem="7Ls-wJ-Yr3" secondAttribute="bottom" constant="10" id="aBp-lS-1P5"/>
                             <constraint firstItem="Msq-YF-itJ" firstAttribute="leading" secondItem="BN9-20-3wf" secondAttribute="trailing" constant="15" id="aKv-3p-svh"/>
                             <constraint firstItem="o92-m5-6nO" firstAttribute="top" secondItem="7Ls-wJ-Yr3" secondAttribute="bottom" constant="7" id="cjV-8k-Xih"/>
@@ -3100,7 +3112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2c-5a-dyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10281" y="-13049"/>
+            <point key="canvasLocation" x="-10396" y="-13653"/>
         </scene>
     </scenes>
     <resources>
@@ -3143,10 +3155,10 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OFC-RP-bvW"/>
+        <segue reference="bOf-Qa-YPU"/>
         <segue reference="XDA-r2-Wma"/>
-        <segue reference="Rgb-uf-yQW"/>
-        <segue reference="oIU-td-Sv5"/>
-        <segue reference="k2w-mW-TjF"/>
+        <segue reference="OFC-RP-bvW"/>
+        <segue reference="iqU-sd-p6J"/>
+        <segue reference="Xac-65-HoW"/>
     </inferredMetricsTieBreakers>
 </document>
