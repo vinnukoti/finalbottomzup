@@ -36,10 +36,28 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     var res_furtherlat:Double!
     var res_furtherlong:Double!
     var distnacemapsort = false
-  
-    @IBOutlet weak var distancemap: UIButton!
+    var citylat:Double!
+    var citylong:Double!
+    var text:String!
+    var locate:String!
+    var newlocate:String!
+    var lookfurtheboolean = false
+    var locatiopopupview = UIView()
+    let closelocationpopupbutton7kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    let imagewi2kmrhradius = UIImage(named: "LookFurthe2kmrwithradius") as UIImage?
+    let imagewi5kmrhradius = UIImage(named: "Lookfurther5withradius") as UIImage?
+    let imagewi7kmrhradius = UIImage(named: "lookfurther7withradius") as UIImage?
     
-    @IBOutlet weak var REsturantdisplaylable: UILabel!
+    let imageName5 = UIImage(named: "lookfurther5") as UIImage?
+    let imageName7 = UIImage(named: "lookfurther7") as UIImage?
+    let imageName2 = UIImage(named: "Lookfurther2") as UIImage?
+    
+     let closelocationpopupbutton5kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    
+      let closelocationpopupbutton2kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+
+    @IBOutlet weak var gotomap: UIButton!
+    @IBOutlet weak var lookfurtherdefault: UIButton!
     override func viewDidLoad()
     {
         
@@ -54,9 +72,92 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         //distancemap.setImage(unCheckedImage, forState: .Normal)
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
-        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(getcitylatitude)&long=\(getcitylongitude)&km=5&records=10")
+        println(citylat)
+        println(citylong)
+        
+//        var text = autocompletedTextfieldnew.text
+//        var locate = localityTextfield.text + text
+//        println(autocompletedTextfieldnew.text)
+//        println(localityfromtextfield)
+        
+        
+
+        println(newlocate)
+        var locate1 = newlocate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        println(locate1)
+        getgoogledatawineandbeer("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+        
+        
         
        // distancemap.setTitle("DISTANCE", forState: .Normal)
+    }
+    
+    
+        func getgoogledatawineandbeer(urlString:String)
+        {
+            let url = NSURL(string: urlString)
+            println(urlString)
+    
+    
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+    
+                dispatch_async(dispatch_get_main_queue(),
+                    {
+    
+                        self.extract_googlejsonwineandbeer(data)
+                })
+            }
+            task.resume()
+        }
+    
+    
+        func extract_googlejsonwineandbeer(data:NSData)
+        {
+            var jsonError:NSError?
+            if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
+            {
+                if let results = json["results"] as? NSArray
+                {
+                    for var i = 0; i < results.count; i++
+                    {
+                        if let one = results[i] as? NSDictionary
+                        {
+                            if let geometry = one["geometry"] as? NSDictionary
+                            {
+                                // for var j = 0; j < geometry.count; j++
+                                //  {
+                                if let location = geometry["location"] as? NSDictionary
+                                {
+    
+                                    if let lat = location["lat"] as? Double
+                                    {
+                                        citylat = lat
+                                        println(citylat)
+                                    }
+                                    if let lng = location["lng"] as? Double
+                                    {
+                                        citylong = lng
+                                        println(citylong)
+                                    }
+                                    ApiCall()
+    
+                                    // }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+    
+    
+    func ApiCall()
+    {
+        
+        getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=2&records=10")
+        
     }
     
     
@@ -99,6 +200,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
 //        tableView.tableFooterView = tblView
 //        tableView.tableFooterView!.hidden = true
 //        tableView.backgroundColor = UIColor.clearColor()
+        cell.gotomap.tag = indexPath.row
+        
         return cell
     }
     func getnaerbybar(urlString:String)
@@ -139,11 +242,13 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                                 //convert string to double
                                 let string = NSString(string: res_lat)
                                res_lat1 = string.doubleValue
+                                wineandbarobj.restlat = res_lat1
                             }
                             if let res_long = resInfo["res_long"] as? String
                             {
                                 let string = NSString(string: res_long)
                                 res_long1 = string.doubleValue
+                                wineandbarobj.restlong = res_long1
                             }
                             
                             if var distance = resInfo["distance"] as? String
@@ -376,7 +481,298 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         
     }
     
+    @IBAction func lookfurther(sender: UIButton, forEvent event: UIEvent)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+        let buttonView = sender as UIView;
+        if let touch = event.touchesForView(buttonView)?.first as? UITouch
+        {
+            
+            
+            // print the touch location on the button
+            println(touch.locationInView(self.view))
+            var point = touch.locationInView(self.view)
+            var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
+            
+            self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 38,p!.y - 270,75,230))
+            
+            if lookfurtheboolean == true
+            {
+                locatiopopupview.hidden = false
+            }
+            else
+            {
+                locatiopopupview.hidden = true
+            }
+            
+            var tag = sender.tag
+            
+            switch (tag){
+                
+                //            case 1:
+                //
+                //                closelocationpopupbutton7kms.frame = CGRectMake(0,0,75,75)
+                //                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                //                closelocationpopupbutton7kms.tag=7
+                //                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                //
+                //                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
+                //                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                //                closelocationpopupbutton5kms.tag=5
+                //                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                //
+                //                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                //                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                //                closelocationpopupbutton2kms.tag=2
+                //                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                //
+                //
+                //                self.view.addSubview(locatiopopupview)
+                //                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+                //                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                //                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+                
+                
+                
+            case 2:
+                closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton5kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+                self.view.addSubview(locatiopopupview)
+                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                // self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+                
+                
+                
+                
+            case 5:
+                closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                
+                self.view.addSubview(locatiopopupview)
+                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+                //self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+                
+                
+            case 7:
+                
+                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                self.view.addSubview(locatiopopupview)
+                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+
+                
+            default: return
+            }
+            
+            
+        }
+        
+    }
+    
+    func lookfurtherfor2KMS(sender: UIButton)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+//        let trimmedString1 = selectedliqor.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+//        selectedliqor = trimmedString1
+        
+        var tag = sender.tag
+        
+        switch(tag){
+            
+            
+            
+            
+        case 2:
+            //call 2km api
+           // countfurther = 1
+//            println(liqFromresult)
+//            println(liqtypeFromresult)
+            
+    
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=2&records=10")
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+   
+            
+        case 5:
+       
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=10")
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+         
+            
+        case 7:
+      
+      
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=7&records=10")
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 7
+         
+            
+        default: return
+            
+        }
+        
+        
+        self.locatiopopupview.hidden = true
+        
+    }
+    
+    
+    func lookfurtherfor5KMS(sender: UIButton)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+        
+        var tag = sender.tag
+        
+        switch(tag){
+        case 2:
+            //call 2km api
+     
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=2&records=10")
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+       
+            
+        case 5:
+           
+      
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=10")
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+     
+            
+        case 7:
+   
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=7&records=10")
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 7
+       
+            
+        default: return
+            
+        }
+        
+        
+        self.locatiopopupview.hidden = true
+    }
+    
+    func lookfurtherfor7KMS(sender: UIButton)
+    {
+        if  lookfurtheboolean == false
+        {
+            lookfurtheboolean = true
+            println(lookfurtheboolean)
+        }
+        else
+        {
+            lookfurtheboolean = false
+            println(lookfurtheboolean)
+        }
+ 
+        
+        
+        var tag = sender.tag
+        
+        switch(tag){
+        case 2:
+            //call 2km api
+   
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=2&records=10")
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+       
+            
+        case 5:
+      
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=5&records=10")
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+           
+            
+        case 7:
+   
+            getnaerbybar("http://demos.dignitasdigital.com/bottomzup/searchwb.php?lat=\(citylat)&long=\(citylong)&km=7&records=10")
+            lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 7
+         
+            
+        default: return
+            
+        }
+        self.locatiopopupview.hidden = true
+    }
+
+    @IBAction func gotomap(sender: UIButton)
+    {
+        println(wineandbararray[sender.tag].restlat)
+        println(wineandbararray[sender.tag].restlong)
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(wineandbararray[sender.tag].restlat),\(wineandbararray[sender.tag].restlong)")!)
+    }
+    
+
 }
+
 
 
 

@@ -35,6 +35,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     var newarar =  [String]()
     var arraysring = [String]()
+    
+    
+    var winecitylat:Double!
+    var winecitylong:Double!
 
     
     @IBOutlet weak var autocompletedTextfieldnew: AutoCompleteTextField3!
@@ -101,7 +105,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     @IBOutlet weak var beerTypeTextfield: UITextField!
     
-    var liqTypes: [String] = ["Beer", "Rum", "whiskey","Vodka"]
+    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka"]
     var liqTypetableview: UITableView  =   UITableView()
     
    // var liqTypes1:[String] = ["BUDWEISER","CARLSBERG","FOSTERS","HEINEKEN","KINGFISHER"]
@@ -127,7 +131,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
   
         // All done!
         
-        println(autocompletedTextfieldnew.text)
+       // println(autocompletedTextfieldnew.text)
 
 
         PleaseWaitlabel = UILabel(frame: CGRectMake(0,20, 150, 100))
@@ -192,7 +196,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         LOcalityTableview.delegate      =   self
         LOcalityTableview.dataSource    =   self
         LOcalityTableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-       // LOcalityTableview
         self.view.addSubview(LOcalityTableview)
         LOcalityTableview.hidden = true
         
@@ -751,6 +754,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             
             cell.textLabel?.text = self.items[indexPath.row]
             cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.textColor = UIColor.darkGrayColor()
             
             return cell
   
@@ -762,6 +766,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             
              cell.textLabel?.text = self.liqTypes[indexPath.row]
              cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.textColor = UIColor.darkGrayColor()
             
             return cell
         }
@@ -875,7 +880,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=2&records=15&query=\(beerTypeTextfield.text)")
         }
         
+        else
+        {
         getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+        }
         
         
         
@@ -1356,6 +1364,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.citylongitudeFromresult = citylong
                 destination.liqtypeFromresult = beerTypeTextfield.text
                 destination.liqFromresult = textfield2.text
+                destination.localityfromtextfield1 = localityTextfield.text
             }
         }
         if segue.identifier == "getvodkanew"
@@ -1387,20 +1396,25 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination1.citylongitudeFromresult = citylong
                 destination1.liqtypeFromresult = beerTypeTextfield.text
                 destination1.liqFromresult = textfield2.text
+                destination1.localityfromtextfield1 = localityTextfield.text
             }
         }
         if segue.identifier == "getwinenearyou"
         {
             if let destination2 = segue.destinationViewController as? mapview
             {
-                destination2.getdevicelatitude = devicelatitude
-                destination2.getdevicelongitude = devicelongitude
+     
                 destination2.getcitylatitude = citylat
                 destination2.getcitylongitude = citylong
                 destination2.getdevicelatitude = devicelatitude
                 destination2.getdevicelongitude = devicelongitude
                 destination2.getrestlastmapview = restlat
                 destination2.getrestlongitmapview = restlong
+                println(citylat)
+                println(citylong)
+                destination2.citylat = winecitylat
+                destination2.citylong = winecitylong
+                destination2.newlocate = autocompletedTextfieldnew.text + localityTextfield.text
             }
             
         }
@@ -1411,9 +1425,69 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
    
     @IBAction func findnearwineandbeer(sender: UIButton)
     {
+        
+   
         performSegueWithIdentifier("getwinenearyou", sender: self)
 
     }
+    
+//    func getgoogledatawineandbeer(urlString:String)
+//    {
+//        let url = NSURL(string: urlString)
+//        println(urlString)
+//        
+//        
+//        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+//            
+//            dispatch_async(dispatch_get_main_queue(),
+//                {
+//                    
+//                    self.extract_googlejsonwineandbeer(data)
+//            })
+//        }
+//        task.resume()
+//    }
+//    
+//    
+//    func extract_googlejsonwineandbeer(data:NSData)
+//    {
+//        var jsonError:NSError?
+//        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
+//        {
+//            if let results = json["results"] as? NSArray
+//            {
+//                for var i = 0; i < results.count; i++
+//                {
+//                    if let one = results[i] as? NSDictionary
+//                    {
+//                        if let geometry = one["geometry"] as? NSDictionary
+//                        {
+//                            // for var j = 0; j < geometry.count; j++
+//                            //  {
+//                            if let location = geometry["location"] as? NSDictionary
+//                            {
+//                                
+//                                if let lat = location["lat"] as? Double
+//                                {
+//                                    winecitylat = lat
+//                                    println(citylat)
+//                                }
+//                                if let lng = location["lng"] as? Double
+//                                {
+//                                    winecitylong = lng
+//                                    println(citylong)
+//                                }
+//                                
+//                                // }
+//                            }
+//                        }
+//                    }
+//                }
+//                
+//            }
+//            
+//        }
+//    }
 
     @IBAction func getdeals(sender: UIButton) {
         performSegueWithIdentifier("Dealsnearyou", sender: self)
@@ -1435,10 +1509,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(name1)
             
             println(name)
+            println(citylat)
+            println(citylong)
             getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(name1)")
         }
         else
         {
+            println(citylat)
+            println(citylong)
             println(citylat)
             println(citylong)
             println(trimmedString)

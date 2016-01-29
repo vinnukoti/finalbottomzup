@@ -22,7 +22,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
     public var onTextChange:(String)->() = {_ in}
     
     /// Font for the text suggestions
-    public var autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14)
+    public var autoCompleteTextFont = UIFont(name: "MyriadPro-Regular", size: 14)
     /// Color of the text suggestions
     public var autoCompleteTextColor = UIColor.blackColor()
     /// Used to set the height of cell for each suggestions
@@ -98,7 +98,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
     {
         hidesWhenEmpty = true
         autoCompleteAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()]
-        autoCompleteAttributes![NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        autoCompleteAttributes![NSFontAttributeName] = UIFont(name: "MyriadPro-Regular", size: 12)
         self.clearButtonMode = .Always
         self.addTarget(self, action: "textFieldDidChange", forControlEvents: .EditingChanged)
     }

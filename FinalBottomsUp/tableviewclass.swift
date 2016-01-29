@@ -250,50 +250,47 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var liqtypeFromresult:String!
     var liqFromresult:String!
 
-    var hstart = "00:00:00 - 00:00:00"
+    var hstart = "00:00 - 00:00"
     
     var countphoneclicked = 0
+    
+    var restlatitude:Double!
+    var restlongitude:Double!
+    
+    var liqplacedisplaylabel = UILabel()
+    var dropdowntextfield = UITextField()
+    var beerdropdowntableview = UITableView()
+    var beerTypedropdowntableview = UITableView()
+    
+    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka"]
+    var liqTypes1:[String] = [String]()
+    
+    var citydropdowntextfield = UITextField()
+    var citydropdowntableview = UITableView()
+    
+    var items: [String] = ["Delhi", "Gurgaon", "Noida"]
+    
+    var search   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    
+    var localityfromtextfield1:String!
    
 
     
     override func viewDidLoad()
     {
+         beerdropdowntableview.hidden = true
+        beerTypedropdowntableview.hidden = true
+        citydropdowntableview.hidden = true
+        
         
         GAI.sharedInstance().trackUncaughtExceptions = true
         GAI.sharedInstance().dispatchInterval = 20
         GAI.sharedInstance().logger.logLevel = GAILogLevel.Verbose
         GAI.sharedInstance().trackerWithTrackingId("UA-73017985-1")
-                var tracker2:GAITracker = GAI.sharedInstance().defaultTracker as GAITracker
-                tracker2.set(kGAIScreenName, value:"Beer Screen")
-        
-//        if Reachability.isConnectedToNetwork() == true {
-//           // print("Internet connection OK")
-//        } else {
-//            //print("Internet connection FAILED")
-//            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
-//            alert.show()
-//        }
-        dealsnearyou.hidden = true
+        var tracker2:GAITracker = GAI.sharedInstance().defaultTracker as GAITracker
+        tracker2.set(kGAIScreenName, value:"Beer Screen")
 
-        
-//          if beerTypefromtextfield != nil
-//          {
-//            
-//            
-//            locationnamedisplaybutton.setTitle("\(beerTypefromtextfield + space + near + space + getselectedcityname)", forState: .Normal)
-//            locationvaluefrombutton = getselectedcityname
-//            liqvaluefrombutton = beerTypefromtextfield
-//            
-//         }
-//          
-//      else
-//        {
-//             locationnamedisplaybutton.setTitle("\(liqvodkaname + space + near + space + getselectedcityname)", forState: .Normal)
-//            locationvaluefrombutton = getselectedcityname
-//            liqvaluefrombutton = beerTypefromtextfield
-//        }
-        
-        
+        dealsnearyou.hidden = true
         locationnamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
       
         locationnamedisplaybutton.layer.cornerRadius = 10
@@ -314,10 +311,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         Happyhours()
+        
         tableview.tag = 1
         liqdropdowntableview.tag = 0
-        newtextfieldtableview.tag = 2
+        
         newtextfieldtableviewcity.tag = 3
+        
+        dropdowntextfield.tag = 7
+        
         
 
          liqdropdowntableview.layer.borderColor = UIColor.grayColor().CGColor
@@ -370,7 +371,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
         newtextfieldtableviewcity.delegate = self
         
-        self.newtextfieldtableview.delegate = self
+      
         
         locationManager1 = CLLocationManager()
         locationManager1.delegate = self;
@@ -380,6 +381,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         liqdropdowntableview.dataSource = self
         liqdropdowntableview.delegate = self
+        
+//        beerdropdowntableview.dataSource = self
+//        beerdropdowntableview.delegate = self
+        
+        
+        
+       
         
     }
     
@@ -471,7 +479,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     self!.connection = nil
                 }
                 
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityFromtextfield.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)&types=(regions)&components=country:IN"
+                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.citydropdowntextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)&types=(regions)&components=country:IN"
                 let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                 if url != nil{
                     let urlRequest = NSURLRequest(URL: url!)
@@ -485,14 +493,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             self!.newtextfieldtableviewcity.text = text
             self!.liqtypefromTextfield = self!.newtextfieldtableview.text
             self!.locationnamefromtextfield = text
-            self!.onselect()
+            //self!.onselect()
             self!.liqFromresult = self!.newtextfieldtableview.text
-            self!.locationnamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text ,forState: .Normal)
+           // self!.locationnamedisplaybutton.setTitle(self!.newtextfieldtableview.text + self!.space + self!.near + self!.space + self!.newtextfieldtableviewcity.text ,forState: .Normal)
 
             self!.iscitytextfieldhavedata = true;
     
             self!.view.endEditing(true);
-            self?.showdropdownview.hidden = true;
+           // self?.showdropdownview.hidden = true;
             self!.getselectedcityname = text
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil
@@ -523,7 +531,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func onselect()
     {
         var text1 = self.newtextfieldtableviewcity.text
-        var locate = self.localityFromtextfield + text1
+        var locate = localityFromtextfield + text1
         
         println(self.newtextfieldtableviewcity.text)
         println(self.localityFromtextfield)
@@ -732,7 +740,94 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         textField.selectAll(self)
         textField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         }
+        
+        else if textField.tag == 5
+        {
+        
+            dropdowntextfield.enabled = false
+            beerdropdowntableview.hidden = false
+            beerTypedropdowntableview.hidden = true
+            citydropdowntableview.hidden = true
+            AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+           
+        }
+        else if textField.tag == 2
+        {
+            AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+            citydropdowntableview.hidden = true
+            newtextfieldtableview.enabled = false
+            
+            if CheckforInternetViewController.isConnectedToNetwork() == true
+            {
+                
+                getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(dropdowntextfield.text)")
+                beerTypedropdowntableview.hidden = false
+                //citydropdowntableview.hidden = true
+                
+              
+            }
+            else
+            {
+                
+                
+                let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+                beerTypedropdowntableview.hidden = true
+          
+            }
+
+        }
+        
+        else if textField.tag == 8
+        {
+            AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+            citydropdowntextfield.enabled = false
+            citydropdowntableview.hidden = false
+
+        }
+        
+        
  
+    }
+    
+    func getliqtypes(urlString:String)
+    {
+        let url = NSURL(string: urlString)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
+            
+            dispatch_async(dispatch_get_main_queue(),
+                {
+                    
+                    self.extract_jsonbeerTypes(data)
+            })
+        }
+        task.resume()
+    }
+    
+    func extract_jsonbeerTypes(data:NSData)
+    {
+        var jsonError:NSError?
+        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
+        {
+            liqTypes1 = [String]()
+            if let result = json["result"] as? NSArray
+            {
+                for var i = 0; i < result.count; i++
+                {
+                    if let one = result[i] as? NSDictionary
+                    {
+                        if let brand_name = one["brand_name"] as? String
+                        {
+                            liqTypes1.append(brand_name)
+                        }
+                    }
+                }
+                
+            }
+        }
+        self.beerTypedropdowntableview.reloadData()
     }
     
     func textFieldDidChange(textField: UITextField)
@@ -846,7 +941,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-         self.showdropdownview.hidden = true
+        // self.showdropdownview.hidden = true
         if tableView.tag == 0
         {
            
@@ -878,17 +973,45 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
             
-            var text = self.newtextfieldtableviewcity.text
-
-            var locate = self.localityFromtextfield + text
-            
-            println(locate)
-            var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-            self.getgoogledata1("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
+//            var text = self.newtextfieldtableviewcity.text
+//
+//            var locate = self.localityFromtextfield + text
+//            
+//            println(locate)
+//            var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//            self.getgoogledata1("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
             
             
         self.view.endEditing(true)
         tableView.hidden = true
+        }
+        
+        else if tableView.tag == 4
+        {
+            citydropdowntextfield.enabled = true
+            newtextfieldtableview.enabled = true
+            dropdowntextfield.enabled = true
+            let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            dropdowntextfield.text = selectedCell1.textLabel?.text
+
+            beerdropdowntableview.hidden = true
+        }
+        
+        else if tableView.tag == 6
+        {
+            citydropdowntextfield.enabled = true
+            newtextfieldtableview.enabled = true
+            let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            newtextfieldtableview.text = selectedCell1.textLabel?.text
+            beerTypedropdowntableview.hidden = true
+        }
+        
+        else if tableView.tag == 9
+        {
+            citydropdowntextfield.enabled = true
+            let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            citydropdowntextfield.text = selectedCell1.textLabel?.text
+            citydropdowntableview.hidden = true
         }
     }
     
@@ -1322,6 +1445,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
         return head.count
         }
+            else if tableView.tag == 4
+        {
+        return 1
+        }
+            else if tableView.tag == 6
+        {
+            return 1
+        }
+            else if tableView.tag == 9
+        {
+            return 1
+        }
         else
         {
             return 1
@@ -1350,6 +1485,22 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             return 0
         }
         }
+            
+        else if tableView.tag == 4
+        {
+            return liqTypes.count
+        }
+            
+            else if tableView.tag == 6
+        {
+            return liqTypes1.count
+        }
+            
+            else if tableView.tag == 9
+        {
+            return items.count
+        }
+
         else
         {
             return autocompleteUrls.count
@@ -1378,20 +1529,67 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
       //  resturantnamelable.text = "I just got a 10% discount at \(head[cells.press2reveal.tag].restname) through the BottomzUp App"
         //namefromlabel = resturantnamelable.text
         cells.distancelabelnew.text = head[indexPath.section].distance
-            cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
             cells.hotelname.text = head[indexPath.section].restname
+            cells.hotelname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
             cells.areaname.text = head[indexPath.section].Place
             //addresslabel.text = head[indexPath.section].Place
             newaddress = head[indexPath.section].Place
-            cells.happytiming.text = head[indexPath.section].happystart +  " - "  + head[indexPath.section].happyend
+            cells.happytiming.text = head[indexPath.section].happystart + " - " + head[indexPath.section].happyend
             cells.popupbutton.tag = indexPath.section
+            println(cells.happytiming.text)
+            println(hstart)
            // println("\(cells.popupbutton.tag)" + "MAxwell")
+            if cells.happytiming.text == hstart
+            {
+                cells.happytiming.hidden = true
+                cells.Happyhourslabel.hidden = true
+            }
+            else
+            {
+                cells.happytiming.hidden = false
+                cells.Happyhourslabel.hidden = false
+            }
 
          
         cells.tableView.reloadData()
         
         return cells
         }
+            else if tableView.tag == 4
+        {
+            var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+            
+            cell.textLabel?.text = self.liqTypes[indexPath.row]
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel?.textColor = UIColor.darkGrayColor()
+            
+            return cell
+        }
+            
+            else if tableView.tag == 6
+        {
+            var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+            
+            cell.textLabel?.text = self.liqTypes1[indexPath.row]
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel?.textColor = UIColor.darkGrayColor()
+            
+            return cell
+            
+        }
+            
+            else if tableView.tag == 9
+        {
+            var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+            
+            cell.textLabel?.text = self.items[indexPath.row]
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel?.textColor = UIColor.darkGrayColor()
+            
+            return cell
+        }
+    
         
         else
         {
@@ -1548,7 +1746,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
              //   self.addresslabel.text = head[headerCell.tapguesturerecognizer.tag].Place
                 
             
-
+                
        headerCell.mapbutton.tag = section
         headerCell.mapbutton.setTitle(head[section].distance, forState: UIControlState.Normal)
                 
@@ -1565,19 +1763,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
            
               //  happyhourstiming = dropLast(happyhourstiming)
-              //  println(happyhourstiming)
+                println(happyhourstiming)
+                println(hstart)
                 
                 
                 
                 
-                if happyhourstiming == hstart
-                {
-                    headerCell.Happyhourslabel.hidden = true
-                }
-                else
-                {
-                    headerCell.Happyhourslabel.hidden = false
-                }
+//                if happyhourstiming == hstart
+//                {
+//                    headerCell.Happyhourslabel.hidden = true
+//                }
+//                else
+//                {
+//                    headerCell.Happyhourslabel.hidden = false
+//                }
                 
                 var screensize = self.view.frame.width
                 headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
@@ -1606,13 +1805,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         var happyhourstiming1 = "Happy Hours " + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
                         
-                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 14.0)!])
                         
                         var length = myMutableString.length
                         
                         myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0), range: NSRange(location:11,length:length - 11))
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
+                    //headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+
                         println(happyhourstiming1)
                     
 //                    else
@@ -1639,11 +1840,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         var happyhourstiming1 = "Happy Hours " + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
                         
-                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 11.0)!])
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 14.0)!])
                         
                         myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
+                  //  headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+
                         println(happyhourstiming1)
                     
 //                    else
@@ -1665,14 +1868,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 {
     
                     headerCell.Happyhourslabel.hidden = false
-//                    if happyhourstiming == hstart
-//                    {
-//                        headerCell.Happyhourslabel.hidden = true
-//                    }
-//                    else
-//                    {
-//                        headerCell.Happyhourslabel.hidden = false
-//                    }
+                    if happyhourstiming == hstart
+                    {
+                        headerCell.Happyhourslabel.hidden = true
+                    }
+                    else
+                    {
+                        headerCell.Happyhourslabel.hidden = false
+                    }
                   //  headerCell.availofferimagetodisplay.hidden = false
 
                 }
@@ -1705,7 +1908,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
         
         //Giving Font family style to a UIButton
-        headerCell.mapbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+        headerCell.mapbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
                 
 
 
@@ -2356,8 +2559,20 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             destination1.liqFromresult = newtextfieldtableview.text
            destination1.citylatitudefFomresult = citylat
             destination1.citylongitudeFromresult = citylong
+            destination1.localityfromtextfield1 = citydropdowntextfield.text
         }
         }
+        
+        else if segue.identifier == "getwinenearyoufrombeer"
+        {
+            if let destination2 = segue.destinationViewController as? mapview
+            {
+                destination2.getdevicelatitude = getdevicelatitude
+                destination2.getdevicelongitude = getdevicelongitude
+                destination2.newlocate = locationnamefromtextfield
+            }
+        }
+        
     }
     
     @IBAction func backbutton(sender: UIButton)
@@ -2819,7 +3034,9 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func gotomapgoogle(sender : UIButton)
     {
-         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
+        println(head[sender.tag].Restaurantlatitude)
+        println(head[sender.tag].Restaurantlongitude)
+         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=13.043118,77.570403&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
     }
 
     
@@ -3231,39 +3448,144 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
         var tapview = UIView()
-        tapview = UIView(frame: CGRectMake(0,60,self.view.frame.width,self.view.frame.height))
+        tapview = UIView(frame: CGRectMake(0,200,self.view.frame.width,self.view.frame.height))
         var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
         tap.delegate = self
         showdropdownview.userInteractionEnabled = true
         
         
-        self.newtextfieldtableview = UITextField (frame:CGRectMake(10,59,self.view.frame.width - 20,45));
+        self.liqplacedisplaylabel = UILabel(frame: CGRectMake(10,3,self.view.frame.width - 20,25))
+       
+        self.liqplacedisplaylabel.backgroundColor = UIColor.whiteColor()
+        self.liqplacedisplaylabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        self.liqplacedisplaylabel.text =  liqtypefromTextfield + space + near + space + locationnamefromtextfield
+        self.liqplacedisplaylabel.layer.cornerRadius = 10
+        self.liqplacedisplaylabel.textAlignment = NSTextAlignment.Center
+        self.liqplacedisplaylabel.textColor = UIColor.darkGrayColor()
+        
+        
+        // liqtypetextfield
+        self.dropdowntextfield = UITextField (frame:CGRectMake(10,40,self.view.frame.width - 20,35));
+        dropdowntextfield.backgroundColor = UIColor.whiteColor()
+        self.dropdowntextfield.delegate = self
+        dropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        dropdowntextfield.text = "Beer"
+        dropdowntextfield.tag = 5
+        dropdowntextfield.textColor = UIColor.darkGrayColor()
+        
+        
+        beerdropdowntableview.frame         =   CGRectMake(10,80,self.view.frame.width - 20,150)
+        beerdropdowntableview.delegate      =   self
+        beerdropdowntableview.dataSource    =   self
+        beerdropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        beerdropdowntableview.tag = 4
+        
+        
+     
+
+        
+        self.newtextfieldtableview = UITextField (frame:CGRectMake(10,85,self.view.frame.width - 20,35));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
-        newtextfieldtableview.text = liqtypefromTextfield
-        liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
+       // newtextfieldtableview.text = liqtypefromTextfield
+        newtextfieldtableview.text = "All"
+        newtextfieldtableview.tag = 2
+        newtextfieldtableview.textColor = UIColor.darkGrayColor()
+//        liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
+        
+        beerTypedropdowntableview.frame         =   CGRectMake(10,130,self.view.frame.width - 20,150)
+        beerTypedropdowntableview.delegate      =   self
+        beerTypedropdowntableview.dataSource    =   self
+        beerTypedropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        beerTypedropdowntableview.tag = 6
+        
+        
+        
+        self.citydropdowntextfield = UITextField (frame:CGRectMake(10,135,self.view.frame.width - 20,35));
+        citydropdowntextfield.backgroundColor = UIColor.whiteColor()
+        self.citydropdowntextfield.delegate = self
+        citydropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        // newtextfieldtableview.text = liqtypefromTextfield
+        citydropdowntextfield.text = localityfromtextfield1
+        citydropdowntextfield.tag = 8
+        citydropdowntextfield.textColor = UIColor.darkGrayColor()
+        
+        
+        
+        citydropdowntableview.frame         =   CGRectMake(10,175,self.view.frame.width - 20,150)
+        citydropdowntableview.delegate      =   self
+        citydropdowntableview.dataSource    =   self
+        citydropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        citydropdowntableview.tag = 9
+        
+        
+        
+            
+        search.frame = CGRectMake(40, 250, self.view.frame.width - 80, 30)
+        search.backgroundColor = UIColor.whiteColor()
+        search.setTitle("Search", forState: UIControlState.Normal)
+        search.titleLabel!.font =  UIFont(name: "MyriadPro-Bold", size: 20)
+        search.addTarget(self, action: "Getresults:", forControlEvents: UIControlEvents.TouchUpInside)
+        search.layer.cornerRadius = 10
+        search.backgroundColor = UIColor.orangeColor()
+        search.tintColor = UIColor.whiteColor()
         
         
         self.view.addSubview(showdropdownview)
         showdropdownview.addSubview(tapview)
         tapview.addGestureRecognizer(tap)
         self.showdropdownview.addSubview(newtextfieldtableview)
-        self.showdropdownview.addSubview(liqdropdowntableview)
+        
+  
+        self.showdropdownview.addSubview(liqplacedisplaylabel)
+        self.showdropdownview.addSubview(dropdowntextfield)
+        self.showdropdownview.addSubview(citydropdowntextfield)
+        self.showdropdownview.addSubview(search)
+  
         
         
-        self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 3,width: self.view.frame.width - 20,height: 45), superview: showdropdownview)
+        
+        
+        self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
         newtextfieldtableviewcity.text = locationnamefromtextfield
+        newtextfieldtableviewcity.textColor = UIColor.darkGrayColor()
         configureTextField()
         handleTextFieldInterfaces()
+        self.showdropdownview.addSubview(citydropdowntableview)
+        self.showdropdownview.addSubview(beerTypedropdowntableview)
+        self.showdropdownview.addSubview(beerdropdowntableview)
         self.showdropdownview.slideInFromLeft()
+    }
+    
+    func Getresults(sender:UIButton!)
+    {
+        liqtypefromTextfield = dropdowntextfield.text
+        locationnamefromtextfield = newtextfieldtableviewcity.text
+        showdropdownview.hidden = true
+        if newtextfieldtableview.text == "All"
+        {
+            self.locationnamedisplaybutton.setTitle(self.dropdowntextfield.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
+        }
+        else
+        
+        {
+           self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
+        }
+        
+        onselect()
     }
     
     func handleTap(gestureRecognizer: UIGestureRecognizer)
     {
+       
+        beerTypedropdowntableview.hidden = true
+        beerdropdowntableview.hidden = true
+        citydropdowntableview.hidden = true
+        self.view.endEditing(true)
         self.showdropdownview.hidden = true
     }
     
@@ -3359,13 +3681,34 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(citylat)
             println(citylong)
         
-            var passliq = newtextfieldtableview.text
-       
-            var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
-             println(passspaceremovedliq)
+        
+        if newtextfieldtableview.text == "All"
+        {
+            var passliq = dropdowntextfield.text
+            println(newtextfieldtableview.text)
+            
+            var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            
+            println(passspaceremovedliq)
+
             
             self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            showdropdownview.hidden = true
+        }
+        else
+        {
+            var passliq = newtextfieldtableview.text
+            println(newtextfieldtableview.text)
+            
+            var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            
+            println(passspaceremovedliq)
+           self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            showdropdownview.hidden = true
+        }
+            
+        
 
         
     }
@@ -3389,6 +3732,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         performSegueWithIdentifier("getwinenearyoufrombeer", sender: self)
     }
     
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+//    {
+//        if segue.identifier == "getwinenearyoufrombeer"
+//        {
+//    
+//        }
+//    }
     
 }
 

@@ -67,6 +67,9 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -104,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYN-if-kpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11121" y="-14198"/>
+            <point key="canvasLocation" x="-11185" y="-14188"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -610,7 +613,7 @@
         <!--Results1-->
         <scene sceneID="p1C-cR-ncg">
             <objects>
-                <viewController id="rsj-6l-Npj" customClass="results1" customModule="Bottomzup" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Results" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rsj-6l-Npj" customClass="results1" customModule="Bottomzup" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MmJ-6p-tRq"/>
                         <viewControllerLayoutGuide type="bottom" id="OR8-Vi-8wa"/>
@@ -855,7 +858,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Sp9-uO-gkO">
-                                <rect key="frame" x="0.0" y="105" width="600" height="422"/>
+                                <rect key="frame" x="0.0" y="105" width="600" height="425"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="wineandbar" rowHeight="48" id="4Z1-tn-j60" customClass="maplable" customModule="Bottomzup" customModuleProvider="target">
@@ -889,6 +892,9 @@
                                                     <state key="normal" image="getdirection">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="gotomap:" destination="6zf-Eh-8mM" eventType="touchUpInside" id="Rmf-UO-g5R"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -916,6 +922,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="distance" destination="reE-bV-rJ8" id="BFm-Pw-7Cn"/>
+                                            <outlet property="gotomap" destination="I1e-SW-t4U" id="UaD-bZ-HTM"/>
                                             <outlet property="name" destination="Fge-0F-U2G" id="Ix7-Vc-uqX"/>
                                         </connections>
                                     </tableViewCell>
@@ -952,17 +959,41 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5S2-jP-Igw">
+                                <rect key="frame" x="10" y="535" width="65" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="Hvg-Bx-wL3"/>
+                                    <constraint firstAttribute="height" constant="65" id="ukP-Ax-kAB"/>
+                                </constraints>
+                                <state key="normal" image="LookFurthe2kmrwithradius">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="lookfurther:forEvent:" destination="6zf-Eh-8mM" eventType="touchUpInside" id="1mD-MT-uKT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NY5-9K-VTR">
+                                <rect key="frame" x="525" y="535" width="65" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="c3P-6J-hmM"/>
+                                    <constraint firstAttribute="width" constant="65" id="xzi-rt-ELh"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Extra button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ef3-1A-Mj5" secondAttribute="trailing" id="2cw-hZ-kUD"/>
                             <constraint firstItem="IIi-lG-oxe" firstAttribute="top" secondItem="ef3-1A-Mj5" secondAttribute="bottom" constant="12" id="5ff-le-J13"/>
                             <constraint firstItem="Sp9-uO-gkO" firstAttribute="leading" secondItem="yoU-sG-LUo" secondAttribute="leading" id="8Vp-cl-4aM"/>
-                            <constraint firstItem="CYW-P3-CaK" firstAttribute="top" secondItem="Sp9-uO-gkO" secondAttribute="bottom" constant="73" id="8ce-lj-8Sy"/>
+                            <constraint firstItem="CYW-P3-CaK" firstAttribute="top" secondItem="Sp9-uO-gkO" secondAttribute="bottom" constant="70" id="8ce-lj-8Sy"/>
                             <constraint firstItem="MGO-2N-X9g" firstAttribute="top" secondItem="yoU-sG-LUo" secondAttribute="top" id="9E7-4y-JOH"/>
                             <constraint firstItem="Sp9-uO-gkO" firstAttribute="top" secondItem="IIi-lG-oxe" secondAttribute="bottom" id="AmF-gQ-tku"/>
                             <constraint firstItem="Hbr-W7-uAN" firstAttribute="leading" secondItem="yoU-sG-LUo" secondAttribute="leading" id="BdP-NK-PwW"/>
                             <constraint firstItem="MGO-2N-X9g" firstAttribute="leading" secondItem="yoU-sG-LUo" secondAttribute="leading" id="CIU-Ui-4J4"/>
+                            <constraint firstItem="CYW-P3-CaK" firstAttribute="top" secondItem="5S2-jP-Igw" secondAttribute="bottom" constant="20" id="Cvb-Mp-JHs"/>
                             <constraint firstAttribute="trailing" secondItem="Sp9-uO-gkO" secondAttribute="trailing" id="Ea8-PO-CGq"/>
                             <constraint firstItem="Sp9-uO-gkO" firstAttribute="top" secondItem="Hbr-W7-uAN" secondAttribute="bottom" id="I5b-4S-nDP"/>
                             <constraint firstItem="ef3-1A-Mj5" firstAttribute="leading" secondItem="yoU-sG-LUo" secondAttribute="leading" id="IZj-Ia-hCO"/>
@@ -970,23 +1001,34 @@
                             <constraint firstItem="Sp9-uO-gkO" firstAttribute="top" secondItem="ys3-MZ-U3w" secondAttribute="bottom" constant="-7" id="LjD-a5-Gt5"/>
                             <constraint firstItem="IIi-lG-oxe" firstAttribute="leading" secondItem="Hbr-W7-uAN" secondAttribute="trailing" constant="22" id="MDk-yX-0Lc"/>
                             <constraint firstItem="BG4-p3-C0w" firstAttribute="leading" secondItem="yoU-sG-LUo" secondAttribute="leading" id="NCh-ep-RDG"/>
+                            <constraint firstItem="5S2-jP-Igw" firstAttribute="leading" secondItem="yoU-sG-LUo" secondAttribute="leading" constant="10" id="RxF-ts-pii"/>
                             <constraint firstAttribute="trailing" secondItem="IIi-lG-oxe" secondAttribute="trailing" constant="21" id="TDX-NQ-2Hk"/>
+                            <constraint firstItem="CYW-P3-CaK" firstAttribute="top" secondItem="NY5-9K-VTR" secondAttribute="bottom" id="Uu3-ce-ZmO"/>
                             <constraint firstItem="ef3-1A-Mj5" firstAttribute="top" secondItem="yoU-sG-LUo" secondAttribute="top" id="Ynw-9v-C3f"/>
+                            <constraint firstAttribute="centerX" secondItem="5S2-jP-Igw" secondAttribute="centerX" id="fbS-1A-4ep"/>
                             <constraint firstItem="CYW-P3-CaK" firstAttribute="top" secondItem="BG4-p3-C0w" secondAttribute="bottom" id="gFg-9w-WIc"/>
                             <constraint firstItem="Hbr-W7-uAN" firstAttribute="top" secondItem="ef3-1A-Mj5" secondAttribute="bottom" constant="12" id="gfM-xf-sq8"/>
                             <constraint firstAttribute="trailing" secondItem="ys3-MZ-U3w" secondAttribute="trailing" id="nkd-yl-xK1"/>
                             <constraint firstItem="ys3-MZ-U3w" firstAttribute="top" secondItem="ef3-1A-Mj5" secondAttribute="bottom" constant="12" id="oQh-J0-a69"/>
                             <constraint firstItem="ys3-MZ-U3w" firstAttribute="leading" secondItem="yoU-sG-LUo" secondAttribute="leading" id="s9C-q8-ULc"/>
+                            <constraint firstItem="CYW-P3-CaK" firstAttribute="top" secondItem="5S2-jP-Igw" secondAttribute="bottom" id="ui7-gd-YLQ"/>
+                            <constraint firstAttribute="trailing" secondItem="NY5-9K-VTR" secondAttribute="trailing" constant="10" id="wVB-zS-GrK"/>
                             <constraint firstAttribute="trailing" secondItem="BG4-p3-C0w" secondAttribute="trailing" id="zh5-t5-S1t"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fbS-1A-4ep"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="lookfurtherdefault" destination="5S2-jP-Igw" id="8Vg-kd-Uo2"/>
                         <outlet property="tableviewformap" destination="Sp9-uO-gkO" id="TyQ-IS-h1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pl3-aM-fz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9606" y="-13018"/>
+            <point key="canvasLocation" x="-9550" y="-12673"/>
         </scene>
         <!--Tableviewclass-->
         <scene sceneID="qUz-jp-MiN">
@@ -1200,7 +1242,7 @@
                                                         <constraint firstAttribute="width" constant="60" id="a7h-6L-WHc"/>
                                                         <constraint firstAttribute="height" priority="1" constant="124" id="t5y-Ld-J4V"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Cond" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Cond" family="Myriad Pro" pointSize="14"/>
                                                     <state key="normal">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1215,7 +1257,7 @@
                                                         <constraint firstAttribute="width" constant="60" id="aQK-pp-053"/>
                                                         <constraint firstAttribute="height" priority="1" constant="124" id="puh-TC-ofe"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1225,16 +1267,7 @@
                                                         <constraint firstAttribute="width" constant="60" id="OEl-pg-LVW"/>
                                                         <constraint firstAttribute="height" priority="1" constant="124" id="peQ-qv-lbY"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hotelname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMo-3H-2qk">
-                                                    <rect key="frame" x="85" y="39" width="245" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="10" id="hYn-Bd-Tpg"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1257,7 +1290,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="Grz-uL-87u"/>
                                                         <constraint firstAttribute="width" constant="50" id="cYk-ZZ-bsA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -1275,10 +1308,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="citynamedisplay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SS-gh-utG">
                                                     <rect key="frame" x="85" y="69" width="296" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="10" id="SKA-AG-iAZ"/>
+                                                        <constraint firstAttribute="height" constant="15" id="SKA-AG-iAZ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hotelname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMo-3H-2qk">
+                                                    <rect key="frame" x="85" y="39" width="245" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="hYn-Bd-Tpg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1310,7 +1352,7 @@
                                                 <constraint firstItem="Bjf-8n-taL" firstAttribute="leading" secondItem="nMo-3H-2qk" secondAttribute="trailing" id="Z0V-mq-zAk"/>
                                                 <constraint firstItem="mcb-Ns-6xh" firstAttribute="top" secondItem="chN-bP-62g" secondAttribute="top" id="Z7i-Ff-vr3"/>
                                                 <constraint firstItem="5wk-Dl-A6g" firstAttribute="leading" secondItem="chN-bP-62g" secondAttribute="leading" id="ahZ-v3-2gs"/>
-                                                <constraint firstItem="nMo-3H-2qk" firstAttribute="top" secondItem="chN-bP-62g" secondAttribute="top" constant="25" id="bVA-cY-8g6"/>
+                                                <constraint firstItem="nMo-3H-2qk" firstAttribute="top" secondItem="chN-bP-62g" secondAttribute="top" constant="15" id="bVA-cY-8g6"/>
                                                 <constraint firstItem="1dW-g9-pRa" firstAttribute="leading" secondItem="Bjf-8n-taL" secondAttribute="trailing" constant="10" id="fsy-sw-PXL"/>
                                                 <constraint firstItem="5SS-gh-utG" firstAttribute="leading" secondItem="nMo-3H-2qk" secondAttribute="leading" id="gIw-pn-FL1"/>
                                                 <constraint firstItem="BB3-CA-6i8" firstAttribute="leading" secondItem="1dW-g9-pRa" secondAttribute="trailing" id="ifn-bJ-9ee"/>
@@ -1507,19 +1549,6 @@
                                                         <action selector="arrowup:" destination="cXB-1m-d5z" eventType="touchUpInside" id="TRK-Th-dhY"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="759-cU-3Bm">
-                                                    <rect key="frame" x="452" y="163" width="23" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="2iO-wg-OPT"/>
-                                                        <constraint firstAttribute="height" constant="50" id="lMh-Ra-biS"/>
-                                                    </constraints>
-                                                    <state key="normal" image="getdirection">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="locationpopup:forEvent:" destination="cXB-1m-d5z" eventType="touchUpInside" id="0FU-mt-xFO"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9O-eb-PjU">
                                                     <rect key="frame" x="410" y="160" width="20" height="24"/>
                                                     <constraints>
@@ -1548,7 +1577,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="dk5-DP-FdA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1557,7 +1586,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="zYj-EZ-BcM"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1565,9 +1594,9 @@
                                                     <rect key="frame" x="33" y="40" width="76" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="0cj-Vt-Nij"/>
-                                                        <constraint firstAttribute="width" constant="75" id="oEh-jh-AHs"/>
+                                                        <constraint firstAttribute="width" constant="100" id="oEh-jh-AHs"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1576,7 +1605,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="JIV-8F-pBI"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1591,6 +1620,19 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="revelofferclicked:forEvent:" destination="cXB-1m-d5z" eventType="touchUpInside" id="gM2-Di-tgH"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="759-cU-3Bm">
+                                                    <rect key="frame" x="452" y="163" width="23" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="2iO-wg-OPT"/>
+                                                        <constraint firstAttribute="height" constant="50" id="lMh-Ra-biS"/>
+                                                    </constraints>
+                                                    <state key="normal" image="getdirection">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="locationpopup:forEvent:" destination="cXB-1m-d5z" eventType="touchUpInside" id="0FU-mt-xFO"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1648,6 +1690,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="Happyhourslabel" destination="Zre-sw-Skm" id="WHp-zq-n1a"/>
                                             <outlet property="areaname" destination="IRx-0f-R5M" id="nn2-Bi-Hos"/>
                                             <outlet property="arrowup" destination="22f-TX-7ic" id="e0j-gi-ZDv"/>
                                             <outlet property="distancelabelnew" destination="q1w-rL-r5a" id="yI8-7z-usG"/>
@@ -1939,7 +1982,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9720" y="-13635"/>
+            <point key="canvasLocation" x="-9447" y="-13603"/>
         </scene>
         <!--Deals Nearyou-->
         <scene sceneID="sEf-f9-9TH">
@@ -2486,11 +2529,11 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="125"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hotelname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGh-al-tlU">
-                                                    <rect key="frame" x="33" y="15" width="447" height="18"/>
+                                                    <rect key="frame" x="33" y="15" width="447" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="VeJ-q8-WZe"/>
+                                                        <constraint firstAttribute="height" constant="15" id="VeJ-q8-WZe"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2499,7 +2542,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="TFw-RS-qUZ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <state key="normal">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2543,11 +2586,11 @@
                                                     </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8Z-T0-dEQ">
-                                                    <rect key="frame" x="33" y="33" width="447" height="18"/>
+                                                    <rect key="frame" x="33" y="30" width="447" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="qEb-jy-0UQ"/>
+                                                        <constraint firstAttribute="height" constant="15" id="qEb-jy-0UQ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2557,7 +2600,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="08z-vy-7Fr"/>
                                                         <constraint firstAttribute="width" constant="80" id="bwQ-gn-vHU"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -2702,9 +2745,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happy Hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRD-R7-H5c">
-                                                    <rect key="frame" x="33" y="45" width="70" height="15"/>
+                                                    <rect key="frame" x="33" y="45" width="100" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="9Nn-4J-bbf"/>
+                                                        <constraint firstAttribute="width" constant="100" id="9Nn-4J-bbf"/>
                                                         <constraint firstAttribute="height" constant="15" id="PHM-au-Q7d"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
@@ -2760,7 +2803,7 @@
                                                     </prototypes>
                                                 </tableView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4o-vF-PLg">
-                                                    <rect key="frame" x="103" y="45" width="497" height="15"/>
+                                                    <rect key="frame" x="133" y="45" width="467" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Db7-Fy-Eb3"/>
                                                     </constraints>
@@ -3112,7 +3155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2c-5a-dyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10396" y="-13653"/>
+            <point key="canvasLocation" x="-10469" y="-13675"/>
         </scene>
     </scenes>
     <resources>
@@ -3123,6 +3166,7 @@
         <image name="Childcellimage" width="320" height="139"/>
         <image name="Dealsnearyou" width="72" height="70"/>
         <image name="Dealsnewaryouhomescreen" width="96" height="97"/>
+        <image name="Extra button" width="71" height="68"/>
         <image name="Find a Pub" width="100" height="17"/>
         <image name="Fullmenu" width="40" height="47"/>
         <image name="Headercellimage" width="320" height="71"/>
@@ -3155,10 +3199,10 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bOf-Qa-YPU"/>
-        <segue reference="XDA-r2-Wma"/>
+        <segue reference="nql-sy-hHY"/>
+        <segue reference="Rgb-uf-yQW"/>
         <segue reference="OFC-RP-bvW"/>
-        <segue reference="iqU-sd-p6J"/>
-        <segue reference="Xac-65-HoW"/>
+        <segue reference="XDA-r2-Wma"/>
+        <segue reference="oIU-td-Sv5"/>
     </inferredMetricsTieBreakers>
 </document>

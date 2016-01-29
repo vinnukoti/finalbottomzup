@@ -55,9 +55,9 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
             liqname.text = liquors[indexPath.row].liqnamebrandname
             price.text = liquors[indexPath.row].liqbrandprice
             
-            price.font = UIFont(name: "MyriadPro-Regular", size: 11)
+            price.font = UIFont(name: "MyriadPro-Regular", size: 14)
             
-            liqname.font = UIFont(name: "MyriadPro-Regular", size: 11)
+            liqname.font = UIFont(name: "MyriadPro-Regular", size: 14)
 
             
         }

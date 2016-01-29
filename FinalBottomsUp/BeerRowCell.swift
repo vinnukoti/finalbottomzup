@@ -26,6 +26,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var happytiming: UILabel!
 
     @IBOutlet weak var popupbutton: UIButton!
+    @IBOutlet weak var Happyhourslabel: UILabel!
 
     var beers: [liqclass] = [liqclass]()
     
@@ -94,9 +95,9 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
 //                headerCell.headercellmin.text =   "  " + "\(head[section].minp)"
 //            }
  
-        minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-        maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
-        liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+        minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
            // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 10)
             
 

@@ -14,12 +14,16 @@ class mapdata
 
     var mapliqname:String!
     var mapliqdistance:String!
+    var restlat:Double!
+    var restlong:Double!
 
     init()
     {
         
         mapliqname = String()
         mapliqdistance = String()
+        restlat = Double()
+        restlong = Double()
 
     }
 

@@ -107,7 +107,7 @@ class ViewController: UIViewController
         signIn.authenticate()
      
         getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(gemail)&password=\(gid)")
-        
+        performSegueWithIdentifier("newsearch", sender: self)
     }
     
     //Autocompletion
@@ -230,6 +230,9 @@ class ViewController: UIViewController
                         let tracker = GAI.sharedInstance().defaultTracker
                         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(self.emailid)",action: "\(self.username)",label: "From facebook", value: nil).build()
                         tracker.send(eventTracker as! [NSObject : AnyObject])
+                        let str = "Results"
+                        var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! UIViewController
+                        self.presentViewController(vc, animated: true, completion: nil)
                         
 //                        let gurl = NSURL(string: "http://www.google.com")
 //                        if (self.isConnectedToNetwork(gurl!) == true){
@@ -348,6 +351,9 @@ class ViewController: UIViewController
         performSegueWithIdentifier("newsearch", sender: self)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let dist = segue.destinationViewController as! results1 
+    }
     
     
     

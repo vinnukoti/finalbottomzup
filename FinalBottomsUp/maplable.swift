@@ -15,6 +15,7 @@ class maplable: UITableViewCell
 
     @IBOutlet weak var distance: UILabel!
   
+    @IBOutlet weak var gotomap: UIButton!
 
     
     override func awakeFromNib()

@@ -12,7 +12,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
 {
     
     //Manages the instance of tableview
-    public var autoCompleteTableView:UITableView?
+    public static var autoCompleteTableView:UITableView?
     /// Holds the collection of attributed strings
     public var attributedAutoCompleteStrings:[NSAttributedString]?
     /// Handles user selection action on autocomplete table view
@@ -21,7 +21,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
     public var onTextChange:(String)->() = {_ in}
     
     /// Font for the text suggestions
-    public var autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14)
+    public var autoCompleteTextFont = UIFont(name: "MyriadPro-Regular", size: 14)
     /// Color of the text suggestions
     public var autoCompleteTextColor = UIColor.blackColor()
     /// Used to set the height of cell for each suggestions
@@ -50,7 +50,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
         {
         didSet{
             assert(hidesWhenEmpty != nil, "hideWhenEmpty cannot be set to nil")
-            autoCompleteTableView?.hidden = hidesWhenEmpty!
+            self.dynamicType.autoCompleteTableView?.hidden = hidesWhenEmpty!
         }
     }
     /// The table view height
@@ -109,7 +109,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
     {
         hidesWhenEmpty = true
         autoCompleteAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()]
-        autoCompleteAttributes![NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        autoCompleteAttributes![NSFontAttributeName] = UIFont(name: "MyriadPro-Regular", size: 11)
         self.clearButtonMode = .Always
         self.addTarget(self, action: "textFieldDidChange", forControlEvents: .EditingChanged)
     }
@@ -120,7 +120,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
         
         //let tableView1 = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize2.width - 50, height: 30.0))
         //let tableView1 = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: screenSize2.width - 140, height: 100.0))
-        let tableView1 = UITableView(frame: CGRect(x: 0, y: 50, width: screenSize2.width, height: 50.0))
+        let tableView1 = UITableView(frame: CGRect(x: 0, y: 220, width: screenSize2.width, height: 50.0))
         
         tableView1.layer.masksToBounds = true
         tableView1.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
@@ -133,7 +133,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
         tableView1.hidden = hidesWhenEmpty ?? true
         tableView1.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView1)
-        autoCompleteTableView = tableView1
+        self.dynamicType.autoCompleteTableView = tableView1
         autoCompleteTableHeight = 250
 
     }
@@ -152,11 +152,11 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
     
     private func redrawTable()
     {
-        if autoCompleteTableView != nil
+        if self.dynamicType.autoCompleteTableView != nil
         {
-            var newFrame = autoCompleteTableView!.frame
+            var newFrame = self.dynamicType.autoCompleteTableView!.frame
             newFrame.size.height = autoCompleteTableHeight!
-            autoCompleteTableView!.frame = newFrame
+            self.dynamicType.autoCompleteTableView!.frame = newFrame
         }
     }
     
@@ -257,7 +257,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
                 }
             }
         }
-        autoCompleteTableView?.reloadData()
+        self.dynamicType.autoCompleteTableView?.reloadData()
     }
     
     //MARK: - Internal
@@ -265,7 +265,7 @@ public class AutoCompleteTextField2:UITextField, UITableViewDataSource, UITableV
         onTextChange(text!)
         if text!.isEmpty{ autoCompleteStrings = nil }
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.autoCompleteTableView?.hidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
+            self.dynamicType.autoCompleteTableView?.hidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
         })
     }
 }
