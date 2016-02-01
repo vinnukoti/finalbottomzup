@@ -56,7 +56,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     
       let closelocationpopupbutton2kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
 
-    @IBOutlet weak var gotomap: UIButton!
+
     @IBOutlet weak var lookfurtherdefault: UIButton!
     override func viewDidLoad()
     {
@@ -474,12 +474,12 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     
-    @IBAction func gotomapvodka(sender: AnyObject)
-    {
-        
-         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(getrestlastmapview),\(getrestlongitmapview)")!)
-        
-    }
+//    @IBAction func gotomapvodka(sender: AnyObject)
+//    {
+//        
+//         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(getrestlastmapview),\(getrestlongitmapview)")!)
+//        
+//    }
     
     @IBAction func lookfurther(sender: UIButton, forEvent event: UIEvent)
     {

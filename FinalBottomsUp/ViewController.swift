@@ -22,6 +22,7 @@ class ViewController: UIViewController
 
 {
     
+    @IBOutlet weak var backgroundimage: UIImageView!
     var fbemail:String!
     var fbid:String!
     
@@ -50,6 +51,9 @@ class ViewController: UIViewController
     {
         
         super.viewDidLoad()
+        
+       // backgroundimage.image = UIImage(named: "Newloginbackground")
+        
         
 //        if Reachability.isConnectedToNetwork() {
 //            println("Haz Interwebz!")

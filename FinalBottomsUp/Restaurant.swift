@@ -27,6 +27,10 @@ class Restaurant
     var Restaurantlatitude: Double!
     var Restaurantlongitude: Double!
     var Place:String!
+    var Phoneone:String!
+    var Phonetwo:String!
+    var restaddress:String!
+    
     
     var amp:[liqclass] = [liqclass]()
     var further:[liqclass] = [liqclass]()
@@ -46,6 +50,9 @@ class Restaurant
         rest_offers_happy_hour = String()
         
         amp = [liqclass]()
+        Phoneone = String()
+        Phonetwo = String()
+        restaddress = String()
         
         Restaurantlatitude = Double()
         Restaurantlongitude = Double()

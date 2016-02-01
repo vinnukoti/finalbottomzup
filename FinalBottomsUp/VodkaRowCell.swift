@@ -24,6 +24,8 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     @IBOutlet weak var happyhours: UILabel!
 
     @IBOutlet weak var happyhourstiming: UILabel!
+    
+    @IBOutlet weak var locationicon: UIButton!
     var liquors: [liqvodka] = [liqvodka]()
     
     override func awakeFromNib() {

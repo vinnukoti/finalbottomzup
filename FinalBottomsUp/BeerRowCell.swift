@@ -27,6 +27,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var popupbutton: UIButton!
     @IBOutlet weak var Happyhourslabel: UILabel!
+    @IBOutlet weak var locationicon: UIButton!
 
     var beers: [liqclass] = [liqclass]()
     

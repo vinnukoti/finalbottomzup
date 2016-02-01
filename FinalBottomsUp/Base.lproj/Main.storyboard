@@ -125,7 +125,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Newloginbackground" translatesAutoresizingMaskIntoConstraints="NO" id="HXF-K8-env">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Newloginbackground" translatesAutoresizingMaskIntoConstraints="NO" id="HXF-K8-env">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BottomzUp" translatesAutoresizingMaskIntoConstraints="NO" id="b5E-vy-rlq">
@@ -172,7 +172,7 @@
                                     <action selector="googlesignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sq4-oO-pji"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="I hereby confirm that i am  above the legal age of drinking." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEj-CM-3Mg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="I hereby confirm that I am  above the legal age of drinking." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEj-CM-3Mg">
                                 <rect key="frame" x="16" y="182" width="568" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ta1-ib-6e4"/>
@@ -390,6 +390,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="FBbutton" destination="sZ7-b9-zOL" id="nKU-gZ-zPU"/>
+                        <outlet property="backgroundimage" destination="HXF-K8-env" id="95E-dZ-e9D"/>
                         <outlet property="gogo" destination="wI9-Q5-JlA" id="WPb-0M-f3j"/>
                         <outlet property="webviewforgif" destination="g7d-gU-36d" id="4xc-3w-Sk3"/>
                     </connections>
@@ -1108,8 +1109,8 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhW-XG-5id">
                                 <rect key="frame" x="5" y="21" width="20" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="14" id="CjB-f2-2fG"/>
-                                    <constraint firstAttribute="height" priority="1" constant="14" id="hcI-Dr-IJl"/>
+                                    <constraint firstAttribute="width" constant="30" id="VME-fF-X16"/>
+                                    <constraint firstAttribute="height" constant="30" id="ciN-UJ-Xd0"/>
                                 </constraints>
                                 <state key="normal" image="Backarrow">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1696,6 +1697,7 @@
                                             <outlet property="distancelabelnew" destination="q1w-rL-r5a" id="yI8-7z-usG"/>
                                             <outlet property="happytiming" destination="OTx-Bv-MsU" id="4Ek-E0-PxI"/>
                                             <outlet property="hotelname" destination="VUr-ac-nnm" id="xgT-Jq-acM"/>
+                                            <outlet property="locationicon" destination="759-cU-3Bm" id="GHc-vW-mlR"/>
                                             <outlet property="popupbutton" destination="O9O-eb-PjU" id="bcI-Ty-Lui"/>
                                             <outlet property="press2reveal" destination="ItC-7g-0nd" id="ffS-z3-0X7"/>
                                             <outlet property="tableView" destination="iVb-dO-VeR" id="6YJ-97-INA"/>
@@ -1785,8 +1787,8 @@
                                     <action selector="getdeals:" destination="cXB-1m-d5z" eventType="touchUpInside" id="vhx-IG-h6Y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AR2-Sm-fRK">
-                                <rect key="frame" x="34" y="10" width="556" height="25"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AR2-Sm-fRK">
+                                <rect key="frame" x="35" y="10" width="555" height="25"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="GHq-6p-5Ra"/>
@@ -1806,7 +1808,7 @@
                                     <action selector="showdropdowns:" destination="cXB-1m-d5z" eventType="touchUpInside" id="AXL-4b-5rN"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uer-ad-iDt">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uer-ad-iDt">
                                 <rect key="frame" x="33" y="43" width="119" height="15"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1870,7 +1872,6 @@
                             <constraint firstItem="v03-3m-lFe" firstAttribute="top" secondItem="0tG-cX-6Po" secondAttribute="bottom" constant="5" id="2gm-4O-Hci"/>
                             <constraint firstItem="v03-3m-lFe" firstAttribute="top" secondItem="mZa-Vh-jz1" secondAttribute="bottom" priority="1" constant="50" id="4jc-vd-gb6"/>
                             <constraint firstItem="EC3-uR-FoV" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" constant="10" id="5Pf-Un-DRb"/>
-                            <constraint firstItem="4IA-Kt-4kI" firstAttribute="leading" secondItem="VhW-XG-5id" secondAttribute="trailing" constant="10" id="5kV-9s-iXo"/>
                             <constraint firstItem="gw3-dO-6Bx" firstAttribute="bottom" secondItem="vow-5r-N1G" secondAttribute="bottom" id="6dB-MA-FoX"/>
                             <constraint firstItem="uer-ad-iDt" firstAttribute="top" secondItem="AR2-Sm-fRK" secondAttribute="bottom" constant="-3" id="6pF-qD-s7v"/>
                             <constraint firstItem="D8l-rU-SU4" firstAttribute="leading" secondItem="gw3-dO-6Bx" secondAttribute="trailing" id="7YV-IE-VQK"/>
@@ -1891,17 +1892,15 @@
                             <constraint firstItem="EWL-gM-2zM" firstAttribute="top" secondItem="Q37-Nk-LRb" secondAttribute="top" constant="16" id="IiJ-aM-ZIR"/>
                             <constraint firstAttribute="trailing" secondItem="EWL-gM-2zM" secondAttribute="trailing" constant="20" id="JCd-nP-gxG"/>
                             <constraint firstItem="0PV-g3-WqK" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="2" id="KZ5-eC-bGS"/>
+                            <constraint firstItem="AR2-Sm-fRK" firstAttribute="leading" secondItem="VhW-XG-5id" secondAttribute="trailing" constant="10" id="MgT-gd-VsJ"/>
                             <constraint firstItem="D8l-rU-SU4" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="25" id="Mh3-Ju-Q4a"/>
-                            <constraint firstItem="VhW-XG-5id" firstAttribute="centerY" secondItem="lxK-NV-XxS" secondAttribute="centerY" priority="1" id="N3F-m1-cZc"/>
                             <constraint firstItem="T0b-9u-jRj" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" constant="10" id="Oa2-8Q-4S6"/>
                             <constraint firstItem="uer-ad-iDt" firstAttribute="top" secondItem="AR2-Sm-fRK" secondAttribute="bottom" constant="5" id="P9B-4B-gbL"/>
-                            <constraint firstItem="VhW-XG-5id" firstAttribute="top" secondItem="bYl-zy-TpS" secondAttribute="bottom" constant="15" id="PeI-GD-iUj"/>
                             <constraint firstItem="XdQ-X1-8ai" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="25" id="Pli-YL-H7E"/>
                             <constraint firstItem="aNY-4Q-qgG" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" id="Pwq-mL-qx4"/>
                             <constraint firstItem="T0b-9u-jRj" firstAttribute="top" secondItem="4IA-Kt-4kI" secondAttribute="bottom" constant="6" id="Q4i-JB-ex2"/>
                             <constraint firstItem="9PE-Dp-Ko1" firstAttribute="top" secondItem="Q37-Nk-LRb" secondAttribute="top" id="QIU-3q-jyl"/>
                             <constraint firstItem="gw3-dO-6Bx" firstAttribute="leading" secondItem="6Yx-ha-CrO" secondAttribute="trailing" id="Qk0-YO-H3H"/>
-                            <constraint firstItem="VhW-XG-5id" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" constant="5" id="Rlv-Er-vWU"/>
                             <constraint firstItem="4IA-Kt-4kI" firstAttribute="height" secondItem="lxK-NV-XxS" secondAttribute="height" id="V4D-4n-pVC"/>
                             <constraint firstItem="gw3-dO-6Bx" firstAttribute="bottom" secondItem="6Yx-ha-CrO" secondAttribute="bottom" id="Vo2-rO-FC1"/>
                             <constraint firstAttribute="trailing" secondItem="XdQ-X1-8ai" secondAttribute="trailing" id="WW8-5f-RT6"/>
@@ -1909,14 +1908,13 @@
                             <constraint firstItem="6Yx-ha-CrO" firstAttribute="leading" secondItem="aNY-4Q-qgG" secondAttribute="trailing" id="Xdx-LT-zEk"/>
                             <constraint firstAttribute="trailing" secondItem="kxU-IR-kN9" secondAttribute="trailing" id="XrC-vU-HpI"/>
                             <constraint firstItem="lxK-NV-XxS" firstAttribute="leading" secondItem="4IA-Kt-4kI" secondAttribute="trailing" constant="10" id="YHG-Qf-gcf"/>
-                            <constraint firstItem="uer-ad-iDt" firstAttribute="leading" secondItem="VhW-XG-5id" secondAttribute="trailing" constant="15" id="YqR-K1-4b2"/>
                             <constraint firstItem="0tG-cX-6Po" firstAttribute="top" secondItem="mZa-Vh-jz1" secondAttribute="bottom" id="ZSy-ty-1jg"/>
                             <constraint firstItem="mZa-Vh-jz1" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" id="ZeJ-V8-4Ag"/>
                             <constraint firstAttribute="trailing" secondItem="D8l-rU-SU4" secondAttribute="trailing" id="aEL-9r-9zp"/>
                             <constraint firstItem="gw3-dO-6Bx" firstAttribute="top" secondItem="9PE-Dp-Ko1" secondAttribute="bottom" constant="25" id="aip-Cq-nem"/>
                             <constraint firstItem="nk8-tg-n1j" firstAttribute="top" secondItem="4IA-Kt-4kI" secondAttribute="bottom" priority="1" constant="8" id="ayz-QD-D4Q"/>
-                            <constraint firstItem="AR2-Sm-fRK" firstAttribute="leading" secondItem="VhW-XG-5id" secondAttribute="trailing" constant="15" id="bSG-gA-QOM"/>
                             <constraint firstItem="D8l-rU-SU4" firstAttribute="bottom" secondItem="gw3-dO-6Bx" secondAttribute="bottom" id="cwy-qb-iUT"/>
+                            <constraint firstItem="VhW-XG-5id" firstAttribute="top" secondItem="bYl-zy-TpS" secondAttribute="bottom" constant="10" id="cxV-5f-MYu"/>
                             <constraint firstItem="XdQ-X1-8ai" firstAttribute="centerY" secondItem="6Yx-ha-CrO" secondAttribute="centerY" constant="4" id="d0w-IW-wWn"/>
                             <constraint firstItem="EC3-uR-FoV" firstAttribute="centerY" secondItem="NTP-q7-dDS" secondAttribute="centerY" id="dUC-fw-Lhp"/>
                             <constraint firstItem="NTP-q7-dDS" firstAttribute="top" secondItem="mZa-Vh-jz1" secondAttribute="bottom" id="dch-6K-ksc"/>
@@ -1924,12 +1922,12 @@
                             <constraint firstItem="AR2-Sm-fRK" firstAttribute="top" secondItem="Q37-Nk-LRb" secondAttribute="top" constant="10" id="e9g-25-ITv"/>
                             <constraint firstItem="nk8-tg-n1j" firstAttribute="centerY" secondItem="T0b-9u-jRj" secondAttribute="centerY" priority="1" id="eA5-li-yVm"/>
                             <constraint firstAttribute="trailing" secondItem="AR2-Sm-fRK" secondAttribute="trailing" constant="10" id="eqS-y1-rMZ"/>
+                            <constraint firstItem="VhW-XG-5id" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" constant="5" id="jq6-8Q-MdI"/>
                             <constraint firstItem="9PE-Dp-Ko1" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" id="lEw-TJ-I1S"/>
                             <constraint firstItem="VhW-XG-5id" firstAttribute="height" secondItem="4IA-Kt-4kI" secondAttribute="height" id="mH8-po-PIm"/>
                             <constraint firstAttribute="trailing" secondItem="vow-5r-N1G" secondAttribute="trailing" id="maP-cc-oZC"/>
                             <constraint firstAttribute="trailing" secondItem="lxK-NV-XxS" secondAttribute="trailing" constant="5" id="oL4-YH-OhC"/>
                             <constraint firstItem="uer-ad-iDt" firstAttribute="top" secondItem="4IA-Kt-4kI" secondAttribute="bottom" constant="1" id="oYm-nG-svS"/>
-                            <constraint firstItem="VhW-XG-5id" firstAttribute="centerY" secondItem="4IA-Kt-4kI" secondAttribute="centerY" priority="1" id="pm4-zo-VDa"/>
                             <constraint firstAttribute="centerX" secondItem="NTP-q7-dDS" secondAttribute="centerX" id="qAD-B0-1eY"/>
                             <constraint firstItem="v03-3m-lFe" firstAttribute="top" secondItem="NTP-q7-dDS" secondAttribute="bottom" constant="5" id="rid-Hi-1jK"/>
                             <constraint firstItem="XdQ-X1-8ai" firstAttribute="leading" secondItem="Q37-Nk-LRb" secondAttribute="leading" id="sFo-4W-DtQ"/>
@@ -1982,7 +1980,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9447" y="-13603"/>
+            <point key="canvasLocation" x="-9633" y="-13593"/>
         </scene>
         <!--Deals Nearyou-->
         <scene sceneID="sEf-f9-9TH">
@@ -2889,6 +2887,7 @@
                                             <outlet property="distancenewvodkalabel" destination="27A-DX-oIs" id="u2e-DH-YaM"/>
                                             <outlet property="happyhours" destination="iRD-R7-H5c" id="PIz-4o-4y2"/>
                                             <outlet property="happyhourstiming" destination="d4o-vF-PLg" id="ZaD-KQ-Hlh"/>
+                                            <outlet property="locationicon" destination="LDK-Mp-NAy" id="n6c-Ov-L6P"/>
                                             <outlet property="press2reveal" destination="MIm-N1-4UM" id="3ux-ub-qVu"/>
                                             <outlet property="tableView" destination="AJb-bZ-qEw" id="PGt-SY-Jtu"/>
                                         </connections>
@@ -3199,10 +3198,10 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nql-sy-hHY"/>
-        <segue reference="Rgb-uf-yQW"/>
         <segue reference="OFC-RP-bvW"/>
         <segue reference="XDA-r2-Wma"/>
+        <segue reference="Rgb-uf-yQW"/>
         <segue reference="oIU-td-Sv5"/>
+        <segue reference="6Fg-HI-kaH"/>
     </inferredMetricsTieBreakers>
 </document>

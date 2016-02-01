@@ -184,6 +184,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var liqTypes1:[String] = [String]()
      var items: [String] = ["Delhi", "Gurgaon", "Noida"]
     
+
+    var restlatitude: Double!
+    var restlongitude: Double!
+    
     
     override func viewDidLoad()
   
@@ -838,6 +842,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if tableView.tag == 1
         {
         let cells = tableView.dequeueReusableCellWithIdentifier("vodkaChildCell", forIndexPath: indexPath) as! VodkaRowCell
+            cells.locationicon.tag = indexPath.section
             cells.press2reveal.hidden = true
         cells.liquors = [liqvodka]()
         cells.liquors = header1[indexPath.section].vodkaarray
@@ -849,12 +854,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
          cells.arrowup.tag = indexPath.section
          cells.Hotelname.text = header1[indexPath.section].restnamevodka
             cells.Hotelname.font = UIFont(name: "MyriadPro-Regular", size:14)
-            cells.address.text = header1[indexPath.section].address
+            cells.address.text = header1[indexPath.section].restaddress
             cells.address.font = UIFont(name: "MyriadPro-Regular", size:14)
             cells.happyhours.font = UIFont(name: "MyriadPro-Regular", size:14)
             cells.happyhourstiming.font = UIFont(name: "MyriadPro-Regular", size:14)
           //  cells.addressLabel.text = header1[indexPath.section].address
-            newaddress = header1[indexPath.section].address
+            newaddress = header1[indexPath.section].restaddress
             cells.happyhourstiming.text = header1[indexPath.section].vodkahappystart + " - " + header1[indexPath.section].vodkahappyend
             if cells.happyhourstiming.text! == hstart
             {
@@ -1485,6 +1490,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             getvodkaobj.restnamevodka = res_name
 
                         }
+                        if let res_address = resInfo["res_address"] as? String
+                        {
+                            getvodkaobj.restaddress = res_address
+                        }
+
                         if let res_locality = resInfo["res_locality"] as? String
                         {
                             getvodkaobj.address = res_locality
@@ -1496,6 +1506,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
                             getvodkalatitude = string.doubleValue
+                            getvodkaobj.Restaurantlatitudevodka = getvodkalatitude
                  
                             
                         }
@@ -1505,7 +1516,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             var string = NSString(string: mySwiftString)
                             string.doubleValue
                             getvodkalongitude = string.doubleValue
+                             getvodkaobj.Restaurantlongitudevodka = getvodkalongitude
                             println(getvodkalongitude)
+                        }
+                        if let res_phone1 = resInfo["res_phone1"] as? String
+                        {
+                            getvodkaobj.Phoneone = res_phone1
+                        }
+                        
+                        if let res_phone2 = resInfo["res_phone2"] as? String
+                        {
+                            getvodkaobj.Phonetwo = res_phone2
                         }
                         if var distance = resInfo["distance"] as? String
                         {
@@ -2023,6 +2044,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
        
                                 fstobj1.restname = res_name
                             }
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                fstobj1.restaddress = res_address
+                            }
                             if let res_locality = resInfo["res_locality"] as? String
                             {
                                 fstobj1.Place = res_locality
@@ -2051,6 +2076,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 // println(restlong)
                                 
                                 
+                            }
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                                fstobj1.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                                fstobj1.Phonetwo = res_phone2
                             }
                             if var distance = resInfo["distance"] as? String
                             {
@@ -2151,6 +2185,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 vodkaobjnew.restnamevodka = res_name
                          
                             }
+                            
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                vodkaobjnew.restaddress = res_address
+                            }
                             if let res_locality = resInfo["res_locality"] as? String
                             {
                                 vodkaobjnew.address = res_locality
@@ -2173,6 +2212,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 getrestlongitudevodka = string.doubleValue
                                 vodkaobjnew.Restaurantlongitudevodka = getrestlongitudevodka
            
+                            }
+                            
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                                vodkaobjnew.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                                vodkaobjnew.Phonetwo = res_phone2
                             }
                             if var distance = resInfo["distance"] as? String
                             {
@@ -2471,7 +2520,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func locationpopupclicked(sender: UIButton, forEvent event: UIEvent)
     {
-        
+        restlatitude = header1[sender.tag].Restaurantlatitudevodka
+        restlongitude = header1[sender.tag].Restaurantlongitudevodka
         let tracker = GAI.sharedInstance().defaultTracker
         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Location Name",action: "Location Name",label: "Location Name", value: nil).build()
         tracker.send(eventTracker as! [NSObject : AnyObject])
@@ -2542,7 +2592,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func gotomapgoogle(sender: UIButton)
     {
-       UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(header1[sender.tag].Restaurantlatitudevodka),\(header1[sender.tag].Restaurantlongitudevodka)")!)
+      // UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(restlatitude),\(restlongitude)")!)
+        
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=13.043148,77.570403&daddr=\(restlatitude),\(restlongitude)")!)
     }
 
     @IBAction func lookfurthernew(sender: UIButton, forEvent event: UIEvent)

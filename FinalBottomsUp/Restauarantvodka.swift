@@ -29,6 +29,9 @@ class Restauarantvodka
     
     var Restaurantlatitudevodka: Double!
     var Restaurantlongitudevodka: Double!
+    var Phoneone:String!
+    var Phonetwo:String!
+    var restaddress:String!
     
     init()
     {
@@ -47,6 +50,9 @@ class Restauarantvodka
         vodkasendarray = [liqvodka]()
         
         rest_offers_happy_hour = String()
+        Phoneone = String()
+        Phonetwo = String()
+        restaddress = String(0)
         
         Restaurantlatitudevodka = Double()
         Restaurantlongitudevodka = Double()

@@ -373,7 +373,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                if CheckforInternetViewController.isConnectedToNetwork() == true
                {
                     print("Internet connection OK")
-                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityTextfield.text)}\(text)&types=(regions)&components=country:IN"
+                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&types=(regions)&components=country:IN"
                     let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                     if url != nil{
                         let urlRequest = NSURLRequest(URL: url!)
@@ -495,7 +495,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // Textfield2
         if textField.tag == 1
         {
-            //textfield2.enabled = false
+           // self.view.endEditing(true)
+           // autocompletedTextfieldnew.resignFirstResponder()
+            AutoCompleteTextField3.autoCompleteTableView?.hidden = true
             textfield2.enabled = false
             
            // getbardata("http://demos.dignitasdigital.com/bottomzup/radmin/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
@@ -553,6 +555,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
            // localityTextfield
         else if textField.tag == 3
         {
+        
             localityTextfield.enabled = false
              textField.selectAll(self)
             LOcalityTableview.hidden = false
@@ -562,8 +565,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             // beerTypeTextfield
         else if textField.tag == 7
         {
-            
-            
+           
+       
             beerTypeTextfield.enabled = false
             tableviewnew.hidden = true
             liqTypetableview.hidden = false
@@ -982,6 +985,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     func getbardata(urlString:String)
     {
         let url = NSURL(string: urlString)
+        println(url)
         
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
@@ -1072,6 +1076,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 
                             }
                             
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                fstobj1.restaddress = res_address
+                            }
+                            
                             if let res_locality = resInfo["res_locality"] as? String
                             {
                                 fstobj1.Place = res_locality
@@ -1099,6 +1108,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 println(restlong)
                                 
                                 
+                            }
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                                fstobj1.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                                fstobj1.Phonetwo = res_phone2
                             }
                             if var distance = resInfo["distance"] as? String
                             {
@@ -1209,6 +1227,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 vodkaobj.restnamevodka = res_name
                                 //vodkasendobj.restnamevodka = res_name
                             }
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                vodkaobj.restaddress = res_address
+                            }
                             
                             if let res_locality = resInfo["res_locality"] as? String
                             {
@@ -1236,6 +1258,17 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 //vodkasendobj.Restaurantlongitudevodka = restvodkalang
                                 println(restvodkalang)
                             }
+                            
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                                vodkaobj.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                                vodkaobj.Phonetwo = res_phone2
+                            }
+
                             if var distance = resInfo["distance"] as? String
                             {
                                 //28.63875
@@ -1357,6 +1390,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.getrestlatitudevodka = restvodkalat
                 destination.getrestlongitudevodka = restvodkalang
                 println(autocompletedTextfieldnew.text)
+                
                 destination.locationnamefromtextfield = autocompletedTextfieldnew.text
                 destination.liqtypefromTextfield = beerTypeTextfield.text
                 destination.localityFromtextfield = localityTextfield.text

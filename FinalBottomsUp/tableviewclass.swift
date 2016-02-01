@@ -273,6 +273,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var search   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     
     var localityfromtextfield1:String!
+    
+    let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    
+    var reslatitude:Double!
+    var reslongitude:Double!
+    
+    
    
 
     
@@ -478,15 +485,32 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     self!.connection!.cancel()
                     self!.connection = nil
                 }
-                
-                let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.citydropdowntextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)&types=(regions)&components=country:IN"
-                let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
-                if url != nil{
-                    let urlRequest = NSURLRequest(URL: url!)
-                    self!.connection = NSURLConnection(request: urlRequest, delegate: self)
+                println(self!.citydropdowntextfield.text)
+                if CheckforInternetViewController.isConnectedToNetwork() == true
+                {
+                   // print("Internet connection OK")
+                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.citydropdowntextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&types=(regions)&components=country:IN"
+                    let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
+                    if url != nil{
+                        let urlRequest = NSURLRequest(URL: url!)
+                        self!.connection = NSURLConnection(request: urlRequest, delegate: self)
+                      //  print("Internet connection OK")
+                        
+                    }}
+                else
+                {
+                   // print("Internet connection FAILED")
+                    
+                    let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+                    alert.show()
+                    AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+                    
+                    
+                    
+                }
                 }
             }
-        }
+        
         newtextfieldtableviewcity.onSelect = {[weak self] text, indexpath in
             
             println(self!.newtextfieldtableviewcity.text)
@@ -531,7 +555,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func onselect()
     {
         var text1 = self.newtextfieldtableviewcity.text
-        var locate = localityFromtextfield + text1
+        var locate = citydropdowntextfield.text + text1
         
         println(self.newtextfieldtableviewcity.text)
         println(self.localityFromtextfield)
@@ -965,7 +989,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         selectedliqor = selectedCell1.textLabel!.text
         isliqtextfieldhasdata = true
            self.liqFromresult = self.newtextfieldtableview.text
-            locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text , forState: .Normal)
+           // locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text , forState: .Normal)
             locationnamefromtextfield = self.newtextfieldtableviewcity.text
             liqtypefromTextfield = self.newtextfieldtableview.text
             println(self.newtextfieldtableviewcity.text)
@@ -1092,6 +1116,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 fstobj1.restname = res_name
                             }
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                fstobj1.restaddress = res_address
+                            }
                             if let res_locality = resInfo["res_locality"] as? String
                             {
                                 fstobj1.Place = res_locality
@@ -1120,6 +1148,19 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 
                                 
                             }
+                            
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                                fstobj1.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                                fstobj1.Phonetwo = res_phone2
+                            }
+
+                            
+                            
                             if var distance = resInfo["distance"] as? String
                             {
                                 //28.63875
@@ -1134,8 +1175,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f Km.", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                                 totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
@@ -1144,7 +1185,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                                fstobj1.distance = totalDistance1 + " Km."
+                                fstobj1.distance = totalDistance1 + " Km"
                                 //println(fstobj1.distance)
                             }
                         }
@@ -1219,6 +1260,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             {
                                 vodkaobjnew.restnamevodka = res_name
                             }
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                vodkaobjnew.restaddress = res_address
+                            }
                             if let res_locality = resInfo["res_locality"] as? String
                             {
                                 vodkaobjnew.address = res_locality
@@ -1242,6 +1287,15 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 getrestlongitudevodka = string.doubleValue
                                 vodkaobjnew.Restaurantlongitudevodka = getrestlongitudevodka
                             }
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                                vodkaobjnew.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                                vodkaobjnew.Phonetwo = res_phone2
+                            }
                             if var distance = resInfo["distance"] as? String
                             {
                                 //28.63875
@@ -1252,8 +1306,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f Km.", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                                 totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
@@ -1262,7 +1316,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                     return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                                vodkaobjnew.distancevodka = totalDistance1 + " Km."
+                                vodkaobjnew.distancevodka = totalDistance1 + " Km"
                  
                             }
                         }
@@ -1521,6 +1575,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
             cells.press2reveal.hidden = true
+            
+            cells.locationicon.tag = indexPath.section
+            //Findongooglemapsbutton.tag = indexPath.section
+            println(cells.locationicon.tag)
         cells.beers = [liqclass]()
         cells.beers = head[indexPath.section].amp
         cells.arrowup.tag = indexPath.section
@@ -1532,9 +1590,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
             cells.hotelname.text = head[indexPath.section].restname
             cells.hotelname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
-            cells.areaname.text = head[indexPath.section].Place
+            cells.areaname.text = head[indexPath.section].restaddress
             //addresslabel.text = head[indexPath.section].Place
-            newaddress = head[indexPath.section].Place
+            newaddress = head[indexPath.section].restaddress
             cells.happytiming.text = head[indexPath.section].happystart + " - " + head[indexPath.section].happyend
             cells.popupbutton.tag = indexPath.section
             println(cells.happytiming.text)
@@ -2295,6 +2353,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             fstobj1.restname = res_name
 
                         }
+                        if let res_address = resInfo["res_address"] as? String
+                        {
+                            fstobj1.restaddress = res_address
+                        }
                         
                         if let res_lat = resInfo["res_lat"] as? String
                         {
@@ -2319,6 +2381,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             
                             
                         }
+                        
+                        if let res_phone1 = resInfo["res_phone1"] as? String
+                        {
+                            fstobj1.Phoneone = res_phone1
+                        }
+                        
+                        if let res_phone2 = resInfo["res_phone2"] as? String
+                        {
+                            fstobj1.Phonetwo = res_phone2
+                        }
                         if var distance = resInfo["distance"] as? String
                         {
                             //28.63875
@@ -2329,8 +2401,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
-                            println(String(format: "%.2f Km.", totalDistance))
-                            NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                            println(String(format: "%.2f Km", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                             totalDistance = Double(round(10*totalDistance)/10)
                             var totalDistance1 = totalDistance.description
                             println(totalDistance1)
@@ -2339,7 +2411,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                 return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
                             }
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
-                            fstobj1.distance = totalDistance1 + " Km."
+                            fstobj1.distance = totalDistance1 + " Km"
                             println(fstobj1.distance)
                         }
                     }
@@ -2788,16 +2860,16 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
             
-            let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+            
             Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicView.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton.setTitle("8722289471", forState: .Normal)
+            Findongooglemapsbutton.setTitle(head[sender.tag].Phoneone, forState: .Normal)
             Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
             
             let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicView.frame.width - 30,30)
             Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton1.setTitle("8892640540", forState: .Normal)
+            Findongooglemapsbutton1.setTitle(head[sender.tag].Phonetwo, forState: .Normal)
             Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
 
             
@@ -2828,12 +2900,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func call1(sender: UIButton)
     {
-        callNumber("8722289471")
+        callNumber(head[sender.tag].Phoneone)
     }
     
     func call2(sender: UIButton)
     {
-        callNumber("8892640540")
+        callNumber(head[sender.tag].Phonetwo)
     }
 
 
@@ -2958,6 +3030,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     @IBAction func locationpopup(sender: UIButton, forEvent event: UIEvent)
     {
+        reslatitude = head[sender.tag].Restaurantlatitude
+        reslongitude = head[sender.tag].Restaurantlongitude
         let tracker = GAI.sharedInstance().defaultTracker
         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Location Name",action: "Location Name",label: "Location Name", value: nil).build()
         tracker.send(eventTracker as! [NSObject : AnyObject])
@@ -3002,7 +3076,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
             
             let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            Findongooglemapsbutton.frame = CGRectMake(0,50,locatiopopupview.frame.width - 30,30)
+            Findongooglemapsbutton.frame = CGRectMake(5,50,locatiopopupview.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "gotomapgoogle:", forControlEvents: UIControlEvents.TouchUpInside)
 
             var text = "Find on Google Maps"
@@ -3034,9 +3108,13 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func gotomapgoogle(sender : UIButton)
     {
-        println(head[sender.tag].Restaurantlatitude)
-        println(head[sender.tag].Restaurantlongitude)
-         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=13.043118,77.570403&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
+        println(reslatitude)
+        println(reslongitude)
+        println(getdevicelatitude)
+        println(getdevicelongitude)
+       //  UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
+        
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=13.043148,77.570403&daddr=\(reslatitude),\(reslongitude)")!)
     }
 
     
@@ -3454,8 +3532,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         showdropdownview.userInteractionEnabled = true
         
         
+        // label to display select beer and city name
         self.liqplacedisplaylabel = UILabel(frame: CGRectMake(10,3,self.view.frame.width - 20,25))
-       
         self.liqplacedisplaylabel.backgroundColor = UIColor.whiteColor()
         self.liqplacedisplaylabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
         self.liqplacedisplaylabel.text =  liqtypefromTextfield + space + near + space + locationnamefromtextfield
@@ -3464,16 +3542,16 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.liqplacedisplaylabel.textColor = UIColor.darkGrayColor()
         
         
-        // liqtypetextfield
+        // Liq catogery textfiled
         self.dropdowntextfield = UITextField (frame:CGRectMake(10,40,self.view.frame.width - 20,35));
         dropdowntextfield.backgroundColor = UIColor.whiteColor()
         self.dropdowntextfield.delegate = self
         dropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
-        dropdowntextfield.text = "Beer"
+        dropdowntextfield.text = liqtypeFromresult
         dropdowntextfield.tag = 5
         dropdowntextfield.textColor = UIColor.darkGrayColor()
         
-        
+        // Liq catogery drop down tableview
         beerdropdowntableview.frame         =   CGRectMake(10,80,self.view.frame.width - 20,150)
         beerdropdowntableview.delegate      =   self
         beerdropdowntableview.dataSource    =   self
@@ -3483,17 +3561,18 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
      
 
-        
+        // liq sub catoegory textfiled
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,85,self.view.frame.width - 20,35));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
        // newtextfieldtableview.text = liqtypefromTextfield
-        newtextfieldtableview.text = "All"
+        newtextfieldtableview.text = liqFromresult
         newtextfieldtableview.tag = 2
         newtextfieldtableview.textColor = UIColor.darkGrayColor()
 //        liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
         
+        // Liq sub category drop down tableview
         beerTypedropdowntableview.frame         =   CGRectMake(10,130,self.view.frame.width - 20,150)
         beerTypedropdowntableview.delegate      =   self
         beerTypedropdowntableview.dataSource    =   self
@@ -3501,7 +3580,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         beerTypedropdowntableview.tag = 6
         
         
-        
+        // Locality dropdown textfield
         self.citydropdowntextfield = UITextField (frame:CGRectMake(10,135,self.view.frame.width - 20,35));
         citydropdowntextfield.backgroundColor = UIColor.whiteColor()
         self.citydropdowntextfield.delegate = self
@@ -3512,7 +3591,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         citydropdowntextfield.textColor = UIColor.darkGrayColor()
         
         
-        
+        // Locality drop down tableview
         citydropdowntableview.frame         =   CGRectMake(10,175,self.view.frame.width - 20,150)
         citydropdowntableview.delegate      =   self
         citydropdowntableview.dataSource    =   self
@@ -3521,7 +3600,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         
         
-            
+        // Search Button
         search.frame = CGRectMake(40, 250, self.view.frame.width - 80, 30)
         search.backgroundColor = UIColor.whiteColor()
         search.setTitle("Search", forState: UIControlState.Normal)
@@ -3546,7 +3625,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         
         
-        
+        // Sublocality search textfiled
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
