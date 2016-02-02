@@ -23,6 +23,7 @@ class customheadercell: UITableViewCell
 
     @IBOutlet weak var mapbutton: UIButton!
     
+    @IBOutlet weak var shadowimage: UIImageView!
 
     
     @IBOutlet weak var arrowimage: UIButton!

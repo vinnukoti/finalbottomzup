@@ -11,21 +11,36 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uGo-K0-P4K">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BottomzUp" translatesAutoresizingMaskIntoConstraints="NO" id="uGo-K0-P4K">
+                    <rect key="frame" x="174" y="197" width="133" height="86"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9XL-iW-cAU"/>
+                        <constraint firstAttribute="height" constant="86" id="9uR-BT-all"/>
+                        <constraint firstAttribute="height" constant="50" id="anl-ea-bJE"/>
+                        <constraint firstAttribute="width" constant="100" id="e0j-z4-AXi"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="9XL-iW-cAU"/>
+                            <exclude reference="9uR-BT-all"/>
+                            <exclude reference="e0j-z4-AXi"/>
+                        </mask>
+                    </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="uGo-K0-P4K" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DhN-RV-mIb"/>
-                <constraint firstItem="uGo-K0-P4K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gE1-Jw-PAD"/>
-                <constraint firstAttribute="bottom" secondItem="uGo-K0-P4K" secondAttribute="bottom" id="rDV-Ni-Tfl"/>
-                <constraint firstAttribute="trailing" secondItem="uGo-K0-P4K" secondAttribute="trailing" id="vFs-X3-DZa"/>
+                <constraint firstAttribute="trailing" secondItem="uGo-K0-P4K" secondAttribute="trailing" constant="10" id="5e6-Mv-chi"/>
+                <constraint firstAttribute="centerY" secondItem="uGo-K0-P4K" secondAttribute="centerY" id="MHD-6C-hfe"/>
+                <constraint firstItem="uGo-K0-P4K" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="ZGo-MR-SJq"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="537" y="406"/>
+            <point key="canvasLocation" x="721" y="405"/>
         </view>
     </objects>
+    <resources>
+        <image name="BottomzUp" width="1024" height="1024"/>
+    </resources>
 </document>

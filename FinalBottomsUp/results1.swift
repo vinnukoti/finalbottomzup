@@ -124,6 +124,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var space = " "
     var searchedin = "Searched in"
     var forliqtype = "For liquor"
+    
+    var count = 0
 
 
     override func viewDidLoad()
@@ -302,6 +304,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         LOcalityTableview.hidden = true
         beerTypeTextfield.enabled = true
         liqTypetableview.hidden = true
+        AutoCompleteTextField3.autoCompleteTableView?.hidden = true
         
         view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
@@ -868,6 +871,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         println(localityfromtextfield)
         println(autocompletedTextfieldnew.text)
         
+        println(autocompletedTextfieldnew.text)
         var text = autocompletedTextfieldnew.text
         var locate = localityTextfield.text + text
         println(autocompletedTextfieldnew.text)
@@ -967,13 +971,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                     println(citylong)
                                 }
                                 
-                                ApiCall()
+                                
                                 
                            // }
                         }
                     }
                 }
             }
+            ApiCall()
             
          }
         
@@ -1132,8 +1137,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f Km.", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                                 totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
@@ -1145,7 +1150,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                // totalDistance1 = PartOfString(totalDistance1, 1, 3)
                                 
                                 
-                                fstobj1.distance = totalDistance1 + "Km."
+                                fstobj1.distance = totalDistance1 + " Km"
                                 println(fstobj1.distance)
                             }
                         }
@@ -1279,8 +1284,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f Km.", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                                 totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
@@ -1290,7 +1295,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                                // totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                                vodkaobj.distancevodka = totalDistance1 + "Km."
+                                vodkaobj.distancevodka = totalDistance1 + " Km"
                                 //vodkasendobj.distancevodka = totalDistance1 + "KM"
                             }
                         }
@@ -1335,6 +1340,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         }
         else
         {
+            count = count + 1
+            println(count)
+            println("Nithin")
             let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -1532,7 +1540,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
   
         
         
-        if trimmedString == "All"
+        if textfield2.text == "All"
         {
             println(citylat)
             println(citylong)
@@ -1554,7 +1562,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(citylat)
             println(citylong)
             println(trimmedString)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(trimmedString)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(textfield2.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
         }
         
     }

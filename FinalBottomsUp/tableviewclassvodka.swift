@@ -510,13 +510,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                     println(citylong)
                                 }
                                 
-                                ApiCall()
                                 
-                                // }
+                                
+                             
                             }
                         }
                     }
                 }
+                
+                ApiCall()
                 
             }
             

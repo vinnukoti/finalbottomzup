@@ -280,7 +280,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var reslongitude:Double!
     
     
+    @IBOutlet weak var tableheightConstrain: NSLayoutConstraint!
+    
+    @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
    
+    @IBOutlet weak var shadowimage: UIImageView!
 
     
     override func viewDidLoad()
@@ -359,16 +363,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             head = pintsoring(head)
             tableview.reloadData()
         }
-       // newtextfieldtableview.text = "  " + selectedliqor
-       // configureTextField()
-       // handleTextFieldInterfaces()
-     
 
-     //   newtextfieldtableviewcity.text = "  " + getselectedcityname
-        
-
-        
-        super.viewDidLayoutSubviews()
+       // super.viewDidLayoutSubviews()
         self.tableview.delegate = self
         self.tableview.dataSource = self
         pintbutton.setTitle("PINT (₹)", forState: .Normal)
@@ -388,14 +384,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         liqdropdowntableview.dataSource = self
         liqdropdowntableview.delegate = self
-        
-//        beerdropdowntableview.dataSource = self
-//        beerdropdowntableview.delegate = self
-        
-        
-        
-       
-        
+
     }
     
     
@@ -633,13 +622,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                                     println(citylong)
                                 }
                                 
-                                ApiCall()
+                               
                                 
                                 // }
                             }
                         }
                     }
                 }
+                 ApiCall()
                 
             }
             
@@ -1497,7 +1487,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         if tableView.tag == 1
         {
-        return head.count
+            
+//            if head.count > 5
+//            {
+//                
+//            }
+//            else if head.count < 5
+//            {
+//              self.tableHeightConstraint.constant = CGFloat(head.count) * 1
+//            }
+            
+            return head.count
         }
             else if tableView.tag == 4
         {
@@ -1527,9 +1527,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        
 
         if tableView.tag == 1
         {
+    
+//          self.tableheightConstrain.constant = CGFloat(head.count) * 1
+//             self.view.layoutIfNeeded()
         if head[section].bool == true
         {
             return 1
@@ -1560,6 +1564,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             return autocompleteUrls.count
         }
     }
+    
+    
+    
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -1725,7 +1732,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
           else
            {
-               return 80
+               return 85
            }
         }
         else
@@ -1771,6 +1778,27 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.headercellname.text = head[section].restname
+                
+                if head.count > 5
+                {
+                    headerCell.shadowimage.hidden = true
+                }
+                else if head.count < 5
+                {
+                    println(section)
+                    println(head.count)
+                   // section = section + 1
+                   // var nor  = head.count
+                    if section == head.count - 1
+                    {
+                        headerCell.shadowimage.hidden = false
+                        shadowimage.hidden = true
+                    }
+                    else
+                    {
+                        headerCell.shadowimage.hidden = true
+                    }
+                }
                 
                 if head[section].minp == 0
                 {

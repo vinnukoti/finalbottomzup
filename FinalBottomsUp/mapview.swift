@@ -61,26 +61,11 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     override func viewDidLoad()
     {
         
-//        tableviewformap.layer.masksToBounds = true
-//        tableviewformap.layer.borderColor = UIColor(red: 0x00/255,green: 0x00/255,blue: 0x000/255,alpha: 1.0).CGColor
-//        tableviewformap.layer.borderWidth = 1.0
-       // distancemap.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 11.0)
-       // distancemap.setTitle("DISTANCE", forState: UIControlState.Normal)
-        //distancemap.titleLabel?.text = "DISTANCE"
-       // REsturantdisplaylable.font = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
-      //  distancemap.setBackgroundImage(bottleunCheckedImage, forState: UIControlState.Normal)
-        //distancemap.setImage(unCheckedImage, forState: .Normal)
+
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
         println(citylat)
         println(citylong)
-        
-//        var text = autocompletedTextfieldnew.text
-//        var locate = localityTextfield.text + text
-//        println(autocompletedTextfieldnew.text)
-//        println(localityfromtextfield)
-        
-        
 
         println(newlocate)
         var locate1 = newlocate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
@@ -139,13 +124,14 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
                                         citylong = lng
                                         println(citylong)
                                     }
-                                    ApiCall()
+                                    
     
                                     // }
                                 }
                             }
                         }
                     }
+                    ApiCall()
                     
                 }
                 

@@ -196,9 +196,6 @@ class ViewController: UIViewController
 //                NSLog("Logged in");
 //            }
 //        })
-        
-       // getFBLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(fbemail)&password=\(fbid)")
-        
         let login = FBSDKLoginManager()
         let FBSDKResult: FBSDKLoginManagerLoginResult!
         let error: NSError!
@@ -222,15 +219,15 @@ class ViewController: UIViewController
                         println(self.userid )
                         self.emailid = dictuser
                         println(self.emailid)
-                        let arr = user["picture"] as! NSDictionary
-                        let dict = arr["data"] as! NSDictionary
+                       // let arr = user["picture"] as! NSDictionary
+                        //let dict = arr["data"] as! NSDictionary
                         //userimageURL = dict["url"] as! String!
                        // gender = user["gender"] as! String!
-                        let fbid = user["id"] as! String!
+                        //let fbid = user["id"] as! String!
                         NSUserDefaults.standardUserDefaults().setValue(self.emailid, forKey: "username")
                         NSUserDefaults.standardUserDefaults().setValue("facebook", forKey: "password")
                         NSUserDefaults.standardUserDefaults().setValue(true, forKey: "hasLoginKey")
-                        
+                        //
                         let tracker = GAI.sharedInstance().defaultTracker
                         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(self.emailid)",action: "\(self.username)",label: "From facebook", value: nil).build()
                         tracker.send(eventTracker as! [NSObject : AnyObject])
@@ -248,11 +245,6 @@ class ViewController: UIViewController
                 
             }
         }
-        
-       
-        
-        
-        
     }
     func didDisconnectWithError(error: NSError!)
     {
