@@ -18,9 +18,13 @@ import CoreLocation
 import CoreMotion
 import GoogleMaps
 
-class ViewController: UIViewController
+class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDSignInUIDelegate
 
 {
+    
+    var signIn: GPPSignIn!
+    
+    var kClientID = "587696970048-18ifi3olkhbl3djkc2qgstlo5bp3vp9g.apps.googleusercontent.com"
     
     @IBOutlet weak var backgroundimage: UIImageView!
     var fbemail:String!
@@ -34,9 +38,11 @@ class ViewController: UIViewController
 
     @IBOutlet weak var webviewforgif: UIWebView!
    
+    @IBOutlet weak var googlesignIN: GIDSignInButton!
     
     @IBOutlet weak var gogo: UIButton!
 
+    @IBOutlet weak var GoogleSignIN: GPPSignInButton!
    var placesClient: GMSPlacesClient?
     let totalCount = 1
     var count = 1
@@ -44,11 +50,67 @@ class ViewController: UIViewController
     var username:String!
     var emailid:String!
     var userid:String!
+    var GSignin: GIDSignIn!
 
     
     override func viewDidLoad()
     
     {
+        GSignin = GIDSignIn()
+        
+        GSignin.clientID = kClientID
+        
+        GSignin.shouldFetchBasicProfile = true
+        
+        
+        
+        GSignin.delegate = self
+        
+        
+        GSignin.uiDelegate = self
+
+//        signIn = GPPSignIn.sharedInstance()
+//        signIn.shouldFetchGooglePlusUser = true
+//        signIn.shouldFetchGoogleUserEmail = true  // Uncomment to get the user's email
+//        signIn.shouldFetchGoogleUserID = true
+//        signIn.clientID = kClientID
+//        // Uncomment one of these two statements for the scope you chose in the previous step
+//        signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
+//        //signIn.delegate = self
+//        signIn.authenticate()
+//        
+//        signIn.scopes.append(kGTLAuthScopePlusLogin)
+//        signIn.scopes.append("profile")
+//        signIn.delegate = self
+//        signIn.trySilentAuthentication()
+        
+//        signIn.shouldFetchGooglePlusUser = true
+//        signIn.shouldFetchGoogleUserEmail = true
+//        signIn.shouldFetchGoogleUserID = true
+//        
+//        signIn.scopes.append(kGTLAuthScopePlusLogin)
+//        signIn.scopes.append("profile")
+//        signIn.delegate = self
+//        signIn.trySilentAuthentication()
+        
+//        signIn = GPPSignIn.sharedInstance()
+//        signIn.shouldFetchGooglePlusUser = true
+//        signIn.shouldFetchGoogleUserEmail = true  // Uncomment to get the user's email
+//        signIn.shouldFetchGoogleUserID = true
+//        signIn.clientID = kClientID
+//        // Uncomment one of these two statements for the scope you chose in the previous step
+//        signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
+//        //signIn.delegate = self
+//        signIn.authenticate()
+//        
+//        signIn.scopes.append(kGTLAuthScopePlusLogin)
+//        signIn.scopes.append("profile")
+//        signIn.delegate = self
+//        signIn.trySilentAuthentication()
+//        var str = signIn.userEmail
+//        var str1 = signIn.userID
+
+
         
         super.viewDidLoad()
         
@@ -80,9 +142,7 @@ class ViewController: UIViewController
 
     }
 
-    func update(){
 
-    }
     
 //    override func viewWillAppear(animated: Bool) {
 //        var name = "Pattern~\(self.title!)"
@@ -100,18 +160,18 @@ class ViewController: UIViewController
     @IBAction func googlesignIn(sender: AnyObject)
     {
        // println("User Logged In With Google+")
-        let signIn = GPPSignIn.sharedInstance()
-        signIn.shouldFetchGooglePlusUser = true
-        signIn.shouldFetchGoogleUserEmail = true  // Uncomment to get the user's email
-        signIn.shouldFetchGoogleUserID = true
-        signIn.clientID = "587696970048-18ifi3olkhbl3djkc2qgstlo5bp3vp9g.apps.googleusercontent.com"
-        // Uncomment one of these two statements for the scope you chose in the previous step
-        signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
-        //signIn.delegate = self
-        signIn.authenticate()
-     
-        getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(gemail)&password=\(gid)")
-        performSegueWithIdentifier("newsearch", sender: self)
+        
+
+   
+    
+        
+        
+        //info()
+        
+       // getInfo()
+
+       // getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(gemail)&password=\(gid)")
+       // performSegueWithIdentifier("newsearch", sender: self)
     }
     
     //Autocompletion
@@ -131,33 +191,26 @@ class ViewController: UIViewController
         })
     }
 
-
-    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!)
-    {
-        if (GPPSignIn.sharedInstance().userID != nil)
-        {
-            let user = GPPSignIn.sharedInstance().googlePlusUser
-            let signin = GPPSignIn.sharedInstance()
-            // println("user name: " + user.name.JSONString() + "\nemail: ")
-                 gemail = signin.userEmail
-                 println("email ID is : " + gemail)
-      
-                gid = user.identifier
-                println("User ID is: " + user.identifier)
+    
+    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
+        print("\(error), \(auth)")
+        
+        if ((error) != nil) {
             
-       
+            print(error.localizedDescription)
+            
+        } else {
+            
+            
+            print(signIn.userEmail)
+            print(signIn.userID)
+            getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(signIn.userEmail)&password=\(signIn.userID)")
+            performSegueWithIdentifier("newsearch", sender: self)
+            
+           // self.performSegueWithIdentifier("loggedIn", sender: self)
             
         }
         
-        if gemail != nil && gid != nil
-        {
-            println(gemail)
-            println(gid)
-          
-            performSegueWithIdentifier("newsearch", sender: self)
-            
-        }
-
     }
     
     
@@ -177,25 +230,7 @@ class ViewController: UIViewController
     @IBAction func FBbuttonClicked(sender: UIButton)
     
     {
-        
-//        var login = FBSDKLoginManager()
-//        var error: NSError!
-//        var result : FBSDKLoginManagerLoginResult!
-//        login.logInWithReadPermissions(["public_profile"], handler: { (result, error) in
-//            if ((error) != nil)
-//            {
-//                NSLog("Process error");
-//            } else if (result.isCancelled)
-//            {
-//                NSLog("Cancelled");
-//            }
-//            else
-//            {
-//          
-//               // self.returnUserData()
-//                NSLog("Logged in");
-//            }
-//        })
+
         let login = FBSDKLoginManager()
         let FBSDKResult: FBSDKLoginManagerLoginResult!
         let error: NSError!
@@ -219,15 +254,11 @@ class ViewController: UIViewController
                         println(self.userid )
                         self.emailid = dictuser
                         println(self.emailid)
-                       // let arr = user["picture"] as! NSDictionary
-                        //let dict = arr["data"] as! NSDictionary
-                        //userimageURL = dict["url"] as! String!
-                       // gender = user["gender"] as! String!
-                        //let fbid = user["id"] as! String!
+                        self.getFBLoginData("http://demos.dignitasdigital.com/bottomzup/facebooklogin.php?emailid=\(self.emailid)&facebookid=\(self.userid)")
                         NSUserDefaults.standardUserDefaults().setValue(self.emailid, forKey: "username")
                         NSUserDefaults.standardUserDefaults().setValue("facebook", forKey: "password")
                         NSUserDefaults.standardUserDefaults().setValue(true, forKey: "hasLoginKey")
-                        //
+                        
                         let tracker = GAI.sharedInstance().defaultTracker
                         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(self.emailid)",action: "\(self.username)",label: "From facebook", value: nil).build()
                         tracker.send(eventTracker as! [NSObject : AnyObject])
@@ -235,17 +266,14 @@ class ViewController: UIViewController
                         var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! UIViewController
                         self.presentViewController(vc, animated: true, completion: nil)
                         
-//                        let gurl = NSURL(string: "http://www.google.com")
-//                        if (self.isConnectedToNetwork(gurl!) == true){
-//                            self.post(["source":"IOS", "devicetype": "Iphone", "deviceid": deviceTok, "fbid":fbid, "username":username, "emailaddress":emailid, "gender":gender, "profilepicture":userimageURL, "password": "facebook"], url: "http://myish.com:3000/api/sociallogin")
-//                        }
-                        
                     }
                 })
                 
             }
         }
     }
+    
+    
     func didDisconnectWithError(error: NSError!)
     {
         
@@ -263,84 +291,6 @@ class ViewController: UIViewController
            // self.returnUserData()
         }
     }
-    
-    
-//    func returnUserData()
-//    {
-//        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me?fields=id,name,email", parameters: nil)
-//        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-//            
-//            if ((error) != nil)
-//            {
-//                // Process error
-//                println("Error: \(error)")
-//            }
-//                
-//            else
-//            {
-//                if let resultdict = result as? NSDictionary
-//                {
-////                    if let id = resultdict["id"] as? String
-////                    {
-////                        println("id : " + id)
-////                        self.fbid = id
-////                    }
-////                    
-////                    if let email = resultdict["email"] as? String
-////                    {
-////                        println("Email is : " + email)
-////                        self.fbemail = email
-////                    }
-//                    
-//                    if let id: NSString = result.valueForKey("id") as? NSString
-//                    {
-//                        println("ID is: \(id)")
-//                     //   self.returnUserProfileImage(id)
-//                    } else
-//                    {
-//                        println("ID es null")
-//                    }
-//                    
-//              
-//
-//                }
-//                
-//       
-//            }
-//        })
-//        
-//
-//         performSegueWithIdentifier("newsearch", sender: self)
-//    
-//}
-    
-    
-    
-//    func returnUserData1()
-//    {
-//        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-//        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-//            
-//            if ((error) != nil)
-//            {
-//                // Process error
-//                println("Error: \(error)")
-//            }
-//            else
-//            {
-//                println("fetched user: \(result)")
-//                
-//                if let id: NSString = result.valueForKey("id") as? NSString {
-//                    println("ID is: \(id)")
-//                    returnUserProfileImage(id)
-//                } else {
-//                    println("ID es null")
-//                }
-//                
-//                
-//            }
-//        })
-//    }
     @IBAction func gogo(sender: AnyObject)
     {
        // performSegueWithIdentifier("show", sender: self)
@@ -351,10 +301,97 @@ class ViewController: UIViewController
         let dist = segue.destinationViewController as! results1 
     }
     
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
+        
+        withError error: NSError!) {
+            
+            if (error == nil) {
+                
+                // Perform any operations on signed in user here.
+                
+                let userId = user.userID                  // For client-side use only!
+                
+                let idToken = user.authentication.idToken // Safe to send to the server
+                
+                let name = user.profile.name
+                
+                let email = user.profile.email
+                
+                if user.profile.hasImage == true{
+                    
+                    let imgURL = user.profile.imageURLWithDimension(0)
+                    
+                   // userimageURL = imgURL.absoluteString
+                    
+                }
+                
+                // ...
+                
+              //  self.actInd.startAnimating()
+                
+                //let dictuser = user["email"] as! String!
+                
+                gid = userId
+                
+                username = name
+                
+                
+                
+                emailid = email
+                
+                getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(emailid)&password=\(gid)")
+                performSegueWithIdentifier("newsearch", sender: self)
+                
+                
+                
+                
+                
+                
+                //gender = user["gender"] as! String!
+                
+                let googleid = userId
+                
+                NSUserDefaults.standardUserDefaults().setValue(emailid, forKey: "username")
+                
+                NSUserDefaults.standardUserDefaults().setValue("google", forKey: "password")
+                
+                NSUserDefaults.standardUserDefaults().setValue(true, forKey: "hasLoginKey")
+                
+                
+                
+                let gurl = NSURL(string: "http://www.google.com")
+                
+            } else {
+                
+                print("\(error.localizedDescription)")
+                
+            }
+            
+    }
     
     
     
     
+    
+    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
+        
+        withError error: NSError!) {
+            
+            // Perform any operations when the user disconnects from app here.
+            
+            // ...
+            
+    }
+    
+    
+    
+    
+    
+    
+    @IBAction func google(sender: GIDSignInButton)
+    {
+         GSignin.signIn()
+    }
     
     
     

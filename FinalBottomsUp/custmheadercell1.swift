@@ -28,6 +28,7 @@ class custmheadercell1: UITableViewCell
     
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet weak var shadowimage: UIImageView!
     override func awakeFromNib()
     {
         super.awakeFromNib()

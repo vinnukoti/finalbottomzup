@@ -10,9 +10,13 @@
 #define FinalBottomsUp_Bridging_Header_h
 
 
+#import <GoogleSignIn/GoogleSignIn.h>
+#import <GoogleSignIn/GIDSignIn.h>
+#import <GoogleSignIn/GIDGoogleUser.h>
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import "Reachability.h"
+//#import <Google/SignIn.h>
 
 
 

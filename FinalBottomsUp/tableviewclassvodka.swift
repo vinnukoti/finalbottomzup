@@ -188,6 +188,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var restlatitude: Double!
     var restlongitude: Double!
     
+    @IBOutlet weak var shadowimage: UIImageView!
     
     override func viewDidLoad()
   
@@ -1015,6 +1016,28 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if header1[section].bool1 == false{
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellvodka") as! custmheadercell1
         headerCell.backgroundColor = UIColor.whiteColor()
+            
+            if header1.count >= 5
+            {
+                shadowimage.hidden = false
+                headerCell.shadowimage.hidden = true
+            }
+            else if header1.count < 5
+            {
+               // println(section)
+               // println(head.count)
+                // section = section + 1
+                // var nor  = head.count
+                if section == header1.count - 1
+                {
+                    headerCell.shadowimage.hidden = false
+                    shadowimage.hidden = true
+                }
+                else
+                {
+                    headerCell.shadowimage.hidden = true
+                }
+            }
         headerCell.vodkarestaurantname.text = header1[section].restnamevodka
                // println(header1[section].address)
         headerCell.addressLabel.text = header1[section].address
@@ -1212,6 +1235,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Tapped Hotel",action: header1[gestureRecognizer.view!.tag].restnamevodka,label: header1[gestureRecognizer.view!.tag].restnamevodka, value: nil).build()
+        tracker.send(eventTracker as! [NSObject : AnyObject])
+
+        
         println("Section: \(gestureRecognizer.view!.tag)")
         if header1[gestureRecognizer.view!.tag].bool1 == false
         {
@@ -1234,7 +1262,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         var array = [Restauarantvodka]()
         
         array = header1
-        
+    
         
         
         if togglevodka == false
@@ -1274,6 +1302,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
                 header1 = self.array1
            }
+        }
+        if header1.count == 0
+        {
+            shadowimage.hidden = true
         }
 
         header1 = self.pricesort1(header1)
@@ -1703,6 +1735,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         else if textField.tag == 5
         {
+            newtextfieldtableview.text = "All"
             dropdowntextfield.enabled = false
             beerdropdowntableview.hidden = false
             beerTypedropdowntableview.hidden = true
@@ -2437,7 +2470,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
         
         let tracker = GAI.sharedInstance().defaultTracker
-        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Phone NUmber",action: "Phone Number",label: "Phone Number", value: nil).build()
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Contact details",action: header1[sender.tag].Phoneone,label: header1[sender.tag].Phonetwo, value: nil).build()
         tracker.send(eventTracker as! [NSObject : AnyObject])
         self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
@@ -3107,6 +3140,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func Getresults(sender:UIButton!)
     {
+        if togglevodka == true
+        {
+            togglebutton.setImage(toggleoff, forState: .Normal)
+            togglevodka == false
+        }
         liqtypefromTextfield = dropdowntextfield.text
         locationnamefromtextfield = newtextfieldtableviewcity.text
         showdropdownview.hidden = true

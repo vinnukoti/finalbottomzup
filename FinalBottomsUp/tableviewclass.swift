@@ -758,6 +758,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         else if textField.tag == 5
         {
         
+            newtextfieldtableview.text = "All"
             dropdowntextfield.enabled = false
             beerdropdowntableview.hidden = false
             beerTypedropdowntableview.hidden = true
@@ -1583,6 +1584,27 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
             cells.press2reveal.hidden = true
             
+//            if head.count > 5
+//            {
+//                cells.shadowimage.hidden = true
+//            }
+//             if head.count < 5
+//            {
+//                println(section)
+//                println(head.count)
+//                // section = section + 1
+//                // var nor  = head.count
+//                if indexPath == head.count - 1
+//                {
+//                    cells.shadowimage.hidden = false
+//                    shadowimage.hidden = true
+//                }
+//                else
+//                {
+//                    cells.shadowimage.hidden = true
+//                }
+//            }
+            
             cells.locationicon.tag = indexPath.section
             //Findongooglemapsbutton.tag = indexPath.section
             println(cells.locationicon.tag)
@@ -1779,16 +1801,17 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.headercellname.text = head[section].restname
                 
-                if head.count > 5
+                println(head.count)
+                if head.count >= 5
                 {
+                    shadowimage.hidden = false
                     headerCell.shadowimage.hidden = true
                 }
                 else if head.count < 5
                 {
                     println(section)
                     println(head.count)
-                   // section = section + 1
-                   // var nor  = head.count
+         
                     if section == head.count - 1
                     {
                         headerCell.shadowimage.hidden = false
@@ -2074,6 +2097,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Tapped Hotel",action: head[gestureRecognizer.view!.tag].restname,label: head[gestureRecognizer.view!.tag].restname, value: nil).build()
+        tracker.send(eventTracker as! [NSObject : AnyObject])
         var section = gestureRecognizer.view!.tag
         println(section)
         println("Section: \(gestureRecognizer.view!.tag)")
@@ -2122,11 +2148,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func togglebuttonbeerpressed(sender: UIButton)
     {
     
+    
         var array = [Restaurant]()
         array = head
         
         if togglebeer == false
         {
+            
             self.array1 = head
             togglebuttonbeer.setImage(toggleon, forState: .Normal)
             togglebeer = true
@@ -2168,6 +2196,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         else{
             head = self.pintsoring(head)
+        }
+        
+        if head.count == 0
+        {
+            shadowimage.hidden = true
         }
         tableview.reloadData()
         
@@ -2847,12 +2880,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         
         let tracker = GAI.sharedInstance().defaultTracker
-        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Phone Number",action: "Phone Number",label: "Phone NUmber", value: nil).build()
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Contact details",action: head[sender.tag].Phoneone,label: head[sender.tag].Phonetwo, value: nil).build()
         tracker.send(eventTracker as! [NSObject : AnyObject])
         
         
         
-        var tracker1 = GAI.sharedInstance().defaultTracker
+      //  var tracker1 = GAI.sharedInstance().defaultTracker
         
 //        tracker1.send(GAIDictionaryBuilder.createEventWithCategory("Game 1", action: "Start Pressed", label: "Start Timer One", value: nil).build() as [NSObject : AnyObject])
 //        println(tracker1)
@@ -3670,6 +3703,11 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func Getresults(sender:UIButton!)
     {
+        if togglebeer == true
+        {
+             togglebuttonbeer.setImage(toggleoff, forState: .Normal)
+            togglebeer == false
+        }
         liqtypefromTextfield = dropdowntextfield.text
         locationnamefromtextfield = newtextfieldtableviewcity.text
         showdropdownview.hidden = true

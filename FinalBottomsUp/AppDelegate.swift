@@ -15,6 +15,7 @@ import Crashlytics
 
 
 
+
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -26,7 +27,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        
+//        var configureError: NSError?
+//        GGLContext.sharedInstance().configureWithError(&configureError)
+//        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+//        
+//        GIDSignIn.sharedInstance().delegate = self
+//        
+//        return true
 
+
+       // GIDSignIn.sharedInstance().clientID = kClientID
         var gai = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
@@ -48,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         self.reachability = Reachability.reachabilityForInternetConnection()
         self.reachability!.startNotifier()
     
-             GMSServices.provideAPIKey("AIzaSyBvSmi0fvOIfFosTmK4khDP6oLaO43kasY")
+         //    GMSServices.provideAPIKey("AIzaSyBvSmi0fvOIfFosTmK4khDP6oLaO43kasY")
              Fabric.with([Crashlytics.self()])
         
                // NSThread.sleepForTimeInterval(1)

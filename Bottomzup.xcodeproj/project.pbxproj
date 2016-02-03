@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2E99E8310E9F1A57A2C3DDF9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167FABA4877F1BA58EC2E16 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		530724081C62397700BC83A2 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 530724071C62397700BC83A2 /* GoogleSignIn.bundle */; };
+		5307240A1C62399500BC83A2 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530724091C62399500BC83A2 /* GoogleSignIn.framework */; };
+		5307240C1C6239D500BC83A2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5307240B1C6239D500BC83A2 /* StoreKit.framework */; };
 		531EC5C21C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */; };
 		531F58B71C3104E800E9D583 /* Dealsnearyouclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */; };
 		531F58B91C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */; };
@@ -103,6 +106,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		530724071C62397700BC83A2 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		530724091C62399500BC83A2 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		5307240B1C6239D500BC83A2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "black bubble_CLIPCHAMP_1080p.mp4"; sourceTree = "<group>"; };
 		531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dealsnearyouclass.swift; sourceTree = "<group>"; };
 		531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionheaderforDelasnearyouTableViewCell.swift; sourceTree = "<group>"; };
@@ -211,11 +217,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5307240C1C6239D500BC83A2 /* StoreKit.framework in Frameworks */,
+				5367CF251B9DBBDC00D33220 /* AddressBook.framework in Frameworks */,
 				5367A99B1C59F50300FA441E /* libz.dylib in Frameworks */,
 				5367A9991C59F4EA00FA441E /* CoreData.framework in Frameworks */,
 				536343131BC2A886008018F6 /* Social.framework in Frameworks */,
 				5367A9A71C59FF6000FA441E /* libGoogleAnalyticsServices.a in Frameworks */,
 				536343151BC2A924008018F6 /* libsqlite3.0.dylib in Frameworks */,
+				5307240A1C62399500BC83A2 /* GoogleSignIn.framework in Frameworks */,
 				536343111BC2A839008018F6 /* AdSupport.framework in Frameworks */,
 				5363430F1BC2A820008018F6 /* Accounts.framework in Frameworks */,
 				538D0A4A1BA41C58005D1386 /* MapKit.framework in Frameworks */,
@@ -230,7 +239,6 @@
 				5367CF2B1B9DBC0100D33220 /* CoreLocation.framework in Frameworks */,
 				5367CF291B9DBBF500D33220 /* Foundation.framework in Frameworks */,
 				5367CF271B9DBBEA00D33220 /* AssetsLibrary.framework in Frameworks */,
-				5367CF251B9DBBDC00D33220 /* AddressBook.framework in Frameworks */,
 				5367CF211B9DBBB700D33220 /* GoogleOpenSource.framework in Frameworks */,
 				5367CF231B9DBBB700D33220 /* GooglePlus.framework in Frameworks */,
 				5367CF1D1B9DB11F00D33220 /* FBSDKShareKit.framework in Frameworks */,
@@ -295,6 +303,8 @@
 		5367CEF31B9DB0EA00D33220 /* FinalBottomsUp */ = {
 			isa = PBXGroup;
 			children = (
+				530724091C62399500BC83A2 /* GoogleSignIn.framework */,
+				530724071C62397700BC83A2 /* GoogleSignIn.bundle */,
 				5367A9A81C5A191300FA441E /* GoogleService-Info.plist */,
 				531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */,
 				539ECEC41C1076D700101C38 /* Bubble-moving.gif */,
@@ -401,6 +411,7 @@
 		F0658164BB9C2D2F4CBFF537 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5307240B1C6239D500BC83A2 /* StoreKit.framework */,
 				5367A99A1C59F50300FA441E /* libz.dylib */,
 				5367A9981C59F4EA00FA441E /* CoreData.framework */,
 				536343141BC2A924008018F6 /* libsqlite3.0.dylib */,
@@ -504,6 +515,7 @@
 				53ED675F1C243F74009966F6 /* MYRIADPRO-COND.OTF in Resources */,
 				531EC5C21C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 in Resources */,
 				53ED67611C244AD7009966F6 /* MYRIADPRO-REGULAR.OTF in Resources */,
+				530724081C62397700BC83A2 /* GoogleSignIn.bundle in Resources */,
 				53704BD81C2A96AB00E84939 /* MYRIADPRO-BOLD.OTF in Resources */,
 				5367CF011B9DB0EA00D33220 /* LaunchScreen.xib in Resources */,
 				5367CF221B9DBBB700D33220 /* GooglePlus.bundle in Resources */,
@@ -781,6 +793,8 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
 				);
 				PRODUCT_NAME = Bottomzup;
 				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
@@ -812,6 +826,8 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
 				);
 				PRODUCT_NAME = Bottomzup;
 				PROVISIONING_PROFILE = "341b2765-e318-44e8-9ae2-4250b25f0aa4";
