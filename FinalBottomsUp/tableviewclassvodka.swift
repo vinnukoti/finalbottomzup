@@ -1570,8 +1570,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             var totalDistance: Double = 0
                             var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                             totalDistance = totalDistance + (meters / 1000)
-                            println(String(format: "%.2f Km.", totalDistance))
-                            NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                            println(String(format: "%.2f Km", totalDistance))
+                            NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                             totalDistance = Double(round(10*totalDistance)/10)
                             var totalDistance1 = totalDistance.description
                             println(totalDistance1)
@@ -1581,8 +1581,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                             }
                             println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                            // totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                            getvodkaobj.distancevodka = totalDistance1 + " Km."
-                            getvodkaobj1.distancevodka = totalDistance1 + " Km."
+                            getvodkaobj.distancevodka = totalDistance1 + " Km"
+                            getvodkaobj1.distancevodka = totalDistance1 + " Km"
                         }
                     }
                     if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -2131,8 +2131,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f Km.", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                                 totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
@@ -2144,7 +2144,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                // totalDistance1 = PartOfString(totalDistance1, 1, 3)
                                 
                                 
-                                fstobj1.distance = totalDistance1 + "Km."
+                                fstobj1.distance = totalDistance1 + " Km"
                                 //println(fstobj1.distance)
                             }
                         }
@@ -2268,8 +2268,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 var totalDistance: Double = 0
                                 var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
                                 totalDistance = totalDistance + (meters / 1000)
-                                println(String(format: "%.2f Km.", totalDistance))
-                                NSLog("totalDistance: %@", String(format: "%.2f Km.", totalDistance))
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
                                 totalDistance = Double(round(10*totalDistance)/10)
                                 var totalDistance1 = totalDistance.description
                                 println(totalDistance1)
@@ -2279,7 +2279,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                 }
                                 println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
                                // totalDistance1 = PartOfString(totalDistance1, 1, 3)
-                                vodkaobjnew.distancevodka = totalDistance1 + "Km."
+                                vodkaobjnew.distancevodka = totalDistance1 + " Km"
                                 //vodkasendobj.distancevodka = totalDistance1 + "KM"
                             }
                         }
@@ -2490,7 +2490,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             imageView.frame = CGRect(x: 0,y: 0,width: DynamicViewvodka.frame.width,height: DynamicViewvodka.frame.height)
             
             let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            closelocationpopupbutton.frame = CGRectMake(DynamicViewvodka.frame.width-27 ,DynamicViewvodka.frame.height/2 - 10,16,16)
+            closelocationpopupbutton.frame = CGRectMake(DynamicViewvodka.frame.width-35 ,DynamicViewvodka.frame.height/2 - 13,25,25)
             closelocationpopupbutton.addTarget(self, action: "popupbuttonclickedclosed:", forControlEvents: UIControlEvents.TouchUpInside)
             let imageName1 = "popupclosebutton.png"
             let image1 = UIImage(named: imageName1)
@@ -2502,13 +2502,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicViewvodka.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
             Findongooglemapsbutton.setTitle("8722289471", forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
             
             let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicViewvodka.frame.width - 30,30)
             Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
             Findongooglemapsbutton1.setTitle("8892640540", forState: .Normal)
-            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
             
             self.view.addSubview(DynamicViewvodka)
             self.DynamicViewvodka.addSubview(imageView)

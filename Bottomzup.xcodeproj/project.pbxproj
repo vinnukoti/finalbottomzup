@@ -11,6 +11,7 @@
 		530724081C62397700BC83A2 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 530724071C62397700BC83A2 /* GoogleSignIn.bundle */; };
 		5307240A1C62399500BC83A2 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530724091C62399500BC83A2 /* GoogleSignIn.framework */; };
 		5307240C1C6239D500BC83A2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5307240B1C6239D500BC83A2 /* StoreKit.framework */; };
+		531E05501C637FC7008F4435 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E054F1C637FC7008F4435 /* Cocktail.swift */; };
 		531EC5C21C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */; };
 		531F58B71C3104E800E9D583 /* Dealsnearyouclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */; };
 		531F58B91C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */; };
@@ -20,6 +21,9 @@
 		532E64591BF6078D00B88D09 /* VodkaRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E64581BF6078D00B88D09 /* VodkaRowCell.swift */; };
 		534D91C21C58BCD2008FE599 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 534D91C11C58BCD2008FE599 /* Reachability.m */; };
 		534D91C41C58D2D9008FE599 /* CheckforInternetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534D91C31C58D2D9008FE599 /* CheckforInternetViewController.swift */; };
+		536315BF1C648D9700E4249E /* Restauarantcocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536315BE1C648D9700E4249E /* Restauarantcocktail.swift */; };
+		536315C11C64A86400E4249E /* customheadercellcocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536315C01C64A86400E4249E /* customheadercellcocktail.swift */; };
+		536315C31C64B48400E4249E /* Cocktailrowcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536315C21C64B48400E4249E /* Cocktailrowcell.swift */; };
 		5363430F1BC2A820008018F6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5363430E1BC2A820008018F6 /* Accounts.framework */; };
 		536343111BC2A839008018F6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343101BC2A839008018F6 /* AdSupport.framework */; };
 		536343131BC2A886008018F6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536343121BC2A886008018F6 /* Social.framework */; };
@@ -109,6 +113,7 @@
 		530724071C62397700BC83A2 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		530724091C62399500BC83A2 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		5307240B1C6239D500BC83A2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		531E054F1C637FC7008F4435 /* Cocktail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
 		531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "black bubble_CLIPCHAMP_1080p.mp4"; sourceTree = "<group>"; };
 		531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dealsnearyouclass.swift; sourceTree = "<group>"; };
 		531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionheaderforDelasnearyouTableViewCell.swift; sourceTree = "<group>"; };
@@ -119,6 +124,9 @@
 		534D91C01C58BCD2008FE599 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		534D91C11C58BCD2008FE599 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		534D91C31C58D2D9008FE599 /* CheckforInternetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckforInternetViewController.swift; sourceTree = "<group>"; };
+		536315BE1C648D9700E4249E /* Restauarantcocktail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restauarantcocktail.swift; sourceTree = "<group>"; };
+		536315C01C64A86400E4249E /* customheadercellcocktail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customheadercellcocktail.swift; sourceTree = "<group>"; };
+		536315C21C64B48400E4249E /* Cocktailrowcell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cocktailrowcell.swift; sourceTree = "<group>"; };
 		5363430E1BC2A820008018F6 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		536343101BC2A839008018F6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		536343121BC2A886008018F6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -343,7 +351,10 @@
 				531F58B81C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift */,
 				531F58BA1C31066C00E9D583 /* childcellfordealsnearyou.swift */,
 				532E64541BF5EF9800B88D09 /* BeerRowCell.swift */,
+				536315C21C64B48400E4249E /* Cocktailrowcell.swift */,
 				537CA3D81BBA56F80082D896 /* tableviewclass.swift */,
+				531E054F1C637FC7008F4435 /* Cocktail.swift */,
+				536315C01C64A86400E4249E /* customheadercellcocktail.swift */,
 				53F8B5EE1C47874800E5BE09 /* UIViewExtensions.swift */,
 				5382C6B31C03146C00F6107E /* results1.swift */,
 				53E5123F1BF0E6A200FFC78E /* NewClass.swift */,
@@ -363,6 +374,7 @@
 				532E64581BF6078D00B88D09 /* VodkaRowCell.swift */,
 				5389EE381BC630EE007999AE /* tableviewclassvodka.swift */,
 				5389EE3A1BC63121007999AE /* Restauarantvodka.swift */,
+				536315BE1C648D9700E4249E /* Restauarantcocktail.swift */,
 				5389EE3C1BC63139007999AE /* liqvodka.swift */,
 				5389EE3E1BC65117007999AE /* custmheadercell1.swift */,
 				537A33A11C075535001E1D7B /* customheadercellafterexpastionforvodka.swift */,
@@ -603,16 +615,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				538EF8621C282FEA00983573 /* Newclass1ViewController.swift in Sources */,
+				536315BF1C648D9700E4249E /* Restauarantcocktail.swift in Sources */,
 				5382C6B41C03146C00F6107E /* results1.swift in Sources */,
 				5389EE3B1BC63121007999AE /* Restauarantvodka.swift in Sources */,
 				538D0A471BA4194B005D1386 /* MKMapViewExtension.swift in Sources */,
 				538A3F951BA9930C00A673C1 /* TableController.swift in Sources */,
 				5382C6B21C02EFF900F6107E /* AutocompleteTextField1.swift in Sources */,
+				536315C31C64B48400E4249E /* Cocktailrowcell.swift in Sources */,
 				538743421BCBB8E300143A1A /* mapdata.swift in Sources */,
 				532E64551BF5EF9800B88D09 /* BeerRowCell.swift in Sources */,
 				531F58BB1C31066C00E9D583 /* childcellfordealsnearyou.swift in Sources */,
 				538743401BCBB5F600143A1A /* maplable.swift in Sources */,
 				539ECEC91C10785200101C38 /* GIFViewController.swift in Sources */,
+				531E05501C637FC7008F4435 /* Cocktail.swift in Sources */,
 				531F58B91C3105E500E9D583 /* sectionheaderforDelasnearyouTableViewCell.swift in Sources */,
 				53F068291C2C0FA400ADC41C /* DealsNearyou.swift in Sources */,
 				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
@@ -625,6 +640,7 @@
 				532E64591BF6078D00B88D09 /* VodkaRowCell.swift in Sources */,
 				537A33A01C072AAB001E1D7B /* customheadercellafterexpanstion.swift in Sources */,
 				53F8B5EF1C47874800E5BE09 /* UIViewExtensions.swift in Sources */,
+				536315C11C64A86400E4249E /* customheadercellcocktail.swift in Sources */,
 				531F58BD1C311F7B00E9D583 /* DealsNearyouRowchild.swift in Sources */,
 				537CA3DB1BBA578A0082D896 /* customheadercell.swift in Sources */,
 				537CA3DD1BBA57DB0082D896 /* onemoreclass1.swift in Sources */,

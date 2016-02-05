@@ -23,7 +23,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var getselectedcityname:String!
     
     var head1:[Restaurant] = [Restaurant]()
+    var head2:[Restauarantcocktail] = [Restauarantcocktail]()
     var fstobj1 = Restaurant()
+    var fstobj2 = Restauarantcocktail()
     
     
     var citylat:Double!
@@ -105,7 +107,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     @IBOutlet weak var beerTypeTextfield: UITextField!
     
-    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka"]
+    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka","Cocktail"]
     var liqTypetableview: UITableView  =   UITableView()
     
    // var liqTypes1:[String] = ["BUDWEISER","CARLSBERG","FOSTERS","HEINEKEN","KINGFISHER"]
@@ -298,6 +300,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     // Resign Firstresponder of UITableview and Keyboard Hiding
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
+        autocompletedTextfieldnew.endEditing(true)
         tableviewnew.hidden = true
         textfield2.enabled = true
         localityTextfield.enabled = true
@@ -306,7 +309,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         liqTypetableview.hidden = true
         AutoCompleteTextField3.autoCompleteTableView?.hidden = true
         
-        view.endEditing(true)
+        //view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
     }
     
@@ -339,19 +342,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
         attributes[NSFontAttributeName] = UIFont(name: "MyriadPro-Regular", size: 14.0)
         autocompletedTextfieldnew.autoCompleteAttributes = attributes
-        
-        
-//        auocompletetextfieldsublocality.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-//        auocompletetextfieldsublocality.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 14.0)
-//        auocompletetextfieldsublocality.autoCompleteCellHeight = 35.0
-//        auocompletetextfieldsublocality.maximumAutoCompleteCount = 20
-//        auocompletetextfieldsublocality.hidesWhenSelected = true
-//        auocompletetextfieldsublocality.hidesWhenEmpty = true
-//        auocompletetextfieldsublocality.enableAttributedText = true
-//        var attributes1 = [String:AnyObject]()
-//        attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-//        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Light", size: 14.0)
-//        auocompletetextfieldsublocality.autoCompleteAttributes = attributes
         
         
         
@@ -491,6 +481,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         println("Error: \(error.localizedDescription)")
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        //self.autocompletedTextfieldnew.resignFirstResponder()
+    }
+    
     // textfield1 starts
     func textFieldDidBeginEditing(textField: UITextField)
     {
@@ -498,6 +492,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // Textfield2
         if textField.tag == 1
         {
+            view.endEditing(true)
            // self.view.endEditing(true)
            // autocompletedTextfieldnew.resignFirstResponder()
             AutoCompleteTextField3.autoCompleteTableView?.hidden = true
@@ -559,10 +554,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         else if textField.tag == 3
         {
         
+            //autocompletedTextfieldnew.enabled = false
             localityTextfield.enabled = false
              textField.selectAll(self)
             LOcalityTableview.hidden = false
             AutoCompleteTextField3.autoCompleteTableView?.hidden = true
+            autocompletedTextfieldnew.resignFirstResponder()
         }
             
             // beerTypeTextfield
@@ -1013,11 +1010,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
       {
             head1 = [Restaurant]()
+            head2 = [Restauarantcocktail]()
             header = [Restauarantvodka]()
             arraysring = [String]()
             for var index = 0; index < json.count; ++index
             {
                 fstobj1 = Restaurant()
+                fstobj2 = Restauarantcocktail()
                 vodkaobj = Restauarantvodka()
                 //vodkasendobj = Restauarantvodka()
                 
@@ -1034,12 +1033,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                         {
                             //var pint_avg_price2:String = toString(pint_avg_price)
                             fstobj1.minp = pint_avg_price
+                            fstobj2.minp = pint_avg_price
                             println(pint_avg_price)
                         }
                         if let bottle_avg_price = bottomsUp1["bottle_min_price"] as? Int
                         {
                             //var bottle_avg_price2:String = toString(bottle_avg_price)
                             fstobj1.maxp = bottle_avg_price
+                            fstobj2.maxp = bottle_avg_price
                         }
                         
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
@@ -1050,6 +1051,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             
                             
                             fstobj1.happystart = happy_hour_start1
+                            fstobj2.happystart = happy_hour_start1
                         }
                         
                         if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
@@ -1058,16 +1060,19 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             
                             var happy_hour_end1 = happy_hour_end
                             fstobj1.happyend = happy_hour_end1
+                            fstobj2.happyend = happy_hour_end1
                         }
                         
                         if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                         {
                             fstobj1.ishappy = is_happy_hour
+                            fstobj2.ishappy = is_happy_hour
                         }
                         
                         if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
                         {
                             fstobj1.rest_offers_happy_hour = rest_offers_happy_hour1
+                            fstobj2.rest_offers_happy_hour = rest_offers_happy_hour1
                         }
                         if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
                         {
@@ -1076,6 +1081,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             if let res_name = resInfo["res_name"] as? String
                             {
                                 fstobj1.restname = res_name
+                                fstobj2.restname = res_name
                                 arraysring.append(res_name)
                                 println(arraysring.first)
                                 
@@ -1084,11 +1090,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             if let res_address = resInfo["res_address"] as? String
                             {
                                 fstobj1.restaddress = res_address
+                                fstobj2.restaddress = res_address
                             }
                             
                             if let res_locality = resInfo["res_locality"] as? String
                             {
                                 fstobj1.Place = res_locality
+                                fstobj2.Place = res_locality
                             }
                             
                             if let res_lat = resInfo["res_lat"] as? String
@@ -1099,6 +1107,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 string.doubleValue
                                 restlat = string.doubleValue
                                 fstobj1.Restaurantlatitude = restlat
+                                fstobj2.Restaurantlatitude = restlat
                                 println(fstobj1.Restaurantlatitude)
                                 println(restlat)
                             }
@@ -1109,6 +1118,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 string.doubleValue
                                 restlong = string.doubleValue
                                 fstobj1.Restaurantlongitude = restlong
+                                fstobj2.Restaurantlongitude = restlong
                                 println(fstobj1.Restaurantlongitude)
                                 println(restlong)
                                 
@@ -1117,11 +1127,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             if let res_phone1 = resInfo["res_phone1"] as? String
                             {
                                 fstobj1.Phoneone = res_phone1
+                                fstobj2.Phoneone = res_phone1
                             }
                             
                             if let res_phone2 = resInfo["res_phone2"] as? String
                             {
                                 fstobj1.Phonetwo = res_phone2
+                                fstobj2.Phonetwo = res_phone2
                             }
                             if var distance = resInfo["distance"] as? String
                             {
@@ -1151,7 +1163,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                 
                                 
                                 fstobj1.distance = totalDistance1 + " Km"
-                                println(fstobj1.distance)
+                                fstobj2.distance = totalDistance1 + " Km"
+                                println(fstobj2.distance)
                             }
                         }
                         if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
@@ -1177,9 +1190,186 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                     }
                                 }
                                 fstobj1.amp.append(liqobj1)
+                                fstobj2.amp.append(liqobj1)
                             }
                         }
+                        println(head1.count)
+                        println(head2.count)
                         head1.append(fstobj1)
+                        head2.append(fstobj2)
+                    }
+                        
+                        else if check == "Cocktails"
+                    {
+                        if let pint_avg_price = bottomsUp1["pint_min_price"] as? Int
+                        {
+                            //var pint_avg_price2:String = toString(pint_avg_price)
+                           // fstobj1.minp = pint_avg_price
+                            fstobj2.minp = pint_avg_price
+                            println(pint_avg_price)
+                        }
+                        if let bottle_avg_price = bottomsUp1["bottle_min_price"] as? Int
+                        {
+                            //var bottle_avg_price2:String = toString(bottle_avg_price)
+                          //  fstobj1.maxp = bottle_avg_price
+                            fstobj2.maxp = bottle_avg_price
+                        }
+                        
+                        if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
+                        {
+                            
+                            
+                            var happy_hour_start1 = happy_hour_start
+                            
+                            
+                           // fstobj1.happystart = happy_hour_start1
+                            fstobj2.happystart = happy_hour_start1
+                        }
+                        
+                        if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
+                        {
+                            
+                            
+                            var happy_hour_end1 = happy_hour_end
+                           // fstobj1.happyend = happy_hour_end1
+                            fstobj2.happyend = happy_hour_end1
+                        }
+                        
+                        if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
+                        {
+                            //fstobj1.ishappy = is_happy_hour
+                            fstobj2.ishappy = is_happy_hour
+                        }
+                        
+                        if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
+                        {
+                           // fstobj1.rest_offers_happy_hour = rest_offers_happy_hour1
+                            fstobj2.rest_offers_happy_hour = rest_offers_happy_hour1
+                        }
+                        if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
+                        {
+                            
+                            
+                            if let res_name = resInfo["res_name"] as? String
+                            {
+                               // fstobj1.restname = res_name
+                                fstobj2.restname = res_name
+                                arraysring.append(res_name)
+                                println(arraysring.first)
+                                
+                            }
+                            
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                //fstobj1.restaddress = res_address
+                                fstobj2.restaddress = res_address
+                            }
+                            
+                            if let res_locality = resInfo["res_locality"] as? String
+                            {
+                               // fstobj1.Place = res_locality
+                                fstobj2.Place = res_locality
+                            }
+                            
+                            if let res_lat = resInfo["res_lat"] as? String
+                            {
+                                //convert String to Double
+                                let mySwiftString = res_lat
+                                var string = NSString(string: mySwiftString)
+                                string.doubleValue
+                                restlat = string.doubleValue
+                                //fstobj1.Restaurantlatitude = restlat
+                                fstobj2.Restaurantlatitude = restlat
+                                println(fstobj1.Restaurantlatitude)
+                                println(restlat)
+                            }
+                            if let res_long = resInfo["res_long"] as? String
+                            {
+                                let mySwiftString = res_long
+                                var string = NSString(string: mySwiftString)
+                                string.doubleValue
+                                restlong = string.doubleValue
+                               // fstobj1.Restaurantlongitude = restlong
+                                fstobj2.Restaurantlongitude = restlong
+                                println(fstobj1.Restaurantlongitude)
+                                println(restlong)
+                                
+                                
+                            }
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                               // fstobj1.Phoneone = res_phone1
+                                fstobj2.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                               // fstobj1.Phonetwo = res_phone2
+                                fstobj2.Phonetwo = res_phone2
+                            }
+                            if var distance = resInfo["distance"] as? String
+                            {
+                                //28.63875
+                                //77.07380
+                                var OldLocation: CLLocation = CLLocation(latitude: devicelatitude, longitude: devicelongitude)
+                                println(devicelatitude)
+                                println(devicelongitude)
+                                //  var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
+                                var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
+                                println(restlat)
+                                println(restlong)
+                                var totalDistance: Double = 0
+                                var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                                totalDistance = totalDistance + (meters / 1000)
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
+                                totalDistance = Double(round(10*totalDistance)/10)
+                                var totalDistance1 = totalDistance.description
+                                println(totalDistance1)
+                                func PartOfString(s: String, start: Int, length: Int) -> String
+                                {
+                                    return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                                }
+                                println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
+                                // totalDistance1 = PartOfString(totalDistance1, 1, 3)
+                                
+                                
+                               // fstobj1.distance = totalDistance1 + " Km"
+                                fstobj2.distance = totalDistance1 + " Km"
+                                println(fstobj2.distance)
+                            }
+                        }
+                        if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
+                        {
+                            for var i = 0; i < resLiqInfo.count; ++i
+                            {
+                                var liqobj1 = liqclass()
+                                if let one = resLiqInfo[i] as? NSDictionary
+                                {
+                                    if let res_liq_brand_name = one["liq_brand_name"] as? String
+                                    {
+                                        liqobj1.liqbrand = res_liq_brand_name
+                                    }
+                                    if let pint_price = one["pint_price"] as? String
+                                    {
+                                        var pint_price = pint_price.toInt()
+                                        liqobj1.pint = pint_price
+                                    }
+                                    if let bottle_price = one["bottle_price"] as? String
+                                    {
+                                        var bottle_price = bottle_price.toInt()
+                                        liqobj1.Bottle = bottle_price
+                                    }
+                                }
+                               // fstobj1.amp.append(liqobj1)
+                                fstobj2.amp.append(liqobj1)
+                            }
+                        }
+                       // println(head1.count)
+                        println(head2.count)
+                        //head1.append(fstobj1)
+                        head2.append(fstobj2)
+
                     }
                         
                     else
@@ -1333,6 +1523,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 
                 self.performSegueWithIdentifier("getbeernew", sender: self)
             }
+                else if check == "Cocktails"
+            {
+                self.performSegueWithIdentifier("cocktail", sender: self)
+            }
             else
             {
                 self.performSegueWithIdentifier("getvodkanew", sender: self)
@@ -1377,10 +1571,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 //77.07380
                 destination.liqname = textfield2.text
                 var liqname = textfield2.text
-//                let trimmedString = liqname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-//                destination.liqname = trimmedString
-//                destination.newtrimmedstring = trimmedString
+                println(head1.count)
                 destination.head = head1
+                println(destination.head.count)
          
                 destination.beerTypefromtextfield = beerTypefromtextfield
                 destination.selectedliqor = textfield2.text
@@ -1407,6 +1600,45 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination.liqtypeFromresult = beerTypeTextfield.text
                 destination.liqFromresult = textfield2.text
                 destination.localityfromtextfield1 = localityTextfield.text
+            }
+        }
+        if segue.identifier == "cocktail"
+        {
+            if let destination3 = segue.destinationViewController as? Cocktail
+            {
+                //28.63875
+                //77.07380
+                destination3.liqname = textfield2.text
+                var liqname = textfield2.text
+                println(head2.count)
+                destination3.header2 = head2
+                println(destination3.header2.count)
+                
+                destination3.beerTypefromtextfield = beerTypefromtextfield
+                destination3.selectedliqor = textfield2.text
+                destination3.getdevicelatitude = devicelatitude
+                destination3.getdevicelongitude = devicelongitude
+                destination3.getcitylatitude = citylat
+                destination3.getcitylongitude = citylong
+                destination3.getrestlatitudebeer = restlat
+                destination3.getdevicelongitude = restlong
+                
+                destination3.getfstobj1 = fstobj1
+                destination3.getselectedcityname = getselectedcityname
+                destination3.checkliqtype = check
+                destination3.vodkaarray = header
+                destination3.getrestlatitudevodka = restvodkalat
+                destination3.getrestlongitudevodka = restvodkalang
+                println(autocompletedTextfieldnew.text)
+                
+                destination3.locationnamefromtextfield = autocompletedTextfieldnew.text
+                destination3.liqtypefromTextfield = beerTypeTextfield.text
+                destination3.localityFromtextfield = localityTextfield.text
+                destination3.citylatitudefFomresult = citylat
+                destination3.citylongitudeFromresult = citylong
+                destination3.liqtypeFromresult = beerTypeTextfield.text
+                destination3.liqFromresult = textfield2.text
+                destination3.localityfromtextfield1 = localityTextfield.text
             }
         }
         if segue.identifier == "getvodkanew"
@@ -1459,6 +1691,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 destination2.newlocate = autocompletedTextfieldnew.text + localityTextfield.text
             }
             
+        }
+        if segue.identifier == "cocktail"
+        {
+            if let destination2 = segue.destinationViewController as? Cocktail
+            {
+                
+            }
         }
     }
     
