@@ -71,7 +71,7 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 15
+        return 16
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

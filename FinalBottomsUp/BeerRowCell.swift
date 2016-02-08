@@ -38,7 +38,6 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        //tableView.backgroundColor = UIColor(red: 249/255.0, green: 229/255.0, blue: 189/255.0, alpha: 1.0)
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -111,7 +110,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 15
+        return 16
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

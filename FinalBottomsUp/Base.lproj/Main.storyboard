@@ -90,6 +90,10 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -409,7 +413,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10455" y="-15254"/>
+            <point key="canvasLocation" x="-10737" y="-15281"/>
         </scene>
         <!--Results-->
         <scene sceneID="kqN-H8-XZO">
@@ -841,7 +845,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xiK-bt-4Ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9412" y="-15271"/>
+            <point key="canvasLocation" x="-8840" y="-15198"/>
         </scene>
         <!--Mapview-->
         <scene sceneID="GT7-l3-ORI">
@@ -1121,8 +1125,10 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mZa-Vh-jz1">
                                 <rect key="frame" x="0.0" y="120" width="600" height="400"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headercellnewforexpanded" rowHeight="147" id="uL1-ej-fUx" customClass="customheadercellafterexpanstion" customModule="Bottomzup" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -1494,12 +1500,12 @@
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nEI-D4-xsg" id="NbT-W6-4wv">
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="62b-Dt-3gh">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62b-Dt-3gh">
                                                                         <rect key="frame" x="26" y="31" width="42" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" priority="1" constant="124" id="hul-lT-jP4"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="11"/>
+                                                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -1508,7 +1514,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="40" id="m1u-jo-2p5"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -1517,7 +1523,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="60" id="gHv-2H-hTv"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -1667,7 +1673,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="IRx-0f-R5M" secondAttribute="trailing" constant="10" id="JIf-rt-2Kt"/>
                                                 <constraint firstItem="iVb-dO-VeR" firstAttribute="top" secondItem="Zre-sw-Skm" secondAttribute="bottom" constant="10" id="LOh-D3-bzj"/>
                                                 <constraint firstAttribute="trailing" secondItem="VUr-ac-nnm" secondAttribute="trailing" constant="10" id="Lz4-be-BJd"/>
-                                                <constraint firstItem="O9O-eb-PjU" firstAttribute="top" secondItem="iVb-dO-VeR" secondAttribute="bottom" constant="5" id="NoM-IO-Cvp"/>
+                                                <constraint firstItem="O9O-eb-PjU" firstAttribute="top" secondItem="iVb-dO-VeR" secondAttribute="bottom" id="NoM-IO-Cvp"/>
                                                 <constraint firstAttribute="trailing" secondItem="ItC-7g-0nd" secondAttribute="trailing" constant="10" id="Nxl-dW-Pwe"/>
                                                 <constraint firstItem="ItC-7g-0nd" firstAttribute="top" secondItem="OI6-rI-24A" secondAttribute="bottom" id="QWM-bv-qG0"/>
                                                 <constraint firstItem="ItC-7g-0nd" firstAttribute="leading" secondItem="759-cU-3Bm" secondAttribute="trailing" constant="5" id="REe-9e-x7x"/>
@@ -1695,8 +1701,11 @@
                                                 <mask key="constraints">
                                                     <exclude reference="9sy-QW-Nqn"/>
                                                     <exclude reference="e30-gG-pz0"/>
+                                                    <exclude reference="oQX-WJ-iey"/>
                                                     <exclude reference="XMy-IW-Ulp"/>
                                                     <exclude reference="6GN-hn-dCm"/>
+                                                    <exclude reference="1Ez-E3-Loq"/>
+                                                    <exclude reference="fK1-GZ-gMy"/>
                                                     <exclude reference="QWM-bv-qG0"/>
                                                     <exclude reference="kmU-n7-dPd"/>
                                                 </mask>
@@ -2023,11 +2032,12 @@
                         <segue destination="62d-Bt-Yva" kind="show" identifier="newsegforvodka" id="OFC-RP-bvW"/>
                         <segue destination="6dt-Yr-tw8" kind="show" identifier="dealsnearyoufrombeer" id="Xac-65-HoW"/>
                         <segue destination="6zf-Eh-8mM" kind="show" identifier="getwinenearyoufrombeer" id="iqU-sd-p6J"/>
+                        <segue destination="Ojt-W6-tLq" kind="show" identifier="cocktail1" id="6hD-ai-ufF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hk-LI-RMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10152" y="-14464"/>
+            <point key="canvasLocation" x="-9498" y="-15308"/>
         </scene>
         <!--Deals Nearyou-->
         <scene sceneID="sEf-f9-9TH">
@@ -2489,7 +2499,10 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w9y-ac-ycT">
                                 <rect key="frame" x="0.0" y="125" width="600" height="387"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headercellvodkanew" rowHeight="153" id="XBi-ul-p8J" customClass="customheadercellafterexpastionforvodka" customModule="Bottomzup" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -3238,6 +3251,7 @@
                         <segue destination="cXB-1m-d5z" kind="show" identifier="gotobeersegue" id="XDA-r2-Wma"/>
                         <segue destination="6dt-Yr-tw8" kind="show" identifier="Dealsnearfromvodka" id="oIU-td-Sv5"/>
                         <segue destination="6zf-Eh-8mM" kind="show" identifier="getwinenearyoufromvodka" id="Rgb-uf-yQW"/>
+                        <segue destination="Ojt-W6-tLq" kind="show" identifier="cocktail2" id="V3G-fz-y2l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2c-5a-dyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3287,6 +3301,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="bottolesort:" destination="Ojt-W6-tLq" eventType="touchUpInside" id="eIl-KX-nB9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-ck-Qov">
                                 <rect key="frame" x="395" y="107" width="65" height="21"/>
@@ -3300,6 +3317,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pintsort:" destination="Ojt-W6-tLq" eventType="touchUpInside" id="onG-ky-5eW"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jJv-yd-l6c">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
@@ -3315,8 +3335,10 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xul-5c-mHP">
                                 <rect key="frame" x="0.0" y="120" width="600" height="400"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headercellnewforexpanded" rowHeight="147" id="wzH-RO-OXz" customClass="customheadercellafterexpanstion" customModule="Bottomzup" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -3753,6 +3775,9 @@
                                                     <state key="normal" image="Phone number">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="popupbuttonclicked:forEvent:" destination="Ojt-W6-tLq" eventType="touchUpInside" id="Ptx-5y-1Op"/>
+                                                    </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Suv-TW-SLG">
                                                     <rect key="frame" x="101" y="179" width="34" height="78"/>
@@ -3820,6 +3845,9 @@
                                                     <state key="normal" image="getdirection">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="locationpopup:forEvent:" destination="Ojt-W6-tLq" eventType="touchUpInside" id="8gn-lV-g6v"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -4041,6 +4069,16 @@
                                     <action selector="backbutton:" destination="Ojt-W6-tLq" eventType="touchUpInside" id="uZa-2z-IXg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DISTANCE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVh-88-EFV">
+                                <rect key="frame" x="545" y="101" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="5pS-ax-wSj"/>
+                                    <constraint firstAttribute="width" constant="60" id="ctN-Xe-3hs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -4065,6 +4103,7 @@
                             <constraint firstItem="qdd-sP-eV7" firstAttribute="top" secondItem="P3K-VY-QkH" secondAttribute="top" constant="16" id="BRx-sc-etg"/>
                             <constraint firstItem="5Y1-lo-kFs" firstAttribute="leading" secondItem="MPD-ck-Qov" secondAttribute="trailing" id="Bo8-lz-AXa"/>
                             <constraint firstItem="jJv-yd-l6c" firstAttribute="leading" secondItem="P3K-VY-QkH" secondAttribute="leading" id="CFL-4q-xmi"/>
+                            <constraint firstItem="LVh-88-EFV" firstAttribute="bottom" secondItem="5Y1-lo-kFs" secondAttribute="bottom" id="CIZ-p1-2go"/>
                             <constraint firstItem="K2Z-xh-5Zm" firstAttribute="leading" secondItem="P3K-VY-QkH" secondAttribute="leading" constant="10" id="CjL-KZ-Sxh"/>
                             <constraint firstAttribute="centerX" secondItem="CBz-3q-yr3" secondAttribute="centerX" id="DyT-sP-6MM"/>
                             <constraint firstItem="67r-1k-UDL" firstAttribute="top" secondItem="jJv-yd-l6c" secondAttribute="bottom" constant="25" id="Ew6-sk-o5P"/>
@@ -4111,6 +4150,7 @@
                             <constraint firstAttribute="trailing" secondItem="jBT-Vf-FlZ" secondAttribute="trailing" constant="10" id="gjd-WQ-aGp"/>
                             <constraint firstItem="eDo-t2-ufO" firstAttribute="leading" secondItem="5Y1-lo-kFs" secondAttribute="trailing" id="hlA-ee-bqk"/>
                             <constraint firstItem="7YP-Xt-Jbs" firstAttribute="top" secondItem="jBT-Vf-FlZ" secondAttribute="bottom" constant="5" id="iHX-Qy-dj0"/>
+                            <constraint firstAttribute="trailing" secondItem="LVh-88-EFV" secondAttribute="trailing" id="iYY-BI-P1B"/>
                             <constraint firstItem="K2Z-xh-5Zm" firstAttribute="top" secondItem="67O-3p-ICT" secondAttribute="bottom" constant="6" id="j2v-Xu-klx"/>
                             <constraint firstItem="CBz-3q-yr3" firstAttribute="top" secondItem="xul-5c-mHP" secondAttribute="bottom" id="lVr-uT-EcX"/>
                             <constraint firstItem="4mz-Wm-NSM" firstAttribute="top" secondItem="JGX-f1-rUL" secondAttribute="bottom" constant="10" id="mHv-LJ-83L"/>
@@ -4158,11 +4198,13 @@
                         <outlet property="tableview" destination="xul-5c-mHP" id="p1b-DN-166"/>
                         <outlet property="togglebuttonbeer" destination="K2Z-xh-5Zm" id="O9L-mz-iz2"/>
                         <segue destination="rsj-6l-Npj" kind="show" identifier="gobacktoresult1" id="aSH-hV-RWE"/>
+                        <segue destination="cXB-1m-d5z" kind="show" identifier="segfromcocktailtobeer" id="ja9-qS-CKX"/>
+                        <segue destination="62d-Bt-Yva" kind="show" identifier="segforvodkafromcocktail" id="yu0-QO-HLc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKv-te-WFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9412" y="-14302"/>
+            <point key="canvasLocation" x="-9434" y="-14508"/>
         </scene>
     </scenes>
     <resources>
@@ -4207,10 +4249,11 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Xac-65-HoW"/>
+        <segue reference="ja9-qS-CKX"/>
+        <segue reference="6hD-ai-ufF"/>
         <segue reference="OFC-RP-bvW"/>
-        <segue reference="XDA-r2-Wma"/>
-        <segue reference="oIU-td-Sv5"/>
-        <segue reference="k2w-mW-TjF"/>
-        <segue reference="Rgb-uf-yQW"/>
+        <segue reference="iqU-sd-p6J"/>
+        <segue reference="6Fg-HI-kaH"/>
     </inferredMetricsTieBreakers>
 </document>

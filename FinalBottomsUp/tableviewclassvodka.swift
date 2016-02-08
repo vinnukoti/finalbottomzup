@@ -99,6 +99,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var isliqtextfieldhasdata = false
     var check:String!
     var fstobj1 = Restaurant()
+    var fstobj2 = Restauarantcocktail()
     var vodkaobjnew = Restauarantvodka()
     var restlat:Double!
     var restlong:Double!
@@ -180,7 +181,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var citydropdowntextfield = UITextField()
     var citydropdowntableview = UITableView()
      var search   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka"]
+    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka","Cocktail"]
     var liqTypes1:[String] = [String]()
      var items: [String] = ["Delhi", "Gurgaon", "Noida"]
     
@@ -190,9 +191,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var shadowimage: UIImageView!
     
+    var head3:[Restauarantcocktail] = [Restauarantcocktail]()
+    
+    var devicelatitude:Double!
+    var devicelongitude:Double!
+    
     override func viewDidLoad()
   
     {
+        
+        var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "TableviewTapped:")
+        tableview1.addGestureRecognizer(headerTapped)
         beerdropdowntableview.hidden = true
         beerTypedropdowntableview.hidden = true
         citydropdowntableview.hidden = true
@@ -298,6 +307,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
         
     }
+    
+    func TableviewTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        //locationp.hidden = true
+        DynamicViewvodka.hidden = true
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+       // locatiopopupview.hidden = true
+        DynamicViewvodka.hidden = true
+    }
+    
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
@@ -654,7 +675,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     @IBAction func Press2revell(sender: UIButton, forEvent event: UIEvent)
     {
         
-        self.tableview1.userInteractionEnabled = false
+       // self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
@@ -941,16 +962,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if tableView.tag == 1{
-        if (header1[indexPath.section].vodkaarray.count * 30 + 10) > 210 {
-        
-        return CGFloat(header1[indexPath.section].vodkaarray.count * 30 + 10)
-        }
-        else{
-        
-        return 210
-            
-        }
+        if tableView.tag == 1
+        {
+           return CGFloat(header1[indexPath.section].vodkaarray.count * 16 + 150)
         }
         else
         {
@@ -1235,6 +1249,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+        DynamicViewvodka.hidden = true
         let tracker = GAI.sharedInstance().defaultTracker
         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Tapped Hotel",action: header1[gestureRecognizer.view!.tag].restnamevodka,label: header1[gestureRecognizer.view!.tag].restnamevodka, value: nil).build()
         tracker.send(eventTracker as! [NSObject : AnyObject])
@@ -1677,8 +1692,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         else
         {
-            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         
@@ -2022,10 +2037,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSArray
         {
             head1 = [Restaurant]()
+             head3 = [Restauarantcocktail]()
             headerfortableview = [Restauarantvodka]()
             for var index = 0; index < json.count; ++index
             {
                 fstobj1 = Restaurant()
+                fstobj2 = Restauarantcocktail()
+               
                 vodkaobjnew = Restauarantvodka()
                 //vodkasendobj = Restauarantvodka()
                 
@@ -2175,6 +2193,168 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                         }
                         head1.append(fstobj1)
                     }
+                    else if check == "Cocktails"
+                    {
+                        if let pint_avg_price = bottomsUp1["pint_min_price"] as? Int
+                        {
+                            
+                            fstobj2.minp = pint_avg_price
+                            println(pint_avg_price)
+                        }
+                        if let bottle_avg_price = bottomsUp1["bottle_min_price"] as? Int
+                        {
+                            
+                            fstobj2.maxp = bottle_avg_price
+                        }
+                        
+                        if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
+                        {
+                            
+                            var happy_hour_start1 = happy_hour_start
+                            
+                            fstobj2.happystart = happy_hour_start1
+                        }
+                        
+                        if let happy_hour_end = bottomsUp1["happy_hour_end"] as? String
+                        {
+                            
+                            
+                            var happy_hour_end1 = happy_hour_end
+                            fstobj2.happyend = happy_hour_end1
+                        }
+                        
+                        if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
+                        {
+                            fstobj2.ishappy = is_happy_hour
+                        }
+                        
+                        if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
+                        {
+                            fstobj2.rest_offers_happy_hour = rest_offers_happy_hour1
+                        }
+                        if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
+                        {
+                            
+                            
+                            if let res_name = resInfo["res_name"] as? String
+                            {
+                                // fstobj1.restname = res_name
+                                fstobj2.restname = res_name
+                                // arraysring.append(res_name)
+                                //println(arraysring.first)
+                                
+                            }
+                            
+                            if let res_address = resInfo["res_address"] as? String
+                            {
+                                //fstobj1.restaddress = res_address
+                                fstobj2.restaddress = res_address
+                            }
+                            
+                            if let res_locality = resInfo["res_locality"] as? String
+                            {
+                                // fstobj1.Place = res_locality
+                                fstobj2.Place = res_locality
+                            }
+                            
+                            if let res_lat = resInfo["res_lat"] as? String
+                            {
+                                //convert String to Double
+                                let mySwiftString = res_lat
+                                var string = NSString(string: mySwiftString)
+                                string.doubleValue
+                                restlat = string.doubleValue
+                                //fstobj1.Restaurantlatitude = restlat
+                                fstobj2.Restaurantlatitude = restlat
+                                println(fstobj1.Restaurantlatitude)
+                                println(restlat)
+                            }
+                            if let res_long = resInfo["res_long"] as? String
+                            {
+                                let mySwiftString = res_long
+                                var string = NSString(string: mySwiftString)
+                                string.doubleValue
+                                restlong = string.doubleValue
+                                // fstobj1.Restaurantlongitude = restlong
+                                fstobj2.Restaurantlongitude = restlong
+                                println(fstobj1.Restaurantlongitude)
+                                println(restlong)
+                                
+                                
+                            }
+                            if let res_phone1 = resInfo["res_phone1"] as? String
+                            {
+                                // fstobj1.Phoneone = res_phone1
+                                fstobj2.Phoneone = res_phone1
+                            }
+                            
+                            if let res_phone2 = resInfo["res_phone2"] as? String
+                            {
+                                // fstobj1.Phonetwo = res_phone2
+                                fstobj2.Phonetwo = res_phone2
+                            }
+                            if var distance = resInfo["distance"] as? String
+                            {
+                                //28.63875
+                                //77.07380
+                                var OldLocation: CLLocation = CLLocation(latitude: getdevicelatitude, longitude: getdevicelongitude)
+                                //println(devicelatitude)
+                               // println(devicelongitude)
+                                //  var OldLocation: CLLocation = CLLocation(latitude: 28.63875, longitude: 77.07380)
+                                var newLocation: CLLocation = CLLocation(latitude: restlat, longitude: restlong)
+                                println(restlat)
+                                println(restlong)
+                                var totalDistance: Double = 0
+                                var meters: CLLocationDistance = newLocation.distanceFromLocation(OldLocation)
+                                totalDistance = totalDistance + (meters / 1000)
+                                println(String(format: "%.2f Km", totalDistance))
+                                NSLog("totalDistance: %@", String(format: "%.2f Km", totalDistance))
+                                totalDistance = Double(round(10*totalDistance)/10)
+                                var totalDistance1 = totalDistance.description
+                                println(totalDistance1)
+                                func PartOfString(s: String, start: Int, length: Int) -> String
+                                {
+                                    return s.substringFromIndex(advance(s.startIndex, start - 1)).substringToIndex(advance(s.startIndex, length))
+                                }
+                                println("SUBSTRING    " + PartOfString(totalDistance1, 1, 3))
+                                // totalDistance1 = PartOfString(totalDistance1, 1, 3)
+                                
+                                
+                                // fstobj1.distance = totalDistance1 + " Km"
+                                fstobj2.distance = totalDistance1 + " Km"
+                                println(fstobj2.distance)
+                            }
+                        }
+                        if let resLiqInfo = bottomsUp1["resLiqInfo"] as? NSArray
+                        {
+                            for var i = 0; i < resLiqInfo.count; ++i
+                            {
+                                var liqobj1 = liqclass()
+                                if let one = resLiqInfo[i] as? NSDictionary
+                                {
+                                    if let res_liq_brand_name = one["liq_brand_name"] as? String
+                                    {
+                                        liqobj1.liqbrand = res_liq_brand_name
+                                    }
+                                    if let pint_price = one["pint_price"] as? String
+                                    {
+                                        var pint_price = pint_price.toInt()
+                                        liqobj1.pint = pint_price
+                                    }
+                                    if let bottle_price = one["bottle_price"] as? String
+                                    {
+                                        var bottle_price = bottle_price.toInt()
+                                        liqobj1.Bottle = bottle_price
+                                    }
+                                }
+                          
+                                fstobj2.amp.append(liqobj1)
+                            }
+                        }
+      
+                        head3.append(fstobj2)
+                        
+                    }
                         
                     else
                     {
@@ -2316,6 +2496,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 self.performSegueWithIdentifier("gotobeersegue", sender: self)
             }
+            else if check == "Cocktails"
+            {
+                self.performSegueWithIdentifier("cocktail2", sender: self)
+            }
             else
             {
                 header1 = headerfortableview
@@ -2323,11 +2507,25 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 tableview1.reloadData()
             }
             header1 = pricesort1(header1)
+            
+            showdropdownview.hidden = true
+            if newtextfieldtableview.text == "All"
+            {
+                //self.locationnamedisplaybutton.setTitle(self.dropdowntextfield.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
+                citynamedisplaybutton.setTitle(dropdowntextfield.text + space + near + space + locationnamefromtextfield, forState: .Normal)
+            }
+            else
+                
+            {
+                // self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
+                citynamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
+            }
         }
         else
         {
-            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            showdropdownview.hidden = false
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             
         }
@@ -2368,6 +2566,44 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             }
         }
         
+        if segue.identifier == "cocktail2"
+        {
+            if let destination3 = segue.destinationViewController as? Cocktail
+            {
+                //28.63875
+                //77.07380
+                destination3.liqname = newtextfieldtableview.text
+                var liqname = newtextfieldtableview.text
+                destination3.header2 = head3
+                
+                destination3.beerTypefromtextfield = beerTypefromtextfield
+                destination3.selectedliqor = newtextfieldtableview.text
+                destination3.getdevicelatitude = devicelatitude
+                destination3.getdevicelongitude = devicelongitude
+                destination3.getcitylatitude = citylat
+                destination3.getcitylongitude = citylong
+                destination3.getrestlatitudebeer = restlat
+                destination3.getdevicelongitude = restlong
+                
+                destination3.getfstobj1 = fstobj1
+                destination3.getselectedcityname = getselectedcityname
+                destination3.checkliqtype = check
+                //destination3.vodkaarray = header
+                // destination3.getrestlatitudevodka = restvodkalat
+                ////destination3.getrestlongitudevodka = restvodkalang
+                //  println(autocompletedTextfieldnew.text)
+                
+                destination3.locationnamefromtextfield = newtextfieldtableviewcity.text
+                destination3.liqtypefromTextfield = dropdowntextfield.text
+                destination3.localityFromtextfield = citydropdowntextfield.text
+                destination3.citylatitudefFomresult = citylat
+                destination3.citylongitudeFromresult = citylong
+                destination3.liqtypeFromresult = dropdowntextfield.text
+                destination3.liqFromresult = newtextfieldtableview.text
+                destination3.localityfromtextfield1 = citydropdowntextfield.text
+            }
+        }
+        
         if segue.identifier == "getwinenearyoufromvodka"
         {
             if let destination1 = segue.destinationViewController as? mapview
@@ -2382,6 +2618,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     @IBAction func arrowup(sender: UIButton)
     {
+        DynamicViewvodka.hidden = true
         if header1[sender.tag].bool1 == true
         {
             header1[sender.tag].bool1 = false
@@ -2472,7 +2709,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         let tracker = GAI.sharedInstance().defaultTracker
         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Contact details",action: header1[sender.tag].Phoneone,label: header1[sender.tag].Phonetwo, value: nil).build()
         tracker.send(eventTracker as! [NSObject : AnyObject])
-        self.tableview1.userInteractionEnabled = false
+       // self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         let imageName = "Popbackground.png"
         let image = UIImage(named: imageName)
@@ -2560,7 +2797,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         let tracker = GAI.sharedInstance().defaultTracker
         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Location Name",action: "Location Name",label: "Location Name", value: nil).build()
         tracker.send(eventTracker as! [NSObject : AnyObject])
-      self.tableview1.userInteractionEnabled = false
+     // self.tableview1.userInteractionEnabled = false
         let buttonView = sender as UIView;
         
         // get any touch on the buttonView
@@ -3140,6 +3377,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func Getresults(sender:UIButton!)
     {
+        showdropdownview.hidden = false
         if togglevodka == true
         {
             togglebutton.setImage(toggleoff, forState: .Normal)
@@ -3147,18 +3385,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         }
         liqtypefromTextfield = dropdowntextfield.text
         locationnamefromtextfield = newtextfieldtableviewcity.text
-        showdropdownview.hidden = true
-        if newtextfieldtableview.text == "All"
-        {
-            //self.locationnamedisplaybutton.setTitle(self.dropdowntextfield.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
-            citynamedisplaybutton.setTitle(dropdowntextfield.text + space + near + space + locationnamefromtextfield, forState: .Normal)
-        }
-        else
-            
-        {
-           // self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
-            citynamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
-        }
+        
+ 
         
         onselect()
     }
@@ -3260,7 +3488,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             
             self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
-            showdropdownview.hidden = true
+            
         }
         else
         {
@@ -3271,7 +3499,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             println(passspaceremovedliq)
             self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
-            showdropdownview.hidden = true
+          
         }
        
 

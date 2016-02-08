@@ -1190,39 +1190,32 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                     }
                                 }
                                 fstobj1.amp.append(liqobj1)
-                                fstobj2.amp.append(liqobj1)
+                               // fstobj2.amp.append(liqobj1)
                             }
                         }
-                        println(head1.count)
-                        println(head2.count)
                         head1.append(fstobj1)
-                        head2.append(fstobj2)
+                       // head2.append(fstobj2)
                     }
                         
                         else if check == "Cocktails"
                     {
                         if let pint_avg_price = bottomsUp1["pint_min_price"] as? Int
                         {
-                            //var pint_avg_price2:String = toString(pint_avg_price)
-                           // fstobj1.minp = pint_avg_price
+       
                             fstobj2.minp = pint_avg_price
                             println(pint_avg_price)
                         }
                         if let bottle_avg_price = bottomsUp1["bottle_min_price"] as? Int
                         {
-                            //var bottle_avg_price2:String = toString(bottle_avg_price)
-                          //  fstobj1.maxp = bottle_avg_price
+        
                             fstobj2.maxp = bottle_avg_price
                         }
                         
                         if let happy_hour_start = bottomsUp1["happy_hour_start"] as? String
                         {
                             
-                            
                             var happy_hour_start1 = happy_hour_start
-                            
-                            
-                           // fstobj1.happystart = happy_hour_start1
+        
                             fstobj2.happystart = happy_hour_start1
                         }
                         
@@ -1231,19 +1224,16 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             
                             
                             var happy_hour_end1 = happy_hour_end
-                           // fstobj1.happyend = happy_hour_end1
                             fstobj2.happyend = happy_hour_end1
                         }
                         
                         if let is_happy_hour = bottomsUp1["is_happy_hour"] as? String
                         {
-                            //fstobj1.ishappy = is_happy_hour
                             fstobj2.ishappy = is_happy_hour
                         }
                         
                         if let rest_offers_happy_hour1 = bottomsUp1["rest_offers_happy_hour"] as? String
                         {
-                           // fstobj1.rest_offers_happy_hour = rest_offers_happy_hour1
                             fstobj2.rest_offers_happy_hour = rest_offers_happy_hour1
                         }
                         if let resInfo = bottomsUp1["resInfo"] as? NSDictionary
@@ -1361,13 +1351,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                         liqobj1.Bottle = bottle_price
                                     }
                                 }
-                               // fstobj1.amp.append(liqobj1)
+                   
                                 fstobj2.amp.append(liqobj1)
                             }
                         }
-                       // println(head1.count)
+      
                         println(head2.count)
-                        //head1.append(fstobj1)
+          
                         head2.append(fstobj2)
 
                     }
@@ -1513,7 +1503,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             }
                         }
                         header.append(vodkaobj)
-                        // headervodka.append(vodkasendobj)
+                    
                         println("header \(vodkaobj)")
                     }
                 }
@@ -1711,64 +1701,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         performSegueWithIdentifier("getwinenearyou", sender: self)
 
     }
-    
-//    func getgoogledatawineandbeer(urlString:String)
-//    {
-//        let url = NSURL(string: urlString)
-//        println(urlString)
-//        
-//        
-//        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
-//            
-//            dispatch_async(dispatch_get_main_queue(),
-//                {
-//                    
-//                    self.extract_googlejsonwineandbeer(data)
-//            })
-//        }
-//        task.resume()
-//    }
-//    
-//    
-//    func extract_googlejsonwineandbeer(data:NSData)
-//    {
-//        var jsonError:NSError?
-//        if  let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary
-//        {
-//            if let results = json["results"] as? NSArray
-//            {
-//                for var i = 0; i < results.count; i++
-//                {
-//                    if let one = results[i] as? NSDictionary
-//                    {
-//                        if let geometry = one["geometry"] as? NSDictionary
-//                        {
-//                            // for var j = 0; j < geometry.count; j++
-//                            //  {
-//                            if let location = geometry["location"] as? NSDictionary
-//                            {
-//                                
-//                                if let lat = location["lat"] as? Double
-//                                {
-//                                    winecitylat = lat
-//                                    println(citylat)
-//                                }
-//                                if let lng = location["lng"] as? Double
-//                                {
-//                                    winecitylong = lng
-//                                    println(citylong)
-//                                }
-//                                
-//                                // }
-//                            }
-//                        }
-//                    }
-//                }
-//                
-//            }
-//            
-//        }
-//    }
+
 
     @IBAction func getdeals(sender: UIButton) {
         performSegueWithIdentifier("Dealsnearyou", sender: self)
@@ -1792,7 +1725,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(name)
             println(citylat)
             println(citylong)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(name1)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=20&query=\(name1)")
         }
         else
         {
@@ -1801,7 +1734,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(citylat)
             println(citylong)
             println(trimmedString)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=15&query=\(textfield2.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=20&query=\(textfield2.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
         }
         
     }
