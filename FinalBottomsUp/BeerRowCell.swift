@@ -96,9 +96,9 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate
 //                headerCell.headercellmin.text =   "  " + "\(head[section].minp)"
 //            }
  
-        minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
-        maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
-        liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 13)
+        maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 13)
+        liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 13)
            // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 10)
             
 

@@ -964,7 +964,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     {
         if tableView.tag == 1
         {
-           return CGFloat(header1[indexPath.section].vodkaarray.count * 16 + 150)
+            println(header1[indexPath.section].vodkaarray.count)
+           return CGFloat(header1[indexPath.section].vodkaarray.count * 16 + 165)
         }
         else
         {

@@ -132,11 +132,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
     override func viewDidLoad()
     {
-  
-        // All done!
-        
-       // println(autocompletedTextfieldnew.text)
-
+ 
 
         PleaseWaitlabel = UILabel(frame: CGRectMake(0,20, 150, 100))
        PleaseWaitlabel.text = "Please Wait..."
@@ -216,6 +212,35 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
 
     }
+    
+
+    
+//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+//        if textField.tag == 3
+//        {
+//            return false
+//        }
+//        else
+//        {
+//            return true
+//        }
+//    }
+    
+    
+//    func didRecognizeTapGesture(gesture: UITapGestureRecognizer) {
+//        var point: CGPoint = gesture.locationInView(gesture.view!)
+//        if gesture.state == .Ended {
+//            if CGRectContainsPoint(self.localityTextfield.frame, point)
+//            {
+//               // self.doSomething()
+//                
+//                self.view.endEditing(true)
+//            }
+//        }
+//    }
+//    
+ 
+
 
 
     
@@ -300,6 +325,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     // Resign Firstresponder of UITableview and Keyboard Hiding
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
+    
+        view.endEditing(true)
         autocompletedTextfieldnew.endEditing(true)
         tableviewnew.hidden = true
         textfield2.enabled = true
@@ -312,6 +339,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         //view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
     }
+
     
     func reverseGeocodeLocation(location: CLLocation!, completionHandler: CLGeocodeCompletionHandler!){
         
@@ -553,13 +581,19 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
            // localityTextfield
         else if textField.tag == 3
         {
-        
+            
+          //  autocompletedTextfieldnew.tintColor = UIColor.clearColor()
+            
             //autocompletedTextfieldnew.enabled = false
-            localityTextfield.enabled = false
-             textField.selectAll(self)
+            println("It came here")
+            localityTextfield.tintColor = UIColor.clearColor()
+            var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "localityTapped:")
+            localityTextfield.addGestureRecognizer(headerTapped)
+            localityTextfield.userInteractionEnabled = true
+            
             LOcalityTableview.hidden = false
             AutoCompleteTextField3.autoCompleteTableView?.hidden = true
-            autocompletedTextfieldnew.resignFirstResponder()
+            
         }
             
             // beerTypeTextfield
@@ -577,6 +611,16 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         }
         
     }
+    
+    
+    func localityTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        
+        view.endEditing(true)
+    }
+    
+
+ 
 //    func textFieldShouldBeginEditing(textField: UITextField) -> Bool
 //    {
 //        if textField.tag == 7
