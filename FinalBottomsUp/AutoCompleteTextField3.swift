@@ -109,7 +109,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
         
         let screenSize = UIScreen.mainScreen().bounds.size
         
-        let tableView = UITableView(frame: CGRect(x: 15, y: self.frame.origin.y + 30, width: screenSize.width - 30, height: 50.0))
+        let tableView = UITableView(frame: CGRect(x: 15, y: self.frame.origin.y + 10, width: screenSize.width - 30, height: 50.0))
         //let tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: 30))
         
         tableView.layer.masksToBounds = true

@@ -141,6 +141,11 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
 
 
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
 
 
     

@@ -192,14 +192,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
         
         
-        LOcalityTableview.frame         =   CGRectMake(15,self.localityTextfield.frame.origin.y + 30, self.view.frame.width - 30, 165);
+        LOcalityTableview.frame         =   CGRectMake(15,self.localityTextfield.frame.origin.y + 10, self.view.frame.width - 30, 165);
         LOcalityTableview.delegate      =   self
         LOcalityTableview.dataSource    =   self
         LOcalityTableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(LOcalityTableview)
         LOcalityTableview.hidden = true
         
-        liqTypetableview.frame         =   CGRectMake(15,self.beerTypeTextfield.frame.origin.y + 40, self.view.frame.width - 30, 165);
+        liqTypetableview.frame         =   CGRectMake(15,self.beerTypeTextfield.frame.origin.y + 20, self.view.frame.width - 30, 165);
         liqTypetableview.delegate      =   self
         liqTypetableview.dataSource    =   self
         liqTypetableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -211,6 +211,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
 
 
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
 
@@ -586,10 +590,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             
             //autocompletedTextfieldnew.enabled = false
             println("It came here")
-            localityTextfield.tintColor = UIColor.clearColor()
-            var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "localityTapped:")
-            localityTextfield.addGestureRecognizer(headerTapped)
-            localityTextfield.userInteractionEnabled = true
+//            localityTextfield.tintColor = UIColor.clearColor()
+//            var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "localityTapped:")
+//            localityTextfield.addGestureRecognizer(headerTapped)
+//            localityTextfield.userInteractionEnabled = true
+            localityTextfield.enabled = false
             
             LOcalityTableview.hidden = false
             AutoCompleteTextField3.autoCompleteTableView?.hidden = true

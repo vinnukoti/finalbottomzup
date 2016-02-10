@@ -72,6 +72,11 @@ class GifImageclassViewController: UIViewController
  
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    
     func playVideo()
     {
     
