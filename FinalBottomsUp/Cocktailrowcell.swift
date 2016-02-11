@@ -94,9 +94,9 @@ class Cocktailrowcell: UITableViewCell, UITableViewDataSource, UITableViewDelega
             //                headerCell.headercellmin.text =   "  " + "\(head[section].minp)"
             //            }
             
-            minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 13)
-            maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: 13)
-            liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 13)
+            minprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            maxprice.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            liqname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             // cell.layer.addBorder(UIRectEdge.Top, color: UIColor.whiteColor(), thickness: 10)
             
             

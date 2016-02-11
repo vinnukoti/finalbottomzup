@@ -121,20 +121,77 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     var currentLocation = "Current Location"
      var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+     var actInd1 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
    // var indicatorview = UIView()
     var PleaseWaitlabel = UILabel()
+    var PleaseWaitlabel1 = UILabel()
     var space = " "
     var searchedin = "Searched in"
     var forliqtype = "For liquor"
     
     var count = 0
 
+    @IBOutlet weak var label: UILabel!
+     //var label = UILabel(frame: CGRectMake(15, 232, 110, 30))
+    //var categoryliqlabel = UILabel(frame: CGRectMake(15, 167, 110, 30))
+   // var subcategoryliqlabel = UILabel(frame: CGRectMake(15, 167, 110, 30))
+    
+    
 
+    @IBOutlet weak var subcategoryliqlabel: UILabel!
+    @IBOutlet weak var liqsubcatogeryDynamicView: UIView!
+    @IBOutlet weak var localityDynamicView: UIView!
+    @IBOutlet weak var categoryliqlabel: UILabel!
+    @IBOutlet weak var liqcatogeryDynamicView: UIView!
     override func viewDidLoad()
     {
  
+        //Locality textfiled
+        localityDynamicView.layer.cornerRadius=5
+        localityDynamicView.backgroundColor = UIColor.whiteColor()
+   
 
-        PleaseWaitlabel = UILabel(frame: CGRectMake(0,20, 150, 100))
+        label.textAlignment = NSTextAlignment.Left
+        label.text = "Delhi"
+        label.font = UIFont(name: "MyriadPro-Regular", size: 14)
+        label.textColor = UIColor.darkGrayColor()
+        
+        var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "localityTapped:")
+        localityDynamicView.addGestureRecognizer(headerTapped)
+        localityDynamicView.userInteractionEnabled = true
+        
+        
+        //liq catogery textfield
+        liqcatogeryDynamicView.layer.cornerRadius=5
+        categoryliqlabel.textAlignment = NSTextAlignment.Left
+        categoryliqlabel.font = UIFont(name: "MyriadPro-Regular", size: 14)
+        categoryliqlabel.text = "Beer"
+        categoryliqlabel.textColor = UIColor.darkGrayColor()
+       
+        var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "liqcategoryTapped:")
+        liqcatogeryDynamicView.addGestureRecognizer(headerTapped1)
+        liqcatogeryDynamicView.userInteractionEnabled = true
+
+        
+         //liq sub catogery textfield
+
+       liqsubcatogeryDynamicView.layer.cornerRadius=5
+       liqsubcatogeryDynamicView.backgroundColor = UIColor.whiteColor()
+       subcategoryliqlabel.textAlignment = NSTextAlignment.Left
+        subcategoryliqlabel.font = UIFont(name: "MyriadPro-Regular", size: 14)
+        subcategoryliqlabel.text = "All"
+        subcategoryliqlabel.textColor = UIColor.darkGrayColor()
+       
+        var headerTapped2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "liqsubcategoryTapped:")
+        liqsubcatogeryDynamicView.addGestureRecognizer(headerTapped2)
+        liqsubcatogeryDynamicView.userInteractionEnabled = true
+        
+        
+        
+        
+        
+
+       PleaseWaitlabel = UILabel(frame: CGRectMake(0,20, 150, 100))
        PleaseWaitlabel.text = "Please Wait..."
        actInd.center = self.view.center
        actInd.hidesWhenStopped = true
@@ -212,6 +269,49 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
 
     }
+    
+    func localityTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        
+        LOcalityTableview.hidden = false
+        view.endEditing(true)
+    }
+    
+    func liqcategoryTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        
+      
+        liqTypetableview.hidden = false
+        view.endEditing(true)
+    }
+    
+    func liqsubcategoryTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        if CheckforInternetViewController.isConnectedToNetwork() == true
+        {
+            print("Internet connection OK")
+            getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(categoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            
+            tableviewnew.hidden = false
+        }
+        else
+        {
+            print("Internet connection FAILED")
+            
+            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+            tableviewnew.hidden = true
+            textfield2.enabled = true
+        }
+
+        tableviewnew.hidden = false
+        view.endEditing(true)
+    }
+    
+    
+    
+    
+    
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -313,7 +413,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     self.actInd.stopAnimating()
                     self.actInd.hidden = true
                     println(locality)
-                    self.localityTextfield.text = locality
+                   // self.localityTextfield.text = locality
+                    
+                    
+                    //instead of localality textfield im using label.
+                    self.label.text = locality
                     
                     
                     println(self.autocompletedTextfieldnew.text)
@@ -398,7 +502,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                if CheckforInternetViewController.isConnectedToNetwork() == true
                {
                     print("Internet connection OK")
-                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.localityTextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&types=(regions)&components=country:IN"
+                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.label.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&types=(regions)&components=country:IN"
                     let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                     if url != nil{
                         let urlRequest = NSURLRequest(URL: url!)
@@ -535,7 +639,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             if CheckforInternetViewController.isConnectedToNetwork() == true
             {
                 print("Internet connection OK")
-                getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(beerTypeTextfield.text)")
+                getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(categoryliqlabel.text)")
                
                 tableviewnew.hidden = false
             }
@@ -585,17 +689,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
            // localityTextfield
         else if textField.tag == 3
         {
-            
-          //  autocompletedTextfieldnew.tintColor = UIColor.clearColor()
-            
-            //autocompletedTextfieldnew.enabled = false
+            //self.view.endEditing(true)
+            textField.endEditing(true)
+            textField.resignFirstResponder()
             println("It came here")
-//            localityTextfield.tintColor = UIColor.clearColor()
-//            var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "localityTapped:")
-//            localityTextfield.addGestureRecognizer(headerTapped)
-//            localityTextfield.userInteractionEnabled = true
             localityTextfield.enabled = false
-            
             LOcalityTableview.hidden = false
             AutoCompleteTextField3.autoCompleteTableView?.hidden = true
             
@@ -618,11 +716,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     }
     
     
-    func localityTapped(gestureRecognizer: UITapGestureRecognizer)
-    {
-        
-        view.endEditing(true)
-    }
+
     
 
  
@@ -853,8 +947,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
            // autocompletedTextfieldnew.userInteractionEnabled = true
             localityTextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            localityTextfield.text = selectedCell1.textLabel?.text
-            localityfromtextfield = localityTextfield.text
+           // localityTextfield.text = selectedCell1.textLabel?.text
+            label.text = selectedCell1.textLabel?.text
+           // localityfromtextfield = localityTextfield.text
+            
+            //inseatd of lacalitytextfiled im using label.
+            localityfromtextfield = label.text
+            
             println(localityfromtextfield)
             self.view.endEditing(true)
             tableView.hidden = true
@@ -864,7 +963,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         {
             textfield2.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            textfield2.text = selectedCell1.textLabel?.text
+            //textfield2.text = selectedCell1.textLabel?.text
+            
+            
+            subcategoryliqlabel.text = selectedCell1.textLabel?.text
+            
+            
+            
             selectedliqor = selectedCell1.textLabel?.text
             isliqtextfieldhasdata = true
             self.view.endEditing(true)
@@ -874,12 +979,23 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // Liq type table view
         else if tableView.tag == 6
         {
-            textfield2.text = "All"
+            //textfield2.text = "All"
+            subcategoryliqlabel.text = "All"
             beerTypeTextfield.enabled = true
             println("You selected cell #\(indexPath.row)!")
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            beerTypeTextfield.text = selectedCell1.textLabel?.text
-            beerTypefromtextfield = beerTypeTextfield.text
+            //beerTypeTextfield.text = selectedCell1.textLabel?.text
+            
+            
+            //instead of beertypetextfield im using categoryliqlabel
+            categoryliqlabel.text = selectedCell1.textLabel?.text
+            
+            
+           // beerTypefromtextfield = beerTypeTextfield.text
+            
+            
+            //instead of beertypetextfield im using categoryliqlabel
+            beerTypefromtextfield = categoryliqlabel.text
             println(beerTypefromtextfield)
             self.view.endEditing(true)
             tableView.hidden = true
@@ -891,16 +1007,25 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     }
     @IBAction func searchnew(sender: UIButton)
     {
+        PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
+        PleaseWaitlabel1.text = "Please Wait..."
+        self.actInd1.center = self.view.center
+        self.actInd1.hidesWhenStopped = true
+        self.actInd1.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd1.color = UIColor.blackColor()
+        view.addSubview(actInd1)
+        self.actInd1.startAnimating()
+        self.actInd1.addSubview(PleaseWaitlabel1)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        if textfield2.text == "All"
+        if subcategoryliqlabel.text == "All"
         {
-          let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(searchedin  + space + localityTextfield.text + space + autocompletedTextfieldnew.text)",action: "\(forliqtype + space + beerTypeTextfield.text)",label: "\(localityTextfield.text + autocompletedTextfieldnew.text)", value: nil).build()
+          let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(searchedin  + space + label.text! + space + autocompletedTextfieldnew.text)",action: "\(forliqtype + space + categoryliqlabel.text!)",label: "\(label.text! + autocompletedTextfieldnew.text)", value: nil).build()
               tracker.send(eventTracker as! [NSObject : AnyObject])
         }
         else
         {
-           let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(searchedin + space + localityTextfield.text + space + autocompletedTextfieldnew.text)",action: "\(forliqtype + space + textfield2.text)",label: "\(localityTextfield.text + space + autocompletedTextfieldnew.text)", value: nil).build()
+           let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(searchedin + space + label.text! + space + autocompletedTextfieldnew.text)",action: "\(forliqtype + space + subcategoryliqlabel.text!)",label: "\(label.text! + space + autocompletedTextfieldnew.text)", value: nil).build()
               tracker.send(eventTracker as! [NSObject : AnyObject])
         }
         
@@ -908,7 +1033,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         
       
-        liqnamefromtextfield = textfield2.text
+       // liqnamefromtextfield = textfield2.text
+        
+        liqnamefromtextfield = categoryliqlabel.text
     
         
         
@@ -919,7 +1046,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         println(autocompletedTextfieldnew.text)
         var text = autocompletedTextfieldnew.text
-        var locate = localityTextfield.text + text
+       // var locate = localityTextfield.text + text
+        
+        //indtead of loacalitytextfile im using lael.
+        var locate = label.text! + text
         println(autocompletedTextfieldnew.text)
         println(localityfromtextfield)
         
@@ -930,7 +1060,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         if autocompletedTextfieldnew.text == currentLocation
         {
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=2&records=15&query=\(beerTypeTextfield.text)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=2&records=15&query=\(categoryliqlabel.text!)")
         }
         
         else
@@ -1570,9 +1700,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             {
                 self.performSegueWithIdentifier("getvodkanew", sender: self)
             }
+        
+        self.actInd1.hidden = true
         }
         else
         {
+           self.actInd1.hidden = true
             count = count + 1
             println(count)
             println("Nithin")
@@ -1608,14 +1741,22 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             {
                 //28.63875
                 //77.07380
-                destination.liqname = textfield2.text
-                var liqname = textfield2.text
+               // destination.liqname = textfield2.text
+                
+                destination.liqname = subcategoryliqlabel.text
+               // var liqname = textfield2.text
+                
+                var liqname = subcategoryliqlabel.text
                 println(head1.count)
                 destination.head = head1
                 println(destination.head.count)
          
                 destination.beerTypefromtextfield = beerTypefromtextfield
-                destination.selectedliqor = textfield2.text
+                //destination.selectedliqor = textfield2.text
+                
+                destination.selectedliqor = subcategoryliqlabel.text
+                
+                
                 destination.getdevicelatitude = devicelatitude
                 destination.getdevicelongitude = devicelongitude
                 destination.getcitylatitude = citylat
@@ -1632,13 +1773,42 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 println(autocompletedTextfieldnew.text)
                 
                 destination.locationnamefromtextfield = autocompletedTextfieldnew.text
-                destination.liqtypefromTextfield = beerTypeTextfield.text
-                destination.localityFromtextfield = localityTextfield.text
+                //destination.liqtypefromTextfield = beerTypeTextfield.text
+                
+                //instead of beertypetextfiled im using category label
+                
+                destination.liqtypefromTextfield = categoryliqlabel.text!
+                
+                
+                
+                
+               // destination.localityFromtextfield = localityTextfield.text
+                
+                
+                //Instead of lactaclity textfield im using label.
+                destination.localityFromtextfield = label.text!
+                
+                
                 destination.citylatitudefFomresult = citylat
                 destination.citylongitudeFromresult = citylong
-                destination.liqtypeFromresult = beerTypeTextfield.text
-                destination.liqFromresult = textfield2.text
-                destination.localityfromtextfield1 = localityTextfield.text
+               // destination.liqtypeFromresult = beerTypeTextfield.text
+                
+                
+                //instead of beertypetextfiled im using category label
+                destination.liqtypeFromresult = categoryliqlabel.text
+                
+                
+                
+                //destination.liqFromresult = textfield2.text
+                destination.liqFromresult = subcategoryliqlabel.text
+                
+                
+                
+               // destination.localityfromtextfield1 = localityTextfield.text
+                
+                
+                //Instead of lactaclity textfield im using label.
+                destination.localityfromtextfield1 = label.text!
             }
         }
         if segue.identifier == "cocktail"
@@ -1647,14 +1817,22 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             {
                 //28.63875
                 //77.07380
-                destination3.liqname = textfield2.text
-                var liqname = textfield2.text
+               // destination3.liqname = textfield2.text
+                
+                destination3.liqname = subcategoryliqlabel.text
+               // var liqname = textfield2.text
+                
+                var liqname = subcategoryliqlabel.text
                 println(head2.count)
                 destination3.header2 = head2
                 println(destination3.header2.count)
                 
                 destination3.beerTypefromtextfield = beerTypefromtextfield
-                destination3.selectedliqor = textfield2.text
+               // destination3.selectedliqor = textfield2.text
+                
+                 destination3.selectedliqor = subcategoryliqlabel.text
+                
+                
                 destination3.getdevicelatitude = devicelatitude
                 destination3.getdevicelongitude = devicelongitude
                 destination3.getcitylatitude = citylat
@@ -1671,22 +1849,48 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 println(autocompletedTextfieldnew.text)
                 
                 destination3.locationnamefromtextfield = autocompletedTextfieldnew.text
-                destination3.liqtypefromTextfield = beerTypeTextfield.text
-                destination3.localityFromtextfield = localityTextfield.text
+                //destination3.liqtypefromTextfield = beerTypeTextfield.text
+                
+                 //Instead of lactaclity textfield im using label.
+                destination3.liqtypefromTextfield = categoryliqlabel.text
+                
+                
+                
+                
+                
+                //destination3.localityFromtextfield = localityTextfield.text
+                
+                ////Instead of lactaclity textfield im using label.
+                destination3.localityFromtextfield = label.text!
                 destination3.citylatitudefFomresult = citylat
                 destination3.citylongitudeFromresult = citylong
-                destination3.liqtypeFromresult = beerTypeTextfield.text
-                destination3.liqFromresult = textfield2.text
-                destination3.localityfromtextfield1 = localityTextfield.text
+                //destination3.liqtypeFromresult = beerTypeTextfield.text
+                
+                //Instead of lactaclity textfield im using label.
+                destination3.liqtypeFromresult = categoryliqlabel.text
+                
+               // destination3.liqFromresult = textfield2.text
+                
+                destination3.liqFromresult = subcategoryliqlabel.text
+                
+               // destination3.localityfromtextfield1 = localityTextfield.text
+                
+                
+                //Instead of lactaclity textfield im using label.
+                destination3.localityfromtextfield1 = label.text!
             }
         }
         if segue.identifier == "getvodkanew"
         {
             if let destination1 = segue.destinationViewController as? tableviewclassvodka
             {
-                destination1.liqvodkaname = textfield2.text
-                var liqvodkaname = textfield2.text
-                let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+               // destination1.liqvodkaname = textfield2.text
+                
+                destination1.liqvodkaname = subcategoryliqlabel.text
+               // var liqvodkaname = textfield2.text
+                
+                var liqvodkaname = subcategoryliqlabel.text
+                let trimmedString = liqvodkaname!.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
                 destination1.liqvodkaname = trimmedString
                 
                 destination1.header1 = header
@@ -1696,20 +1900,47 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 //                destination1.getcitylongitude = citylong
                 destination1.getdevicelatitude = devicelatitude
                 destination1.getdevicelongitude = devicelongitude
-                destination1.selectedliqor = textfield2.text
+               // destination1.selectedliqor = textfield2.text
+                
+                destination1.selectedliqor = subcategoryliqlabel.text
+                
+                
                 destination1.getvodkalatitude = restlat
                 destination1.getvodkalongitude = restlong
                 destination1.getselectedcityname = getselectedcityname
                 destination1.locationnamefromtextfield = autocompletedTextfieldnew.text
                 println(autocompletedTextfieldnew.text)
-                destination1.liqtypefromTextfield = beerTypeTextfield.text
-                destination1.localityFromtextfield = localityTextfield.text
+               // destination1.liqtypefromTextfield = beerTypeTextfield.text
+                
+                
+                
+                 //Instead of lactaclity textfield im using label.
+                 destination1.liqtypefromTextfield = categoryliqlabel.text
+                
+                
+              //  destination1.localityFromtextfield = localityTextfield.text
+                
+                
+                // Instead of lactaclity textfield im using label.
+                destination1.localityFromtextfield = label.text!
                 
                 destination1.citylatitudefFomresult = citylat
                 destination1.citylongitudeFromresult = citylong
-                destination1.liqtypeFromresult = beerTypeTextfield.text
-                destination1.liqFromresult = textfield2.text
-                destination1.localityfromtextfield1 = localityTextfield.text
+               // destination1.liqtypeFromresult = beerTypeTextfield.text
+                
+                //Instead of lactaclity textfield im using label.
+                destination1.liqtypeFromresult = categoryliqlabel.text
+                
+                
+                //destination1.liqFromresult = textfield2.text
+                
+                destination1.liqFromresult = subcategoryliqlabel.text
+                
+                
+              //  destination1.localityfromtextfield1 = localityTextfield.text
+                
+                //Instead of lactaclity textfield im using label.
+                destination1.localityfromtextfield1 = label.text!
             }
         }
         if segue.identifier == "getwinenearyou"
@@ -1727,16 +1958,13 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 println(citylong)
                 destination2.citylat = winecitylat
                 destination2.citylong = winecitylong
-                destination2.newlocate = autocompletedTextfieldnew.text + localityTextfield.text
+               // destination2.newlocate = autocompletedTextfieldnew.text + localityTextfield.text
+                
+                
+                 //Instead of lactaclity textfield im using label.
+                destination2.newlocate = autocompletedTextfieldnew.text + label.text!
             }
             
-        }
-        if segue.identifier == "cocktail"
-        {
-            if let destination2 = segue.destinationViewController as? Cocktail
-            {
-                
-            }
         }
     }
     
@@ -1761,14 +1989,17 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
   
         
         
-        if textfield2.text == "All"
+        if subcategoryliqlabel.text == "All"
         {
             println(citylat)
             println(citylong)
             println(trimmedString)
             println(beerTypeTextfield.text)
-            var name  = beerTypeTextfield.text
-            var name1 =  name.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            //var name  = beerTypeTextfield.text
+            
+            var name  = categoryliqlabel.text
+            
+            var name1 =  name!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             println(name1)
             
             println(name)
@@ -1783,7 +2014,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(citylat)
             println(citylong)
             println(trimmedString)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=20&query=\(textfield2.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=20&query=\(subcategoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
         }
         
     }

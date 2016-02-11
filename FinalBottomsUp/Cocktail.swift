@@ -15,7 +15,11 @@ import FBSDKShareKit
 
 class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
-    
+    var PleaseWaitlabel1 = UILabel()
+    var actInd1 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+
+    @IBOutlet weak var sortbyfont: UILabel!
+    @IBOutlet weak var happyhoursfont: UILabel!
      var header2:[Restauarantcocktail] = [Restauarantcocktail]()
     var newHeader2:[Restauarantcocktail] = [Restauarantcocktail]()
     var head2:[Restaurant] = [Restaurant]()
@@ -284,6 +288,9 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     {
         super.viewDidLoad()
         
+        self.happyhoursfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        self.sortbyfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        
         
         
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "TableviewTapped:")
@@ -304,6 +311,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         
         //dealsnearyou.hidden = true
         locationnamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
+        locationnamedisplaybutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         
         locationnamedisplaybutton.layer.cornerRadius = 10
     
@@ -1694,14 +1702,8 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
-        
-        
-        
         if tableView.tag == 1
         {
-            
-            
             
             let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! Cocktailrowcell
             //cells.press2reveal.hidden = true
@@ -1716,10 +1718,13 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             //  resturantnamelable.text = "I just got a 10% discount at \(head[cells.press2reveal.tag].restname) through the BottomzUp App"
             //namefromlabel = resturantnamelable.text
             cells.distancelabelnew.text = header2[indexPath.section].distance
-            cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.hotelname.text = header2[indexPath.section].restname
-            cells.hotelname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            cells.hotelname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.areaname.text = header2[indexPath.section].restaddress
+            cells.areaname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            cells.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            cells.happytiming.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             //addresslabel.text = head[indexPath.section].Place
             newaddress = header2[indexPath.section].restaddress
             cells.happytiming.text = header2[indexPath.section].happystart + " - " + header2[indexPath.section].happyend
@@ -1748,7 +1753,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.liqTypes[indexPath.row]
-            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cell.textLabel?.textColor = UIColor.darkGrayColor()
             
             return cell
@@ -1759,7 +1764,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.liqTypes1[indexPath.row]
-            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cell.textLabel?.textColor = UIColor.darkGrayColor()
             
             return cell
@@ -1771,7 +1776,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.items[indexPath.row]
-            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cell.textLabel?.textColor = UIColor.darkGrayColor()
             
             return cell
@@ -1790,7 +1795,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             
             let index = indexPath.row as Int
             cell!.textLabel!.text = autocompleteUrls[index]
-            cell!.textLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14.0)
+            cell!.textLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
             return cell!
         }
@@ -1903,6 +1908,10 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             {
                 var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercellcocktail
                 headerCell.headercellname.text = header2[section].restname
+                headerCell.headercellname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                headerCell.citynamedisplay.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                
                 
                 println(head.count)
                 if header2.count >= 5
@@ -1959,20 +1968,20 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 println(happyhourstiming)
                 println(hstart)
                 var screensize = self.view.frame.width
-                headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
-                headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+                headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
               //  bottlebutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                // pintbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
                 
                 if boolexists == true
                 {
-                    headerCell.headercellmax.font = UIFont(name: "MyriadPro-Bold", size: 15)
-                    bottlebutton.titleLabel?.font = UIFont(name: "MyriadPro-Bold", size: 10)
+                    headerCell.headercellmax.font = UIFont(name: "MyriadPro-Bold", size: fontsizenew)
+                    bottlebutton.titleLabel?.font = UIFont(name: "MyriadPro-Bold", size: 11)
                     
                 }
                 else
                 {
-                    headerCell.headercellmin.font = UIFont(name: "MyriadPro-Bold", size: 15)
+                    headerCell.headercellmin.font = UIFont(name: "MyriadPro-Bold", size: fontsizenew)
                     pintbutton.titleLabel?.font = UIFont(name: "MyriadPro-Bold", size: 11)
                     
                 }
@@ -1985,7 +1994,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                     var happyhourstiming1 = "Happy Hours " + happyhourstiming
                     var myMutableString = NSMutableAttributedString()
                     
-                    myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 14.0)!])
+                    myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: fontsizenew)!])
                     
                     var length = myMutableString.length
                     
@@ -2005,7 +2014,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                     var happyhourstiming1 = "Happy Hours " + happyhourstiming
                     var myMutableString = NSMutableAttributedString()
                     
-                    myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 14.0)!])
+                    myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: fontsizenew)!])
                     
                     myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
                     
@@ -2048,7 +2057,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 
                 
                 //Giving Font family style to a UIButton
-                headerCell.mapbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+                headerCell.mapbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 
                 
                 
@@ -2080,13 +2089,13 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 if boolexists
                 {
                     
-                    headerCell1.bottlelabel.font = UIFont(name: "Helvetica-Bold", size: 12)
+                    headerCell1.bottlelabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                     //                headerCell1.pintlabel.backgroundColor = UIColor.whiteColor()
                     
                 }
                 else
                 {
-                    headerCell1.pintlabel.font = UIFont(name: "Helvetica-Bold", size: 12)
+                    headerCell1.pintlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                     //                headerCell1.bottlelabel.backgroundColor = UIColor.whiteColor()
                 }
                 
@@ -2420,10 +2429,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                     println(header2[i].minp)
                 }
             }
+            self.actInd1.hidden = true
         }
             
         else
         {
+            self.actInd1.hidden = true
             let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -3111,14 +3122,14 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 
                 
             case 2:
-                closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton7kms.frame = CGRectMake(0,75,70,70)
                 closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton7kms.tag=7
                 closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton5kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton5kms.frame = CGRectMake(0,150,70,70)
                 closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton5kms.tag=5
                 closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
@@ -3132,14 +3143,14 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 
                 
             case 5:
-                closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton7kms.frame = CGRectMake(0,75,70,70)
                 closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton7kms.tag=7
                 closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,70,70)
                 closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton2kms.tag=2
                 closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
@@ -3153,14 +3164,14 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 
             case 7:
                 
-                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
+                closelocationpopupbutton5kms.frame = CGRectMake(0,75,70,70)
                 closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton5kms.tag=5
                 closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+                closelocationpopupbutton2kms.frame = CGRectMake(0,150,70,70)
                 closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton2kms.tag=2
                 closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
@@ -3188,6 +3199,15 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
+        PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
+        PleaseWaitlabel1.text = "Please Wait..."
+        self.actInd1.center = self.view.center
+        self.actInd1.hidesWhenStopped = true
+        self.actInd1.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd1.color = UIColor.blackColor()
+        view.addSubview(actInd1)
+        self.actInd1.startAnimating()
+        self.actInd1.addSubview(PleaseWaitlabel1)
         if  lookfurtheboolean == false
         {
             lookfurtheboolean = true
@@ -3275,6 +3295,15 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
+        PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
+        PleaseWaitlabel1.text = "Please Wait..."
+        self.actInd1.center = self.view.center
+        self.actInd1.hidesWhenStopped = true
+        self.actInd1.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd1.color = UIColor.blackColor()
+        view.addSubview(actInd1)
+        self.actInd1.startAnimating()
+        self.actInd1.addSubview(PleaseWaitlabel1)
         if  lookfurtheboolean == false
         {
             lookfurtheboolean = true
@@ -3353,6 +3382,15 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
+        PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
+        PleaseWaitlabel1.text = "Please Wait..."
+        self.actInd1.center = self.view.center
+        self.actInd1.hidesWhenStopped = true
+        self.actInd1.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd1.color = UIColor.blackColor()
+        view.addSubview(actInd1)
+        self.actInd1.startAnimating()
+        self.actInd1.addSubview(PleaseWaitlabel1)
         if  lookfurtheboolean == false
         {
             lookfurtheboolean = true
@@ -3454,7 +3492,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         // label to display select beer and city name
         self.liqplacedisplaylabel = UILabel(frame: CGRectMake(10,3,self.view.frame.width - 20,25))
         self.liqplacedisplaylabel.backgroundColor = UIColor.whiteColor()
-        self.liqplacedisplaylabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        self.liqplacedisplaylabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         self.liqplacedisplaylabel.text =  liqtypefromTextfield + space + near + space + locationnamefromtextfield
         self.liqplacedisplaylabel.layer.cornerRadius = 10
         self.liqplacedisplaylabel.textAlignment = NSTextAlignment.Center
@@ -3465,7 +3503,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         self.dropdowntextfield = UITextField (frame:CGRectMake(10,40,self.view.frame.width - 20,35));
         dropdowntextfield.backgroundColor = UIColor.whiteColor()
         self.dropdowntextfield.delegate = self
-        dropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        dropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         dropdowntextfield.text = liqtypeFromresult
         dropdowntextfield.tag = 5
         dropdowntextfield.textColor = UIColor.darkGrayColor()
@@ -3484,7 +3522,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,85,self.view.frame.width - 20,35));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
-        newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         // newtextfieldtableview.text = liqtypefromTextfield
         newtextfieldtableview.text = liqFromresult
         newtextfieldtableview.tag = 2
@@ -3503,7 +3541,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         self.citydropdowntextfield = UITextField (frame:CGRectMake(10,135,self.view.frame.width - 20,35));
         citydropdowntextfield.backgroundColor = UIColor.whiteColor()
         self.citydropdowntextfield.delegate = self
-        citydropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        citydropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         // newtextfieldtableview.text = liqtypefromTextfield
         citydropdowntextfield.text = localityfromtextfield1
         citydropdowntextfield.tag = 8
@@ -3548,7 +3586,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         newtextfieldtableviewcity.text = locationnamefromtextfield
         newtextfieldtableviewcity.textColor = UIColor.darkGrayColor()
         configureTextField()
@@ -3599,7 +3637,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 35,y: 36,width: self.view.frame.width - 35,height: 35), superview: DynamicView)
         
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: fontsizenew)
         //   newtextfieldtableviewcity.placeholder = " Search for city here..."
         configureTextField()
         handleTextFieldInterfaces()

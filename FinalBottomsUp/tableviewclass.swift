@@ -17,7 +17,11 @@ import FBSDKShareKit
 
 class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate
 {
-    
+    var PleaseWaitlabel1 = UILabel()
+    var actInd1 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+    @IBOutlet weak var sortbyfontnew: UILabel!
+    @IBOutlet weak var happyhoursfont: UILabel!
+    @IBOutlet weak var sortbyfont: UIImageView!
    // var yourMobileNUmber = 8892640540
     var head2:[Restaurant] = [Restaurant]()
     var head3:[Restauarantcocktail] = [Restauarantcocktail]()
@@ -295,6 +299,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad()
     {
         
+        self.happyhoursfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        self.sortbyfontnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "TableviewTapped:")
         tableview.addGestureRecognizer(headerTapped)
        // tableview.tag = section
@@ -317,6 +324,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
         dealsnearyou.hidden = true
         locationnamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
+        locationnamedisplaybutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
       
         locationnamedisplaybutton.layer.cornerRadius = 10
         liqnamedisplaybutton.hidden = true
@@ -473,7 +481,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     private func configureTextField()
     {
         newtextfieldtableviewcity.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        newtextfieldtableviewcity.autoCompleteTextFont = UIFont(name: "MYRIADPRO-REGULAR", size: 14.0)
+        newtextfieldtableviewcity.autoCompleteTextFont = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         newtextfieldtableviewcity.autoCompleteCellHeight = 35.0
         newtextfieldtableviewcity.maximumAutoCompleteCount = 20
         newtextfieldtableviewcity.hidesWhenSelected = true
@@ -481,7 +489,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         newtextfieldtableviewcity.enableAttributedText = true
         var attributes = [String:AnyObject]()
         attributes[NSForegroundColorAttributeName] = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-        attributes[NSFontAttributeName] = UIFont(name: "MYRIADPRO-REGULAR", size: 14.0)
+        attributes[NSFontAttributeName] = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         newtextfieldtableviewcity.autoCompleteAttributes = attributes
         
     }
@@ -1817,10 +1825,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
       //  resturantnamelable.text = "I just got a 10% discount at \(head[cells.press2reveal.tag].restname) through the BottomzUp App"
         //namefromlabel = resturantnamelable.text
         cells.distancelabelnew.text = head[indexPath.section].distance
-            cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            cells.distancelabelnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.hotelname.text = head[indexPath.section].restname
-            cells.hotelname.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            cells.hotelname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.areaname.text = head[indexPath.section].restaddress
+            cells.areaname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            cells.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            cells.happytiming.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             //addresslabel.text = head[indexPath.section].Place
             newaddress = head[indexPath.section].restaddress
             cells.happytiming.text = head[indexPath.section].happystart + " - " + head[indexPath.section].happyend
@@ -1849,7 +1860,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.liqTypes[indexPath.row]
-            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cell.textLabel?.textColor = UIColor.darkGrayColor()
             
             return cell
@@ -1860,7 +1871,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.liqTypes1[indexPath.row]
-            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cell.textLabel?.textColor = UIColor.darkGrayColor()
             
             return cell
@@ -1872,7 +1883,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             cell.textLabel?.text = self.items[indexPath.row]
-            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:14)
+            cell.textLabel!.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cell.textLabel?.textColor = UIColor.darkGrayColor()
             
             return cell
@@ -1891,7 +1902,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             
             let index = indexPath.row as Int
             cell!.textLabel!.text = autocompleteUrls[index]
-            cell!.textLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14.0)
+            cell!.textLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
             return cell!
         }
@@ -2016,6 +2027,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.headercellname.text = head[section].restname
+                headerCell.headercellname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 
                 println(head.count)
                 if head.count >= 5
@@ -2064,6 +2076,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         headerCell.tapguesturerecognizer.tag = section
         headerCell.tapguesturerecognizer.userInteractionEnabled = true
                 headerCell.citynamedisplay.text = head[section].Place
+                headerCell.citynamedisplay.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
              ///   newaddress = head[section].Place
                // addresslabel.text = head[section].Place
                 
@@ -2102,23 +2115,25 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //                {
 //                    headerCell.Happyhourslabel.hidden = false
 //                }
+                headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 
                 var screensize = self.view.frame.width
-                headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
-                headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: 12)
+                headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                headerCell.headercellmin.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 bottlebutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
                 pintbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+               
         
                 if boolexists == true
             {
-               headerCell.headercellmax.font = UIFont(name: "MyriadPro-Bold", size: 15)
-                bottlebutton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 10)
+               headerCell.headercellmax.font = UIFont(name: "MyriadPro-Bold", size: fontsizenew)
+                bottlebutton.titleLabel?.font = UIFont(name: "MyriadPro-Bold", size: 11)
          
             }
             else
             {
-                headerCell.headercellmin.font = UIFont(name: "MyriadPro-Bold", size: 15)
-                pintbutton.titleLabel?.font = UIFont(name: "HelveticaNeue-bold", size: 10)
+                headerCell.headercellmin.font = UIFont(name: "MyriadPro-Bold", size: fontsizenew)
+                pintbutton.titleLabel?.font = UIFont(name: "MyriadPro-Bold", size: 11)
           
             }
                 
@@ -2130,7 +2145,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         var happyhourstiming1 = "Happy Hours " + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
                         
-                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 14.0)!])
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: fontsizenew)!])
                         
                         var length = myMutableString.length
                         
@@ -2165,7 +2180,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         var happyhourstiming1 = "Happy Hours " + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
                         
-                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: 14.0)!])
+                        myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: fontsizenew)!])
                         
                         myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
                         
@@ -2233,7 +2248,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
         
         //Giving Font family style to a UIButton
-        headerCell.mapbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        headerCell.mapbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 
 
 
@@ -2250,6 +2265,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             headerCell1.bottlelabel.text = "\(head[section].maxp)"
             headerCell1.distancelabel.text = "\(head[section].distance)"
             headerCell1.Areanamelabel.text = " " + head[section].Place
+            headerCell1.Areanamelabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            
 
            
 
@@ -2265,13 +2282,13 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             if boolexists
             {
   
-                headerCell1.bottlelabel.font = UIFont(name: "Helvetica-Bold", size: 12)
+                headerCell1.bottlelabel.font = UIFont(name: "Helvetica-Bold", size: fontsizenew)
 //                headerCell1.pintlabel.backgroundColor = UIColor.whiteColor()
                 
             }
             else
             {
-              headerCell1.pintlabel.font = UIFont(name: "Helvetica-Bold", size: 12)
+              headerCell1.pintlabel.font = UIFont(name: "Helvetica-Bold", size: fontsizenew)
                 //                headerCell1.bottlelabel.backgroundColor = UIColor.whiteColor()
             }
 
@@ -2603,12 +2620,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                     println(head[i].minp)
                 }
             }
+            actInd1.hidden = true
         }
             
         else
         {
-            let alertController = UIAlertController(title: "Bottomz Up", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            actInd1.hidden = true
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             
         }
@@ -3208,7 +3227,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         println(getdevicelongitude)
        //  UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(head[sender.tag].Restaurantlatitude),\(head[sender.tag].Restaurantlongitude)")!)
         
-        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=13.043148,77.570403&daddr=\(reslatitude),\(reslongitude)")!)
+      //  UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=13.043148,77.570403&daddr=\(reslatitude),\(reslongitude)")!)
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(reslatitude),\(reslongitude)")!)
     }
 
     
@@ -3286,14 +3306,14 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
 
             
         case 2:
-            closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
+            closelocationpopupbutton7kms.frame = CGRectMake(5,75,70,70)
             closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton7kms.tag=7
             closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
             
             
             
-            closelocationpopupbutton5kms.frame = CGRectMake(0,150,75,75)
+            closelocationpopupbutton5kms.frame = CGRectMake(5,150,70,70)
             closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton5kms.tag=5
             closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
@@ -3307,14 +3327,14 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
 
             
         case 5:
-            closelocationpopupbutton7kms.frame = CGRectMake(0,75,75,75)
+            closelocationpopupbutton7kms.frame = CGRectMake(5,90,70,70)
             closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton7kms.tag=7
             closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
             
             
             
-            closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+            closelocationpopupbutton2kms.frame = CGRectMake(5,160,70,70)
             closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton2kms.tag=2
             closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
@@ -3328,14 +3348,14 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
         case 7:
             
-            closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
+            closelocationpopupbutton5kms.frame = CGRectMake(5,75,70,70)
             closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton5kms.tag=5
             closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
             
             
             
-            closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
+            closelocationpopupbutton2kms.frame = CGRectMake(5,150,70,70)
             closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton2kms.tag=2
             closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
@@ -3363,6 +3383,16 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
+        PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
+        PleaseWaitlabel1.text = "Please Wait..."
+        self.actInd1.center = self.view.center
+        self.actInd1.hidesWhenStopped = true
+        self.actInd1.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd1.color = UIColor.blackColor()
+        view.addSubview(actInd1)
+        self.actInd1.startAnimating()
+        self.actInd1.addSubview(PleaseWaitlabel1)
+        
         if  lookfurtheboolean == false
         {
             lookfurtheboolean = true
@@ -3450,6 +3480,15 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
+        PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
+        PleaseWaitlabel1.text = "Please Wait..."
+        self.actInd1.center = self.view.center
+        self.actInd1.hidesWhenStopped = true
+        self.actInd1.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd1.color = UIColor.blackColor()
+        view.addSubview(actInd1)
+        self.actInd1.startAnimating()
+        self.actInd1.addSubview(PleaseWaitlabel1)
         if  lookfurtheboolean == false
         {
             lookfurtheboolean = true
@@ -3528,6 +3567,15 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
+        PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
+        PleaseWaitlabel1.text = "Please Wait..."
+        self.actInd1.center = self.view.center
+        self.actInd1.hidesWhenStopped = true
+        self.actInd1.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd1.color = UIColor.blackColor()
+        view.addSubview(actInd1)
+        self.actInd1.startAnimating()
+        self.actInd1.addSubview(PleaseWaitlabel1)
         if  lookfurtheboolean == false
         {
             lookfurtheboolean = true
@@ -3629,7 +3677,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         // label to display select beer and city name
         self.liqplacedisplaylabel = UILabel(frame: CGRectMake(10,3,self.view.frame.width - 20,25))
         self.liqplacedisplaylabel.backgroundColor = UIColor.whiteColor()
-        self.liqplacedisplaylabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        self.liqplacedisplaylabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         self.liqplacedisplaylabel.text =  liqtypefromTextfield + space + near + space + locationnamefromtextfield
         self.liqplacedisplaylabel.layer.cornerRadius = 10
         self.liqplacedisplaylabel.textAlignment = NSTextAlignment.Center
@@ -3640,7 +3688,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.dropdowntextfield = UITextField (frame:CGRectMake(10,40,self.view.frame.width - 20,35));
         dropdowntextfield.backgroundColor = UIColor.whiteColor()
         self.dropdowntextfield.delegate = self
-        dropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        dropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         dropdowntextfield.text = liqtypeFromresult
         dropdowntextfield.tag = 5
         dropdowntextfield.textColor = UIColor.darkGrayColor()
@@ -3659,7 +3707,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableview = UITextField (frame:CGRectMake(10,85,self.view.frame.width - 20,35));
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
-        newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
        // newtextfieldtableview.text = liqtypefromTextfield
         newtextfieldtableview.text = liqFromresult
         newtextfieldtableview.tag = 2
@@ -3678,7 +3726,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.citydropdowntextfield = UITextField (frame:CGRectMake(10,135,self.view.frame.width - 20,35));
         citydropdowntextfield.backgroundColor = UIColor.whiteColor()
         self.citydropdowntextfield.delegate = self
-        citydropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        citydropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         // newtextfieldtableview.text = liqtypefromTextfield
         citydropdowntextfield.text = localityfromtextfield1
         citydropdowntextfield.tag = 8
@@ -3723,7 +3771,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+        newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         newtextfieldtableviewcity.text = locationnamefromtextfield
         newtextfieldtableviewcity.textColor = UIColor.darkGrayColor()
         configureTextField()
@@ -3773,7 +3821,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 35,y: 36,width: self.view.frame.width - 35,height: 35), superview: DynamicView)
         
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
-        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        newtextfieldtableviewcity.font = UIFont(name: "HelveticaNeue-Bold", size: fontsizenew)
      //   newtextfieldtableviewcity.placeholder = " Search for city here..."
         configureTextField()
         handleTextFieldInterfaces()

@@ -15,6 +15,7 @@ import Crashlytics
 
 
 
+var fontsizenew:CGFloat!
 
 @UIApplicationMain
 
@@ -24,9 +25,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     var window: UIWindow?
     var reachability:Reachability?
    
-    
+   static var fontsize:Int!
+    static var timesCalled = 0
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        
+        
+        
+        var screenHeight: CGFloat = UIScreen.mainScreen().bounds.size.height
+        var screenWidth: CGFloat = UIScreen.mainScreen().bounds.size.width
+        if screenHeight < screenWidth
+        {
+            screenHeight = screenWidth
+        }
+        if screenHeight > 480 && screenHeight < 667
+        {
+           
+          fontsizenew = 11
+            println(fontsizenew)
+            NSLog("iPhone 5/5s")
+        }
+        else if screenHeight > 480 && screenHeight < 736
+        {
+            fontsizenew = 13
+            println(fontsizenew)
+            NSLog("iPhone 6")
+        }
+        else if screenHeight > 480
+        {
+            fontsizenew = 16
+            NSLog("iPhone 6 Plus")
+        }
+        else
+        {
+            fontsizenew = 8
+            NSLog("iPhone 4/4s")
+        }
+        
+
+        
+//        let screenSize: CGRect = UIScreen.mainScreen().bounds
+//        
+//        let screenWidth = screenSize.width
+//        let screenHeight = screenSize.height
+//        
+//        if screenWidth <= 320
+//        {
+//            
+//        }
+//        else
+//        {
+//            
+//        }
+//        
+//        println(screenWidth)
+//        println(screenHeight)
+        
+
+        
         
 //        var configureError: NSError?
 //        GGLContext.sharedInstance().configureWithError(&configureError)
