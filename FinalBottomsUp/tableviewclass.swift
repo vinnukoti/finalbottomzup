@@ -294,10 +294,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var devicelatitude:Double!
     var devicelongitude:Double!
-
     
+     var actInd2 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+    var PleaseWaitlabel2 = UILabel()
+
+     var tapview = UIView()
     override func viewDidLoad()
     {
+        actInd2.hidden = true
         
         self.happyhoursfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         self.sortbyfontnew.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
@@ -1035,6 +1039,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         else if tableView.tag == 4
         {
+            
             citydropdowntextfield.enabled = true
             newtextfieldtableview.enabled = true
             dropdowntextfield.enabled = true
@@ -1055,6 +1060,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         else if tableView.tag == 9
         {
+           
+            newtextfieldtableviewcity.text = ""
             citydropdowntextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             citydropdowntextfield.text = selectedCell1.textLabel?.text
@@ -1588,14 +1595,16 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
             }
+            actInd2.hidden = true
             
 
         }
             
         else
         {
+            actInd2.hidden = true
             showdropdownview.hidden = false
-            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         
@@ -2626,7 +2635,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         else
         {
             actInd1.hidden = true
-            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             
@@ -2697,8 +2706,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 destination3.beerTypefromtextfield = beerTypefromtextfield
                 destination3.selectedliqor = newtextfieldtableview.text
-                destination3.getdevicelatitude = devicelatitude
-                destination3.getdevicelongitude = devicelongitude
+                destination3.getdevicelatitude = getdevicelatitude
+                destination3.getdevicelongitude = getdevicelongitude
                 destination3.getcitylatitude = citylat
                 destination3.getcitylongitude = citylong
                 destination3.getrestlatitudebeer = restlat
@@ -2717,9 +2726,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 destination3.localityFromtextfield = citydropdowntextfield.text
                 destination3.citylatitudefFomresult = citylat
                 destination3.citylongitudeFromresult = citylong
+                println(dropdowntextfield.text)
                 destination3.liqtypeFromresult = dropdowntextfield.text
                 destination3.liqFromresult = newtextfieldtableview.text
+                println(newtextfieldtableview.text)
                 destination3.localityfromtextfield1 = citydropdowntextfield.text
+                destination3.liqtypeFromresult = dropdowntextfield.text
             }
         }
 
@@ -2756,6 +2768,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
            destination1.citylatitudefFomresult = citylat
             destination1.citylongitudeFromresult = citylong
             destination1.localityfromtextfield1 = citydropdowntextfield.text
+            destination1.liqtypeFromresult = dropdowntextfield.text
         }
         }
         
@@ -3383,6 +3396,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
+        //self.view.makeToast("Account created Successfully", duration: 0.5, position: CSToastPositionBottom)
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3667,8 +3681,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
-        var tapview = UIView()
-        tapview = UIView(frame: CGRectMake(0,200,self.view.frame.width,self.view.frame.height))
+       
+        tapview = UIView(frame: CGRectMake(0,280,self.view.frame.width,self.view.frame.height))
         var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
         tap.delegate = self
         showdropdownview.userInteractionEnabled = true
@@ -3784,6 +3798,17 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func Getresults(sender:UIButton!)
     {
+        PleaseWaitlabel2 = UILabel(frame: CGRectMake(-25,20, 150, 100))
+        PleaseWaitlabel2.text = "Please Wait..."
+        PleaseWaitlabel2.textColor = UIColor.whiteColor()
+       // self.actInd2.center = self.view.center
+        self.actInd2 = UIActivityIndicatorView(frame: CGRectMake(self.view.frame.width/2 - 30, 280 , 50, 50))
+        self.actInd2.hidesWhenStopped = true
+        self.actInd2.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd2.color = UIColor.whiteColor()
+        self.view.addSubview(actInd2)
+        self.actInd2.startAnimating()
+        self.actInd2.addSubview(PleaseWaitlabel2)
          showdropdownview.hidden = false
         if togglebeer == true
         {
@@ -3844,13 +3869,15 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     func ApiCall()
     {
 
-            println(citylat)
-            println(citylong)
         
+        if dropdowntextfield.text != nil && newtextfieldtableviewcity.text != "" && citydropdowntextfield.text != nil && newtextfieldtableview.text != nil
+        {
         
         
         if newtextfieldtableview.text == "All"
         {
+            println(citylat)
+            println(citylong)
             var passliq = dropdowntextfield.text
             println(newtextfieldtableview.text)
             
@@ -3864,6 +3891,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         }
         else
         {
+            println(citylat)
+            println(citylong)
             var passliq = newtextfieldtableview.text
             println(newtextfieldtableview.text)
             
@@ -3873,7 +3902,16 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
             //showdropdownview.hidden = true
         }
-            
+        }
+        
+        else
+        {
+             actInd2.hidden = true
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
         
 
         
@@ -3896,6 +3934,10 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     @IBAction func findwineandbeernewryou(sender: UIButton)
     {
         performSegueWithIdentifier("getwinenearyoufrombeer", sender: self)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        actInd2.hidden = true
     }
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)

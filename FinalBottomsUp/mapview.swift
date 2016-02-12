@@ -264,8 +264,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         }
         else
         {
-            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         
@@ -353,8 +353,8 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         }
         else
         {
-            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         
@@ -756,6 +756,11 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.google.com/maps?saddr=\(getdevicelatitude),\(getdevicelongitude)&daddr=\(wineandbararray[sender.tag].restlat),\(wineandbararray[sender.tag].restlong)")!)
     }
     
+    @IBAction func backbutton(sender: UIButton)
+    {
+        
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
 
 }
 

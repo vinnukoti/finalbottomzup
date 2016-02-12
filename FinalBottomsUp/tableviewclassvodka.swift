@@ -201,9 +201,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var devicelatitude:Double!
     var devicelongitude:Double!
     
+    var actInd2 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+    var PleaseWaitlabel2 = UILabel()
+    
     override func viewDidLoad()
   
     {
+         println(liqtypeFromresult)
+         println(liqFromresult)
+        
         self.happyhoursfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         self.sortbyfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         
@@ -1705,7 +1711,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         else
         {
              actInd1.hidden = true
-            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
@@ -2020,6 +2026,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         else if tableView.tag == 9
         {
+            newtextfieldtableviewcity.text = ""
             citydropdowntextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             citydropdowntextfield.text = selectedCell1.textLabel?.text
@@ -2533,11 +2540,13 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 // self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
                 citynamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
             }
+            actInd2.hidden = true
         }
         else
         {
+            actInd2.hidden = true
             showdropdownview.hidden = false
-            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             
@@ -2573,6 +2582,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination.citylatitudefFomresult = citylat
                 destination.citylongitudeFromresult = citylong
                 destination.localityfromtextfield1 = citydropdowntextfield.text
+                destination.liqtypeFromresult = dropdowntextfield.text
                 
                 
                 
@@ -2591,8 +2601,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 destination3.beerTypefromtextfield = beerTypefromtextfield
                 destination3.selectedliqor = newtextfieldtableview.text
-                destination3.getdevicelatitude = devicelatitude
-                destination3.getdevicelongitude = devicelongitude
+                destination3.getdevicelatitude = getdevicelatitude
+                destination3.getdevicelongitude = getdevicelongitude
                 destination3.getcitylatitude = citylat
                 destination3.getcitylongitude = citylong
                 destination3.getrestlatitudebeer = restlat
@@ -2614,6 +2624,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination3.liqtypeFromresult = dropdowntextfield.text
                 destination3.liqFromresult = newtextfieldtableview.text
                 destination3.localityfromtextfield1 = citydropdowntextfield.text
+                destination3.liqtypeFromresult = dropdowntextfield.text
             }
         }
         
@@ -3417,6 +3428,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func Getresults(sender:UIButton!)
     {
+        
+        PleaseWaitlabel2 = UILabel(frame: CGRectMake(-25,20, 150, 100))
+        PleaseWaitlabel2.text = "Please Wait..."
+        PleaseWaitlabel2.textColor = UIColor.whiteColor()
+        //self.actInd2.center = self.view.center
+        self.actInd2 = UIActivityIndicatorView(frame: CGRectMake(self.view.frame.width/2 - 30, 280 , 50, 50))
+        self.actInd2.hidesWhenStopped = true
+        self.actInd2.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd2.color = UIColor.whiteColor()
+        view.addSubview(actInd2)
+        self.actInd2.startAnimating()
+        self.actInd2.addSubview(PleaseWaitlabel2)
         showdropdownview.hidden = false
         if togglevodka == true
         {
@@ -3516,6 +3539,9 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 //            
 //            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passliqspaceremoved)")
         
+        if dropdowntextfield.text != nil && newtextfieldtableviewcity.text != "" && citydropdowntextfield.text != nil && newtextfieldtableview.text != nil
+        {
+        
         
         if newtextfieldtableview.text == "All"
         {
@@ -3541,6 +3567,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
           
         }
+        }
+        else
+        {
+            actInd2.hidden = true
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
        
 
         
@@ -3557,7 +3591,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
            var  passliqspaceremoved = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passliqspaceremoved)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=4&query=\(passliqspaceremoved)")
         
 
         

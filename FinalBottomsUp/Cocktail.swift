@@ -283,9 +283,15 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     var devicelatitude:Double!
     var devicelongitude:Double!
+    
+    var actInd2 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+    var PleaseWaitlabel2 = UILabel()
 
     override func viewDidLoad()
     {
+        
+        println(getdevicelatitude)
+        println(getdevicelongitude)
         super.viewDidLoad()
         
         self.happyhoursfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
@@ -1051,6 +1057,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             
         else if tableView.tag == 9
         {
+            newtextfieldtableviewcity.text = ""
             citydropdowntextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             citydropdowntextfield.text = selectedCell1.textLabel?.text
@@ -1582,13 +1589,15 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             {
                 self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
             }
+            actInd2.hidden = true
             
         }
             
         else
         {
+            actInd2.hidden = true
             showdropdownview.hidden = false
-            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             
@@ -2435,7 +2444,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         else
         {
             self.actInd1.hidden = true
-            let alertController = UIAlertController(title: "Bottomz Up", message:"No Dtat found Please try with some other Place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             
@@ -2530,6 +2539,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 destination1.citylatitudefFomresult = citylat
                 destination1.citylongitudeFromresult = citylong
                 destination1.localityfromtextfield1 = citydropdowntextfield.text
+                destination1.liqtypeFromresult = dropdowntextfield.text
                 
             }
         }
@@ -2568,6 +2578,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 destination1.citylatitudefFomresult = citylat
                 destination1.citylongitudeFromresult = citylong
                 destination1.localityfromtextfield1 = citydropdowntextfield.text
+                destination1.liqtypeFromresult = dropdowntextfield.text
                 
             }
         }
@@ -3599,6 +3610,17 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func Getresults(sender:UIButton!)
     {
+        PleaseWaitlabel2 = UILabel(frame: CGRectMake(-25,20, 150, 100))
+        PleaseWaitlabel2.text = "Please Wait..."
+        PleaseWaitlabel2.textColor = UIColor.whiteColor()
+       // self.actInd2.center = self.view.center
+        self.actInd2 = UIActivityIndicatorView(frame: CGRectMake(self.view.frame.width/2 - 30, 280 , 50, 50))
+        self.actInd2.hidesWhenStopped = true
+        self.actInd2.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.actInd2.color = UIColor.whiteColor()
+        view.addSubview(actInd2)
+        self.actInd2.startAnimating()
+        self.actInd2.addSubview(PleaseWaitlabel2)
         showdropdownview.hidden = false
         if togglebeer == true
         {
@@ -3664,7 +3686,8 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         println(citylat)
         println(citylong)
         
-        
+        if dropdowntextfield.text != nil && newtextfieldtableviewcity.text != "" && citydropdowntextfield.text != nil && newtextfieldtableview.text != nil
+        {
         
         if newtextfieldtableview.text == "All"
         {
@@ -3689,6 +3712,15 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             println(passspaceremovedliq)
             self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
            
+        }
+        }
+        else
+        {
+             actInd2.hidden = true
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+
         }
         
         

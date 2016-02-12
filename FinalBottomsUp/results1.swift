@@ -122,6 +122,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var currentLocation = "Current Location"
      var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
      var actInd1 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+   
    // var indicatorview = UIView()
     var PleaseWaitlabel = UILabel()
     var PleaseWaitlabel1 = UILabel()
@@ -944,7 +945,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // Locality tableview
         if tableView.tag == 4
         {
-           // autocompletedTextfieldnew.userInteractionEnabled = true
+            autocompletedTextfieldnew.text = ""
             localityTextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
            // localityTextfield.text = selectedCell1.textLabel?.text
@@ -1709,8 +1710,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             count = count + 1
             println(count)
             println("Nithin")
-            let alertController = UIAlertController(title: "Bottomz Up", message:"Appsriv", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "No data Found", style: UIAlertActionStyle.Default,handler: nil))
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
@@ -1986,6 +1987,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     func ApiCall()
     {
+        if label.text != nil && categoryliqlabel.text != nil && subcategoryliqlabel.text != nil && autocompletedTextfieldnew.text != ""
+        {
+            println(autocompletedTextfieldnew.text)
+             println(label.text)
+             println(categoryliqlabel.text)
+             println(subcategoryliqlabel.text)
   
         
         
@@ -2015,6 +2022,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(citylong)
             println(trimmedString)
             getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=20&query=\(subcategoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+        }
+        }
+        else
+        {
+            actInd1.hidden = true
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
     }
