@@ -11,6 +11,9 @@
 		530724081C62397700BC83A2 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 530724071C62397700BC83A2 /* GoogleSignIn.bundle */; };
 		5307240A1C62399500BC83A2 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530724091C62399500BC83A2 /* GoogleSignIn.framework */; };
 		5307240C1C6239D500BC83A2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5307240B1C6239D500BC83A2 /* StoreKit.framework */; };
+		5307F3A01C71E6DF000CB4C2 /* JLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5307F39F1C71E6DF000CB4C2 /* JLToastView.swift */; };
+		5307F3A41C71E6F5000CB4C2 /* JLToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5307F3A21C71E6F5000CB4C2 /* JLToast.swift */; };
+		5307F3A51C71E6F5000CB4C2 /* JLToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5307F3A31C71E6F5000CB4C2 /* JLToastCenter.swift */; };
 		531E05501C637FC7008F4435 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E054F1C637FC7008F4435 /* Cocktail.swift */; };
 		531EC5C21C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */; };
 		531F58B71C3104E800E9D583 /* Dealsnearyouclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */; };
@@ -113,6 +116,10 @@
 		530724071C62397700BC83A2 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		530724091C62399500BC83A2 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		5307240B1C6239D500BC83A2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5307F39F1C71E6DF000CB4C2 /* JLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastView.swift; sourceTree = "<group>"; };
+		5307F3A11C71E6F5000CB4C2 /* JLToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLToast.h; sourceTree = "<group>"; };
+		5307F3A21C71E6F5000CB4C2 /* JLToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToast.swift; sourceTree = "<group>"; };
+		5307F3A31C71E6F5000CB4C2 /* JLToastCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastCenter.swift; sourceTree = "<group>"; };
 		531E054F1C637FC7008F4435 /* Cocktail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
 		531EC5C11C35636C00EADFA7 /* black bubble_CLIPCHAMP_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "black bubble_CLIPCHAMP_1080p.mp4"; sourceTree = "<group>"; };
 		531F58B61C3104E800E9D583 /* Dealsnearyouclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dealsnearyouclass.swift; sourceTree = "<group>"; };
@@ -386,6 +393,10 @@
 		5367CEF41B9DB0EA00D33220 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5307F3A11C71E6F5000CB4C2 /* JLToast.h */,
+				5307F3A21C71E6F5000CB4C2 /* JLToast.swift */,
+				5307F3A31C71E6F5000CB4C2 /* JLToastCenter.swift */,
+				5307F39F1C71E6DF000CB4C2 /* JLToastView.swift */,
 				5367A9A61C59FF6000FA441E /* libGoogleAnalyticsServices.a */,
 				5367A99C1C59FBAF00FA441E /* GAI.h */,
 				5367A99D1C59FBAF00FA441E /* GAIDictionaryBuilder.h */,
@@ -632,6 +643,7 @@
 				53F068291C2C0FA400ADC41C /* DealsNearyou.swift in Sources */,
 				5389EE3F1BC65117007999AE /* custmheadercell1.swift in Sources */,
 				537CA3E11BBA58400082D896 /* liqclass.swift in Sources */,
+				5307F3A51C71E6F5000CB4C2 /* JLToastCenter.swift in Sources */,
 				5367CEF91B9DB0EA00D33220 /* ViewController.swift in Sources */,
 				53A659771C11AEDE0002B4BC /* GifImageclassViewController.swift in Sources */,
 				537809D31BE4C81F00C18D6B /* CheckBox.swift in Sources */,
@@ -654,11 +666,13 @@
 				538D0A481BA4194B005D1386 /* Service.swift in Sources */,
 				537CA3DF1BBA58240082D896 /* Restaurant.swift in Sources */,
 				5389EE411BC65146007999AE /* onemoreclass2.swift in Sources */,
+				5307F3A01C71E6DF000CB4C2 /* JLToastView.swift in Sources */,
 				53E512401BF0E6A200FFC78E /* NewClass.swift in Sources */,
 				5389EE3D1BC63139007999AE /* liqvodka.swift in Sources */,
 				534D91C41C58D2D9008FE599 /* CheckforInternetViewController.swift in Sources */,
 				5389EE391BC630EE007999AE /* tableviewclassvodka.swift in Sources */,
 				53F9E8FF1C4A4F8600183052 /* AutoCompleteTextField4.swift in Sources */,
+				5307F3A41C71E6F5000CB4C2 /* JLToast.swift in Sources */,
 				5367CEF71B9DB0EA00D33220 /* AppDelegate.swift in Sources */,
 				538D0A461BA4194B005D1386 /* Location.swift in Sources */,
 			);

@@ -55,6 +55,11 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
      let closelocationpopupbutton5kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     
       let closelocationpopupbutton2kms = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    
+    var searchedLocality:String!
+    var searchedLiq:String!
+    var searchedaLiqType:String!
+    var searchedsubLocality:String!
 
 
     @IBOutlet weak var lookfurtherdefault: UIButton!
@@ -758,8 +763,11 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     @IBAction func backbutton(sender: UIButton)
     {
+      //  performSegueWithIdentifier("backtopreviousview", sender: self)
         
         self.dismissViewControllerAnimated(true, completion: {});
+        
+       // navigationController!.popViewControllerAnimated(true)
     }
 
 }

@@ -299,6 +299,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var PleaseWaitlabel2 = UILabel()
 
      var tapview = UIView()
+    
+    var searchedLocality:String!
+    var searchedLiq:String!
+    var searchedaLiqType:String!
+    var searchedsubLocality:String!
     override func viewDidLoad()
     {
         actInd2.hidden = true
@@ -999,6 +1004,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         newtextfieldtableview.text = selectedCell1.textLabel?.text
          liqnamefromtextfield = newtextfieldtableview.text
+           // searchedaLiqType = newtextfieldtableview.text
             isliqtextfieldhasdata = true
             if liqnamefromtextfield.rangeOfString(substringofselectedliq) != nil
             {
@@ -1047,6 +1053,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             dropdowntextfield.text = selectedCell1.textLabel?.text
 
             beerdropdowntableview.hidden = true
+            searchedLiq = dropdowntextfield.text
         }
         
         else if tableView.tag == 6
@@ -1056,6 +1063,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             newtextfieldtableview.text = selectedCell1.textLabel?.text
             beerTypedropdowntableview.hidden = true
+            searchedaLiqType =  newtextfieldtableview.text
         }
         
         else if tableView.tag == 9
@@ -1066,6 +1074,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             citydropdowntextfield.text = selectedCell1.textLabel?.text
             citydropdowntableview.hidden = true
+            searchedLocality = citydropdowntextfield.text
         }
     }
     
@@ -1595,6 +1604,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
             }
+            
+            //self.view.removeFromSuperview()
+            if let viewWithTag = self.view.viewWithTag(100) {
+                println("Tag 100")
+                viewWithTag.removeFromSuperview()
+            }
             actInd2.hidden = true
             
 
@@ -1602,6 +1617,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             
         else
         {
+            // self.view.removeFromSuperview()
+            if let viewWithTag = self.view.viewWithTag(100) {
+                println("Tag 100")
+                viewWithTag.removeFromSuperview()
+            }
             actInd2.hidden = true
             showdropdownview.hidden = false
             let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
@@ -2732,6 +2752,24 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 println(newtextfieldtableview.text)
                 destination3.localityfromtextfield1 = citydropdowntextfield.text
                 destination3.liqtypeFromresult = dropdowntextfield.text
+                
+                destination3.searchedLocality = searchedLocality
+                
+                
+                //Beer
+                destination3.searchedLiq = searchedLiq
+                
+                
+                
+                //Sublocality
+                
+                destination3.searchedsubLocality = locationnamefromtextfield
+                
+                //All
+                
+                destination3.searchedaLiqType = searchedaLiqType
+
+                
             }
         }
 
@@ -2769,6 +2807,23 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             destination1.citylongitudeFromresult = citylong
             destination1.localityfromtextfield1 = citydropdowntextfield.text
             destination1.liqtypeFromresult = dropdowntextfield.text
+            
+            destination1.searchedLocality = searchedLocality
+            
+            
+            //Beer
+            destination1.searchedLiq = searchedLiq
+            
+            
+            
+            //Sublocality
+            
+            destination1.searchedsubLocality = locationnamefromtextfield
+            
+            //All
+            
+            destination1.searchedaLiqType = searchedaLiqType
+
         }
         }
         
@@ -2780,6 +2835,30 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 destination2.getdevicelongitude = getdevicelongitude
                 destination2.newlocate = locationnamefromtextfield
             }
+        }
+        else if segue.identifier == "gobacktoresult1"
+        {
+            if let destination2 = segue.destinationViewController as? results1
+            {
+                
+                //Locality
+                destination2.searchedLocality = searchedLocality
+            
+                
+                //Beer
+                destination2.searchedLiq = searchedLiq
+
+                
+                
+                //Sublocality
+
+                destination2.searchedsubLocality = locationnamefromtextfield
+ 
+                //All
+
+                destination2.searchedaLiqType = searchedaLiqType
+            }
+            
         }
         
     }
@@ -3319,14 +3398,14 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
 
             
         case 2:
-            closelocationpopupbutton7kms.frame = CGRectMake(5,75,70,70)
+            closelocationpopupbutton7kms.frame = CGRectMake(5,90,70,70)
             closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton7kms.tag=7
             closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
             
             
             
-            closelocationpopupbutton5kms.frame = CGRectMake(5,150,70,70)
+            closelocationpopupbutton5kms.frame = CGRectMake(5,160,70,70)
             closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton5kms.tag=5
             closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
@@ -3361,14 +3440,14 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
         case 7:
             
-            closelocationpopupbutton5kms.frame = CGRectMake(5,75,70,70)
+            closelocationpopupbutton5kms.frame = CGRectMake(5,90,70,70)
             closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton5kms.tag=5
             closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
             
             
             
-            closelocationpopupbutton2kms.frame = CGRectMake(5,150,70,70)
+            closelocationpopupbutton2kms.frame = CGRectMake(5,160,70,70)
             closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
             closelocationpopupbutton2kms.tag=2
             closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
@@ -3396,6 +3475,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
+        JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         //self.view.makeToast("Account created Successfully", duration: 0.5, position: CSToastPositionBottom)
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
@@ -3494,6 +3574,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
+        JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3581,6 +3662,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
+        JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3809,6 +3891,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.view.addSubview(actInd2)
         self.actInd2.startAnimating()
         self.actInd2.addSubview(PleaseWaitlabel2)
+        self.actInd2.tag = 100
          showdropdownview.hidden = false
         if togglebeer == true
         {
@@ -3936,9 +4019,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         performSegueWithIdentifier("getwinenearyoufrombeer", sender: self)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        actInd2.hidden = true
-    }
+ 
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
 //    {

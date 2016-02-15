@@ -144,8 +144,18 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     @IBOutlet weak var localityDynamicView: UIView!
     @IBOutlet weak var categoryliqlabel: UILabel!
     @IBOutlet weak var liqcatogeryDynamicView: UIView!
+    
+    
+    var searchedLocality:String!
+    var searchedLiq:String!
+    var searchedaLiqType:String!
+    var searchedsubLocality:String!
+    
+    
     override func viewDidLoad()
     {
+        
+        autocompletedTextfieldnew.textColor = UIColor.darkGrayColor()
  
         //Locality textfiled
         localityDynamicView.layer.cornerRadius=5
@@ -153,7 +163,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
    
 
         label.textAlignment = NSTextAlignment.Left
-        label.text = "Delhi"
         label.font = UIFont(name: "MyriadPro-Regular", size: 14)
         label.textColor = UIColor.darkGrayColor()
         
@@ -166,7 +175,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         liqcatogeryDynamicView.layer.cornerRadius=5
         categoryliqlabel.textAlignment = NSTextAlignment.Left
         categoryliqlabel.font = UIFont(name: "MyriadPro-Regular", size: 14)
-        categoryliqlabel.text = "Beer"
+        if searchedLiq != nil
+        {
+           categoryliqlabel.text = searchedLiq
+        }
+        else
+        {
+            categoryliqlabel.text = "Beer"
+        }
+        
         categoryliqlabel.textColor = UIColor.darkGrayColor()
        
         var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "liqcategoryTapped:")
@@ -180,7 +197,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
        liqsubcatogeryDynamicView.backgroundColor = UIColor.whiteColor()
        subcategoryliqlabel.textAlignment = NSTextAlignment.Left
         subcategoryliqlabel.font = UIFont(name: "MyriadPro-Regular", size: 14)
-        subcategoryliqlabel.text = "All"
+        if searchedaLiqType != nil
+        {
+            subcategoryliqlabel.text = searchedaLiqType
+        }
+        else
+        {
+          subcategoryliqlabel.text = "All"
+        }
+        
         subcategoryliqlabel.textColor = UIColor.darkGrayColor()
        
         var headerTapped2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "liqsubcategoryTapped:")
@@ -207,6 +232,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         if CheckforInternetViewController.isConnectedToNetwork() == true {
             print("Internet connection OK")
         } else {
+            actInd.removeFromSuperview()
+    
             print("Internet connection FAILED")
             let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
             alert.show()
@@ -409,7 +436,18 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     //Assigning the address to the address label on the map.
                    // self.addressLabel.text = " \(roadno) \r \(thoroughfare) \r \(subLocality) \r \(locality) \(administrativeArea) \(postalCode) \r \(country)"
                      self.currentLocationname = subLocality + "," + locality
-                    self.autocompletedTextfieldnew.text = self.currentLocation
+                    if self.searchedsubLocality != nil
+                    {
+                        self.autocompletedTextfieldnew.text = self.searchedsubLocality
+                    }
+                    else
+                    {
+                  
+                       self.autocompletedTextfieldnew.text = self.currentLocation
+                    }
+                    
+                    
+                    
                     self.PleaseWaitlabel.hidden = true
                     self.actInd.stopAnimating()
                     self.actInd.hidden = true
@@ -418,7 +456,15 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     
                     
                     //instead of localality textfield im using label.
-                    self.label.text = locality
+                    if self.searchedLocality != nil
+                    {
+                       self.label.text = self.searchedLocality
+                    }
+                    else
+                    {
+                      self.label.text = locality
+                    }
+                    
                     
                     
                     println(self.autocompletedTextfieldnew.text)
@@ -535,8 +581,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
           
             println(text)
             println(self!.autocompletedTextfieldnew.text)
-          
-            self!.autocompletedTextfieldnew.text = text;self!.iscitytextfieldhavedata = true;self!.view.endEditing(true);self!.getselectedcityname = text
+            self!.autocompletedTextfieldnew.text = text;
+            self!.iscitytextfieldhavedata = true;
+            self!.view.endEditing(true);
+            self!.getselectedcityname = text
             println(self!.autocompletedTextfieldnew.text)
             print(self!.getselectedcityname)
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
@@ -1810,6 +1858,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 
                 //Instead of lactaclity textfield im using label.
                 destination.localityfromtextfield1 = label.text!
+                
+                destination.searchedLocality = label.text!
+                destination.searchedaLiqType = subcategoryliqlabel.text
             }
         }
         if segue.identifier == "cocktail"
@@ -1879,6 +1930,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 
                 //Instead of lactaclity textfield im using label.
                 destination3.localityfromtextfield1 = label.text!
+                
+                destination3.searchedLocality = label.text!
+                destination3.searchedaLiqType = subcategoryliqlabel.text
+                destination3.searchedLiq = categoryliqlabel.text
             }
         }
         if segue.identifier == "getvodkanew"
@@ -1942,6 +1997,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 
                 //Instead of lactaclity textfield im using label.
                 destination1.localityfromtextfield1 = label.text!
+                
+                destination1.searchedLocality = label.text!
+                destination1.searchedaLiqType = subcategoryliqlabel.text
+                destination1.searchedLiq = categoryliqlabel.text
             }
         }
         if segue.identifier == "getwinenearyou"
@@ -1964,6 +2023,11 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 
                  //Instead of lactaclity textfield im using label.
                 destination2.newlocate = autocompletedTextfieldnew.text + label.text!
+                
+                destination2.searchedLocality = localityTextfield.text
+                destination2.searchedLiq = beerTypeTextfield.text
+                destination2.searchedaLiqType = textfield2.text
+                destination2.searchedsubLocality = autocompletedTextfieldnew.text
             }
             
         }

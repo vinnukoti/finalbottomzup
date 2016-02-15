@@ -204,6 +204,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var actInd2 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     var PleaseWaitlabel2 = UILabel()
     
+    
+    var searchedLocality:String!
+    var searchedLiq:String!
+    var searchedaLiqType:String!
+    var searchedsubLocality:String!
     override func viewDidLoad()
   
     {
@@ -315,12 +320,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         newtextfieldtableviewcity.text = getselectedcityname
         
         header1 = pricesort1(header1)
-
-        
-
-
-
-        
     }
     
     func TableviewTapped(gestureRecognizer: UITapGestureRecognizer)
@@ -546,10 +545,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                                     citylongitudeFromresult = lng
                                     println(citylong)
                                 }
-                                
-                                
-                                
-                             
+
                             }
                         }
                     }
@@ -654,8 +650,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 //                                
 //                            }
 
-                          
-                            
                         }
                         self.newtextfieldtableviewcity.autoCompleteStrings = locations
                     }
@@ -1345,8 +1339,6 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
     }
 
-    
-    
     func Happyhours()
     {
         var array = [Restauarantvodka]()
@@ -2011,8 +2003,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             dropdowntextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             dropdowntextfield.text = selectedCell1.textLabel?.text
-            
             beerdropdowntableview.hidden = true
+            searchedLiq = dropdowntextfield.text
         }
             
         else if tableView.tag == 6
@@ -2022,6 +2014,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             newtextfieldtableview.text = selectedCell1.textLabel?.text
             beerTypedropdowntableview.hidden = true
+            searchedaLiqType =  newtextfieldtableview.text
         }
             
         else if tableView.tag == 9
@@ -2031,6 +2024,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             citydropdowntextfield.text = selectedCell1.textLabel?.text
             citydropdowntableview.hidden = true
+            searchedLocality = citydropdowntextfield.text
         }
     }
     
@@ -2540,10 +2534,18 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 // self.locationnamedisplaybutton.setTitle(self.newtextfieldtableview.text + self.space + self.near + self.space + self.newtextfieldtableviewcity.text ,forState: .Normal)
                 citynamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
             }
+            if let viewWithTag = self.view.viewWithTag(100) {
+                println("Tag 100")
+                viewWithTag.removeFromSuperview()
+            }
             actInd2.hidden = true
         }
         else
         {
+            if let viewWithTag = self.view.viewWithTag(100) {
+                println("Tag 100")
+                viewWithTag.removeFromSuperview()
+            }
             actInd2.hidden = true
             showdropdownview.hidden = false
             let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
@@ -2583,6 +2585,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination.citylongitudeFromresult = citylong
                 destination.localityfromtextfield1 = citydropdowntextfield.text
                 destination.liqtypeFromresult = dropdowntextfield.text
+                
+                destination.searchedLocality = searchedLocality
+                
+                
+                //Beer
+                destination.searchedLiq = searchedLiq
+                
+                
+                
+                //Sublocality
+                
+                destination.searchedsubLocality = locationnamefromtextfield
+                
+                //All
+                
+                destination.searchedaLiqType = searchedaLiqType
+
                 
                 
                 
@@ -2625,6 +2644,23 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 destination3.liqFromresult = newtextfieldtableview.text
                 destination3.localityfromtextfield1 = citydropdowntextfield.text
                 destination3.liqtypeFromresult = dropdowntextfield.text
+                
+                destination3.searchedLocality = searchedLocality
+                
+                
+                //Beer
+                destination3.searchedLiq = searchedLiq
+                
+                
+                
+                //Sublocality
+                
+                destination3.searchedsubLocality = locationnamefromtextfield
+                
+                //All
+                
+                destination3.searchedaLiqType = searchedaLiqType
+
             }
         }
         
@@ -2636,6 +2672,29 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 destination1.getdevicelatitude = getdevicelatitude
                 destination1.getdevicelongitude = getdevicelongitude
+            }
+        }
+        
+        if segue.identifier == "gobacktoresult1"
+        {
+            if let destination1 = segue.destinationViewController as? results1
+            {
+                //Locality
+                destination1.searchedLocality = searchedLocality
+                
+                
+                //Beer
+                destination1.searchedLiq = searchedLiq
+                
+                
+                
+                //Sublocality
+                
+                destination1.searchedsubLocality = locationnamefromtextfield
+                
+                //All
+                
+                destination1.searchedaLiqType = searchedaLiqType
             }
         }
     }
@@ -2964,14 +3023,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 
             case 2:
-                closelocationpopupbutton7kms.frame = CGRectMake(0,75,70,70)
+                closelocationpopupbutton7kms.frame = CGRectMake(0,90,70,70)
                 closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton7kms.tag=7
                 closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton5kms.frame = CGRectMake(0,150,70,70)
+                closelocationpopupbutton5kms.frame = CGRectMake(0,160,70,70)
                 closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton5kms.tag=5
                 closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
@@ -2982,14 +3041,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 
             case 5:
-                closelocationpopupbutton7kms.frame = CGRectMake(0,75,70,70)
+                closelocationpopupbutton7kms.frame = CGRectMake(0,90,70,70)
                 closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton7kms.tag=7
                 closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton2kms.frame = CGRectMake(0,150,70,70)
+                closelocationpopupbutton2kms.frame = CGRectMake(0,160,70,70)
                 closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton2kms.tag=2
                 closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
@@ -3000,14 +3059,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
             case 7:
                 
-                closelocationpopupbutton5kms.frame = CGRectMake(0,75,70,70)
+                closelocationpopupbutton5kms.frame = CGRectMake(0,90,70,70)
                 closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton5kms.tag=5
                 closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
                 
                 
                 
-                closelocationpopupbutton2kms.frame = CGRectMake(0,150,70,70)
+                closelocationpopupbutton2kms.frame = CGRectMake(0,160,70,70)
                 closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
                 closelocationpopupbutton2kms.tag=2
                 closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
@@ -3028,6 +3087,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
+       JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3127,6 +3187,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
+        JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3214,6 +3275,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
+       JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3440,6 +3502,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         view.addSubview(actInd2)
         self.actInd2.startAnimating()
         self.actInd2.addSubview(PleaseWaitlabel2)
+        self.actInd2.tag = 100
         showdropdownview.hidden = false
         if togglevodka == true
         {
