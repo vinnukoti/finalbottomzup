@@ -212,6 +212,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
   
     {
+        
+       
          println(liqtypeFromresult)
          println(liqFromresult)
         
@@ -3379,7 +3381,10 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         self.liqplacedisplaylabel.backgroundColor = UIColor.whiteColor()
         self.liqplacedisplaylabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         self.liqplacedisplaylabel.text =  liqtypefromTextfield + space + near + space + locationnamefromtextfield
+        self.liqplacedisplaylabel.layer.masksToBounds = true
         self.liqplacedisplaylabel.layer.cornerRadius = 10
+        self.liqplacedisplaylabel.layer.borderWidth = 2
+        self.liqplacedisplaylabel.layer.borderColor = UIColor.whiteColor().CGColor
         self.liqplacedisplaylabel.textAlignment = NSTextAlignment.Center
         self.liqplacedisplaylabel.textColor = UIColor.darkGrayColor()
         

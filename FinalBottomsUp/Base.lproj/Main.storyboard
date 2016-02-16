@@ -3164,27 +3164,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G93-WR-MLw">
-                                <rect key="frame" x="45" y="10" width="545" height="25"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="sVW-3D-9tG"/>
-                                    <constraint firstAttribute="width" constant="180" id="yNl-ta-Xie"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                <state key="normal" title="Cityname">
-                                    <color key="titleColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="yNl-ta-Xie"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="shownewviewvodka:" destination="62d-Bt-Yva" eventType="touchUpInside" id="DIZ-2t-R7Z"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msq-YF-itJ">
                                 <rect key="frame" x="45" y="40" width="180" height="20"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -3251,6 +3230,27 @@
                                 <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G93-WR-MLw">
+                                <rect key="frame" x="45" y="10" width="545" height="25"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="sVW-3D-9tG"/>
+                                    <constraint firstAttribute="width" constant="180" id="yNl-ta-Xie"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                <state key="normal" title="Cityname">
+                                    <color key="titleColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="yNl-ta-Xie"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="shownewviewvodka:" destination="62d-Bt-Yva" eventType="touchUpInside" id="DIZ-2t-R7Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -3353,7 +3353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2c-5a-dyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7360" y="-15291"/>
+            <point key="canvasLocation" x="-7057" y="-15398"/>
         </scene>
         <!--Cocktail-->
         <scene sceneID="C8J-em-6J5">
@@ -4355,11 +4355,11 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k2w-mW-TjF"/>
-        <segue reference="KlY-oy-LUS"/>
-        <segue reference="oIU-td-Sv5"/>
         <segue reference="V3G-fz-y2l"/>
-        <segue reference="XDA-r2-Wma"/>
-        <segue reference="Rgb-uf-yQW"/>
+        <segue reference="yu0-QO-HLc"/>
+        <segue reference="oIU-td-Sv5"/>
+        <segue reference="aSH-hV-RWE"/>
+        <segue reference="ja9-qS-CKX"/>
+        <segue reference="aAb-Jn-8Nq"/>
     </inferredMetricsTieBreakers>
 </document>
