@@ -30,6 +30,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var Happyhourslabel: UILabel!
     @IBOutlet weak var locationicon: UIButton!
 
+    @IBOutlet weak var tapimage: UIImageView!
     var beers: [liqclass] = [liqclass]()
     
 

@@ -31,6 +31,7 @@ class Cocktailrowcell: UITableViewCell, UITableViewDataSource, UITableViewDelega
     
     var beers: [liqclass] = [liqclass]()
     
+    @IBOutlet weak var tapimage: UIImageView!
     
     var restaurantName: String!
     

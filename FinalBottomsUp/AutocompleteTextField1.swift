@@ -123,7 +123,7 @@ public class AutoCompleteTextField1:UITextField, UITableViewDataSource, UITableV
         
         let screenSize = UIScreen.mainScreen().bounds.size
         
-        let tableView = UITableView(frame: CGRect(x: 0, y: 220, width: screenSize.width ,height: 30.0))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 220, width: screenSize.width ,height: 95))
        // let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + CGRectGetHeight(self.frame), width: view.frame.width, height: 30))
         //tableView  =   CGRectMake(0, 65,screenSize.width ,10);
         tableView.layer.masksToBounds = true
@@ -138,7 +138,7 @@ public class AutoCompleteTextField1:UITextField, UITableViewDataSource, UITableV
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
         self.dynamicType.autoCompleteTableView = tableView
-        autoCompleteTableHeight = 250
+       
     }
     
     //    override public func layoutSubviews()

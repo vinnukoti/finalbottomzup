@@ -26,6 +26,7 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     @IBOutlet weak var happyhourstiming: UILabel!
     
     @IBOutlet weak var locationicon: UIButton!
+    @IBOutlet weak var tapimage: UIImageView!
     
     
     var liquors: [liqvodka] = [liqvodka]()

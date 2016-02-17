@@ -268,7 +268,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var beerdropdowntableview = UITableView()
     var beerTypedropdowntableview = UITableView()
     
-    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka","Cocktail"]
+    var liqTypes: [String] = ["Beer", "Whiskey", "Vodka","rum","Cocktail"]
     var liqTypes1:[String] = [String]()
     
     var citydropdowntextfield = UITextField()
@@ -1822,6 +1822,12 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
             cells.press2reveal.hidden = true
             
+             var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hidesubsection:")
+            cells.tapimage.addGestureRecognizer(headerTapped)
+            cells.tapimage.tag = indexPath.section
+            cells.tapimage.userInteractionEnabled = true
+
+            
 //            if head.count > 5
 //            {
 //                cells.shadowimage.hidden = true
@@ -1950,6 +1956,30 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         tableview.reloadData()
         
+    }
+    
+    func hidesubsection(gestureRecognizer: UITapGestureRecognizer)
+    {
+        DynamicView.hidden = true
+        locatiopopupview.hidden = true
+//        if head[sender.tag].bool == true
+//        {
+//            head[sender.tag].bool = false
+//        }
+        if head[gestureRecognizer.view!.tag].bool == false
+        {
+            head[gestureRecognizer.view!.tag].bool = true
+            
+        }
+        else
+        {
+            head[gestureRecognizer.view!.tag].bool = false
+        }
+        
+        self.tableview.reloadData()
+
+        
+        tableview.reloadData()
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
@@ -3971,7 +4001,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(passspaceremovedliq)
 
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
             //showdropdownview.hidden = true
         }
         else
@@ -3984,7 +4014,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             println(passspaceremovedliq)
-           self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+           self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
             //showdropdownview.hidden = true
         }
         }
@@ -4012,7 +4042,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
 
         
     }

@@ -186,7 +186,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var citydropdowntextfield = UITextField()
     var citydropdowntableview = UITableView()
      var search   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka","Cocktail"]
+    var liqTypes: [String] = ["Beer", "Whiskey", "Vodka","rum","Cocktail"]
     var liqTypes1:[String] = [String]()
      var items: [String] = ["Delhi", "Gurgaon", "Noida"]
     
@@ -877,6 +877,11 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if tableView.tag == 1
         {
         let cells = tableView.dequeueReusableCellWithIdentifier("vodkaChildCell", forIndexPath: indexPath) as! VodkaRowCell
+            var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hidecell:")
+            cells.tapimage.addGestureRecognizer(headerTapped1)
+           cells.tapimage.tag =  indexPath.section
+            cells.tapimage.userInteractionEnabled = true
+            
             cells.locationicon.tag = indexPath.section
             cells.press2reveal.hidden = true
         cells.liquors = [liqvodka]()
@@ -958,6 +963,20 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             return cell!
  
         }
+    }
+    
+    func hidecell(gestureRecognizer: UITapGestureRecognizer)
+    {
+        DynamicViewvodka.hidden = true
+        if header1[gestureRecognizer.view!.tag].bool1 == false
+        {
+            header1[gestureRecognizer.view!.tag].bool1 = true
+        }
+        else
+        {
+            header1[gestureRecognizer.view!.tag].bool1 = false
+        }
+        self.tableview1.reloadData()
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
@@ -3621,7 +3640,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             println(passspaceremovedliq)
             
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
             
         }
         else
@@ -3632,7 +3651,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             println(passspaceremovedliq)
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
           
         }
         }
@@ -3659,7 +3678,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
            var  passliqspaceremoved = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=4&query=\(passliqspaceremoved)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passliqspaceremoved)")
         
 
         

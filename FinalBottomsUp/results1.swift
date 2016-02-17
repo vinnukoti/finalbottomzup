@@ -107,7 +107,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     @IBOutlet weak var beerTypeTextfield: UITextField!
     
-    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka","Cocktail"]
+    var liqTypes: [String] = ["Beer", "Whiskey", "Vodka","rum","Cocktail"]
+
     var liqTypetableview: UITableView  =   UITableView()
     
    // var liqTypes1:[String] = ["BUDWEISER","CARLSBERG","FOSTERS","HEINEKEN","KINGFISHER"]
@@ -151,10 +152,20 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var searchedaLiqType:String!
     var searchedsubLocality:String!
     
+    var category = false
+    var subcategory = false
+    
+    var initaialcount = 0
+    
     
     override func viewDidLoad()
     {
+        tableviewnew.tableFooterView = UIView()
+        AutoCompleteTextField3.autoCompleteTableView?.tableFooterView = UIView()
+       // AutoCompleteTextField3.autoCompleteTableView?.alwaysBounceVertical = false
         
+        AutoCompleteTextField3.autoCompleteTableView?.bounces = false
+         AutoCompleteTextField3.autoCompleteTableView?.scrollEnabled = true
         autocompletedTextfieldnew.textColor = UIColor.darkGrayColor()
  
         //Locality textfiled
@@ -169,6 +180,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "localityTapped:")
         localityDynamicView.addGestureRecognizer(headerTapped)
         localityDynamicView.userInteractionEnabled = true
+        localityDynamicView.tag = 200
         
         
         //liq catogery textfield
@@ -277,19 +289,28 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
         
         
-        LOcalityTableview.frame         =   CGRectMake(15,self.localityTextfield.frame.origin.y + 10, self.view.frame.width - 30, 165);
+        LOcalityTableview.frame         =   CGRectMake(15,self.localityTextfield.frame.origin.y + 10, self.view.frame.width - 30, 130);
+        LOcalityTableview.bounces = false
         LOcalityTableview.delegate      =   self
         LOcalityTableview.dataSource    =   self
         LOcalityTableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(LOcalityTableview)
         LOcalityTableview.hidden = true
+        LOcalityTableview.layer.borderWidth = 2
+        LOcalityTableview.layer.borderColor = UIColor.darkGrayColor().CGColor
+        LOcalityTableview.tableFooterView = UIView(frame: CGRectZero)
         
-        liqTypetableview.frame         =   CGRectMake(15,self.beerTypeTextfield.frame.origin.y + 20, self.view.frame.width - 30, 165);
+        liqTypetableview.frame         =   CGRectMake(15,self.beerTypeTextfield.frame.origin.y + 20, self.view.frame.width - 30, 210);
+        liqTypetableview.bounces = false
         liqTypetableview.delegate      =   self
         liqTypetableview.dataSource    =   self
         liqTypetableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(liqTypetableview)
         liqTypetableview.hidden = true
+        liqTypetableview.layer.borderColor = UIColor.darkGrayColor().CGColor
+        liqTypetableview.layer.borderWidth = 2
+        liqTypetableview.tableFooterView = UIView(frame: CGRectZero)
+    
         
          println(autocompletedTextfieldnew.text)
         
@@ -301,40 +322,122 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     func localityTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         
-        LOcalityTableview.hidden = false
+        LOcalityTableview.hidden = !LOcalityTableview.hidden
         view.endEditing(true)
     }
     
     func liqcategoryTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+//        if subcategory == true
+//        {
+//            category = false
+//            subcategory = false
+//        }
+//        
+//        
+//        if category == false
+//        {
+//            category = true
+//            liqTypetableview.hidden = false
+//            
+//        }
+//        else
+//        {
+//            
+//            category = false
+//            liqTypetableview.hidden = true
+//        
+//        }
         
+//        else
+//        {
+//            category = false
+//            liqTypetableview.hidden = true
+//        }
+
+//        LOcalityTableview.hidden = true
+//        println(liqTypetableview.hidden)
+//        if liqTypetableview.hidden == false{
+//            liqTypetableview.hidden = true
+//        }
+//        else
+//        {
+//            liqTypetableview.hidden = false
+//        }
+      // liqTypetableview.hidden = !liqTypetableview.hidden
+      // println(liqTypetableview.hidden)
+        
+        
+        
+//        liqTypetableview.hidden = false
+//        if self.localityDynamicView.tag == 200
+//        {
+//          initaialcount = initaialcount + 1
+//        }
+//        
+//        println(initaialcount)
+//        
+//            if initaialcount == 2
+//            {
+//                println(initaialcount)
+//                liqTypetableview.hidden = true
+//                initaialcount = 0
+//        }
+        func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+        {
+
+        var location: CGPoint!
+        
+        for touch: AnyObject in touches
+        {
+            location = touch.locationInView(self.view)
+        }
+        
+        if CGRectContainsPoint(localityDynamicView.frame, location)
+        {
+            liqTypetableview.hidden = false
+        }
+        else
+        {
+            liqTypetableview.hidden = true
+            }
+        }
+    
+
       
-        liqTypetableview.hidden = false
+        
         view.endEditing(true)
     }
     
     func liqsubcategoryTapped(gestureRecognizer: UITapGestureRecognizer)
     {
-        if CheckforInternetViewController.isConnectedToNetwork() == true
-        {
-            print("Internet connection OK")
-            getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(categoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+        LOcalityTableview.hidden = true
+       liqTypetableview.hidden = true
+            if CheckforInternetViewController.isConnectedToNetwork() == true
+            {
+                print("Internet connection OK")
+                getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(categoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+                
+                tableviewnew.hidden = false
+            }
+            else{
+                            print("Internet connection FAILED")
             
-            tableviewnew.hidden = false
-        }
-        else
-        {
-            print("Internet connection FAILED")
-            
-            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
-            tableviewnew.hidden = true
-            textfield2.enabled = true
-        }
-
-        tableviewnew.hidden = false
+                            let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+                            alert.show()
+                            tableviewnew.hidden = true
+                            textfield2.enabled = true
+            }
+        //tableviewnew.hidden = true
+        
         view.endEditing(true)
-    }
+   
+        }
+   
+    
+
+  
+    
     
     
     
@@ -480,13 +583,36 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     // Resign Firstresponder of UITableview and Keyboard Hiding
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
-    
+        var location: CGPoint!
+        
+        for touch: AnyObject in touches
+        {
+             location = touch.locationInView(self.view)
+        }
+        
+        if CGRectContainsPoint(localityDynamicView.frame, location)
+        {
+           liqTypetableview.hidden = false
+        }
+        else
+        {
+            liqTypetableview.hidden = true
+        }
+
+        
+        if liqTypetableview.hidden == false
+        {
+            subcategory = true
+        }
+        
+       // category = false
+       // subcategory = true
         view.endEditing(true)
         autocompletedTextfieldnew.endEditing(true)
         tableviewnew.hidden = true
         textfield2.enabled = true
         localityTextfield.enabled = true
-        LOcalityTableview.hidden = true
+        //LOcalityTableview.hidden = true
         beerTypeTextfield.enabled = true
         liqTypetableview.hidden = true
         AutoCompleteTextField3.autoCompleteTableView?.hidden = true
@@ -494,6 +620,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         //view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
     }
+    
+
 
     
     func reverseGeocodeLocation(location: CLLocation!, completionHandler: CLGeocodeCompletionHandler!){
@@ -703,7 +831,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             }
             
             
-            liqTypetableview.hidden = true
+           liqTypetableview.hidden = true
             LOcalityTableview.hidden = true
         }
             
@@ -1010,6 +1138,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // liqatable view
         else if tableView.tag == 5
         {
+       
+            subcategory = false
             textfield2.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             //textfield2.text = selectedCell1.textLabel?.text
@@ -1028,6 +1158,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         // Liq type table view
         else if tableView.tag == 6
         {
+            category = false
             //textfield2.text = "All"
             subcategoryliqlabel.text = "All"
             beerTypeTextfield.enabled = true
@@ -1752,8 +1883,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         self.actInd1.hidden = true
         }
+        
         else
         {
+            println(autocompletedTextfieldnew.text)
            self.actInd1.hidden = true
             count = count + 1
             println(count)
@@ -2076,7 +2209,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(name)
             println(citylat)
             println(citylong)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=20&query=\(name1)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=500&query=\(name1)")
         }
         else
         {
@@ -2085,15 +2218,29 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(citylat)
             println(citylong)
             println(trimmedString)
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=20&query=\(subcategoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=2&records=500&query=\(subcategoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
         }
         }
         else
         {
+            if autocompletedTextfieldnew.text == "" || autocompletedTextfieldnew.text == nil
+            {
+                 actInd1.hidden = true
+                let alertController = UIAlertController(title: "Bottomz Up", message:"Please enter locality...", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                println(autocompletedTextfieldnew.text)
+  
+            }
+            else
+            {
+            println(autocompletedTextfieldnew.text)
             actInd1.hidden = true
             let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place or liquor", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
+             println(autocompletedTextfieldnew.text)
+            }
         }
         
     }

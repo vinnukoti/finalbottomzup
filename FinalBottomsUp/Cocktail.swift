@@ -262,7 +262,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     var beerdropdowntableview = UITableView()
     var beerTypedropdowntableview = UITableView()
     
-    var liqTypes: [String] = ["Beer", "Rum", "Whiskey","Vodka"]
+    var liqTypes: [String] = ["Beer", "Whiskey", "Vodka","rum","Cocktail"]
     var liqTypes1:[String] = [String]()
     
     var citydropdowntextfield = UITextField()
@@ -1738,6 +1738,13 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         {
             
             let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! Cocktailrowcell
+            
+            var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hidecell:")
+            cells.tapimage.addGestureRecognizer(headerTapped)
+            cells.tapimage.tag = indexPath.section
+            cells.tapimage.userInteractionEnabled = true
+
+            
             //cells.press2reveal.hidden = true
             cells.locationicon.tag = indexPath.section
             //Findongooglemapsbutton.tag = indexPath.section
@@ -1831,6 +1838,32 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             cell!.textLabel?.textColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
             return cell!
         }
+    }
+    
+    func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        
+        locatiopopupview.hidden = true
+        DynamicView.hidden = true
+        let tracker = GAI.sharedInstance().defaultTracker
+        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Tapped Hotel",action: header2[gestureRecognizer.view!.tag].restname,label: header2[gestureRecognizer.view!.tag].restname, value: nil).build()
+        tracker.send(eventTracker as! [NSObject : AnyObject])
+        var section = gestureRecognizer.view!.tag
+        println(section)
+        println("Section: \(gestureRecognizer.view!.tag)")
+        
+        if header2[gestureRecognizer.view!.tag].bool == false
+        {
+            header2[gestureRecognizer.view!.tag].bool = true
+            
+        }
+        else
+        {
+            header2[gestureRecognizer.view!.tag].bool = false
+        }
+        
+        self.tableview.reloadData()
+        
     }
     
     
@@ -2155,18 +2188,11 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         
     }
     
-    func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
+    func hidecell(gestureRecognizer: UITapGestureRecognizer)
     {
         
         locatiopopupview.hidden = true
         DynamicView.hidden = true
-        let tracker = GAI.sharedInstance().defaultTracker
-        let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Tapped Hotel",action: header2[gestureRecognizer.view!.tag].restname,label: header2[gestureRecognizer.view!.tag].restname, value: nil).build()
-        tracker.send(eventTracker as! [NSObject : AnyObject])
-        var section = gestureRecognizer.view!.tag
-        println(section)
-        println("Section: \(gestureRecognizer.view!.tag)")
-        
         if header2[gestureRecognizer.view!.tag].bool == false
         {
             header2[gestureRecognizer.view!.tag].bool = true
@@ -3788,7 +3814,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             println(passspaceremovedliq)
             
             
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
         
         }
         else
@@ -3799,7 +3825,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             
             println(passspaceremovedliq)
-            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+            self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
            
         }
         }
@@ -3827,7 +3853,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         var passspaceremovedliq = passliq.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
         
-        self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=20&query=\(passspaceremovedliq)")
+        self.getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(self.citylat)&long=\(self.citylong)&km=2&records=500&query=\(passspaceremovedliq)")
         
         
     }
