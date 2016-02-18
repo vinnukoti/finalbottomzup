@@ -66,6 +66,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     override func viewDidLoad()
     {
         
+        tableviewformap.tableFooterView = UIView()
 
         self.tableviewformap.delegate = self
         self.tableviewformap.dataSource = self
@@ -269,7 +270,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
         }
         else
         {
-            let alertController = UIAlertController(title: "Bottomz Up", message:"No Data found please try with some other place.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Bottomz Up", message:"No wine and beer shop in this area", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }

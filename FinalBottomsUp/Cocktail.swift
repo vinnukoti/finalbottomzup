@@ -262,6 +262,17 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     var beerdropdowntableview = UITableView()
     var beerTypedropdowntableview = UITableView()
     
+    //uiview and labels programatically
+    
+    var dropdowntextfieldnew = UIView()
+    var dropdowntextfieldnewlabel = UILabel()
+    
+    var newtextfieldtableviewnew = UIView()
+    var newtextfieldtableviewlabel = UILabel()
+    
+    var citydropdowntextfieldnew = UIView()
+    var citydropdowntextfieldlabel = UILabel()
+    
     var liqTypes: [String] = ["Beer", "Whiskey", "Vodka","rum","Cocktail"]
     var liqTypes1:[String] = [String]()
     
@@ -1049,6 +1060,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             dropdowntextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             dropdowntextfield.text = selectedCell1.textLabel?.text
+            dropdowntextfieldnewlabel.text = selectedCell1.textLabel?.text
             searchedLiq = dropdowntextfield.text
             println(searchedLiq)
             
@@ -1062,6 +1074,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             newtextfieldtableview.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             newtextfieldtableview.text = selectedCell1.textLabel?.text
+            newtextfieldtableviewlabel.text = selectedCell1.textLabel?.text
             beerTypedropdowntableview.hidden = true
             searchedaLiqType = newtextfieldtableview.text
         }
@@ -1073,6 +1086,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             citydropdowntextfield.enabled = true
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             citydropdowntextfield.text = selectedCell1.textLabel?.text
+            citydropdowntextfieldlabel.text = selectedCell1.textLabel?.text
             citydropdowntableview.hidden = true
             searchedLocality = citydropdowntextfield.text
         }
@@ -3597,10 +3611,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     @IBAction func showdropdowns(sender: UIButton)
     {
-        
-        
-        
-        
+
         self.showdropdownview = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         showdropdownview.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
@@ -3627,18 +3638,37 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         // Liq catogery textfiled
         self.dropdowntextfield = UITextField (frame:CGRectMake(10,40,self.view.frame.width - 20,35));
         dropdowntextfield.backgroundColor = UIColor.whiteColor()
+        
         self.dropdowntextfield.delegate = self
         dropdowntextfield.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         dropdowntextfield.text = liqtypeFromresult
         dropdowntextfield.tag = 5
         dropdowntextfield.textColor = UIColor.darkGrayColor()
+        dropdowntextfield.hidden = true
+        
+        self.dropdowntextfieldnew = UIView(frame:CGRectMake(10,40,self.view.frame.width - 20,35));
+        self.dropdowntextfieldnewlabel = UILabel(frame:CGRectMake(10,40,self.view.frame.width - 20,35));
+        dropdowntextfieldnew.layer.cornerRadius = 5
+        dropdowntextfieldnew.backgroundColor = UIColor.whiteColor()
+        dropdowntextfieldnewlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        dropdowntextfieldnewlabel.text = liqtypeFromresult
+        dropdowntextfieldnewlabel.textColor = UIColor.darkGrayColor()
+        
+        var dropdowntextfieldnewtapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "liqcategorytapped:")
+        dropdowntextfieldnew.addGestureRecognizer(dropdowntextfieldnewtapped)
+        dropdowntextfieldnew.userInteractionEnabled = true
+        showdropdownview.addSubview(dropdowntextfieldnew)
+        showdropdownview.addSubview(dropdowntextfieldnewlabel)
         
         // Liq catogery drop down tableview
-        beerdropdowntableview.frame         =   CGRectMake(10,80,self.view.frame.width - 20,150)
+        beerdropdowntableview.frame         =   CGRectMake(10,77,self.view.frame.width - 20,150)
         beerdropdowntableview.delegate      =   self
         beerdropdowntableview.dataSource    =   self
         beerdropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         beerdropdowntableview.tag = 4
+        beerdropdowntableview.layer.cornerRadius = 5
+       // beerdropdowntableview.layer.borderWidth = 2
+       // beerdropdowntableview.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         
         
@@ -3648,18 +3678,35 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         newtextfieldtableview.backgroundColor = UIColor.whiteColor()
         self.newtextfieldtableview.delegate = self
         newtextfieldtableview.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
-        // newtextfieldtableview.text = liqtypefromTextfield
         newtextfieldtableview.text = liqFromresult
         newtextfieldtableview.tag = 2
         newtextfieldtableview.textColor = UIColor.darkGrayColor()
-        //        liqdropdowntableview.frame = CGRectMake(0,105,self.view.frame.width,100);
+        newtextfieldtableview.hidden = true
+        
+        self.newtextfieldtableviewnew = UIView(frame:CGRectMake(10,85,self.view.frame.width - 20,35));
+        self.newtextfieldtableviewlabel = UILabel(frame:CGRectMake(10,85,self.view.frame.width - 20,35));
+        newtextfieldtableviewnew.layer.cornerRadius = 5
+        newtextfieldtableviewnew.backgroundColor = UIColor.whiteColor()
+        newtextfieldtableviewlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        newtextfieldtableviewlabel.text = liqFromresult
+        newtextfieldtableviewlabel.textColor = UIColor.darkGrayColor()
+        
+        var newtextfieldtableviewnewtapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "liqsubcategorytapped:")
+        newtextfieldtableviewnew.addGestureRecognizer(newtextfieldtableviewnewtapped)
+        newtextfieldtableviewnew.userInteractionEnabled = true
+        showdropdownview.addSubview(newtextfieldtableviewnew)
+        showdropdownview.addSubview(newtextfieldtableviewlabel)
+
         
         // Liq sub category drop down tableview
-        beerTypedropdowntableview.frame         =   CGRectMake(10,130,self.view.frame.width - 20,150)
+        beerTypedropdowntableview.frame         =   CGRectMake(10,126,self.view.frame.width - 20,150)
         beerTypedropdowntableview.delegate      =   self
         beerTypedropdowntableview.dataSource    =   self
         beerTypedropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         beerTypedropdowntableview.tag = 6
+        beerTypedropdowntableview.layer.cornerRadius = 5
+       // beerTypedropdowntableview.layer.borderColor = UIColor.lightGrayColor().CGColor
+       // beerTypedropdowntableview.layer.borderWidth = 2
         
         
         // Locality dropdown textfield
@@ -3671,14 +3718,31 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         citydropdowntextfield.text = localityfromtextfield1
         citydropdowntextfield.tag = 8
         citydropdowntextfield.textColor = UIColor.darkGrayColor()
+        citydropdowntextfield.hidden = true
         
+        self.citydropdowntextfieldnew = UIView(frame:CGRectMake(10,135,self.view.frame.width - 20,35));
+        self.citydropdowntextfieldlabel = UILabel(frame:CGRectMake(10,135,self.view.frame.width - 20,35));
+        citydropdowntextfieldnew.layer.cornerRadius = 5
+        citydropdowntextfieldnew.backgroundColor = UIColor.whiteColor()
+        citydropdowntextfieldlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        citydropdowntextfieldlabel.text = localityfromtextfield1
+        citydropdowntextfieldlabel.textColor = UIColor.darkGrayColor()
         
+        var citydropdowntextfieldnewtapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "localityrytapped:")
+        citydropdowntextfieldnew.addGestureRecognizer(citydropdowntextfieldnewtapped)
+        citydropdowntextfieldnew.userInteractionEnabled = true
+        showdropdownview.addSubview(citydropdowntextfieldnew)
+        showdropdownview.addSubview(citydropdowntextfieldlabel)
+
         // Locality drop down tableview
-        citydropdowntableview.frame         =   CGRectMake(10,175,self.view.frame.width - 20,150)
+        citydropdowntableview.frame         =   CGRectMake(10,173,self.view.frame.width - 20,150)
         citydropdowntableview.delegate      =   self
         citydropdowntableview.dataSource    =   self
         citydropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         citydropdowntableview.tag = 9
+        citydropdowntableview.layer.cornerRadius = 5
+       // citydropdowntableview.layer.borderWidth = 2
+        //citydropdowntableview.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         
         
@@ -3709,6 +3773,11 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         
         // Sublocality search textfiled
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
+        AutoCompleteTextField1.autoCompleteTableView?.layer.cornerRadius = 5
+      //  AutoCompleteTextField1.autoCompleteTableView?.layer.borderWidth = 2
+        //AutoCompleteTextField1.autoCompleteTableView?.layer.borderColor = UIColor.lightGrayColor().CGColor
+        
+        self.newtextfieldtableviewcity.layer.cornerRadius = 5
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
@@ -3720,6 +3789,36 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         self.showdropdownview.addSubview(beerTypedropdowntableview)
         self.showdropdownview.addSubview(beerdropdowntableview)
         self.showdropdownview.slideInFromLeft()
+    }
+    
+    func liqcategorytapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        
+        beerdropdowntableview.hidden = !beerdropdowntableview.hidden
+        citydropdowntableview.hidden = true
+        beerTypedropdowntableview.hidden = true
+        self.view.endEditing(true)
+        AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+    }
+    func liqsubcategorytapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        // getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(dropdowntextfieldnewlabel.text)")
+        getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(dropdowntextfieldnewlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
+        beerTypedropdowntableview.hidden = !beerTypedropdowntableview.hidden
+        citydropdowntableview.hidden = true
+        beerdropdowntableview.hidden = true
+        AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+        self.view.endEditing(true)
+    }
+    
+    func localityrytapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        citydropdowntableview.hidden = !citydropdowntableview.hidden
+        beerdropdowntableview.hidden = true
+        beerTypedropdowntableview.hidden = true
+        AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+        self.view.endEditing(true)
+        
     }
     
     func Getresults(sender:UIButton!)

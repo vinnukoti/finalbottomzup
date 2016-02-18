@@ -16,6 +16,7 @@
 
 import UIKit
 import CoreLocation
+import CoreFoundation
 
 
 class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,NSURLConnectionDataDelegate,CLLocationManagerDelegate,UIWebViewDelegate
@@ -161,7 +162,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     override func viewDidLoad()
     {
         tableviewnew.tableFooterView = UIView()
+        tableviewnew.layer.cornerRadius = 5
+        
         AutoCompleteTextField3.autoCompleteTableView?.tableFooterView = UIView()
+        AutoCompleteTextField3.autoCompleteTableView?.layer.cornerRadius = 5
        // AutoCompleteTextField3.autoCompleteTableView?.alwaysBounceVertical = false
         
         AutoCompleteTextField3.autoCompleteTableView?.bounces = false
@@ -299,6 +303,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         LOcalityTableview.layer.borderWidth = 2
         LOcalityTableview.layer.borderColor = UIColor.darkGrayColor().CGColor
         LOcalityTableview.tableFooterView = UIView(frame: CGRectZero)
+        LOcalityTableview.layer.cornerRadius = 5
+        
         
         liqTypetableview.frame         =   CGRectMake(15,self.beerTypeTextfield.frame.origin.y + 20, self.view.frame.width - 30, 210);
         liqTypetableview.bounces = false
@@ -310,6 +316,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         liqTypetableview.layer.borderColor = UIColor.darkGrayColor().CGColor
         liqTypetableview.layer.borderWidth = 2
         liqTypetableview.tableFooterView = UIView(frame: CGRectZero)
+        liqTypetableview.layer.cornerRadius = 5
     
         
          println(autocompletedTextfieldnew.text)
@@ -318,6 +325,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
 
     }
+    
     
     func localityTapped(gestureRecognizer: UITapGestureRecognizer)
     {
@@ -328,97 +336,22 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     func liqcategoryTapped(gestureRecognizer: UITapGestureRecognizer)
     {
-//        if subcategory == true
-//        {
-//            category = false
-//            subcategory = false
-//        }
-//        
-//        
-//        if category == false
-//        {
-//            category = true
-//            liqTypetableview.hidden = false
-//            
-//        }
-//        else
-//        {
-//            
-//            category = false
-//            liqTypetableview.hidden = true
-//        
-//        }
-        
-//        else
-//        {
-//            category = false
-//            liqTypetableview.hidden = true
-//        }
 
-//        LOcalityTableview.hidden = true
-//        println(liqTypetableview.hidden)
-//        if liqTypetableview.hidden == false{
-//            liqTypetableview.hidden = true
-//        }
-//        else
-//        {
-//            liqTypetableview.hidden = false
-//        }
-      // liqTypetableview.hidden = !liqTypetableview.hidden
-      // println(liqTypetableview.hidden)
-        
-        
-        
-//        liqTypetableview.hidden = false
-//        if self.localityDynamicView.tag == 200
-//        {
-//          initaialcount = initaialcount + 1
-//        }
-//        
-//        println(initaialcount)
-//        
-//            if initaialcount == 2
-//            {
-//                println(initaialcount)
-//                liqTypetableview.hidden = true
-//                initaialcount = 0
-//        }
-        func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-        {
-
-        var location: CGPoint!
-        
-        for touch: AnyObject in touches
-        {
-            location = touch.locationInView(self.view)
-        }
-        
-        if CGRectContainsPoint(localityDynamicView.frame, location)
-        {
-            liqTypetableview.hidden = false
-        }
-        else
-        {
-            liqTypetableview.hidden = true
-            }
-        }
-    
-
-      
-        
+        println("Tap gesture")
+       liqTypetableview.hidden = !liqTypetableview.hidden
         view.endEditing(true)
     }
     
     func liqsubcategoryTapped(gestureRecognizer: UITapGestureRecognizer)
     {
-        LOcalityTableview.hidden = true
-       liqTypetableview.hidden = true
+
+       
             if CheckforInternetViewController.isConnectedToNetwork() == true
             {
                 print("Internet connection OK")
                 getliqtypes("http://demos.dignitasdigital.com/bottomzup/get_brandmaster_for_category.php?category=\(categoryliqlabel.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)")
-                
-                tableviewnew.hidden = false
+                 tableviewnew.hidden = !tableviewnew.hidden
+               
             }
             else{
                             print("Internet connection FAILED")
@@ -428,21 +361,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                             tableviewnew.hidden = true
                             textfield2.enabled = true
             }
-        //tableviewnew.hidden = true
         
         view.endEditing(true)
    
         }
-   
-    
-
-  
-    
-    
-    
-    
-    
-    
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -474,12 +396,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 //        }
 //    }
 //    
- 
 
-
-
-    
-    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
         var userLocation:CLLocation = locations[0] as! CLLocation
@@ -584,41 +501,41 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         var location: CGPoint!
+         var location1: CGPoint!
+        var location2: CGPoint!
         
-        for touch: AnyObject in touches
-        {
-             location = touch.locationInView(self.view)
-        }
+        location = (touches.first as! UITouch).locationInView(self.view)
+        location1 = (touches.first as! UITouch).locationInView(self.view)
+        location2 = (touches.first as! UITouch).locationInView(self.view)
         
-        if CGRectContainsPoint(localityDynamicView.frame, location)
+        if !CGRectContainsPoint(localityDynamicView.frame, location1)
         {
-           liqTypetableview.hidden = false
-        }
-        else
-        {
-            liqTypetableview.hidden = true
+            println("touches began")
+            LOcalityTableview.hidden = true
         }
 
         
-        if liqTypetableview.hidden == false
+        if !CGRectContainsPoint(liqcatogeryDynamicView.frame, location)
         {
-            subcategory = true
+            println("touches began")
+           liqTypetableview.hidden = true
+        }
+        if !CGRectContainsPoint(liqsubcatogeryDynamicView.frame, location2)
+        {
+            println("touches began")
+            tableviewnew.hidden = true
         }
         
-       // category = false
-       // subcategory = true
+
         view.endEditing(true)
         autocompletedTextfieldnew.endEditing(true)
-        tableviewnew.hidden = true
+       // tableviewnew.hidden = true
         textfield2.enabled = true
         localityTextfield.enabled = true
         //LOcalityTableview.hidden = true
         beerTypeTextfield.enabled = true
-        liqTypetableview.hidden = true
         AutoCompleteTextField3.autoCompleteTableView?.hidden = true
-        
-        //view.endEditing(true)
-        //super.touchesBegan(touches, withEvent: event)
+
     }
     
 
@@ -692,17 +609,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
                     alert.show()
                     AutoCompleteTextField3.autoCompleteTableView?.hidden = true
-                   
-                    
            
                 }
- 
-          
-                
-                        
-                    
 
-                
             }
         }
         autocompletedTextfieldnew.onSelect = {[weak self] text , indexpath in
@@ -722,9 +631,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         }
 
     }
-    
-    
-    
+
     //MARK: NSURLConnectionDelegate
     func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse)
     {
@@ -757,28 +664,29 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                            // locations1.append(dict["description"] as! String)
                           
                         }
-                        println(locations)
+                        println(locations.count)
                         
                         for var i = 0; i < locations.count ;i++
                         {
                             var newlaocations = locations[i]
+                            println(newlaocations)
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             var firstName: String = fullNameArr[0]
-                          //  var lastName: String = fullNameArr[1]
+//                            var lastName: String = fullNameArr[1]
+//                            var thirdnaem : String = fullNameArr[2]
                             
-                          //  println(firstName)
+                            println(firstName)
                            // println(lastName)
                             locations[i] =  firstName
         
                         }
 
-       
-                        
-                        
                         self.autocompletedTextfieldnew.autoCompleteStrings = locations
-                  
-     
                     }
+//                    else if let predictions = result["predictions"] as? NSDictionary
+//                    {
+//                        println("Here is the exception")
+//                    }
                 }
                 else{
                     self.autocompletedTextfieldnew.autoCompleteStrings = nil
@@ -853,9 +761,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
                 alert.show()
                 AutoCompleteTextField3.autoCompleteTableView?.hidden = true
-            
-                
-                
             }
             
             LOcalityTableview.hidden = true
@@ -891,24 +796,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         }
         
     }
-    
-    
-
-    
-
- 
-//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool
-//    {
-//        if textField.tag == 7
-//        {
-//            return false; //do not show keyboard nor cursor
-//        }
-//        else
-//        {
-//            return true
-//        }
-//        
-//    }
     
     func getliqtypes(urlString:String)
     {
@@ -1208,18 +1095,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
            let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(searchedin + space + label.text! + space + autocompletedTextfieldnew.text)",action: "\(forliqtype + space + subcategoryliqlabel.text!)",label: "\(label.text! + space + autocompletedTextfieldnew.text)", value: nil).build()
               tracker.send(eventTracker as! [NSObject : AnyObject])
         }
-        
-        
-        
-        
-      
+
        // liqnamefromtextfield = textfield2.text
         
         liqnamefromtextfield = categoryliqlabel.text
-    
-        
-        
-        
         trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
         println(localityfromtextfield)
         println(autocompletedTextfieldnew.text)
@@ -1283,7 +1162,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     func getgoogledata(urlString:String)
     {
         let url = NSURL(string: urlString)
-        println(urlString)
+        println(url)
         
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data,response,error) in
@@ -1305,8 +1184,12 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         {
           if let results = json["results"] as? NSArray
           {
+            
+            println(results.count)
             for var i = 0; i < results.count; i++
             {
+                println(results.count)
+                println(i)
                 if let one = results[i] as? NSDictionary
                 {
                     if let geometry = one["geometry"] as? NSDictionary
@@ -1326,10 +1209,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                                     citylong = lng
                                     println(citylong)
                                 }
-                                
-                                
-                                
-                           // }
+
                         }
                     }
                 }
