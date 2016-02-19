@@ -528,7 +528,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 if CheckforInternetViewController.isConnectedToNetwork() == true
                 {
                     // print("Internet connection OK")
-                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.citydropdowntextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&types=(regions)&components=country:IN"
+                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.citydropdowntextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&components=country:IN"
                     let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                     if url != nil{
                         let urlRequest = NSURLRequest(URL: url!)
@@ -766,16 +766,21 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             println(fullNameArr.count)
                             
-                            //                            if fullNameArr.count > 1
-                            //                            {
-                            //                                var firstName: String = fullNameArr[0]
-                            //                                var lastName: String = fullNameArr[1]
-                            //                                locations[i] = firstName + ", " + lastName
-                            //                            }
-                            
-                            
+                         if fullNameArr.count >= 2
+                        {
+                            var firstName: String = fullNameArr[0]
+                            var lastName: String = fullNameArr[1]
+                            locations[i] = firstName + ", " + lastName
+                        }
+                            else
+                         {
                             var firstName: String = fullNameArr[0]
                             locations[i] = firstName
+                            
+                            }
+                            
+                            
+                         
                             
                             
                         }
@@ -784,6 +789,10 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 }
                 else{
                     self.newtextfieldtableviewcity.autoCompleteStrings = nil
+                    if self.newtextfieldtableviewcity.autoCompleteStrings == nil
+                    {
+                        AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+                    }
                 }
             }
         }
@@ -1990,6 +1999,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 headerCell.headercellname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 headerCell.citynamedisplay.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                headerCell.headercellimage.image = UIImage(named: "Headercellimage")
                 
                 
                 println(head.count)
@@ -3370,12 +3380,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3387,12 +3397,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3404,12 +3414,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3460,12 +3470,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3477,12 +3487,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3494,12 +3504,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3552,12 +3562,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3569,12 +3579,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3586,12 +3596,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3651,6 +3661,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         dropdowntextfieldnew.layer.cornerRadius = 5
         dropdowntextfieldnew.backgroundColor = UIColor.whiteColor()
         dropdowntextfieldnewlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        dropdowntextfieldnewlabel.textAlignment = NSTextAlignment.Center
         dropdowntextfieldnewlabel.text = liqtypeFromresult
         dropdowntextfieldnewlabel.textColor = UIColor.darkGrayColor()
         
@@ -3661,14 +3672,14 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         showdropdownview.addSubview(dropdowntextfieldnewlabel)
         
         // Liq catogery drop down tableview
-        beerdropdowntableview.frame         =   CGRectMake(10,77,self.view.frame.width - 20,150)
+        beerdropdowntableview.frame         =   CGRectMake(10,77,self.view.frame.width - 20,170)
         beerdropdowntableview.delegate      =   self
         beerdropdowntableview.dataSource    =   self
         beerdropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         beerdropdowntableview.tag = 4
         beerdropdowntableview.layer.cornerRadius = 5
-       // beerdropdowntableview.layer.borderWidth = 2
-       // beerdropdowntableview.layer.borderColor = UIColor.lightGrayColor().CGColor
+        beerdropdowntableview.bounces = false
+        
         
         
         
@@ -3689,6 +3700,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         newtextfieldtableviewnew.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         newtextfieldtableviewlabel.text = liqFromresult
+        newtextfieldtableviewlabel.textAlignment = NSTextAlignment.Center
         newtextfieldtableviewlabel.textColor = UIColor.darkGrayColor()
         
         var newtextfieldtableviewnewtapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "liqsubcategorytapped:")
@@ -3699,12 +3711,13 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
 
         
         // Liq sub category drop down tableview
-        beerTypedropdowntableview.frame         =   CGRectMake(10,126,self.view.frame.width - 20,150)
+        beerTypedropdowntableview.frame         =   CGRectMake(10,126,self.view.frame.width - 20,165)
         beerTypedropdowntableview.delegate      =   self
         beerTypedropdowntableview.dataSource    =   self
         beerTypedropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         beerTypedropdowntableview.tag = 6
         beerTypedropdowntableview.layer.cornerRadius = 5
+        beerTypedropdowntableview.bounces = false
        // beerTypedropdowntableview.layer.borderColor = UIColor.lightGrayColor().CGColor
        // beerTypedropdowntableview.layer.borderWidth = 2
         
@@ -3725,6 +3738,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         citydropdowntextfieldnew.layer.cornerRadius = 5
         citydropdowntextfieldnew.backgroundColor = UIColor.whiteColor()
         citydropdowntextfieldlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+        citydropdowntextfieldlabel.textAlignment = NSTextAlignment.Center
         citydropdowntextfieldlabel.text = localityfromtextfield1
         citydropdowntextfieldlabel.textColor = UIColor.darkGrayColor()
         
@@ -3735,14 +3749,14 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         showdropdownview.addSubview(citydropdowntextfieldlabel)
 
         // Locality drop down tableview
-        citydropdowntableview.frame         =   CGRectMake(10,173,self.view.frame.width - 20,150)
+        citydropdowntableview.frame         =   CGRectMake(10,173,self.view.frame.width - 20,110)
         citydropdowntableview.delegate      =   self
         citydropdowntableview.dataSource    =   self
         citydropdowntableview.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         citydropdowntableview.tag = 9
         citydropdowntableview.layer.cornerRadius = 5
-       // citydropdowntableview.layer.borderWidth = 2
-        //citydropdowntableview.layer.borderColor = UIColor.lightGrayColor().CGColor
+        citydropdowntableview.bounces = false
+       
         
         
         
@@ -3774,10 +3788,12 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         // Sublocality search textfiled
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
         AutoCompleteTextField1.autoCompleteTableView?.layer.cornerRadius = 5
+        AutoCompleteTextField1.autoCompleteTableView?.bounces = false
       //  AutoCompleteTextField1.autoCompleteTableView?.layer.borderWidth = 2
         //AutoCompleteTextField1.autoCompleteTableView?.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         self.newtextfieldtableviewcity.layer.cornerRadius = 5
+        self.newtextfieldtableviewcity.textAlignment = NSTextAlignment.Center
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
         newtextfieldtableviewcity.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewcity.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
@@ -3959,6 +3975,10 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     @IBAction func findwineandbeernewryou(sender: UIButton)
     {
         performSegueWithIdentifier("getwineandbeernearyoufromcocktail", sender: self)
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 
     

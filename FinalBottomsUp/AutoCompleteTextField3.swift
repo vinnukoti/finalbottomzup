@@ -137,6 +137,30 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
     //        autoCompleteTableView!.frame = someFrame
     //    }
     
+//    public func setupAutocompleteTable1(view:UIView)
+//    {
+//        
+//        var count = 10
+//        let screenSize = UIScreen.mainScreen().bounds.size
+//        
+//        let tableView = UITableView(frame: CGRect(x: 15, y: self.frame.origin.y + 10, width: screenSize.width - 30, height: 20 * 10))
+//        //let tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: 30))
+//        
+//        tableView.layer.masksToBounds = true
+//        tableView.layer.borderColor = UIColor( red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0 ).CGColor
+//        tableView.layer.borderWidth = 2.0
+//        //tableView.frame =   CGRectMake(0, 247,375,10);
+//        
+//        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.rowHeight = autoCompleteCellHeight
+//        tableView.hidden = hidesWhenEmpty ?? true
+//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        view.addSubview(tableView)
+//        self.dynamicType.autoCompleteTableView = tableView
+//        
+//    }
+
     
     
     private func redrawTable()
@@ -236,6 +260,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
             
             if autoCompleteStrings != nil
             {
+               // AutoCompleteTextField3.autoCompleteTableView = UITableView(frame: CGRect(x: 15, y: self.frame.origin.y + 10, width: 100, height: 195))
                 for i in 0..<autoCompleteStrings!.count
                 {
                     let str = autoCompleteStrings![i] as NSString
@@ -254,6 +279,8 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
         onTextChange(text!)
         if text!.isEmpty{ autoCompleteStrings = nil }
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            // AutoCompleteTextField3.autoCompleteTableView = UITableView(frame: CGRect(x: 15, y: 50, width: 100, height: 100))
+            
             self.dynamicType.autoCompleteTableView?.hidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
         })
     }

@@ -309,6 +309,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     
      var actInd2 : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     var PleaseWaitlabel2 = UILabel()
+    var popupbox = UIView()
 
      var tapview = UIView()
     
@@ -531,7 +532,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 if CheckforInternetViewController.isConnectedToNetwork() == true
                 {
                    // print("Internet connection OK")
-                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.citydropdowntextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&types=(regions)&components=country:IN"
+                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.citydropdowntextfield.text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&components=country:IN"
                     let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
                     if url != nil{
                         let urlRequest = NSURLRequest(URL: url!)
@@ -768,25 +769,30 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                             var newlaocations = locations[i]
                             var fullNameArr = split(newlaocations) {$0 == ","}
                             println(fullNameArr.count)
-                            
-//                            if fullNameArr.count > 1
-//                            {
-//                                var firstName: String = fullNameArr[0]
-//                                var lastName: String = fullNameArr[1]
-//                                locations[i] = firstName + ", " + lastName
-//                            }
-                     
-                            
+                            if fullNameArr.count >= 2
+                            {
+                         
+                                var firstName: String = fullNameArr[0]
+                                var lastname:String = fullNameArr[1]
+                                locations[i] = firstName + ", " + lastname
+                            }
+                            else
+                            {
                                 var firstName: String = fullNameArr[0]
                                 locations[i] = firstName
-                            
-
+                            }
+        
                         }
                         self.newtextfieldtableviewcity.autoCompleteStrings = locations
                     }
                 }
                 else{
                     self.newtextfieldtableviewcity.autoCompleteStrings = nil
+                    
+                    if self.newtextfieldtableviewcity.autoCompleteStrings == nil
+                    {
+                        AutoCompleteTextField1.autoCompleteTableView?.hidden = true
+                    }
                 }
             }
         }
@@ -2103,6 +2109,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         var  headerCell = tableView.dequeueReusableCellWithIdentifier("headercellnew") as! customheadercell
         headerCell.headercellname.text = head[section].restname
                 headerCell.headercellname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                headerCell.headercellimage.image = UIImage(named: "Headercellimage")
                 
                 println(head.count)
                 if head.count >= 5
@@ -3562,12 +3569,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
             }
             
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3579,12 +3586,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             if liqFromresult == "All"
             {
                  var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
             }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3596,12 +3603,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             if liqFromresult == "All"
             {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
             }
             else
             {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
             }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3652,12 +3659,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3669,12 +3676,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3686,12 +3693,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3743,12 +3750,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
@@ -3760,12 +3767,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3777,12 +3784,12 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
               if liqFromresult == "All"
               {
                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqtypeFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
               }
               else
               {
                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=15&query=\(trimmedliqFromresult)")
+                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
               }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3847,6 +3854,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.dropdowntextfieldnewlabel = UILabel(frame:CGRectMake(10,40,self.view.frame.width - 20,35));
         dropdowntextfieldnew.backgroundColor = UIColor.whiteColor()
          self.dropdowntextfieldnew.layer.cornerRadius = 5
+        dropdowntextfieldnewlabel.textAlignment = NSTextAlignment.Center
         dropdowntextfieldnewlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         dropdowntextfieldnewlabel.text = liqtypeFromresult
         dropdowntextfieldnewlabel.textColor = UIColor.darkGrayColor()
@@ -3890,6 +3898,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.newtextfieldtableviewnew.backgroundColor = UIColor.whiteColor()
         newtextfieldtableviewlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         newtextfieldtableviewlabel.text = liqFromresult
+        newtextfieldtableviewlabel.textAlignment = NSTextAlignment.Center
         newtextfieldtableviewlabel.textColor = UIColor.darkGrayColor()
         showdropdownview.addSubview(self.newtextfieldtableviewnew)
         showdropdownview.addSubview(newtextfieldtableviewlabel)
@@ -3929,6 +3938,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         self.citydropdowntextfieldnew.backgroundColor = UIColor.whiteColor()
         citydropdowntextfieldnewlabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         citydropdowntextfieldnewlabel.text = localityfromtextfield1
+        citydropdowntextfieldnewlabel.textAlignment = NSTextAlignment.Center
         citydropdowntextfieldnewlabel.textColor = UIColor.darkGrayColor()
         showdropdownview.addSubview(self.citydropdowntextfieldnew)
         showdropdownview.addSubview(citydropdowntextfieldnewlabel)
@@ -3980,6 +3990,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         // Sublocality search textfiled
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
+        self.newtextfieldtableviewcity.textAlignment = NSTextAlignment.Center
         AutoCompleteTextField1.autoCompleteTableView?.layer.cornerRadius = 5
         self.newtextfieldtableviewcity.layer.cornerRadius = 5
         self.showdropdownview.addSubview(newtextfieldtableviewcity)
@@ -4028,16 +4039,20 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func Getresults(sender:UIButton!)
     {
+      //  popupbox = UIView(frame: CGRectMake(self.view.frame.width/2 - 30,self.view.frame.he, 250, 100))
         PleaseWaitlabel2 = UILabel(frame: CGRectMake(-25,20, 150, 100))
         PleaseWaitlabel2.text = "Please Wait..."
         PleaseWaitlabel2.textColor = UIColor.whiteColor()
        // self.actInd2.center = self.view.center
+        self.popupbox.center = self.view.center
+        self.popupbox.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         self.actInd2 = UIActivityIndicatorView(frame: CGRectMake(self.view.frame.width/2 - 30, 280 , 50, 50))
         self.actInd2.hidesWhenStopped = true
         self.actInd2.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         self.actInd2.color = UIColor.whiteColor()
         self.view.addSubview(actInd2)
         self.actInd2.startAnimating()
+      //  self.view.addSubview(popupbox)
         self.actInd2.addSubview(PleaseWaitlabel2)
         self.actInd2.tag = 100
          showdropdownview.hidden = false

@@ -158,6 +158,9 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     
     var initaialcount = 0
     
+    var place_id:String!
+    var place_id1:String!
+    
     
     override func viewDidLoad()
     {
@@ -177,7 +180,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         localityDynamicView.backgroundColor = UIColor.whiteColor()
    
 
-        label.textAlignment = NSTextAlignment.Left
+        label.textAlignment = NSTextAlignment.Center
         label.font = UIFont(name: "MyriadPro-Regular", size: 14)
         label.textColor = UIColor.darkGrayColor()
         
@@ -189,7 +192,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         //liq catogery textfield
         liqcatogeryDynamicView.layer.cornerRadius=5
-        categoryliqlabel.textAlignment = NSTextAlignment.Left
+        categoryliqlabel.textAlignment = NSTextAlignment.Center
         categoryliqlabel.font = UIFont(name: "MyriadPro-Regular", size: 14)
         if searchedLiq != nil
         {
@@ -211,7 +214,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
 
        liqsubcatogeryDynamicView.layer.cornerRadius=5
        liqsubcatogeryDynamicView.backgroundColor = UIColor.whiteColor()
-       subcategoryliqlabel.textAlignment = NSTextAlignment.Left
+       subcategoryliqlabel.textAlignment = NSTextAlignment.Center
         subcategoryliqlabel.font = UIFont(name: "MyriadPro-Regular", size: 14)
         if searchedaLiqType != nil
         {
@@ -266,6 +269,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         tableviewnew.tag = 5
         liqTypetableview.tag = 6
         beerTypeTextfield.tag = 7
+        AutoCompleteTextField3.autoCompleteTableView?.tag = 8
         
        // beerTypeTextfield.enabled = false
         
@@ -580,6 +584,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     //city Textfield
     private  func handleTextFieldInterfaces()
     {
+      // AutoCompleteTextField3().setupAutocompleteTable1(self.view)
         autocompletedTextfieldnew.onTextChange = {[weak self] text in
             if !text.isEmpty{
                 if self!.connection != nil
@@ -594,8 +599,10 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                if CheckforInternetViewController.isConnectedToNetwork() == true
                {
                     print("Internet connection OK")
-                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.label.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&types=(regions)&components=country:IN"
+                    let urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyC45IqTyfdeO5SzyLDGAVWiwADSSv70S6g&input={\(self!.label.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)}\(text)&components=country:IN"
                     let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
+                println(urlString)
+                println(url)
                     if url != nil{
                         let urlRequest = NSURLRequest(URL: url!)
                         self!.connection = NSURLConnection(request: urlRequest, delegate: self)
@@ -651,47 +658,56 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             var error:NSError?
             if let result = NSJSONSerialization.JSONObjectWithData(responseData!, options: nil, error: &error) as? NSDictionary
             {
+                
                 let status = result["status"] as? String
                 if status == "OK"
                 {
                     if let predictions = result["predictions"] as? NSArray
                     {
                         var locations = [String]()
-                       // var locations1 = [String]()
                         for dict in predictions as! [NSDictionary]
                         {
                             locations.append(dict["description"] as! String)
-                           // locations1.append(dict["description"] as! String)
-                          
+                            place_id = dict["place_id"] as! String
+                            println(place_id)
                         }
                         println(locations.count)
-                        
+                        var countarrayvalues = locations.count
+                        println(countarrayvalues)
+                        println(locations.count)
                         for var i = 0; i < locations.count ;i++
                         {
+                            println(locations.count)
                             var newlaocations = locations[i]
                             println(newlaocations)
                             var fullNameArr = split(newlaocations) {$0 == ","}
-                            var firstName: String = fullNameArr[0]
-//                            var lastName: String = fullNameArr[1]
-//                            var thirdnaem : String = fullNameArr[2]
-                            
-                            println(firstName)
-                           // println(lastName)
-                            locations[i] =  firstName
+                            println(fullNameArr.count)
+                            if fullNameArr.count >= 2
+                            {
+                                var firstName: String = fullNameArr[0]
+                                var lastName: String = fullNameArr[1]
+                                println(firstName)
+                                locations[i] =  firstName + ", " + lastName
+                            }
+                            else
+                            {
+                                var firstName: String = fullNameArr[0]
+                                //var lastName: String = fullNameArr[1]
+                                println(firstName)
+                                locations[i] =  firstName
+                            }
+                        
         
                         }
-
                         self.autocompletedTextfieldnew.autoCompleteStrings = locations
                     }
-//                    else if let predictions = result["predictions"] as? NSDictionary
-//                    {
-//                        println("Here is the exception")
-//                    }
                 }
                 else{
                     self.autocompletedTextfieldnew.autoCompleteStrings = nil
-                    
-                   // self.auocompletetextfieldsublocality.autoCompleteStrings = nil
+                    if self.autocompletedTextfieldnew.autoCompleteStrings == nil
+                    {
+                        AutoCompleteTextField3.autoCompleteTableView?.hidden = true
+                    }
                 }
             }
         }
@@ -1052,12 +1068,8 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println("You selected cell #\(indexPath.row)!")
             let selectedCell1 : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             //beerTypeTextfield.text = selectedCell1.textLabel?.text
-            
-            
             //instead of beertypetextfield im using categoryliqlabel
             categoryliqlabel.text = selectedCell1.textLabel?.text
-            
-            
            // beerTypefromtextfield = beerTypeTextfield.text
             
             
@@ -1066,11 +1078,28 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             println(beerTypefromtextfield)
             self.view.endEditing(true)
             tableView.hidden = true
-            
         }
- 
-        
+    }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        if tableView.tag == 8
+        {
+            return 43;//Choose your custom row height
+        }
+//        else if tableView.tag == 5
+//        {
+//            return 30
+//        }
+//        else if tableView.tag == 6
+//        {
+//            return 30
+//        }
+        else
+        {
+            return 43
+        }
+      //  return 100.0;//Choose your custom row height
     }
     @IBAction func searchnew(sender: UIButton)
     {
@@ -1119,45 +1148,16 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         if autocompletedTextfieldnew.text == currentLocation
         {
-            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=2&records=15&query=\(categoryliqlabel.text!)")
+            getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(devicelatitude)&long=\(devicelongitude)&km=5&records=15&query=\(categoryliqlabel.text!)")
         }
         
         else
         {
         getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
         }
-        
-        
-        
-        
-       //  getgoogledata("http://maps.google.com/maps/api/geocode/json?address=delhi%20connaught%20place&sensor=false")
-        
-      //  println(trimmedString)
-        
-      
-        
-  
-        
-        //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=5&records=10&query=\(trimmedString)")
-        
-        // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
-        //28.63875
-        //77.07380
+
     }
-//
-//    @IBAction func search(sender: AnyObject)
-//    {
-//        
-//        liqnamefromtextfield = textfield2.text
-//        trimmedString = liqnamefromtextfield.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-//        getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=\(citylat)&long=\(citylong)&km=5&records=15&query=\(trimmedString)")
-//        //getbardata("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylat)&long=\(citylong)&km=5&records=10&query=\(trimmedString)")
-//        
-//        // getbardata("http://demos.dignitasdigital.com/bottomzup/searchresult.php?lat=28.63875&long=77.07380&km=5&records=4&query=\(trimmedString)")
-//        //28.63875
-//        //77.07380
-//    }
-    
+
     
     func getgoogledata(urlString:String)
     {
@@ -1184,16 +1184,21 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         {
           if let results = json["results"] as? NSArray
           {
-            
-            println(results.count)
+          
             for var i = 0; i < results.count; i++
             {
                 println(results.count)
                 println(i)
                 if let one = results[i] as? NSDictionary
                 {
+                    if let place_id = json["place_id"] as? String!
+                    {
+                        place_id1 = place_id
+                        println(place_id1)
+                    }
                     if let geometry = one["geometry"] as? NSDictionary
                     {
+                   
                        // for var j = 0; j < geometry.count; j++
                       //  {
                             if let location = geometry["location"] as? NSDictionary
@@ -1214,15 +1219,14 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                     }
                 }
             }
+   
             ApiCall()
             
          }
         
         }
     }
-    
-    
-    
+
     func getbardata(urlString:String)
     {
         let url = NSURL(string: urlString)
@@ -2149,6 +2153,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         
     }
+    
 }
 
 
