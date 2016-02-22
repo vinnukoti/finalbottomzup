@@ -161,9 +161,24 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
     var place_id:String!
     var place_id1:String!
     
+    var uName:String!
+    
+    @IBOutlet weak var Namedisplaylabel: UILabel!
     
     override func viewDidLoad()
     {
+        if self.uName != nil
+        {
+          Namedisplaylabel.text = "Time to drink, \(uName)"
+        }
+        else
+        {
+           Namedisplaylabel.text = "Time to drink, Archy"
+        }
+        
+        Namedisplaylabel.font = UIFont(name: "MyriadPro-Bold", size: 23.0)
+        Namedisplaylabel.textAlignment = NSTextAlignment.Center
+        Namedisplaylabel.textColor = UIColor.whiteColor()
         tableviewnew.tableFooterView = UIView()
         tableviewnew.layer.cornerRadius = 5
         
@@ -1808,6 +1823,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 //28.63875
                 //77.07380
                // destination.liqname = textfield2.text
+                destination.uName = self.uName
                 
                 destination.liqname = subcategoryliqlabel.text
                // var liqname = textfield2.text
@@ -1888,6 +1904,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
                 //77.07380
                // destination3.liqname = textfield2.text
                 
+                destination3.uName = self.uName
                 destination3.liqname = subcategoryliqlabel.text
                // var liqname = textfield2.text
                 
@@ -1959,6 +1976,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             {
                // destination1.liqvodkaname = textfield2.text
                 
+                destination1.uName = self.uName
                 destination1.liqvodkaname = subcategoryliqlabel.text
                // var liqvodkaname = textfield2.text
                 
@@ -2025,6 +2043,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
             if let destination2 = segue.destinationViewController as? mapview
             {
      
+                destination2.uName = self.uName
                 destination2.getcitylatitude = citylat
                 destination2.getcitylongitude = citylong
                 destination2.getdevicelatitude = devicelatitude

@@ -223,9 +223,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var searchedLiq:String!
     var searchedaLiqType:String!
     var searchedsubLocality:String!
+    var uName:String!
     override func viewDidLoad()
   
     {
+        
+        tableview1.backgroundColor = UIColor.clearColor()
         
        
          println(liqtypeFromresult)
@@ -916,6 +919,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             cells.address.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cells.happyhours.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cells.happyhourstiming.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
+            cells.happyhours.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
+            cells.happyhourstiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
           //  cells.addressLabel.text = header1[indexPath.section].address
             newaddress = header1[indexPath.section].restaddress
             cells.happyhourstiming.text = header1[indexPath.section].vodkahappystart + " - " + header1[indexPath.section].vodkahappyend
@@ -1081,6 +1086,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         headerCell.backgroundColor = UIColor.whiteColor()
             headerCell.addressLabel.font = UIFont(name: "MyriadPro-Regular", size: fontsizenew)
             headerCell.headercellimage.image = UIImage(named: "Headercellimage")
+            headerCell.Happyhourlabelbeforeexpantion.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             
             if header1.count >= 5
             {
@@ -1181,7 +1187,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
                 
                 myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: fontsizenew)!])
                 
-                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
+                myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1), range: NSRange(location:0,length:myMutableString.length))
                 
                 headerCell.Happyhourlabelbeforeexpantion.attributedText = myMutableString
                 println(happyhourstiming1)
@@ -2603,6 +2609,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             if let destination = segue.destinationViewController as? tableviewclass
             {
+                destination.uName = self.uName
                 destination.liqvodkaname = newtextfieldtableview.text
                 var liqvodkaname = newtextfieldtableview.text
                 let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
@@ -2657,6 +2664,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
                 //28.63875
                 //77.07380
+                destination3.uName = self.uName
                 destination3.liqname = newtextfieldtableview.text
                 var liqname = newtextfieldtableview.text
                 destination3.header2 = head3
@@ -2712,7 +2720,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             if let destination1 = segue.destinationViewController as? mapview
             {
                 destination1.newlocate = locationnamefromtextfield
-                
+                destination1.uName = self.uName
                 destination1.getdevicelatitude = getdevicelatitude
                 destination1.getdevicelongitude = getdevicelongitude
             }
@@ -2722,6 +2730,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         {
             if let destination1 = segue.destinationViewController as? results1
             {
+                destination1.uName = self.uName
                 //Locality
                 destination1.searchedLocality = searchedLocality
                 
@@ -3130,7 +3139,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
-       JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+       //JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3230,7 +3239,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
-        JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+        //JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3318,7 +3327,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
-       JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+       //JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center

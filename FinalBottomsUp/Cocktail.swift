@@ -302,6 +302,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     var searchedLiq:String!
     var searchedaLiqType:String!
     var searchedsubLocality:String!
+    var uName:String!
 
     override func viewDidLoad()
     {
@@ -1786,7 +1787,9 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             cells.areaname.text = header2[indexPath.section].restaddress
             cells.areaname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            cells.Happyhourslabel.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             cells.happytiming.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            cells.happytiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             //addresslabel.text = head[indexPath.section].Place
             newaddress = header2[indexPath.section].restaddress
             cells.happytiming.text = header2[indexPath.section].happystart + " - " + header2[indexPath.section].happyend
@@ -2000,6 +2003,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                 headerCell.citynamedisplay.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
                 headerCell.headercellimage.image = UIImage(named: "Headercellimage")
+                headerCell.Happyhourslabel.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
                 
                 
                 println(head.count)
@@ -2105,7 +2109,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                     
                     myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: fontsizenew)!])
                     
-                    myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
+                    myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1), range: NSRange(location:0,length:myMutableString.length))
                     
                     headerCell.Happyhourslabel.attributedText = myMutableString
          
@@ -2582,6 +2586,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         {
             if let destination1 = segue.destinationViewController as? tableviewclass
             {
+                destination1.uName = self.uName
                 destination1.head = head2
                 destination1.liqvodkaname = newtextfieldtableview.text
                 var liqvodkaname = newtextfieldtableview.text
@@ -2638,6 +2643,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         {
             if let destination1 = segue.destinationViewController as? tableviewclassvodka
             {
+                destination1.uName = self.uName
                 destination1.header1 = headerfortableview
                 destination1.liqvodkaname = newtextfieldtableview.text
                 var liqvodkaname = newtextfieldtableview.text
@@ -2694,6 +2700,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         {
             if let destination2 = segue.destinationViewController as? mapview
             {
+                destination2.uName = self.uName
                 destination2.getdevicelatitude = getdevicelatitude
                 destination2.getdevicelongitude = getdevicelongitude
                 destination2.newlocate = locationnamefromtextfield
@@ -2704,6 +2711,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         {
             if let destination2 = segue.destinationViewController as? results1
             {
+                destination2.uName = self.uName
                 //Locality
                 destination2.searchedLocality = searchedLocality
                 
@@ -3341,7 +3349,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
-        JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+        //JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3438,7 +3446,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
-        JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+        //JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3526,7 +3534,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
-        JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+        //JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         //JLToast.makeText("Restaurants Near 7KMS", duration: JLToastDelay.ShortDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."

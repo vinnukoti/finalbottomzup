@@ -22,6 +22,8 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
 
 {
     
+    var uName:String!
+    
     var signIn: GPPSignIn!
     
     var kClientID = "587696970048-18ifi3olkhbl3djkc2qgstlo5bp3vp9g.apps.googleusercontent.com"
@@ -254,6 +256,13 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
                        // self.actInd.startAnimating()
                         let dictuser = user["email"] as! String!
                         self.username = user["name"] as! String!
+                        println(self.username)
+                        var delimiter = " "
+                       // var newstr = "token0 token1 token2 token3"
+                        var token = self.username.componentsSeparatedByString(delimiter)
+                        print (token[0])
+                        self.uName = token[0]
+                        println(self.uName)
                         let id = user["id"]as! String!
                         self.userid = id
                         println(self.userid )
@@ -268,7 +277,8 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
                         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(self.emailid)",action: "\(self.username)",label: "From facebook", value: nil).build()
                         tracker.send(eventTracker as! [NSObject : AnyObject])
                         let str = "Results"
-                        var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! UIViewController
+                        var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! results1
+                        vc.uName = self.uName.capitalizedString
                         self.presentViewController(vc, animated: true, completion: nil)
                         
                     }
@@ -302,8 +312,19 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
         performSegueWithIdentifier("newsearch", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let dist = segue.destinationViewController as! results1 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        let dist = segue.destinationViewController as! results1
+        
+        if segue.identifier == "newsearch"
+        {
+            if let destination = segue.destinationViewController as? results1
+            {
+                println(self.uName)
+                destination.uName = self.uName.capitalizedString
+            }
+        }
+        
     }
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
@@ -339,6 +360,15 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
                 gid = userId
                 
                 username = name
+               
+                
+                var delimiter = " "
+                // var newstr = "token0 token1 token2 token3"
+                var token = self.username.componentsSeparatedByString(delimiter)
+                print (token[0])
+                self.uName = token[0]
+
+                println(uName)
                 
                 
                 

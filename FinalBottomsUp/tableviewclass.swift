@@ -317,8 +317,10 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var searchedLiq:String!
     var searchedaLiqType:String!
     var searchedsubLocality:String!
+    var uName:String!
     override func viewDidLoad()
     {
+        println(uName)
         actInd2.hidden = true
         
         self.happyhoursfont.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
@@ -1888,8 +1890,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.areaname.text = head[indexPath.section].restaddress
             cells.areaname.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            cells.Happyhourslabel.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             cells.happytiming.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
-            //addresslabel.text = head[indexPath.section].Place
+            cells.happytiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             newaddress = head[indexPath.section].restaddress
             cells.happytiming.text = head[indexPath.section].happystart + " - " + head[indexPath.section].happyend
             cells.popupbutton.tag = indexPath.section
@@ -2198,6 +2201,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 //                    headerCell.Happyhourslabel.hidden = false
 //                }
                 headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                headerCell.Happyhourslabel.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
                 
                 var screensize = self.view.frame.width
                 headerCell.headercellmax.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
@@ -2223,7 +2227,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 {
                     
                  
-                        
+                        println(head[section].restname)
                         var happyhourstiming1 = "Happy Hours " + happyhourstiming
                         var myMutableString = NSMutableAttributedString()
                         
@@ -2264,7 +2268,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                         
                         myMutableString = NSMutableAttributedString(string: happyhourstiming1, attributes: [NSFontAttributeName:UIFont(name: "MyriadPro-Regular", size: fontsizenew)!])
                         
-                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.orangeColor(), range: NSRange(location:0,length:myMutableString.length))
+                        myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1), range: NSRange(location:0,length:myMutableString.length))
                         
                         headerCell.Happyhourslabel.attributedText = myMutableString
                   //  headerCell.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
@@ -2773,6 +2777,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 //28.63875
                 //77.07380
+                destination3.uName = self.uName
                 destination3.liqname = newtextfieldtableview.text
                 var liqname = newtextfieldtableview.text
                 destination3.header2 = head3
@@ -2830,6 +2835,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
         if let destination1 = segue.destinationViewController as? tableviewclassvodka
         {
+            destination1.uName = self.uName
             destination1.liqvodkaname = newtextfieldtableview.text
             var liqvodkaname = newtextfieldtableview.text
             let trimmedString = liqvodkaname.stringByReplacingOccurrencesOfString("\\s", withString: "%20", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
@@ -2884,6 +2890,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if let destination2 = segue.destinationViewController as? mapview
             {
+                destination2.uName = self.uName
                 destination2.getdevicelatitude = getdevicelatitude
                 destination2.getdevicelongitude = getdevicelongitude
                 destination2.newlocate = locationnamefromtextfield
@@ -2893,8 +2900,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if let destination2 = segue.destinationViewController as? results1
             {
-                
+                destination2.uName = self.uName
                 //Locality
+                
                 destination2.searchedLocality = searchedLocality
             
                 
@@ -3528,7 +3536,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor2KMS(sender: UIButton)
     {
-        JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+       // JLToast.makeText("Restaurants Near 2KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         //self.view.makeToast("Account created Successfully", duration: 0.5, position: CSToastPositionBottom)
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
@@ -3627,7 +3635,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor5KMS(sender: UIButton)
     {
-        JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+       // JLToast.makeText("Restaurants Near 5KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center
@@ -3715,7 +3723,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     func lookfurtherfor7KMS(sender: UIButton)
     {
-        JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
+        //JLToast.makeText("Restaurants Near 7KMS.", delay: 2, duration:JLToastDelay.LongDelay).show()
         PleaseWaitlabel1 = UILabel(frame: CGRectMake(0,20, 150, 100))
         PleaseWaitlabel1.text = "Please Wait..."
         self.actInd1.center = self.view.center

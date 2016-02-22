@@ -60,6 +60,7 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     var searchedLiq:String!
     var searchedaLiqType:String!
     var searchedsubLocality:String!
+    var uName:String!
 
 
     @IBOutlet weak var lookfurtherdefault: UIButton!
