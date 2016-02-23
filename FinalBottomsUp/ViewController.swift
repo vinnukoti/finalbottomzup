@@ -321,7 +321,16 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
             if let destination = segue.destinationViewController as? results1
             {
                 println(self.uName)
-                destination.uName = self.uName.capitalizedString
+                if uName != nil
+                
+                {
+                   destination.uName = self.uName.capitalizedString
+                }
+                else
+                {
+                    
+                }
+                
             }
         }
         

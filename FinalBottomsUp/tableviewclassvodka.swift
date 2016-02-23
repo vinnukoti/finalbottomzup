@@ -1306,6 +1306,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+        self.tableview1.scrollsToTop = true
         DynamicViewvodka.hidden = true
         let tracker = GAI.sharedInstance().defaultTracker
         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Tapped Hotel",action: header1[gestureRecognizer.view!.tag].restnamevodka,label: header1[gestureRecognizer.view!.tag].restnamevodka, value: nil).build()
@@ -2873,14 +2874,14 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicViewvodka.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton.setTitle("8722289471", forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
             let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicViewvodka.frame.width - 30,30)
             Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton1.setTitle("8892640540", forState: .Normal)
-            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton1.tintColor = UIColor.blackColor()
             
             self.view.addSubview(DynamicViewvodka)
             self.DynamicViewvodka.addSubview(imageView)
@@ -2900,12 +2901,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
     func call1(sender:UIButton)
     {
-      callNumber("8722289471")
+       callNumber(header1[sender.tag].Phoneone)
     }
     
     func call2(sender:UIButton)
     {
-        callNumber("8892640540")
+         callNumber(header1[sender.tag].Phoneone)
     }
     
     
@@ -2927,6 +2928,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func locationpopupclicked(sender: UIButton, forEvent event: UIEvent)
     {
+         self.DynamicViewvodka.hidden = true
         restlatitude = header1[sender.tag].Restaurantlatitudevodka
         restlongitude = header1[sender.tag].Restaurantlongitudevodka
         let tracker = GAI.sharedInstance().defaultTracker
@@ -2962,8 +2964,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             self.addresslabel.frame = CGRectMake(10, 5, DynamicViewvodka.frame.width - 25, 35)
             self.addresslabel.textColor = UIColor.blackColor()
             self.addresslabel.textAlignment = NSTextAlignment.Left
-            self.addresslabel.text = newaddress
-            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 11)
+            self.addresslabel.text = header1[sender.tag].restaddress
+            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: fontsizenew)
             self.addresslabel.numberOfLines = 3
             
             
@@ -2977,7 +2979,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
            // titleString.addAttribute(text, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, 18))
             
             Findongooglemapsbutton.setAttributedTitle(titleString, forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 11)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
             
             self.view.addSubview(DynamicViewvodka)

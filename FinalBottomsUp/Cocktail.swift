@@ -2944,13 +2944,15 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicView.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
             Findongooglemapsbutton.setTitle(header2[sender.tag].Phoneone, forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
             let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicView.frame.width - 30,30)
             Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
             Findongooglemapsbutton1.setTitle(header2[sender.tag].Phonetwo, forState: .Normal)
-            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton1.tintColor = UIColor.blackColor()
             
             
             
@@ -3110,6 +3112,7 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
     
     @IBAction func locationpopup(sender: UIButton, forEvent event: UIEvent)
     {
+        self.locatiopopupview.hidden = true
         reslatitude = header2[sender.tag].Restaurantlatitude
         reslongitude = header2[sender.tag].Restaurantlongitude
         let tracker = GAI.sharedInstance().defaultTracker
@@ -3150,8 +3153,8 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             self.addresslabel.frame = CGRectMake(10, 5, locatiopopupview.frame.width - 25, 35)
             self.addresslabel.textColor = UIColor.blackColor()
             self.addresslabel.textAlignment = NSTextAlignment.Left
-            self.addresslabel.text = newaddress
-            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 14)
+            self.addresslabel.text = header2[sender.tag].restaddress
+            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: fontsizenew)
             self.addresslabel.numberOfLines = 3
             
             
@@ -3163,7 +3166,8 @@ class Cocktail: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             var titleString : NSMutableAttributedString = NSMutableAttributedString(string: "Find on Google Maps")
             titleString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, count(text.utf8)))
             Findongooglemapsbutton.setAttributedTitle(titleString, forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
             
             self.view.addSubview(locatiopopupview)

@@ -318,6 +318,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var searchedaLiqType:String!
     var searchedsubLocality:String!
     var uName:String!
+    var scrollTag:Int!
     override func viewDidLoad()
     {
         println(uName)
@@ -1850,6 +1851,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.tapimage.addGestureRecognizer(headerTapped)
             cells.tapimage.tag = indexPath.section
             cells.tapimage.userInteractionEnabled = true
+            println(cells.tapimage.tag)
+            scrollTag = cells.tapimage.tag
 
             
 //            if head.count > 5
@@ -1893,7 +1896,9 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.Happyhourslabel.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             cells.happytiming.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.happytiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
-            newaddress = head[indexPath.section].restaddress
+           // newaddress = head[indexPath.section].restaddress
+            //self.addresslabel.text = head[indexPath.section].restaddress
+            println(newaddress)
             cells.happytiming.text = head[indexPath.section].happystart + " - " + head[indexPath.section].happyend
             cells.popupbutton.tag = indexPath.section
             println(cells.happytiming.text)
@@ -1967,6 +1972,11 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             return cell!
         }
     }
+    
+//    func scrollToRowAtIndexPath(indexPath: NSIndexPath,atScrollPosition scrollPosition: UITableViewScrollPosition,animated: Bool)
+//    {
+//        if
+//    }
     
     
    
@@ -2402,9 +2412,21 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
+    
+//    func scrollToFirstRow() {
+////        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+////        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top,animated: true)
+//        
+////        let selectedRows = self.tableView.indexPathsForSelectedRows
+////        if let selectedRow = selectedRows?[0] as? NSIndexPath {
+////            self.tableView.scrollToRowAtIndexPath(selectedRow, atScrollPosition: .Middle, animated: true)
+//        
+//    }
 
     func sectionHeaderTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+       
+       // self.tableview.scrollToRowAtIndexPath(NSIndexPath(index: 4), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
         DynamicView.hidden = true
         locatiopopupview.hidden = true
         let tracker = GAI.sharedInstance().defaultTracker
@@ -2425,6 +2447,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         }
      
         self.tableview.reloadData()
+       // self.tableview.reloadSections(NSIndexSet(index: gestureRecognizer.view!.tag), withRowAnimation: UITableViewRowAnimation.Top)
+        
         
     }
 
@@ -3130,13 +3154,15 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicView.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
             Findongooglemapsbutton.setTitle(head[sender.tag].Phoneone, forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
             let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicView.frame.width - 30,30)
             Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
             Findongooglemapsbutton1.setTitle(head[sender.tag].Phonetwo, forState: .Normal)
-            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton1.tintColor = UIColor.blackColor()
 
             
 
@@ -3296,6 +3322,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     @IBAction func locationpopup(sender: UIButton, forEvent event: UIEvent)
     {
+         self.locatiopopupview.hidden = true
         reslatitude = head[sender.tag].Restaurantlatitude
         reslongitude = head[sender.tag].Restaurantlongitude
         let tracker = GAI.sharedInstance().defaultTracker
@@ -3336,8 +3363,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             self.addresslabel.frame = CGRectMake(10, 5, locatiopopupview.frame.width - 25, 35)
             self.addresslabel.textColor = UIColor.blackColor()
             self.addresslabel.textAlignment = NSTextAlignment.Left
-            self.addresslabel.text = newaddress
-            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: 14)
+            self.addresslabel.text = head[sender.tag].restaddress
+            self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: fontsizenew)
             self.addresslabel.numberOfLines = 3
             
             
@@ -3349,7 +3376,8 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             var titleString : NSMutableAttributedString = NSMutableAttributedString(string: "Find on Google Maps")
             titleString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, count(text.utf8)))
             Findongooglemapsbutton.setAttributedTitle(titleString, forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: 14)
+            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
             
             self.view.addSubview(locatiopopupview)

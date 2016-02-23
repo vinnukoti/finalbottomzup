@@ -173,7 +173,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         }
         else
         {
-           Namedisplaylabel.text = "Time to drink, Archy"
+           Namedisplaylabel.text = "Time to drink, Buddy"
         }
         
         Namedisplaylabel.font = UIFont(name: "MyriadPro-Bold", size: 23.0)

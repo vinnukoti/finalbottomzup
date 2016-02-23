@@ -625,7 +625,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfW-vS-awx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5338" y="-7329"/>
+            <point key="canvasLocation" x="-6693" y="-7869"/>
         </scene>
         <!--Results1-->
         <scene sceneID="p1C-cR-ncg">
@@ -1126,7 +1126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pl3-aM-fz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8654" y="-16388"/>
+            <point key="canvasLocation" x="-9230" y="-16088"/>
         </scene>
         <!--Tableviewclass-->
         <scene sceneID="qUz-jp-MiN">
@@ -2552,7 +2552,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oFp-Lf-5go" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9639" y="-15916"/>
+            <point key="canvasLocation" x="-9969" y="-16104"/>
         </scene>
         <!--Tableviewclassvodka-->
         <scene sceneID="0pa-3Q-oDE">
@@ -3372,7 +3372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2c-5a-dyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7724" y="-16921"/>
+            <point key="canvasLocation" x="-8542" y="-17101"/>
         </scene>
         <!--Cocktail-->
         <scene sceneID="C8J-em-6J5">
@@ -4337,7 +4337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKv-te-WFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8410" y="-16903"/>
+            <point key="canvasLocation" x="-9314" y="-16865"/>
         </scene>
     </scenes>
     <resources>
@@ -4382,11 +4382,11 @@
         <image name="wordcloud2" width="1080" height="319"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k2w-mW-TjF"/>
-        <segue reference="KlY-oy-LUS"/>
-        <segue reference="UxJ-43-AB9"/>
-        <segue reference="hwc-eh-rZc"/>
-        <segue reference="yq4-9t-36Q"/>
-        <segue reference="hUh-ht-H6h"/>
+        <segue reference="yu0-QO-HLc"/>
+        <segue reference="V3G-fz-y2l"/>
+        <segue reference="aAb-Jn-8Nq"/>
+        <segue reference="ja9-qS-CKX"/>
+        <segue reference="aSH-hV-RWE"/>
+        <segue reference="oIU-td-Sv5"/>
     </inferredMetricsTieBreakers>
 </document>
