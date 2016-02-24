@@ -319,6 +319,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var searchedsubLocality:String!
     var uName:String!
     var scrollTag:Int!
+    var currentLocation: String!
     override func viewDidLoad()
     {
         println(uName)
@@ -348,7 +349,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         tracker2.set(kGAIScreenName, value:"Beer Screen")
 
         dealsnearyou.hidden = true
+        println(locationnamefromtextfield)
         locationnamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
+        if locationnamefromtextfield == "Current Location"
+        {
+             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+        }
+        else
+        {
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+        }
         locationnamedisplaybutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
       
         locationnamedisplaybutton.layer.cornerRadius = 10
@@ -1853,6 +1865,14 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.tapimage.userInteractionEnabled = true
             println(cells.tapimage.tag)
             scrollTag = cells.tapimage.tag
+            if head[indexPath.section].ishappy == "Yes"
+            {
+                cells.happytiming.textColor = UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0)
+            }
+            else
+            {
+                cells.happytiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
+            }
 
             
 //            if head.count > 5
@@ -1895,7 +1915,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             cells.Happyhourslabel.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
             cells.Happyhourslabel.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             cells.happytiming.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
-            cells.happytiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
+           // cells.happytiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
            // newaddress = head[indexPath.section].restaddress
             //self.addresslabel.text = head[indexPath.section].restaddress
             println(newaddress)
@@ -3116,7 +3136,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         // Receive action
         // downcast sender as a UIView
         
-       
+       DynamicView.hidden = true
         
         
         let tracker = GAI.sharedInstance().defaultTracker
@@ -3138,7 +3158,16 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
             
-             self.DynamicView=UIView(frame: CGRectMake(self.view.frame.origin.x + 60 ,p!.y + 15,self.view.frame.width * 0.5,90))
+            if p?.y <= 386
+            {
+                self.DynamicView = UIView(frame: CGRectMake(self.view.frame.origin.x + 60 ,p!.y + 15,self.view.frame.width * 0.5,90))
+            }
+            else
+            {
+                self.DynamicView = UIView(frame: CGRectMake(self.view.frame.origin.x + 60 ,p!.y - 105,self.view.frame.width * 0.5,90))
+            }
+            
+            // self.DynamicView=UIView(frame: CGRectMake(self.view.frame.origin.x + 60 ,p!.y + 15,self.view.frame.width * 0.5,90))
             imageView.frame = CGRect(x: 0,y: 0,width: DynamicView.frame.width,height: DynamicView.frame.height)
             
             let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
@@ -3347,8 +3376,18 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(touch.locationInView(self.view))
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
+            println(p)
             
-            self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 140,p!.y + 20,165,95))
+            if p?.y <= 386
+            {
+                self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 140,p!.y + 20,185,105))
+            }
+            else
+            {
+                self.locatiopopupview = UIView(frame: CGRectMake(p!.x - 140,p!.y - 120,185,105))
+            }
+            
+            
              imageView.frame = CGRect(x: 0,y: 0,width: locatiopopupview.frame.width,height: locatiopopupview.frame.height)
             
             let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
@@ -3360,16 +3399,16 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
 
-            self.addresslabel.frame = CGRectMake(10, 5, locatiopopupview.frame.width - 25, 35)
+            self.addresslabel.frame = CGRectMake(10, 1, locatiopopupview.frame.width - 25, 55)
             self.addresslabel.textColor = UIColor.blackColor()
             self.addresslabel.textAlignment = NSTextAlignment.Left
             self.addresslabel.text = head[sender.tag].restaddress
             self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: fontsizenew)
-            self.addresslabel.numberOfLines = 3
+            self.addresslabel.numberOfLines = 4
             
             
             let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            Findongooglemapsbutton.frame = CGRectMake(5,50,locatiopopupview.frame.width - 30,30)
+            Findongooglemapsbutton.frame = CGRectMake(5,55,locatiopopupview.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "gotomapgoogle:", forControlEvents: UIControlEvents.TouchUpInside)
 
             var text = "Find on Google Maps"
@@ -3457,106 +3496,70 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             locatiopopupview.hidden = true
         }
         
-     var tag = sender.tag
-        
-        switch (tag){
-            
-//            case 1:
-//            
-//                closelocationpopupbutton7kms.frame = CGRectMake(0,0,75,75)
-//                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-//                closelocationpopupbutton7kms.tag=7
-//                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
-//            
-//                closelocationpopupbutton5kms.frame = CGRectMake(0,75,75,75)
-//                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-//                closelocationpopupbutton5kms.tag=5
-//                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
-//            
-//                closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
-//                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-//                closelocationpopupbutton2kms.tag=2
-//                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
-//                
-//                
-//                self.view.addSubview(locatiopopupview)
-//                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
-//                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
-//                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
 
+    
+            var tag = sender.tag
+            
+            switch (tag){
+                
+            case 2:
+                closelocationpopupbutton7kms.frame = CGRectMake(5,90,70,70)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton5kms.frame = CGRectMake(5,160,70,70)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+                self.view.addSubview(locatiopopupview)
+                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                
+            case 5:
+                closelocationpopupbutton7kms.frame = CGRectMake(5,90,70,70)
+                closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton7kms.tag=7
+                closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton2kms.frame = CGRectMake(5,160,70,70)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                
+                self.view.addSubview(locatiopopupview)
+                self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
+                //self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+                
+                
+            case 7:
+                
+                closelocationpopupbutton5kms.frame = CGRectMake(5,90,70,70)
+                closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton5kms.tag=5
+                closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
+                
+                
+                
+                closelocationpopupbutton2kms.frame = CGRectMake(5,160,70,70)
+                closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
+                closelocationpopupbutton2kms.tag=2
+                closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
+                
+                self.view.addSubview(locatiopopupview)
+                self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
+                self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
+                
+            default: return
+            }
 
-            
-        case 2:
-            closelocationpopupbutton7kms.frame = CGRectMake(5,90,70,70)
-            closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton7kms.tag=7
-            closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
-            
-            
-            
-            closelocationpopupbutton5kms.frame = CGRectMake(5,160,70,70)
-            closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton5kms.tag=5
-            closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
-            
-            self.view.addSubview(locatiopopupview)
-            self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
-            self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
-           // self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
-
-            
-
-            
-        case 5:
-            closelocationpopupbutton7kms.frame = CGRectMake(5,90,70,70)
-            closelocationpopupbutton7kms.addTarget(self, action: "lookfurtherfor7KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton7kms.tag=7
-            closelocationpopupbutton7kms.setBackgroundImage(imageName7, forState: .Normal)
-            
-            
-            
-            closelocationpopupbutton2kms.frame = CGRectMake(5,160,70,70)
-            closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton2kms.tag=2
-            closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
-            
-            
-            self.view.addSubview(locatiopopupview)
-            self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
-            //self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
-            self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
-
-            
-        case 7:
-            
-            closelocationpopupbutton5kms.frame = CGRectMake(5,90,70,70)
-            closelocationpopupbutton5kms.addTarget(self, action: "lookfurtherfor5KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton5kms.tag=5
-            closelocationpopupbutton5kms.setBackgroundImage(imageName5, forState: .Normal)
-            
-            
-            
-            closelocationpopupbutton2kms.frame = CGRectMake(5,160,70,70)
-            closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-            closelocationpopupbutton2kms.tag=2
-            closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
-            
-            self.view.addSubview(locatiopopupview)
-          //  self.locatiopopupview.addSubview(closelocationpopupbutton7kms)
-            self.locatiopopupview.addSubview(closelocationpopupbutton5kms)
-            self.locatiopopupview.addSubview(closelocationpopupbutton2kms)
-
-            
-            
-//            closelocationpopupbutton2kms.frame = CGRectMake(0,150,75,75)
-//            closelocationpopupbutton2kms.addTarget(self, action: "lookfurtherfor2KMS:", forControlEvents: UIControlEvents.TouchUpInside)
-//            closelocationpopupbutton2kms.tag=2
-//            closelocationpopupbutton2kms.setBackgroundImage(imageName2, forState: .Normal)
-            
-        default: return
-        }
-        
-        
         }
  
     }
@@ -3602,16 +3605,36 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             println(liqFromresult)
             println(liqtypeFromresult)
             
-            if liqFromresult == "All"
+            
+            
+            if locationnamefromtextfield == "Current Location"
             {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
             }
             else
             {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
             }
+            
+    
             
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
@@ -3619,16 +3642,34 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
         case 5:
             countfurther = 2
-            if liqFromresult == "All"
+            if locationnamefromtextfield == "Current Location"
             {
-                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
             }
             else
             {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
             }
+            
+
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
@@ -3636,16 +3677,35 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
         case 7:
             countfurther = 3
-            if liqFromresult == "All"
-            {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+            
+             if locationnamefromtextfield == "Current Location"
+             {
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
             }
             else
-            {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+             {
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
             }
+            
+   
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
@@ -3692,33 +3752,69 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         case 2:
             //call 2km api
               countfurther = 1
-              if liqFromresult == "All"
+              
+              if locationnamefromtextfield == "Current Location"
               {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
+
               }
               else
               {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
-              }
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
 
+              }
+         
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
               self.array1 = self.head
             
         case 5:
               countfurther = 2
-              if liqFromresult == "All"
+              if locationnamefromtextfield == "Current Location"
               {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
               }
               else
               {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
               }
+       
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
@@ -3726,16 +3822,33 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
         case 7:
               countfurther = 3
-              if liqFromresult == "All"
+              if locationnamefromtextfield == "Current Location"
               {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
               }
               else
               {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
               }
+      
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7
@@ -3783,16 +3896,33 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             //call 2km api
               countfurther = 1
               println(liqtypeFromresult)
-              if liqFromresult == "All"
+              if locationnamefromtextfield == "Current Location"
               {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
               }
               else
               {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
               }
+   
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
@@ -3800,16 +3930,34 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
         case 5:
               countfurther = 2
-              if liqFromresult == "All"
+              
+              if locationnamefromtextfield == "Current Location"
               {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
               }
               else
               {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
               }
+  
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
@@ -3817,16 +3965,33 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             
         case 7:
               countfurther = 3
-              if liqFromresult == "All"
+              if locationnamefromtextfield == "Current Location"
               {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
               }
               else
               {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurther("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
               }
+    
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7

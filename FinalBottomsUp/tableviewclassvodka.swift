@@ -250,6 +250,17 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         citynamedisplaybutton.setTitle(liqtypefromTextfield + space + near + space + locationnamefromtextfield, forState: .Normal)
         citynamedisplaybutton.titleLabel!.font =  UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
         
+        if locationnamefromtextfield == "Current Location"
+        {
+            lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 5
+        }
+        else
+        {
+            lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
+            lookfurtherdefault.tag = 2
+        }
+        
 
         citynamedisplaybutton.layer.cornerRadius = 10
         dealsnearyou.hidden = true
@@ -920,7 +931,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             cells.happyhours.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cells.happyhourstiming.font = UIFont(name: "MyriadPro-Regular", size:fontsizenew)
             cells.happyhours.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
-            cells.happyhourstiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
+           // cells.happyhourstiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
           //  cells.addressLabel.text = header1[indexPath.section].address
             newaddress = header1[indexPath.section].restaddress
             cells.happyhourstiming.text = header1[indexPath.section].vodkahappystart + " - " + header1[indexPath.section].vodkahappyend
@@ -933,6 +944,15 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             {
                 cells.happyhourstiming.hidden = false
                 cells.happyhours.hidden = false
+            }
+            
+            if header1[indexPath.section].vodkaishappy == "Yes"
+            {
+                cells.happyhourstiming.textColor = UIColor(red: 0/255.0, green: 153/255.0, blue: 0/255.0, alpha: 1.0)
+            }
+            else
+            {
+                cells.happyhourstiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             }
            // cells.tableview1.reloadData()
         return cells
@@ -2841,6 +2861,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     
     @IBAction func phonebuttonclicked(sender: UIButton, forEvent event: UIEvent)
     {
+        DynamicViewvodka.hidden = true
         
         let tracker = GAI.sharedInstance().defaultTracker
         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("Contact details",action: header1[sender.tag].Phoneone,label: header1[sender.tag].Phonetwo, value: nil).build()
@@ -2859,7 +2880,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
             
-            self.DynamicViewvodka=UIView(frame: CGRectMake(self.view.frame.origin.x + 60 ,p!.y + 15,self.view.frame.width * 0.5,90))
+            if p?.y <= 386
+            {
+                self.DynamicViewvodka = UIView(frame: CGRectMake(self.view.frame.origin.x + 80 ,p!.y + 15,self.view.frame.width * 0.5,90))
+            }
+            else
+            {
+                self.DynamicViewvodka = UIView(frame: CGRectMake(self.view.frame.origin.x + 80 ,p!.y - 105,self.view.frame.width * 0.5,90))
+            }
+            
+           // self.DynamicViewvodka=UIView(frame: CGRectMake(self.view.frame.origin.x + 80 ,p!.y + 15,self.view.frame.width * 0.5,90))
             imageView.frame = CGRect(x: 0,y: 0,width: DynamicViewvodka.frame.width,height: DynamicViewvodka.frame.height)
             
             let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
@@ -2949,7 +2979,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             var point = touch.locationInView(self.view)
             var p = buttonView.superview?.convertPoint(buttonView.center, toView: self.view)
             
-            self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 140,p!.y + 20,165,95))
+            if p?.y <= 386
+            {
+                self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 170,p!.y + 20,185,105))
+            }
+            else
+            {
+                self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 170,p!.y - 120,185,105))
+            }
+            
+            //self.DynamicViewvodka = UIView(frame: CGRectMake(p!.x - 170,p!.y + 20,185,105))
             imageView.frame = CGRect(x: 0,y: 0,width: DynamicViewvodka.frame.width,height: DynamicViewvodka.frame.height)
             
             let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
@@ -2961,16 +3000,16 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
             //  var addresslabel: UILabel = UILabel()
-            self.addresslabel.frame = CGRectMake(10, 5, DynamicViewvodka.frame.width - 25, 35)
+            self.addresslabel.frame = CGRectMake(10, 1, DynamicViewvodka.frame.width - 25, 55)
             self.addresslabel.textColor = UIColor.blackColor()
             self.addresslabel.textAlignment = NSTextAlignment.Left
             self.addresslabel.text = header1[sender.tag].restaddress
             self.addresslabel.font = UIFont(name:"MYRIADPRO-REGULAR", size: fontsizenew)
-            self.addresslabel.numberOfLines = 3
+            self.addresslabel.numberOfLines = 4
             
             
             let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            Findongooglemapsbutton.frame = CGRectMake(0,50,DynamicViewvodka.frame.width - 30,30)
+            Findongooglemapsbutton.frame = CGRectMake(0,55,DynamicViewvodka.frame.width - 30,30)
             Findongooglemapsbutton.addTarget(self, action: "gotomapgoogle:", forControlEvents: UIControlEvents.TouchUpInside)
             
             var text = "Find on Google Maps"
@@ -3174,16 +3213,34 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             println(liqFromresult)
             println(citylatitudefFomresult)
             println(citylongitudeFromresult)
-            if liqFromresult == "All"
-            {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+            
+             if locationnamefromtextfield == "Current Location"
+             {
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
             }
             else
-            {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+             {
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
             }
+  
 
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
@@ -3194,17 +3251,31 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              println(liqFromresult)
              println(citylatitudefFomresult)
              println(citylongitudeFromresult)
-             if liqFromresult == "All"
+             if locationnamefromtextfield == "Current Location"
              {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
              }
              else
              {
-                println(citylatitudefFomresult)
-                println(citylongitudeFromresult)
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
              }
 
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
@@ -3213,15 +3284,31 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         case 7:
              count = 3
-             if liqFromresult == "All"
+             if locationnamefromtextfield == "Current Location"
              {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
              }
              else
              {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
              }
 
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
@@ -3271,15 +3358,32 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         case 2:
             //call 2km api
              count = 1
-             if liqFromresult == "All"
+             
+             if locationnamefromtextfield == "Current Location"
              {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
              }
              else
              {
-                 var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=2&records=500&query=\(trimmedliqFromresult)")
+                }
              }
             lookfurtherdefault.setImage(imagewi2kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 2
@@ -3290,15 +3394,42 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
              println(liqFromresult)
              println(citylatitudefFomresult)
              println(citylongitudeFromresult)
-             if liqFromresult == "All"
+//             if liqFromresult == "All"
+//             {
+//                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+//             }
+//             else
+//             {
+//                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+//             }
+             
+             if locationnamefromtextfield == "Current Location"
              {
-                var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
              }
              else
              {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=5&records=500&query=\(trimmedliqFromresult)")
+                }
              }
             lookfurtherdefault.setImage(imagewi5kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 5
@@ -3306,15 +3437,42 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
         case 7:
              count = 3
-             if liqFromresult == "All"
+//             if liqFromresult == "All"
+//             {
+//                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+//             }
+//             else
+//             {
+//                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+//             }
+             
+             if locationnamefromtextfield == "Current Location"
              {
-                 var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(getdevicelatitude)&long=\(getdevicelongitude)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
              }
              else
              {
-                var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                if liqFromresult == "All"
+                {
+                    var trimmedliqtypeFromresult = liqtypeFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqtypeFromresult)")
+                }
+                else
+                {
+                    var trimmedliqFromresult = liqFromresult.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    getbardatafurtherforvodka("http://demos.dignitasdigital.com/bottomzup/searchresultV2.php?lat=\(citylatitudefFomresult)&long=\(citylongitudeFromresult)&km=7&records=500&query=\(trimmedliqFromresult)")
+                }
              }
             lookfurtherdefault.setImage(imagewi7kmrhradius, forState: .Normal)
             lookfurtherdefault.tag = 7

@@ -237,7 +237,7 @@ public class AutoCompleteTextField3:UITextField, UITableViewDataSource, UITableV
     }
     
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return autoCompleteCellHeight
+        return 43
     }
     
     //MARK: - Private Interface
