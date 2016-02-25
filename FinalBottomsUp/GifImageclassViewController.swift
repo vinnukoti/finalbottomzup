@@ -116,8 +116,28 @@ class GifImageclassViewController: UIViewController
     
     func playerDidFinish(sender:AnyObject)
     {
+        let prefs = NSUserDefaults.standardUserDefaults()
         
-        self.performSegueWithIdentifier("LoginScreen", sender: self)
+        if let emailidforkey = prefs.stringForKey("emaild")
+        {
+            println("The user has a mailid: " + emailidforkey)
+            let str = "Results"
+            var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! results1
+            //self.presentViewController(vc, animated: true, completion: nil)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.presentViewController(vc, animated: true, completion: nil)
+            })
+            //  performSegueWithIdentifier("newidentifier", sender: self)
+        }
+        else
+        {
+            self.performSegueWithIdentifier("LoginScreen", sender: self)
+            //Nothing stored in NSUserDefaults yet. Set a value.
+            //prefs.setValue("Berlin", forKey: "userCity")
+        }
+        
+        
     }
 }
 

@@ -53,6 +53,10 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
     var emailid:String!
     var userid:String!
     var GSignin: GIDSignIn!
+    
+    
+    var emailkeyvalue:String!
+    var idkeyvaluew:String!
 
     
     override func viewDidLoad()
@@ -70,61 +74,33 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
         
         
         GSignin.uiDelegate = self
-
-//        signIn = GPPSignIn.sharedInstance()
-//        signIn.shouldFetchGooglePlusUser = true
-//        signIn.shouldFetchGoogleUserEmail = true  // Uncomment to get the user's email
-//        signIn.shouldFetchGoogleUserID = true
-//        signIn.clientID = kClientID
-//        // Uncomment one of these two statements for the scope you chose in the previous step
-//        signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
-//        //signIn.delegate = self
-//        signIn.authenticate()
-//        
-//        signIn.scopes.append(kGTLAuthScopePlusLogin)
-//        signIn.scopes.append("profile")
-//        signIn.delegate = self
-//        signIn.trySilentAuthentication()
         
-//        signIn.shouldFetchGooglePlusUser = true
-//        signIn.shouldFetchGoogleUserEmail = true
-//        signIn.shouldFetchGoogleUserID = true
-//        
-//        signIn.scopes.append(kGTLAuthScopePlusLogin)
-//        signIn.scopes.append("profile")
-//        signIn.delegate = self
-//        signIn.trySilentAuthentication()
         
-//        signIn = GPPSignIn.sharedInstance()
-//        signIn.shouldFetchGooglePlusUser = true
-//        signIn.shouldFetchGoogleUserEmail = true  // Uncomment to get the user's email
-//        signIn.shouldFetchGoogleUserID = true
-//        signIn.clientID = kClientID
-//        // Uncomment one of these two statements for the scope you chose in the previous step
-//        signIn.scopes = [ kGTLAuthScopePlusLogin ]  // "https://www.googleapis.com/auth/plus.login" scope
-//        //signIn.delegate = self
-//        signIn.authenticate()
+//        let prefs = NSUserDefaults.standardUserDefaults()
 //        
-//        signIn.scopes.append(kGTLAuthScopePlusLogin)
-//        signIn.scopes.append("profile")
-//        signIn.delegate = self
-//        signIn.trySilentAuthentication()
-//        var str = signIn.userEmail
-//        var str1 = signIn.userID
-
+//        if let emailidforkey = prefs.stringForKey("emaild")
+//        {
+//            println("The user has a mailid: " + emailidforkey)
+//            let str = "Results"
+//            var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! results1
+//            //self.presentViewController(vc, animated: true, completion: nil)
+//            
+//            dispatch_async(dispatch_get_main_queue(), {
+//                self.presentViewController(vc, animated: true, completion: nil)
+//            })
+//          //  performSegueWithIdentifier("newidentifier", sender: self)
+//        }
+//        else
+//        {
+//            //Nothing stored in NSUserDefaults yet. Set a value.
+//            //prefs.setValue("Berlin", forKey: "userCity")
+//        }
+        
+        
 
         
         super.viewDidLoad()
-        
-       // backgroundimage.image = UIImage(named: "Newloginbackground")
-        
-        
-//        if Reachability.isConnectedToNetwork() {
-//            println("Haz Interwebz!")
-//        } else {
-//            println("Oh noes! No interwebz!!!")
-//        }
-//        
+
         if CheckforInternetViewController.isConnectedToNetwork() == true {
             print("Internet connection OK")
         } else {
@@ -132,53 +108,21 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
             let alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
             alert.show()
         }
-
         
-//        let filePath = NSBundle.mainBundle().pathForResource("Bubble-moving", ofType: "gif")
-//        let gif = NSData(contentsOfFile: filePath!)
-//        webviewforgif.loadData(gif!, MIMEType: "image/gif", textEncodingName: String(), baseURL: NSURL())
-//        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: false)
-//        webviewforgif.userInteractionEnabled = false
-
+        println(emailkeyvalue)
 
 
     }
+
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
-
-
-    
-//    override func viewWillAppear(animated: Bool) {
-//        var name = "Pattern~\(self.title!)"
-//    var tracker = GAI.sharedInstance().defaultTracker
-//    tracker.set(kGAIScreenName, value: name)
-//    
-//    var builder = GAIDictionaryBuilder.createScreenView()
-//    tracker.send(builder.build() as [NSObject : AnyObject])
-//    ViewController.self
-//    }
-
-
-
    
     @IBAction func googlesignIn(sender: AnyObject)
     {
-       // println("User Logged In With Google+")
-        
 
-   
-    
-        
-        
-        //info()
-        
-       // getInfo()
-
-       // getGoogleLoginData("http://demos.dignitasdigital.com/bottomzup/login.php?emailid=\(gemail)&password=\(gid)")
-       // performSegueWithIdentifier("newsearch", sender: self)
     }
     
     //Autocompletion
@@ -238,6 +182,9 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
     
     {
 
+
+
+
         let login = FBSDKLoginManager()
         let FBSDKResult: FBSDKLoginManagerLoginResult!
         let error: NSError!
@@ -258,7 +205,6 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
                         self.username = user["name"] as! String!
                         println(self.username)
                         var delimiter = " "
-                       // var newstr = "token0 token1 token2 token3"
                         var token = self.username.componentsSeparatedByString(delimiter)
                         print (token[0])
                         self.uName = token[0]
@@ -268,6 +214,22 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
                         println(self.userid )
                         self.emailid = dictuser
                         println(self.emailid)
+                        
+                        let prefs = NSUserDefaults.standardUserDefaults()
+                        
+                        //prefs.setValue("vinayak", forKey: "mmm")
+
+                        prefs.setValue(self.emailid, forKey: "emaild")
+                        self.emailkeyvalue = prefs.valueForKey("emaild") as! String
+                        println(self.emailkeyvalue)
+                        prefs.setValue(self.userid, forKey: "id")
+                        self.idkeyvaluew = prefs.valueForKey("id") as! String
+                        println(self.idkeyvaluew)
+                        
+                        
+                    
+                        
+                        
                         self.getFBLoginData("http://demos.dignitasdigital.com/bottomzup/facebooklogin.php?emailid=\(self.emailid)&facebookid=\(self.userid)")
                         NSUserDefaults.standardUserDefaults().setValue(self.emailid, forKey: "username")
                         NSUserDefaults.standardUserDefaults().setValue("facebook", forKey: "password")
@@ -276,10 +238,14 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
                         let tracker = GAI.sharedInstance().defaultTracker
                         let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory("\(self.emailid)",action: "\(self.username)",label: "From facebook", value: nil).build()
                         tracker.send(eventTracker as! [NSObject : AnyObject])
-                        let str = "Results"
-                        var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! results1
-                        vc.uName = self.uName.capitalizedString
-                        self.presentViewController(vc, animated: true, completion: nil)
+                    
+                            let str = "Results"
+                            var vc = self.storyboard!.instantiateViewControllerWithIdentifier(str) as! results1
+                            vc.uName = self.uName.capitalizedString
+                            self.presentViewController(vc, animated: true, completion: nil)
+                            
+                        
+                  
                         
                     }
                 })
@@ -425,6 +391,11 @@ class ViewController: UIViewController,GPPSignInDelegate,GIDSignInDelegate, GIDS
             
             // ...
             
+    }
+    
+    func applicationDidEnterBackground(application: UIApplication) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.synchronize()
     }
     
     

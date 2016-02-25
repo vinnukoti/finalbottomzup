@@ -320,6 +320,8 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     var uName:String!
     var scrollTag:Int!
     var currentLocation: String!
+    
+    let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     override func viewDidLoad()
     {
         println(uName)
@@ -613,7 +615,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
     func onselect()
     {
         var text1 = self.newtextfieldtableviewcity.text
-        var locate = citydropdowntextfield.text + text1
+        var locate =  text1 + citydropdowntextfield.text
         
         println(self.newtextfieldtableviewcity.text)
         println(self.localityFromtextfield)
@@ -658,6 +660,18 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
             })
         }
         task.resume()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        
+        newtextfieldtableviewcity.resignFirstResponder()
+        
+        return true
+    }
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    {
+      self.view.endEditing(true)
     }
     
     func extract_googlejson(data:NSData)
@@ -1859,6 +1873,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
         let cells = tableView.dequeueReusableCellWithIdentifier("tableChildCell", forIndexPath: indexPath) as! BeerRowCell
             cells.press2reveal.hidden = true
             
+            
              var headerTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hidesubsection:")
             cells.tapimage.addGestureRecognizer(headerTapped)
             cells.tapimage.tag = indexPath.section
@@ -1874,27 +1889,6 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
                 cells.happytiming.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
             }
 
-            
-//            if head.count > 5
-//            {
-//                cells.shadowimage.hidden = true
-//            }
-//             if head.count < 5
-//            {
-//                println(section)
-//                println(head.count)
-//                // section = section + 1
-//                // var nor  = head.count
-//                if indexPath == head.count - 1
-//                {
-//                    cells.shadowimage.hidden = false
-//                    shadowimage.hidden = true
-//                }
-//                else
-//                {
-//                    cells.shadowimage.hidden = true
-//                }
-//            }
             
             cells.locationicon.tag = indexPath.section
             //Findongooglemapsbutton.tag = indexPath.section
@@ -2498,6 +2492,7 @@ class tableviewclass: UIViewController, UITableViewDataSource, UITableViewDelega
 
             }
             head = array
+            
         }
         else
         {
@@ -3136,6 +3131,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         // Receive action
         // downcast sender as a UIView
         
+        locatiopopupview.hidden = true
        DynamicView.hidden = true
         
         
@@ -3178,20 +3174,31 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
             let imageView1 = UIImageView(image: image1!)
             closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
+            if head[sender.tag].Phoneone != nil && head[sender.tag].Phonetwo != nil
+            {
+                Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicView.frame.width - 30,30)
+                Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
+                Findongooglemapsbutton.setTitle(head[sender.tag].Phoneone, forState: .Normal)
+                Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                Findongooglemapsbutton.tintColor = UIColor.blackColor()
+                
+              
+                Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicView.frame.width - 30,30)
+                Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
+                Findongooglemapsbutton1.setTitle(head[sender.tag].Phonetwo, forState: .Normal)
+                Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                Findongooglemapsbutton1.tintColor = UIColor.blackColor()
+            }
+            else
+            {
+                let alertController = UIAlertController(title: "Bottomz Up", message:"No phone numbers available now", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
             
             
-            Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicView.frame.width - 30,30)
-            Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton.setTitle(head[sender.tag].Phoneone, forState: .Normal)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
-            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
-            let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicView.frame.width - 30,30)
-            Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton1.setTitle(head[sender.tag].Phonetwo, forState: .Normal)
-            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
-            Findongooglemapsbutton1.tintColor = UIColor.blackColor()
+   
 
             
 
@@ -3351,6 +3358,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
     
     @IBAction func locationpopup(sender: UIButton, forEvent event: UIEvent)
     {
+        DynamicView.hidden = true
          self.locatiopopupview.hidden = true
         reslatitude = head[sender.tag].Restaurantlatitude
         reslongitude = head[sender.tag].Restaurantlongitude
@@ -3391,7 +3399,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
              imageView.frame = CGRect(x: 0,y: 0,width: locatiopopupview.frame.width,height: locatiopopupview.frame.height)
             
             let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            closelocationpopupbutton.frame = CGRectMake(locatiopopupview.frame.width-27 ,locatiopopupview.frame.height/2 - 10,20,20)
+            closelocationpopupbutton.frame = CGRectMake(locatiopopupview.frame.width-32 ,locatiopopupview.frame.height/2 - 10,25,25)
             closelocationpopupbutton.addTarget(self, action: "locationpopupclosebuttontouchedbuttonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             let imageName1 = "popupclosebutton.png"
             let image1 = UIImage(named: imageName1)
@@ -4191,6 +4199,7 @@ func pintsoring (var array:[Restaurant]) -> [Restaurant]
         
         // Sublocality search textfiled
         self.newtextfieldtableviewcity = AutoCompleteTextField1 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
+        newtextfieldtableviewcity.delegate = self
         self.newtextfieldtableviewcity.textAlignment = NSTextAlignment.Center
         AutoCompleteTextField1.autoCompleteTableView?.layer.cornerRadius = 5
         self.newtextfieldtableviewcity.layer.cornerRadius = 5

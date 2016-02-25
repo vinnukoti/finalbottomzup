@@ -35,6 +35,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate
     
 
     var restaurantName: String!
+    var delimiter = "."
     
     override func awakeFromNib()
     {
@@ -75,6 +76,7 @@ class BeerRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate
             }
             else
             {
+                println(beers[indexPath.row].pint)
                minprice.text =   "\(beers[indexPath.row].pint)"
             }
             

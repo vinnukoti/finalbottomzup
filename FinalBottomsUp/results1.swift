@@ -389,33 +389,6 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         return true
     }
     
-
-    
-//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-//        if textField.tag == 3
-//        {
-//            return false
-//        }
-//        else
-//        {
-//            return true
-//        }
-//    }
-    
-    
-//    func didRecognizeTapGesture(gesture: UITapGestureRecognizer) {
-//        var point: CGPoint = gesture.locationInView(gesture.view!)
-//        if gesture.state == .Ended {
-//            if CGRectContainsPoint(self.localityTextfield.frame, point)
-//            {
-//               // self.doSomething()
-//                
-//                self.view.endEditing(true)
-//            }
-//        }
-//    }
-//    
-
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
         var userLocation:CLLocation = locations[0] as! CLLocation
@@ -1152,7 +1125,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
        // var locate = localityTextfield.text + text
         
         //indtead of loacalitytextfile im using lael.
-        var locate = label.text! + text
+        var locate =   text + label.text!
         println(autocompletedTextfieldnew.text)
         println(localityfromtextfield)
         
@@ -1168,6 +1141,7 @@ class results1: UIViewController,UITableViewDelegate, UITableViewDataSource, UIT
         
         else
         {
+            
         getgoogledata("http://maps.google.com/maps/api/geocode/json?address=\(locate1)&sensor=false")
         }
 

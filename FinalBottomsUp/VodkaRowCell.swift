@@ -27,6 +27,7 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
     
     @IBOutlet weak var locationicon: UIButton!
     @IBOutlet weak var tapimage: UIImageView!
+    var delimiter = "."
     
     
     var liquors: [liqvodka] = [liqvodka]()
@@ -35,6 +36,7 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
         super.awakeFromNib()
         tableView.delegate = self
         tableView.dataSource = self
+       // tableView.backgroundColor = UIColor.clearColor()
        
 
     }
@@ -49,16 +51,21 @@ class VodkaRowCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate 
         
         let cell = tableView.dequeueReusableCellWithIdentifier("liquorRowChild", forIndexPath: indexPath) as! UITableViewCell
         cell.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)
-         self.tableView.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)
+        self.tableView.backgroundColor = UIColor(red: 233/255.0, green: 210/255.0, blue: 165/255.0, alpha: 1.0)
         
         var liqname = cell.viewWithTag(100) as! UILabel
         var price = cell.viewWithTag(200) as! UILabel
         
         
         if liquors.count > 0 {
+            println(liquors[indexPath.row].liqbrandprice)
             
             liqname.text = liquors[indexPath.row].liqnamebrandname
-            price.text = liquors[indexPath.row].liqbrandprice
+         
+            var token = liquors[indexPath.row].liqbrandprice.componentsSeparatedByString(delimiter)
+            println(token)
+           
+            price.text = token[0]
             
             price.font = UIFont(name: "MyriadPro-Regular", size: fontsizenew)
             

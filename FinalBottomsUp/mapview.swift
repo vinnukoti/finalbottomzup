@@ -181,9 +181,10 @@ class mapview: UIViewController,UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("wineandbar", forIndexPath: indexPath) as! maplable
+        cell.backgroundColor = UIColor.clearColor()
         cell.name.text = wineandbararray[indexPath.row].mapliqname
-        cell.name.font = UIFont(name: "MyriadPro-Regular", size: 11.0)
-        cell.distance.font = UIFont(name: "MyriadPro-Regular", size: 11.0)
+        cell.name.font = UIFont(name: "MyriadPro-Regular", size: fontsizenew)
+        cell.distance.font = UIFont(name: "MyriadPro-Regular", size: fontsizenew)
         cell.distance.text = wineandbararray[indexPath.row].mapliqdistance
 //        if distnacemapsort == true
 //        {

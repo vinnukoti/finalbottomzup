@@ -224,6 +224,8 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
     var searchedaLiqType:String!
     var searchedsubLocality:String!
     var uName:String!
+     let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     override func viewDidLoad()
   
     {
@@ -909,6 +911,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         if tableView.tag == 1
         {
         let cells = tableView.dequeueReusableCellWithIdentifier("vodkaChildCell", forIndexPath: indexPath) as! VodkaRowCell
+            
             var headerTapped1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hidecell:")
             cells.tapimage.addGestureRecognizer(headerTapped1)
            cells.tapimage.tag =  indexPath.section
@@ -1107,6 +1110,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             headerCell.addressLabel.font = UIFont(name: "MyriadPro-Regular", size: fontsizenew)
             headerCell.headercellimage.image = UIImage(named: "Headercellimage")
             headerCell.Happyhourlabelbeforeexpantion.textColor = UIColor(red: 196/255, green: 97/255, blue: 74/255, alpha: 1)
+            headerCell.backgroundColor = UIColor.clearColor()
             
             if header1.count >= 5
             {
@@ -2053,7 +2057,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             
             var text = self.newtextfieldtableviewcity.text
             println(self.localityFromtextfield)
-            var locate = self.localityFromtextfield + text
+            var locate =   text + self.localityFromtextfield
             println(locate)
             var locate1 = locate.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             println(locate1)
@@ -2901,17 +2905,30 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             closelocationpopupbutton.setBackgroundImage(image1, forState: .Normal)
             
             
-            let Findongooglemapsbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicViewvodka.frame.width - 30,30)
-            Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
-            Findongooglemapsbutton.tintColor = UIColor.blackColor()
             
-            let Findongooglemapsbutton1 = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicViewvodka.frame.width - 30,30)
-            Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
-            Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
-            Findongooglemapsbutton1.tintColor = UIColor.blackColor()
+            if header1[sender.tag].Phoneone != nil && header1[sender.tag].Phonetwo != nil{
+                Findongooglemapsbutton.frame = CGRectMake(0,45,DynamicViewvodka.frame.width - 30,30)
+                Findongooglemapsbutton.addTarget(self, action: "call1:", forControlEvents: UIControlEvents.TouchUpInside)
+                Findongooglemapsbutton.setTitle(header1[sender.tag].Phonetwo, forState: .Normal)
+                Findongooglemapsbutton.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                Findongooglemapsbutton.tintColor = UIColor.blackColor()
+                
+                
+                Findongooglemapsbutton1.frame = CGRectMake(0,15,DynamicViewvodka.frame.width - 30,30)
+                Findongooglemapsbutton1.addTarget(self, action: "call2:", forControlEvents: UIControlEvents.TouchUpInside)
+                Findongooglemapsbutton1.setTitle(header1[sender.tag].Phonetwo, forState: .Normal)
+                Findongooglemapsbutton1.titleLabel?.font = UIFont(name: "MYRIADPRO-REGULAR", size: fontsizenew)
+                Findongooglemapsbutton1.tintColor = UIColor.blackColor()
+            }
+            else
+            {
+                let alertController = UIAlertController(title: "Bottomz Up", message:"No phone numbers available now", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+
+            }
+            
+      
             
             self.view.addSubview(DynamicViewvodka)
             self.DynamicViewvodka.addSubview(imageView)
@@ -2992,7 +3009,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
             imageView.frame = CGRect(x: 0,y: 0,width: DynamicViewvodka.frame.width,height: DynamicViewvodka.frame.height)
             
             let closelocationpopupbutton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-            closelocationpopupbutton.frame = CGRectMake(DynamicViewvodka.frame.width-27 ,DynamicViewvodka.frame.height/2 - 10,16,16)
+            closelocationpopupbutton.frame = CGRectMake(DynamicViewvodka.frame.width-32 ,DynamicViewvodka.frame.height/2 - 10,25,25)
             closelocationpopupbutton.addTarget(self, action: "locationpopupclosebuttontouchedbuttonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             let imageName1 = "popupclosebutton.png"
             let image1 = UIImage(named: imageName1)
@@ -3743,6 +3760,7 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
         
         
         self.newtextfieldtableviewcity = AutoCompleteTextField2 (frame: CGRect(x: 10,y: 185,width: self.view.frame.width - 20,height: 35), superview: showdropdownview)
+        self.newtextfieldtableviewcity.delegate = self
         self.newtextfieldtableviewcity.textAlignment = NSTextAlignment.Center
         newtextfieldtableviewcity.layer.cornerRadius = 5
         AutoCompleteTextField2.autoCompleteTableView?.layer.cornerRadius = 5
@@ -3761,6 +3779,12 @@ class tableviewclassvodka: UIViewController,UITableViewDataSource, UITableViewDe
 
  
         
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+         self.newtextfieldtableviewcity.resignFirstResponder()
+        
+        return true
     }
     func liqcategorytapped(gestureRecognizer: UITapGestureRecognizer)
     {
